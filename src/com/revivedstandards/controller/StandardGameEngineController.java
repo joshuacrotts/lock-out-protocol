@@ -27,7 +27,6 @@ package com.revivedstandards.controller;
 import com.revivedstandards.model.StandardGameObject;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * The StandardGameEngineController has an ArrayList of SGOs. In the main
@@ -37,7 +36,6 @@ import java.util.Iterator;
  */
 public class StandardGameEngineController
 {
-    
     // Arraylist of game object controllers.
     private ArrayList<StandardGameObject> sgoHandler = new ArrayList<>();
     
@@ -48,26 +46,17 @@ public class StandardGameEngineController
      */
     public void update( double dt )
     {
-        Iterator<StandardGameObject> sgoHandlerIt = sgoHandler.listIterator();
-        
-        while( sgoHandlerIt.hasNext() )
+        for( int i = 0; i < this.sgoHandler.size(); i++ )
         {
-            StandardGameObject sgo = sgoHandlerIt.next();
-            sgo.update( dt );
-            
-            if ( sgo.getLife() < 0 )
-            {
-                sgoHandlerIt.remove();
-            }
+            this.sgoHandler.get( i ).update( dt );
         }
     }
     
     public void render( Graphics2D g2 )
     {
-        Iterator<StandardGameObject> sgoHandlerIt = sgoHandler.listIterator();
-        while( sgoHandlerIt.hasNext() )
+        for( int i = 0; i < this.sgoHandler.size(); i++ )
         {
-            sgoHandlerIt.next().renderGameObject( g2 );
+            this.sgoHandler.get( i ).renderGameObject( g2 );
         }
     }
     

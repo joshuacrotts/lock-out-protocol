@@ -39,7 +39,6 @@ import java.awt.image.BufferStrategy;
  */
 public class StandardGame extends Canvas implements Runnable
 {
-
     //
     //  Default window object
     //
@@ -91,7 +90,7 @@ public class StandardGame extends Canvas implements Runnable
 
     private synchronized void start ()
     {
-        if ( running )
+        if ( this.running )
         {
             return;
         }
@@ -124,6 +123,7 @@ public class StandardGame extends Canvas implements Runnable
         }
     }
 
+    @Override
     public void run ()
     {
         requestFocus(); //Focuses the click/input on the frame/canvas.

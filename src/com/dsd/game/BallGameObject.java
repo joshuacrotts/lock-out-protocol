@@ -5,22 +5,11 @@ import com.revivedstandards.StdOps;
 import com.revivedstandards.controller.StandardAnimationController;
 import com.revivedstandards.model.StandardAnimation;
 import com.revivedstandards.model.StandardGameObject;
-import com.revivedstandards.view.StandardSprite;
 import java.awt.image.BufferedImage;
 
 public class BallGameObject extends StandardGameObject
 {
-    private StandardSprite sprite;
-    private static BufferedImage[] frames;
-    static
-    {
-        frames = new BufferedImage[5];
-        frames[ 0 ] = StdOps.loadImage( "src/res/img/ball1.png" );
-        frames[ 1 ] = StdOps.loadImage( "src/res/img/ball2.png" );
-        frames[ 2 ] = StdOps.loadImage( "src/res/img/ball3.png" );
-        frames[ 3 ] = StdOps.loadImage( "src/res/img/ball4.png" );
-        frames[ 4 ] = StdOps.loadImage( "src/res/img/ball5.png" );
-    }
+    private int ballType;
     
     public BallGameObject( StandardGame sg, int x, int y )
     {
@@ -29,13 +18,17 @@ public class BallGameObject extends StandardGameObject
         this.setVelX( StdOps.rand( 3.0, 7.0 ) );
         this.setVelY( StdOps.rand( 3.0, 7.0 ) );
         
-        this.setStandardAnimationController( new StandardAnimationController( new StandardAnimation(this, frames, 20)));
-        
+        this.initFrames();
+
+        this.setStandardAnimationController( new StandardAnimationController( 
+                                             new StandardAnimation( this, this.initFrames(), 0.5d, 1.0d ) ) );
     }
     
     @Override
     public void update ( double dt )
     {
+        this.getStandardAnimationController().update( dt );
+        
         if ( this.getX() <= 0 || this.getX() > this.getGameWidth() - this.getWidth() )
         {
             this.setVelX( -this.getVelX() );
@@ -47,6 +40,42 @@ public class BallGameObject extends StandardGameObject
         
         this.setX( this.getX() + this.getVelX() );
         this.setY( this.getY() + this.getVelY() );
+    }
+    
+    private BufferedImage[] initFrames()
+    {
+        BufferedImage[] frames = new BufferedImage[ 12 ];
         
+        int ballGenerator = StdOps.rand( 1, 20 );
+        
+        if ( ballGenerator <= 10 )
+        {
+            this.ballType = 1;
+        }
+        else if ( ballGenerator <= 15 )
+        {
+            this.ballType = 2;
+        }
+        else if ( ballGenerator <= 20 )
+        {
+            this.ballType = 3;
+        }
+        
+        for( int i = 0; i < frames.length; i++ )
+        {
+            if ( i < 10 )
+            {
+                frames[ i ] = StdOps.loadImage( "src/res/img/ball_" 
+                                               + this.ballType + "/tile00" + i + ".png" );
+            }
+            else
+            {
+                frames[ i ] = StdOps.loadImage( "src/res/img/ball_" 
+                                               + this.ballType + "/tile0" + i + ".png" );
+            }
+                
+        }
+        
+        return frames;
     }
 }

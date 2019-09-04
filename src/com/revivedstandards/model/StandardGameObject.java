@@ -83,17 +83,16 @@ public abstract class StandardGameObject
     
     public StandardGameObject( StandardGame sg, double x, double y )
     {
-        this.sg     = sg;
-        this.sac    = sac;
-        this.x = x;
-        this.y = y;
+        this.sg = sg;
+        this.x  = x;
+        this.y  = y;
     }
     
     public abstract void update( double dt );
     
     public void renderGameObject( Graphics2D g2 )
     {
-        if ( this.sprite == null )
+        if ( this.sprite == null && this.sac != null )
         {
             this.sac.renderFrame( g2 );
         }
@@ -107,6 +106,11 @@ public abstract class StandardGameObject
     {
         this.sac = s;
         this.sprite = null;
+    }
+    
+    public StandardAnimationController getStandardAnimationController()
+    {
+        return this.sac;
     }
     
     public int getGameWidth()

@@ -29,7 +29,9 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 /**
- *  A Sprite is a view for any arbitrary SGO. It represents some 2D image.
+ *  A Sprite is a view for any arbitrary SGO. It represents some 2D image. 
+ * 
+ *  If your StandardGameObject only has animations, this class is not necessary.
  */
 public class StandardSprite implements Renderable
 {
