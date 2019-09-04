@@ -61,5 +61,10 @@ public class StandardSprite implements Renderable
    {
        return this.imageView.getHeight();
    }
+   
+   public BufferedImage getSpriteImage()
+   {
+       return this.imageView;
+   }
 
 }

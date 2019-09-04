@@ -24,6 +24,7 @@ to simplify the rendering and logic pipeline.
 package com.revivedstandards.model;
 
 import com.revivedstandards.StandardGame;
+import com.revivedstandards.controller.StandardAnimationController;
 import com.revivedstandards.view.StandardSprite;
 import java.awt.Graphics2D;
 
@@ -35,6 +36,7 @@ public abstract class StandardGameObject
 {
     private StandardGame sg = null;
     private StandardSprite  sprite  = null;
+    private StandardAnimationController sac = null;
     
     private int   life      = -1;
     private int   type      = 0;
@@ -71,13 +73,42 @@ public abstract class StandardGameObject
         this.height = this.sprite.getSpriteHeight();
     }
     
+    public StandardGameObject( StandardGame sg, StandardAnimationController sac, double x, double y )
+    {
+        this.sg     = sg;
+        this.sac    = sac;
+        this.x = x;
+        this.y = y;
+    }
+    
+    public StandardGameObject( StandardGame sg, double x, double y )
+    {
+        this.sg     = sg;
+        this.sac    = sac;
+        this.x = x;
+        this.y = y;
+    }
+    
     public abstract void update( double dt );
     
     public void renderGameObject( Graphics2D g2 )
     {
-        this.sprite.render( g2, this.x, this.y );
+        if ( this.sprite == null )
+        {
+            this.sac.renderFrame( g2 );
+        }
+        else
+        {
+            this.sprite.render( g2, this.x, this.y );
+        }
     }
 
+    public void setStandardAnimationController( StandardAnimationController s )
+    {
+        this.sac = s;
+        this.sprite = null;
+    }
+    
     public int getGameWidth()
     {
         return this.sg.getWindow().width();
@@ -86,6 +117,11 @@ public abstract class StandardGameObject
     public int getGameHeight()
     {
         return this.sg.getWindow().height();
+    }
+    
+    public StandardGame getGame()
+    {
+        return this.sg;
     }
     
     public StandardSprite getSprite()
