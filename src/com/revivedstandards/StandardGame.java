@@ -60,6 +60,7 @@ public class StandardGame extends Canvas implements Runnable
     //  Other miscellaneous flags.
     //
     private boolean debugMode = false;
+    private int fps = -1;
 
     //
     // Render Thread
@@ -118,6 +119,7 @@ public class StandardGame extends Canvas implements Runnable
             {
                 e.printStackTrace();
             }
+            
             this.running = false;
             System.exit( 0 );
         }
@@ -155,10 +157,8 @@ public class StandardGame extends Canvas implements Runnable
                 renderable = true;
             }
 
-            /*
-                This clause replaces the original methods of tick and render.
-                One can use tick and render exclusively.
-             */
+            // This clause replaces the original methods of tick and render.
+            // One can use tick and render exclusively.
             if ( renderable )
             {
                 frames++;
@@ -166,11 +166,13 @@ public class StandardGame extends Canvas implements Runnable
                 Graphics2D renderer = ( Graphics2D ) bufferStrategy.getDrawGraphics(); //Sets up the available graphics on the StandardDraw Graphics2D object
 
                 //Sets the color to black, and buffers the screen to eradicate the black flickering dilemma.
-                renderer.setColor( Color.BLACK );
-                renderer.fillRect( 0, 0, this.frame.width(), this.frame.height() );
+                this.doubleBufferScreen( renderer );
 
-                //Calls the render method that the sub class will forcibly possess. (render() is abstract)
+                //Calls the render method within the game engine class to render
+                //other entities.
                 this.gameEngine.render( renderer );
+                
+                this.drawFPSToScreen( renderer );
 
                 renderer.dispose(); //Disposes of the Renderer Graphics object to free resources
                 bufferStrategy.show(); //Shows the current BufferStrategy
@@ -181,7 +183,7 @@ public class StandardGame extends Canvas implements Runnable
                 if ( this.debugMode )
                 {
                     this.frame.setTitle( this.frame.getTitle() + " | " + updates + " ups, " + frames + " fps" );
-                    System.out.println( this.frame.getTitle() + " | " + updates + " ups, " + frames + " fps" );
+                    this.fps = frames;
                 }
 
                 timer += 1000;
@@ -191,6 +193,29 @@ public class StandardGame extends Canvas implements Runnable
         }
 
         this.stop();
+    }
+    
+    /**
+     * Sets the color of the screen to black, and buffers the screen to not only
+     * fix flickering, but to make sure all previous frames of animation are 
+     * removed from the screen.
+     * 
+     * @param renderer 
+     */
+    private void doubleBufferScreen( Graphics2D renderer )
+    {
+        renderer.setColor( Color.BLACK );
+        renderer.fillRect( 0, 0, this.frame.width(), this.frame.height() );
+    }
+    
+    /**
+     * Renders the current frames per second to the screen in the top-left corner.
+     * @param renderer 
+     */
+    private void drawFPSToScreen( Graphics2D renderer)
+    {
+        renderer.setColor( Color.YELLOW );
+        renderer.drawString( "FPS: " + this.fps, 0 + 20, 0 + 20 );
     }
     
     public void toggleDebugMode()
@@ -215,5 +240,4 @@ public class StandardGame extends Canvas implements Runnable
     {
         return this.gameEngine;
     }
-
 }

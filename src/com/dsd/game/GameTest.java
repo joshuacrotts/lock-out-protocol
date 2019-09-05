@@ -10,7 +10,9 @@ public class GameTest
         game.toggleDebugMode();
         
         for( int i = 0; i < 10; i++)
-        game.getGameEngine().addObject( new BallGameObject( game, 20, 20 ) );
+        {
+            game.getGameEngine().addObject( new BallGameObject( game, 100, 100 ) );
+        }
 
     }
 }

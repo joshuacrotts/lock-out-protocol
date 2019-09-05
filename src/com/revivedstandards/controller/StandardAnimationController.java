@@ -46,20 +46,11 @@ public class StandardAnimationController
      */
     public void update ( double dt )
     {
-        if ( this.animation.getCurrentAnimationTime() < this.animation.getDelay() )
+        if ( System.nanoTime() > this.animation.getLastTime() + 
+                                  ( 1_000_000_000 / this.animation.getFPS() ) )
         {
-            this.animation.incrementTimer();
-        }
-        else
-        {
-            this.animation.setCurrentFrameIndex( this.animation.getCurrentFrameIndex() + 1 );
-
-            if ( this.frameOutOfBounds() )
-            {
-                this.animation.setCurrentFrameIndex( 0 );
-            }
-
-            this.animation.resetTimer();
+            this.animation.advanceFrame();
+            this.animation.setLastTime( System.nanoTime() );
         }
     }
 
@@ -68,11 +59,6 @@ public class StandardAnimationController
         StandardGameObject sgo = this.animation.getStandardGameObject();
 
         this.animation.getView().render( g2, sgo.getX(), sgo.getY() );
-    }
-
-    public boolean frameOutOfBounds ()
-    {
-        return this.animation.getCurrentFrameIndex() >= this.animation.getView().getFrames().length;
     }
 
 }

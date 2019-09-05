@@ -21,7 +21,7 @@ public class BallGameObject extends StandardGameObject
         this.initFrames();
 
         this.setStandardAnimationController( new StandardAnimationController( 
-                                             new StandardAnimation( this, this.initFrames(), 0.5d, 1.0d ) ) );
+                                             new StandardAnimation( this, this.initFrames(), 180 ) ) );
     }
     
     @Override

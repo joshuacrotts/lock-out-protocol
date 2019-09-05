@@ -34,8 +34,8 @@ import java.awt.Graphics2D;
  */
 public abstract class StandardGameObject
 {
-    private StandardGame sg = null;
-    private StandardSprite  sprite  = null;
+    private StandardGame sg                 = null;
+    private StandardSprite  sprite          = null;
     private StandardAnimationController sac = null;
     
     private int   life      = -1;
@@ -75,10 +75,10 @@ public abstract class StandardGameObject
     
     public StandardGameObject( StandardGame sg, StandardAnimationController sac, double x, double y )
     {
-        this.sg     = sg;
-        this.sac    = sac;
-        this.x = x;
-        this.y = y;
+        this.sg  = sg;
+        this.sac = sac;
+        this.x   = x;
+        this.y   = y;
     }
     
     public StandardGameObject( StandardGame sg, double x, double y )
@@ -104,7 +104,7 @@ public abstract class StandardGameObject
 
     public void setStandardAnimationController( StandardAnimationController s )
     {
-        this.sac = s;
+        this.sac    = s;
         this.sprite = null;
     }
     
