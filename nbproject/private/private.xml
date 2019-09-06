@@ -3,13 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/revivedstandards/view/StandardWindowView.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/revivedstandards/model/StandardAnimation.java</file>
             <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/revivedstandards/controller/StandardAnimationController.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/revivedstandards/view/StandardSprite.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/BallGameObject.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/revivedstandards/controller/StandardGameEngineController.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/GameTest.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/revivedstandards/StdOps.java</file>
         </group>
     </open-files>
 </project-private>
