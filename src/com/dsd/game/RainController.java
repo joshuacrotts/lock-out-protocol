@@ -1,13 +1,11 @@
 package com.dsd.game;
 
+import com.dsd.game.objects.RainDrop;
 import com.revivedstandards.handlers.StandardParticleHandler;
 import com.revivedstandards.main.StandardCamera;
-import com.revivedstandards.main.StandardGame;
-import com.revivedstandards.model.StandardDragParticle;
 import com.revivedstandards.util.StdOps;
 import com.revivedstandards.view.Renderable;
 import com.revivedstandards.view.Updatable;
-import java.awt.Color;
 import java.awt.Graphics2D;
 
 /**
@@ -35,7 +33,7 @@ public class RainController implements Renderable, Updatable {
         // Be sure to always set the SPH camera or it'll throw a NPE
         this.sph.setCamera(sc);
 
-        this.isRaining = weather.contains("rain");
+        this.isRaining = /*weather.contains("rain");*/ true;
     }
 
     @Override
@@ -52,13 +50,13 @@ public class RainController implements Renderable, Updatable {
             // Generates the min/max points for the rain to spawn
             int xGenMin = (int) (this.sc.getX() - RainController.X_BORDER);
             int xGenMax = (int) (this.sc.getX() + RainController.X_BORDER);
-            int yGenMin = (int) (this.sc.getY() - RainController.Y_BORDER * 2);
-            int yGenMax = (int) (this.sc.getY() - RainController.Y_BORDER);
+            int yGenMin = (int) (this.sc.getY() - RainController.Y_BORDER);
+            int yGenMax = (int) (this.sc.getY() + RainController.Y_BORDER / 4);
 
             int xPos = StdOps.rand(xGenMin, xGenMax);
             int yPos = StdOps.rand(yGenMin, yGenMax);
 
-            this.sph.addEntity(new StandardDragParticle(xPos, yPos, 10f, sph, Color.BLUE));
+            this.sph.addEntity(new RainDrop(xPos, yPos, -Math.PI * 1.5, Math.random() * 5, (int) (this.sc.getY() + this.sc.getVph() * 2)));
 
             this.sph.tick();
         }
