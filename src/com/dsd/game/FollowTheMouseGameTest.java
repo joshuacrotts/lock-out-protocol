@@ -26,6 +26,8 @@
  */
 package com.dsd.game;
 
+import com.dsd.game.api.CityLocator;
+import com.dsd.game.api.WeatherConnector;
 import com.dsd.game.objects.BrickGameObject;
 import com.dsd.game.objects.TriangleGameObject;
 import com.revivedstandards.controller.StandardAudioController;
@@ -154,20 +156,8 @@ public class FollowTheMouseGameTest extends StandardGame {
         this.gameState = gs;
     }
 
-    /**
-     * Asks the user via dialog box to enter the city they're in (or some other
-     * city)
-     *
-     * @return
-     */
-    private static String getCity () {
-        return JOptionPane.showInputDialog(null, "Enter your city: ");
-    }
-
     public static void main (String[] args) {
-
-        String city = FollowTheMouseGameTest.getCity();
-        FollowTheMouseGameTest gameTest = new FollowTheMouseGameTest(WeatherConnector.getWeather(city));
+        FollowTheMouseGameTest gameTest = new FollowTheMouseGameTest(WeatherConnector.getWeather(CityLocator.getCity()));
         gameTest.StartGame();
     }
 

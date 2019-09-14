@@ -1,4 +1,4 @@
-package com.dsd.game;
+package com.dsd.game.api;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,7 +28,8 @@ public class WeatherConnector
 
     static
     {
-        WeatherConnector.INPUT_STREAM = WeatherConnector.class.getClassLoader().getResourceAsStream(".config/config.txt" );
+        //  Loads in the key for the api connection
+        WeatherConnector.INPUT_STREAM = WeatherConnector.class.getClassLoader().getResourceAsStream(".config/.weather_config.txt" );
         WeatherConnector.READER = new BufferedReader( new InputStreamReader( WeatherConnector.INPUT_STREAM ) );
         try
         {
@@ -39,15 +40,25 @@ public class WeatherConnector
             Logger.getLogger( WeatherConnector.class.getName() ).log( Level.SEVERE, null, ex );
         }
 
+        //  Extracts the key from the line read in by the buffered reader
         WeatherConnector.KEY = WeatherConnector.LINE.substring( WeatherConnector.LINE.lastIndexOf( ":" ) + 1 );
     }
 
+    /**
+     * Connects to the weather API to retrieve the JSON-formatted weather
+     * information for the supplied city.
+     * 
+     * @param city
+     * @return
+     */
     private static String fetch ( String city )
     {
         StringBuilder jsonInformation = null;
 
         try
         {
+            //  Processes the request to the API, and reads the information
+            //  into the StringBuilder object.
             jsonInformation = new StringBuilder();
             url = new URL( String.format( "https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s ", city, KEY ) );
             HttpURLConnection con = ( HttpURLConnection ) url.openConnection();
