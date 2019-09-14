@@ -18,6 +18,8 @@ public class RainDrop extends StandardGameObject {
     private static final int red = 255 << 16;
     private static final int green = 255 << 8;
     private static final int blue = 255;
+    
+    private final double gravity = 0.25d;
     private final int vanish;
 
     public RainDrop (double x, double y, double direction, double speed, int vanish) {
@@ -35,7 +37,7 @@ public class RainDrop extends StandardGameObject {
 
         this.updatePosition();
 
-        this.setVelY(this.getVelY() + 0.25d);
+        this.setVelY(this.getVelY() + gravity);
     }
 
     @Override

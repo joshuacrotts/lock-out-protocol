@@ -18,6 +18,9 @@ public class RainController implements Renderable, Updatable {
     private final FollowTheMouseGameTest sg;
     private final StandardCamera sc;
 
+    //  Serves as a debugging feature
+    private static final boolean toggleDownfall = true;
+
     //
     //  If it is raining, this boolean is toggled true.
     //
@@ -33,7 +36,7 @@ public class RainController implements Renderable, Updatable {
         // Be sure to always set the SPH camera or it'll throw a NPE
         this.sph.setCamera(sc);
 
-        this.isRaining = /*weather.contains("rain");*/ true;
+        this.isRaining = weather.contains("rain") | RainController.toggleDownfall;
     }
 
     @Override
