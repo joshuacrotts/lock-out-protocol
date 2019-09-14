@@ -9,14 +9,13 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
  * This class is an example of connecting to and loading data from
  * the weather API.
- * 
+ *
  * @author Joshua
  */
 public class WeatherConnector
