@@ -1,6 +1,5 @@
 package com.dsd.game.api;
 
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,7 +10,6 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**

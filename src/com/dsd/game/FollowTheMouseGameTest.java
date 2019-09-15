@@ -39,7 +39,6 @@ import com.revivedstandards.main.StandardGame;
 import com.revivedstandards.model.StandardID;
 import com.revivedstandards.model.StandardLevel;
 import java.awt.Color;
-import javax.swing.JOptionPane;
 
 /**
  * Class "FollowTheMouseGameTest" extends the 'StandardGame' and it follows the
