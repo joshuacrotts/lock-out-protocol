@@ -13,74 +13,60 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- * This class is an example of connecting to and loading data from
- * the weather API.
+ * This class is an example of connecting to and loading data from the weather
+ * API.
  *
  * @author Joshua
  */
-public class WeatherConnector
-{
+public class WeatherConnector {
+
     private static URL url;
     private static InputStream INPUT_STREAM;
     private static BufferedReader READER;
     private static String LINE;
     private static String KEY;
 
-    static
-    {
+    static {
         //  Loads in the key for the api connection
-        WeatherConnector.INPUT_STREAM = WeatherConnector.class.getClassLoader().getResourceAsStream(".config/.weather_config.txt" );
-        WeatherConnector.READER = new BufferedReader( new InputStreamReader( WeatherConnector.INPUT_STREAM ) );
-        try
-        {
+        WeatherConnector.INPUT_STREAM = WeatherConnector.class.getClassLoader().getResourceAsStream(".config/.weather_config.txt");
+        WeatherConnector.READER = new BufferedReader(new InputStreamReader(WeatherConnector.INPUT_STREAM));
+        try {
             WeatherConnector.LINE = WeatherConnector.READER.readLine();
+        } catch (IOException ex) {
+            Logger.getLogger(WeatherConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
-        catch ( IOException ex )
-        {
-            Logger.getLogger( WeatherConnector.class.getName() ).log( Level.SEVERE, null, ex );
-        }
-
         //  Extracts the key from the line read in by the buffered reader
-        WeatherConnector.KEY = WeatherConnector.LINE.substring( WeatherConnector.LINE.lastIndexOf( ":" ) + 1 );
+        WeatherConnector.KEY = WeatherConnector.LINE.substring(WeatherConnector.LINE.lastIndexOf(":") + 1);
     }
 
     /**
      * Connects to the weather API to retrieve the JSON-formatted weather
      * information for the supplied city.
-     * 
+     *
      * @param city
      * @return
      */
-    private static String fetch ( String city )
-    {
+    private static String fetch(String city) {
         StringBuilder jsonInformation = null;
 
-        try
-        {
+        try {
             //  Processes the request to the API, and reads the information
             //  into the StringBuilder object.
             jsonInformation = new StringBuilder();
-            url = new URL( String.format( "https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s ", city, KEY ) );
-            HttpURLConnection con = ( HttpURLConnection ) url.openConnection();
-            con.setRequestMethod( "GET" );
-            BufferedReader in = new BufferedReader( new InputStreamReader( con.getInputStream() ) );
+            url = new URL(String.format("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s ", city, KEY));
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
-            while ( ( inputLine = in.readLine() ) != null )
-            {
-                jsonInformation.append( inputLine );
+            while ((inputLine = in.readLine()) != null) {
+                jsonInformation.append(inputLine);
             }
-
             in.close();
+        } catch (ProtocolException ex) {
+            Logger.getLogger(WeatherConnector.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(WeatherConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
-        catch ( ProtocolException ex )
-        {
-            Logger.getLogger( WeatherConnector.class.getName() ).log( Level.SEVERE, null, ex );
-        }
-        catch ( IOException ex )
-        {
-            Logger.getLogger( WeatherConnector.class.getName() ).log( Level.SEVERE, null, ex );
-        }
-
         return jsonInformation.toString();
     }
 
@@ -91,10 +77,9 @@ public class WeatherConnector
      * @param city
      * @return
      */
-    private static JSONArray getWeatherArray ( String city )
-    {
-        JSONObject weatherJSON = new JSONObject( WeatherConnector.fetch( city ) );
-        return ( JSONArray ) weatherJSON.get( "weather" );
+    private static JSONArray getWeatherArray(String city) {
+        JSONObject weatherJSON = new JSONObject(WeatherConnector.fetch(city));
+        return (JSONArray) weatherJSON.get("weather");
     }
 
     /**
@@ -103,10 +88,9 @@ public class WeatherConnector
      * @param weatherArray
      * @return
      */
-    private static String getWeatherType ( JSONArray weatherArray )
-    {
-        JSONObject indexOne = ( JSONObject ) weatherArray.getJSONObject( 0 );
-        return ( String ) indexOne.get( "description" );
+    private static String getWeatherType(JSONArray weatherArray) {
+        JSONObject indexOne = (JSONObject) weatherArray.getJSONObject(0);
+        return (String) indexOne.get("description");
     }
 
     /**
@@ -115,8 +99,7 @@ public class WeatherConnector
      * @param city
      * @return
      */
-    public static String getWeather ( String city )
-    {
-        return getWeatherType( getWeatherArray( city ) );
+    public static String getWeather(String city) {
+        return getWeatherType(getWeatherArray(city));
     }
 }

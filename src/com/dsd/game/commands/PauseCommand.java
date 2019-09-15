@@ -18,10 +18,8 @@ public class PauseCommand extends Command {
     }
 
     @Override
-    public void pressed(float dt){
+    public void pressed(float dt) {
         this.paused = !this.paused;
-
-        this.sg.setGameState( this.paused ? GameState.PAUSED : GameState.RUNNING);
+        this.sg.setGameState(this.paused ? GameState.PAUSED : GameState.RUNNING);
     }
-
 }

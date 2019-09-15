@@ -34,11 +34,9 @@ public class CityLocator {
         CityLocator.READER = new BufferedReader(new InputStreamReader(CityLocator.INPUT_STREAM));
         try {
             CityLocator.LINE = CityLocator.READER.readLine();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         CityLocator.KEY = CityLocator.LINE.substring(CityLocator.LINE.lastIndexOf(":") + 1);
     }
 
@@ -47,7 +45,7 @@ public class CityLocator {
      *
      * @return
      */
-    public static String getCity () {
+    public static String getCity() {
         return CityLocator.getCityJSON().getString("city");
     }
 
@@ -56,34 +54,30 @@ public class CityLocator {
      *
      * @return string representation of IP address
      */
-    public static String getIPAddress () {
+    public static String getIPAddress() {
         String ipAddress = null;
 
         try {
             URL whatismyip = new URL("http://checkip.amazonaws.com");
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     whatismyip.openStream()));
-
             ipAddress = in.readLine();
-        }
-        catch (MalformedURLException ex) {
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
         }
-        catch (IOException ex) {
-            Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
         return ipAddress;
     }
 
     /**
-     * Connects to the IPStack API with the supplied IP, and constructs
-     * a JSONObject with the 'city' field. Returns this in a String object.
+     * Connects to the IPStack API with the supplied IP, and constructs a
+     * JSONObject with the 'city' field. Returns this in a String object.
      *
      * @param city
      * @return
      */
-    private static String fetch (String ipAddress) {
+    private static String fetch(String ipAddress) {
         StringBuilder jsonInformation = null;
 
         try {
@@ -98,25 +92,22 @@ public class CityLocator {
             while ((inputLine = in.readLine()) != null) {
                 jsonInformation.append(inputLine);
             }
-
             in.close();
-        }
-        catch (ProtocolException ex) {
+        } catch (ProtocolException ex) {
+            Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
         }
-        catch (IOException ex) {
-            Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
         return jsonInformation.toString();
     }
 
     /**
-     * Returns the JSON object fetched by the API call with the supplied IP address
+     * Returns the JSON object fetched by the API call with the supplied IP
+     * address
      *
      * @return
      */
-    private static JSONObject getCityJSON () {
+    private static JSONObject getCityJSON() {
         return new JSONObject(CityLocator.fetch(CityLocator.getIPAddress()));
     }
 }

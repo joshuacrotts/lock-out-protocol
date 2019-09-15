@@ -41,6 +41,11 @@ import com.revivedstandards.model.StandardLevel;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
+/**
+ * Class "FollowTheMouseGameTest" extends the 'StandardGame' and it follows the
+ * mouse and turn to that direction
+ *
+ */
 public class FollowTheMouseGameTest extends StandardGame {
 
     private final TriangleGameObject tri;        //Player
@@ -52,7 +57,7 @@ public class FollowTheMouseGameTest extends StandardGame {
 
     private GameState gameState;                 //Current Game State (running/paused)
 
-    public FollowTheMouseGameTest (String weather) {
+    public FollowTheMouseGameTest(String weather) {
         super(1280, 720, "Game Test");
         System.out.println(weather);
 
@@ -88,7 +93,7 @@ public class FollowTheMouseGameTest extends StandardGame {
         //  Spawn bricks
         this.spawnBricks(10, 64);
 
-        for (int i = 0 ; i < 10 ; i++) {
+        for (int i = 0; i < 10; i++) {
             StandardAudioController.load("src/res/audio/sfx/laser_sfx.wav");
             StandardAudioController.load("src/res/audio/sfx/damage_0.wav");
             StandardAudioController.load("src/res/audio/sfx/damage_1.wav");
@@ -100,7 +105,7 @@ public class FollowTheMouseGameTest extends StandardGame {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         // If the game is running (ie not paused), we can update
         // the logic.
         if (this.gameState == GameState.RUNNING) {
@@ -114,7 +119,7 @@ public class FollowTheMouseGameTest extends StandardGame {
     }
 
     @Override
-    public void render () {
+    public void render() {
         // Render the level background first
         this.level.render(StandardDraw.Renderer);
         // Then render the camera
@@ -134,29 +139,31 @@ public class FollowTheMouseGameTest extends StandardGame {
      * @param n
      * @param dim
      */
-    private void spawnBricks (int n, int dim) {
+    private void spawnBricks(int n, int dim) {
         //Horizontal top & bottom rows
-        for (int x = 100 ; x <= n * 64 ; x += dim) {
+        for (int x = 100; x <= n * 64; x += dim) {
             this.sch.addEntity(new BrickGameObject(this, this.sch, x, 64, dim, Color.ORANGE));
             this.sch.addEntity(new BrickGameObject(this, this.sch, x, n * 64, dim, Color.ORANGE));
         }
 
         //Vertical left & right row
-        for (int y = 64 ; y <= n * 64 ; y += dim) {
+        for (int y = 64; y <= n * 64; y += dim) {
             this.sch.addEntity(new BrickGameObject(this, this.sch, 100, y, dim, Color.ORANGE));
             this.sch.addEntity(new BrickGameObject(this, this.sch, n * 64, y, dim, Color.ORANGE));
         }
     }
 
-    public GameState getGameState () {
+    //==========GETTERS====================
+    public GameState getGameState() {
         return this.gameState;
     }
 
-    public void setGameState (GameState gs) {
+    //=============SETTERS=================
+    public void setGameState(GameState gs) {
         this.gameState = gs;
     }
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         FollowTheMouseGameTest gameTest = new FollowTheMouseGameTest(WeatherConnector.getWeather(CityLocator.getCity()));
         gameTest.StartGame();
     }

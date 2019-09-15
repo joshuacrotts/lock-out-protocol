@@ -19,50 +19,39 @@ import java.awt.event.KeyEvent;
  */
 public class UserInterface implements Renderable, Updatable {
 
-    //
     // Global instance variables
-    //
     private final FollowTheMouseGameTest sg;
     private final StandardCamera sc;
     private final TriangleGameObject obj;
 
-    //
     //  Points that serve as a reference to draw
     //  UI elements
-    //
     private int renderX = 0;
     private int renderY = 0;
 
-    //
     //  Command for pausing and unpausing the game
-    //
     private final PauseCommand pauseCommand;
 
-    //
     //  Font used for elements
-    //
     private final Font gameFont;
 
-    public UserInterface (FollowTheMouseGameTest sg, TriangleGameObject obj, StandardCamera sc) {
+    public UserInterface(FollowTheMouseGameTest sg, TriangleGameObject obj, StandardCamera sc) {
         this.sg = sg;
         this.sc = sc;
         this.obj = obj;
-
         this.gameFont = StdOps.initFont("src/res/fonts/chargen.ttf", 0f);
-
         this.pauseCommand = new PauseCommand(sg);
         this.pauseCommand.bind(this.sg.getKeyboard(), KeyEvent.VK_P);
-
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.renderX = (int) this.obj.getX();
         this.renderY = (int) this.obj.getY();
     }
 
     @Override
-    public void render (Graphics2D g2) {
+    public void render(Graphics2D g2) {
         // Debug information
         StandardDraw.text("GAME", this.renderX, this.renderY - 320, this.gameFont, 36f, Color.yellow);
         StandardDraw.text("FPS: " + this.sg.getFPS(), this.renderX - 620, this.renderY - 330, this.gameFont, 20f, Color.yellow);
