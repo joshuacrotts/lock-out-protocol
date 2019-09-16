@@ -37,7 +37,7 @@ public class TriangleGameObject extends StandardGameObject {
 
     //  Variables representing the angle and approach velocity
     private float angle;
-    private final float APPROACH_VEL = -3.0f;
+    private final float APPROACH_VEL = -4.5f;
 
     //  Other variables representing status of SGO (bullets in this case)
     private int ammo = 30;
@@ -70,8 +70,8 @@ public class TriangleGameObject extends StandardGameObject {
         double distance = (double) FastMath.sqrt(((this.getX() - mx) * (this.getX() - mx))
                 + ((this.getY() - my) * (this.getY() - my)));
         // Sets the velocity according to how far away the sprite is from the cursor
-        this.setVelX((this.APPROACH_VEL / distance) * diffX);
-        this.setVelY((this.APPROACH_VEL / distance) * diffY);
+        this.setVelX((int)((this.APPROACH_VEL / distance) * diffX));
+        this.setVelY((int)((this.APPROACH_VEL / distance) * diffY));
 
         //*****************************************************************//
         //      Calculates the angle the ship needs to be in to face the   //
