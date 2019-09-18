@@ -3,6 +3,7 @@ package com.dsd.game;
 import com.dsd.game.objects.RainDrop;
 import com.revivedstandards.handlers.StandardParticleHandler;
 import com.revivedstandards.main.StandardCamera;
+import com.revivedstandards.main.StandardGame;
 import com.revivedstandards.util.StdOps;
 import com.revivedstandards.view.Renderable;
 import com.revivedstandards.view.Updatable;
@@ -15,7 +16,7 @@ import java.awt.Graphics2D;
 public class RainController implements Renderable, Updatable {
 
     private final StandardParticleHandler sph;
-    private final FollowTheMouseGameTest sg;
+    private final StandardGame sg;
     private final StandardCamera sc;
 
     //  Serves as a debugging feature
@@ -29,7 +30,7 @@ public class RainController implements Renderable, Updatable {
     private static final int X_BORDER = 600;
     private static final int Y_BORDER = 400;
 
-    public RainController (FollowTheMouseGameTest sg, StandardCamera sc, String weather) {
+    public RainController (StandardGame sg, StandardCamera sc, String weather) {
         this.sg = sg;
         this.sc = sc;
         this.sph = new StandardParticleHandler(5000);
