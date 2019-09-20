@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group/>
+=======
+        <group>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/Game.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/RainController.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/objects/RainDrop.java</file>
+        </group>
+>>>>>>> c56f57184df8f806365651f9ff37d4409f36e11d
     </open-files>
 </project-private>
