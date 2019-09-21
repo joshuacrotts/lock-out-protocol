@@ -12,14 +12,16 @@ import java.awt.Graphics2D;
 public class RainDrop extends StandardGameObject {
 
     private static final int ALPHA = 255 << 24;
-    private static final int RED = 255 << 16;
+    private static final int RED   = 255 << 16;
     private static final int GREEN = 255 << 8;
-    private static final int BLUE = 255;
-    private final double gravity = 0.25d;
+    private static final int BLUE  = 255;
+
+    private final double gravity   = 0.25d;
     private final int vanish;
 
     public RainDrop (double x, double y, double direction, double speed, int vanish) {
         super(x, y, StandardID.Particle);
+
         //Solve for horizontal leg of right triangle formed by velocity vector
         this.setVelX(speed * Math.sin(direction));
         this.vanish = vanish;
@@ -30,6 +32,7 @@ public class RainDrop extends StandardGameObject {
         if (this.getY() > vanish) {
             this.setAlive(false);
         }
+
         this.setVelY(this.getVelY() + gravity);
 
         this.updatePosition();
@@ -37,9 +40,9 @@ public class RainDrop extends StandardGameObject {
     }
 
     @Override
-    public void render (Graphics2D g2) {
+    public void render (Graphics2D _g2) {
         int rg = 100;
-        g2.setColor(new Color(rg, rg, StdOps.rand(rg, 255)));
-        g2.drawLine((int) this.getX(), (int) this.getY(), (int) (this.getX() - this.getVelX() * 2), (int) (this.getY() - this.getVelY() * 2));
+        _g2.setColor(new Color(rg, rg, StdOps.rand(rg, 255)));
+        _g2.drawLine((int) this.getX(), (int) this.getY(), (int) (this.getX() - this.getVelX() * 2), (int) (this.getY() - this.getVelY() * 2));
     }
 }

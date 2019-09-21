@@ -75,14 +75,14 @@ public class CityLocator {
      * @param city
      * @return
      */
-    private static String fetch(String ipAddress) {
+    private static String fetch(String _ipAddress) {
         StringBuilder jsonInformation = null;
 
         try {
             //  Processes the request to the API, and reads the information
             //  into the StringBuilder object.
             jsonInformation = new StringBuilder();
-            CityLocator.url = new URL(String.format("http://api.ipstack.com/%s?access_key=%s&fields=city", ipAddress, CityLocator.KEY));
+            CityLocator.url = new URL(String.format("http://api.ipstack.com/%s?access_key=%s&fields=city", _ipAddress, CityLocator.KEY));
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
