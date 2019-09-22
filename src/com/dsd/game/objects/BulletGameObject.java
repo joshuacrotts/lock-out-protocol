@@ -3,12 +3,8 @@ package com.dsd.game.objects;
 import com.dsd.game.Game;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
-import com.revivedstandards.handlers.StandardHandler;
-import com.revivedstandards.handlers.StandardParticleHandler;
 import com.revivedstandards.main.StandardCamera;
-import com.revivedstandards.main.StandardDraw;
 import com.revivedstandards.main.StandardGame;
-import com.revivedstandards.model.DeathListener;
 import com.revivedstandards.model.StandardAnimation;
 import com.revivedstandards.model.StandardGameObject;
 import com.revivedstandards.model.StandardID;
@@ -16,7 +12,14 @@ import com.revivedstandards.util.StdOps;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-public class BulletGameObject extends StandardGameObject implements DeathListener {
+/**
+ * Bullet game object
+ *
+ * @TODO: Refactor this into ProjectileGameObject
+ *
+ * @author Joshua
+ */
+public class BulletGameObject extends StandardGameObject {
 
     //
     //  Miscellaneous variables
@@ -26,20 +29,11 @@ public class BulletGameObject extends StandardGameObject implements DeathListene
     private final StandardCamera sc;
 
     //
-    //  Handler for particle explosions after the bullet
-    //  collides with a wall.
-    //
-    private StandardParticleHandler explosionHandler;
-
-    //
-    //  One-time variable for tracking the "alive" to "death state" transition
-    //
-    private boolean aliveFlag = true;
-
-    //
-    //  Angle of bullet according to current rotation of player
+    //  Angle of bullet according to current rotation of player,
+    //  and damage of bullet.
     //
     private final double angle;
+    private final int damage = 25;
 
     //
     //  Static reference to the BufferedImages
@@ -68,26 +62,15 @@ public class BulletGameObject extends StandardGameObject implements DeathListene
 
     @Override
     public void tick () {
-        this.updatePosition();
+        if (this.sc.SGOInBounds(this)) {
+            this.updatePosition();
 
-        //As long as the object is alive, we can tick it.
-        if (this.isAlive()) {
-            this.getAnimationController().tick();
-        }
-        else {
-            // Do this only once.
-            if (this.aliveFlag) {
-                this.uponDeath();
-                this.aliveFlag = false;
+            //As long as the object is alive, we can tick it.
+            if (this.isAlive()) {
+                this.getAnimationController().tick();
             }
-
-            // If the size of the exphandler (MAX_PARTICLES - dead ones) == 0,
-            // we can set this entity to be dead, and remove it from the handler.
-            if (this.explosionHandler.size() == 0) {
-                this.setAlive(false);
-            }
-
-            StandardHandler.Handler(this.explosionHandler);
+        } else {
+            this.sch.removeEntity(this);
         }
     }
 
@@ -99,14 +82,7 @@ public class BulletGameObject extends StandardGameObject implements DeathListene
             this.getAnimationController().getStandardAnimation().setRotation(angle);
             this.getAnimationController().renderFrame(g2);
         }
-        else {
-            StandardDraw.Handler(this.explosionHandler);
-        }
-
     }
-
-    @Override
-    public void uponDeath () { }
 
     /**
      * Instantiates the buffered image array.
@@ -118,6 +94,10 @@ public class BulletGameObject extends StandardGameObject implements DeathListene
         BulletGameObject.frames[0] = (StdOps.loadImage("src/res/img/bullet/bullet_sprite/bullet.png"));
 
         return BulletGameObject.frames;
+    }
+
+    public int getDamage () {
+        return this.damage;
     }
 
     //

@@ -10,7 +10,6 @@ import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.main.StandardGame;
 import com.revivedstandards.model.StandardAnimation;
-import com.revivedstandards.model.StandardGameObject;
 import com.revivedstandards.model.StandardID;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
@@ -20,14 +19,12 @@ import org.apache.commons.math3.util.FastMath;
 /**
  * This class encompasses the model for the Player object.
  */
-public class Player extends StandardGameObject {
+public class Player extends Entity {
 
     //
     //  Miscellaneous reference variables
     //
-    private StandardGame sg;
     private StandardCamera sc;
-    private StandardCollisionHandler globalHandler;
 
     //  Refers to the player's current state (walking, shooting, etc.)
     //  PlayerState is set by commands
@@ -53,13 +50,11 @@ public class Player extends StandardGameObject {
     private float angle;
     private final float approachVel = -3.0f;
 
-    public Player (StandardGame _sg, StandardCamera _sc, StandardCollisionHandler _sch, int x, int y) {
-        super(x, y, StandardID.Player);
+    public Player (int _x, int _y, StandardGame _sg, StandardCamera _sc, StandardCollisionHandler _sch) {
+        super(_x, _y, 100, StandardID.Player, (Game) _sg, _sch);
 
         //  Initializes the miscellaneous variables
-        this.sg = _sg;
         this.sc = _sc;
-        this.globalHandler = _sch;
 
         //  Instantiates the animation controllers
         StandardAnimatorController walkingAnimation = new StandardAnimatorController(
@@ -74,11 +69,11 @@ public class Player extends StandardGameObject {
         this.setAnimation(walkingAnimation);
 
         //  Assigns key-bindings to the commands
-        this.shootCommand = new ShootCommand((Game) this.sg, this, this.globalHandler, shootingAnimation);
-        this.shootCommand.bind(this.sg.getKeyboard(), KeyEvent.VK_SPACE);
+        this.shootCommand = new ShootCommand(this.getGame(), this, this.getHandler(), shootingAnimation);
+        this.shootCommand.bind(this.getGame().getKeyboard(), KeyEvent.VK_SPACE);
 
-        this.moveCommand = new MoveCommand((Game) this.sg, this);
-        this.moveCommand.bind(this.sg.getKeyboard(), KeyEvent.VK_W);
+        this.moveCommand = new MoveCommand(this.getGame(), this);
+        this.moveCommand.bind(this.getGame().getKeyboard(), KeyEvent.VK_W);
 
         this.playerState = PlayerState.Standing;
 
@@ -98,8 +93,8 @@ public class Player extends StandardGameObject {
         //      Causes the arrow to follow the cursor wherever on the screen //
         //*******************************************************************//
         // Save the mouse position
-        double mx = this.sc.getX() + this.sg.getMouse().getMouseX() - this.sc.getVpw();
-        double my = this.sc.getY() + this.sg.getMouse().getMouseY() - this.sc.getVph();
+        double mx = this.sc.getX() + this.getGame().getMouse().getMouseX() - this.sc.getVpw();
+        double my = this.sc.getY() + this.getGame().getMouse().getMouseY() - this.sc.getVph();
 
         // Calculate the distance between the sprite and the mouse
         double diffX = this.getX() - mx - 8;

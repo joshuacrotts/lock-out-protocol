@@ -2,6 +2,8 @@ package com.dsd.game;
 
 import com.dsd.game.api.CityLocator;
 import com.dsd.game.api.WeatherConnector;
+import com.dsd.game.controller.AudioBoxController;
+import com.dsd.game.controller.CollisionHandlerController;
 import com.dsd.game.controller.RainController;
 import com.dsd.game.objects.Monster;
 import com.dsd.game.objects.Player;
@@ -60,18 +62,18 @@ public class Game extends StandardGame {
         this.menu = new MenuScreen(this);
 
         //  Initialize the sound controller
-        StandardAudioController.init(8);
+        AudioBoxController.initialize(16);
 
         //  Create a new collision handler
-        this.sch = new StandardCollisionHandler(null);
+        this.sch = new CollisionHandlerController(null);
 
         //  Instantiates player & adds it to the handler
-        player = new Player(this, null, this.sch, 200, 200);
+        this.player = new Player(200, 200, this, null, this.sch);
         this.sch.addEntity(player);
-        this.sch.addEntity(new Monster(900, 900, this));
 
         //  Instantiate the camera
         this.sc = new StandardCamera(this, player, 1, this.getGameWidth(), this.getGameHeight());
+        this.sch.addEntity(new Monster(900, 900, this, this.sc, this.sch));
 
         //  Prevents the camera from scrolling too far to any of the sides
         int cameraMinX = 640;//These numbers are just guess&check..
@@ -82,7 +84,7 @@ public class Game extends StandardGame {
         this.sc.restrict(cameraMaxX, cameraMaxY, cameraMinX, cameraMinY);
 
         //  Sets the camera for the player and the handler
-        player.setCamera(this.sc);
+        this.player.setCamera(this.sc);
         this.sch.setCamera(this.sc);
 
         // Instantiates the rain controller
@@ -92,7 +94,7 @@ public class Game extends StandardGame {
         // some type of controller to determine HOW levels transition)
         this.level = new ForestLevel(player);
 
-        this.StartGame();
+        this.startGame();
 
     }
 
@@ -146,7 +148,7 @@ public class Game extends StandardGame {
     public GameState getGameState () {
         return this.gameState;
     }
-    
+
 //========================== SETTERS =============================/
     public void setGameState (GameState _gs) {
         this.gameState = _gs;
