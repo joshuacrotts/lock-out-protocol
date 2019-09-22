@@ -4,6 +4,7 @@ import com.dsd.game.api.CityLocator;
 import com.dsd.game.api.WeatherConnector;
 import com.dsd.game.controller.RainController;
 import com.dsd.game.objects.Player;
+import com.dsd.game.userinterface.MenuScreen;
 import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.handlers.StandardHandler;
@@ -14,19 +15,44 @@ import com.revivedstandards.model.StandardLevel;
 
 /**
  * This is the main class.
+ * 
+ * @TODO: Lots of refactoring to separate private methods
+ *         Create level controller class which determines
+ *         when the user transitions from one level to
+ *         the next.
  *
  * @author Joshua
  */
 public class Game extends StandardGame {
 
+    //
+    //  Miscellaneous reference variables
+    //
     private final StandardCamera sc;
     private final StandardCollisionHandler sch;
     private final StandardLevel level;
 
+    //
+    //  UI Element controller
+    //
+    private final MenuScreen menu;
+
+    //
+    //  Rain controller which contacts the API for the logic of
+    //  determining whether it should rain or not.
+    //
     private final RainController rainController;
+
+    //
+    //  Game state variable (paused, running, menu, etc.)
+    //
+    private GameState gameState = GameState.MENU;
 
     public Game () {
         super(1280, 720, "CSC-340 Game");
+
+        //  Creates the UI handler
+        this.menu = new MenuScreen(this);
 
         //  Initialize the sound controller
         StandardAudioController.init(8);
@@ -56,36 +82,64 @@ public class Game extends StandardGame {
         // Instantiates the rain controller
         this.rainController = new RainController(this, this.sc, WeatherConnector.getWeather(CityLocator.getCity()));
 
+        // Instantiates the levels @TODO: (should move this to a method and to
+        // some type of controller to determine HOW levels transition)
         this.level = new ForestLevel(player);
 
         this.StartGame();
+
     }
 
     @Override
     public void tick () {
-        //  Update the level background first
-        this.level.tick();
-        //  Then the objects within the handler
-        StandardHandler.Handler(this.sch);
-        // Then the rain if applicable
-        this.rainController.tick();
-        //  And lastly the camera
-        StandardHandler.Object(this.sc);
+        //
+        //  Depending on the game state, update different things.
+        //
+        if (this.gameState == GameState.MENU) {
+            this.menu.tick();
+        }
+
+        else if (this.gameState == GameState.RUNNING) {
+            //  Update the level background first
+            this.level.tick();
+            //  Then the objects within the handler
+            StandardHandler.Handler(this.sch);
+            // Then the rain if applicable
+            this.rainController.tick();
+            //  And lastly the camera
+            StandardHandler.Object(this.sc);
+        }
     }
 
     @Override
     public void render () {
-        //  First things first: render the camera
-        StandardDraw.Object(this.sc);
+        //
+        //  Depending on the game state, render different things.
+        //
+        if (this.gameState == GameState.MENU) {
+            this.menu.render(StandardDraw.Renderer);
+        }
 
-        //  Then render the level
-        this.level.render(StandardDraw.Renderer);
+        else if (this.gameState == GameState.RUNNING) {
+            //  First things first: render the camera
+            StandardDraw.Object(this.sc);
+            //  Then render the level
+            this.level.render(StandardDraw.Renderer);
+            // Then render the rain if applicable
+            this.rainController.render(StandardDraw.Renderer);
+            //  Then render the handler objects
+            StandardDraw.Handler(this.sch);
+        }
+    }
+    
+    
 
-        // Then render the rain if applicable
-        this.rainController.render(StandardDraw.Renderer);
+    public GameState getGameState () {
+        return this.gameState;
+    }
 
-        //  Then render the handler objects
-        StandardDraw.Handler(this.sch);
+    public void setGameState (GameState _gs) {
+        this.gameState = _gs;
     }
 
     public static void main (String[] args) {

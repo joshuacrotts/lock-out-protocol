@@ -60,6 +60,7 @@ public class WeatherConnector {
             con.setRequestMethod("GET");
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
+            
             while ((inputLine = in.readLine()) != null) {
                 jsonInformation.append(inputLine);
             }

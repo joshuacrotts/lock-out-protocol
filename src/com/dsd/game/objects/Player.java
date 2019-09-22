@@ -149,7 +149,6 @@ public class Player extends StandardGameObject {
         BufferedImage[] frames = new BufferedImage[_frameCount];
 
         for (int i = 0 ; i < frames.length ; i++) {
-            System.out.println(listOfFiles[i].getPath());
             frames[i] = StdOps.loadImage(listOfFiles[i].getPath());
         }
         return frames;

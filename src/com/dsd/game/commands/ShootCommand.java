@@ -32,7 +32,7 @@ public class ShootCommand extends Command {
         this.globalHandler = _gh;
         this.animation = animation;
         this.animation.getStandardAnimation().setReturnAnimation(this.player.getAnimationController());
-        
+
         StandardAudioController.load(gunSFXPath, 16);
     }
 
