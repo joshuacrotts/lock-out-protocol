@@ -23,7 +23,6 @@ public class MenuScreen implements Renderable, Updatable {
 
     private final Game sg;
     private final StandardInteractorHandler sih;
-    private final String title = "Lock Out Protocol";
 
     public MenuScreen (Game _sg) {
         this.sg = _sg;
@@ -55,7 +54,7 @@ public class MenuScreen implements Renderable, Updatable {
         this.sih.addInteractor(new ExitButton(this.sg, this.sg.getGameWidth() - 300, this.sg.getGameHeight() - 200, 200, 100, "EXIT", Color.RED));
 
         //  Instantiates the title label
-        this.sih.addInteractor(new StandardLabel(this.sg.getGameWidth() / 2 - 150, 40, title, "src/res/fonts/chargen.ttf", 32f));
+        this.sih.addInteractor(new StandardLabel(this.sg.getGameWidth() / 2 - 150, 40, this.sg.getWindow().getTitle(), "src/res/fonts/chargen.ttf", 32f));
     }
 
     /**

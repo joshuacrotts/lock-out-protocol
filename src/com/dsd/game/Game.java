@@ -56,7 +56,7 @@ public class Game extends StandardGame {
     private final Player player;
 
     public Game () {
-        super(1280, 720, "CSC-340 Game");
+        super(1280, 720, "Lock Out Protocol");
 
         //  Creates the UI handler
         this.menu = new MenuScreen(this);
