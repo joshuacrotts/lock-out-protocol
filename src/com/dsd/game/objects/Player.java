@@ -4,6 +4,7 @@ import com.dsd.game.PlayerState;
 import com.dsd.game.Game;
 import com.dsd.game.commands.MoveCommand;
 import com.dsd.game.commands.ShootCommand;
+import com.dsd.game.util.Utilities;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.main.StandardCamera;
@@ -11,11 +12,9 @@ import com.revivedstandards.main.StandardGame;
 import com.revivedstandards.model.StandardAnimation;
 import com.revivedstandards.model.StandardGameObject;
 import com.revivedstandards.model.StandardID;
-import com.revivedstandards.util.StdOps;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import org.apache.commons.math3.util.FastMath;
 
 /**
@@ -38,8 +37,8 @@ public class Player extends StandardGameObject {
     //
     //  Commands for the player's actions
     //
-    private MoveCommand moveCommand;
-    private ShootCommand shootCommand;
+    private final MoveCommand moveCommand;
+    private final ShootCommand shootCommand;
 
     //
     //  Frames of animation for the player
@@ -136,25 +135,6 @@ public class Player extends StandardGameObject {
     }
 
     /**
-     * Loads all files from a particular directory. All files need to be of the
-     * same type (png, jpeg, etc.) and have distinct, ordinal names.
-     *
-     * @param _directory
-     * @param _frameCount
-     * @return
-     */
-    public static BufferedImage[] loadFrames (String _directory, int _frameCount) {
-        File folder = new File(_directory);
-        File[] listOfFiles = folder.listFiles();
-        BufferedImage[] frames = new BufferedImage[_frameCount];
-
-        for (int i = 0 ; i < frames.length ; i++) {
-            frames[i] = StdOps.loadImage(listOfFiles[i].getPath());
-        }
-        return frames;
-    }
-
-    /**
      * Updates the dimensions of the SGO according to the animation's current
      * sprite.
      */
@@ -193,9 +173,9 @@ public class Player extends StandardGameObject {
     //  Initializes the images used in the animation frames
     //
     static {
-        walkingFrames = Player.loadFrames("src/res/img/player/player_walk_gun/", 6);
-        shootingGunFrames = Player.loadFrames("src/res/img/player/player_shoot_gun/", 5);
-        walkingRifleFrames = Player.loadFrames("src/res/img/player/player_walk_rifle/", 6);
+        walkingFrames = Utilities.loadFrames("src/res/img/player/player_walk_gun/", 6);
+        shootingGunFrames = Utilities.loadFrames("src/res/img/player/player_shoot_gun/", 5);
+        walkingRifleFrames = Utilities.loadFrames("src/res/img/player/player_walk_rifle/", 6);
     }
 
 }

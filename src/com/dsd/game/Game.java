@@ -3,6 +3,7 @@ package com.dsd.game;
 import com.dsd.game.api.CityLocator;
 import com.dsd.game.api.WeatherConnector;
 import com.dsd.game.controller.RainController;
+import com.dsd.game.objects.Monster;
 import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.MenuScreen;
 import com.revivedstandards.controller.StandardAudioController;
@@ -15,11 +16,10 @@ import com.revivedstandards.model.StandardLevel;
 
 /**
  * This is the main class.
- * 
- * @TODO: Lots of refactoring to separate private methods
- *         Create level controller class which determines
- *         when the user transitions from one level to
- *         the next.
+ *
+ * @TODO: Lots of refactoring to separate private methods Create level
+ * controller class which determines when the user transitions from one level to
+ * the next.
  *
  * @author Joshua
  */
@@ -48,6 +48,11 @@ public class Game extends StandardGame {
     //
     private GameState gameState = GameState.MENU;
 
+    //
+    //  Main player reference so other monsters can track them
+    //
+    private final Player player;
+
     public Game () {
         super(1280, 720, "CSC-340 Game");
 
@@ -61,8 +66,9 @@ public class Game extends StandardGame {
         this.sch = new StandardCollisionHandler(null);
 
         //  Instantiates player & adds it to the handler
-        Player player = new Player(this, null, this.sch, 200, 200);
+        player = new Player(this, null, this.sch, 200, 200);
         this.sch.addEntity(player);
+        this.sch.addEntity(new Monster(900, 900, this));
 
         //  Instantiate the camera
         this.sc = new StandardCamera(this, player, 1, this.getGameWidth(), this.getGameHeight());
@@ -131,13 +137,17 @@ public class Game extends StandardGame {
             StandardDraw.Handler(this.sch);
         }
     }
-    
-    
+
+//========================== GETTERS =============================/
+    public Player getPlayer () {
+        return this.player;
+    }
 
     public GameState getGameState () {
         return this.gameState;
     }
-
+    
+//========================== SETTERS =============================/
     public void setGameState (GameState _gs) {
         this.gameState = _gs;
     }
