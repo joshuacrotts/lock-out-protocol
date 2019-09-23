@@ -43,7 +43,7 @@ public class StandardLabel extends Interactor {
     }
 
     /**
-     * 
+     *
      */
     private void initFont (String fontPath, float fontSize) {
         this.font = StdOps.initFont(fontPath, fontSize);
