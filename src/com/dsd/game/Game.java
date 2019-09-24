@@ -58,11 +58,11 @@ public class Game extends StandardGame {
     public Game () {
         super(1280, 720, "Lock Out Protocol");
 
-        //  Creates the UI handler
-        this.menu = new MenuScreen(this);
-
         //  Initialize the sound controller
         AudioBoxController.initialize(16);
+
+        //  Creates the UI handler
+        this.menu = new MenuScreen(this);
 
         //  Create a new collision handler
         this.sch = new CollisionHandlerController(null);
@@ -76,12 +76,7 @@ public class Game extends StandardGame {
         this.sch.addEntity(new Monster(900, 900, this, this.sc, this.sch));
 
         //  Prevents the camera from scrolling too far to any of the sides
-        int cameraMinX = 640;//These numbers are just guess&check..
-        int cameraMaxX = 1080;
-        int cameraMinY = 350;
-        int cameraMaxY = 720;
-
-        this.sc.restrict(cameraMaxX, cameraMaxY, cameraMinX, cameraMinY);
+        this.initCamera();
 
         //  Sets the camera for the player and the handler
         this.player.setCamera(this.sc);
@@ -138,6 +133,19 @@ public class Game extends StandardGame {
             //  Then render the handler objects
             StandardDraw.Handler(this.sch);
         }
+    }
+
+    /**
+     * Sets the camera's field of view so as to prevent the camera from
+     * scrolling too far to any of the sides
+     */
+    private void initCamera () {
+        int cameraMinX = 640;//These numbers are just guess&check..
+        int cameraMaxX = 1080;
+        int cameraMinY = 350;
+        int cameraMaxY = 720;
+
+        this.sc.restrict(cameraMaxX, cameraMaxY, cameraMinX, cameraMinY);
     }
 
 //========================== GETTERS =============================/

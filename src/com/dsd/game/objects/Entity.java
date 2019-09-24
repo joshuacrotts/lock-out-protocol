@@ -43,8 +43,8 @@ public abstract class Entity extends StandardGameObject {
     }
 
 //========================= SETTERS =============================//
-    public void setHealth (double h) {
-        this.health = h;
+    public void setHealth (double _h) {
+        this.health = _h;
     }
 
 }

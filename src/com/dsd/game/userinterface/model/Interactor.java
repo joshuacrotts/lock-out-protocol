@@ -24,20 +24,20 @@ public abstract class Interactor {
     public Interactor () {
     }
 
-    public Interactor (int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Interactor (int _x, int _y) {
+        this.x = _x;
+        this.y = _y;
     }
 
-    public Interactor (int x, int y, boolean interactable) {
-        this(x, y);
-        this.interactable = interactable;
+    public Interactor (int _x, int _y, boolean _interactable) {
+        this(_x, _y);
+        this.interactable = _interactable;
     }
 
-    public Interactor (int x, int y, int width, int height) {
-        this(x, y);
-        this.width = width;
-        this.height = height;
+    public Interactor (int _x, int _y, int _width, int _height) {
+        this(_x, _y);
+        this.width = _width;
+        this.height = _height;
     }
 
     public Interactor (int x, int y, int width, int height, boolean interactable) {
@@ -47,7 +47,7 @@ public abstract class Interactor {
 
     public abstract void tick ();
 
-    public abstract void render (Graphics2D paramGraphics2D);
+    public abstract void render (Graphics2D _g2);
 
     public Rectangle getBounds () {
         return new Rectangle(this.x, this.y, this.width, this.height);
@@ -83,31 +83,31 @@ public abstract class Interactor {
     }
 //============================ SETTERS =================================//
 
-    public void setX (int x) {
-        this.x = x;
+    public void setX (int _x) {
+        this.x = _x;
     }
 
-    public void setY (int y) {
-        this.y = y;
+    public void setY (int _y) {
+        this.y = _y;
     }
 
-    public void setVelX (int velX) {
-        this.velX = velX;
+    public void setVelX (int _velX) {
+        this.velX = _velX;
     }
 
-    public void setVelY (int velY) {
-        this.velY = velY;
+    public void setVelY (int _velY) {
+        this.velY = _velY;
     }
 
-    public void setWidth (int width) {
-        this.width = width;
+    public void setWidth (int _width) {
+        this.width = _width;
     }
 
-    public void setHeight (int height) {
-        this.height = height;
+    public void setHeight (int _height) {
+        this.height = _height;
     }
 
-    public void setInteractable (boolean interactable) {
-        this.interactable = interactable;
+    public void setInteractable (boolean _interactable) {
+        this.interactable = _interactable;
     }
 }

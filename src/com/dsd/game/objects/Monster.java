@@ -169,8 +169,8 @@ public class Monster extends Entity implements DeathListener {
      *
      * @param sfx either 1 or 2
      */
-    private void generateDeathSound (int sfx) {
-        StandardAudioController.play("src/res/audio/sfx/splat" + sfx + ".wav");
+    private void generateDeathSound (int _sfx) {
+        StandardAudioController.play("src/res/audio/sfx/splat" + _sfx + ".wav");
     }
 
     static {

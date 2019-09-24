@@ -24,6 +24,10 @@ public class ShootCommand extends Command {
     private final StandardCollisionHandler globalHandler;
 
     private StandardAnimatorController animation;
+
+    //
+    //  This may need to change with time.
+    //
     private String gunSFXPath = "src/res/audio/sfx/pistol.wav";
 
     public ShootCommand (Game _sg, Player _obj, StandardCollisionHandler _gh, StandardAnimatorController animation) {
@@ -43,10 +47,10 @@ public class ShootCommand extends Command {
         this.player.setAnimation(this.animation);
         this.player.setPlayerState(PlayerState.Shooting);
 
-        this.globalHandler.addEntity(new BulletGameObject(this.game, this.globalHandler, this.player.getCamera(), this.player,
-                (int) this.player.getX() + this.player.getWidth() / 2,
-                (int) this.player.getY() + this.player.getHeight() / 2,
-                this.player.getAngle()));
+        this.globalHandler.addEntity(new BulletGameObject((int) this.player.getX() + this.player.getWidth() / 2,
+                                                          (int) this.player.getY() + this.player.getHeight() / 2,
+                                                          this.player.getAngle(), this.game, this.globalHandler,
+                                                          this.player.getCamera(), this.player ));
 
         StandardAudioController.play(this.gunSFXPath);
     }
@@ -54,10 +58,10 @@ public class ShootCommand extends Command {
     /**
      * If we switch to a different weapon, we need to update this command.
      *
-     * @param sac
+     * @param _sac
      */
-    public void setAnimation (StandardAnimatorController sac) {
-        this.animation = sac;
+    public void setAnimation (StandardAnimatorController _sac) {
+        this.animation = _sac;
     }
 
 }

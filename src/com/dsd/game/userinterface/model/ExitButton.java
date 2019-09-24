@@ -23,8 +23,7 @@ public class ExitButton extends StandardButton {
     public void tick () {
         super.tick();
         if (super.isPressed()) {
-            // Try and fix StopGame()...
-            System.exit(0);
+            this.sg.stopGame();
         }
     }
 
