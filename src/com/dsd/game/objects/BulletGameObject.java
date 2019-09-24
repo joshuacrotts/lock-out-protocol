@@ -40,24 +40,28 @@ public class BulletGameObject extends StandardGameObject {
     //
     private static final BufferedImage[] frames = new BufferedImage[1];
 
-    public BulletGameObject (Game sg, StandardCollisionHandler parentContainer, StandardCamera sc, Player parent, int x, int y, double angle) {
-        super(x, y, StandardID.Projectile);
+    public BulletGameObject (int _x, int _y, double _angle, Game _sg,
+                             StandardCollisionHandler _parentContainer,
+                             StandardCamera _sc, Player _parent) {
 
-        this.sg = sg;
-        this.sch = parentContainer;
-        this.angle = angle;
+        super(_x, _y, StandardID.Projectile);
 
-        this.setAnimation(new StandardAnimatorController(new StandardAnimation(this, frames, 20)));
+        this.sg = _sg;
+        this.sch = _parentContainer;
+        this.angle = _angle;
+
+        this.setAnimation(new StandardAnimatorController(
+                    new StandardAnimation(this, BulletGameObject.frames, 20)));
         this.setWidth(this.getWidth());
         this.setHeight(this.getHeight());
         this.setAlive(true);
-        this.setVelX(parent.getVelX() * 20);
-        this.setVelY(parent.getVelY() * 20);
+        this.setVelX(_parent.getVelX() * 20);
+        this.setVelY(_parent.getVelY() * 20);
 
         this.sch.flagAlive(this.getId());
         this.sch.addCollider(this.getId());
 
-        this.sc = sc;
+        this.sc = _sc;
     }
 
     @Override
@@ -75,12 +79,12 @@ public class BulletGameObject extends StandardGameObject {
     }
 
     @Override
-    public void render (Graphics2D g2) {
+    public void render (Graphics2D _g2) {
         // If they're alive, draw the frame that the bullet animation is on.
         // Otherwise, render the explosion handler
         if (this.isAlive()) {
             this.getAnimationController().getStandardAnimation().setRotation(angle);
-            this.getAnimationController().renderFrame(g2);
+            this.getAnimationController().renderFrame(_g2);
         }
     }
 

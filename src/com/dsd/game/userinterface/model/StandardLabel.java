@@ -21,32 +21,24 @@ public class StandardLabel extends Interactor {
 
     private Font font;
 
-    public StandardLabel (int x, int y, String text, String fontPath, float fontSize) {
-        super(x, y);
+    public StandardLabel (int _x, int _y, String _text, String _fontPath, float _fontSize) {
+        super(_x, _y);
 
-        this.originX = x;
-        this.originY = y;
-        this.text = text;
+        this.originX = _x;
+        this.originY = _y;
+        this.text = _text;
 
-        this.initFont(fontPath, fontSize);
+        this.font = StdOps.initFont(_fontPath, _fontSize);
     }
 
     @Override
     public void tick () {
-        this.setX(StdOps.rand(this.originX - shakeFactor, this.originX + shakeFactor));
-        this.setY(StdOps.rand(this.originY - shakeFactor, this.originY + shakeFactor));
+        this.setX(StdOps.rand(this.originX - shakeFactor, this.originX + this.shakeFactor));
+        this.setY(StdOps.rand(this.originY - shakeFactor, this.originY + this.shakeFactor));
     }
 
     @Override
     public void render (Graphics2D _g2) {
         StandardDraw.text(this.text, this.getX(), this.getY(), this.font, this.font.getSize(), Color.WHITE);
     }
-
-    /**
-     *
-     */
-    private void initFont (String fontPath, float fontSize) {
-        this.font = StdOps.initFont(fontPath, fontSize);
-    }
-
 }

@@ -10,5 +10,5 @@ package com.dsd.game.objects;
  * @author Joshua
  */
 public class ProjectileGameObject {
-    
+
 }

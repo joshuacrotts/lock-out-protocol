@@ -19,12 +19,12 @@ public class StandardInteractorHandler extends StandardHandler {
         this.interactors = new LinkedList<>();
     }
 
-    public void addInteractor (Interactor interactor) {
-        this.interactors.add(interactor);
+    public void addInteractor (Interactor _interactor) {
+        this.interactors.add(_interactor);
     }
 
     @Override
-    public void addEntity (StandardGameObject obj) {
+    public void addEntity (StandardGameObject _obj) {
         throw new UnsupportedOperationException("You cannot add an SGO to this particular handler.");
     }
 

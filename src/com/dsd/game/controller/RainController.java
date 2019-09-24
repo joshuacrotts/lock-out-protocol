@@ -40,7 +40,7 @@ public class RainController implements Renderable, Updatable {
         this.sg = _sg;
         this.sc = _sc;
         this.sph = new StandardParticleHandler(5000);
-        
+
         // Be sure to always set the SPH camera or it'll throw a NPE
         this.sph.setCamera(this.sc);
 

@@ -14,8 +14,13 @@ public class ForestLevel extends StandardLevel {
     //
     private final Player player;
 
+    //
+    //  Variables used to track where the background image is drawn.
+    //  The placement depends on the position and velocity of the player.
+    //
     private int trackX;
     private int trackXX;
+    private final double scrollXFactor = 0.25;
 
     public ForestLevel (Player player) {
         super(null, "src/res/img/bg/bg_1.png", null);
@@ -30,8 +35,7 @@ public class ForestLevel extends StandardLevel {
 
     @Override
     public void tick () {
-        this.trackX -= (int) this.player.getVelX() * 0.25;
-        this.trackXX -= (int) this.player.getVelX() * 0.50;
+        this.trackX -= (int) this.player.getVelX() * this.scrollXFactor;
     }
 
     @Override
@@ -44,14 +48,6 @@ public class ForestLevel extends StandardLevel {
             else {
                 g2.drawImage(this.getBgImage(), 0, 0, null);
             }
-
-//            if (this.trackXX <= 0) {
-//                g2.drawImage(this.getBgImage(), this.trackXX, 0, null);
-//            }
-//            else {
-//                g2.drawImage(this.getBgImage(), 0, 0, null);
-//            }
-
         }
     }
 

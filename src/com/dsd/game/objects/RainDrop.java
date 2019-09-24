@@ -5,35 +5,36 @@ import com.revivedstandards.model.StandardID;
 import com.revivedstandards.util.StdOps;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import org.apache.commons.math3.util.FastMath;
 
 /**
  * Typical Rain Drop for the Rain effect.
  */
 public class RainDrop extends StandardGameObject {
 
-    private static final int ALPHA = 255 << 24;
-    private static final int RED   = 255 << 16;
-    private static final int GREEN = 255 << 8;
-    private static final int BLUE  = 255;
-
-    private final double gravity   = 0.25d;
+    //
+    //  Gravity pulling the rain drop to the bottom of the screen,
+    //  as well as its vanish factor (how long it lasts on screen
+    //  before it dies.
+    //
+    private final double gravity = 0.25d;
     private final int vanish;
 
-    public RainDrop (double x, double y, double direction, double speed, int vanish) {
-        super(x, y, StandardID.Particle);
+    public RainDrop (double _x, double _y, double _direction, double _speed, int _vanish) {
+        super(_x, _y, StandardID.Particle);
 
         //Solve for horizontal leg of right triangle formed by velocity vector
-        this.setVelX(speed * Math.sin(direction));
-        this.vanish = vanish;
+        this.setVelX(_speed * FastMath.sin(_direction));
+        this.vanish = _vanish;
     }
 
     @Override
     public void tick () {
-        if (this.getY() > vanish) {
+        if (this.getY() > this.vanish) {
             this.setAlive(false);
         }
 
-        this.setVelY(this.getVelY() + gravity);
+        this.setVelY(this.getVelY() + this.gravity);
 
         this.updatePosition();
 
