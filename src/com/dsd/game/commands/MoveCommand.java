@@ -15,24 +15,24 @@ public class MoveCommand extends Command {
     private final Game game;
     private final Player player;
 
-    public MoveCommand (Game _sg, Player _obj) {
+    public MoveCommand(Game _sg, Player _obj) {
         this.game = _sg;
         this.player = _obj;
     }
 
     @Override
-    public void pressed (float _dt) {
+    public void pressed(float _dt) {
         this.player.setPlayerState(PlayerState.Walking);
         this.player.updatePosition();
     }
 
     @Override
-    public void released (float dt) {
+    public void released(float dt) {
         this.player.setPlayerState(PlayerState.Standing);
     }
 
     @Override
-    public void down (float _dt) {
+    public void down(float _dt) {
         this.player.setPlayerState(PlayerState.Walking);
         this.player.updatePosition();
     }

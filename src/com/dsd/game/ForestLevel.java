@@ -22,30 +22,29 @@ public class ForestLevel extends StandardLevel {
     private int trackXX;
     private final double scrollXFactor = 0.25;
 
-    public ForestLevel (Player player) {
+    public ForestLevel(Player player) {
         super(null, "src/res/img/bg/bg_1.png", null);
 
         this.player = player;
     }
 
     @Override
-    public void loadLevelData () {
+    public void loadLevelData() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.trackX -= (int) this.player.getVelX() * this.scrollXFactor;
     }
 
     @Override
-    public void render (Graphics2D g2) {
+    public void render(Graphics2D g2) {
         if (this.getBgImage() != null) {
 
             if (this.trackX <= 0) {
                 g2.drawImage(this.getBgImage(), this.trackX, 0, null);
-            }
-            else {
+            } else {
                 g2.drawImage(this.getBgImage(), 0, 0, null);
             }
         }

@@ -14,22 +14,22 @@ import java.awt.Graphics2D;
  */
 public class CollisionHandlerController extends StandardCollisionHandler {
 
-    public CollisionHandlerController (StandardCamera _sc) {
+    public CollisionHandlerController(StandardCamera _sc) {
         super(_sc);
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         super.tick();
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         super.render(_g2);
     }
 
     @Override
-    public void handleCollision (StandardGameObject _obj1, StandardGameObject _obj2) {
+    public void handleCollision(StandardGameObject _obj1, StandardGameObject _obj2) {
         //
         //  Handles bullet to monster collision
         //  (kills bullet and takes damage away from monster).

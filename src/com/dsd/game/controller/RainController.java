@@ -36,7 +36,7 @@ public class RainController implements Renderable, Updatable {
     private static final int X_BORDER = 600;
     private static final int Y_BORDER = 400;
 
-    public RainController (StandardGame _sg, StandardCamera _sc, String _weather) {
+    public RainController(StandardGame _sg, StandardCamera _sc, String _weather) {
         this.sg = _sg;
         this.sc = _sc;
         this.sph = new StandardParticleHandler(5000);
@@ -48,14 +48,14 @@ public class RainController implements Renderable, Updatable {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (this.isRaining()) {
             this.sph.render(_g2);
         }
     }
 
     @Override
-    public void tick () {
+    public void tick() {
 
         if (this.isRaining()) {
             // Generates the min/max points for the rain to spawn
@@ -68,14 +68,14 @@ public class RainController implements Renderable, Updatable {
             int yPos = StdOps.rand(yGenMin, yGenMax);
 
             this.sph.addEntity(new RainDrop(xPos, yPos, -Math.PI * 1.5, Math.random() * 5,
-                                           (int) (this.sc.getY() + this.sc.getVph() * 2)));
+                    (int) (this.sc.getY() + this.sc.getVph() * 2)));
 
             this.sph.tick();
         }
     }
 
 //========================== SETTERS =======================/
-    public boolean isRaining () {
+    public boolean isRaining() {
         return this.isRaining;
     }
 }

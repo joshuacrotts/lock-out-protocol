@@ -20,7 +20,7 @@ public class RainDrop extends StandardGameObject {
     private final double gravity = 0.25d;
     private final int vanish;
 
-    public RainDrop (double _x, double _y, double _direction, double _speed, int _vanish) {
+    public RainDrop(double _x, double _y, double _direction, double _speed, int _vanish) {
         super(_x, _y, StandardID.Particle);
 
         //Solve for horizontal leg of right triangle formed by velocity vector
@@ -29,7 +29,7 @@ public class RainDrop extends StandardGameObject {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (this.getY() > this.vanish) {
             this.setAlive(false);
         }
@@ -41,7 +41,7 @@ public class RainDrop extends StandardGameObject {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         int rg = 100;
         _g2.setColor(new Color(rg, rg, StdOps.rand(rg, 255)));
         _g2.drawLine((int) this.getX(), (int) this.getY(), (int) (this.getX() - this.getVelX() * 2), (int) (this.getY() - this.getVelY() * 2));

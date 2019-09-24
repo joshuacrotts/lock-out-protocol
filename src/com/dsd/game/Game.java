@@ -55,7 +55,7 @@ public class Game extends StandardGame {
     //
     private final Player player;
 
-    public Game () {
+    public Game() {
         super(1280, 720, "Lock Out Protocol");
 
         //  Initialize the sound controller
@@ -94,15 +94,13 @@ public class Game extends StandardGame {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         //
         //  Depending on the game state, update different things.
         //
         if (this.gameState == GameState.MENU) {
             this.menu.tick();
-        }
-
-        else if (this.gameState == GameState.RUNNING) {
+        } else if (this.gameState == GameState.RUNNING) {
             //  Update the level background first
             this.level.tick();
             //  Then the objects within the handler
@@ -115,15 +113,13 @@ public class Game extends StandardGame {
     }
 
     @Override
-    public void render () {
+    public void render() {
         //
         //  Depending on the game state, render different things.
         //
         if (this.gameState == GameState.MENU) {
             this.menu.render(StandardDraw.Renderer);
-        }
-
-        else if (this.gameState == GameState.RUNNING) {
+        } else if (this.gameState == GameState.RUNNING) {
             //  First things first: render the camera
             StandardDraw.Object(this.sc);
             //  Then render the level
@@ -139,7 +135,7 @@ public class Game extends StandardGame {
      * Sets the camera's field of view so as to prevent the camera from
      * scrolling too far to any of the sides
      */
-    private void initCamera () {
+    private void initCamera() {
         int cameraMinX = 640;//These numbers are just guess&check..
         int cameraMaxX = 1080;
         int cameraMinY = 350;
@@ -149,20 +145,20 @@ public class Game extends StandardGame {
     }
 
 //========================== GETTERS =============================/
-    public Player getPlayer () {
+    public Player getPlayer() {
         return this.player;
     }
 
-    public GameState getGameState () {
+    public GameState getGameState() {
         return this.gameState;
     }
 
 //========================== SETTERS =============================/
-    public void setGameState (GameState _gs) {
+    public void setGameState(GameState _gs) {
         this.gameState = _gs;
     }
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         Game game = new Game();
     }
 

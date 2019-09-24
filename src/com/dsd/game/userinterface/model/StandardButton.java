@@ -20,7 +20,7 @@ import javax.imageio.ImageIO;
  *
  * @author Joshua
  */
-public class StandardButton extends Interactor implements MouseListener, KeyListener, MouseMotionListener {
+public abstract class StandardButton extends Interactor {
 
     //
     //  State of button
@@ -37,49 +37,41 @@ public class StandardButton extends Interactor implements MouseListener, KeyList
     private String fileLocation;
     private BufferedImage image;
 
-    public StandardButton () {
-    }
-
-    public StandardButton (int _x, int _y) {
+    public StandardButton(int _x, int _y) {
         super(_x, _y);
     }
 
-    public StandardButton (int _x, int _y, int _width, int _height) {
+    public StandardButton(int _x, int _y, int _width, int _height) {
         super(_x, _y, _width, _height);
     }
 
-    public StandardButton (int _x, int _y, int _width, int _height, Color _color) {
+    public StandardButton(int _x, int _y, int _width, int _height, Color _color) {
         super(_x, _y, _width, _height);
         this.color = _color;
     }
 
-    public StandardButton (int _x, int _y, int _width, int _height, String _text, Color _color) {
+    public StandardButton(int _x, int _y, int _width, int _height, String _text, Color _color) {
         this(_x, _y, _width, _height);
         this.text = _text;
         this.color = _color;
     }
 
-    public StandardButton (int _x, int _y, int _width, int _height, int _red, int _green, int _blue) {
+    public StandardButton(int _x, int _y, int _width, int _height, int _red, int _green, int _blue) {
         super(_x, _y, _width, _height);
         this.color = new Color(_red, _green, _blue);
     }
 
-    public StandardButton (int _x, int _y, String fileLocation) {
+    public StandardButton(int _x, int _y, String fileLocation) {
         super(_x, _y);
 
-        try {
-            this.image = ImageIO.read(new File(fileLocation));
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.image = StdOps.loadImage(fileLocation);
 
         this.setWidth(this.image.getWidth());
         this.setHeight(this.image.getHeight());
         this.isImage = true;
     }
 
-    public StandardButton (int _x, int _y, BufferedImage _image) {
+    public StandardButton(int _x, int _y, BufferedImage _image) {
         this(_x, _y, _image.getWidth(), _image.getHeight());
 
         this.image = _image;
@@ -87,27 +79,15 @@ public class StandardButton extends Interactor implements MouseListener, KeyList
     }
 
     @Override
-    public void tick () {
-        if (this.mouseOver) {
-            this.color = Color.green;
-            if (this.pressed) {
-                this.color = Color.BLUE;
-            }
-            else {
-                this.color = Color.GREEN;
-            }
-        }
-        else {
-            this.color = Color.red;
-        }
+    public void tick() {
+
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (this.isImage) {
             _g2.drawImage(this.image, this.getX(), this.getY(), null);
-        }
-        else {
+        } else {
             _g2.setColor(this.color);
             _g2.fillRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
 
@@ -120,86 +100,36 @@ public class StandardButton extends Interactor implements MouseListener, KeyList
     }
 
     @Override
-    public void mousePressed (MouseEvent _e) {
-        if (isInteractable() && !this.pressed) {
-            System.out.println("Mouse clicked button.");
-
-            this.pressed = StdOps.mouseOver(_e.getX(), _e.getY(), this.getX(), this.getY(), this.getWidth(), this.getHeight());
-        }
-    }
+    public abstract void onMouseClick();
 
     @Override
-    public void mouseReleased (MouseEvent _e) {
-        if (isInteractable() && this.pressed) {
-            System.out.println("Mouse released button.");
-
-            if (StdOps.mouseOver(_e.getX(), _e.getY(), this.getX(), this.getY(), this.getWidth(), this.getHeight())) {
-                this.pressed = false;
-            }
-        }
-    }
+    public abstract void onMouseHover();
 
     @Override
-    public void mouseMoved (MouseEvent _e) {
-        if (isInteractable()) {
-            this.mouseOver = StdOps.mouseOver(_e.getX(), _e.getY(), this.getX(), this.getY(), this.getWidth(), this.getHeight());
-        }
-    }
-
-    @Override
-    public void mouseClicked (MouseEvent _e) {
-    }
-
-    @Override
-    public void mouseEntered (MouseEvent _e) {
-    }
-
-    @Override
-    public void mouseExited (MouseEvent _e) {
-    }
-
-    @Override
-    public void mouseDragged (MouseEvent _e) {
-    }
-
-    @Override
-    public void keyTyped (KeyEvent _e) {
-    }
-
-    @Override
-    public void keyPressed (KeyEvent _e) {
-    }
-
-    @Override
-    public void keyReleased (KeyEvent _e) {
-    }
-
-    @Override
-    public String toString () {
+    public String toString() {
         return "StandardButton Object: X: " + getX() + "\tY: " + getY() + "\tWidth: " + getWidth() + "\tHeight: " + getHeight() + "\tText: " + this.text + "\tColor: " + this.color;
     }
 
 //========================= GETTERS =============================//
-
-    public String getFileLocation () {
+    public String getFileLocation() {
         return this.fileLocation;
     }
 
-    public boolean isPressed () {
+    public boolean isPressed() {
         return pressed;
     }
 
-    public boolean isMouseOver () {
+    public boolean isMouseOver() {
         return mouseOver;
     }
 
-    public Color getColor () {
+    public Color getColor() {
         return color;
     }
 
 //========================= SETTERS =============================//
-
-    public void setFileLocation (String _fileLocation) {
+    public void setFileLocation(String _fileLocation) {
         this.fileLocation = _fileLocation;
     }
+
 }

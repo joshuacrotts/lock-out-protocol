@@ -30,7 +30,7 @@ public class ShootCommand extends Command {
     //
     private String gunSFXPath = "src/res/audio/sfx/pistol.wav";
 
-    public ShootCommand (Game _sg, Player _obj, StandardCollisionHandler _gh, StandardAnimatorController animation) {
+    public ShootCommand(Game _sg, Player _obj, StandardCollisionHandler _gh, StandardAnimatorController animation) {
         this.game = _sg;
         this.player = _obj;
         this.globalHandler = _gh;
@@ -39,7 +39,7 @@ public class ShootCommand extends Command {
     }
 
     @Override
-    public void pressed (float _dt) {
+    public void pressed(float _dt) {
         if (this.player.getVelX() == 0 || this.player.getVelY() == 0) {
             return;
         }
@@ -48,9 +48,9 @@ public class ShootCommand extends Command {
         this.player.setPlayerState(PlayerState.Shooting);
 
         this.globalHandler.addEntity(new BulletGameObject((int) this.player.getX() + this.player.getWidth() / 2,
-                                                          (int) this.player.getY() + this.player.getHeight() / 2,
-                                                          this.player.getAngle(), this.game, this.globalHandler,
-                                                          this.player.getCamera(), this.player ));
+                (int) this.player.getY() + this.player.getHeight() / 2,
+                this.player.getAngle(), this.game, this.globalHandler,
+                this.player.getCamera(), this.player));
 
         StandardAudioController.play(this.gunSFXPath);
     }
@@ -60,7 +60,7 @@ public class ShootCommand extends Command {
      *
      * @param _sac
      */
-    public void setAnimation (StandardAnimatorController _sac) {
+    public void setAnimation(StandardAnimatorController _sac) {
         this.animation = _sac;
     }
 

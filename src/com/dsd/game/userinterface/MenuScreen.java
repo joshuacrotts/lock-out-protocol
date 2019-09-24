@@ -24,21 +24,21 @@ public class MenuScreen implements Renderable, Updatable {
     private final Game sg;
     private final StandardInteractorHandler sih;
 
-    public MenuScreen (Game _sg) {
+    public MenuScreen(Game _sg) {
         this.sg = _sg;
-        this.sih = new StandardInteractorHandler();
+        this.sih = new StandardInteractorHandler(_sg);
 
         this.createUIElements();
         this.addUIElementsAsListeners();
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         StandardHandler.Handler(this.sih);
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         StandardDraw.Handler(this.sih);
     }
 
@@ -46,7 +46,7 @@ public class MenuScreen implements Renderable, Updatable {
      * Initializes the position of all the buttons for the user-interface when
      * the user is in the menu state.
      */
-    private void createUIElements () {
+    private void createUIElements() {
         //  Instantiates the play button
         this.sih.addInteractor(new PlayButton(this.sg, 100, this.sg.getGameHeight() - 200, 200, 100, "PLAY", Color.RED));
 
@@ -61,15 +61,8 @@ public class MenuScreen implements Renderable, Updatable {
      * Iterates through the list of UI elements and adds them as listeners to
      * the StandardGame.
      */
-    private void addUIElementsAsListeners () {
-        for (int i = 0 ; i < this.sih.getInteractors().size() ; i++) {
-            Interactor inter = this.sih.getInteractors().get(i);
-
-            if (inter instanceof StandardButton) {
-                this.sg.addKeyListener((StandardButton) inter);
-                this.sg.addMouseListener((StandardButton) inter);
-                this.sg.addMouseMotionListener((StandardButton) inter);
-            }
-        }
+    private void addUIElementsAsListeners() {
+        this.sg.addMouseListener(this.sih);
+        this.sg.addMouseMotionListener(this.sih);
     }
 }

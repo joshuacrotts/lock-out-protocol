@@ -40,9 +40,9 @@ public class BulletGameObject extends StandardGameObject {
     //
     private static final BufferedImage[] frames = new BufferedImage[1];
 
-    public BulletGameObject (int _x, int _y, double _angle, Game _sg,
-                             StandardCollisionHandler _parentContainer,
-                             StandardCamera _sc, Player _parent) {
+    public BulletGameObject(int _x, int _y, double _angle, Game _sg,
+            StandardCollisionHandler _parentContainer,
+            StandardCamera _sc, Player _parent) {
 
         super(_x, _y, StandardID.Projectile);
 
@@ -51,7 +51,7 @@ public class BulletGameObject extends StandardGameObject {
         this.angle = _angle;
 
         this.setAnimation(new StandardAnimatorController(
-                    new StandardAnimation(this, BulletGameObject.frames, 20)));
+                new StandardAnimation(this, BulletGameObject.frames, 20)));
         this.setWidth(this.getWidth());
         this.setHeight(this.getHeight());
         this.setAlive(true);
@@ -65,7 +65,7 @@ public class BulletGameObject extends StandardGameObject {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (this.sc.SGOInBounds(this)) {
             this.updatePosition();
 
@@ -79,7 +79,7 @@ public class BulletGameObject extends StandardGameObject {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         // If they're alive, draw the frame that the bullet animation is on.
         // Otherwise, render the explosion handler
         if (this.isAlive()) {
@@ -93,14 +93,14 @@ public class BulletGameObject extends StandardGameObject {
      *
      * @return
      */
-    private static BufferedImage[] initImages () {
+    private static BufferedImage[] initImages() {
 
         BulletGameObject.frames[0] = (StdOps.loadImage("src/res/img/bullet/bullet_sprite/bullet.png"));
 
         return BulletGameObject.frames;
     }
 
-    public int getDamage () {
+    public int getDamage() {
         return this.damage;
     }
 

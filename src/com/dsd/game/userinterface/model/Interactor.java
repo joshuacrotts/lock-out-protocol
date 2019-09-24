@@ -1,5 +1,8 @@
 package com.dsd.game.userinterface.model;
 
+import com.dsd.game.userinterface.MouseEventInterface;
+import com.revivedstandards.view.Renderable;
+import com.revivedstandards.view.Updatable;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
@@ -10,7 +13,7 @@ import java.awt.Rectangle;
  *
  * @author Joshua
  */
-public abstract class Interactor {
+public abstract class Interactor implements Renderable, Updatable, MouseEventInterface {
 
     private int x;
     private int y;
@@ -21,93 +24,101 @@ public abstract class Interactor {
 
     private boolean interactable = true;
 
-    public Interactor () {
+    public Interactor() {
     }
 
-    public Interactor (int _x, int _y) {
+    public Interactor(int _x, int _y) {
         this.x = _x;
         this.y = _y;
     }
 
-    public Interactor (int _x, int _y, boolean _interactable) {
+    public Interactor(int _x, int _y, boolean _interactable) {
         this(_x, _y);
         this.interactable = _interactable;
     }
 
-    public Interactor (int _x, int _y, int _width, int _height) {
+    public Interactor(int _x, int _y, int _width, int _height) {
         this(_x, _y);
         this.width = _width;
         this.height = _height;
     }
 
-    public Interactor (int x, int y, int width, int height, boolean interactable) {
+    public Interactor(int x, int y, int width, int height, boolean interactable) {
         this(x, y, width, height);
         this.interactable = interactable;
     }
 
-    public abstract void tick ();
+    @Override
+    public abstract void tick();
 
-    public abstract void render (Graphics2D _g2);
+    @Override
+    public abstract void render(Graphics2D _g2);
 
-    public Rectangle getBounds () {
+    @Override
+    public abstract void onMouseClick();
+
+    @Override
+    public abstract void onMouseHover();
+
+    public Rectangle getBounds() {
         return new Rectangle(this.x, this.y, this.width, this.height);
     }
 
 //============================ GETTERS =================================//
-    public int getX () {
+    public int getX() {
         return this.x;
     }
 
-    public int getY () {
+    public int getY() {
         return this.y;
     }
 
-    public int getVelX () {
+    public int getVelX() {
         return this.velX;
     }
 
-    public int getVelY () {
+    public int getVelY() {
         return this.velY;
     }
 
-    public int getWidth () {
+    public int getWidth() {
         return this.width;
     }
 
-    public int getHeight () {
+    public int getHeight() {
         return this.height;
     }
 
-    public boolean isInteractable () {
+    public boolean isInteractable() {
         return this.interactable;
     }
 //============================ SETTERS =================================//
 
-    public void setX (int _x) {
+    public void setX(int _x) {
         this.x = _x;
     }
 
-    public void setY (int _y) {
+    public void setY(int _y) {
         this.y = _y;
     }
 
-    public void setVelX (int _velX) {
+    public void setVelX(int _velX) {
         this.velX = _velX;
     }
 
-    public void setVelY (int _velY) {
+    public void setVelY(int _velY) {
         this.velY = _velY;
     }
 
-    public void setWidth (int _width) {
+    public void setWidth(int _width) {
         this.width = _width;
     }
 
-    public void setHeight (int _height) {
+    public void setHeight(int _height) {
         this.height = _height;
     }
 
-    public void setInteractable (boolean _interactable) {
+    public void setInteractable(boolean _interactable) {
         this.interactable = _interactable;
     }
 }

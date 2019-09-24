@@ -50,7 +50,7 @@ public class Player extends Entity {
     private float angle;
     private final float approachVel = -3.0f;
 
-    public Player (int _x, int _y, StandardGame _sg, StandardCamera _sc, StandardCollisionHandler _sch) {
+    public Player(int _x, int _y, StandardGame _sg, StandardCamera _sc, StandardCollisionHandler _sch) {
         super(_x, _y, 100, StandardID.Player, (Game) _sg, _sch);
 
         //  Initializes the miscellaneous variables
@@ -80,7 +80,7 @@ public class Player extends Entity {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         //  If the player is not standing still, update the animation controller.
         if (this.getPlayerState() != PlayerState.Standing) {
             this.getAnimationController().tick();
@@ -125,7 +125,7 @@ public class Player extends Entity {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         this.getAnimationController().renderFrame(_g2);
     }
 
@@ -133,34 +133,34 @@ public class Player extends Entity {
      * Updates the dimensions of the SGO according to the animation's current
      * sprite.
      */
-    private void updateDimensions () {
+    private void updateDimensions() {
         this.setWidth(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getWidth());
         this.setHeight(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getHeight());
     }
 
 //============================== GETTERS ================================//
-    public StandardCamera getCamera () {
+    public StandardCamera getCamera() {
         return this.sc;
     }
 
-    public PlayerState getPlayerState () {
+    public PlayerState getPlayerState() {
         return this.playerState;
     }
 
-    public double getAngle () {
+    public double getAngle() {
         return this.angle;
     }
 
 //=============================== SETTERS ================================//
-    public void setWalking () {
+    public void setWalking() {
         this.playerState = PlayerState.Walking;
     }
 
-    public void setCamera (StandardCamera _sc) {
+    public void setCamera(StandardCamera _sc) {
         this.sc = _sc;
     }
 
-    public void setPlayerState (PlayerState _playerState) {
+    public void setPlayerState(PlayerState _playerState) {
         this.playerState = _playerState;
     }
 

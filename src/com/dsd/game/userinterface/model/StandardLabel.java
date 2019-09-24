@@ -1,5 +1,6 @@
 package com.dsd.game.userinterface.model;
 
+import com.dsd.game.userinterface.MouseEventInterface;
 import com.revivedstandards.main.StandardDraw;
 import com.revivedstandards.util.StdOps;
 import java.awt.Color;
@@ -11,7 +12,7 @@ import java.awt.Graphics2D;
  *
  * @author Joshua
  */
-public class StandardLabel extends Interactor {
+public class StandardLabel extends Interactor implements MouseEventInterface {
 
     private String text;
 
@@ -21,7 +22,7 @@ public class StandardLabel extends Interactor {
 
     private Font font;
 
-    public StandardLabel (int _x, int _y, String _text, String _fontPath, float _fontSize) {
+    public StandardLabel(int _x, int _y, String _text, String _fontPath, float _fontSize) {
         super(_x, _y);
 
         this.originX = _x;
@@ -31,14 +32,23 @@ public class StandardLabel extends Interactor {
         this.font = StdOps.initFont(_fontPath, _fontSize);
     }
 
-    @Override
-    public void tick () {
+    public void tick() {
         this.setX(StdOps.rand(this.originX - shakeFactor, this.originX + this.shakeFactor));
         this.setY(StdOps.rand(this.originY - shakeFactor, this.originY + this.shakeFactor));
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         StandardDraw.text(this.text, this.getX(), this.getY(), this.font, this.font.getSize(), Color.WHITE);
+    }
+
+    @Override
+    public void onMouseClick() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void onMouseHover() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

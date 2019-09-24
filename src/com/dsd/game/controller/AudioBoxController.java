@@ -9,7 +9,7 @@ import com.revivedstandards.controller.StandardAudioController;
  */
 public abstract class AudioBoxController {
 
-    public static void initialize (int _buffers) {
+    public static void initialize(int _buffers) {
         StandardAudioController.init(_buffers);
 
         StandardAudioController.load("src/res/audio/sfx/pistol.wav", 16);

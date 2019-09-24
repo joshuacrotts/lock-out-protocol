@@ -20,12 +20,12 @@ public abstract class Utilities extends StdOps {
      * @param _frameCount
      * @return
      */
-    public static BufferedImage[] loadFrames (String _directory, int _frameCount) {
+    public static BufferedImage[] loadFrames(String _directory, int _frameCount) {
         File folder = new File(_directory);
         File[] listOfFiles = folder.listFiles();
         BufferedImage[] frames = new BufferedImage[_frameCount];
 
-        for (int i = 0 ; i < frames.length ; i++) {
+        for (int i = 0; i < frames.length; i++) {
             frames[i] = StdOps.loadImage(listOfFiles[i].getPath());
         }
         return frames;
