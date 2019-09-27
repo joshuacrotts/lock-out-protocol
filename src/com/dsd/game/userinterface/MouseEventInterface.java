@@ -11,5 +11,7 @@ public interface MouseEventInterface {
 
     public void onMouseClick();
 
-    public void onMouseHover();
+    public void onMouseEnterHover();
+    
+    public void onMouseExitHover();
 }

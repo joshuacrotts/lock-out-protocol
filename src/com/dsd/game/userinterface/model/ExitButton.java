@@ -31,6 +31,12 @@ public class ExitButton extends StandardButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseHover() {
+    public void onMouseEnterHover() {
+        this.setColor(Color.GREEN);
+    }
+    
+    @Override
+    public void onMouseExitHover() {
+        this.setColor(Color.RED);
     }
 }

@@ -54,12 +54,12 @@ public class Game extends StandardGame {
     //
     private final Player player;
 
-    public Game(int width, int height, String title) {
+    public Game(int _width, int _height, String _title) {
         //
         //  Note: Magic numbers for the player and the monster are just
         //        for demonstration; they will NOT be in the final game.
         //
-        super(width, height, title);
+        super(_width, _height, _title);
 
         //  Initialize the sound controller
         AudioBoxController.initialize(16);

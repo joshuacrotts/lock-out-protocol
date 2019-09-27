@@ -85,9 +85,9 @@ public class StandardInteractorHandler extends StandardHandler implements MouseL
             Interactor inter = this.interactors.get(i);
             if (StdOps.mouseOver(this.sg.getMouse().getMouseX(), this.sg.getMouse().getMouseY(),
                     inter.getX(), inter.getY(), inter.getWidth(), inter.getHeight())) {
-
-                inter.onMouseHover();
-
+                inter.onMouseEnterHover();
+            } else {
+                inter.onMouseExitHover();
             }
         }
     }

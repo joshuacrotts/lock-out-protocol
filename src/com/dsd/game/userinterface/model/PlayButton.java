@@ -33,7 +33,13 @@ public class PlayButton extends StandardButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseHover() {
+    public void onMouseEnterHover() {
+        this.setColor(Color.BLUE);
+    }
+    
+    @Override
+    public void onMouseExitHover() {
+        
     }
 
 }

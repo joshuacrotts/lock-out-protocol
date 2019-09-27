@@ -3,27 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/api/WeatherConnector.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/api/CityLocator.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/userinterface/MenuScreen.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/GameState.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/controller/CollisionHandlerController.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/userinterface/model/PlayButton.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/commands/MoveCommand.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/PlayerState.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/userinterface/model/StandardButton.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/objects/RainDrop.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/objects/BulletGameObject.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/userinterface/model/StandardLabel.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/ForestLevel.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/objects/ProjectileGameObject.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/commands/ShootCommand.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/userinterface/StandardInteractorHandler.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/objects/Player.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/controller/RainController.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/Game.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/objects/Monster.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/userinterface/model/ExitButton.java</file>
+            <file>file:/C:/Users/ljcrotts/Documents/NetBeansProjects/CSC-340-Game/src/com/dsd/game/Game.java</file>
+            <file>file:/C:/Users/ljcrotts/Documents/NetBeansProjects/CSC-340-Game/src/com/dsd/game/objects/Player.java</file>
         </group>
     </open-files>
 </project-private>

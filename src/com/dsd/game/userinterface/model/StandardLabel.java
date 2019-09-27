@@ -32,6 +32,7 @@ public class StandardLabel extends Interactor implements MouseEventInterface {
         this.font = StdOps.initFont(_fontPath, _fontSize);
     }
 
+    @Override
     public void tick() {
         this.setX(StdOps.rand(this.originX - shakeFactor, this.originX + this.shakeFactor));
         this.setY(StdOps.rand(this.originY - shakeFactor, this.originY + this.shakeFactor));
@@ -48,7 +49,12 @@ public class StandardLabel extends Interactor implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseHover() {
+    public void onMouseEnterHover() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void onMouseExitHover() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -93,8 +93,11 @@ public abstract class StandardButton extends Interactor {
     public abstract void onMouseClick();
 
     @Override
-    public abstract void onMouseHover();
+    public abstract void onMouseEnterHover();
 
+    @Override
+    public abstract void onMouseExitHover();
+    
     @Override
     public String toString() {
         return "StandardButton Object: X: " + getX() + "\tY: " + getY() + "\tWidth: " + getWidth() + "\tHeight: " + getHeight() + "\tText: " + this.text + "\tColor: " + this.color;
@@ -112,6 +115,10 @@ public abstract class StandardButton extends Interactor {
 //========================= SETTERS =============================//
     public void setFileLocation(String _fileLocation) {
         this.fileLocation = _fileLocation;
+    }
+    
+    public void setColor(Color _c) {
+        this.color = _c;
     }
 
 }
