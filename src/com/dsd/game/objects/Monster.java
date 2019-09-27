@@ -50,6 +50,11 @@ public class Monster extends Entity implements DeathListener {
     private static final BufferedImage[] walkingFrames;
 
     //
+    //  Animation frame per second setting
+    //
+    private static final int WALKING_FPS = 10;
+
+    //
     //  One-time variable for tracking the "alive" to "death state" transition
     //
     private boolean aliveFlag = true;
@@ -60,26 +65,26 @@ public class Monster extends Entity implements DeathListener {
     private final float approachVel = -1.5f;
     private float angle;
 
-    public Monster(int _x, int _y, Game _sg, StandardCamera _sc, StandardCollisionHandler _sch) {
+    public Monster (int _x, int _y, Game _sg, StandardCamera _sc, StandardCollisionHandler _sch) {
         super(_x, _y, 100, StandardID.Enemy3, _sg, _sch);
         this.target = _sg.getPlayer();
         this.sc = _sc;
 
         StandardAnimatorController walkingAnimation = new StandardAnimatorController(
-                new StandardAnimation(this, Monster.walkingFrames, 10d));
+                new StandardAnimation(this, Monster.walkingFrames, Monster.WALKING_FPS));
 
         this.setAnimation(walkingAnimation);
 
         //  Hard-coded values from png files
-        this.setWidth(199);
-        this.setHeight(191);
+        this.setWidth(walkingAnimation.getStandardAnimation().getView().getCurrentFrame().getWidth());
+        this.setHeight(walkingAnimation.getStandardAnimation().getView().getCurrentFrame().getHeight());
 
         this.getHandler().addCollider(this.getId());
         this.getHandler().flagAlive(this.getId());
     }
 
     @Override
-    public void tick() {
+    public void tick () {
 
         if (this.isAlive()) {
             this.updatePosition();
@@ -120,7 +125,8 @@ public class Monster extends Entity implements DeathListener {
             if ((tx > this.getX() && ty > this.getY()) || (tx < this.getX() && ty > this.getY())) {
                 this.angle = (float) ((FastMath.PI * 0.5) + (FastMath.PI * 0.5 - this.angle));
             }
-        } else {
+        }
+        else {
             // Do this only once.
             if (this.aliveFlag) {
                 this.uponDeath();
@@ -138,20 +144,21 @@ public class Monster extends Entity implements DeathListener {
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         if (this.isAlive()) {
             this.getAnimationController().renderFrame(_g2);
-        } else if (this.explosionHandler != null) {
+        }
+        else if (this.explosionHandler != null) {
             StandardDraw.Handler(this.explosionHandler);
         }
     }
 
     @Override
-    public void uponDeath() {
+    public void uponDeath () {
         this.explosionHandler = new StandardParticleHandler(50);
         this.explosionHandler.setCamera(this.sc);
 
-        for (int i = 0; i < this.explosionHandler.getMaxParticles(); i++) {
+        for (int i = 0 ; i < this.explosionHandler.getMaxParticles() ; i++) {
 
             this.explosionHandler.addEntity(new StandardBoxParticle(this.getX(), this.getY(),
                     StdOps.rand(1.0, 5.0), StdOps.randBounds(-10.0, -3.0, 3.0, 10.0),
@@ -162,12 +169,16 @@ public class Monster extends Entity implements DeathListener {
         this.generateDeathSound(StdOps.rand(1, 2));
     }
 
+    public void generateHurtSound (int _sfx) {
+        StandardAudioController.play("src/res/audio/sfx/zombies/zombie-" + _sfx + ".wav");
+    }
+
     /**
      * Randomly plays one of the two sound effects for the monster.
      *
      * @param sfx either 1 or 2
      */
-    private void generateDeathSound(int _sfx) {
+    private void generateDeathSound (int _sfx) {
         StandardAudioController.play("src/res/audio/sfx/splat" + _sfx + ".wav");
     }
 

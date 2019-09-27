@@ -14,6 +14,12 @@ import com.revivedstandards.model.StandardID;
 public abstract class Entity extends StandardGameObject {
 
     //
+    //  For entities that follow another entity, this is the factor that
+    //  should be applied when detecting the angle to turn towards.
+    //
+    public static final int APPROACH_FACTOR = 8;
+
+    //
     //  Miscellaneous reference variables
     //
     private final Game game;
@@ -22,7 +28,7 @@ public abstract class Entity extends StandardGameObject {
     //  Health of entity
     private double health = 0;
 
-    public Entity(int _x, int _y, int _health, StandardID _id, Game _game, StandardCollisionHandler _parentContainer) {
+    public Entity (int _x, int _y, int _health, StandardID _id, Game _game, StandardCollisionHandler _parentContainer) {
         super(_x, _y, _id);
         this.game = _game;
         this.parentContainer = _parentContainer;
@@ -30,20 +36,24 @@ public abstract class Entity extends StandardGameObject {
     }
 //========================= GETTERS =============================//
 
-    public Game getGame() {
+    public Game getGame () {
         return this.game;
     }
 
-    public StandardCollisionHandler getHandler() {
+    public StandardCollisionHandler getHandler () {
         return this.parentContainer;
     }
 
-    public double getHealth() {
+    public double getHealth () {
         return this.health;
     }
 
+    public boolean isMoving () {
+        return this.getVelX() != 0 && this.getVelY() != 0;
+    }
+
 //========================= SETTERS =============================//
-    public void setHealth(double _h) {
+    public void setHealth (double _h) {
         this.health = _h;
     }
 

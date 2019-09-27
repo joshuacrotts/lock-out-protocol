@@ -45,7 +45,7 @@ public class ShootCommand extends Command {
         }
 
         this.player.setAnimation(this.animation);
-        this.player.setPlayerState(PlayerState.Shooting);
+        this.player.setPlayerState(PlayerState.SHOOTING);
 
         this.globalHandler.addEntity(new BulletGameObject((int) this.player.getX() + this.player.getWidth() / 2,
                 (int) this.player.getY() + this.player.getHeight() / 2,

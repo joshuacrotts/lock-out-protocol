@@ -19,8 +19,7 @@ public class ForestLevel extends StandardLevel {
     //  The placement depends on the position and velocity of the player.
     //
     private int trackX;
-    private int trackXX;
-    private final double scrollXFactor = 0.25;
+    private final double SCROLL_X_FACTOR = 0.25;
 
     public ForestLevel(Player player) {
         super(null, "src/res/img/bg/bg_1.png", null);
@@ -35,7 +34,7 @@ public class ForestLevel extends StandardLevel {
 
     @Override
     public void tick() {
-        this.trackX -= (int) this.player.getVelX() * this.scrollXFactor;
+        this.trackX -= (int) this.player.getVelX() * this.SCROLL_X_FACTOR;
     }
 
     @Override

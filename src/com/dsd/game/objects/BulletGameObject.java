@@ -34,13 +34,24 @@ public class BulletGameObject extends StandardGameObject {
     //
     private final double angle;
     private final int damage = 25;
+    
+    //
+    //  Velocity factor applied to the bullet.
+    //
+    private final int VEL_X_FACTOR = 20;
+    private final int VEL_Y_FACTOR = 20;
 
     //
     //  Static reference to the BufferedImages
     //
     private static final BufferedImage[] frames = new BufferedImage[1];
 
-    public BulletGameObject(int _x, int _y, double _angle, Game _sg,
+    //
+    //  Animation frame per second setting
+    //
+    private static final int BULLET_FPS = 20;
+
+    public BulletGameObject (int _x, int _y, double _angle, Game _sg,
             StandardCollisionHandler _parentContainer,
             StandardCamera _sc, Player _parent) {
 
@@ -51,12 +62,12 @@ public class BulletGameObject extends StandardGameObject {
         this.angle = _angle;
 
         this.setAnimation(new StandardAnimatorController(
-                new StandardAnimation(this, BulletGameObject.frames, 20)));
+                new StandardAnimation(this, BulletGameObject.frames, BULLET_FPS)));
         this.setWidth(this.getWidth());
         this.setHeight(this.getHeight());
         this.setAlive(true);
-        this.setVelX(_parent.getVelX() * 20);
-        this.setVelY(_parent.getVelY() * 20);
+        this.setVelX(_parent.getVelX() * VEL_X_FACTOR);
+        this.setVelY(_parent.getVelY() * VEL_Y_FACTOR);
 
         this.sch.flagAlive(this.getId());
         this.sch.addCollider(this.getId());
@@ -65,7 +76,7 @@ public class BulletGameObject extends StandardGameObject {
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         if (this.sc.SGOInBounds(this)) {
             this.updatePosition();
 
@@ -73,13 +84,14 @@ public class BulletGameObject extends StandardGameObject {
             if (this.isAlive()) {
                 this.getAnimationController().tick();
             }
-        } else {
+        }
+        else {
             this.sch.removeEntity(this);
         }
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         // If they're alive, draw the frame that the bullet animation is on.
         // Otherwise, render the explosion handler
         if (this.isAlive()) {
@@ -93,14 +105,14 @@ public class BulletGameObject extends StandardGameObject {
      *
      * @return
      */
-    private static BufferedImage[] initImages() {
+    private static BufferedImage[] initImages () {
 
         BulletGameObject.frames[0] = (StdOps.loadImage("src/res/img/bullet/bullet_sprite/bullet.png"));
 
         return BulletGameObject.frames;
     }
 
-    public int getDamage() {
+    public int getDamage () {
         return this.damage;
     }
 

@@ -19,6 +19,8 @@ public class RainDrop extends StandardGameObject {
     //
     private final double gravity = 0.25d;
     private final int vanish;
+    private final int BLUE_COLOR = 100;
+    private final int VEL_FACTOR = 2;
 
     public RainDrop(double _x, double _y, double _direction, double _speed, int _vanish) {
         super(_x, _y, StandardID.Particle);
@@ -42,8 +44,8 @@ public class RainDrop extends StandardGameObject {
 
     @Override
     public void render(Graphics2D _g2) {
-        int rg = 100;
-        _g2.setColor(new Color(rg, rg, StdOps.rand(rg, 255)));
-        _g2.drawLine((int) this.getX(), (int) this.getY(), (int) (this.getX() - this.getVelX() * 2), (int) (this.getY() - this.getVelY() * 2));
+        _g2.setColor(new Color(BLUE_COLOR, BLUE_COLOR, StdOps.rand(BLUE_COLOR, 255)));
+        _g2.drawLine((int) this.getX(), (int) this.getY(), (int) (this.getX() - this.getVelX() * VEL_FACTOR),
+                                                           (int) (this.getY() - this.getVelY() * VEL_FACTOR));
     }
 }

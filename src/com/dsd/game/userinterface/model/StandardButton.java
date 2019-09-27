@@ -3,15 +3,7 @@ package com.dsd.game.userinterface.model;
 import com.revivedstandards.util.StdOps;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 
 /**
  * This class represents a standard button model. It can be used as a template
@@ -25,8 +17,6 @@ public abstract class StandardButton extends Interactor {
     //
     //  State of button
     //
-    private boolean pressed = false;
-    private boolean mouseOver = false;
     private boolean isImage = false;
 
     //
@@ -113,14 +103,6 @@ public abstract class StandardButton extends Interactor {
 //========================= GETTERS =============================//
     public String getFileLocation() {
         return this.fileLocation;
-    }
-
-    public boolean isPressed() {
-        return pressed;
-    }
-
-    public boolean isMouseOver() {
-        return mouseOver;
     }
 
     public Color getColor() {

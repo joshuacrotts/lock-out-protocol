@@ -22,18 +22,18 @@ public class MoveCommand extends Command {
 
     @Override
     public void pressed(float _dt) {
-        this.player.setPlayerState(PlayerState.Walking);
+        this.player.setPlayerState(PlayerState.WALKING);
         this.player.updatePosition();
     }
 
     @Override
     public void released(float dt) {
-        this.player.setPlayerState(PlayerState.Standing);
+        this.player.setPlayerState(PlayerState.STANDING);
     }
 
     @Override
     public void down(float _dt) {
-        this.player.setPlayerState(PlayerState.Walking);
+        this.player.setPlayerState(PlayerState.WALKING);
         this.player.updatePosition();
     }
 }

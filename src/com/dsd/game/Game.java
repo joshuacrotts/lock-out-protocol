@@ -8,7 +8,6 @@ import com.dsd.game.controller.RainController;
 import com.dsd.game.objects.Monster;
 import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.MenuScreen;
-import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.handlers.StandardHandler;
 import com.revivedstandards.main.StandardCamera;
@@ -55,8 +54,12 @@ public class Game extends StandardGame {
     //
     private final Player player;
 
-    public Game() {
-        super(1280, 720, "Lock Out Protocol");
+    public Game(int width, int height, String title) {
+        //
+        //  Note: Magic numbers for the player and the monster are just
+        //        for demonstration; they will NOT be in the final game.
+        //
+        super(width, height, title);
 
         //  Initialize the sound controller
         AudioBoxController.initialize(16);
@@ -159,7 +162,7 @@ public class Game extends StandardGame {
     }
 
     public static void main(String[] args) {
-        Game game = new Game();
+        Game game = new Game(1280, 720, "Lock Out Protocol");
     }
 
 }
