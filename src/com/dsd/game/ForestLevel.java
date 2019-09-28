@@ -30,13 +30,13 @@ public class ForestLevel extends StandardLevel {
     private final int MIN_Y = 350;
 
     public ForestLevel (Player _player, Game _sg, StandardCamera _sc) {
-        super(null, "src/res/img/bg/bg2.png", null);
+        super(null, "src/res/img/bg/resized_bg/panel1.jpg", null);
 
         this.player = _player;
         this.sc = _sc;
 
         this.setCameraBounds(this.getBgImage().getWidth() - _sg.getGameWidth() / 2,
-                this.getBgImage().getHeight() - _sg.getGameHeight() / 2);
+                             this.getBgImage().getHeight() - _sg.getGameHeight() / 2);
     }
 
     @Override

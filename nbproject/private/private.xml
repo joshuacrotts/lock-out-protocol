@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ljcrotts/Documents/NetBeansProjects/CSC-340-Game/src/com/dsd/game/Game.java</file>
-            <file>file:/C:/Users/ljcrotts/Documents/NetBeansProjects/CSC-340-Game/src/com/dsd/game/objects/Player.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/ForestLevel.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/Game.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/userinterface/HUD.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/userinterface/model/StandardLabel.java</file>
         </group>
     </open-files>
 </project-private>

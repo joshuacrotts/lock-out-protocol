@@ -99,8 +99,8 @@ public class Monster extends Entity implements DeathListener {
             double ty = this.target.getY();
 
             // Calculate the distance between the enemy and the player
-            double diffX = this.getX() - tx - 8;
-            double diffY = this.getY() - ty - 8;
+            double diffX = this.getX() - tx - Entity.APPROACH_FACTOR;
+            double diffY = this.getY() - ty - Entity.APPROACH_FACTOR;
 
             // Use the pythagorean theorem to solve for the hypotenuse distance
             double distance = (double) FastMath.sqrt(((this.getX() - tx) * (this.getX() - tx))
@@ -123,7 +123,7 @@ public class Monster extends Entity implements DeathListener {
 
             // If we're in Q1 (+x, -+y) or in Q2 (-x, +y)
             if ((tx > this.getX() && ty > this.getY()) || (tx < this.getX() && ty > this.getY())) {
-                this.angle = (float) ((FastMath.PI * 0.5) + (FastMath.PI * 0.5 - this.angle));
+                this.angle = (float) ((FastMath.PI / 2) + (FastMath.PI / 2 - this.angle));
             }
         }
         else {

@@ -11,6 +11,7 @@ import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.main.StandardGame;
 import com.revivedstandards.model.StandardAnimation;
 import com.revivedstandards.model.StandardID;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -78,12 +79,14 @@ public class Player extends Entity {
         //  Assigns key-bindings to the commands
         this.shootCommand = new ShootCommand(this.getGame(), this, this.getHandler(), shootingAnimation);
         this.shootCommand.bind(this.getGame().getKeyboard(), KeyEvent.VK_SPACE);
-
         this.moveCommand = new MoveCommand(this.getGame(), this);
         this.moveCommand.bind(this.getGame().getKeyboard(), KeyEvent.VK_W);
 
         this.playerState = PlayerState.STANDING;
 
+        //  Adds the player to the list of collidable objects
+        _sch.addCollider(StandardID.Player);
+        _sch.flagAlive(StandardID.Player);
     }
 
     @Override

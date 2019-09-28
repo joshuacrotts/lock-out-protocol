@@ -34,7 +34,7 @@ public class Game extends StandardGame {
     private final StandardLevel level;
 
     //
-    //  UI Element controller
+    //  UI Element view
     //
     private final MenuScreen menu;
 
