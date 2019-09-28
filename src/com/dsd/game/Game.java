@@ -78,9 +78,6 @@ public class Game extends StandardGame {
         this.sc = new StandardCamera(this, player, 1, this.getGameWidth(), this.getGameHeight());
         this.sch.addEntity(new Monster(900, 900, this, this.sc, this.sch));
 
-        //  Prevents the camera from scrolling too far to any of the sides
-        this.initCamera();
-
         //  Sets the camera for the player and the handler
         this.player.setCamera(this.sc);
         this.sch.setCamera(this.sc);
@@ -90,7 +87,7 @@ public class Game extends StandardGame {
 
         // Instantiates the levels @TODO: (should move this to a method and to
         // some type of controller to determine HOW levels transition)
-        this.level = new ForestLevel(player);
+        this.level = new ForestLevel(this.player, this, this.sc);
 
         this.startGame();
 
@@ -132,19 +129,6 @@ public class Game extends StandardGame {
             //  Then render the handler objects
             StandardDraw.Handler(this.sch);
         }
-    }
-
-    /**
-     * Sets the camera's field of view so as to prevent the camera from
-     * scrolling too far to any of the sides
-     */
-    private void initCamera() {
-        int cameraMinX = 640;//These numbers are just guess&check..
-        int cameraMaxX = 1080;
-        int cameraMinY = 350;
-        int cameraMaxY = 720;
-
-        this.sc.restrict(cameraMaxX, cameraMaxY, cameraMinX, cameraMinY);
     }
 
 //========================== GETTERS =============================/
