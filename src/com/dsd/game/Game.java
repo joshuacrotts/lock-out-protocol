@@ -8,6 +8,7 @@ import com.dsd.game.controller.RainController;
 import com.dsd.game.objects.Monster;
 import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.MenuScreen;
+import com.dsd.game.userinterface.PauseScreen;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.handlers.StandardHandler;
 import com.revivedstandards.main.StandardCamera;
@@ -34,9 +35,10 @@ public class Game extends StandardGame {
     private final StandardLevel level;
 
     //
-    //  UI Element controller
+    //  UI Element views
     //
-    private final MenuScreen menu;
+    private final MenuScreen menuScreen;
+    private final PauseScreen pauseScreen;
 
     //
     //  Rain controller which contacts the API for the logic of
@@ -54,7 +56,7 @@ public class Game extends StandardGame {
     //
     private final Player player;
 
-    public Game(int _width, int _height, String _title) {
+    public Game (int _width, int _height, String _title) {
         //
         //  Note: Magic numbers for the player and the monster are just
         //        for demonstration; they will NOT be in the final game.
@@ -63,9 +65,6 @@ public class Game extends StandardGame {
 
         //  Initialize the sound controller
         AudioBoxController.initialize(16);
-
-        //  Creates the UI handler
-        this.menu = new MenuScreen(this);
 
         //  Create a new collision handler
         this.sch = new CollisionHandlerController(null);
@@ -78,9 +77,6 @@ public class Game extends StandardGame {
         this.sc = new StandardCamera(this, player, 1, this.getGameWidth(), this.getGameHeight());
         this.sch.addEntity(new Monster(900, 900, this, this.sc, this.sch));
 
-        //  Prevents the camera from scrolling too far to any of the sides
-        this.initCamera();
-
         //  Sets the camera for the player and the handler
         this.player.setCamera(this.sc);
         this.sch.setCamera(this.sc);
@@ -90,39 +86,49 @@ public class Game extends StandardGame {
 
         // Instantiates the levels @TODO: (should move this to a method and to
         // some type of controller to determine HOW levels transition)
-        this.level = new ForestLevel(player);
+        this.level = new ForestLevel(this.player, this, this.sc);
+
+        //  Creates the UI views
+        this.menuScreen = new MenuScreen(this);
+        this.pauseScreen = new PauseScreen(this);
 
         this.startGame();
-
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         //
         //  Depending on the game state, update different things.
         //
-        if (this.gameState == GameState.MENU) {
-            this.menu.tick();
-        } else if (this.gameState == GameState.RUNNING) {
-            //  Update the level background first
-            this.level.tick();
-            //  Then the objects within the handler
-            StandardHandler.Handler(this.sch);
-            // Then the rain if applicable
-            this.rainController.tick();
-            //  And lastly the camera
-            StandardHandler.Object(this.sc);
+        switch (this.gameState) {
+            case MENU:
+                this.menuScreen.tick();
+                break;
+            case PAUSED:
+                this.pauseScreen.tick();
+                break;
+            case RUNNING:
+                //  Update the level background first
+                this.level.tick();
+                //  Then the objects within the handler
+                StandardHandler.Handler(this.sch);
+                // Then the rain if applicable
+                this.rainController.tick();
+                //  And lastly the camera
+                StandardHandler.Object(this.sc);
         }
     }
 
     @Override
-    public void render() {
+    public void render () {
         //
         //  Depending on the game state, render different things.
         //
         if (this.gameState == GameState.MENU) {
-            this.menu.render(StandardDraw.Renderer);
-        } else if (this.gameState == GameState.RUNNING) {
+            this.menuScreen.render(StandardDraw.Renderer);
+        }
+        else {
+
             //  First things first: render the camera
             StandardDraw.Object(this.sc);
             //  Then render the level
@@ -131,37 +137,35 @@ public class Game extends StandardGame {
             this.rainController.render(StandardDraw.Renderer);
             //  Then render the handler objects
             StandardDraw.Handler(this.sch);
+
+            //  If the game is paused, draw the paused text and
+            //  transparent background.
+            if (this.gameState == GameState.PAUSED) {
+                this.pauseScreen.render(StandardDraw.Renderer);
+            }
+
         }
     }
 
-    /**
-     * Sets the camera's field of view so as to prevent the camera from
-     * scrolling too far to any of the sides
-     */
-    private void initCamera() {
-        int cameraMinX = 640;//These numbers are just guess&check..
-        int cameraMaxX = 1080;
-        int cameraMinY = 350;
-        int cameraMaxY = 720;
-
-        this.sc.restrict(cameraMaxX, cameraMaxY, cameraMinX, cameraMinY);
-    }
-
 //========================== GETTERS =============================/
-    public Player getPlayer() {
+    public Player getPlayer () {
         return this.player;
     }
 
-    public GameState getGameState() {
+    public GameState getGameState () {
         return this.gameState;
     }
 
+    public StandardCamera getCamera () {
+        return this.sc;
+    }
+
 //========================== SETTERS =============================/
-    public void setGameState(GameState _gs) {
+    public void setGameState (GameState _gs) {
         this.gameState = _gs;
     }
 
-    public static void main(String[] args) {
+    public static void main (String[] args) {
         Game game = new Game(1280, 720, "Lock Out Protocol");
     }
 

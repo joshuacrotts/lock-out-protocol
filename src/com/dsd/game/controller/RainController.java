@@ -37,15 +37,22 @@ public class RainController implements Renderable, Updatable {
     private static final int X_BORDER = 600;
     private static final int Y_BORDER = 400;
 
-    // 
+    //
     //  Velocity constants and factors for the rain drop object.
     //
-    private final double RAIN_DIRECTION = -FastMath.PI * 1.5;
+    private static final double RAIN_DIRECTION = -FastMath.PI * 1.5;
+
+    //
+    //  Constants
+    //
+    private static final int MAX_RAIN_PARTICLES = 5000;
+    private static final int VEL_FACTOR = 5;
+    private static final int Y_BOUND_FACTOR = 2;
 
     public RainController (StandardGame _sg, StandardCamera _sc, String _weather) {
         this.sg = _sg;
         this.sc = _sc;
-        this.sph = new StandardParticleHandler(5000);
+        this.sph = new StandardParticleHandler(MAX_RAIN_PARTICLES);
 
         // Be sure to always set the SPH camera or it'll throw a NPE
         this.sph.setCamera(this.sc);
@@ -73,8 +80,8 @@ public class RainController implements Renderable, Updatable {
             int xPos = StdOps.rand(xGenMin, xGenMax);
             int yPos = StdOps.rand(yGenMin, yGenMax);
 
-            this.sph.addEntity(new RainDrop(xPos, yPos, RAIN_DIRECTION, this.getRandomSpeed(5),
-                    (int) (this.sc.getY() + this.sc.getVph() * 2)));
+            this.sph.addEntity(new RainDrop(xPos, yPos, RAIN_DIRECTION, this.getRandomSpeed(VEL_FACTOR),
+                               (int) (this.sc.getY() + this.sc.getVph() * Y_BOUND_FACTOR)));
 
             this.sph.tick();
         }

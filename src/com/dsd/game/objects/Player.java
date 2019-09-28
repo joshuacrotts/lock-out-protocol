@@ -11,6 +11,7 @@ import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.main.StandardGame;
 import com.revivedstandards.model.StandardAnimation;
 import com.revivedstandards.model.StandardID;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -40,9 +41,9 @@ public class Player extends Entity {
     //
     //  Frames of animation for the player
     //
-    private static final BufferedImage[] walkingFrames;
-    private static final BufferedImage[] walkingRifleFrames;
-    private static final BufferedImage[] shootingGunFrames;
+    private static final BufferedImage[] WALK_FRAMES;
+    private static final BufferedImage[] WALK_RIFLE_FRAMES;
+    private static final BufferedImage[] SHOOT_PISTOL_FRAMES;
 
     //
     //  Animation frame per second settings
@@ -65,25 +66,25 @@ public class Player extends Entity {
 
         //  Instantiates the animation controllers
         StandardAnimatorController walkingAnimation = new StandardAnimatorController(
-                new StandardAnimation(this, Player.walkingFrames, Player.WALKING_FPS));
+                new StandardAnimation(this, Player.WALK_FRAMES, Player.WALKING_FPS));
 
         StandardAnimatorController walkingRifleAnimation = new StandardAnimatorController(
-                new StandardAnimation(this, Player.walkingRifleFrames, Player.WALK_RIFLE_FPS));
+                new StandardAnimation(this, Player.WALK_RIFLE_FRAMES, Player.WALK_RIFLE_FPS));
 
         StandardAnimatorController shootingAnimation = new StandardAnimatorController(
-                new StandardAnimation(this, Player.shootingGunFrames, Player.SHOOT_GUN_FPS));
+                new StandardAnimation(this, Player.SHOOT_PISTOL_FRAMES, Player.SHOOT_GUN_FPS));
 
         this.setAnimation(walkingAnimation);
 
-        //  Assigns key-bindings to the commands
+        //  Instantiate commands
         this.shootCommand = new ShootCommand(this.getGame(), this, this.getHandler(), shootingAnimation);
-        this.shootCommand.bind(this.getGame().getKeyboard(), KeyEvent.VK_SPACE);
-
         this.moveCommand = new MoveCommand(this.getGame(), this);
-        this.moveCommand.bind(this.getGame().getKeyboard(), KeyEvent.VK_W);
 
         this.playerState = PlayerState.STANDING;
 
+        //  Adds the player to the list of collidable objects
+        _sch.addCollider(StandardID.Player);
+        _sch.flagAlive(StandardID.Player);
     }
 
     @Override
@@ -175,9 +176,9 @@ public class Player extends Entity {
     //  Initializes the images used in the animation frames
     //
     static {
-        walkingFrames = Utilities.loadFrames("src/res/img/player/player_walk_gun/", 6);
-        shootingGunFrames = Utilities.loadFrames("src/res/img/player/player_shoot_gun/", 5);
-        walkingRifleFrames = Utilities.loadFrames("src/res/img/player/player_walk_rifle/", 6);
+        WALK_FRAMES = Utilities.loadFrames("src/res/img/player/player_walk_gun/", 6);
+        SHOOT_PISTOL_FRAMES = Utilities.loadFrames("src/res/img/player/player_shoot_gun/", 5);
+        WALK_RIFLE_FRAMES = Utilities.loadFrames("src/res/img/player/player_walk_rifle/", 6);
     }
 
 }

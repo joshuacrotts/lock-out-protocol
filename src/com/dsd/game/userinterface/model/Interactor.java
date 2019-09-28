@@ -59,7 +59,7 @@ public abstract class Interactor implements Renderable, Updatable, MouseEventInt
 
     @Override
     public abstract void onMouseEnterHover();
-    
+
     @Override
     public abstract void onMouseExitHover();
 

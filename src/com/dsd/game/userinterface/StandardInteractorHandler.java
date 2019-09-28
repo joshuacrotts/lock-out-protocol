@@ -23,6 +23,7 @@ public class StandardInteractorHandler extends StandardHandler implements MouseL
     private final LinkedList<Interactor> interactors;
     private final Game sg;
 
+
     public StandardInteractorHandler(Game _sg) {
         this.interactors = new LinkedList<>();
         this.sg = _sg;

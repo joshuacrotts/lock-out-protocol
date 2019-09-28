@@ -34,7 +34,7 @@ public class BulletGameObject extends StandardGameObject {
     //
     private final double angle;
     private final int damage = 25;
-    
+
     //
     //  Velocity factor applied to the bullet.
     //

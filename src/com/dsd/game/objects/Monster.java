@@ -47,7 +47,7 @@ public class Monster extends Entity implements DeathListener {
     //
     //  BufferedImage arrays for the sprites
     //
-    private static final BufferedImage[] walkingFrames;
+    private static final BufferedImage[] WALK_FRAMES;
 
     //
     //  Animation frame per second setting
@@ -62,7 +62,7 @@ public class Monster extends Entity implements DeathListener {
     //
     //  Variables representing the angle and approach velocity
     //
-    private final float approachVel = -1.5f;
+    private final float APPROACH_VEL = -1.5f;
     private float angle;
 
     public Monster (int _x, int _y, Game _sg, StandardCamera _sc, StandardCollisionHandler _sch) {
@@ -71,11 +71,11 @@ public class Monster extends Entity implements DeathListener {
         this.sc = _sc;
 
         StandardAnimatorController walkingAnimation = new StandardAnimatorController(
-                new StandardAnimation(this, Monster.walkingFrames, Monster.WALKING_FPS));
+                new StandardAnimation(this, Monster.WALK_FRAMES, Monster.WALKING_FPS));
 
         this.setAnimation(walkingAnimation);
 
-        //  Hard-coded values from png files
+        //  The width/height of the model is set by the buffered image backing it.
         this.setWidth(walkingAnimation.getStandardAnimation().getView().getCurrentFrame().getWidth());
         this.setHeight(walkingAnimation.getStandardAnimation().getView().getCurrentFrame().getHeight());
 
@@ -99,8 +99,8 @@ public class Monster extends Entity implements DeathListener {
             double ty = this.target.getY();
 
             // Calculate the distance between the enemy and the player
-            double diffX = this.getX() - tx - 8;
-            double diffY = this.getY() - ty - 8;
+            double diffX = this.getX() - tx - Entity.APPROACH_FACTOR;
+            double diffY = this.getY() - ty - Entity.APPROACH_FACTOR;
 
             // Use the pythagorean theorem to solve for the hypotenuse distance
             double distance = (double) FastMath.sqrt(((this.getX() - tx) * (this.getX() - tx))
@@ -108,8 +108,8 @@ public class Monster extends Entity implements DeathListener {
 
             // Sets the velocity according to how far away the enemy is from the
             // player
-            this.setVelX(((this.approachVel / distance) * (int) diffX));
-            this.setVelY(((this.approachVel / distance) * (int) diffY));
+            this.setVelX(((this.APPROACH_VEL / distance) * (int) diffX));
+            this.setVelY(((this.APPROACH_VEL / distance) * (int) diffY));
 
             //*****************************************************************//
             //      Calculates the angle the monster needs to be in to face    //
@@ -123,7 +123,7 @@ public class Monster extends Entity implements DeathListener {
 
             // If we're in Q1 (+x, -+y) or in Q2 (-x, +y)
             if ((tx > this.getX() && ty > this.getY()) || (tx < this.getX() && ty > this.getY())) {
-                this.angle = (float) ((FastMath.PI * 0.5) + (FastMath.PI * 0.5 - this.angle));
+                this.angle = (float) ((FastMath.PI / 2) + (FastMath.PI / 2 - this.angle));
             }
         }
         else {
@@ -153,6 +153,9 @@ public class Monster extends Entity implements DeathListener {
         }
     }
 
+    /**
+     * @TODO: Refactor the magic numbers
+     */
     @Override
     public void uponDeath () {
         this.explosionHandler = new StandardParticleHandler(50);
@@ -183,7 +186,7 @@ public class Monster extends Entity implements DeathListener {
     }
 
     static {
-        walkingFrames = Utilities.loadFrames("src/res/img/enemies/monster1/walk/", 9);
+        WALK_FRAMES = Utilities.loadFrames("src/res/img/enemies/monster1/walk/", 9);
     }
 
 }

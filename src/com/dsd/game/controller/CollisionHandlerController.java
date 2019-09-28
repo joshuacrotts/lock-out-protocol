@@ -2,6 +2,7 @@ package com.dsd.game.controller;
 
 import com.dsd.game.objects.BulletGameObject;
 import com.dsd.game.objects.Monster;
+import com.dsd.game.objects.Player;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.model.StandardGameObject;
@@ -31,8 +32,8 @@ public class CollisionHandlerController extends StandardCollisionHandler {
 
     /**
      * This method will be called from the SCH; it is designed to allow the user
-     * to implement any collision reaction they want. If a collision occurs,
-     * this method is called, which has the two entities that collided.
+     * to implement any collision reaction they want. If a direct collision
+     * occurs, this method is called, which has the two entities that collided.
      *
      * @param _obj1
      * @param _obj2
@@ -49,6 +50,22 @@ public class CollisionHandlerController extends StandardCollisionHandler {
     }
 
     /**
+     * This method will be called from the SCH; it is designed to allow the user
+     * to implement any AABB collision reaction they want. If the bounds of
+     * _obj1 intersects the bounds of _obj2 (as opposed to just touching), this
+     * method is called.
+     *
+     * @param _obj1
+     * @param _obj2
+     */
+    @Override
+    public void handleBoundsCollision (StandardGameObject _obj1, StandardGameObject _obj2) {
+        if (_obj1 instanceof Player && _obj2 instanceof Monster) {
+            this.handlePlayerMonsterCollision((Player) _obj1, (Monster) _obj2);
+        }
+    }
+
+    /**
      * If a bullet hits a monster (shot by the player), we will destroy the
      * bullet, deduct the bullet's damage from the monster, and determine if the
      * monster is alive or not.
@@ -56,20 +73,32 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      * @param bullet
      * @param monster
      */
-    private void handleBulletMonsterCollision (BulletGameObject bullet, Monster monster) {
+    private void handleBulletMonsterCollision (BulletGameObject _bullet, Monster _monster) {
 
         // Sets the bullet to dead
-        bullet.setAlive(false);
+        _bullet.setAlive(false);
 
         // Casts the obj2 to a Monster so we can deduct health from it
-        monster.setHealth(monster.getHealth() - bullet.getDamage());
+        _monster.setHealth(_monster.getHealth() - _bullet.getDamage());
 
         // If the monster's health is less than 0, we can flag it as dead.
-        monster.setAlive(monster.getHealth() > 0);
+        _monster.setAlive(_monster.getHealth() > 0);
 
-        if (monster.isAlive()) {
+        if (_monster.isAlive()) {
             // Plays random monster hurt sfx
-            monster.generateHurtSound(StdOps.rand(1, 5));
+            _monster.generateHurtSound(StdOps.rand(1, 5));
         }
+    }
+
+    /**
+     *
+     * If a monster hits the player, the player will take damage according to
+     * the monster's type (for now?).
+     *
+     * @param _player
+     * @param _monster
+     */
+    private void handlePlayerMonsterCollision (Player _player, Monster _monster) {
+        System.out.println("Player is hurting!");
     }
 }
