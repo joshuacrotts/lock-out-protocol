@@ -21,7 +21,6 @@ public class MoveCommand extends Command {
         this.game = _sg;
         this.player = _obj;
         this.bind(_sg.getKeyboard(), KeyEvent.VK_W);
-
     }
 
     @Override
