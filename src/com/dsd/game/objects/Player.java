@@ -76,11 +76,9 @@ public class Player extends Entity {
 
         this.setAnimation(walkingAnimation);
 
-        //  Assigns key-bindings to the commands
+        //  Instantiate commands
         this.shootCommand = new ShootCommand(this.getGame(), this, this.getHandler(), shootingAnimation);
-        this.shootCommand.bind(this.getGame().getKeyboard(), KeyEvent.VK_SPACE);
         this.moveCommand = new MoveCommand(this.getGame(), this);
-        this.moveCommand.bind(this.getGame().getKeyboard(), KeyEvent.VK_W);
 
         this.playerState = PlayerState.STANDING;
 
