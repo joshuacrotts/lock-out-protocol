@@ -39,8 +39,8 @@ public class Monster extends Entity implements DeathListener {
     private final StandardCamera sc;
 
     //
-    //  Handler for particle explosions after the bullet
-    //  collides with a wall.
+    //  Handler for particle explosions after the
+    //  monster dies.
     //
     private StandardParticleHandler explosionHandler;
 
@@ -64,6 +64,11 @@ public class Monster extends Entity implements DeathListener {
     //
     private final float APPROACH_VEL = -1.5f;
     private float angle;
+
+    //
+    //  Damage done to the player
+    //
+    private final double damage = 0.20;
 
     public Monster (int _x, int _y, Game _sg, StandardCamera _sc, StandardCollisionHandler _sch) {
         super(_x, _y, 100, StandardID.Enemy3, _sg, _sch);
@@ -183,6 +188,11 @@ public class Monster extends Entity implements DeathListener {
      */
     private void generateDeathSound (int _sfx) {
         StandardAudioController.play("src/res/audio/sfx/splat" + _sfx + ".wav");
+    }
+
+//================================== GETTERS ==================================//
+    public double getDamage () {
+        return this.damage;
     }
 
     static {

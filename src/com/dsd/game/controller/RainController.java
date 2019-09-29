@@ -41,13 +41,13 @@ public class RainController implements Renderable, Updatable {
     //  Velocity constants and factors for the rain drop object.
     //
     private static final double RAIN_DIRECTION = -FastMath.PI * 1.5;
-
-    //
-    //  Constants
-    //
-    private static final int MAX_RAIN_PARTICLES = 5000;
     private static final int VEL_FACTOR = 5;
     private static final int Y_BOUND_FACTOR = 2;
+
+    //
+    //  Constants for how many rain particles should spawn
+    //
+    private static final int MAX_RAIN_PARTICLES = 5000;
 
     public RainController (StandardGame _sg, StandardCamera _sc, String _weather) {
         this.sg = _sg;
@@ -81,7 +81,7 @@ public class RainController implements Renderable, Updatable {
             int yPos = StdOps.rand(yGenMin, yGenMax);
 
             this.sph.addEntity(new RainDrop(xPos, yPos, RAIN_DIRECTION, this.getRandomSpeed(VEL_FACTOR),
-                               (int) (this.sc.getY() + this.sc.getVph() * Y_BOUND_FACTOR)));
+                    (int) (this.sc.getY() + this.sc.getVph() * Y_BOUND_FACTOR)));
 
             this.sph.tick();
         }
