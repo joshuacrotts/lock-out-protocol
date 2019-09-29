@@ -8,8 +8,8 @@ import com.dsd.game.Game;
  */
 public class InventoryView extends Screen {
 
-    public InventoryView (Game _sg) {
-        super(_sg);
+    public InventoryView(Game _game) {
+        super(_game);
     }
 
 }

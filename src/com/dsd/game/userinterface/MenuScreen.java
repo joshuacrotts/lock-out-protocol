@@ -15,19 +15,19 @@ import java.awt.Graphics2D;
  */
 public class MenuScreen extends Screen {
 
-    public MenuScreen (Game _sg) {
-        super(_sg);
+    public MenuScreen(Game _game) {
+        super(_game);
 
         this.createUIElements();
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         super.tick();
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         super.render(_g2);
     }
 
@@ -37,7 +37,7 @@ public class MenuScreen extends Screen {
      *
      * @TODO: Somehow define these without using magic numbers.
      */
-    private void createUIElements () {
+    private void createUIElements() {
         //  Instantiates the play button
         super.addInteractor(new PlayButton(this.getGame()));
 

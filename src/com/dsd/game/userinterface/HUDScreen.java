@@ -14,8 +14,8 @@ public class HUDScreen extends Screen {
 
     private final Player player;
 
-    public HUDScreen (Game _sg, Player _player) {
-        super(_sg);
+    public HUDScreen(Game _game, Player _player) {
+        super(_game);
 
         this.player = _player;
 
@@ -23,16 +23,16 @@ public class HUDScreen extends Screen {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         super.tick();
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         super.render(_g2);
     }
 
-    private void createUIElements () {
+    private void createUIElements() {
         this.addInteractor(new HealthLabel(super.getGame(), this.player));
         this.addInteractor(new AmmoLabel(super.getGame(), this.player));
     }

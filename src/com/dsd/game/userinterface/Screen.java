@@ -18,36 +18,36 @@ import java.awt.Graphics2D;
  */
 public abstract class Screen implements Renderable, Updatable {
 
-    private final Game sg;
+    private final Game game;
     private final StandardInteractorHandler sih;
 
-    public static int GAME_HALF_WIDTH;
-    public static int GAME_HALF_HEIGHT;
-    public static int GAME_DOUBLE_WIDTH;
-    public static int GAME_DOUBLE_HEIGHT;
+    public static int gameHalfWidth;
+    public static int gameHalfHeight;
+    public static int gameDoubleWidth;
+    public static int gameDoubleHeight;
 
-    public Screen (Game _sg) {
-        this.sg = _sg;
-        this.sih = new StandardInteractorHandler(this.sg);
+    public Screen(Game _game) {
+        this.game = _game;
+        this.sih = new StandardInteractorHandler(this.game);
         this.addUIElementsAsListeners();
 
-        GAME_HALF_WIDTH = this.sg.getGameWidth() / 2;
-        GAME_HALF_HEIGHT = this.sg.getGameHeight() / 2;
-        GAME_DOUBLE_WIDTH = this.sg.getGameWidth() * 2;
-        GAME_DOUBLE_HEIGHT = this.sg.getGameHeight() * 2;
+        gameHalfWidth = this.game.getGameWidth() / 2;
+        gameHalfHeight = this.game.getGameHeight() / 2;
+        gameDoubleWidth = this.game.getGameWidth() * 2;
+        gameDoubleHeight = this.game.getGameHeight() * 2;
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         StandardHandler.Handler(this.sih);
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         StandardDraw.Handler(this.sih);
     }
 
-    public void addInteractor (Interactor _interactor) {
+    public void addInteractor(Interactor _interactor) {
         this.sih.addInteractor(_interactor);
     }
 
@@ -55,13 +55,13 @@ public abstract class Screen implements Renderable, Updatable {
      * Iterates through the list of UI elements and adds them as listeners to
      * the StandardGame.
      */
-    private void addUIElementsAsListeners () {
-        this.sg.addMouseListener(this.sih);
-        this.sg.addMouseMotionListener(this.sih);
+    private void addUIElementsAsListeners() {
+        this.game.addMouseListener(this.sih);
+        this.game.addMouseMotionListener(this.sih);
     }
 
 //============================ GETTERS =================================//
-    public Game getGame () {
-        return this.sg;
+    public Game getGame() {
+        return this.game;
     }
 }

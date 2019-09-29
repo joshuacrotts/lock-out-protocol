@@ -45,16 +45,16 @@ public class Player extends Entity {
     //
     //  Frames of animation for the player
     //
-    private static final BufferedImage[] WALK_FRAMES;
-    private static final BufferedImage[] WALK_RIFLE_FRAMES;
-    private static final BufferedImage[] SHOOT_PISTOL_FRAMES;
+    private static final BufferedImage[] walkFrames;
+    private static final BufferedImage[] walkRifleFrames;
+    private static final BufferedImage[] shootPistolFrames;
 
     //
     //  Animation frame per second settings
     //
-    private static final int WALKING_FPS = 10;
-    private static final int WALK_RIFLE_FPS = 10;
-    private static final int SHOOT_GUN_FPS = 20;
+    private static final int walkingFPS = 10;
+    private static final int walkRifleFPS = 10;
+    private static final int shootGunFPS = 20;
 
     //
     //  Variables representing the angle and approach velocity
@@ -62,21 +62,21 @@ public class Player extends Entity {
     private float angle;
     private final float approachVel = -3.0f;
 
-    public Player (int _x, int _y, StandardGame _sg, StandardCamera _sc, StandardCollisionHandler _sch) {
-        super(_x, _y, 100, StandardID.Player, (Game) _sg, _sch);
+    public Player(int _x, int _y, StandardGame _game, StandardCamera _sc, StandardCollisionHandler _sch) {
+        super(_x, _y, 100, StandardID.Player, (Game) _game, _sch);
 
         //  Initializes the miscellaneous variables
         this.sc = _sc;
 
         //  Instantiates the animation controllers
         StandardAnimatorController walkingAnimation = new StandardAnimatorController(
-                new StandardAnimation(this, Player.WALK_FRAMES, Player.WALKING_FPS));
+                new StandardAnimation(this, Player.walkFrames, Player.walkingFPS));
 
         StandardAnimatorController walkingRifleAnimation = new StandardAnimatorController(
-                new StandardAnimation(this, Player.WALK_RIFLE_FRAMES, Player.WALK_RIFLE_FPS));
+                new StandardAnimation(this, Player.walkRifleFrames, Player.walkRifleFPS));
 
         StandardAnimatorController shootingAnimation = new StandardAnimatorController(
-                new StandardAnimation(this, Player.SHOOT_PISTOL_FRAMES, Player.SHOOT_GUN_FPS));
+                new StandardAnimation(this, Player.shootPistolFrames, Player.shootGunFPS));
 
         this.setAnimation(walkingAnimation);
 
@@ -97,7 +97,7 @@ public class Player extends Entity {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         //  If the player is not standing still, update the animation controller.
         if (this.getPlayerState() != PlayerState.STANDING) {
             this.getAnimationController().tick();
@@ -114,8 +114,8 @@ public class Player extends Entity {
         double my = this.sc.getY() + this.getGame().getMouse().getMouseY() - this.sc.getVph();
 
         // Calculate the distance between the sprite and the mouse
-        double diffX = this.getX() - mx - Entity.APPROACH_FACTOR;
-        double diffY = this.getY() - my - Entity.APPROACH_FACTOR;
+        double diffX = this.getX() - mx - Entity.approachFactor;
+        double diffY = this.getY() - my - Entity.approachFactor;
 
         // Use the pythagorean theorem to solve for the hypotenuse distance
         double distance = (double) FastMath.sqrt(((this.getX() - mx) * (this.getX() - mx))
@@ -142,7 +142,7 @@ public class Player extends Entity {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         this.getAnimationController().renderFrame(_g2);
     }
 
@@ -150,38 +150,38 @@ public class Player extends Entity {
      * Updates the dimensions of the SGO according to the animation's current
      * sprite.
      */
-    private void updateDimensions () {
+    private void updateDimensions() {
         this.setWidth(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getWidth());
         this.setHeight(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getHeight());
     }
 
 //============================== GETTERS ================================//
-    public StandardCamera getCamera () {
+    public StandardCamera getCamera() {
         return this.sc;
     }
 
-    public PlayerState getPlayerState () {
+    public PlayerState getPlayerState() {
         return this.playerState;
     }
 
-    public Inventory getInventory () {
+    public Inventory getInventory() {
         return this.inventory;
     }
 
-    public double getAngle () {
+    public double getAngle() {
         return this.angle;
     }
 
 //=============================== SETTERS ================================//
-    public void setWalking () {
+    public void setWalking() {
         this.playerState = PlayerState.WALKING;
     }
 
-    public void setCamera (StandardCamera _sc) {
+    public void setCamera(StandardCamera _sc) {
         this.sc = _sc;
     }
 
-    public void setPlayerState (PlayerState _playerState) {
+    public void setPlayerState(PlayerState _playerState) {
         this.playerState = _playerState;
     }
 
@@ -189,9 +189,9 @@ public class Player extends Entity {
     //  Initializes the images used in the animation frames
     //
     static {
-        WALK_FRAMES = Utilities.loadFrames("src/res/img/player/player_walk_gun/", 6);
-        SHOOT_PISTOL_FRAMES = Utilities.loadFrames("src/res/img/player/player_shoot_gun/", 5);
-        WALK_RIFLE_FRAMES = Utilities.loadFrames("src/res/img/player/player_walk_rifle/", 6);
+        walkFrames = Utilities.loadFrames("src/res/img/player/player_walk_gun/", 6);
+        shootPistolFrames = Utilities.loadFrames("src/res/img/player/player_shoot_gun/", 5);
+        walkRifleFrames = Utilities.loadFrames("src/res/img/player/player_walk_rifle/", 6);
     }
 
 }

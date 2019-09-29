@@ -20,17 +20,16 @@ public class PauseCommand extends Command {
 
     public Game game;
 
-    public PauseCommand (Game _game) {
+    public PauseCommand(Game _game) {
         this.game = _game;
         this.bind(game.getKeyboard(), KeyEvent.VK_ESCAPE);
     }
 
     @Override
-    public void pressed (float dt) {
+    public void pressed(float dt) {
         if (this.game.getGameState() != GameState.PAUSED) {
             this.game.setGameState(GameState.PAUSED);
-        }
-        else {
+        } else {
             this.game.setGameState(GameState.RUNNING);
         }
     }

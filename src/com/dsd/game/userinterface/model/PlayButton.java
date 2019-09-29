@@ -18,60 +18,59 @@ import java.awt.Graphics2D;
  */
 public class PlayButton extends StandardButton implements MouseEventInterface {
 
-    private final Game sg;
+    private final Game game;
 
     private final Font font;
 
-    private final int Y_OFFSET = 400;
-    private final int X_OFFSET = 70;
-    private final int TEXT_X_OFFSET = 30;
-    private final int BUTTON_WIDTH = 200;
-    private final int BUTTON_HEIGHT = 100;
+    private final int yOffset = 400;
+    private final int xOffset = 70;
+    private final int textXOffset = 30;
+    private final int buttonWidth = 200;
+    private final int buttonHeight = 100;
 
-    public PlayButton (Game _sg) {
-        this.sg = _sg;
+    public PlayButton(Game _game) {
+        this.game = _game;
 
         this.font = StdOps.initFont("src/res/fonts/chargen.ttf", 24f);
 
-        this.setX(Screen.GAME_HALF_WIDTH - X_OFFSET);
-        this.setY(this.sg.getGameHeight() - Y_OFFSET);
-        this.setWidth(BUTTON_WIDTH);
-        this.setHeight(BUTTON_HEIGHT);
+        this.setX(Screen.gameHalfWidth - xOffset);
+        this.setY(this.game.getGameHeight() - yOffset);
+        this.setWidth(buttonWidth);
+        this.setHeight(buttonHeight);
         this.setText("PLAY");
         this.setColor(Color.RED);
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         super.render(_g2);
-        StandardDraw.text(this.getText(), (this.getX() + (this.getWidth() / 2)) - TEXT_X_OFFSET,
+        StandardDraw.text(this.getText(), (this.getX() + (this.getWidth() / 2)) - textXOffset,
                 this.getY() + this.getHeight() / 2, this.font,
                 this.font.getSize(), Color.WHITE);
     }
 
     @Override
-    public void onMouseClick () {
-        if (this.sg.getGameState() != GameState.MENU) {
+    public void onMouseClick() {
+        if (this.game.getGameState() != GameState.MENU) {
             return;
         }
 
-        this.sg.setGameState(GameState.RUNNING);
+        this.game.setGameState(GameState.RUNNING);
     }
 
     @Override
-    public void onMouseEnterHover () {
-        if (this.sg.getGameState() != GameState.MENU) {
+    public void onMouseEnterHover() {
+        if (this.game.getGameState() != GameState.MENU) {
             return;
         }
         this.setColor(Color.BLUE);
     }
 
     @Override
-    public void onMouseExitHover () {
-        if (this.sg.getGameState() != GameState.MENU) {
+    public void onMouseExitHover() {
+        if (this.game.getGameState() != GameState.MENU) {
             return;
         }
         this.setColor(Color.RED);
     }
-
 }

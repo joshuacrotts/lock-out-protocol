@@ -15,7 +15,7 @@ import java.awt.image.BufferedImage;
 /**
  * Bullet game object
  *
- * @TODO: Refactor this into ProjectileGameObject
+ * @TODO: Re-factor this into ProjectileGameObject
  *
  * @author Joshua
  */
@@ -24,7 +24,7 @@ public class BulletGameObject extends StandardGameObject {
     //
     //  Miscellaneous variables
     //
-    private final StandardGame sg;
+    private final StandardGame game;
     private final StandardCollisionHandler sch;
     private final StandardCamera sc;
 
@@ -38,8 +38,8 @@ public class BulletGameObject extends StandardGameObject {
     //
     //  Velocity factor applied to the bullet.
     //
-    private final int VEL_X_FACTOR = 20;
-    private final int VEL_Y_FACTOR = 20;
+    private final int velXFactor = 20;
+    private final int velYFactor = 20;
 
     //
     //  Static reference to the BufferedImages
@@ -49,25 +49,25 @@ public class BulletGameObject extends StandardGameObject {
     //
     //  Animation frame per second setting
     //
-    private static final int BULLET_FPS = 20;
+    private static final int bulletFPS = 20;
 
-    public BulletGameObject (int _x, int _y, double _angle, Game _sg,
+    public BulletGameObject(int _x, int _y, double _angle, Game _game,
             StandardCollisionHandler _parentContainer,
             StandardCamera _sc, Player _parent) {
 
         super(_x, _y, StandardID.Projectile);
 
-        this.sg = _sg;
+        this.game = _game;
         this.sch = _parentContainer;
         this.angle = _angle;
 
         this.setAnimation(new StandardAnimatorController(
-                new StandardAnimation(this, BulletGameObject.frames, BULLET_FPS)));
+                new StandardAnimation(this, BulletGameObject.frames, bulletFPS)));
         this.setWidth(this.getWidth());
         this.setHeight(this.getHeight());
         this.setAlive(true);
-        this.setVelX(_parent.getVelX() * VEL_X_FACTOR);
-        this.setVelY(_parent.getVelY() * VEL_Y_FACTOR);
+        this.setVelX(_parent.getVelX() * velXFactor);
+        this.setVelY(_parent.getVelY() * velYFactor);
 
         this.sch.flagAlive(this.getId());
         this.sch.addCollider(this.getId());
@@ -76,7 +76,7 @@ public class BulletGameObject extends StandardGameObject {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (this.sc.SGOInBounds(this)) {
             this.updatePosition();
 
@@ -84,14 +84,13 @@ public class BulletGameObject extends StandardGameObject {
             if (this.isAlive()) {
                 this.getAnimationController().tick();
             }
-        }
-        else {
+        } else {
             this.sch.removeEntity(this);
         }
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         // If they're alive, draw the frame that the bullet animation is on.
         // Otherwise, render the explosion handler
         if (this.isAlive()) {
@@ -105,14 +104,14 @@ public class BulletGameObject extends StandardGameObject {
      *
      * @return
      */
-    private static BufferedImage[] initImages () {
+    private static BufferedImage[] initImages() {
 
         BulletGameObject.frames[0] = (StdOps.loadImage("src/res/img/bullet/bullet_sprite/bullet.png"));
 
         return BulletGameObject.frames;
     }
 
-    public int getDamage () {
+    public int getDamage() {
         return this.damage;
     }
 

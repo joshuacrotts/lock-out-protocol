@@ -17,9 +17,9 @@ public class PauseLabel extends StandardLabel {
 
     private final Color transparentBlack;
 
-    public PauseLabel (Game _game) {
-        super((int) Screen.GAME_HALF_WIDTH,
-                (int) Screen.GAME_HALF_HEIGHT,
+    public PauseLabel(Game _game) {
+        super((int) Screen.gameHalfWidth,
+                (int) Screen.gameHalfHeight,
                 "PAUSED", "src/res/fonts/chargen.ttf", 32f);
 
         this.game = _game;
@@ -27,20 +27,19 @@ public class PauseLabel extends StandardLabel {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.setX((int) this.game.getCamera().getX());
         this.setY((int) this.game.getCamera().getY());
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         _g2.setColor(this.transparentBlack);
-        _g2.fillRect((int) (this.game.getCamera().getX() - Screen.GAME_HALF_WIDTH),
-                (int) (this.game.getCamera().getY() - Screen.GAME_HALF_HEIGHT),
-                (int) (this.game.getCamera().getX() + Screen.GAME_DOUBLE_WIDTH),
-                (int) (this.game.getCamera().getY() + Screen.GAME_DOUBLE_HEIGHT));
+        _g2.fillRect((int) (this.game.getCamera().getX() - Screen.gameHalfWidth),
+                (int) (this.game.getCamera().getY() - Screen.gameHalfHeight),
+                (int) (this.game.getCamera().getX() + Screen.gameDoubleWidth),
+                (int) (this.game.getCamera().getY() + Screen.gameDoubleHeight));
 
         super.render(_g2);
     }
-
 }

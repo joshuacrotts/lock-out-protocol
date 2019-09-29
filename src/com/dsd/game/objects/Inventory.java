@@ -16,7 +16,7 @@ public class Inventory {
 
     private Weapon currentWeapon;
 
-    public Inventory (Game _game, Player _player) {
+    public Inventory(Game _game, Player _player) {
         this.game = _game;
         this.player = _player;
         this.currentWeapon = new Weapon("pistol", 16);
@@ -24,16 +24,16 @@ public class Inventory {
     }
 
 //============================= GETTERS ===================================//
-    public Weapon getCurrentWeapon () {
+    public Weapon getCurrentWeapon() {
         return this.currentWeapon;
     }
 
-    public InventoryView getView () {
+    public InventoryView getView() {
         return this.view;
     }
 
 //============================= SETTERS ===================================//
-    public void setCurrentWeapon (Weapon _weapon) {
+    public void setCurrentWeapon(Weapon _weapon) {
         this.currentWeapon = _weapon;
     }
 }

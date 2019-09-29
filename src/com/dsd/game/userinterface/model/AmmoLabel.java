@@ -25,48 +25,47 @@ public class AmmoLabel extends StandardLabel {
     //
     //  Position and sizing of health elements
     //
-    private final int AMMO_X_OFFSET = 220;
-    private final int AMMO_Y_OFFSET = 100;
+    private final int ammoXOffset = 220;
+    private final int ammoYOffset = 100;
 
-    public AmmoLabel (Game _game, Player _player) {
-        super((int) (Screen.GAME_HALF_WIDTH + Screen.GAME_HALF_WIDTH),
-              (int) (Screen.GAME_HALF_HEIGHT + Screen.GAME_HALF_HEIGHT / 2),
-                    "AMMO: ", "src/res/fonts/chargen.ttf", 32f);
+    public AmmoLabel(Game _game, Player _player) {
+        super((int) (Screen.gameHalfWidth + Screen.gameHalfWidth),
+                (int) (Screen.gameHalfHeight + Screen.gameHalfHeight / 2),
+                "AMMO: ", "src/res/fonts/chargen.ttf", 32f);
 
         this.game = _game;
         this.player = _player;
     }
 
     @Override
-    public void tick () {
+    public void tick() {
 
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
 
         //  Update positioning here because the timing is crucial to the rendering;
         //  delegating it to tick() will cause flickering problems.
-        this.setX((int) (this.game.getCamera().getX() + Screen.GAME_HALF_WIDTH - AMMO_X_OFFSET));
-        this.setY((int) ((this.game.getCamera().getY() + Screen.GAME_HALF_HEIGHT / 2) + AMMO_Y_OFFSET));
-
+        this.setX((int) (this.game.getCamera().getX() + Screen.gameHalfWidth - ammoXOffset));
+        this.setY((int) ((this.game.getCamera().getY() + Screen.gameHalfHeight / 2) + ammoYOffset));
         this.drawAmmoText(_g2);
     }
 
-    private void drawAmmoText (Graphics2D _g2) {
+    private void drawAmmoText(Graphics2D _g2) {
         StandardDraw.text("AMMO: " + this.getAmmoAmount(), this.getX(), this.getY(), this.getFont(), this.getFont().getSize(), Color.WHITE);
     }
 
-    private String getAmmoAmount () {
+    //=========================================GETTERS============================================
+    private String getAmmoAmount() {
         return this.getCurrentAmmo() + "/" + this.getTotalAmmo();
     }
 
-    private int getCurrentAmmo () {
+    private int getCurrentAmmo() {
         return this.player.getInventory().getCurrentWeapon().getCurrentAmmo();
     }
 
-    private int getTotalAmmo () {
+    private int getTotalAmmo() {
         return this.player.getInventory().getCurrentWeapon().getTotalAmmo();
     }
-
 }

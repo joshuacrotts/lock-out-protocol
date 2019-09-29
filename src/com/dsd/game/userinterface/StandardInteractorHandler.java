@@ -21,12 +21,11 @@ import java.util.LinkedList;
 public class StandardInteractorHandler extends StandardHandler implements MouseListener, MouseMotionListener, Renderable {
 
     private final LinkedList<Interactor> interactors;
-    private final Game sg;
+    private final Game game;
 
-
-    public StandardInteractorHandler(Game _sg) {
+    public StandardInteractorHandler(Game _game) {
         this.interactors = new LinkedList<>();
-        this.sg = _sg;
+        this.game = _game;
     }
 
     public void addInteractor(Interactor _interactor) {
@@ -65,7 +64,7 @@ public class StandardInteractorHandler extends StandardHandler implements MouseL
     public void mousePressed(MouseEvent e) {
         for (int i = 0; i < interactors.size(); i++) {
             Interactor inter = this.interactors.get(i);
-            if (StdOps.mouseOver(this.sg.getMouse().getMouseX(), this.sg.getMouse().getMouseY(),
+            if (StdOps.mouseOver(this.game.getMouse().getMouseX(), this.game.getMouse().getMouseY(),
                     inter.getX(), inter.getY(), inter.getWidth(), inter.getHeight())) {
 
                 inter.onMouseClick();
@@ -84,7 +83,7 @@ public class StandardInteractorHandler extends StandardHandler implements MouseL
     public void mouseMoved(MouseEvent e) {
         for (int i = 0; i < interactors.size(); i++) {
             Interactor inter = this.interactors.get(i);
-            if (StdOps.mouseOver(this.sg.getMouse().getMouseX(), this.sg.getMouse().getMouseY(),
+            if (StdOps.mouseOver(this.game.getMouse().getMouseX(), this.game.getMouse().getMouseY(),
                     inter.getX(), inter.getY(), inter.getWidth(), inter.getHeight())) {
                 inter.onMouseEnterHover();
             } else {

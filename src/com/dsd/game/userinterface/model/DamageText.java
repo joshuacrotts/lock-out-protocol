@@ -13,7 +13,8 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 
 /**
- * This class represents a string that appears above monsters when you shoot them.
+ * This class represents a string that appears above monsters when you shoot
+ * them.
  *
  * @author Joshua
  */
@@ -24,7 +25,7 @@ public class DamageText extends StandardLabel {
     private Color fadeColor;
     private final int fadeTimer = 5;
 
-    public DamageText (int _x, int _y, String _text, StandardInteractorHandler _sih) {
+    public DamageText(int _x, int _y, String _text, StandardInteractorHandler _sih) {
         super(_x, _y, _text, font);
         this.sih = _sih;
         this.fadeColor = new Color(0xff, 0xff, 0xff, 0xff);
@@ -32,11 +33,10 @@ public class DamageText extends StandardLabel {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (this.fadeColor.getAlpha() <= 0) {
             this.sih.getInteractors().remove(this);
-        }
-        else {
+        } else {
             this.fadeColor = new Color(this.fadeColor.getRed(),
                     this.fadeColor.getGreen(),
                     this.fadeColor.getBlue(),
@@ -47,8 +47,7 @@ public class DamageText extends StandardLabel {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         StandardDraw.text(this.getText(), this.getX(), this.getY(), font, font.getSize(), this.fadeColor);
     }
-
 }

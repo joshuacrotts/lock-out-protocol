@@ -31,25 +31,24 @@ public class ShootCommand extends Command {
     //
     //  This may need to change with time.
     //
-    public ShootCommand (Game _sg, Player _obj, StandardCollisionHandler _gh, StandardAnimatorController animation) {
-        this.game = _sg;
+    public ShootCommand(Game _game, Player _obj, StandardCollisionHandler _gh, StandardAnimatorController animation) {
+        this.game = _game;
         this.player = _obj;
         this.globalHandler = _gh;
         this.animation = animation;
         this.animation.getStandardAnimation().setReturnAnimation(this.player.getAnimationController());
 
-        this.bind(_sg.getKeyboard(), KeyEvent.VK_SPACE);
+        this.bind(_game.getKeyboard(), KeyEvent.VK_SPACE);
     }
 
     @Override
-    public void pressed (float _dt) {
+    public void pressed(float _dt) {
         Weapon weapon = this.player.getInventory().getCurrentWeapon();
 
         if (this.game.getGameState() != GameState.PAUSED) {
             if (this.player.getVelX() == 0 || this.player.getVelY() == 0) {
                 return;
-            }
-            else if (weapon.isWeaponEmpty()) {
+            } else if (weapon.isWeaponEmpty()) {
                 StandardAudioController.play(weapon.getEmptySFXPath());
                 return;
             }
@@ -80,8 +79,7 @@ public class ShootCommand extends Command {
      *
      * @param _sac
      */
-    public void setAnimation (StandardAnimatorController _sac) {
+    public void setAnimation(StandardAnimatorController _sac) {
         this.animation = _sac;
     }
-
 }

@@ -17,14 +17,14 @@ public class MoveCommand extends Command {
     private final Game game;
     private final Player player;
 
-    public MoveCommand (Game _sg, Player _obj) {
-        this.game = _sg;
+    public MoveCommand(Game _game, Player _obj) {
+        this.game = _game;
         this.player = _obj;
-        this.bind(_sg.getKeyboard(), KeyEvent.VK_W);
+        this.bind(_game.getKeyboard(), KeyEvent.VK_W);
     }
 
     @Override
-    public void pressed (float _dt) {
+    public void pressed(float _dt) {
         if (this.game.getGameState() != GameState.PAUSED) {
             this.player.setPlayerState(PlayerState.WALKING);
             this.player.updatePosition();
@@ -32,12 +32,12 @@ public class MoveCommand extends Command {
     }
 
     @Override
-    public void released (float dt) {
+    public void released(float dt) {
         this.player.setPlayerState(PlayerState.STANDING);
     }
 
     @Override
-    public void down (float _dt) {
+    public void down(float _dt) {
         if (this.game.getGameState() != GameState.PAUSED) {
             this.player.setPlayerState(PlayerState.WALKING);
             this.player.updatePosition();
