@@ -13,34 +13,36 @@ import java.awt.Graphics2D;
  *
  * @author Joshua
  */
-public class MenuScreen extends Screen{
+public class MenuScreen extends Screen {
 
-    public MenuScreen(Game _sg) {
+    public MenuScreen (Game _sg) {
         super(_sg);
 
         this.createUIElements();
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         super.tick();
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         super.render(_g2);
     }
 
     /**
      * Initializes the position of all the buttons for the user-interface when
      * the user is in the menu state.
+     *
+     * @TODO: Somehow define these without using magic numbers.
      */
-    private void createUIElements() {
+    private void createUIElements () {
         //  Instantiates the play button
-        super.addInteractor(new PlayButton(this.getGame(), 100, this.getGame().getGameHeight() - 200, 200, 100, "PLAY", Color.RED));
+        super.addInteractor(new PlayButton(this.getGame()));
 
         //  Instantiates the exit button
-        super.addInteractor(new ExitButton(this.getGame(), this.getGame().getGameWidth() - 300, this.getGame().getGameHeight() - 200, 200, 100, "EXIT", Color.RED));
+        super.addInteractor(new ExitButton(this.getGame()));
 
         //  Instantiates the title label
         super.addInteractor(new StandardLabel(this.getGame().getGameWidth() / 2 - 150, 40, this.getGame().getWindow().getTitle(), "src/res/fonts/chargen.ttf", 32f));

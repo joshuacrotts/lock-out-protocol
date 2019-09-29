@@ -11,9 +11,7 @@ import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.main.StandardGame;
 import com.revivedstandards.model.StandardAnimation;
 import com.revivedstandards.model.StandardID;
-import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import org.apache.commons.math3.util.FastMath;
 
@@ -31,6 +29,12 @@ public class Player extends Entity {
     //  PlayerState is set by commands
     //
     private PlayerState playerState;
+
+    //
+    //  Inventory of the player, tells how much money they have, the current
+    //  weapon, etc.
+    //
+    private final Inventory inventory;
 
     //
     //  Commands for the player's actions
@@ -85,6 +89,11 @@ public class Player extends Entity {
         //  Adds the player to the list of collidable objects
         _sch.addCollider(StandardID.Player);
         _sch.flagAlive(StandardID.Player);
+
+        this.setHealth(200.0);
+
+        //  Instantiate the inventory
+        this.inventory = new Inventory(this.getGame(), this);
     }
 
     @Override
@@ -113,8 +122,8 @@ public class Player extends Entity {
                 + ((this.getY() - my) * (this.getY() - my)));
 
         // Sets the velocity according to how far away the sprite is from the cursor
-        this.setVelX(((this.approachVel / distance) * (int) diffX));
-        this.setVelY(((this.approachVel / distance) * (int) diffY));
+        this.setVelX((this.approachVel / distance) * diffX);
+        this.setVelY((this.approachVel / distance) * diffY);
 
         //*****************************************************************//
         //      Calculates the angle the ship needs to be in to face the   //
@@ -153,6 +162,10 @@ public class Player extends Entity {
 
     public PlayerState getPlayerState () {
         return this.playerState;
+    }
+
+    public Inventory getInventory () {
+        return this.inventory;
     }
 
     public double getAngle () {

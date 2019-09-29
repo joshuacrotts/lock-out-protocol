@@ -21,10 +21,10 @@ public abstract class Screen implements Renderable, Updatable {
     private final Game sg;
     private final StandardInteractorHandler sih;
 
-    protected static int GAME_HALF_WIDTH;
-    protected static int GAME_HALF_HEIGHT;
-    protected static int GAME_DOUBLE_WIDTH;
-    protected static int GAME_DOUBLE_HEIGHT;
+    public static int GAME_HALF_WIDTH;
+    public static int GAME_HALF_HEIGHT;
+    public static int GAME_DOUBLE_WIDTH;
+    public static int GAME_DOUBLE_HEIGHT;
 
     public Screen (Game _sg) {
         this.sg = _sg;

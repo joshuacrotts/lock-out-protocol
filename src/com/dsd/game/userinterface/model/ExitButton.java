@@ -1,8 +1,12 @@
 package com.dsd.game.userinterface.model;
 
+import com.dsd.game.Game;
 import com.dsd.game.userinterface.MouseEventInterface;
-import com.revivedstandards.main.StandardGame;
+import com.dsd.game.userinterface.Screen;
+import com.revivedstandards.main.StandardDraw;
+import com.revivedstandards.util.StdOps;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 
 /**
@@ -12,31 +16,50 @@ import java.awt.Graphics2D;
  */
 public class ExitButton extends StandardButton implements MouseEventInterface {
 
-    private final StandardGame sg;
+    private final Game sg;
 
-    public ExitButton(StandardGame _sg, int _x, int _y, int _width, int _height, String _text, Color _color) {
-        super(_x, _y, _width, _height, _text, _color);
+    private final int Y_OFFSET = 200;
+    private final int X_OFFSET = 70;
+    private final int TEXT_X_OFFSET = 25;
+    private final int BUTTON_WIDTH = 200;
+    private final int BUTTON_HEIGHT = 100;
+
+    private final Font font;
+
+    public ExitButton (Game _sg) {
+        super();
 
         this.sg = _sg;
+        this.font = StdOps.initFont("src/res/fonts/chargen.ttf", 24f);
+
+        this.setX(Screen.GAME_HALF_WIDTH - X_OFFSET);
+        this.setY(this.sg.getGameHeight() - Y_OFFSET);
+        this.setWidth(BUTTON_WIDTH);
+        this.setHeight(BUTTON_HEIGHT);
+        this.setText("EXIT");
+        this.setColor(Color.RED);
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         super.render(_g2);
+        StandardDraw.text(this.getText(), (this.getX() + (this.getWidth() / 2)) - TEXT_X_OFFSET,
+                this.getY() + this.getHeight() / 2, this.font,
+                this.font.getSize(), Color.WHITE);
     }
 
     @Override
-    public void onMouseClick() {
+    public void onMouseClick () {
         this.sg.stopGame();
     }
 
     @Override
-    public void onMouseEnterHover() {
+    public void onMouseEnterHover () {
         this.setColor(Color.GREEN);
     }
-    
+
     @Override
-    public void onMouseExitHover() {
+    public void onMouseExitHover () {
         this.setColor(Color.RED);
     }
 }

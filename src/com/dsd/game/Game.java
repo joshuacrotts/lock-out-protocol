@@ -7,6 +7,7 @@ import com.dsd.game.controller.CollisionHandlerController;
 import com.dsd.game.controller.RainController;
 import com.dsd.game.objects.Monster;
 import com.dsd.game.objects.Player;
+import com.dsd.game.userinterface.HUDScreen;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.PauseScreen;
 import com.revivedstandards.handlers.StandardCollisionHandler;
@@ -39,6 +40,7 @@ public class Game extends StandardGame {
     //
     private final MenuScreen menuScreen;
     private final PauseScreen pauseScreen;
+    private final HUDScreen hudScreen;
 
     //
     //  Rain controller which contacts the API for the logic of
@@ -91,6 +93,7 @@ public class Game extends StandardGame {
         //  Creates the UI views
         this.menuScreen = new MenuScreen(this);
         this.pauseScreen = new PauseScreen(this);
+        this.hudScreen = new HUDScreen(this, this.player);
 
         this.startGame();
     }
@@ -112,10 +115,13 @@ public class Game extends StandardGame {
                 this.level.tick();
                 //  Then the objects within the handler
                 StandardHandler.Handler(this.sch);
-                // Then the rain if applicable
+                //  Then the rain if applicable
                 this.rainController.tick();
+                //  Then the heads up display
+                this.hudScreen.tick();
                 //  And lastly the camera
                 StandardHandler.Object(this.sc);
+
         }
     }
 
@@ -137,6 +143,8 @@ public class Game extends StandardGame {
             this.rainController.render(StandardDraw.Renderer);
             //  Then render the handler objects
             StandardDraw.Handler(this.sch);
+            //  Then render the heads up display
+            this.hudScreen.render(StandardDraw.Renderer);
 
             //  If the game is paused, draw the paused text and
             //  transparent background.

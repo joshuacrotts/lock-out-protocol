@@ -7,6 +7,7 @@ import com.revivedstandards.commands.Command;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.dsd.game.objects.BulletGameObject;
 import com.dsd.game.PlayerState;
+import com.dsd.game.objects.Weapon;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.controller.StandardAudioController;
 import java.awt.event.KeyEvent;
@@ -30,8 +31,6 @@ public class ShootCommand extends Command {
     //
     //  This may need to change with time.
     //
-    private String gunSFXPath = "src/res/audio/sfx/pistol.wav";
-
     public ShootCommand (Game _sg, Player _obj, StandardCollisionHandler _gh, StandardAnimatorController animation) {
         this.game = _sg;
         this.player = _obj;
@@ -44,20 +43,35 @@ public class ShootCommand extends Command {
 
     @Override
     public void pressed (float _dt) {
+        Weapon weapon = this.player.getInventory().getCurrentWeapon();
+
         if (this.game.getGameState() != GameState.PAUSED) {
             if (this.player.getVelX() == 0 || this.player.getVelY() == 0) {
                 return;
             }
+            else if (weapon.isWeaponEmpty()) {
+                StandardAudioController.play(weapon.getEmptySFXPath());
+                return;
+            }
 
+            //
+            //  Play the animation and deduct ammunition from the gun
+            //  that the player is using.
+            //
             this.player.setAnimation(this.animation);
             this.player.setPlayerState(PlayerState.SHOOTING);
+            weapon.deductAmmo();
 
-            this.globalHandler.addEntity(new BulletGameObject((int) this.player.getX() + this.player.getWidth() / 2,
+            //
+            //  Add bullet to the global hander
+            //
+            this.globalHandler.addEntity(new BulletGameObject(
+                    (int) this.player.getX() + this.player.getWidth() / 2,
                     (int) this.player.getY() + this.player.getHeight() / 2,
                     this.player.getAngle(), this.game, this.globalHandler,
                     this.player.getCamera(), this.player));
 
-            StandardAudioController.play(this.gunSFXPath);
+            StandardAudioController.play(weapon.getGunSFXPath());
         }
     }
 

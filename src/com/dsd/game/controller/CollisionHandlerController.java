@@ -60,7 +60,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      */
     @Override
     public void handleBoundsCollision (StandardGameObject _obj1, StandardGameObject _obj2) {
-        if (_obj1 instanceof Player && _obj2 instanceof Monster) {
+        if (_obj1 instanceof Player && _obj2 instanceof Monster && _obj2.isAlive()) {
             this.handlePlayerMonsterCollision((Player) _obj1, (Monster) _obj2);
         }
     }
@@ -99,6 +99,6 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      * @param _monster
      */
     private void handlePlayerMonsterCollision (Player _player, Monster _monster) {
-        System.out.println("Player is hurting!");
+        _player.setHealth(_player.getHealth() - _monster.getDamage());
     }
 }

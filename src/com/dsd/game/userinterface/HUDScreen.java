@@ -1,6 +1,10 @@
 package com.dsd.game.userinterface;
 
 import com.dsd.game.Game;
+import com.dsd.game.objects.Player;
+import com.dsd.game.userinterface.model.AmmoLabel;
+import com.dsd.game.userinterface.model.HealthLabel;
+import java.awt.Graphics2D;
 
 /**
  *
@@ -8,8 +12,29 @@ import com.dsd.game.Game;
  */
 public class HUDScreen extends Screen {
 
-    public HUDScreen (Game _sg) {
+    private final Player player;
+
+    public HUDScreen (Game _sg, Player _player) {
         super(_sg);
+
+        this.player = _player;
+
+        this.createUIElements();
+    }
+
+    @Override
+    public void tick () {
+        super.tick();
+    }
+
+    @Override
+    public void render (Graphics2D _g2) {
+        super.render(_g2);
+    }
+
+    private void createUIElements () {
+        this.addInteractor(new HealthLabel(super.getGame(), this.player));
+        this.addInteractor(new AmmoLabel(super.getGame(), this.player));
     }
 
 }
