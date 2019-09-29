@@ -1,6 +1,7 @@
 package com.dsd.game.userinterface.model;
 
 import com.dsd.game.Game;
+import com.dsd.game.GameState;
 import com.dsd.game.userinterface.MouseEventInterface;
 import com.dsd.game.userinterface.Screen;
 import com.revivedstandards.main.StandardDraw;
@@ -43,23 +44,33 @@ public class ExitButton extends StandardButton implements MouseEventInterface {
     @Override
     public void render (Graphics2D _g2) {
         super.render(_g2);
-        StandardDraw.text(this.getText(), (this.getX() + (this.getWidth() / 2)) - TEXT_X_OFFSET,
-                this.getY() + this.getHeight() / 2, this.font,
+        StandardDraw.text(this.getText(),
+                (this.getX() + (this.getWidth() / 2)) - TEXT_X_OFFSET,
+                (this.getY() + this.getHeight() / 2), this.font,
                 this.font.getSize(), Color.WHITE);
     }
 
     @Override
     public void onMouseClick () {
+        if (this.sg.getGameState() != GameState.MENU) {
+            return;
+        }
         this.sg.stopGame();
     }
 
     @Override
     public void onMouseEnterHover () {
+        if (this.sg.getGameState() != GameState.MENU) {
+            return;
+        }
         this.setColor(Color.GREEN);
     }
 
     @Override
     public void onMouseExitHover () {
+        if (this.sg.getGameState() != GameState.MENU) {
+            return;
+        }
         this.setColor(Color.RED);
     }
 }

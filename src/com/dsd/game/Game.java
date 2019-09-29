@@ -69,7 +69,7 @@ public class Game extends StandardGame {
         AudioBoxController.initialize(16);
 
         //  Create a new collision handler
-        this.sch = new CollisionHandlerController(null);
+        this.sch = new CollisionHandlerController(this, null);
 
         //  Instantiates player & adds it to the handler
         this.player = new Player(200, 200, this, null, this.sch);

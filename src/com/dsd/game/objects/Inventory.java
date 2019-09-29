@@ -4,6 +4,7 @@ import com.dsd.game.Game;
 import com.dsd.game.userinterface.InventoryView;
 
 /**
+ * Model representing the player's current inventory.
  *
  * @author Joshua
  */
@@ -23,7 +24,7 @@ public class Inventory {
     }
 
 //============================= GETTERS ===================================//
-    public Weapon getCurrentWeapon() {
+    public Weapon getCurrentWeapon () {
         return this.currentWeapon;
     }
 
@@ -32,8 +33,7 @@ public class Inventory {
     }
 
 //============================= SETTERS ===================================//
-
-    public void setCurrentWeapon(Weapon _weapon){
-         this.currentWeapon = _weapon;
+    public void setCurrentWeapon (Weapon _weapon) {
+        this.currentWeapon = _weapon;
     }
 }

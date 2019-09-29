@@ -51,16 +51,26 @@ public class PlayButton extends StandardButton implements MouseEventInterface {
 
     @Override
     public void onMouseClick () {
+        if (this.sg.getGameState() != GameState.MENU) {
+            return;
+        }
+
         this.sg.setGameState(GameState.RUNNING);
     }
 
     @Override
     public void onMouseEnterHover () {
+        if (this.sg.getGameState() != GameState.MENU) {
+            return;
+        }
         this.setColor(Color.BLUE);
     }
 
     @Override
     public void onMouseExitHover () {
+        if (this.sg.getGameState() != GameState.MENU) {
+            return;
+        }
         this.setColor(Color.RED);
     }
 

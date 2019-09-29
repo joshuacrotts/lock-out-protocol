@@ -1,8 +1,11 @@
 package com.dsd.game.controller;
 
+import com.dsd.game.Game;
 import com.dsd.game.objects.BulletGameObject;
 import com.dsd.game.objects.Monster;
 import com.dsd.game.objects.Player;
+import com.dsd.game.userinterface.StandardInteractorHandler;
+import com.dsd.game.userinterface.model.DamageText;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.model.StandardGameObject;
@@ -16,18 +19,27 @@ import java.awt.Graphics2D;
  */
 public class CollisionHandlerController extends StandardCollisionHandler {
 
-    public CollisionHandlerController (StandardCamera _sc) {
+    //
+    //  We can probably decouple this later, but this is the handler
+    //  that holds all damageText objects.
+    //
+    private static StandardInteractorHandler damageText;
+
+    public CollisionHandlerController (Game _game, StandardCamera _sc) {
         super(_sc);
+        CollisionHandlerController.damageText = new StandardInteractorHandler(_game);
     }
 
     @Override
     public void tick () {
         super.tick();
+        damageText.tick();
     }
 
     @Override
     public void render (Graphics2D _g2) {
         super.render(_g2);
+        damageText.render(_g2);
     }
 
     /**
@@ -87,6 +99,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
         if (_monster.isAlive()) {
             // Plays random monster hurt sfx
             _monster.generateHurtSound(StdOps.rand(1, 5));
+            this.addDamageText(_monster, _bullet.getDamage());
         }
     }
 
@@ -100,5 +113,9 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      */
     private void handlePlayerMonsterCollision (Player _player, Monster _monster) {
         _player.setHealth(_player.getHealth() - _monster.getDamage());
+    }
+
+    private void addDamageText (Monster _monster, int _damage) {
+        damageText.addInteractor(new DamageText((int) _monster.getX() + _monster.getWidth() / 2, (int) _monster.getY(), "-" + _damage, damageText));
     }
 }

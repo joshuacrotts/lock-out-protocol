@@ -44,7 +44,7 @@ public class RainDrop extends StandardGameObject {
 
     @Override
     public void render(Graphics2D _g2) {
-        _g2.setColor(new Color(BLUE_COLOR, BLUE_COLOR, StdOps.rand(BLUE_COLOR, 255)));
+        _g2.setColor(new Color(BLUE_COLOR, BLUE_COLOR, StdOps.rand(BLUE_COLOR, 0xFF)));
         _g2.drawLine((int) this.getX(), (int) this.getY(), (int) (this.getX() - this.getVelX() * VEL_FACTOR),
                                                            (int) (this.getY() - this.getVelY() * VEL_FACTOR));
     }

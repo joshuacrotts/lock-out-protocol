@@ -30,7 +30,8 @@ public class AmmoLabel extends StandardLabel {
 
     public AmmoLabel (Game _game, Player _player) {
         super((int) (Screen.GAME_HALF_WIDTH + Screen.GAME_HALF_WIDTH),
-                (int) (Screen.GAME_HALF_HEIGHT + Screen.GAME_HALF_HEIGHT / 2), "AMMO: ", "src/res/fonts/chargen.ttf", 32f);
+              (int) (Screen.GAME_HALF_HEIGHT + Screen.GAME_HALF_HEIGHT / 2),
+                    "AMMO: ", "src/res/fonts/chargen.ttf", 32f);
 
         this.game = _game;
         this.player = _player;
@@ -46,11 +47,10 @@ public class AmmoLabel extends StandardLabel {
 
         //  Update positioning here because the timing is crucial to the rendering;
         //  delegating it to tick() will cause flickering problems.
-        this.setX((int) this.game.getCamera().getX() + Screen.GAME_HALF_WIDTH - AMMO_X_OFFSET);
+        this.setX((int) (this.game.getCamera().getX() + Screen.GAME_HALF_WIDTH - AMMO_X_OFFSET));
         this.setY((int) ((this.game.getCamera().getY() + Screen.GAME_HALF_HEIGHT / 2) + AMMO_Y_OFFSET));
 
         this.drawAmmoText(_g2);
-
     }
 
     private void drawAmmoText (Graphics2D _g2) {

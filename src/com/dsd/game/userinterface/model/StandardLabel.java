@@ -22,6 +22,16 @@ public class StandardLabel extends Interactor implements MouseEventInterface {
 
     private final Font font;
 
+    public StandardLabel (int _x, int _y, String _text, Font _fontPath) {
+        super(_x, _y);
+
+        this.originX = _x;
+        this.originY = _y;
+        this.text = _text;
+
+        this.font = _fontPath;
+    }
+
     public StandardLabel (int _x, int _y, String _text, String _fontPath, float _fontSize) {
         super(_x, _y);
 
@@ -61,5 +71,9 @@ public class StandardLabel extends Interactor implements MouseEventInterface {
 //=============================== GETTERS ====================================//
     public Font getFont () {
         return this.font;
+    }
+
+    public String getText () {
+        return this.text;
     }
 }
