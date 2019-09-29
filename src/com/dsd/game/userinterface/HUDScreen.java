@@ -25,11 +25,13 @@ public class HUDScreen extends Screen {
     @Override
     public void tick() {
         super.tick();
+        this.player.getInventory().getView().tick();
     }
 
     @Override
     public void render(Graphics2D _g2) {
         super.render(_g2);
+        this.player.getInventory().getView().render(_g2);
     }
 
     private void createUIElements() {

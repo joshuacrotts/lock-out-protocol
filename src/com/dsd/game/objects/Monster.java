@@ -90,7 +90,9 @@ public class Monster extends Entity implements DeathListener {
 
     @Override
     public void tick() {
-
+        // If the monster's health is less than 0, we can flag it as dead.
+        this.setAlive(this.getHealth() > 0);
+        
         if (this.isAlive()) {
             this.updatePosition();
             this.getAnimationController().tick();

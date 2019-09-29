@@ -21,5 +21,8 @@ public abstract class AudioBoxController {
         StandardAudioController.load("src/res/audio/sfx/zombies/zombie-4.wav", 2);
         StandardAudioController.load("src/res/audio/sfx/zombies/zombie-5.wav", 2);
         StandardAudioController.load("src/res/audio/sfx/empty.wav", 1);
+        StandardAudioController.load("src/res/audio/sfx/reload.wav", 1);
+        StandardAudioController.load("src/res/audio/sfx/knife.wav", 3);
+        StandardAudioController.load("src/res/audio/sfx/rifle.wav", 16);
     }
 }
