@@ -4,7 +4,6 @@ import com.dsd.game.userinterface.model.PlayButton;
 import com.dsd.game.Game;
 import com.dsd.game.userinterface.model.ExitButton;
 import com.dsd.game.userinterface.model.StandardLabel;
-import java.awt.Color;
 import java.awt.Graphics2D;
 
 /**
