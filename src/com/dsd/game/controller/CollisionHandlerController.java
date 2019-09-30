@@ -5,8 +5,10 @@ import com.dsd.game.PlayerState;
 import com.dsd.game.objects.BulletGameObject;
 import com.dsd.game.objects.Monster;
 import com.dsd.game.objects.Player;
+import com.dsd.game.objects.items.Coin;
 import com.dsd.game.userinterface.StandardInteractorHandler;
 import com.dsd.game.userinterface.model.DamageText;
+import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.model.StandardGameObject;
@@ -76,6 +78,10 @@ public class CollisionHandlerController extends StandardCollisionHandler {
         if (_obj1 instanceof Player && _obj2 instanceof Monster && _obj2.isAlive()) {
             this.handlePlayerMonsterCollision((Player) _obj1, (Monster) _obj2);
         }
+
+        else if (_obj1 instanceof Player && _obj2 instanceof Coin && _obj2.isAlive()) {
+            this.handlePlayerCoinCollision((Player) _obj1, (Coin) _obj2);
+        }
     }
 
     /**
@@ -119,6 +125,12 @@ public class CollisionHandlerController extends StandardCollisionHandler {
             _monster.generateHurtSound(StdOps.rand(1, 5));
             _player.setPlayerState(PlayerState.STANDING);
         }
+    }
+
+    private void handlePlayerCoinCollision (Player _player, Coin _coin) {
+        _player.setMoney(_player.getMoney() + _coin.getValue());
+        _coin.setAlive(false);
+        StandardAudioController.play("src/res/audio/sfx/coin.wav");
     }
 
     private void addDamageText (Monster _monster, int _damage) {

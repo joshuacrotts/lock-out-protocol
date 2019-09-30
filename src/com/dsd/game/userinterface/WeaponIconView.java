@@ -23,7 +23,8 @@ public class WeaponIconView extends Interactor {
     private final Inventory inventory;
     private final BasicStroke rectBorderStroke;
 
-    private final int iconYOffset = 50;
+    private final int iconXOffset = 300;
+    private final int iconYOffset = 70;
 
     public WeaponIconView (Game _game, Inventory _inventory) {
         this.game = _game;
@@ -37,8 +38,10 @@ public class WeaponIconView extends Interactor {
 
     @Override
     public void render (Graphics2D _g2) {
-        this.setX((int) (this.game.getCamera().getX()));
+
+        this.setX((int) (this.game.getCamera().getX() + Screen.gameHalfWidth - this.iconXOffset));
         this.setY((int) ((this.game.getCamera().getY() + Screen.gameHalfHeight / 2) + this.iconYOffset));
+
         this.drawIcon(_g2);
         this.drawRectangleBorder(_g2);
 

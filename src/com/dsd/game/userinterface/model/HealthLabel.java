@@ -37,10 +37,11 @@ public class HealthLabel extends StandardLabel {
     //
     //  Position and sizing of health elements
     //
+    private final int maxHealth = 200;
     private final int healthBarYOffset = 5;
     private final int healthBarHeight = 35;
     private final int healthXOffset = 150;
-    private final int healthYOffset = 100;
+    private final int healthYOffset = 140;
     private final int arcWidth = 10;
     private final int arcHeight = 10;
 
@@ -91,7 +92,7 @@ public class HealthLabel extends StandardLabel {
         //
         _g2.setColor(Color.BLACK);
         _g2.drawRoundRect(this.getX() + this.healthXOffset, this.getY() + healthBarYOffset - this.healthBarHeight,
-                (int) 200, this.healthBarHeight, this.arcWidth, this.arcHeight);
+                          maxHealth, this.healthBarHeight, this.arcWidth, this.arcHeight);
     }
 
     private Color makeColorTransparent(Color _c) {

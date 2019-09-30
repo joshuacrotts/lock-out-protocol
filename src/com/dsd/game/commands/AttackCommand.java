@@ -52,7 +52,7 @@ public class AttackCommand extends Command {
         if (this.game.getGameState() == GameState.PAUSED) {
             return;
         }
-        
+
         Weapon weapon = this.player.getInventory().getCurrentWeapon();
         //
         //  If the weapon's delay is not active, we can attack.
@@ -114,6 +114,7 @@ public class AttackCommand extends Command {
 
     /**
      * Uses the knife attack.
+     *
      * @param _knife
      */
     private void knifeAttack (Weapon _knife) {

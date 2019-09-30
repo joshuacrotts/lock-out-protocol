@@ -51,6 +51,11 @@ public class Player extends Entity {
     private float angle;
     private final float approachVel = -3.0f;
 
+    //
+    //  Money amt
+    //
+    private int money;
+
     public Player (int _x, int _y, StandardGame _game, StandardCamera _sc, StandardCollisionHandler _sch) {
         super(_x, _y, 100, StandardID.Player, (Game) _game, _sch);
 
@@ -155,6 +160,10 @@ public class Player extends Entity {
         return this.angle;
     }
 
+    public int getMoney () {
+        return this.money;
+    }
+
 //=============================== SETTERS ================================//
     public void setWalking () {
         this.playerState = PlayerState.WALKING;
@@ -170,6 +179,10 @@ public class Player extends Entity {
 
     public void setAttackAnimator (StandardAnimatorController sac) {
         this.attackCommand.setAnimation(sac);
+    }
+
+    public void setMoney (int _money) {
+        this.money = _money;
     }
 
 }

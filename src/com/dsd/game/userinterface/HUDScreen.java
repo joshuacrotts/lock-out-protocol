@@ -3,6 +3,7 @@ package com.dsd.game.userinterface;
 import com.dsd.game.Game;
 import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.model.AmmoLabel;
+import com.dsd.game.userinterface.model.CoinLabel;
 import com.dsd.game.userinterface.model.HealthLabel;
 import java.awt.Graphics2D;
 
@@ -37,6 +38,7 @@ public class HUDScreen extends Screen {
     private void createUIElements() {
         this.addInteractor(new HealthLabel(super.getGame(), this.player));
         this.addInteractor(new AmmoLabel(super.getGame(), this.player));
+        this.addInteractor(new CoinLabel(super.getGame(), this.player));
     }
 
 }

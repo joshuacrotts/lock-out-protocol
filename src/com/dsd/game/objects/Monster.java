@@ -6,6 +6,7 @@
 package com.dsd.game.objects;
 
 import com.dsd.game.Game;
+import com.dsd.game.objects.items.Coin;
 import com.dsd.game.util.Utilities;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.controller.StandardAudioController;
@@ -70,7 +71,7 @@ public class Monster extends Entity implements DeathListener {
     //
     private final double damage = 0.20;
 
-    public Monster(int _x, int _y, Game _game, StandardCamera _sc, StandardCollisionHandler _sch) {
+    public Monster (int _x, int _y, Game _game, StandardCamera _sc, StandardCollisionHandler _sch) {
         super(_x, _y, 100, StandardID.Enemy3, _game, _sch);
         this.target = _game.getPlayer();
         this.sc = _sc;
@@ -89,10 +90,10 @@ public class Monster extends Entity implements DeathListener {
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         // If the monster's health is less than 0, we can flag it as dead.
         this.setAlive(this.getHealth() > 0);
-        
+
         if (this.isAlive()) {
             this.updatePosition();
             this.getAnimationController().tick();
@@ -132,7 +133,8 @@ public class Monster extends Entity implements DeathListener {
             if ((tx > this.getX() && ty > this.getY()) || (tx < this.getX() && ty > this.getY())) {
                 this.angle = (float) ((FastMath.PI / 2) + (FastMath.PI / 2 - this.angle));
             }
-        } else {
+        }
+        else {
             // Do this only once.
             if (this.aliveFlag) {
                 this.uponDeath();
@@ -150,10 +152,11 @@ public class Monster extends Entity implements DeathListener {
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         if (this.isAlive()) {
             this.getAnimationController().renderFrame(_g2);
-        } else if (this.explosionHandler != null) {
+        }
+        else if (this.explosionHandler != null) {
             StandardDraw.Handler(this.explosionHandler);
         }
     }
@@ -162,21 +165,26 @@ public class Monster extends Entity implements DeathListener {
      * @TODO: Re-factor the magic numbers
      */
     @Override
-    public void uponDeath() {
+    public void uponDeath () {
         this.explosionHandler = new StandardParticleHandler(50);
         this.explosionHandler.setCamera(this.sc);
 
-        for (int i = 0; i < this.explosionHandler.getMaxParticles(); i++) {
+        for (int i = 0 ; i < this.explosionHandler.getMaxParticles() ; i++) {
 
             this.explosionHandler.addEntity(new StandardBoxParticle(this.getX(), this.getY(),
                     StdOps.rand(1.0, 5.0), StdOps.randBounds(-10.0, -3.0, 3.0, 10.0),
                     StdOps.randBounds(-10.0, -3.0, 3.0, 10.0), Color.RED, 3f, this.explosionHandler,
                     this.angle, ShapeType.CIRCLE, true));
         }
+
+        for (int i = 0 ; i < 5 ; i++) {
+            this.getHandler().addEntity(new Coin((int) this.getX(), (int) this.getY(), 0.7, 0.9, 1.0));
+        }
+
         this.generateDeathSound(StdOps.rand(1, 2));
     }
 
-    public void generateHurtSound(int _sfx) {
+    public void generateHurtSound (int _sfx) {
         StandardAudioController.play("src/res/audio/sfx/zombies/zombie-" + _sfx + ".wav");
     }
 
@@ -185,12 +193,12 @@ public class Monster extends Entity implements DeathListener {
      *
      * @param sfx either 1 or 2
      */
-    private void generateDeathSound(int _sfx) {
+    private void generateDeathSound (int _sfx) {
         StandardAudioController.play("src/res/audio/sfx/splat" + _sfx + ".wav");
     }
 
 //================================== GETTERS ==================================//
-    public double getDamage() {
+    public double getDamage () {
         return this.damage;
     }
 
