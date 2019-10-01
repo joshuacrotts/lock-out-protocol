@@ -14,7 +14,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 /**
- * This label will display the money amt.
+ * This label will display the money amount.
  *
  * @author Joshua
  */
