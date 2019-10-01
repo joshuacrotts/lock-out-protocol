@@ -6,5 +6,5 @@ package com.dsd.game;
  * @author Joshua
  */
 public enum PlayerState {
-    WALKING, STANDING, ATTACKING
+    WALKING, STANDING, ATTACKING, DEAD
 }
