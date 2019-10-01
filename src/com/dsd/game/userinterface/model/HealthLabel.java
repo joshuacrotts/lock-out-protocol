@@ -45,7 +45,7 @@ public class HealthLabel extends StandardLabel {
     private final int arcWidth = 10;
     private final int arcHeight = 10;
 
-    public HealthLabel(Game _game, Player _player) {
+    public HealthLabel (Game _game, Player _player) {
         super((int) (Screen.gameHalfWidth - Screen.gameHalfWidth),
                 (int) (Screen.gameHalfHeight + Screen.gameHalfHeight / 2), "Health: ", "src/res/fonts/chargen.ttf", 32f);
 
@@ -58,12 +58,12 @@ public class HealthLabel extends StandardLabel {
     }
 
     @Override
-    public void tick() {
+    public void tick () {
 
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
 
         //  Update positioning here because the timing is crucial to the rendering;
         //  delegating it to tick() will cause flickering problems.
@@ -74,11 +74,11 @@ public class HealthLabel extends StandardLabel {
         this.drawHealthBar(_g2);
     }
 
-    private void drawHealthText(Graphics2D _g2) {
+    private void drawHealthText (Graphics2D _g2) {
         StandardDraw.text("HEALTH: ", this.getX(), this.getY(), this.getFont(), this.getFont().getSize(), Color.WHITE);
     }
 
-    private void drawHealthBar(Graphics2D _g2) {
+    private void drawHealthBar (Graphics2D _g2) {
         //
         //  Draw the green portion (health of actual player).
         //
@@ -92,10 +92,10 @@ public class HealthLabel extends StandardLabel {
         //
         _g2.setColor(Color.BLACK);
         _g2.drawRoundRect(this.getX() + this.healthXOffset, this.getY() + healthBarYOffset - this.healthBarHeight,
-                          maxHealth, this.healthBarHeight, this.arcWidth, this.arcHeight);
+                maxHealth, this.healthBarHeight, this.arcWidth, this.arcHeight);
     }
 
-    private Color makeColorTransparent(Color _c) {
+    private Color makeColorTransparent (Color _c) {
         return new Color(_c.getRed(), _c.getGreen(), _c.getBlue(), this.transparency);
     }
 }

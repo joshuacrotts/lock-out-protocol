@@ -17,7 +17,8 @@ import java.awt.image.BufferedImage;
  * screen.
  *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class WeaponIconView extends Interactor {
 

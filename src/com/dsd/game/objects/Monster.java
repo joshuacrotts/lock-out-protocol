@@ -30,7 +30,8 @@ import org.apache.commons.math3.util.FastMath;
  * Monster entity; follows the player around and (eventually) drains his health.
  *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class Monster extends Entity implements DeathListener {
 

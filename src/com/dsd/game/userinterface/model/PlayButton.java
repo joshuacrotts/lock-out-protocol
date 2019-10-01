@@ -28,7 +28,7 @@ public class PlayButton extends StandardButton implements MouseEventInterface {
     private final int buttonWidth = 200;
     private final int buttonHeight = 100;
 
-    public PlayButton(Game _game) {
+    public PlayButton (Game _game) {
         this.game = _game;
 
         this.font = StdOps.initFont("src/res/fonts/chargen.ttf", 24f);
@@ -42,7 +42,7 @@ public class PlayButton extends StandardButton implements MouseEventInterface {
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         super.render(_g2);
         StandardDraw.text(this.getText(), (this.getX() + (this.getWidth() / 2)) - textXOffset,
                 this.getY() + this.getHeight() / 2, this.font,
@@ -50,7 +50,7 @@ public class PlayButton extends StandardButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseClick() {
+    public void onMouseClick () {
         if (this.game.getGameState() != GameState.MENU) {
             return;
         }
@@ -59,7 +59,7 @@ public class PlayButton extends StandardButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseEnterHover() {
+    public void onMouseEnterHover () {
         if (this.game.getGameState() != GameState.MENU) {
             return;
         }
@@ -67,7 +67,7 @@ public class PlayButton extends StandardButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseExitHover() {
+    public void onMouseExitHover () {
         if (this.game.getGameState() != GameState.MENU) {
             return;
         }

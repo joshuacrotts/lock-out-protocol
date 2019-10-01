@@ -19,9 +19,10 @@ import java.awt.Graphics2D;
  * StandardCollisionHandler has a method integrated in it: handleCollision(obj1,
  * obj2), and it needs a subclass to override it so the handler knows what to do
  * when two SGO's collide.
- * 
+ *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class CollisionHandlerController extends StandardCollisionHandler {
 

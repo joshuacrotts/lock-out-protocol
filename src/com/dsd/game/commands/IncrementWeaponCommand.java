@@ -8,11 +8,11 @@ import com.revivedstandards.commands.Command;
 import com.sun.glass.events.KeyEvent;
 
 /**
- * Command representing when the user increments their weapon
- * counter position.
+ * Command representing when the user increments their weapon counter position.
  *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class IncrementWeaponCommand extends Command {
 

@@ -11,21 +11,22 @@ import java.awt.event.KeyEvent;
  * Command representing when the user shoots their weapon.
  *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class MoveCommand extends Command {
 
     private final Game game;
     private final Player player;
 
-    public MoveCommand(Game _game, Player _obj) {
+    public MoveCommand (Game _game, Player _obj) {
         this.game = _game;
         this.player = _obj;
         this.bind(_game.getKeyboard(), KeyEvent.VK_W);
     }
 
     @Override
-    public void pressed(float _dt) {
+    public void pressed (float _dt) {
         if (this.game.getGameState() != GameState.PAUSED) {
             this.player.setPlayerState(PlayerState.WALKING);
             this.player.updatePosition();
@@ -33,12 +34,12 @@ public class MoveCommand extends Command {
     }
 
     @Override
-    public void released(float dt) {
+    public void released (float dt) {
         this.player.setPlayerState(PlayerState.STANDING);
     }
 
     @Override
-    public void down(float _dt) {
+    public void down (float _dt) {
         if (this.game.getGameState() != GameState.PAUSED) {
             this.player.setPlayerState(PlayerState.WALKING);
             this.player.updatePosition();

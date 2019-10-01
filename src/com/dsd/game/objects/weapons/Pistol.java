@@ -12,7 +12,8 @@ import com.revivedstandards.model.StandardAnimation;
  * This class is a subclass of Gun; it acts as a standard pistol.
  *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class Pistol extends Gun {
 

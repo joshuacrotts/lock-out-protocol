@@ -6,11 +6,12 @@ import com.revivedstandards.controller.StandardAudioController;
  * This class loads all necessary sfx for the game.
  *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public abstract class AudioBoxController {
 
-    public static void initialize(int _buffers) {
+    public static void initialize (int _buffers) {
         StandardAudioController.init(_buffers);
 
         StandardAudioController.load("src/res/audio/sfx/pistol.wav", 16);

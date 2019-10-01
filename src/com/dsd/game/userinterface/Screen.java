@@ -15,7 +15,8 @@ import java.awt.Graphics2D;
  * The user can add new elements if desired.
  *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public abstract class Screen implements Renderable, Updatable {
 
@@ -27,7 +28,7 @@ public abstract class Screen implements Renderable, Updatable {
     public static int gameDoubleWidth;
     public static int gameDoubleHeight;
 
-    public Screen(Game _game) {
+    public Screen (Game _game) {
         this.game = _game;
         this.sih = new StandardInteractorHandler(this.game);
         this.addUIElementsAsListeners();
@@ -39,16 +40,16 @@ public abstract class Screen implements Renderable, Updatable {
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         StandardHandler.Handler(this.sih);
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         StandardDraw.Handler(this.sih);
     }
 
-    public void addInteractor(Interactor _interactor) {
+    public void addInteractor (Interactor _interactor) {
         this.sih.addInteractor(_interactor);
     }
 
@@ -56,13 +57,13 @@ public abstract class Screen implements Renderable, Updatable {
      * Iterates through the list of UI elements and adds them as listeners to
      * the StandardGame.
      */
-    private void addUIElementsAsListeners() {
+    private void addUIElementsAsListeners () {
         this.game.addMouseListener(this.sih);
         this.game.addMouseMotionListener(this.sih);
     }
 
 //============================ GETTERS =================================//
-    public Game getGame() {
+    public Game getGame () {
         return this.game;
     }
 }

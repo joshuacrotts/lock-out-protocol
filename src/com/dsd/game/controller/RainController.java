@@ -13,9 +13,10 @@ import org.apache.commons.math3.util.FastMath;
 /**
  * RainController will spawn different rain (blue) particles if it is raining in
  * the location provided by the user.
- * 
+ *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class RainController implements Renderable, Updatable {
 
@@ -52,7 +53,7 @@ public class RainController implements Renderable, Updatable {
     //
     private static final int maxRainParticles = 5000;
 
-    public RainController(StandardGame _game, StandardCamera _sc, String _weather) {
+    public RainController (StandardGame _game, StandardCamera _sc, String _weather) {
         this.game = _game;
         this.sc = _sc;
         this.sph = new StandardParticleHandler(maxRainParticles);
@@ -64,14 +65,14 @@ public class RainController implements Renderable, Updatable {
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         if (this.isRaining()) {
             this.sph.render(_g2);
         }
     }
 
     @Override
-    public void tick() {
+    public void tick () {
 
         if (this.isRaining()) {
             // Generates the min/max points for the rain to spawn
@@ -97,12 +98,12 @@ public class RainController implements Renderable, Updatable {
      * @param speedFactor
      * @return
      */
-    private double getRandomSpeed(int speedFactor) {
+    private double getRandomSpeed (int speedFactor) {
         return Math.random() * speedFactor;
     }
 
 //========================== SETTERS =======================/
-    public boolean isRaining() {
+    public boolean isRaining () {
         return this.isRaining;
     }
 }

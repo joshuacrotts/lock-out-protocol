@@ -9,7 +9,8 @@ import com.revivedstandards.model.StandardAnimation;
  * This class is a subclass of Weapon; it is a standard knife with melee damage.
  *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class Knife extends Weapon {
 

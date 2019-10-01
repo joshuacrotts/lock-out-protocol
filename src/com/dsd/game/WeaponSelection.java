@@ -5,7 +5,8 @@ package com.dsd.game;
  * or backwards)
  *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public enum WeaponSelection {
 

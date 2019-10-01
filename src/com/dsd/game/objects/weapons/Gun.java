@@ -12,7 +12,7 @@ import com.revivedstandards.handlers.StandardCollisionHandler;
  * @TODO: Add bullet damage type.
  *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ * @author Joshua, Ronald, Rinty
  */
 public abstract class Gun extends Weapon {
 

@@ -13,7 +13,8 @@ import java.util.Timer;
  * Command representing when the user shoots their weapon.
  *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class ReloadCommand extends Command {
 
