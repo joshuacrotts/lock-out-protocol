@@ -5,7 +5,8 @@ import com.revivedstandards.controller.StandardAudioController;
 /**
  * This class loads all necessary sfx for the game.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ * @author Joshua, Ronald, Rinty 
  */
 public abstract class AudioBoxController {
 

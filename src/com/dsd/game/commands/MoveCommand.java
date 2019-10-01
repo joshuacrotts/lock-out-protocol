@@ -10,7 +10,8 @@ import java.awt.event.KeyEvent;
 /**
  * Command representing when the user shoots their weapon.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ * @author Joshua, Ronald, Rinty 
  */
 public class MoveCommand extends Command {
 

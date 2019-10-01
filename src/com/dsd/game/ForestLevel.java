@@ -7,6 +7,9 @@ import java.awt.Graphics2D;
 
 /**
  * Demonstrates the concept of a very primitive level using the Standards API.
+ * 
+ * [Group Name: Data Structure Deadheads]
+ * @author Joshua, Ronald, Rinty 
  */
 public class ForestLevel extends StandardLevel {
 

@@ -16,7 +16,8 @@ import java.util.ArrayList;
 /**
  * Model representing the player's current inventory.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ * @author Joshua, Ronald, Rinty 
  */
 public class Inventory {
 

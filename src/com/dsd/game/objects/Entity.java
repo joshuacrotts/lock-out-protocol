@@ -9,7 +9,8 @@ import com.revivedstandards.model.StandardID;
  * Abstract class representing an entity that belongs to a standard collision
  * handler, and has health.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ * @author Joshua, Ronald, Rinty 
  */
 public abstract class Entity extends StandardGameObject {
 

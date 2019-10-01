@@ -16,7 +16,8 @@ import java.awt.image.BufferedImage;
  * This view draws the border and the user's current weapon to the center of the
  * screen.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ * @author Joshua, Ronald, Rinty 
  */
 public class WeaponIconView extends Interactor {
 

@@ -10,7 +10,8 @@ import java.awt.Graphics2D;
 
 /**
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ * @author Joshua, Ronald, Rinty 
  */
 public class HUDScreen extends Screen {
 

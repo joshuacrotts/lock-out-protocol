@@ -18,7 +18,8 @@ import java.util.TimerTask;
 /**
  * Command representing when the user shoots their weapon.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ * @author Joshua, Ronald, Rinty 
  */
 public class AttackCommand extends Command {
 

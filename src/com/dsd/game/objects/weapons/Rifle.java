@@ -11,7 +11,8 @@ import com.revivedstandards.model.StandardAnimation;
 /**
  * This class is a subclass of Gun; it's an automatic rifle.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ * @author Joshua, Ronald, Rinty 
  */
 public class Rifle extends Gun {
 

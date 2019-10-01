@@ -19,6 +19,9 @@ import org.apache.commons.math3.util.FastMath;
 
 /**
  * This class encompasses the model for the Player object.
+ * 
+ * [Group Name: Data Structure Deadheads]
+ * @author Joshua, Ronald, Rinty 
  */
 public class Player extends Entity implements DeathListener {
 

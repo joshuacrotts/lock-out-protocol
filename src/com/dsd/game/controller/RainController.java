@@ -13,6 +13,9 @@ import org.apache.commons.math3.util.FastMath;
 /**
  * RainController will spawn different rain (blue) particles if it is raining in
  * the location provided by the user.
+ * 
+ * [Group Name: Data Structure Deadheads]
+ * @author Joshua, Ronald, Rinty 
  */
 public class RainController implements Renderable, Updatable {
 
