@@ -11,7 +11,8 @@ import com.sun.glass.events.KeyEvent;
  * Command representing when the user decrements their weapon
  * counter position.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ * @author Joshua, Ronald, Rinty 
  */
 public class DecrementWeaponCommand extends Command {
 

@@ -23,8 +23,9 @@ import com.revivedstandards.model.StandardLevel;
  * @TODO: Lots of refactoring to separate private methods Create level
  * controller class which determines when the user transitions from one level to
  * the next.
- *
- * @author Joshua
+ * 
+ * [Group Name: Data Structure Deadheads]
+ * @author Joshua, Ronald, Rinty 
  */
 public class Game extends StandardGame {
 

@@ -10,7 +10,8 @@ import java.awt.image.BufferedImage;
 
 /**
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ * @author Joshua, Ronald, Rinty 
  */
 public class Coin extends StandardGameObject {
 

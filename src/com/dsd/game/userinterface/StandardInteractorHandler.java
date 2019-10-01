@@ -17,6 +17,8 @@ import java.util.LinkedList;
  * updates logic for interactors (UI elements). This includes listening for
  * mouse clicks and hovers.
  *
+ * [Group Name: Data Structure Deadheads]
+ * @author Joshua, Ronald, Rinty 
  */
 public class StandardInteractorHandler extends StandardHandler implements MouseListener, MouseMotionListener, Renderable {
 

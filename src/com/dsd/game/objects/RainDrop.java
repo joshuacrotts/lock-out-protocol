@@ -9,6 +9,9 @@ import org.apache.commons.math3.util.FastMath;
 
 /**
  * Typical Rain Drop for the Rain effect.
+ * 
+ * [Group Name: Data Structure Deadheads]
+ * @author Joshua, Ronald, Rinty 
  */
 public class RainDrop extends StandardGameObject {
 

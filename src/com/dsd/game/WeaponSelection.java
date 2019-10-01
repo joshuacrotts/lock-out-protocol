@@ -4,7 +4,8 @@ package com.dsd.game;
  * Enums for determining how the player wants to switch their weapon (forwards
  * or backwards)
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ * @author Joshua, Ronald, Rinty 
  */
 public enum WeaponSelection {
 

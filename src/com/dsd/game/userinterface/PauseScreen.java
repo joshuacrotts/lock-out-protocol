@@ -9,7 +9,8 @@ import java.awt.Graphics2D;
  * Pause Screen displays a string "Paused" on the screen when the user presses
  * the escape key.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ * @author Joshua, Ronald, Rinty 
  */
 public class PauseScreen extends Screen {
 

@@ -7,7 +7,8 @@ import java.awt.Graphics2D;
 /**
  * @TODO
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ * @author Joshua, Ronald, Rinty 
  */
 public class InventoryView extends Screen {
 
