@@ -27,7 +27,7 @@ public class RainController implements Renderable, Updatable {
     private final StandardCamera sc;
 
     //  Serves as a debugging feature
-    private static final boolean toggleDownfall = false;
+    private static final boolean toggleDownfall = true;
 
     //
     //  If it is raining, this boolean is toggled true.

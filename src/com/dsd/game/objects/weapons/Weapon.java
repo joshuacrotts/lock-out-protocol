@@ -42,7 +42,7 @@ public abstract class Weapon {
     //
     public int damage;
 
-    public Weapon (String _type) {
+    public Weapon(String _type) {
         this.type = _type;
         this.weaponState = WeaponState.READY;
         this.setSFXPath("src/res/audio/sfx/" + _type + ".wav");
@@ -50,86 +50,86 @@ public abstract class Weapon {
 
     }
 
-//============================== GETTERS ===================================//
-    public String getWeaponType () {
-        return this.type;
-    }
-
-    public WeaponState getWeaponState () {
-        return this.weaponState;
-    }
-
-    public StandardAnimatorController getWalkFrames () {
-        return this.walkWeaponFrames;
-    }
-
-    public StandardAnimatorController getAttackFrames () {
-        return this.attackWeaponFrames;
-    }
-
-    public BufferedImage getIcon () {
-        return this.weaponIcon;
-    }
-
-    public int getIconWidth () {
-        return this.weaponIcon.getWidth();
-    }
-
-    public int getIconHeight () {
-        return this.weaponIcon.getHeight();
-    }
-
-    public String getSFXPath () {
-        return this.attackSFXPath;
-    }
-
-    public int getDamage () {
-        return this.damage;
-    }
-
     /**
      * Determine if the weapon is ready to attack or not depending on the delay.
      *
      * @return
      */
-    public boolean ready () {
+    public boolean ready() {
         return this.ready;
     }
 
-    public long getDelay () {
+    public long getDelay() {
         return this.delay;
     }
-//============================== SETTERS ===================================//
 
-    public void setWeaponState (WeaponState _state) {
+//============================== GETTERS ===================================//
+    public String getWeaponType() {
+        return this.type;
+    }
+
+    public WeaponState getWeaponState() {
+        return this.weaponState;
+    }
+
+    public StandardAnimatorController getWalkFrames() {
+        return this.walkWeaponFrames;
+    }
+
+    public StandardAnimatorController getAttackFrames() {
+        return this.attackWeaponFrames;
+    }
+
+    public BufferedImage getIcon() {
+        return this.weaponIcon;
+    }
+
+    public int getIconWidth() {
+        return this.weaponIcon.getWidth();
+    }
+
+    public int getIconHeight() {
+        return this.weaponIcon.getHeight();
+    }
+
+    public String getSFXPath() {
+        return this.attackSFXPath;
+    }
+
+    public int getDamage() {
+        return this.damage;
+    }
+
+//============================== SETTERS ===================================//
+    public void setWeaponState(WeaponState _state) {
         this.weaponState = _state;
     }
 
-    public void setIcon (BufferedImage _image) {
+    public void setIcon(BufferedImage _image) {
         this.weaponIcon = _image;
     }
 
-    public void setSFXPath (String _sfx) {
+    public void setSFXPath(String _sfx) {
         this.attackSFXPath = _sfx;
     }
 
-    protected void setWalkFrames (StandardAnimatorController _walkFrames) {
+    protected void setWalkFrames(StandardAnimatorController _walkFrames) {
         this.walkWeaponFrames = _walkFrames;
     }
 
-    protected void setAttackFrames (StandardAnimatorController _attackFrames) {
+    protected void setAttackFrames(StandardAnimatorController _attackFrames) {
         this.attackWeaponFrames = _attackFrames;
     }
 
-    public void setDamage (int _damage) {
+    public void setDamage(int _damage) {
         this.damage = _damage;
     }
 
-    public void setDelay (long _delay) {
+    public void setDelay(long _delay) {
         this.delay = _delay;
     }
 
-    public void setReady (boolean _ready) {
+    public void setReady(boolean _ready) {
         this.ready = _ready;
     }
 }

@@ -15,8 +15,8 @@ import java.awt.image.BufferedImage;
 /**
  * Bullet game object
  *
- * @TODO: Re-factor this to couple it on a per-weapon basis rather than
- * its own object fired/instantiated from AttackCommand.
+ * @TODO: Re-factor this to couple it on a per-weapon basis rather than its own
+ * object fired/instantiated from AttackCommand.
  *
  * [Group Name: Data Structure Deadheads]
  * @author Joshua, Ronald, Rinty 
@@ -47,7 +47,7 @@ public class BulletGameObject extends StandardGameObject {
     //  Modified velocities to fix bullet bug
     //
     private final double modifiedVelX;
-    private final double modifiedVelY;    
+    private final double modifiedVelY;
 
     //
     //  Static reference to the BufferedImages
@@ -59,8 +59,7 @@ public class BulletGameObject extends StandardGameObject {
     //
     private static final int bulletFPS = 20;
 
-
-    public BulletGameObject (int _x, int _y, double _angle, Game _game,
+    public BulletGameObject(int _x, int _y, double _angle, Game _game,
             StandardCollisionHandler _parentContainer,
             StandardCamera _sc, Player _parent) {
 
@@ -89,7 +88,7 @@ public class BulletGameObject extends StandardGameObject {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (this.sc.SGOInBounds(this)) {
             this.setX(this.getX() + this.modifiedVelX);
             this.setY(this.getY() + this.modifiedVelY);
@@ -98,14 +97,13 @@ public class BulletGameObject extends StandardGameObject {
             if (this.isAlive()) {
                 this.getAnimationController().tick();
             }
-        }
-        else {
+        } else {
             this.sch.removeEntity(this);
         }
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         // If they're alive, draw the frame that the bullet animation is on.
         // Otherwise, render the explosion handler
         if (this.isAlive()) {
@@ -119,14 +117,14 @@ public class BulletGameObject extends StandardGameObject {
      *
      * @return
      */
-    private static BufferedImage[] initImages () {
+    private static BufferedImage[] initImages() {
 
         BulletGameObject.frames[0] = (StdOps.loadImage("src/res/img/bullet/bullet_sprite/bullet.png"));
 
         return BulletGameObject.frames;
     }
 
-    public int getDamage () {
+    public int getDamage() {
         return this.damage;
     }
 

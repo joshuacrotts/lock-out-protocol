@@ -94,7 +94,7 @@ public class Game extends StandardGame {
         //  Creates the UI views
         this.menuScreen = new MenuScreen(this);
         this.pauseScreen = new PauseScreen(this);
-        this.hudScreen = new HUDScreen(this, this.player);
+        this.hudScreen = new HUDScreen(this, this.player, this.sch);
 
         this.startGame();
     }

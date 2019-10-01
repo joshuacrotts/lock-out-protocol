@@ -15,13 +15,13 @@ import com.revivedstandards.model.StandardAnimation;
  * @author Joshua, Ronald, Rinty 
  */
 public class Rifle extends Gun {
-    
+
     private static final int walkingFPS = 10;
     private static final int shootGunFPS = 20;
 
     private final int delay = 100;
 
-    public Rifle (Game _game, Player _player, StandardCollisionHandler _sch) {
+    public Rifle(Game _game, Player _player, StandardCollisionHandler _sch) {
         super("rifle", 31, _game, _player, _sch);
 
         //  Instantiates the animation controllers
@@ -38,7 +38,7 @@ public class Rifle extends Gun {
     }
 
     @Override
-    public void shoot () {
+    public void shoot() {
         this.addBullet();
         super.deductAmmo();
     }
@@ -46,7 +46,7 @@ public class Rifle extends Gun {
     /**
      * Adds a bullet to the global handler.
      */
-    private void addBullet () {
+    private void addBullet() {
         super.getHandler().addEntity(new BulletGameObject(
                 (int) super.getPlayer().getX() + super.getPlayer().getWidth() / 2,
                 (int) super.getPlayer().getY() + super.getPlayer().getHeight() / 2,

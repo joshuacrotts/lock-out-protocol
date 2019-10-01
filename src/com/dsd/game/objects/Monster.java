@@ -100,40 +100,20 @@ public class Monster extends Entity implements DeathListener {
             this.getAnimationController().tick();
             this.getAnimationController().getStandardAnimation().setRotation(this.angle);
 
-            //*******************************************************************//
-            //    Causes the monster to follow the target wherever on the screen //
-            //*******************************************************************//
             // Save the mouse position
             double tx = this.target.getX();
             double ty = this.target.getY();
+            //*******************************************************************//
+            //    Causes the monster to follow the target wherever on the screen //
+            //*******************************************************************//
 
-            // Calculate the distance between the enemy and the player
-            double diffX = this.getX() - tx - Entity.approachFactor;
-            double diffY = this.getY() - ty - Entity.approachFactor;
-
-            // Use the pythagorean theorem to solve for the hypotenuse distance
-            double distance = (double) FastMath.sqrt(((this.getX() - tx) * (this.getX() - tx))
-                    + ((this.getY() - ty) * (this.getY() - ty)));
-
-            // Sets the velocity according to how far away the enemy is from the
-            // player
-            this.setVelX(((this.approachVel / distance) * (int) diffX));
-            this.setVelY(((this.approachVel / distance) * (int) diffY));
+            this.followPlayer((int) tx, (int) ty);
 
             //*****************************************************************//
             //      Calculates the angle the monster needs to be in to face    //
             //      the player                                                 //
             //*****************************************************************//
-            float xSign = (float) FastMath.signum(tx - this.getX());
-            double dx = FastMath.abs(tx - this.getX());
-            double dy = FastMath.abs(ty - this.getY());
-
-            this.angle = (float) ((xSign) * (FastMath.atan((dx) / (dy))));
-
-            // If we're in Q1 (+x, -+y) or in Q2 (-x, +y)
-            if ((tx > this.getX() && ty > this.getY()) || (tx < this.getX() && ty > this.getY())) {
-                this.angle = (float) ((FastMath.PI / 2) + (FastMath.PI / 2 - this.angle));
-            }
+            this.facePlayer((int) tx, (int) ty);
         }
         else {
             // Do this only once.
@@ -149,6 +129,47 @@ public class Monster extends Entity implements DeathListener {
             }
 
             StandardHandler.Handler(this.explosionHandler);
+        }
+    }
+
+    /**
+     * Makes the monster move towards the player.
+     *
+     * @param _posX
+     * @param _posY
+     */
+    private void followPlayer (int _posX, int _posY) {
+
+        // Calculate the distance between the enemy and the player
+        double diffX = this.getX() - _posX - Entity.approachFactor;
+        double diffY = this.getY() - _posY - Entity.approachFactor;
+
+        // Use the pythagorean theorem to solve for the hypotenuse distance
+        double distance = (double) FastMath.sqrt(((this.getX() - _posX) * (this.getX() - _posX))
+                + ((this.getY() - _posY) * (this.getY() - _posY)));
+
+        // Sets the velocity according to how far away the enemy is from the
+        // player
+        this.setVelX(((this.approachVel / distance) * (int) diffX));
+        this.setVelY(((this.approachVel / distance) * (int) diffY));
+    }
+
+    /**
+     * Makes the monster face the player.
+     *
+     * @param _posX
+     * @param _posY
+     */
+    private void facePlayer (int _posX, int _posY) {
+        float xSign = (float) FastMath.signum(_posX - this.getX());
+        double dx = FastMath.abs(_posX - this.getX());
+        double dy = FastMath.abs(_posY - this.getY());
+
+        this.angle = (float) ((xSign) * (FastMath.atan((dx) / (dy))));
+
+        // If we're in Q1 (+x, -+y) or in Q2 (-x, +y)
+        if ((_posX > this.getX() && _posY > this.getY()) || (_posX < this.getX() && _posY > this.getY())) {
+            this.angle = (float) ((FastMath.PI / 2) + (FastMath.PI / 2 - this.angle));
         }
     }
 
