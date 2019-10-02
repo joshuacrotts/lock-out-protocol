@@ -22,16 +22,28 @@ import java.awt.Graphics2D;
  */
 public class DamageText extends StandardLabel {
 
+    //  Interactor handler that this damage text belongs to
     private final StandardInteractorHandler sih;
+
+    //  Font for the text
     private static final Font font = StdOps.initFont("src/res/fonts/chargen.ttf", 12f);
-    private Color fadeColor;
+
+    //
+    //  Values regarding the color of the damage text, how fast it fades, and
+    //  how quickly it changes colors.
+    //
+    private static final int RED_INC_VALUE = 20;
+    private static final int ORIGINAL_RED_VALUE = 90;
+    private static int redColorValue = ORIGINAL_RED_VALUE;
     private final int FADE_TIMER = 5;
+    private Color fadeColor;
 
     public DamageText (int _x, int _y, String _text, StandardInteractorHandler _sih) {
         super(_x, _y, _text, font);
         this.sih = _sih;
-        this.fadeColor = new Color(0xff, 0xff, 0xff, 0xff);
+        this.fadeColor = new Color(this.generateRedColor(), 0, 0, 0xff);
         this.setVelY(-1);
+        System.out.println("color: " + redColorValue);
     }
 
     @Override
@@ -40,11 +52,7 @@ public class DamageText extends StandardLabel {
             this.sih.getInteractors().remove(this);
         }
         else {
-            this.fadeColor = new Color(this.fadeColor.getRed(),
-                    this.fadeColor.getGreen(),
-                    this.fadeColor.getBlue(),
-                    this.fadeColor.getAlpha() - FADE_TIMER);
-
+            this.updateColor();
             this.setY(this.getY() + this.getVelY());
         }
     }
@@ -52,5 +60,27 @@ public class DamageText extends StandardLabel {
     @Override
     public void render (Graphics2D _g2) {
         StandardDraw.text(this.getText(), this.getX(), this.getY(), font, font.getSize(), this.fadeColor);
+    }
+
+    /**
+     * Updates the color of the text being drawn above the monster when hurt.
+     */
+    private void updateColor () {
+        this.fadeColor = new Color(this.fadeColor.getRed(),
+                this.fadeColor.getGreen(),
+                this.fadeColor.getBlue(),
+                this.fadeColor.getAlpha() - FADE_TIMER);
+    }
+
+    /**
+     * Continuously generates a red value for the text, getting increasingly
+     * brighter with every new text.
+     *
+     * @return redValue if leq 255, original red value otherwise.
+     */
+    private int generateRedColor () {
+        DamageText.redColorValue += RED_INC_VALUE;
+        return DamageText.redColorValue > 255 ? (DamageText.redColorValue = ORIGINAL_RED_VALUE) : DamageText.redColorValue;
+
     }
 }

@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dsd.game.controller;
 
+import com.dsd.game.EnemyType;
 import com.dsd.game.Game;
 import com.dsd.game.objects.BasicMonster;
 import com.revivedstandards.handlers.StandardCollisionHandler;
@@ -16,21 +12,33 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
+ * This class is a "mob-spawner". As in, using a pre-specified radius and
+ * duration, it will randomly spawn n EnemyType objects within the radius.
  *
  * @author Joshua
  */
 public class SpawnerController extends StandardGameObject {
 
+    //
+    //  Miscellaneous reference variables
+    //
     private final StandardCollisionHandler parentContainer;
-    private final StandardID spawnerID;
+    private final EnemyType spawnerID;
     private final Game game;
+
+    //
+    //  Timer object controlling the spawn-rate.
+    //
     private final Timer spawnerTimer;
 
+    //
+    //  Delay and radius of the timer.
+    //
     private final long delay;
     private final int radius;
 
-    public SpawnerController (int _x, int _y, StandardID _id, long _delay, int _radius, Game _game, StandardCollisionHandler _sch) {
-        super(_x, _y, StandardID.Tile1);
+    public SpawnerController (int _x, int _y, EnemyType _id, long _delay, int _radius, Game _game, StandardCollisionHandler _sch) {
+        super(_x, _y, StandardID.Enemy);
 
         this.game = _game;
         this.spawnerID = _id;
@@ -49,6 +57,11 @@ public class SpawnerController extends StandardGameObject {
     public void render (Graphics2D _gd) {
     }
 
+    /**
+     * Spawns _n mobs randomly in the specified radius of the spawner.
+     *
+     * @param _n
+     */
     protected void spawn (int _n) {
 
         for (int i = 0 ; i < _n ; i++) {
@@ -56,12 +69,16 @@ public class SpawnerController extends StandardGameObject {
             int yPos = (int) StdOps.rand(this.getY() - this.radius, this.getY() + this.radius);
 
             switch (this.spawnerID) {
-                case BasicMonster:
+                case BASIC_MONSTER:
                     this.parentContainer.addEntity(new BasicMonster(xPos, yPos, this.game, this.game.getCamera(), this.parentContainer));
             }
         }
     }
 
+    //
+    //  Very similar to the AttackCommand, we need a delay
+    //  slash timer for mobs spawning. We only want mobs to
+    //  spawn at a certain interval, so this allows for that.
     private class SpawnerDelayTimer extends TimerTask {
 
         private final SpawnerController spawnerController;

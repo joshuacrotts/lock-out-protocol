@@ -14,6 +14,11 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 /**
+ * This class is a template for an enemy. Before, we had everything extending
+ * Entity, but because the Player and other enemies act differently, we needed a
+ * way to further distinguish between the two. Enemy has three animator
+ * controllers per entity: walking, attacking, and death. Depending on the state
+ * of the enemy, one of these will be set.
  *
  * @author Joshua
  */
@@ -47,6 +52,10 @@ public abstract class Enemy extends Entity {
     @Override
     public abstract void tick ();
 
+    /**
+     * Sets the dimensions of the enemy to the animation's current frame
+     * dimensions.
+     */
     public void setDimensions () {
         this.setWidth(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getWidth());
         this.setHeight(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getHeight());

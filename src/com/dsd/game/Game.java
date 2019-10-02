@@ -6,7 +6,6 @@ import com.dsd.game.controller.AudioBoxController;
 import com.dsd.game.controller.CollisionHandlerController;
 import com.dsd.game.controller.RainController;
 import com.dsd.game.controller.SpawnerController;
-import com.dsd.game.objects.BasicMonster;
 import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.HUDScreen;
 import com.dsd.game.userinterface.MenuScreen;
@@ -80,7 +79,6 @@ public class Game extends StandardGame {
 
         //  Instantiate the camera
         this.sc = new StandardCamera(this, player, 1, this.getGameWidth(), this.getGameHeight());
-        this.sch.addEntity(new SpawnerController(900, 900, StandardID.BasicMonster, 5000, 200, this, this.sch));
 
         //  Sets the camera for the player and the handler
         this.player.setCamera(this.sc);
@@ -155,6 +153,14 @@ public class Game extends StandardGame {
                 this.pauseScreen.render(StandardDraw.Renderer);
             }
         }
+    }
+
+    /**
+     * Once the game turns to the PLAY state, this method is called. It will
+     * instantiate the Spawner controllers, level controllers, etc.
+     */
+    public void uponPlay () {
+        this.sch.addEntity(new SpawnerController(900, 900, EnemyType.BASIC_MONSTER, 5000, 200, this, this.sch));
     }
 
 //========================== GETTERS =============================/

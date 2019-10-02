@@ -7,7 +7,6 @@ package com.dsd.game.userinterface.model;
 
 import com.dsd.game.Game;
 import com.dsd.game.objects.Player;
-import com.dsd.game.objects.weapons.Gun;
 import com.dsd.game.userinterface.Screen;
 import com.revivedstandards.main.StandardDraw;
 import java.awt.Color;
