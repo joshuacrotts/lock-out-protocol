@@ -8,7 +8,6 @@ package com.dsd.game.objects;
 import com.dsd.game.Game;
 import com.dsd.game.objects.items.Coin;
 import com.dsd.game.util.Utilities;
-import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.handlers.StandardHandler;
@@ -16,14 +15,12 @@ import com.revivedstandards.handlers.StandardParticleHandler;
 import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.main.StandardDraw;
 import com.revivedstandards.model.DeathListener;
-import com.revivedstandards.model.StandardAnimation;
 import com.revivedstandards.model.StandardBoxParticle;
 import com.revivedstandards.model.StandardID;
 import com.revivedstandards.util.StdOps;
 import com.revivedstandards.view.ShapeType;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import org.apache.commons.math3.util.FastMath;
 
 /**
@@ -33,24 +30,13 @@ import org.apache.commons.math3.util.FastMath;
  *
  * @author Joshua, Ronald, Rinty
  */
-public class Monster extends Entity implements DeathListener {
-
-    //
-    //  Miscellaneous reference variables
-    //
-    private final Player target;
-    private final StandardCamera sc;
+public class BasicMonster extends Enemy implements DeathListener {
 
     //
     //  Handler for particle explosions after the
     //  monster dies.
     //
     private StandardParticleHandler explosionHandler;
-
-    //
-    //  BufferedImage arrays for the sprites
-    //
-    private static final BufferedImage[] walkFrames;
 
     //
     //  Animation frame per second setting
@@ -66,29 +52,23 @@ public class Monster extends Entity implements DeathListener {
     //  Variables representing the angle and approach velocity
     //
     private final float APPROACH_VEL = -1.5f;
+    private final double DAMAGE = 0.20;
     private float angle;
 
-    //
-    //  Damage done to the player
-    //
-    private final double DAMAGE = 0.20;
+    public BasicMonster (int _x, int _y, Game _game, StandardCamera _sc, StandardCollisionHandler _sch) {
+        super(_x, _y, 100, StandardID.BasicMonster, _game, _sch);
+        this.setTarget(_game.getPlayer());
 
-    public Monster (int _x, int _y, Game _game, StandardCamera _sc, StandardCollisionHandler _sch) {
-        super(_x, _y, 100, StandardID.Monster, _game, _sch);
-        this.target = _game.getPlayer();
-        this.sc = _sc;
+        super.initWalkingFrames(Utilities.loadFrames("src/res/img/enemies/monster1/walk/", 9), WALKING_FPS);
 
-        StandardAnimatorController walkingAnimation = new StandardAnimatorController(
-                new StandardAnimation(this, Monster.walkFrames, Monster.WALKING_FPS));
-
-        this.setAnimation(walkingAnimation);
+        super.setAnimation(super.getWalkingAnimation());
 
         //  The width/height of the model is set by the buffered image backing it.
-        this.setWidth(walkingAnimation.getStandardAnimation().getView().getCurrentFrame().getWidth());
-        this.setHeight(walkingAnimation.getStandardAnimation().getView().getCurrentFrame().getHeight());
+        super.setDimensions();
+        super.setDamage(DAMAGE);
 
-        this.getHandler().addCollider(this.getId());
-        this.getHandler().flagAlive(this.getId());
+        super.getHandler().addCollider(this.getId());
+        super.getHandler().flagAlive(this.getId());
     }
 
     @Override
@@ -102,8 +82,8 @@ public class Monster extends Entity implements DeathListener {
             this.updatePosition();
 
             // Save the mouse position
-            double tx = this.target.getX();
-            double ty = this.target.getY();
+            double tx = this.getTarget().getX();
+            double ty = this.getTarget().getY();
             //*******************************************************************//
             //    Causes the monster to follow the target wherever on the screen //
             //*******************************************************************//
@@ -194,7 +174,7 @@ public class Monster extends Entity implements DeathListener {
     @Override
     public void uponDeath () {
         this.explosionHandler = new StandardParticleHandler(50);
-        this.explosionHandler.setCamera(this.sc);
+        this.explosionHandler.setCamera(this.getCamera());
 
         for (int i = 0 ; i < this.explosionHandler.getMaxParticles() ; i++) {
 
@@ -233,19 +213,8 @@ public class Monster extends Entity implements DeathListener {
      * @param _coinAmt
      */
     private void generateCoins (int _coinAmt) {
-
         for (int i = 0 ; i < _coinAmt ; i++) {
             this.getHandler().addEntity(new Coin((int) this.getX(), (int) this.getY(), 0.7, 0.9, 1.0));
         }
     }
-
-//================================== GETTERS ==================================//
-    public double getDamage () {
-        return this.DAMAGE;
-    }
-
-    static {
-        walkFrames = Utilities.loadFrames("src/res/img/enemies/monster1/walk/", 9);
-    }
-
 }
