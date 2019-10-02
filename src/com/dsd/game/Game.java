@@ -5,7 +5,8 @@ import com.dsd.game.api.WeatherConnector;
 import com.dsd.game.controller.AudioBoxController;
 import com.dsd.game.controller.CollisionHandlerController;
 import com.dsd.game.controller.RainController;
-import com.dsd.game.objects.Monster;
+import com.dsd.game.controller.SpawnerController;
+import com.dsd.game.objects.BasicMonster;
 import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.HUDScreen;
 import com.dsd.game.userinterface.MenuScreen;
@@ -15,6 +16,7 @@ import com.revivedstandards.handlers.StandardHandler;
 import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.main.StandardDraw;
 import com.revivedstandards.main.StandardGame;
+import com.revivedstandards.model.StandardID;
 import com.revivedstandards.model.StandardLevel;
 
 /**
@@ -78,7 +80,7 @@ public class Game extends StandardGame {
 
         //  Instantiate the camera
         this.sc = new StandardCamera(this, player, 1, this.getGameWidth(), this.getGameHeight());
-        this.sch.addEntity(new Monster(900, 900, this, this.sc, this.sch));
+        this.sch.addEntity(new SpawnerController(900, 900, StandardID.BasicMonster, 5000, 200, this, this.sch));
 
         //  Sets the camera for the player and the handler
         this.player.setCamera(this.sc);

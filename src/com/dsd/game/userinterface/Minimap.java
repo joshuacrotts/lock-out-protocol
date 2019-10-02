@@ -46,7 +46,7 @@ public class Minimap extends Interactor {
                 if (obj.getId() == StandardID.Player) {
                     this.drawObject(_g2, obj, Color.BLUE);
 
-                } else if (obj.getId() == StandardID.Monster) {
+                } else if (obj.getId() == StandardID.BasicMonster) {
                     this.drawObject(_g2, obj, Color.RED);
 
                 }
