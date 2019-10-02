@@ -14,7 +14,9 @@ import java.awt.event.KeyEvent;
  * Command that defines what happens when the user presses the "ESCAPE" key (it
  * changes the game state to paused).
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class PauseCommand extends Command {
 

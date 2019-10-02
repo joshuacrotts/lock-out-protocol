@@ -9,7 +9,9 @@ import com.revivedstandards.model.StandardID;
  * Abstract class representing an entity that belongs to a standard collision
  * handler, and has health.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public abstract class Entity extends StandardGameObject {
 
@@ -17,7 +19,7 @@ public abstract class Entity extends StandardGameObject {
     //  For entities that follow another entity, this is the factor that
     //  should be applied when detecting the angle to turn towards.
     //
-    public static final int approachFactor = 8;
+    public static final int APPROACH_FACTOR = 8;
 
     //
     //  Miscellaneous reference variables
@@ -34,8 +36,12 @@ public abstract class Entity extends StandardGameObject {
         this.parentContainer = _parentContainer;
         this.health = _health;
     }
-//========================= GETTERS =============================//
 
+    public boolean isMoving() {
+        return this.getVelX() != 0 && this.getVelY() != 0;
+    }
+
+//========================= GETTERS =============================//
     public Game getGame() {
         return this.game;
     }
@@ -46,10 +52,6 @@ public abstract class Entity extends StandardGameObject {
 
     public double getHealth() {
         return this.health;
-    }
-
-    public boolean isMoving() {
-        return this.getVelX() != 0 && this.getVelY() != 0;
     }
 
 //========================= SETTERS =============================//

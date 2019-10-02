@@ -13,7 +13,9 @@ import java.awt.Graphics2D;
 /**
  * Subclass of StandardButton - exits the game when the user presses it.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class ExitButton extends StandardButton implements MouseEventInterface {
 

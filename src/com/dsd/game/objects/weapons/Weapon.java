@@ -9,7 +9,9 @@ import java.awt.image.BufferedImage;
  * This class is a template for a weapon. All weapons will extend this class.
  * This class includes melee weapons and guns.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public abstract class Weapon {
 
@@ -58,11 +60,11 @@ public abstract class Weapon {
         return this.ready;
     }
 
+//============================== GETTERS ===================================//
     public long getDelay() {
         return this.delay;
     }
 
-//============================== GETTERS ===================================//
     public String getWeaponType() {
         return this.type;
     }

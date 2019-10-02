@@ -7,6 +7,10 @@ import java.awt.Graphics2D;
 
 /**
  * Demonstrates the concept of a very primitive level using the Standards API.
+ *
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class ForestLevel extends StandardLevel {
 
@@ -21,13 +25,13 @@ public class ForestLevel extends StandardLevel {
     //  The placement depends on the position and velocity of the player.
     //
     private int trackX;
-    private final double scrollXFactor = 0.25;
+    private final double SCROLL_X_FACTOR = 0.25;
 
     //
     //  Define camera scroll minimum constants
     //
-    private final int minX = 640;
-    private final int minY = 350;
+    private final int MIN_X = 640;
+    private final int MIN_Y = 350;
 
     public ForestLevel(Player _player, Game _sg, StandardCamera _sc) {
         super(null, "src/res/img/bg/resized_bg/panel1.jpg", null);
@@ -46,7 +50,7 @@ public class ForestLevel extends StandardLevel {
 
     @Override
     public void tick() {
-        this.trackX -= (int) this.player.getVelX() * this.scrollXFactor;
+        this.trackX -= (int) this.player.getVelX() * this.SCROLL_X_FACTOR;
     }
 
     @Override
@@ -66,7 +70,7 @@ public class ForestLevel extends StandardLevel {
      * scrolling too far to any of the sides
      */
     private void setCameraBounds(int _maxX, int _maxY) {
-        this.sc.restrict(_maxX, _maxY, this.minX, this.minY);
+        this.sc.restrict(_maxX, _maxY, this.MIN_X, this.MIN_Y);
     }
 
 }

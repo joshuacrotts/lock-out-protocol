@@ -10,7 +10,9 @@ import java.awt.Graphics2D;
 /**
  * Creates a string of text drawn at the user-specified location.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class StandardLabel extends Interactor implements MouseEventInterface {
 

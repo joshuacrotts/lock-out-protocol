@@ -7,7 +7,9 @@ package com.dsd.game.objects;
 
 /**
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class ProjectileGameObject {
 

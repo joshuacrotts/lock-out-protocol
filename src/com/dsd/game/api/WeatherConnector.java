@@ -16,7 +16,9 @@ import org.json.JSONObject;
  * This class is an example of connecting to and loading data from the weather
  * API.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class WeatherConnector {
 
@@ -72,6 +74,7 @@ public class WeatherConnector {
         return jsonInformation.toString();
     }
 
+    //=================================== GETTERS =====================================
     /**
      * Returns the array from the collection of JSON objects from the API
      * connection.

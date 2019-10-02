@@ -13,6 +13,10 @@ import org.apache.commons.math3.util.FastMath;
 /**
  * RainController will spawn different rain (blue) particles if it is raining in
  * the location provided by the user.
+ *
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class RainController implements Renderable, Updatable {
 
@@ -34,25 +38,25 @@ public class RainController implements Renderable, Updatable {
     //
     //  Defines the range in which rain can spawn for the user
     //
-    private static final int xBorder = 600;
-    private static final int yBorder = 400;
+    private static final int X_BORDER = 600;
+    private static final int Y_BORDER = 400;
 
     //
     //  Velocity constants and factors for the rain drop object.
     //
-    private static final double rainDirection = -FastMath.PI * 1.5;
-    private static final int velFactor = 5;
-    private static final int yBoundFactor = 2;
+    private static final double RAIN_DIRECTION = -FastMath.PI * 1.5;
+    private static final int VEL_FACTOR = 5;
+    private static final int Y_BOUND_FACTOR = 2;
 
     //
     //  Constants for how many rain particles should spawn
     //
-    private static final int maxRainParticles = 5000;
+    private static final int MAX_RAIN_PARTICLES = 5000;
 
     public RainController(StandardGame _game, StandardCamera _sc, String _weather) {
         this.game = _game;
         this.sc = _sc;
-        this.sph = new StandardParticleHandler(maxRainParticles);
+        this.sph = new StandardParticleHandler(MAX_RAIN_PARTICLES);
 
         // Be sure to always set the SPH camera or it'll throw a NPE
         this.sph.setCamera(this.sc);
@@ -72,21 +76,22 @@ public class RainController implements Renderable, Updatable {
 
         if (this.isRaining()) {
             // Generates the min/max points for the rain to spawn
-            int xGenMin = (int) (this.sc.getX() - RainController.xBorder);
-            int xGenMax = (int) (this.sc.getX() + RainController.xBorder);
-            int yGenMin = (int) (this.sc.getY() - RainController.yBorder);
-            int yGenMax = (int) (this.sc.getY() + RainController.yBorder / 4);
+            int xGenMin = (int) (this.sc.getX() - RainController.X_BORDER);
+            int xGenMax = (int) (this.sc.getX() + RainController.Y_BORDER);
+            int yGenMin = (int) (this.sc.getY() - RainController.Y_BORDER);
+            int yGenMax = (int) (this.sc.getY() + RainController.Y_BORDER / 4);
 
             int xPos = StdOps.rand(xGenMin, xGenMax);
             int yPos = StdOps.rand(yGenMin, yGenMax);
 
-            this.sph.addEntity(new RainDrop(xPos, yPos, rainDirection, this.getRandomSpeed(velFactor),
-                    (int) (this.sc.getY() + this.sc.getVph() * yBoundFactor)));
+            this.sph.addEntity(new RainDrop(xPos, yPos, RAIN_DIRECTION, this.getRandomSpeed(VEL_FACTOR),
+                    (int) (this.sc.getY() + this.sc.getVph() * Y_BOUND_FACTOR)));
 
             this.sph.tick();
         }
     }
 
+    //========================== GETTERS ==============================
     /**
      * Returns a random speed between [0, speedFactor). Determines how fast each
      * rain drop will fall.

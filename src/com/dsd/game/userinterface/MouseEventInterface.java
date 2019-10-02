@@ -6,6 +6,10 @@ package com.dsd.game.userinterface;
  *
  * This "hover" and "click" "on them" is defined as the mouse existing within
  * the rectangular bounds of the interactor (set by the user).
+ *
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public interface MouseEventInterface {
 

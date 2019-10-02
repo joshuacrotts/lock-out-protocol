@@ -8,24 +8,25 @@ import com.revivedstandards.commands.Command;
 import com.sun.glass.events.KeyEvent;
 
 /**
- * Command representing when the user increments their weapon
- * counter position.
+ * Command representing when the user increments their weapon counter position.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class IncrementWeaponCommand extends Command {
 
     private final Game game;
     private final Player player;
 
-    public IncrementWeaponCommand (Game _game, Player _player) {
+    public IncrementWeaponCommand(Game _game, Player _player) {
         this.game = _game;
         this.player = _player;
         this.bind(this.game.getKeyboard(), KeyEvent.VK_C);
     }
 
     @Override
-    public void pressed (float _dt) {
+    public void pressed(float _dt) {
         if (this.player.getPlayerState() == PlayerState.ATTACKING) {
             return;
         }

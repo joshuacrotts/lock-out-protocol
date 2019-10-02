@@ -14,7 +14,9 @@ import java.awt.Graphics2D;
  * Subclass of StandardButton - switches the game state from Menu to Running
  * when the user clicks it.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class PlayButton extends StandardButton implements MouseEventInterface {
 
@@ -22,21 +24,21 @@ public class PlayButton extends StandardButton implements MouseEventInterface {
 
     private final Font font;
 
-    private final int yOffset = 400;
-    private final int xOffset = 70;
-    private final int textXOffset = 30;
-    private final int buttonWidth = 200;
-    private final int buttonHeight = 100;
+    private final int Y_OFFSET = 400;
+    private final int X_OFFSET = 70;
+    private final int TEXT_X_OFFSET = 30;
+    private final int BUTTON_WIDTH = 200;
+    private final int BUTTON_HEIGHT = 100;
 
     public PlayButton(Game _game) {
         this.game = _game;
 
         this.font = StdOps.initFont("src/res/fonts/chargen.ttf", 24f);
 
-        this.setX(Screen.gameHalfWidth - xOffset);
-        this.setY(this.game.getGameHeight() - yOffset);
-        this.setWidth(buttonWidth);
-        this.setHeight(buttonHeight);
+        this.setX(Screen.gameHalfWidth - X_OFFSET);
+        this.setY(this.game.getGameHeight() - Y_OFFSET);
+        this.setWidth(BUTTON_WIDTH);
+        this.setHeight(BUTTON_HEIGHT);
         this.setText("PLAY");
         this.setColor(Color.RED);
     }
@@ -44,7 +46,7 @@ public class PlayButton extends StandardButton implements MouseEventInterface {
     @Override
     public void render(Graphics2D _g2) {
         super.render(_g2);
-        StandardDraw.text(this.getText(), (this.getX() + (this.getWidth() / 2)) - textXOffset,
+        StandardDraw.text(this.getText(), (this.getX() + (this.getWidth() / 2)) - TEXT_X_OFFSET,
                 this.getY() + this.getHeight() / 2, this.font,
                 this.font.getSize(), Color.WHITE);
     }

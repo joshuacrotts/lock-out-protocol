@@ -24,7 +24,8 @@ import com.revivedstandards.model.StandardLevel;
  * controller class which determines when the user transitions from one level to
  * the next.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ * @author Joshua, Ronald, Rinty
  */
 public class Game extends StandardGame {
 
@@ -93,7 +94,7 @@ public class Game extends StandardGame {
         //  Creates the UI views
         this.menuScreen = new MenuScreen(this);
         this.pauseScreen = new PauseScreen(this);
-        this.hudScreen = new HUDScreen(this, this.player);
+        this.hudScreen = new HUDScreen(this, this.player, this.sch);
 
         this.startGame();
     }
@@ -153,7 +154,11 @@ public class Game extends StandardGame {
         }
     }
 
-//========================== GETTERS =============================/
+    public static void main(String[] args) {
+        Game game = new Game(1280, 720, "Lock Out Protocol");
+    }
+
+//========================== GETTERS =============================
     public Player getPlayer() {
         return this.player;
     }
@@ -166,13 +171,9 @@ public class Game extends StandardGame {
         return this.sc;
     }
 
-//========================== SETTERS =============================/
+//========================== SETTERS =============================
     public void setGameState(GameState _gs) {
         this.gameState = _gs;
-    }
-
-    public static void main(String[] args) {
-        Game game = new Game(1280, 720, "Lock Out Protocol");
     }
 
 }

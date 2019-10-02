@@ -10,7 +10,9 @@ import java.awt.Graphics2D;
  * MenuScreen controller. Decides what gets rendered when on the screen for when
  * the game is in the Menu state.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class MenuScreen extends Screen {
 
