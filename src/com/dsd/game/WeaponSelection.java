@@ -18,6 +18,7 @@ public enum WeaponSelection {
         this.change = change;
     }
 
+//================= GETTERS ============================
     public int getChange() {
         return this.change;
     }
