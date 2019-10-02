@@ -15,7 +15,8 @@ import java.awt.event.KeyEvent;
  * changes the game state to paused).
  *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class PauseCommand extends Command {
 

@@ -18,7 +18,8 @@ import java.util.LinkedList;
  * mouse clicks and hovers.
  *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class StandardInteractorHandler extends StandardHandler implements MouseListener, MouseMotionListener, Renderable {
 

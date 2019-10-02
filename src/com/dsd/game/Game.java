@@ -23,9 +23,9 @@ import com.revivedstandards.model.StandardLevel;
  * @TODO: Lots of refactoring to separate private methods Create level
  * controller class which determines when the user transitions from one level to
  * the next.
- * 
+ *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ * @author Joshua, Ronald, Rinty
  */
 public class Game extends StandardGame {
 
@@ -154,7 +154,11 @@ public class Game extends StandardGame {
         }
     }
 
-//========================== GETTERS =============================/
+    public static void main(String[] args) {
+        Game game = new Game(1280, 720, "Lock Out Protocol");
+    }
+
+//========================== GETTERS =============================
     public Player getPlayer() {
         return this.player;
     }
@@ -167,13 +171,9 @@ public class Game extends StandardGame {
         return this.sc;
     }
 
-//========================== SETTERS =============================/
+//========================== SETTERS =============================
     public void setGameState(GameState _gs) {
         this.gameState = _gs;
-    }
-
-    public static void main(String[] args) {
-        Game game = new Game(1280, 720, "Lock Out Protocol");
     }
 
 }

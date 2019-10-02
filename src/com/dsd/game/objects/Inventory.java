@@ -17,7 +17,8 @@ import java.util.ArrayList;
  * Model representing the player's current inventory.
  *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class Inventory {
 
@@ -29,7 +30,7 @@ public class Inventory {
     private int currentWeapon = 0;
     private boolean hasGun;
 
-    public Inventory (Game _game, Player _player, StandardCollisionHandler _sch) {
+    public Inventory(Game _game, Player _player, StandardCollisionHandler _sch) {
         this.game = _game;
         this.player = _player;
         this.weapons = new ArrayList<>();
@@ -47,7 +48,7 @@ public class Inventory {
      *
      * @param choice
      */
-    public void changeWeapon (WeaponSelection choice) {
+    public void changeWeapon(WeaponSelection choice) {
         this.currentWeapon += choice.getChange();
         this.clampWeapon();
         this.updateAnimation();
@@ -57,11 +58,10 @@ public class Inventory {
     /**
      * Clamps the pointer for the current weapon to values in the arraylist.
      */
-    private void clampWeapon () {
+    private void clampWeapon() {
         if (this.currentWeapon < 0) {
             this.currentWeapon = this.weapons.size() - 1;
-        }
-        else if (this.currentWeapon >= this.weapons.size()) {
+        } else if (this.currentWeapon >= this.weapons.size()) {
             this.currentWeapon = 0;
         }
     }
@@ -70,11 +70,10 @@ public class Inventory {
      * Updates the animation set by the player determined by which weapon they
      * have.
      */
-    private void updateAnimation () {
+    private void updateAnimation() {
         if (this.player.getPlayerState() == PlayerState.WALKING || this.player.getPlayerState() == PlayerState.STANDING) {
             this.player.setAnimation(this.weapons.get(currentWeapon).getWalkFrames());
-        }
-        else if (this.player.getPlayerState() == PlayerState.ATTACKING) {
+        } else if (this.player.getPlayerState() == PlayerState.ATTACKING) {
             this.player.setAnimation(this.weapons.get(currentWeapon).getAttackFrames());
         }
 
@@ -82,30 +81,28 @@ public class Inventory {
     }
 
 //============================= GETTERS ===================================//
-    public Weapon getCurrentWeapon () {
+    public Weapon getCurrentWeapon() {
         return weapons.get(this.currentWeapon);
     }
 
-    public Gun getGun () {
+    public Gun getGun() {
         Gun gun = null;
 
         try {
             gun = (Gun) this.getCurrentWeapon();
-        }
-        catch (ClassCastException ex) {
+        } catch (ClassCastException ex) {
             System.err.println("Could not cast weapon to gun!");
             return null;
         }
         return gun;
     }
 
-    public InventoryView getView () {
+    public InventoryView getView() {
         return this.view;
     }
 
-    public boolean hasGun () {
+    public boolean hasGun() {
         return this.hasGun;
     }
 
-//============================= SETTERS ===================================//
 }

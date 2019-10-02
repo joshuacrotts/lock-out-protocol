@@ -15,7 +15,8 @@ import java.awt.Graphics2D;
  * The user can add new elements if desired.
  *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public abstract class Screen implements Renderable, Updatable {
 

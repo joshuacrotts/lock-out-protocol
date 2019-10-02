@@ -17,7 +17,8 @@ import org.json.JSONObject;
  * API.
  *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class CityLocator {
 
@@ -40,6 +41,7 @@ public class CityLocator {
         CityLocator.key = CityLocator.line.substring(CityLocator.line.lastIndexOf(":") + 1);
     }
 
+    //=============================== GETTERS ======================================
     /**
      * Returns the city that the user is located in.
      *

@@ -19,9 +19,10 @@ import java.awt.Graphics2D;
  * StandardCollisionHandler has a method integrated in it: handleCollision(obj1,
  * obj2), and it needs a subclass to override it so the handler knows what to do
  * when two SGO's collide.
- * 
+ *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class CollisionHandlerController extends StandardCollisionHandler {
 
@@ -31,19 +32,19 @@ public class CollisionHandlerController extends StandardCollisionHandler {
     //
     private static StandardInteractorHandler damageText;
 
-    public CollisionHandlerController (Game _game, StandardCamera _sc) {
+    public CollisionHandlerController(Game _game, StandardCamera _sc) {
         super(_sc);
         CollisionHandlerController.damageText = new StandardInteractorHandler(_game);
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         super.tick();
         damageText.tick();
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         super.render(_g2);
         damageText.render(_g2);
     }
@@ -57,7 +58,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      * @param _obj2
      */
     @Override
-    public void handleCollision (StandardGameObject _obj1, StandardGameObject _obj2) {
+    public void handleCollision(StandardGameObject _obj1, StandardGameObject _obj2) {
         //
         //  Handles bullet to monster collision
         //  (kills bullet and takes damage away from monster).
@@ -77,12 +78,10 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      * @param _obj2
      */
     @Override
-    public void handleBoundsCollision (StandardGameObject _obj1, StandardGameObject _obj2) {
+    public void handleBoundsCollision(StandardGameObject _obj1, StandardGameObject _obj2) {
         if (_obj1 instanceof Player && _obj2 instanceof Monster && _obj2.isAlive()) {
             this.handlePlayerMonsterCollision((Player) _obj1, (Monster) _obj2);
-        }
-
-        else if (_obj1 instanceof Player && _obj2 instanceof Coin && _obj2.isAlive()) {
+        } else if (_obj1 instanceof Player && _obj2 instanceof Coin && _obj2.isAlive()) {
             this.handlePlayerCoinCollision((Player) _obj1, (Coin) _obj2);
         }
     }
@@ -95,7 +94,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      * @param bullet
      * @param monster
      */
-    private void handleBulletMonsterCollision (BulletGameObject _bullet, Monster _monster) {
+    private void handleBulletMonsterCollision(BulletGameObject _bullet, Monster _monster) {
 
         // Sets the bullet to dead
         _bullet.setAlive(false);
@@ -118,7 +117,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      * @param _player
      * @param _monster
      */
-    private void handlePlayerMonsterCollision (Player _player, Monster _monster) {
+    private void handlePlayerMonsterCollision(Player _player, Monster _monster) {
         _player.setHealth(_player.getHealth() - _monster.getDamage());
         if (_player.getPlayerState() == PlayerState.ATTACKING) {
             int dmg = (int) _player.getInventory().getCurrentWeapon().getDamage();
@@ -130,13 +129,13 @@ public class CollisionHandlerController extends StandardCollisionHandler {
         }
     }
 
-    private void handlePlayerCoinCollision (Player _player, Coin _coin) {
+    private void handlePlayerCoinCollision(Player _player, Coin _coin) {
         _player.setMoney(_player.getMoney() + _coin.getValue());
         _coin.setAlive(false);
         StandardAudioController.play("src/res/audio/sfx/coin.wav");
     }
 
-    private void addDamageText (Monster _monster, int _damage) {
+    private void addDamageText(Monster _monster, int _damage) {
         damageText.addInteractor(new DamageText((int) _monster.getX() + _monster.getWidth() / 2,
                 (int) _monster.getY(), "-" + _damage, damageText));
     }

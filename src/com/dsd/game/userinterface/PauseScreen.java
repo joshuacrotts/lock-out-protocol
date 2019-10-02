@@ -10,7 +10,8 @@ import java.awt.Graphics2D;
  * the escape key.
  *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class PauseScreen extends Screen {
 

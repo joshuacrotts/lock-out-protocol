@@ -19,7 +19,7 @@ import java.awt.image.BufferedImage;
  * object fired/instantiated from AttackCommand.
  *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ * @author Joshua, Ronald, Rinty
  */
 public class BulletGameObject extends StandardGameObject {
 
@@ -35,13 +35,13 @@ public class BulletGameObject extends StandardGameObject {
     //  and damage of bullet.
     //
     private final double angle;
-    private final int damage = 25;
+    private final int DAMAGE = 25;
 
     //
     //  Velocity factor applied to the bullet.
     //
-    private final int velXFactor = 20;
-    private final int velYFactor = 20;
+    private final int VEL_X_FACTOR = 20;
+    private final int VEL_Y_FACTOR = 20;
 
     //
     //  Modified velocities to fix bullet bug
@@ -57,7 +57,7 @@ public class BulletGameObject extends StandardGameObject {
     //
     //  Animation frame per second setting
     //
-    private static final int bulletFPS = 20;
+    private static final int BULLET_FPS = 20;
 
     public BulletGameObject(int _x, int _y, double _angle, Game _game,
             StandardCollisionHandler _parentContainer,
@@ -70,13 +70,13 @@ public class BulletGameObject extends StandardGameObject {
         this.angle = _angle;
 
         this.setAnimation(new StandardAnimatorController(
-                new StandardAnimation(this, BulletGameObject.frames, bulletFPS)));
+                new StandardAnimation(this, BulletGameObject.frames, BULLET_FPS)));
         this.setWidth(this.getWidth());
         this.setHeight(this.getHeight());
         this.setAlive(true);
 
-        this.modifiedVelX = _parent.getVelX() * this.velXFactor;
-        this.modifiedVelY = _parent.getVelY() * this.velYFactor;
+        this.modifiedVelX = _parent.getVelX() * this.VEL_X_FACTOR;
+        this.modifiedVelY = _parent.getVelY() * this.VEL_Y_FACTOR;
 
         this.setVelX(modifiedVelX);
         this.setVelY(modifiedVelY);
@@ -125,7 +125,7 @@ public class BulletGameObject extends StandardGameObject {
     }
 
     public int getDamage() {
-        return this.damage;
+        return this.DAMAGE;
     }
 
     //

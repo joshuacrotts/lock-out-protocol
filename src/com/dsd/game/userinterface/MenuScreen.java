@@ -11,7 +11,8 @@ import java.awt.Graphics2D;
  * the game is in the Menu state.
  *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class MenuScreen extends Screen {
 

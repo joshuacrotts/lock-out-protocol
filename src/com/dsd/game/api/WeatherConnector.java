@@ -17,7 +17,8 @@ import org.json.JSONObject;
  * API.
  *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class WeatherConnector {
 
@@ -73,6 +74,7 @@ public class WeatherConnector {
         return jsonInformation.toString();
     }
 
+    //=================================== GETTERS =====================================
     /**
      * Returns the array from the collection of JSON objects from the API
      * connection.

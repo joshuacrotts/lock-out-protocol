@@ -10,7 +10,9 @@ import java.awt.image.BufferedImage;
  * to make more complex buttons or UI elements. However, buttons should ONLY be
  * used for changing the state of something.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public abstract class StandardButton extends Interactor {
 

@@ -10,7 +10,8 @@ import java.awt.image.BufferedImage;
  * This class includes melee weapons and guns.
  *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public abstract class Weapon {
 
@@ -59,11 +60,11 @@ public abstract class Weapon {
         return this.ready;
     }
 
+//============================== GETTERS ===================================//
     public long getDelay() {
         return this.delay;
     }
 
-//============================== GETTERS ===================================//
     public String getWeaponType() {
         return this.type;
     }
