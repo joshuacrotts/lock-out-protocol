@@ -63,14 +63,14 @@ public class BulletGameObject extends StandardGameObject {
             StandardCollisionHandler _parentContainer,
             StandardCamera _sc, Player _parent) {
 
-        super(_x, _y, StandardID.Projectile);
+        super(_x, _y, StandardID.Bullet);
 
         this.game = _game;
         this.sch = _parentContainer;
         this.angle = _angle;
 
         this.setAnimation(new StandardAnimatorController(
-                new StandardAnimation(this, BulletGameObject.frames, BULLET_FPS)));
+                new StandardAnimation(this, BulletGameObject.frames, BulletGameObject.BULLET_FPS)));
         this.setWidth(this.getWidth());
         this.setHeight(this.getHeight());
         this.setAlive(true);
@@ -78,8 +78,8 @@ public class BulletGameObject extends StandardGameObject {
         this.modifiedVelX = _parent.getVelX() * this.VEL_X_FACTOR;
         this.modifiedVelY = _parent.getVelY() * this.VEL_Y_FACTOR;
 
-        this.setVelX(modifiedVelX);
-        this.setVelY(modifiedVelY);
+        this.setVelX(this.modifiedVelX);
+        this.setVelY(this.modifiedVelY);
 
         this.sch.flagAlive(this.getId());
         this.sch.addCollider(this.getId());
@@ -120,7 +120,7 @@ public class BulletGameObject extends StandardGameObject {
      */
     private static BufferedImage[] initImages () {
 
-        BulletGameObject.frames[0] = (StdOps.loadImage("src/res/img/bullet/bullet_sprite/bullet.png"));
+        BulletGameObject.frames[0] = StdOps.loadImage("src/res/img/bullet/bullet_sprite/bullet.png");
 
         return BulletGameObject.frames;
     }

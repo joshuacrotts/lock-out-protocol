@@ -65,21 +65,12 @@ public abstract class Interactor implements Renderable, Updatable, MouseEventInt
     @Override
     public abstract void onMouseExitHover ();
 
-<<<<<<< HEAD
-    public Rectangle getBounds () {
-        return new Rectangle(this.x, this.y, this.width, this.height);
-    }
-
-//============================ GETTERS =================================//
-    public int getX () {
-=======
 //============================ GETTERS =================================//
     public Rectangle getBounds() {
         return new Rectangle(this.x, this.y, this.width, this.height);
     }
 
     public int getX() {
->>>>>>> 6b258bb2223bdf058e59bdeddcdfe6b064a3bd15
         return this.x;
     }
 

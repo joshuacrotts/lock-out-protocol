@@ -1,6 +1,7 @@
 package com.dsd.game.objects.weapons;
 
 import com.dsd.game.Game;
+import com.dsd.game.WeaponType;
 import com.dsd.game.objects.BulletGameObject;
 import com.dsd.game.objects.Player;
 import com.dsd.game.util.Utilities;
@@ -23,7 +24,7 @@ public class Rifle extends Gun {
     private final int DELAY = 100;
 
     public Rifle (Game _game, Player _player, StandardCollisionHandler _sch) {
-        super("rifle", 31, _game, _player, _sch);
+        super(WeaponType.RIFLE, 31, _game, _player, _sch);
 
         //  Instantiates the animation controllers
         StandardAnimatorController walkingAnimation = new StandardAnimatorController(

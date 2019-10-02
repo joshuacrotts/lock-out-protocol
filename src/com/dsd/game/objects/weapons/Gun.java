@@ -2,6 +2,7 @@ package com.dsd.game.objects.weapons;
 
 import com.dsd.game.Game;
 import com.dsd.game.WeaponState;
+import com.dsd.game.WeaponType;
 import com.dsd.game.objects.Player;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 
@@ -29,7 +30,7 @@ public abstract class Gun extends Weapon {
     //
     private final String emptySFXPath;
 
-    public Gun(String _type, int _totalAmmo, Game _game, Player _player, StandardCollisionHandler _sch) {
+    public Gun(WeaponType _type, int _totalAmmo, Game _game, Player _player, StandardCollisionHandler _sch) {
         super(_type);
         this.game = _game;
         this.player = _player;

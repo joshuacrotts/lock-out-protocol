@@ -1,6 +1,7 @@
 package com.dsd.game.objects.weapons;
 
 import com.dsd.game.WeaponState;
+import com.dsd.game.WeaponType;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.util.StdOps;
 import java.awt.image.BufferedImage;
@@ -19,7 +20,7 @@ public abstract class Weapon {
     //  Type of weapon, standard animator controllers,
     //  the icon (for the inventoryview)
     //
-    private final String type;
+    private WeaponType weaponType;
     private StandardAnimatorController walkWeaponFrames;
     private StandardAnimatorController attackWeaponFrames;
     private BufferedImage weaponIcon;
@@ -41,13 +42,14 @@ public abstract class Weapon {
     //  Some weapons will have damage that the actual weapons do as opposed
     //  to just a projectile exiting the weapon (like a bullet).
     //
-    public int damage;
+    private int damage;
 
-    public Weapon (String _type) {
-        this.type = _type;
+    public Weapon (WeaponType _type) {
+        this.weaponType = _type;
         this.weaponState = WeaponState.READY;
         this.setSFXPath("src/res/audio/sfx/" + _type + ".wav");
-        this.setIcon(StdOps.loadImage("src/res/img/items/icons/" + _type + "_icon.png"));
+        System.out.println(_type);
+        this.setIcon(StdOps.loadImage("src/res/img/items/icons/" + _type.getType() + "_icon.png"));
 
     }
 
@@ -60,22 +62,13 @@ public abstract class Weapon {
         return this.ready;
     }
 
-<<<<<<< HEAD
+//============================== GETTERS ===================================//
     public long getDelay () {
         return this.delay;
     }
 
-//============================== GETTERS ===================================//
-    public String getWeaponType () {
-=======
-//============================== GETTERS ===================================//
-    public long getDelay() {
-        return this.delay;
-    }
-
-    public String getWeaponType() {
->>>>>>> 6b258bb2223bdf058e59bdeddcdfe6b064a3bd15
-        return this.type;
+    public WeaponType getWeaponType () {
+        return this.weaponType;
     }
 
     public WeaponState getWeaponState () {

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dsd.game.userinterface;
 
 import com.dsd.game.Game;
@@ -14,6 +9,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 /**
+ * This class is a minimap in the top right of the screen. Pretty self-explanatory.
  *
  * @author Joshua
  */
@@ -40,13 +36,17 @@ public class Minimap extends Interactor {
     public void render(Graphics2D _g2) {
         this.drawMapBackground(_g2);
 
+        //
+        //  Renders a copy of all entities on the screen, but by a factor of 20x
+        //  smaller.
+        //
         for (int i = 0; i < this.globalHandler.size(); i++) {
             StandardGameObject obj = this.globalHandler.get(i);
             if (obj.isAlive()) {
                 if (obj.getId() == StandardID.Player) {
                     this.drawObject(_g2, obj, Color.BLUE);
 
-                } else if (obj.getId() == StandardID.Enemy3) {
+                } else if (obj.getId() == StandardID.Monster) {
                     this.drawObject(_g2, obj, Color.RED);
 
                 }

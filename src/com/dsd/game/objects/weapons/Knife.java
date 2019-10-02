@@ -1,5 +1,6 @@
 package com.dsd.game.objects.weapons;
 
+import com.dsd.game.WeaponType;
 import com.dsd.game.objects.Player;
 import com.dsd.game.util.Utilities;
 import com.revivedstandards.controller.StandardAnimatorController;
@@ -21,7 +22,7 @@ public class Knife extends Weapon {
     private final int KNIFE_DAMAGE = 2;
 
     public Knife(Player _player) {
-        super("knife");
+        super(WeaponType.KNIFE);
         //  Instantiates the animation controllers
         StandardAnimatorController walkingAnimation = new StandardAnimatorController(
                 new StandardAnimation(_player, Utilities.loadFrames("src/res/img/player/player_walk_knife/", 6), WALKING_FPS));
@@ -31,7 +32,7 @@ public class Knife extends Weapon {
 
         this.setWalkFrames(walkingAnimation);
         this.setAttackFrames(shootingAnimation);
-        super.setDamage(KNIFE_DAMAGE);
-        super.setDelay(DELAY);
+        super.setDamage(this.KNIFE_DAMAGE);
+        super.setDelay(this.DELAY);
     }
 }

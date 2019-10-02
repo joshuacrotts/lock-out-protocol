@@ -12,6 +12,7 @@ import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.model.StandardGameObject;
+import com.revivedstandards.model.StandardID;
 import com.revivedstandards.util.StdOps;
 import java.awt.Graphics2D;
 
@@ -63,7 +64,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
         //  Handles bullet to monster collision
         //  (kills bullet and takes damage away from monster).
         //
-        if (_obj1 instanceof BulletGameObject && _obj2 instanceof Monster) {
+        if (_obj1.getId() == StandardID.Bullet && _obj2.getId() == StandardID.Monster) {
             this.handleBulletMonsterCollision((BulletGameObject) _obj1, (Monster) _obj2);
         }
     }
@@ -79,9 +80,9 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      */
     @Override
     public void handleBoundsCollision(StandardGameObject _obj1, StandardGameObject _obj2) {
-        if (_obj1 instanceof Player && _obj2 instanceof Monster && _obj2.isAlive()) {
+        if (_obj1.getId() == StandardID.Player && _obj2.getId() == StandardID.Monster && _obj2.isAlive()) {
             this.handlePlayerMonsterCollision((Player) _obj1, (Monster) _obj2);
-        } else if (_obj1 instanceof Player && _obj2 instanceof Coin && _obj2.isAlive()) {
+        } else if (_obj1.getId() == StandardID.Player && _obj2.getId() == StandardID.Coin && _obj2.isAlive()) {
             this.handlePlayerCoinCollision((Player) _obj1, (Coin) _obj2);
         }
     }
