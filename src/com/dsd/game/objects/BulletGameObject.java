@@ -120,7 +120,7 @@ public class BulletGameObject extends StandardGameObject {
      */
     private static BufferedImage[] initImages () {
 
-        BulletGameObject.frames[0] = StdOps.loadImage("src/res/img/bullet/bullet_sprite/bullet.png");
+        BulletGameObject.frames[0] = StdOps.loadImage("src/res/img/bullet/bullet_sprite/new_bullet/bullet.png");
 
         return BulletGameObject.frames;
     }
