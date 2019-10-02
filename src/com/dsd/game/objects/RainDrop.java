@@ -21,10 +21,10 @@ public class RainDrop extends StandardGameObject {
     //  as well as its vanish factor (how long it lasts on screen
     //  before it dies.
     //
-    private final double gravity = 0.25d;
+    private final double GRAVITY = 0.25d;
     private final int vanish;
-    private final int blueColor = 100;
-    private final int velFactor = 2;
+    private final int BLUE_COLOR = 100;
+    private final int VEL_FACTOR = 2;
 
     public RainDrop (double _x, double _y, double _direction, double _speed, int _vanish) {
         super(_x, _y, StandardID.Particle);
@@ -40,16 +40,16 @@ public class RainDrop extends StandardGameObject {
             this.setAlive(false);
         }
 
-        this.setVelY(this.getVelY() + this.gravity);
+        this.setVelY(this.getVelY() + this.GRAVITY);
 
         this.updatePosition();
 
     }
 
     @Override
-    public void render (Graphics2D _g2) {
-        _g2.setColor(new Color(blueColor, blueColor, StdOps.rand(blueColor, 0xFF)));
-        _g2.drawLine((int) this.getX(), (int) this.getY(), (int) (this.getX() - this.getVelX() * velFactor),
-                (int) (this.getY() - this.getVelY() * velFactor));
+    public void render(Graphics2D _g2) {
+        _g2.setColor(new Color(BLUE_COLOR, BLUE_COLOR, StdOps.rand(BLUE_COLOR, 0xFF)));
+        _g2.drawLine((int) this.getX(), (int) this.getY(), (int) (this.getX() - this.getVelX() * VEL_FACTOR),
+                (int) (this.getY() - this.getVelY() * VEL_FACTOR));
     }
 }

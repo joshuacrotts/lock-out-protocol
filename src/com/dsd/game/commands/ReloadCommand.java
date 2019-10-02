@@ -21,12 +21,12 @@ public class ReloadCommand extends Command {
     private final Game game;
     private final Player player;
     private final Timer reloadTimer;
-    private final int reloadDelay = 3000;
+    private final int RELOAD_DELAY = 3000;
 
     //
     //  This may need to change with time.
     //
-    public ReloadCommand (Game _game, Player _obj) {
+    public ReloadCommand(Game _game, Player _obj) {
         this.game = _game;
         this.player = _obj;
 
@@ -35,7 +35,7 @@ public class ReloadCommand extends Command {
     }
 
     @Override
-    public void pressed (float _dt) {
+    public void pressed(float _dt) {
         if (!this.player.getInventory().hasGun()) {
             return;
         }
@@ -48,7 +48,7 @@ public class ReloadCommand extends Command {
 
         gun.setReloading(true);
         StandardAudioController.play("src/res/audio/sfx/reload.wav");
-        this.reloadTimer.schedule(new ReloadTimer(gun), this.reloadDelay);
+        this.reloadTimer.schedule(new ReloadTimer(gun), this.RELOAD_DELAY);
 
     }
 
@@ -60,12 +60,12 @@ public class ReloadCommand extends Command {
 
         private final Gun weapon;
 
-        public ReloadTimer (Gun _weapon) {
+        public ReloadTimer(Gun _weapon) {
             this.weapon = _weapon;
         }
 
         @Override
-        public void run () {
+        public void run() {
             this.weapon.reload();
             this.weapon.setReloading(false);
         }

@@ -18,11 +18,11 @@ public class Coin extends StandardGameObject {
 
     private static final BufferedImage[] coinOneFrames;
     private static final BufferedImage[] coinTwoFrames;
-    private final int coinFPS = 5;
+    private final int COIN_FPS = 5;
 
     private int value = 0;
 
-    public Coin (int _x, int _y, double _small, double _mid, double _large) {
+    public Coin(int _x, int _y, double _small, double _mid, double _large) {
         super(_x, _y, StandardID.Object);
 
         this.generateCoinType(_small, _mid, _large);
@@ -32,7 +32,7 @@ public class Coin extends StandardGameObject {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (this.isAlive()) {
             this.getAnimationController().tick();
             this.slowVelocities();
@@ -41,31 +41,30 @@ public class Coin extends StandardGameObject {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (this.isAlive()) {
             this.getAnimationController().renderFrame(_g2);
         }
     }
 
-    private void slowVelocities () {
+    private void slowVelocities() {
         this.setVelX(this.getVelX() * 0.99);
         this.setVelY(this.getVelY() * 0.99);
     }
 
-    private void generateCoinType (double _small, double _mid, double _large) {
+    private void generateCoinType(double _small, double _mid, double _large) {
         int coin = StdOps.rand(0, 100);
         if (coin < _small * 100) {
-            this.setAnimation(new StandardAnimatorController(this, coinOneFrames, coinFPS));
+            this.setAnimation(new StandardAnimatorController(this, coinOneFrames, COIN_FPS));
             this.value = 1;
-        }
-        else {
-            this.setAnimation(new StandardAnimatorController(this, coinTwoFrames, coinFPS));
+        } else {
+            this.setAnimation(new StandardAnimatorController(this, coinTwoFrames, COIN_FPS));
             this.value = 5;
         }
     }
 
 //================================= GETTERS ==================================//
-    public int getValue () {
+    public int getValue() {
         return this.value;
     }
 

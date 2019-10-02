@@ -42,6 +42,7 @@ public class CityLocator {
         CityLocator.key = CityLocator.line.substring(CityLocator.line.lastIndexOf(":") + 1);
     }
 
+    //=============================== GETTERS ======================================
     /**
      * Returns the city that the user is located in.
      *

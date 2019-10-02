@@ -55,7 +55,7 @@ public class Monster extends Entity implements DeathListener {
     //
     //  Animation frame per second setting
     //
-    private static final int walkingFPS = 10;
+    private static final int WALKING_FPS = 10;
 
     //
     //  One-time variable for tracking the "alive" to "death state" transition
@@ -65,21 +65,21 @@ public class Monster extends Entity implements DeathListener {
     //
     //  Variables representing the angle and approach velocity
     //
-    private final float approachVel = -1.5f;
+    private final float APPROACH_VEL = -1.5f;
     private float angle;
 
     //
     //  Damage done to the player
     //
-    private final double damage = 0.20;
+    private final double DAMAGE = 0.20;
 
-    public Monster (int _x, int _y, Game _game, StandardCamera _sc, StandardCollisionHandler _sch) {
+    public Monster(int _x, int _y, Game _game, StandardCamera _sc, StandardCollisionHandler _sch) {
         super(_x, _y, 100, StandardID.Enemy3, _game, _sch);
         this.target = _game.getPlayer();
         this.sc = _sc;
 
         StandardAnimatorController walkingAnimation = new StandardAnimatorController(
-                new StandardAnimation(this, Monster.walkFrames, Monster.walkingFPS));
+                new StandardAnimation(this, Monster.walkFrames, Monster.WALKING_FPS));
 
         this.setAnimation(walkingAnimation);
 
@@ -92,7 +92,7 @@ public class Monster extends Entity implements DeathListener {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         // If the monster's health is less than 0, we can flag it as dead.
         this.setAlive(this.getHealth() > 0);
 
@@ -115,8 +115,7 @@ public class Monster extends Entity implements DeathListener {
             //      the player                                                 //
             //*****************************************************************//
             this.facePlayer((int) tx, (int) ty);
-        }
-        else {
+        } else {
             // Do this only once.
             if (this.aliveFlag) {
                 this.uponDeath();
@@ -139,11 +138,11 @@ public class Monster extends Entity implements DeathListener {
      * @param _posX
      * @param _posY
      */
-    private void followPlayer (int _posX, int _posY) {
+    private void followPlayer(int _posX, int _posY) {
 
         // Calculate the distance between the enemy and the player
-        double diffX = this.getX() - _posX - Entity.approachFactor;
-        double diffY = this.getY() - _posY - Entity.approachFactor;
+        double diffX = this.getX() - _posX - Entity.APPROACH_FACTOR;
+        double diffY = this.getY() - _posY - Entity.APPROACH_FACTOR;
 
         // Use the pythagorean theorem to solve for the hypotenuse distance
         double distance = (double) FastMath.sqrt(((this.getX() - _posX) * (this.getX() - _posX))
@@ -151,8 +150,8 @@ public class Monster extends Entity implements DeathListener {
 
         // Sets the velocity according to how far away the enemy is from the
         // player
-        this.setVelX(((this.approachVel / distance) * (int) diffX));
-        this.setVelY(((this.approachVel / distance) * (int) diffY));
+        this.setVelX(((this.APPROACH_VEL / distance) * (int) diffX));
+        this.setVelY(((this.APPROACH_VEL / distance) * (int) diffY));
     }
 
     /**
@@ -161,7 +160,7 @@ public class Monster extends Entity implements DeathListener {
      * @param _posX
      * @param _posY
      */
-    private void facePlayer (int _posX, int _posY) {
+    private void facePlayer(int _posX, int _posY) {
         float xSign = (float) FastMath.signum(_posX - this.getX());
         double dx = FastMath.abs(_posX - this.getX());
         double dy = FastMath.abs(_posY - this.getY());
@@ -175,11 +174,10 @@ public class Monster extends Entity implements DeathListener {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (this.isAlive()) {
             this.getAnimationController().renderFrame(_g2);
-        }
-        else if (this.explosionHandler != null) {
+        } else if (this.explosionHandler != null) {
             StandardDraw.Handler(this.explosionHandler);
         }
     }
@@ -188,11 +186,11 @@ public class Monster extends Entity implements DeathListener {
      * @TODO: Re-factor the magic numbers
      */
     @Override
-    public void uponDeath () {
+    public void uponDeath() {
         this.explosionHandler = new StandardParticleHandler(50);
         this.explosionHandler.setCamera(this.sc);
 
-        for (int i = 0 ; i < this.explosionHandler.getMaxParticles() ; i++) {
+        for (int i = 0; i < this.explosionHandler.getMaxParticles(); i++) {
 
             this.explosionHandler.addEntity(new StandardBoxParticle(this.getX(), this.getY(),
                     StdOps.rand(1.0, 5.0), StdOps.randBounds(-10.0, -3.0, 3.0, 10.0),
@@ -200,14 +198,14 @@ public class Monster extends Entity implements DeathListener {
                     this.angle, ShapeType.CIRCLE, true));
         }
 
-        for (int i = 0 ; i < 5 ; i++) {
+        for (int i = 0; i < 5; i++) {
             this.getHandler().addEntity(new Coin((int) this.getX(), (int) this.getY(), 0.7, 0.9, 1.0));
         }
 
         this.generateDeathSound(StdOps.rand(1, 2));
     }
 
-    public void generateHurtSound (int _sfx) {
+    public void generateHurtSound(int _sfx) {
         StandardAudioController.play("src/res/audio/sfx/zombies/zombie-" + _sfx + ".wav");
     }
 
@@ -216,13 +214,13 @@ public class Monster extends Entity implements DeathListener {
      *
      * @param sfx either 1 or 2
      */
-    private void generateDeathSound (int _sfx) {
+    private void generateDeathSound(int _sfx) {
         StandardAudioController.play("src/res/audio/sfx/splat" + _sfx + ".wav");
     }
 
 //================================== GETTERS ==================================//
-    public double getDamage () {
-        return this.damage;
+    public double getDamage() {
+        return this.DAMAGE;
     }
 
     static {

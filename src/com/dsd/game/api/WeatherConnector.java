@@ -77,6 +77,7 @@ public class WeatherConnector {
         return jsonInformation.toString();
     }
 
+    //=================================== GETTERS =====================================
     /**
      * Returns the array from the collection of JSON objects from the API
      * connection.

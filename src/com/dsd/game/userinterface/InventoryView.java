@@ -14,7 +14,7 @@ public class InventoryView extends Screen {
 
     private final Inventory inventory;
 
-    public InventoryView (Game _game, Inventory _inventory) {
+    public InventoryView(Game _game, Inventory _inventory) {
         super(_game);
 
         this.inventory = _inventory;
@@ -23,16 +23,16 @@ public class InventoryView extends Screen {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         super.tick();
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         super.render(_g2);
     }
 
-    private void createUIElements () {
+    private void createUIElements() {
         super.addInteractor(new WeaponIconView(this.getGame(), this.inventory));
     }
 

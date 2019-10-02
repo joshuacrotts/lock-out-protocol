@@ -16,14 +16,16 @@ import java.awt.Graphics2D;
  * This class represents a string that appears above monsters when you shoot
  * them.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class DamageText extends StandardLabel {
 
     private final StandardInteractorHandler sih;
     private static final Font font = StdOps.initFont("src/res/fonts/chargen.ttf", 12f);
     private Color fadeColor;
-    private final int fadeTimer = 5;
+    private final int FADE_TIMER = 5;
 
     public DamageText (int _x, int _y, String _text, StandardInteractorHandler _sih) {
         super(_x, _y, _text, font);
@@ -41,7 +43,7 @@ public class DamageText extends StandardLabel {
             this.fadeColor = new Color(this.fadeColor.getRed(),
                     this.fadeColor.getGreen(),
                     this.fadeColor.getBlue(),
-                    this.fadeColor.getAlpha() - fadeTimer);
+                    this.fadeColor.getAlpha() - FADE_TIMER);
 
             this.setY(this.getY() + this.getVelY());
         }

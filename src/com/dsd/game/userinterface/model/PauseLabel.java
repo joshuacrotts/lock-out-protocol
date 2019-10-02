@@ -9,7 +9,9 @@ import java.awt.Graphics2D;
  * This class represents the text shown on the screen when the user presses the
  * ESCAPE button (thus pausing the game).
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class PauseLabel extends StandardLabel {
 

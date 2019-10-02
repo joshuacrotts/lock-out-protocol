@@ -60,12 +60,21 @@ public abstract class Weapon {
         return this.ready;
     }
 
+<<<<<<< HEAD
     public long getDelay () {
         return this.delay;
     }
 
 //============================== GETTERS ===================================//
     public String getWeaponType () {
+=======
+//============================== GETTERS ===================================//
+    public long getDelay() {
+        return this.delay;
+    }
+
+    public String getWeaponType() {
+>>>>>>> 6b258bb2223bdf058e59bdeddcdfe6b064a3bd15
         return this.type;
     }
 
