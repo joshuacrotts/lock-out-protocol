@@ -1,4 +1,4 @@
-/resources/.config
-/build/
-/dist/
-/nbproject/private/
+/resources/.config/*
+/build/*
+/dist/*
+/nbproject/*
