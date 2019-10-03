@@ -42,7 +42,7 @@ public class ReloadCommand extends Command {
 
         Gun gun = this.player.getInventory().getGun();
 
-        if (!gun.hasAmmo()) {
+        if (!gun.hasAmmo() || gun.hasFullAmmo()) {
             return;
         }
 

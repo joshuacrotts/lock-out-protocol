@@ -58,6 +58,7 @@ public class PlayButton extends StandardButton implements MouseEventInterface {
         }
 
         this.game.setGameState(GameState.RUNNING);
+        this.game.uponPlay();
     }
 
     @Override

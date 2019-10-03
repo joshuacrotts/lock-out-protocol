@@ -11,7 +11,8 @@ import java.awt.Graphics2D;
 /**
  * This class is a minimap in the top right of the screen. Pretty self-explanatory.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ * @author Joshua, Ronald, Rinty
  */
 public class Minimap extends Interactor {
 
