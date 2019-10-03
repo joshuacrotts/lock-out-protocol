@@ -72,7 +72,7 @@ public class SpawnerController extends StandardGameObject {
 
         @Override
         public void run () {
-            this.spawnerController.spawn(5);
+            this.spawnerController.spawn(1);
         }
     }
 
