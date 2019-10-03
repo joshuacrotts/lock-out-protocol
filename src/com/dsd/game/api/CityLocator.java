@@ -13,8 +13,8 @@ import java.util.logging.Logger;
 import org.json.JSONObject;
 
 /**
- * This class is an example of connecting to and loading data from the weather
- * API.
+ * This class is an example of connecting to and loading data from the city locator
+ * API, resolving the IP looked up by the Amazon API.
  *
  * [Group Name: Data Structure Deadheads]
  *
