@@ -13,7 +13,9 @@ import java.awt.Graphics2D;
 /**
  * Subclass of StandardButton - exits the game when the user presses it.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class ExitButton extends StandardButton implements MouseEventInterface {
 
@@ -27,7 +29,7 @@ public class ExitButton extends StandardButton implements MouseEventInterface {
 
     private final Font font;
 
-    public ExitButton(Game _game) {
+    public ExitButton (Game _game) {
         super();
 
         this.game = _game;
@@ -42,7 +44,7 @@ public class ExitButton extends StandardButton implements MouseEventInterface {
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         super.render(_g2);
         StandardDraw.text(this.getText(),
                 (this.getX() + (this.getWidth() / 2)) - textXOffset,
@@ -51,7 +53,7 @@ public class ExitButton extends StandardButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseClick() {
+    public void onMouseClick () {
         if (this.game.getGameState() != GameState.MENU) {
             return;
         }
@@ -59,7 +61,7 @@ public class ExitButton extends StandardButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseEnterHover() {
+    public void onMouseEnterHover () {
         if (this.game.getGameState() != GameState.MENU) {
             return;
         }
@@ -67,7 +69,7 @@ public class ExitButton extends StandardButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseExitHover() {
+    public void onMouseExitHover () {
         if (this.game.getGameState() != GameState.MENU) {
             return;
         }

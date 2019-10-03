@@ -5,7 +5,8 @@ import com.dsd.game.api.WeatherConnector;
 import com.dsd.game.controller.AudioBoxController;
 import com.dsd.game.controller.CollisionHandlerController;
 import com.dsd.game.controller.RainController;
-import com.dsd.game.objects.Monster;
+import com.dsd.game.controller.SpawnerController;
+import com.dsd.game.objects.BasicMonster;
 import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.HUDScreen;
 import com.dsd.game.userinterface.MenuScreen;
@@ -15,6 +16,7 @@ import com.revivedstandards.handlers.StandardHandler;
 import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.main.StandardDraw;
 import com.revivedstandards.main.StandardGame;
+import com.revivedstandards.model.StandardID;
 import com.revivedstandards.model.StandardLevel;
 
 /**
@@ -23,9 +25,9 @@ import com.revivedstandards.model.StandardLevel;
  * @TODO: Lots of refactoring to separate private methods Create level
  * controller class which determines when the user transitions from one level to
  * the next.
- * 
+ *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ * @author Joshua, Ronald, Rinty
  */
 public class Game extends StandardGame {
 
@@ -59,7 +61,7 @@ public class Game extends StandardGame {
     //
     private final Player player;
 
-    public Game(int _width, int _height, String _title) {
+    public Game (int _width, int _height, String _title) {
         //
         //  Note: Magic numbers for the player and the monster are just
         //        for demonstration; they will NOT be in the final game.
@@ -78,7 +80,7 @@ public class Game extends StandardGame {
 
         //  Instantiate the camera
         this.sc = new StandardCamera(this, player, 1, this.getGameWidth(), this.getGameHeight());
-        this.sch.addEntity(new Monster(900, 900, this, this.sc, this.sch));
+        this.sch.addEntity(new SpawnerController(900, 900, StandardID.BasicMonster, 5000, 200, this, this.sch));
 
         //  Sets the camera for the player and the handler
         this.player.setCamera(this.sc);
@@ -100,7 +102,7 @@ public class Game extends StandardGame {
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         //
         //  Depending on the game state, update different things.
         //
@@ -127,13 +129,14 @@ public class Game extends StandardGame {
     }
 
     @Override
-    public void render() {
+    public void render () {
         //
         //  Depending on the game state, render different things.
         //
         if (this.gameState == GameState.MENU) {
             this.menuScreen.render(StandardDraw.Renderer);
-        } else {
+        }
+        else {
 
             //  First things first: render the camera
             StandardDraw.Object(this.sc);
@@ -155,24 +158,24 @@ public class Game extends StandardGame {
     }
 
 //========================== GETTERS =============================/
-    public Player getPlayer() {
+    public Player getPlayer () {
         return this.player;
     }
 
-    public GameState getGameState() {
+    public GameState getGameState () {
         return this.gameState;
     }
 
-    public StandardCamera getCamera() {
+    public StandardCamera getCamera () {
         return this.sc;
     }
 
 //========================== SETTERS =============================/
-    public void setGameState(GameState _gs) {
+    public void setGameState (GameState _gs) {
         this.gameState = _gs;
     }
 
-    public static void main(String[] args) {
+    public static void main (String[] args) {
         Game game = new Game(1280, 720, "Lock Out Protocol");
     }
 

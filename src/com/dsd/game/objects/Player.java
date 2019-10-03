@@ -19,9 +19,10 @@ import org.apache.commons.math3.util.FastMath;
 
 /**
  * This class encompasses the model for the Player object.
- * 
+ *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class Player extends Entity implements DeathListener {
 
@@ -54,14 +55,14 @@ public class Player extends Entity implements DeathListener {
     //  Variables representing the angle and approach velocity
     //
     private float angle;
-    private final float approachVel = -3.0f;
+    private final float APPROACH_VEL = -3.0f;
 
     //
-    //  Money amt
+    //  Money amount
     //
     private int money;
 
-    public Player (int _x, int _y, StandardGame _game, StandardCamera _sc, StandardCollisionHandler _sch) {
+    public Player(int _x, int _y, StandardGame _game, StandardCamera _sc, StandardCollisionHandler _sch) {
         super(_x, _y, 100, StandardID.Player, (Game) _game, _sch);
 
         //  Instantiate the inventory
@@ -90,7 +91,7 @@ public class Player extends Entity implements DeathListener {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.setAlive(this.getHealth() > 0);
 
         if (this.isAlive()) {
@@ -116,20 +117,19 @@ public class Player extends Entity implements DeathListener {
             //      cursor                                                     //
             //*****************************************************************//
             this.faceCursor((int) mx, (int) my);
-        }
-        else {
+        } else {
             this.uponDeath();
         }
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         this.getAnimationController().renderFrame(_g2);
     }
 
     @Override
-    public void uponDeath () {
-        JOptionPane.showMessageDialog(null, "You have died.");
+    public void uponDeath() {
+        JOptionPane.showMessageDialog(null, "You have died!");
         this.getGame().stopGame();
     }
 
@@ -140,7 +140,7 @@ public class Player extends Entity implements DeathListener {
      * @param _mx
      * @param _my
      */
-    private void faceCursor (int _mx, int _my) {
+    private void faceCursor(int _mx, int _my) {
         float xSign = (float) FastMath.signum(_mx - this.getX());
         double dx = FastMath.abs(_mx - this.getX());
         double dy = FastMath.abs(_my - this.getY());
@@ -159,68 +159,68 @@ public class Player extends Entity implements DeathListener {
      * @param _mx
      * @param _my
      */
-    private void followCursor (int _mx, int _my) {
+    private void followCursor(int _mx, int _my) {
         // Calculate the distance between the sprite and the mouse
-        double diffX = this.getX() - _mx - Entity.approachFactor;
-        double diffY = this.getY() - _my - Entity.approachFactor;
+        double diffX = this.getX() - _mx - Entity.APPROACH_FACTOR;
+        double diffY = this.getY() - _my - Entity.APPROACH_FACTOR;
 
         // Use the pythagorean theorem to solve for the hypotenuse distance
         double distance = (double) FastMath.sqrt(((this.getX() - _mx) * (this.getX() - _mx))
                 + ((this.getY() - _my) * (this.getY() - _my)));
 
         // Sets the velocity according to how far away the sprite is from the cursor
-        this.setVelX((this.approachVel / distance) * diffX);
-        this.setVelY((this.approachVel / distance) * diffY);
+        this.setVelX((this.APPROACH_VEL / distance) * diffX);
+        this.setVelY((this.APPROACH_VEL / distance) * diffY);
     }
 
     /**
      * Updates the dimensions of the SGO according to the animation's current
      * sprite.
      */
-    private void updateDimensions () {
+    private void updateDimensions() {
         this.setWidth(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getWidth());
         this.setHeight(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getHeight());
     }
 
 //============================== GETTERS ================================//
-    public StandardCamera getCamera () {
+    public StandardCamera getCamera() {
         return this.sc;
     }
 
-    public PlayerState getPlayerState () {
+    public PlayerState getPlayerState() {
         return this.playerState;
     }
 
-    public Inventory getInventory () {
+    public Inventory getInventory() {
         return this.inventory;
     }
 
-    public double getAngle () {
+    public double getAngle() {
         return this.angle;
     }
 
-    public int getMoney () {
+    public int getMoney() {
         return this.money;
     }
 
 //=============================== SETTERS ================================//
-    public void setWalking () {
+    public void setWalking() {
         this.playerState = PlayerState.WALKING;
     }
 
-    public void setCamera (StandardCamera _sc) {
+    public void setCamera(StandardCamera _sc) {
         this.sc = _sc;
     }
 
-    public void setPlayerState (PlayerState _playerState) {
+    public void setPlayerState(PlayerState _playerState) {
         this.playerState = _playerState;
     }
 
-    public void setAttackAnimator (StandardAnimatorController sac) {
+    public void setAttackAnimator(StandardAnimatorController sac) {
         this.attackCommand.setAnimation(sac);
     }
 
-    public void setMoney (int _money) {
+    public void setMoney(int _money) {
         this.money = _money;
     }
 

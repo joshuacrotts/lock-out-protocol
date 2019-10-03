@@ -5,7 +5,8 @@ package com.dsd.game;
  * or backwards)
  *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public enum WeaponSelection {
 
@@ -13,11 +14,12 @@ public enum WeaponSelection {
 
     private final int change;
 
-    private WeaponSelection (int change) {
+    private WeaponSelection(int change) {
         this.change = change;
     }
 
-    public int getChange () {
+//================= GETTERS ============================
+    public int getChange() {
         return this.change;
     }
 }

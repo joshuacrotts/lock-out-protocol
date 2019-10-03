@@ -17,7 +17,8 @@ import java.awt.image.BufferedImage;
  * screen.
  *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class WeaponIconView extends Interactor {
 
@@ -25,47 +26,47 @@ public class WeaponIconView extends Interactor {
     private final Inventory inventory;
     private final BufferedImage weaponBorder;
 
-    private final int iconXOffset = 300;
-    private final int iconYOffset = 70;
+    private final int ICON_X_OFFSET = 300;
+    private final int ICON_Y_OFFSET = 70;
 
-    public WeaponIconView (Game _game, Inventory _inventory) {
+    public WeaponIconView(Game _game, Inventory _inventory) {
         this.game = _game;
         this.inventory = _inventory;
         this.weaponBorder = StdOps.loadImage("src/res/img/items/icons/item_holder.png");
     }
 
     @Override
-    public void tick () {
+    public void tick() {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
 
-        this.setX((int) (this.game.getCamera().getX() + Screen.gameHalfWidth - this.iconXOffset));
-        this.setY((int) ((this.game.getCamera().getY() + Screen.gameHalfHeight / 2) + this.iconYOffset));
+        this.setX((int) (this.game.getCamera().getX() + Screen.gameHalfWidth - this.ICON_X_OFFSET));
+        this.setY((int) ((this.game.getCamera().getY() + Screen.gameHalfHeight / 2) + this.ICON_Y_OFFSET));
 
         this.drawWeaponBorder(_g2);
         this.drawIcon(_g2);
     }
 
-    public void drawWeaponBorder (Graphics2D _g2) {
+    public void drawWeaponBorder(Graphics2D _g2) {
         _g2.drawImage(this.weaponBorder, this.getX(), this.getY(), null);
     }
 
-    private void drawIcon (Graphics2D _g2) {
+    private void drawIcon(Graphics2D _g2) {
         _g2.drawImage(this.inventory.getCurrentWeapon().getIcon(), this.getX(), this.getY(), null);
 
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
     }
 }

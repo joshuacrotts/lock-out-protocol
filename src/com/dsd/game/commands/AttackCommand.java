@@ -19,7 +19,8 @@ import java.util.TimerTask;
  * Command representing when the user shoots their weapon.
  *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class AttackCommand extends Command {
 
@@ -62,11 +63,13 @@ public class AttackCommand extends Command {
             //
             //  We need to do different things depending on what the weapon is.
             //
-            if (weapon instanceof Gun) {
-                this.gunAttack((Gun) weapon);
-            }
-            else if (weapon instanceof Knife) {
-                this.knifeAttack(weapon);
+            switch (weapon.getWeaponType()) {
+                case PISTOL:
+                case RIFLE:
+                    this.gunAttack((Gun) weapon);
+                    break;
+                case KNIFE:
+                    this.knifeAttack((Knife) weapon);
             }
 
             weapon.setReady(false);
@@ -132,26 +135,6 @@ public class AttackCommand extends Command {
         this.player.setPlayerState(PlayerState.ATTACKING);
     }
 
-//============================ GETTERS ===================================//
-    public boolean hasTimer () {
-        return AttackCommand.hasTimer;
-    }
-
-//============================ SETTERS ===================================//
-    /**
-     * If we switch to a different weapon, we need to update the animation.
-     *
-     * @param _sac
-     */
-    public void setAnimation (StandardAnimatorController _sac) {
-        this.animation = _sac;
-        this.animation.getStandardAnimation().setReturnAnimation(this.player.getAnimationController());
-    }
-
-    public void setTimer (boolean _timer) {
-        AttackCommand.hasTimer = _timer;
-    }
-
     //
     //  Private class similar to the reload timer, except for this class, we need
     //  to determine how long to wait in between attacks (so the user can't just
@@ -173,4 +156,25 @@ public class AttackCommand extends Command {
             this.weapon.setReady(true);
         }
     }
+
+//============================ GETTERS ===================================//
+    public boolean hasTimer () {
+        return AttackCommand.hasTimer;
+    }
+
+//============================ SETTERS ===================================//
+    /**
+     * If we switch to a different weapon, we need to update the animation.
+     *
+     * @param _sac
+     */
+    public void setAnimation (StandardAnimatorController _sac) {
+        this.animation = _sac;
+        this.animation.getStandardAnimation().setReturnAnimation(this.player.getAnimationController());
+    }
+
+    public void setTimer (boolean _timer) {
+        AttackCommand.hasTimer = _timer;
+    }
+
 }

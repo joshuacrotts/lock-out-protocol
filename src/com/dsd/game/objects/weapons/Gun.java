@@ -2,6 +2,7 @@ package com.dsd.game.objects.weapons;
 
 import com.dsd.game.Game;
 import com.dsd.game.WeaponState;
+import com.dsd.game.WeaponType;
 import com.dsd.game.objects.Player;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 
@@ -12,7 +13,7 @@ import com.revivedstandards.handlers.StandardCollisionHandler;
  * @TODO: Add bullet damage type.
  *
  * [Group Name: Data Structure Deadheads]
- * @author Joshua, Ronald, Rinty 
+ * @author Joshua, Ronald, Rinty
  */
 public abstract class Gun extends Weapon {
 
@@ -29,7 +30,7 @@ public abstract class Gun extends Weapon {
     //
     private final String emptySFXPath;
 
-    public Gun (String _type, int _totalAmmo, Game _game, Player _player, StandardCollisionHandler _sch) {
+    public Gun(WeaponType _type, int _totalAmmo, Game _game, Player _player, StandardCollisionHandler _sch) {
         super(_type);
         this.game = _game;
         this.player = _player;
@@ -46,13 +47,13 @@ public abstract class Gun extends Weapon {
     /**
      * Defines what happens when the gun is shot.
      */
-    public abstract void shoot ();
+    public abstract void shoot();
 
-    public void deductAmmo () {
+    public void deductAmmo() {
         this.currentAmmo--;
     }
 
-    public void reload () {
+    public void reload() {
         //
         //  Three cases:
         //  1. The magazine is empty and we have enough to fill it
@@ -60,8 +61,7 @@ public abstract class Gun extends Weapon {
         if (this.magExceedsTotalAmmo() && !this.magExceedsGunAmmo()) {
             this.currentAmmo += this.totalAmmo;
             this.totalAmmo = 0;
-        }
-        else {
+        } else {
             //  If we don't have enough to fill the magazine but the
             //  current + total > magazine
             int difference = this.magazineAmt - this.currentAmmo;
@@ -71,57 +71,57 @@ public abstract class Gun extends Weapon {
 
     }
 
-    private boolean magExceedsTotalAmmo () {
+    private boolean magExceedsTotalAmmo() {
         return this.totalAmmo < this.magazineAmt;
     }
 
-    private boolean magExceedsGunAmmo () {
+    private boolean magExceedsGunAmmo() {
         return this.currentAmmo + this.totalAmmo > this.magazineAmt;
     }
 
 //============================== GETTERS ===================================//
-    public int getTotalAmmo () {
+    public int getTotalAmmo() {
         return this.totalAmmo;
     }
 
-    public int getCurrentAmmo () {
+    public int getCurrentAmmo() {
         return this.currentAmmo;
     }
 
-    public boolean isWeaponEmpty () {
+    public boolean isWeaponEmpty() {
         return this.currentAmmo == 0;
     }
 
-    public boolean hasAmmo () {
+    public boolean hasAmmo() {
         return this.totalAmmo != 0;
     }
 
-    public String getEmptySFXPath () {
+    public String getEmptySFXPath() {
         return this.emptySFXPath;
     }
 
-    public boolean isReloading () {
+    public boolean isReloading() {
         return super.getWeaponState() == WeaponState.RELOAD;
     }
 
-    public Player getPlayer () {
+    public Player getPlayer() {
         return this.player;
     }
 
-    public StandardCollisionHandler getHandler () {
+    public StandardCollisionHandler getHandler() {
         return this.globalHandler;
     }
 
-    public Game getGame () {
+    public Game getGame() {
         return this.game;
     }
 //============================== SETTERS ===================================//
 
-    public void setCurrentAmmo (int _ammo) {
+    public void setCurrentAmmo(int _ammo) {
         this.currentAmmo = _ammo;
     }
 
-    public void setReloading (boolean _reloading) {
+    public void setReloading(boolean _reloading) {
         this.setWeaponState(_reloading ? WeaponState.RELOAD : WeaponState.READY);
     }
 

@@ -16,7 +16,9 @@ import java.awt.Graphics2D;
 /**
  * This label will display the money amount.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class CoinLabel extends StandardLabel {
 
@@ -26,10 +28,10 @@ public class CoinLabel extends StandardLabel {
     //
     //  Position and sizing of health elements
     //
-    private final int coinXOffset = 220;
-    private final int coinYOffset = 140;
+    private final int COIN_X_OFFSET = 220;
+    private final int COIN_Y_OFFSET = 140;
 
-    public CoinLabel (Game _game, Player _player) {
+    public CoinLabel(Game _game, Player _player) {
         super((int) (Screen.gameHalfWidth + Screen.gameHalfWidth),
                 (int) (Screen.gameHalfHeight + Screen.gameHalfHeight / 2),
                 "$", "src/res/fonts/chargen.ttf", 32f);
@@ -39,19 +41,19 @@ public class CoinLabel extends StandardLabel {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         //  Update positioning here because the timing is crucial to the rendering;
         //  delegating it to tick() will cause flickering problems.
-        this.setX((int) (this.game.getCamera().getX() + Screen.gameHalfWidth - this.coinXOffset));
-        this.setY((int) ((this.game.getCamera().getY() + Screen.gameHalfHeight / 2) + this.coinYOffset));
+        this.setX((int) (this.game.getCamera().getX() + Screen.gameHalfWidth - this.COIN_X_OFFSET));
+        this.setY((int) ((this.game.getCamera().getY() + Screen.gameHalfHeight / 2) + this.COIN_Y_OFFSET));
         this.drawCoinText(_g2);
     }
 
-    private void drawCoinText (Graphics2D _g2) {
+    private void drawCoinText(Graphics2D _g2) {
         StandardDraw.text("$" + this.player.getMoney(), this.getX(), this.getY(), this.getFont(), this.getFont().getSize(), Color.WHITE);
     }
 }
