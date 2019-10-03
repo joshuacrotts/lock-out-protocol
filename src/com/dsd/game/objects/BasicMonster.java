@@ -33,7 +33,7 @@ import org.apache.commons.math3.util.FastMath;
  * @author Joshua, Ronald, Rinty
  */
 public class BasicMonster extends Enemy implements DeathListener {
-    
+
     //
     //  Handler for particle explosions after the
     //  monster dies.
@@ -85,6 +85,8 @@ public class BasicMonster extends Enemy implements DeathListener {
 
         super.getHandler().addCollider(this.getId());
         super.getHandler().flagAlive(this.getId());
+
+        super.setTransparentFactor((float) 0.001);
     }
 
     @Override
@@ -253,7 +255,7 @@ public class BasicMonster extends Enemy implements DeathListener {
      */
     private void generateCoins (int _coinAmt) {
         for (int i = 0 ; i < _coinAmt ; i++) {
-            this.getHandler().addEntity(new Coin((int) this.getX(), (int) this.getY(), 0.7, 0.9, 1.0));
+            this.getHandler().addEntity(new Coin((int) this.getX(), (int) this.getY(), 0.7, 0.9, 1.0, this.getHandler()));
         }
     }
 

@@ -4,6 +4,7 @@ import com.dsd.game.api.CityLocator;
 import com.dsd.game.api.WeatherConnector;
 import com.dsd.game.controller.AudioBoxController;
 import com.dsd.game.controller.CollisionHandlerController;
+import com.dsd.game.controller.DebugController;
 import com.dsd.game.controller.RainController;
 import com.dsd.game.controller.SpawnerController;
 import com.dsd.game.objects.Player;
@@ -15,7 +16,6 @@ import com.revivedstandards.handlers.StandardHandler;
 import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.main.StandardDraw;
 import com.revivedstandards.main.StandardGame;
-import com.revivedstandards.model.StandardID;
 import com.revivedstandards.model.StandardLevel;
 
 /**
@@ -49,6 +49,11 @@ public class Game extends StandardGame {
     //  determining whether it should rain or not.
     //
     private final RainController rainController;
+
+    //
+    //  Debug controller
+    //
+    private final DebugController debugController;
 
     //
     //  Game state variable (paused, running, menu, etc.)
@@ -95,6 +100,8 @@ public class Game extends StandardGame {
         this.menuScreen = new MenuScreen(this);
         this.pauseScreen = new PauseScreen(this);
         this.hudScreen = new HUDScreen(this, this.player, this.sch);
+
+        this.debugController = new DebugController(this, this.sch);
 
         this.startGame();
     }
@@ -151,6 +158,13 @@ public class Game extends StandardGame {
             //  transparent background.
             if (this.gameState == GameState.PAUSED) {
                 this.pauseScreen.render(StandardDraw.Renderer);
+            }
+
+            //
+            //  If we are in debug mode, we can draw the text.
+            //
+            if (DebugController.DEBUG_MODE) {
+                this.debugController.render(StandardDraw.Renderer);
             }
         }
     }
