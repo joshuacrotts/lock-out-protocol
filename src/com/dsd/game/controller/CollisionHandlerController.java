@@ -3,7 +3,8 @@ package com.dsd.game.controller;
 import com.dsd.game.Game;
 import com.dsd.game.PlayerState;
 import com.dsd.game.objects.BulletGameObject;
-import com.dsd.game.objects.Monster;
+import com.dsd.game.objects.BasicMonster;
+import com.dsd.game.objects.Enemy;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.items.Coin;
 import com.dsd.game.userinterface.StandardInteractorHandler;
@@ -64,8 +65,8 @@ public class CollisionHandlerController extends StandardCollisionHandler {
         //  Handles bullet to monster collision
         //  (kills bullet and takes damage away from monster).
         //
-        if (_obj1.getId() == StandardID.Bullet && _obj2.getId() == StandardID.Monster) {
-            this.handleBulletMonsterCollision((BulletGameObject) _obj1, (Monster) _obj2);
+        if (_obj1.getId() == StandardID.Bullet && _obj2.getId() == StandardID.BasicMonster) {
+            this.handleBulletBasicMonsterCollision((BulletGameObject) _obj1, (BasicMonster) _obj2);
         }
     }
 
@@ -80,8 +81,8 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      */
     @Override
     public void handleBoundsCollision(StandardGameObject _obj1, StandardGameObject _obj2) {
-        if (_obj1.getId() == StandardID.Player && _obj2.getId() == StandardID.Monster && _obj2.isAlive()) {
-            this.handlePlayerMonsterCollision((Player) _obj1, (Monster) _obj2);
+        if (_obj1.getId() == StandardID.Player && _obj2.getId() == StandardID.BasicMonster && _obj2.isAlive()) {
+            this.handlePlayerMonsterCollision((Player) _obj1, (BasicMonster) _obj2);
         } else if (_obj1.getId() == StandardID.Player && _obj2.getId() == StandardID.Coin && _obj2.isAlive()) {
             this.handlePlayerCoinCollision((Player) _obj1, (Coin) _obj2);
         }
@@ -95,7 +96,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      * @param bullet
      * @param monster
      */
-    private void handleBulletMonsterCollision(BulletGameObject _bullet, Monster _monster) {
+    private void handleBulletBasicMonsterCollision(BulletGameObject _bullet, BasicMonster _monster) {
 
         // Sets the bullet to dead
         _bullet.setAlive(false);
@@ -118,7 +119,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      * @param _player
      * @param _monster
      */
-    private void handlePlayerMonsterCollision(Player _player, Monster _monster) {
+    private void handlePlayerMonsterCollision(Player _player, BasicMonster _monster) {
         _player.setHealth(_player.getHealth() - _monster.getDamage());
         if (_player.getPlayerState() == PlayerState.ATTACKING) {
             int dmg = (int) _player.getInventory().getCurrentWeapon().getDamage();
@@ -136,7 +137,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
         StandardAudioController.play("src/res/audio/sfx/coin.wav");
     }
 
-    private void addDamageText(Monster _monster, int _damage) {
+    private void addDamageText(Enemy _monster, int _damage) {
         damageText.addInteractor(new DamageText((int) _monster.getX() + _monster.getWidth() / 2,
                 (int) _monster.getY(), "-" + _damage, damageText));
     }
