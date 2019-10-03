@@ -4,9 +4,9 @@ import com.dsd.game.api.CityLocator;
 import com.dsd.game.api.WeatherConnector;
 import com.dsd.game.controller.AudioBoxController;
 import com.dsd.game.controller.CollisionHandlerController;
+import com.dsd.game.controller.DebugController;
 import com.dsd.game.controller.RainController;
 import com.dsd.game.controller.SpawnerController;
-import com.dsd.game.objects.BasicMonster;
 import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.HUDScreen;
 import com.dsd.game.userinterface.MenuScreen;
@@ -16,7 +16,6 @@ import com.revivedstandards.handlers.StandardHandler;
 import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.main.StandardDraw;
 import com.revivedstandards.main.StandardGame;
-import com.revivedstandards.model.StandardID;
 import com.revivedstandards.model.StandardLevel;
 
 /**
@@ -52,6 +51,11 @@ public class Game extends StandardGame {
     private final RainController rainController;
 
     //
+    //  Debug controller
+    //
+    private final DebugController debugController;
+
+    //
     //  Game state variable (paused, running, menu, etc.)
     //
     private GameState gameState = GameState.MENU;
@@ -80,7 +84,6 @@ public class Game extends StandardGame {
 
         //  Instantiate the camera
         this.sc = new StandardCamera(this, player, 1, this.getGameWidth(), this.getGameHeight());
-        this.sch.addEntity(new SpawnerController(900, 900, StandardID.BasicMonster, 5000, 200, this, this.sch));
 
         //  Sets the camera for the player and the handler
         this.player.setCamera(this.sc);
@@ -97,6 +100,8 @@ public class Game extends StandardGame {
         this.menuScreen = new MenuScreen(this);
         this.pauseScreen = new PauseScreen(this);
         this.hudScreen = new HUDScreen(this, this.player, this.sch);
+
+        this.debugController = new DebugController(this, this.sch);
 
         this.startGame();
     }
@@ -154,7 +159,22 @@ public class Game extends StandardGame {
             if (this.gameState == GameState.PAUSED) {
                 this.pauseScreen.render(StandardDraw.Renderer);
             }
+
+            //
+            //  If we are in debug mode, we can draw the text.
+            //
+            if (DebugController.DEBUG_MODE) {
+                this.debugController.render(StandardDraw.Renderer);
+            }
         }
+    }
+
+    /**
+     * Once the game turns to the PLAY state, this method is called. It will
+     * instantiate the Spawner controllers, level controllers, etc.
+     */
+    public void uponPlay () {
+        this.sch.addEntity(new SpawnerController(900, 900, EnemyType.BASIC_MONSTER, 5000, 200, this, this.sch));
     }
 
 //========================== GETTERS =============================/

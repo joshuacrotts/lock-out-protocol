@@ -3,6 +3,7 @@ package com.dsd.game.objects;
 import com.dsd.game.PlayerState;
 import com.dsd.game.Game;
 import com.dsd.game.commands.AttackCommand;
+import com.dsd.game.commands.DebugCommand;
 import com.dsd.game.commands.DecrementWeaponCommand;
 import com.dsd.game.commands.IncrementWeaponCommand;
 import com.dsd.game.commands.MoveCommand;
@@ -50,6 +51,7 @@ public class Player extends Entity implements DeathListener {
     private final ReloadCommand reloadCommand;
     private final IncrementWeaponCommand incWeaponCommand;
     private final DecrementWeaponCommand decWeaponCommand;
+    private final DebugCommand debugCommand;
 
     //
     //  Variables representing the angle and approach velocity
@@ -80,6 +82,7 @@ public class Player extends Entity implements DeathListener {
         this.reloadCommand = new ReloadCommand(this.getGame(), this);
         this.incWeaponCommand = new IncrementWeaponCommand(this.getGame(), this);
         this.decWeaponCommand = new DecrementWeaponCommand(this.getGame(), this);
+        this.debugCommand = new DebugCommand(this.getGame());
 
         this.playerState = PlayerState.STANDING;
 

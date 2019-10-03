@@ -16,16 +16,16 @@ import com.revivedstandards.model.StandardID;
 public abstract class Entity extends StandardGameObject {
 
     //
+    //  Miscellaneous reference variables
+    //
+    private final StandardCollisionHandler parentContainer;
+    private final Game game;
+
+    //
     //  For entities that follow another entity, this is the factor that
     //  should be applied when detecting the angle to turn towards.
     //
     public static final int APPROACH_FACTOR = 8;
-
-    //
-    //  Miscellaneous reference variables
-    //
-    private final Game game;
-    private final StandardCollisionHandler parentContainer;
 
     //  Health of entity
     private double health = 0;
@@ -36,7 +36,8 @@ public abstract class Entity extends StandardGameObject {
         this.parentContainer = _parentContainer;
         this.health = _health;
     }
-
+    
+//========================= GETTERS =============================//
     public Game getGame () {
         return this.game;
     }
