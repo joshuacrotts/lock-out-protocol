@@ -33,12 +33,7 @@ import org.apache.commons.math3.util.FastMath;
  * @author Joshua, Ronald, Rinty
  */
 public class BasicMonster extends Enemy implements DeathListener {
-
-    //
-    //  Alpha composition object for when the monster dies.
-    //
-    private AlphaComposite deathTransparentComposite;
-
+    
     //
     //  Handler for particle explosions after the
     //  monster dies.
@@ -71,14 +66,8 @@ public class BasicMonster extends Enemy implements DeathListener {
     private float angle;
 
     //
-    //  Variables for the disappearing effect when the monster
-    //  dies.
+    //  Health factor for this specific object.
     //
-    //  @TODO: Refactor this into Enemy possibly (since it's absolutely
-    //  reusable!
-    //
-    private final float deathTransparencyFactor = 0.001f;
-    private float deathTransparency = 1.0f;
     private static int health = 100;
 
     public BasicMonster (int _x, int _y, Game _game, StandardCamera _sc, StandardCollisionHandler _sch) {
@@ -138,7 +127,7 @@ public class BasicMonster extends Enemy implements DeathListener {
 
             // If the size of the exphandler (MAX_PARTICLES - dead ones) == 0,
             // we can set this entity to be dead, and remove it from the handler.
-            if (this.explosionHandler.size() == 0 || this.deathTransparency <= 0) {
+            if (this.explosionHandler.size() == 0 || this.getTransparency() <= 0) {
                 this.getHandler().removeEntity(this);
             }
 
@@ -200,14 +189,6 @@ public class BasicMonster extends Enemy implements DeathListener {
      */
     public void generateHurtSound (int _sfx) {
         StandardAudioController.play("src/res/audio/sfx/zombies/zombie-" + _sfx + ".wav");
-    }
-
-    /**
-     * Applies the composition factor to the actual transparency.
-     */
-    private void updateComposite () {
-        this.deathTransparentComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, this.deathTransparency);
-        this.deathTransparency -= this.deathTransparencyFactor;
     }
 
     /**

@@ -12,6 +12,7 @@ import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.model.StandardAnimation;
 import com.revivedstandards.model.StandardGameObject;
 import com.revivedstandards.model.StandardID;
+import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -41,8 +42,20 @@ public abstract class Enemy extends Entity {
     private StandardAnimatorController attackingController;
     private StandardAnimatorController deathController;
 
+    //
+    //  Variables for the disappearing effect when the monster
+    //  dies.
+    //
+    private float deathTransparencyFactor;
+    private float deathTransparency = 1.0f;
+
     //  How much damage the enemy does when running into the player
     protected double damage;
+
+    //
+    //  Alpha composition object for when the monster dies.
+    //
+    protected AlphaComposite deathTransparentComposite;
 
     public Enemy (int _x, int _y, int _health, StandardID _id, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, _health, _id, _game, _sch);
@@ -120,8 +133,8 @@ public abstract class Enemy extends Entity {
     }
 
     /**
-     * Instantiates the death animation controller, but also sets the halt
-     * frame in the StandardAnimation object to be _haltFrame.
+     * Instantiates the death animation controller, but also sets the halt frame
+     * in the StandardAnimation object to be _haltFrame.
      *
      * @param _frames
      * @param _fps
@@ -138,6 +151,14 @@ public abstract class Enemy extends Entity {
     protected void moveEntityToFront () {
         ArrayList<StandardGameObject> entities = this.getHandler().getEntities();
         Collections.swap(entities, 0, entities.indexOf(this));
+    }
+
+    /**
+     * Applies the composition factor to the actual transparency.
+     */
+    protected void updateComposite () {
+        this.deathTransparentComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, this.deathTransparency);
+        this.deathTransparency -= this.deathTransparencyFactor;
     }
 
 //================================ GETTERS ===================================//
@@ -165,6 +186,10 @@ public abstract class Enemy extends Entity {
         return this.damage;
     }
 
+    public float getTransparency () {
+        return this.deathTransparency;
+    }
+
 //================================ SETTERS ===================================//
     public void setTarget (Entity _target) {
         this.target = _target;
@@ -172,6 +197,10 @@ public abstract class Enemy extends Entity {
 
     public void setDamage (double _damage) {
         this.damage = _damage;
+    }
+
+    public void setTransparentFactor (float _alphaFactor) {
+        this.deathTransparencyFactor = _alphaFactor;
     }
 
 }
