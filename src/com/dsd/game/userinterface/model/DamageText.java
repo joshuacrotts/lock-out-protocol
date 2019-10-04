@@ -43,7 +43,6 @@ public class DamageText extends StandardLabel {
         this.sih = _sih;
         this.fadeColor = new Color(this.generateRedColor(), 0, 0, 0xff);
         this.setVelY(-1);
-        System.out.println("color: " + redColorValue);
     }
 
     @Override

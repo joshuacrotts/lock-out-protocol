@@ -70,7 +70,7 @@ public class BasicMonster extends Enemy implements DeathListener {
     //
     private static int health = 100;
 
-    public BasicMonster (int _x, int _y, Game _game, StandardCamera _sc, StandardCollisionHandler _sch) {
+    public BasicMonster (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, BasicMonster.health, StandardID.BasicMonster, _game, _sch);
         this.setTarget(_game.getPlayer());
 

@@ -70,7 +70,7 @@ public class SpawnerController extends StandardGameObject {
 
             switch (this.spawnerID) {
                 case BASIC_MONSTER:
-                    this.parentContainer.addEntity(new BasicMonster(xPos, yPos, this.game, this.game.getCamera(), this.parentContainer));
+                    this.parentContainer.addEntity(new BasicMonster(xPos, yPos, this.game, this.parentContainer));
             }
         }
     }
@@ -89,7 +89,7 @@ public class SpawnerController extends StandardGameObject {
 
         @Override
         public void run () {
-            this.spawnerController.spawn(5);
+            this.spawnerController.spawn(StdOps.rand(0, 5));
         }
     }
 

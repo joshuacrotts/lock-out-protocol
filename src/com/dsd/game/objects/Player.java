@@ -8,12 +8,14 @@ import com.dsd.game.commands.DecrementWeaponCommand;
 import com.dsd.game.commands.IncrementWeaponCommand;
 import com.dsd.game.commands.MoveCommand;
 import com.dsd.game.commands.ReloadCommand;
+import com.dsd.game.userinterface.Screen;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.main.StandardGame;
 import com.revivedstandards.model.DeathListener;
 import com.revivedstandards.model.StandardID;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import javax.swing.JOptionPane;
 import org.apache.commons.math3.util.FastMath;
@@ -64,14 +66,14 @@ public class Player extends Entity implements DeathListener {
     //
     private int money;
 
-    public Player(int _x, int _y, StandardGame _game, StandardCamera _sc, StandardCollisionHandler _sch) {
+    public Player (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, 100, StandardID.Player, (Game) _game, _sch);
 
         //  Instantiate the inventory
         this.inventory = new Inventory(this.getGame(), this, _sch);
 
         //  Initializes the miscellaneous variables
-        this.sc = _sc;
+        this.sc = this.getGame().getCamera();
 
         //  Sets the default animation
         this.setAnimation(this.inventory.getCurrentWeapon().getWalkFrames());
@@ -94,7 +96,7 @@ public class Player extends Entity implements DeathListener {
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         this.setAlive(this.getHealth() > 0);
 
         if (this.isAlive()) {
@@ -120,19 +122,20 @@ public class Player extends Entity implements DeathListener {
             //      cursor                                                     //
             //*****************************************************************//
             this.faceCursor((int) mx, (int) my);
-        } else {
+        }
+        else {
             this.uponDeath();
         }
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         this.getAnimationController().renderFrame(_g2);
     }
 
     @Override
-    public void uponDeath() {
-        JOptionPane.showMessageDialog(null, "You have died!");
+    public void uponDeath () {
+        JOptionPane.showMessageDialog(this.getGame(), "You have died!");
         this.getGame().stopGame();
     }
 
@@ -143,7 +146,7 @@ public class Player extends Entity implements DeathListener {
      * @param _mx
      * @param _my
      */
-    private void faceCursor(int _mx, int _my) {
+    private void faceCursor (int _mx, int _my) {
         float xSign = (float) FastMath.signum(_mx - this.getX());
         double dx = FastMath.abs(_mx - this.getX());
         double dy = FastMath.abs(_my - this.getY());
@@ -162,7 +165,7 @@ public class Player extends Entity implements DeathListener {
      * @param _mx
      * @param _my
      */
-    private void followCursor(int _mx, int _my) {
+    private void followCursor (int _mx, int _my) {
         // Calculate the distance between the sprite and the mouse
         double diffX = this.getX() - _mx - Entity.APPROACH_FACTOR;
         double diffY = this.getY() - _my - Entity.APPROACH_FACTOR;
@@ -180,50 +183,46 @@ public class Player extends Entity implements DeathListener {
      * Updates the dimensions of the SGO according to the animation's current
      * sprite.
      */
-    private void updateDimensions() {
+    private void updateDimensions () {
         this.setWidth(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getWidth());
         this.setHeight(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getHeight());
     }
 
 //============================== GETTERS ================================//
-    public StandardCamera getCamera() {
-        return this.sc;
-    }
-
-    public PlayerState getPlayerState() {
+    public PlayerState getPlayerState () {
         return this.playerState;
     }
 
-    public Inventory getInventory() {
+    public Inventory getInventory () {
         return this.inventory;
     }
 
-    public double getAngle() {
+    public double getAngle () {
         return this.angle;
     }
 
-    public int getMoney() {
+    public int getMoney () {
         return this.money;
     }
 
 //=============================== SETTERS ================================//
-    public void setWalking() {
+    public void setWalking () {
         this.playerState = PlayerState.WALKING;
     }
 
-    public void setCamera(StandardCamera _sc) {
+    public void setCamera (StandardCamera _sc) {
         this.sc = _sc;
     }
 
-    public void setPlayerState(PlayerState _playerState) {
+    public void setPlayerState (PlayerState _playerState) {
         this.playerState = _playerState;
     }
 
-    public void setAttackAnimator(StandardAnimatorController sac) {
+    public void setAttackAnimator (StandardAnimatorController sac) {
         this.attackCommand.setAnimation(sac);
     }
 
-    public void setMoney(int _money) {
+    public void setMoney (int _money) {
         this.money = _money;
     }
 

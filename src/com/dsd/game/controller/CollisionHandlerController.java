@@ -34,8 +34,8 @@ public class CollisionHandlerController extends StandardCollisionHandler {
     //
     private static StandardInteractorHandler damageText;
 
-    public CollisionHandlerController(Game _game, StandardCamera _sc) {
-        super(_sc);
+    public CollisionHandlerController(Game _game) {
+        super(_game.getCamera());
         CollisionHandlerController.damageText = new StandardInteractorHandler(_game);
     }
 

@@ -23,7 +23,9 @@ import com.revivedstandards.model.StandardLevel;
  *
  * @TODO: Lots of refactoring to separate private methods Create level
  * controller class which determines when the user transitions from one level to
- * the next.
+ * the next. Serialization is also being accounted for because only a few pieces
+ * of data will ever need to be saved (the Player's position, stats, inventory,
+ * and level info).
  *
  * [Group Name: Data Structure Deadheads]
  * @author Joshua, Ronald, Rinty
@@ -76,10 +78,10 @@ public class Game extends StandardGame {
         AudioBoxController.initialize(16);
 
         //  Create a new collision handler
-        this.sch = new CollisionHandlerController(this, null);
+        this.sch = new CollisionHandlerController(this);
 
         //  Instantiates player & adds it to the handler
-        this.player = new Player(200, 200, this, null, this.sch);
+        this.player = new Player(200, 200, this, this.sch);
         this.sch.addEntity(player);
 
         //  Instantiate the camera
@@ -90,7 +92,7 @@ public class Game extends StandardGame {
         this.sch.setCamera(this.sc);
 
         // Instantiates the rain controller
-        this.rainController = new RainController(this, this.sc, WeatherConnector.getWeather(CityLocator.getCity()));
+        this.rainController = new RainController(this, WeatherConnector.getWeather(CityLocator.getCity()));
 
         // Instantiates the levels @TODO: (should move this to a method and to
         // some type of controller to determine HOW levels transition)
