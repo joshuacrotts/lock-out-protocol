@@ -91,7 +91,7 @@ public class BasicMonster extends Enemy implements DeathListener {
 
     @Override
     public void tick () {
-        // If the monster's health is less than 0, we can flag it as dead.
+        //  If the monster's health is less than 0, we can flag it as dead.
         this.setAlive(this.getHealth() > 0);
         this.getAnimationController().tick();
         this.getAnimationController().getStandardAnimation().setRotation(this.angle);
@@ -99,28 +99,22 @@ public class BasicMonster extends Enemy implements DeathListener {
         if (this.isAlive()) {
             this.updatePosition();
 
-            // Save the mouse position
+            //  Save the target's position
             double tx = this.getTarget().getX();
             double ty = this.getTarget().getY();
-            //*******************************************************************//
-            //    Causes the monster to follow the target wherever on the screen //
-            //*******************************************************************//
-
+            //  Causes the monster to follow the target wherever on the screen
             this.followPlayer((int) tx, (int) ty);
 
-            //*****************************************************************//
-            //      Calculates the angle the monster needs to be in to face    //
-            //      the player                                                 //
-            //*****************************************************************//
+            //  Calculates the angle the monster needs to be in to face
+            //  the player
             this.facePlayer((int) tx, (int) ty);
         }
         else {
-            // Do this only once.
+            //  Do this only once.
             if (this.aliveFlag) {
                 this.uponDeath();
                 this.aliveFlag = false;
             }
-
             //
             //  Creates the alpha composite object based off the object's current
             //  transparency.
@@ -142,7 +136,6 @@ public class BasicMonster extends Enemy implements DeathListener {
         //
         //  We need to save the old alpha composition, apply the new one,
         //  render, THEN set the old one back.
-
         if (!this.isAlive() && this.explosionHandler != null) {
             StandardDraw.Handler(this.explosionHandler);
             //
