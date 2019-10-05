@@ -21,7 +21,7 @@ public class PauseLabel extends StandardLabel {
 
     public PauseLabel (Game _game) {
         super((int) Screen.gameHalfWidth,
-                (int) Screen.gameHalfHeight,
+              (int) Screen.gameHalfHeight,
                 "PAUSED", "src/res/fonts/chargen.ttf", 32f);
 
         this.game = _game;

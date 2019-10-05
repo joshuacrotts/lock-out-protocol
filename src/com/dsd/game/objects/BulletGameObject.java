@@ -11,6 +11,7 @@ import com.revivedstandards.model.StandardID;
 import com.revivedstandards.util.StdOps;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import org.apache.commons.math3.util.FastMath;
 
 /**
  * Bullet game object
@@ -26,28 +27,20 @@ public class BulletGameObject extends StandardGameObject {
     //
     //  Miscellaneous variables
     //
-    private final StandardGame game;
+    private final Game game;
     private final StandardCollisionHandler sch;
-    private final StandardCamera sc;
+    private final StandardCamera camera;
 
     //
     //  Angle of bullet according to current rotation of player,
     //  and damage of bullet.
     //
-    private final double angle;
     private final int DAMAGE = 25;
 
     //
     //  Velocity factor applied to the bullet.
     //
-    private final int VEL_X_FACTOR = 20;
-    private final int VEL_Y_FACTOR = 20;
-
-    //
-    //  Modified velocities to fix bullet bug
-    //
-    private final double modifiedVelX;
-    private final double modifiedVelY;
+    private final int VEL_FACTOR = 20;
 
     //
     //  Static reference to the BufferedImages
@@ -67,12 +60,12 @@ public class BulletGameObject extends StandardGameObject {
 
         this.game = _game;
         this.sch = _parentContainer;
-        this.angle = _angle;
 
         this.setAnimation(new StandardAnimatorController(new StandardAnimation(this, BulletGameObject.frames, BulletGameObject.BULLET_FPS)));
         this.setWidth(this.getWidth());
         this.setHeight(this.getHeight());
         this.setAlive(true);
+        this.setAngle(_angle);
 
         /*if (_parent.getPlayerState() == _parent.getPlayerState().REVERSEWALKING) {
             this.modifiedVelX = _parent.getVelX() * this.VEL_X_FACTOR * -1;
@@ -93,7 +86,7 @@ public class BulletGameObject extends StandardGameObject {
         this.sch.flagAlive(this.getId());
         this.sch.addCollider(this.getId());
 
-        this.sc = _sc;
+        this.camera = this.game.getCamera();
     }
 
     @Override
@@ -116,9 +109,33 @@ public class BulletGameObject extends StandardGameObject {
         // If they're alive, draw the frame that the bullet animation is on.
         // Otherwise, render the explosion handler
         if (this.isAlive()) {
-            this.getAnimationController().getStandardAnimation().setRotation(angle);
+            this.getAnimationController().getStandardAnimation().setRotation(this.getAngle());
             this.getAnimationController().renderFrame(_g2);
         }
+    }
+
+    /**
+     * Instantiates the velocity of the bullet depending on where the cursor is
+     * in relation to the player.
+     *
+     * @param _x
+     * @param _y
+     * @param _mx
+     * @param _my
+     */
+    private void setVelocity (double _x, double _y, int _mx, int _my) {
+        double deltaX = (_mx - _x);
+        double deltaY = (_my - _y);
+
+        // Use the pythagorean theorem to solve for the hypotenuse distance
+        double distance = (double) FastMath.sqrt(((deltaX) * (deltaX))
+                + ((deltaY) * (deltaY)));
+
+        deltaX = (deltaX / distance) * this.VEL_FACTOR;
+        deltaY = (deltaY / distance) * this.VEL_FACTOR;
+
+        this.setVelX(deltaX);
+        this.setVelY(deltaY);
     }
 
     /**
@@ -133,7 +150,7 @@ public class BulletGameObject extends StandardGameObject {
         return BulletGameObject.frames;
     }
 
-    public int getDamage() {
+    public int getDamage () {
         return this.DAMAGE;
     }
 

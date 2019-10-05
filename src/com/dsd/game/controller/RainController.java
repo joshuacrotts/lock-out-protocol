@@ -1,9 +1,9 @@
 package com.dsd.game.controller;
 
+import com.dsd.game.Game;
 import com.dsd.game.objects.RainDrop;
 import com.revivedstandards.handlers.StandardParticleHandler;
 import com.revivedstandards.main.StandardCamera;
-import com.revivedstandards.main.StandardGame;
 import com.revivedstandards.util.StdOps;
 import com.revivedstandards.view.Renderable;
 import com.revivedstandards.view.Updatable;
@@ -24,8 +24,8 @@ public class RainController implements Renderable, Updatable {
     //  Reference variables
     //
     private final StandardParticleHandler sph;
-    private final StandardGame game;
     private final StandardCamera sc;
+    private final Game game;
 
     //  Serves as a debugging feature
     private static final boolean toggleDownfall = true;
@@ -53,9 +53,9 @@ public class RainController implements Renderable, Updatable {
     //
     private static final int MAX_RAIN_PARTICLES = 5000;
 
-    public RainController (StandardGame _game, StandardCamera _sc, String _weather) {
+    public RainController (Game _game, String _weather) {
         this.game = _game;
-        this.sc = _sc;
+        this.sc = _game.getCamera();
         this.sph = new StandardParticleHandler(MAX_RAIN_PARTICLES);
 
         // Be sure to always set the SPH camera or it'll throw a NPE

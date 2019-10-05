@@ -2,6 +2,7 @@ package com.dsd.game.objects.items;
 
 import com.dsd.game.util.Utilities;
 import com.revivedstandards.controller.StandardAnimatorController;
+import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.model.StandardGameObject;
 import com.revivedstandards.model.StandardID;
 import com.revivedstandards.util.StdOps;
@@ -18,6 +19,11 @@ import java.awt.image.BufferedImage;
  * @author Joshua, Ronald, Rinty
  */
 public class Coin extends StandardGameObject {
+
+    //
+    //  Handler for the coins
+    //
+    private final StandardCollisionHandler parentContainer;
 
     private static final BufferedImage[] coinOneFrames;
     private static final BufferedImage[] coinTwoFrames;
@@ -48,15 +54,16 @@ public class Coin extends StandardGameObject {
      * @param _medium
      * @param _large
      */
-    public Coin (int _x, int _y, double _small, double _medium, double _large) {
+    public Coin (int _x, int _y, double _small, double _medium, double _large, StandardCollisionHandler _sch) {
         super(_x, _y, StandardID.Coin);
+        this.parentContainer = _sch;
 
         this.generateCoinType(_small, _medium, _large);
 
         this.setVelX(StdOps.randBounds(-VEL_UPPER_BOUND, -VEL_LOWER_BOUND,
-                                        VEL_LOWER_BOUND, VEL_UPPER_BOUND));
+                VEL_LOWER_BOUND, VEL_UPPER_BOUND));
         this.setVelY(StdOps.randBounds(-VEL_UPPER_BOUND, -VEL_LOWER_BOUND,
-                                        VEL_LOWER_BOUND, VEL_UPPER_BOUND));
+                VEL_LOWER_BOUND, VEL_UPPER_BOUND));
     }
 
     @Override
@@ -65,6 +72,8 @@ public class Coin extends StandardGameObject {
             this.getAnimationController().tick();
             this.slowVelocities();
             this.updatePosition();
+        } else {
+            this.parentContainer.removeEntity(this);
         }
     }
 

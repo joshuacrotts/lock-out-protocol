@@ -97,10 +97,7 @@ public class AttackCommand extends Command {
      */
     private void gunAttack (Gun _gun) {
         if (!_gun.isReloading()) {
-            if (this.player.getVelX() == 0 || this.player.getVelY() == 0) {
-                return;
-            }
-            else if (_gun.isWeaponEmpty()) {
+            if (_gun.isWeaponEmpty()) {
                 StandardAudioController.play(_gun.getEmptySFXPath());
                 return;
             }

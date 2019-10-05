@@ -34,8 +34,8 @@ public class CollisionHandlerController extends StandardCollisionHandler {
     //
     private static StandardInteractorHandler damageText;
 
-    public CollisionHandlerController(Game _game, StandardCamera _sc) {
-        super(_sc);
+    public CollisionHandlerController(Game _game) {
+        super(_game.getCamera());
         CollisionHandlerController.damageText = new StandardInteractorHandler(_game);
     }
 
@@ -121,7 +121,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      */
     private void handlePlayerMonsterCollision(Player _player, BasicMonster _monster) {
         _player.setHealth(_player.getHealth() - _monster.getDamage());
-        if (_player.getPlayerState() == PlayerState.ATTACKING) {
+        if (_player.isAttacking()) {
             int dmg = (int) _player.getInventory().getCurrentWeapon().getDamage();
             this.addDamageText(_monster, dmg);
 

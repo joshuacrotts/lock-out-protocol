@@ -30,7 +30,7 @@ public class DecrementWeaponCommand extends Command {
 
     @Override
     public void pressed(float _dt) {
-        if (this.player.getPlayerState() == PlayerState.ATTACKING) {
+        if (this.player.isAttacking()) {
             return;
         }
         this.player.getInventory().changeWeapon(WeaponSelection.DECREMENT);

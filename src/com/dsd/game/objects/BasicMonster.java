@@ -19,8 +19,10 @@ import com.revivedstandards.model.StandardBoxParticle;
 import com.revivedstandards.model.StandardID;
 import com.revivedstandards.util.StdOps;
 import com.revivedstandards.view.ShapeType;
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import org.apache.commons.math3.util.FastMath;
 
 /**
@@ -32,85 +34,141 @@ import org.apache.commons.math3.util.FastMath;
  */
 public class BasicMonster extends Enemy implements DeathListener {
 
-    //
     //  Handler for particle explosions after the
     //  monster dies.
-    //
     private StandardParticleHandler explosionHandler;
 
-    //
-    //  Animation frame per second setting
-    //
-    private static final int WALKING_FPS = 10;
+    //  Static bufferedimage array so the images aren't constantly
+    //  loading in upon instantiation of a new monster
+    private static final BufferedImage[] WALK_FRAMES;
+    private static final BufferedImage[] DEATH_FRAMES;
 
-    //
+    //  Animation frame per second setting
+    private static final int WALKING_FPS = 10;
+    private static final int DEATH_FPS = 5;
+
     //  One-time variable for tracking the "alive" to "death state" transition
-    //
     private boolean aliveFlag = true;
 
-    //
     //  Variables representing the angle and approach velocity
-    //
     private final float APPROACH_VEL = -1.5f;
     private final double DAMAGE = 0.20;
-    private float angle;
 
-    public BasicMonster (int _x, int _y, Game _game, StandardCamera _sc, StandardCollisionHandler _sch) {
-        super(_x, _y, 100, StandardID.BasicMonster, _game, _sch);
+    //  Health factor for this BasicMonster object.
+    private static int health = 100;
+
+    public BasicMonster (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
+        super(_x, _y, BasicMonster.health, StandardID.BasicMonster, _game, _sch);
         this.setTarget(_game.getPlayer());
 
-        super.initWalkingFrames(Utilities.loadFrames("src/res/img/enemies/monster1/walk/", 9), WALKING_FPS);
+        super.initWalkingFrames(BasicMonster.WALK_FRAMES, WALKING_FPS);
+        super.initDeathFrames(BasicMonster.DEATH_FRAMES, DEATH_FPS, 5);
 
         super.setAnimation(super.getWalkingAnimation());
 
         //  The width/height of the model is set by the buffered image backing it.
         super.setDimensions();
-        super.setDamage(DAMAGE);
+        super.setDamage(this.DAMAGE);
 
         super.getHandler().addCollider(this.getId());
         super.getHandler().flagAlive(this.getId());
+
+        super.setTransparentFactor((float) 0.001);
     }
 
     @Override
     public void tick () {
-        // If the monster's health is less than 0, we can flag it as dead.
+        //  If the monster's health is less than 0, we can flag it as dead.
         this.setAlive(this.getHealth() > 0);
         this.getAnimationController().tick();
-        this.getAnimationController().getStandardAnimation().setRotation(this.angle);
+        this.getAnimationController().getStandardAnimation().setRotation(this.getAngle());
 
         if (this.isAlive()) {
             this.updatePosition();
 
-            // Save the mouse position
+            //  Save the target's position
             double tx = this.getTarget().getX();
             double ty = this.getTarget().getY();
-            //*******************************************************************//
-            //    Causes the monster to follow the target wherever on the screen //
-            //*******************************************************************//
-
+            //  Causes the monster to follow the target wherever on the screen
             this.followPlayer((int) tx, (int) ty);
 
-            //*****************************************************************//
-            //      Calculates the angle the monster needs to be in to face    //
-            //      the player                                                 //
-            //*****************************************************************//
+            //  Calculates the angle the monster needs to be in to face
+            //  the player
             this.facePlayer((int) tx, (int) ty);
         }
         else {
-            // Do this only once.
+            //  Do this only once.
             if (this.aliveFlag) {
                 this.uponDeath();
                 this.aliveFlag = false;
             }
+            //  Creates the alpha composite object based off the object's current
+            //  transparency.
+            this.updateComposite();
 
             // If the size of the exphandler (MAX_PARTICLES - dead ones) == 0,
             // we can set this entity to be dead, and remove it from the handler.
-            if (this.explosionHandler.size() == 0) {
+            if (this.explosionHandler.size() == 0 || this.getTransparency() <= 0) {
                 this.getHandler().removeEntity(this);
             }
 
             StandardHandler.Handler(this.explosionHandler);
         }
+    }
+
+    @Override
+    public void render (Graphics2D _g2) {
+        //
+        //  We need to save the old alpha composition, apply the new one,
+        //  render, THEN set the old one back.
+        if (!this.isAlive() && this.explosionHandler != null) {
+            StandardDraw.Handler(this.explosionHandler);
+            //
+            //  We need to save the old alpha composition, apply the new one,
+            //  render, THEN set the old one back.
+            //
+            AlphaComposite oldComposite = (AlphaComposite) _g2.getComposite();
+            _g2.setComposite(this.deathTransparentComposite);
+            this.getAnimationController().renderFrame(_g2);
+            _g2.setComposite(oldComposite);
+        }
+        else {
+            this.getAnimationController().renderFrame(_g2);
+
+        }
+    }
+
+    /**
+     * This method is called once the basic monster dies.
+     *
+     * @TODO: Re-factor the magic numbers
+     */
+    @Override
+    public void uponDeath () {
+        this.setAnimation(this.getDeathAnimation());
+        this.explosionHandler = new StandardParticleHandler(50);
+        this.explosionHandler.setCamera(this.getCamera());
+
+        for (int i = 0 ; i < this.explosionHandler.getMaxParticles() ; i++) {
+
+            this.explosionHandler.addEntity(new StandardBoxParticle(this.getX(), this.getY(),
+                    StdOps.rand(1.0, 5.0), StdOps.randBounds(-10.0, -3.0, 3.0, 10.0),
+                    StdOps.randBounds(-10.0, -3.0, 3.0, 10.0), Color.RED, 3f, this.explosionHandler,
+                    this.getAngle(), ShapeType.CIRCLE, true));
+        }
+
+        this.generateCoins(StdOps.rand(0, 5));
+        this.generateDeathSound(StdOps.rand(1, 2));
+        this.moveEntityToFront();
+    }
+
+    /**
+     * Randomly generate one of the zombie sound effects.
+     *
+     * @param _sfx
+     */
+    public void generateHurtSound (int _sfx) {
+        StandardAudioController.play("src/res/audio/sfx/zombies/zombie-" + _sfx + ".wav");
     }
 
     /**
@@ -150,51 +208,12 @@ public class BasicMonster extends Enemy implements DeathListener {
         double dx = FastMath.abs(_posX - this.getX());
         double dy = FastMath.abs(_posY - this.getY());
 
-        this.angle = (float) ((xSign) * (FastMath.atan((dx) / (dy))));
+        this.setAngle((double) ((xSign) * (FastMath.atan((dx) / (dy)))));
 
         // If we're in Q1 (+x, -+y) or in Q2 (-x, +y)
         if ((_posX > this.getX() && _posY > this.getY()) || (_posX < this.getX() && _posY > this.getY())) {
-            this.angle = (float) ((FastMath.PI / 2) + (FastMath.PI / 2 - this.angle));
+            this.setAngle((double) ((FastMath.PI / 2) + (FastMath.PI / 2 - this.getAngle())));
         }
-    }
-
-    @Override
-    public void render (Graphics2D _g2) {
-        if (this.isAlive()) {
-            this.getAnimationController().renderFrame(_g2);
-        }
-        else if (this.explosionHandler != null) {
-            StandardDraw.Handler(this.explosionHandler);
-        }
-    }
-
-    /**
-     * @TODO: Re-factor the magic numbers
-     */
-    @Override
-    public void uponDeath () {
-        this.explosionHandler = new StandardParticleHandler(50);
-        this.explosionHandler.setCamera(this.getCamera());
-
-        for (int i = 0 ; i < this.explosionHandler.getMaxParticles() ; i++) {
-
-            this.explosionHandler.addEntity(new StandardBoxParticle(this.getX(), this.getY(),
-                    StdOps.rand(1.0, 5.0), StdOps.randBounds(-10.0, -3.0, 3.0, 10.0),
-                    StdOps.randBounds(-10.0, -3.0, 3.0, 10.0), Color.RED, 3f, this.explosionHandler,
-                    this.angle, ShapeType.CIRCLE, true));
-        }
-
-        this.generateCoins(StdOps.rand(0, 5));
-        this.generateDeathSound(StdOps.rand(1, 2));
-    }
-
-    /**
-     * Randomly generate one of the zombie sound effects.
-     *
-     * @param _sfx
-     */
-    public void generateHurtSound (int _sfx) {
-        StandardAudioController.play("src/res/audio/sfx/zombies/zombie-" + _sfx + ".wav");
     }
 
     /**
@@ -214,7 +233,15 @@ public class BasicMonster extends Enemy implements DeathListener {
      */
     private void generateCoins (int _coinAmt) {
         for (int i = 0 ; i < _coinAmt ; i++) {
-            this.getHandler().addEntity(new Coin((int) this.getX(), (int) this.getY(), 0.7, 0.9, 1.0));
+            this.getHandler().addEntity(new Coin((int) this.getX(), (int) this.getY(), 0.7, 0.9, 1.0, this.getHandler()));
         }
+    }
+
+    //
+    //  Static block for instantiating the images.
+    //
+    static {
+        WALK_FRAMES = Utilities.loadFrames("src/res/img/enemies/monster1/walk/", 9);
+        DEATH_FRAMES = Utilities.loadFrames("src/res/img/enemies/monster1/death/", 6);
     }
 }
