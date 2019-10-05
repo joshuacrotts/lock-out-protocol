@@ -7,6 +7,7 @@ import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.model.StandardGameObject;
 import com.revivedstandards.model.StandardID;
 import com.revivedstandards.util.StdOps;
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
@@ -23,31 +24,38 @@ import java.awt.image.BufferedImage;
  */
 public class Minimap extends Interactor {
 
+    //  Miscellaneous reference variables
     private final Game game;
     private final StandardCollisionHandler globalHandler;
+
+    //  Border texture that surrounds the image with the objects
     private final BufferedImage border;
 
+    //  Scale that is applied to all objects in the map
     private final int MINIMAP_SCALE = 20;
 
     private final int MMX_OFFSET = 230;
     private final int MMY_OFFSET = 20;
 
+    //  Object and map size dimensions
     private final int MAP_DIMENSION = 200;
     private final int OBJECT_DIMENTION = 5;
 
+    //  Points for describing the triangle that draws the player
     private final int[] X_POINTS;
     private final int[] Y_POINTS;
 
+    //  Indices in the arrays of x/y points
     private final int POINT_ONE = 0;
     private final int POINT_TWO = 1;
     private final int POINT_THREE = 2;
     private final int POINT_FOUR = 3;
-    private final int POINT_FIVE = 4;
 
+    //  Scale for the player's triangle
     private final int TRIANGLE_X_SCALE = 6;
     private final int TRIANGLE_Y_SCALE = 12;
 
-    private final Color TRANS_BLACK = new Color(0f, 0f, 0f, 0.5f);
+    //private final Color TRANS_BLACK = new Color(0f, 0f, 0f, 0.5f);
 
     public Minimap (Game _game, StandardCollisionHandler _sch) {
         this.game = _game;
@@ -89,12 +97,24 @@ public class Minimap extends Interactor {
      * @param _g2
      */
     private void drawMapBackground (Graphics2D _g2) {
-        _g2.setColor(TRANS_BLACK);
-        _g2.fillRect((int) this.game.getCamera().getX() + Screen.gameHalfWidth - this.MMX_OFFSET,
+//        _g2.setColor(TRANS_BLACK);
+//        _g2.fillRect((int) this.game.getCamera().getX() + Screen.gameHalfWidth - this.MMX_OFFSET,
+//                (int) this.game.getCamera().getY() - Screen.gameHalfHeight + this.MMY_OFFSET,
+//                MAP_DIMENSION, this.MAP_DIMENSION);
+        AlphaComposite oldComposite = (AlphaComposite) _g2.getComposite();
+        _g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+        _g2.drawImage(this.game.getCurrentLevel().getBgImage(), (int) this.game.getCamera().getX() + Screen.gameHalfWidth - this.MMX_OFFSET,
                 (int) this.game.getCamera().getY() - Screen.gameHalfHeight + this.MMY_OFFSET,
-                MAP_DIMENSION, this.MAP_DIMENSION);
+                MAP_DIMENSION, MAP_DIMENSION, null);
+        _g2.setComposite(oldComposite);
+
     }
 
+    /**
+     * Draws the border around the transparent map background.
+     *
+     * @param _g2
+     */
     private void drawBorder (Graphics2D _g2) {
         _g2.drawImage(this.border, (int) this.game.getCamera().getX() + Screen.gameHalfWidth - this.MMX_OFFSET,
                 (int) this.game.getCamera().getY() - Screen.gameHalfHeight + this.MMY_OFFSET,

@@ -8,11 +8,10 @@ import com.dsd.game.commands.DecrementWeaponCommand;
 import com.dsd.game.commands.IncrementWeaponCommand;
 import com.dsd.game.commands.MoveCommand;
 import com.dsd.game.commands.ReloadCommand;
-import com.dsd.game.userinterface.Screen;
+import com.dsd.game.controller.DebugController;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.main.StandardCamera;
-import com.revivedstandards.main.StandardGame;
 import com.revivedstandards.model.DeathListener;
 import com.revivedstandards.model.StandardID;
 import java.awt.Color;
@@ -58,7 +57,6 @@ public class Player extends Entity implements DeathListener {
     //
     //  Variables representing the angle and approach velocity
     //
-    private float angle;
     private final float APPROACH_VEL = -3.0f;
 
     //
@@ -105,7 +103,7 @@ public class Player extends Entity implements DeathListener {
                 this.getAnimationController().tick();
             }
 
-            this.getAnimationController().getStandardAnimation().setRotation(this.angle);
+            this.getAnimationController().getStandardAnimation().setRotation(this.getAngle());
             this.updateDimensions();
 
             // Save the mouse position
@@ -130,6 +128,9 @@ public class Player extends Entity implements DeathListener {
 
     @Override
     public void render (Graphics2D _g2) {
+        if (DebugController.DEBUG_MODE) {
+            this.drawBorder(_g2);
+        }
         this.getAnimationController().renderFrame(_g2);
     }
 
@@ -137,6 +138,11 @@ public class Player extends Entity implements DeathListener {
     public void uponDeath () {
         JOptionPane.showMessageDialog(this.getGame(), "You have died!");
         this.getGame().stopGame();
+    }
+
+    private void drawBorder (Graphics2D _g2) {
+        _g2.setColor(Color.RED);
+        _g2.draw(this.getBounds());
     }
 
     /**
@@ -151,11 +157,11 @@ public class Player extends Entity implements DeathListener {
         double dx = FastMath.abs(_mx - this.getX());
         double dy = FastMath.abs(_my - this.getY());
 
-        this.angle = (float) ((xSign) * (FastMath.atan((dx) / (dy))));
+        this.setAngle((double) ((xSign) * (FastMath.atan((dx) / (dy)))));
 
         // If we're in Q1 (+x, -+y) or in Q2 (-x, +y)
         if ((_mx > this.getX() && _my > this.getY()) || (_mx < this.getX() && _my > this.getY())) {
-            this.angle = (float) ((FastMath.PI / 2) + (FastMath.PI / 2 - this.angle));
+            this.setAngle((float) ((FastMath.PI / 2) + (FastMath.PI / 2 - this.getAngle())));
         }
     }
 
@@ -195,10 +201,6 @@ public class Player extends Entity implements DeathListener {
 
     public Inventory getInventory () {
         return this.inventory;
-    }
-
-    public double getAngle () {
-        return this.angle;
     }
 
     public int getMoney () {

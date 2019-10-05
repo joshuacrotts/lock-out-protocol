@@ -34,40 +34,27 @@ import org.apache.commons.math3.util.FastMath;
  */
 public class BasicMonster extends Enemy implements DeathListener {
 
-    //
     //  Handler for particle explosions after the
     //  monster dies.
-    //
     private StandardParticleHandler explosionHandler;
 
-    //
     //  Static bufferedimage array so the images aren't constantly
     //  loading in upon instantiation of a new monster
-    //
     private static final BufferedImage[] WALK_FRAMES;
     private static final BufferedImage[] DEATH_FRAMES;
 
-    //
     //  Animation frame per second setting
-    //
     private static final int WALKING_FPS = 10;
     private static final int DEATH_FPS = 5;
 
-    //
     //  One-time variable for tracking the "alive" to "death state" transition
-    //
     private boolean aliveFlag = true;
 
-    //
     //  Variables representing the angle and approach velocity
-    //
     private final float APPROACH_VEL = -1.5f;
     private final double DAMAGE = 0.20;
-    private float angle;
 
-    //
-    //  Health factor for this specific object.
-    //
+    //  Health factor for this BasicMonster object.
     private static int health = 100;
 
     public BasicMonster (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
@@ -94,7 +81,7 @@ public class BasicMonster extends Enemy implements DeathListener {
         //  If the monster's health is less than 0, we can flag it as dead.
         this.setAlive(this.getHealth() > 0);
         this.getAnimationController().tick();
-        this.getAnimationController().getStandardAnimation().setRotation(this.angle);
+        this.getAnimationController().getStandardAnimation().setRotation(this.getAngle());
 
         if (this.isAlive()) {
             this.updatePosition();
@@ -115,10 +102,8 @@ public class BasicMonster extends Enemy implements DeathListener {
                 this.uponDeath();
                 this.aliveFlag = false;
             }
-            //
             //  Creates the alpha composite object based off the object's current
             //  transparency.
-            //
             this.updateComposite();
 
             // If the size of the exphandler (MAX_PARTICLES - dead ones) == 0,
@@ -169,7 +154,7 @@ public class BasicMonster extends Enemy implements DeathListener {
             this.explosionHandler.addEntity(new StandardBoxParticle(this.getX(), this.getY(),
                     StdOps.rand(1.0, 5.0), StdOps.randBounds(-10.0, -3.0, 3.0, 10.0),
                     StdOps.randBounds(-10.0, -3.0, 3.0, 10.0), Color.RED, 3f, this.explosionHandler,
-                    this.angle, ShapeType.CIRCLE, true));
+                    this.getAngle(), ShapeType.CIRCLE, true));
         }
 
         this.generateCoins(StdOps.rand(0, 5));
@@ -223,11 +208,11 @@ public class BasicMonster extends Enemy implements DeathListener {
         double dx = FastMath.abs(_posX - this.getX());
         double dy = FastMath.abs(_posY - this.getY());
 
-        this.angle = (float) ((xSign) * (FastMath.atan((dx) / (dy))));
+        this.setAngle((double) ((xSign) * (FastMath.atan((dx) / (dy)))));
 
         // If we're in Q1 (+x, -+y) or in Q2 (-x, +y)
         if ((_posX > this.getX() && _posY > this.getY()) || (_posX < this.getX() && _posY > this.getY())) {
-            this.angle = (float) ((FastMath.PI / 2) + (FastMath.PI / 2 - this.angle));
+            this.setAngle((double) ((FastMath.PI / 2) + (FastMath.PI / 2 - this.getAngle())));
         }
     }
 

@@ -35,7 +35,6 @@ public class BulletGameObject extends StandardGameObject {
     //  Angle of bullet according to current rotation of player,
     //  and damage of bullet.
     //
-    private final double angle;
     private final int DAMAGE = 25;
 
     //
@@ -60,13 +59,13 @@ public class BulletGameObject extends StandardGameObject {
 
         this.game = _game;
         this.sch = _parentContainer;
-        this.angle = _angle;
 
         this.setAnimation(new StandardAnimatorController(
                 new StandardAnimation(this, BulletGameObject.frames, BulletGameObject.BULLET_FPS)));
         this.setWidth(this.getWidth());
         this.setHeight(this.getHeight());
         this.setAlive(true);
+        this.setAngle(_angle);
 
         this.setVelocity(_parent.getX(), _parent.getY(), _game.getCamera().getCamMouseX(), _game.getCamera().getCamMouseY());
         this.sch.flagAlive(this.getId());
@@ -96,7 +95,7 @@ public class BulletGameObject extends StandardGameObject {
         // If they're alive, draw the frame that the bullet animation is on.
         // Otherwise, render the explosion handler
         if (this.isAlive()) {
-            this.getAnimationController().getStandardAnimation().setRotation(angle);
+            this.getAnimationController().getStandardAnimation().setRotation(this.getAngle());
             this.getAnimationController().renderFrame(_g2);
         }
     }

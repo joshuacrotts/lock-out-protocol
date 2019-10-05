@@ -21,6 +21,8 @@ public abstract class Gun extends Weapon {
     private final StandardCollisionHandler globalHandler;
     private final Player player;
 
+    //  Variables for how much ammo the gun can carry, how much is in a mag,
+    //  and how much they currently have.
     private final int magazineAmt;
     private int totalAmmo;
     private int currentAmmo;
@@ -49,10 +51,16 @@ public abstract class Gun extends Weapon {
      */
     public abstract void shoot ();
 
+    /**
+     * Removes one bullet from the gun.
+     */
     public void deductAmmo () {
         this.currentAmmo--;
     }
 
+    /**
+     * Reloads a gun using the specified algorithm.
+     */
     public void reload () {
         //
         //  Three cases:
