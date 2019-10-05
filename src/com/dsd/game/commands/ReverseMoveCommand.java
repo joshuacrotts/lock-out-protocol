@@ -8,27 +8,27 @@ import com.dsd.game.PlayerState;
 import java.awt.event.KeyEvent;
 
 /**
- * Command representing when the user runs forward
+ * Command representing when the user back-peddles
  *
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
  */
-public class MoveCommand extends Command {
+public class ReverseMoveCommand extends Command {
 
     private final Game game;
     private final Player player;
 
-    public MoveCommand (Game _game, Player _obj) {
+    public ReverseMoveCommand (Game _game, Player _obj) {
         this.game = _game;
         this.player = _obj;
-        this.bind(_game.getKeyboard(), KeyEvent.VK_W);
+        this.bind(_game.getKeyboard(), KeyEvent.VK_S);
     }
 
     @Override
     public void pressed (float _dt) {
         if (this.game.getGameState() != GameState.PAUSED) {
-            this.player.setPlayerState(PlayerState.WALKING);
+            this.player.setPlayerState(PlayerState.REVERSEWALKING);
             this.player.updatePosition();
         }
     }
@@ -41,7 +41,7 @@ public class MoveCommand extends Command {
     @Override
     public void down (float _dt) {
         if (this.game.getGameState() != GameState.PAUSED) {
-            this.player.setPlayerState(PlayerState.WALKING);
+            this.player.setPlayerState(PlayerState.REVERSEWALKING);
             this.player.updatePosition();
         }
     }

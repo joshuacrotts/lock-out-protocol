@@ -6,6 +6,7 @@ import com.dsd.game.commands.AttackCommand;
 import com.dsd.game.commands.DecrementWeaponCommand;
 import com.dsd.game.commands.IncrementWeaponCommand;
 import com.dsd.game.commands.MoveCommand;
+import com.dsd.game.commands.ReverseMoveCommand;
 import com.dsd.game.commands.ReloadCommand;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
@@ -46,6 +47,7 @@ public class Player extends Entity implements DeathListener {
     //  Commands for the player's actions
     //
     private final MoveCommand moveCommand;
+    private final ReverseMoveCommand reverseMoveCommand;
     private final AttackCommand attackCommand;
     private final ReloadCommand reloadCommand;
     private final IncrementWeaponCommand incWeaponCommand;
@@ -77,6 +79,7 @@ public class Player extends Entity implements DeathListener {
         //  Instantiate commands
         this.attackCommand = new AttackCommand(this.getGame(), this, this.getHandler(), this.inventory.getCurrentWeapon().getAttackFrames());
         this.moveCommand = new MoveCommand(this.getGame(), this);
+        this.reverseMoveCommand = new ReverseMoveCommand(this.getGame(), this);
         this.reloadCommand = new ReloadCommand(this.getGame(), this);
         this.incWeaponCommand = new IncrementWeaponCommand(this.getGame(), this);
         this.decWeaponCommand = new DecrementWeaponCommand(this.getGame(), this);
@@ -155,7 +158,7 @@ public class Player extends Entity implements DeathListener {
 
     /**
      * Makes the player move towards the cursor whenever they press W.
-     *
+     * Also makes the player move backwards to the cursor whenever they press S.
      * @param _mx
      * @param _my
      */
@@ -169,8 +172,15 @@ public class Player extends Entity implements DeathListener {
                 + ((this.getY() - _my) * (this.getY() - _my)));
 
         // Sets the velocity according to how far away the sprite is from the cursor
-        this.setVelX((this.APPROACH_VEL / distance) * diffX);
-        this.setVelY((this.APPROACH_VEL / distance) * diffY);
+        if (this.playerState == playerState.WALKING) {
+            this.setVelX((this.APPROACH_VEL / distance) * diffX);
+            this.setVelY((this.APPROACH_VEL / distance) * diffY);
+        }
+
+        else if (this.playerState == playerState.REVERSEWALKING) {
+            this.setVelX((this.APPROACH_VEL / distance) * diffX * -1);
+            this.setVelY((this.APPROACH_VEL / distance) * diffY * -1);
+        }
     }
 
     /**

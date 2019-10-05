@@ -8,5 +8,5 @@ package com.dsd.game;
  * @author Joshua, Ronald, Rinty
  */
 public enum PlayerState {
-    WALKING, STANDING, ATTACKING, DEAD
+    WALKING, STANDING, ATTACKING, DEAD, REVERSEWALKING
 }

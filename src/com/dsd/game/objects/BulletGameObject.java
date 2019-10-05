@@ -59,7 +59,7 @@ public class BulletGameObject extends StandardGameObject {
     //
     private static final int BULLET_FPS = 20;
 
-    public BulletGameObject (int _x, int _y, double _angle, Game _game,
+    public BulletGameObject(int _x, int _y, double _angle, Game _game,
             StandardCollisionHandler _parentContainer,
             StandardCamera _sc, Player _parent) {
 
@@ -69,12 +69,21 @@ public class BulletGameObject extends StandardGameObject {
         this.sch = _parentContainer;
         this.angle = _angle;
 
-        this.setAnimation(new StandardAnimatorController(
-                new StandardAnimation(this, BulletGameObject.frames, BulletGameObject.BULLET_FPS)));
+        this.setAnimation(new StandardAnimatorController(new StandardAnimation(this, BulletGameObject.frames, BulletGameObject.BULLET_FPS)));
         this.setWidth(this.getWidth());
         this.setHeight(this.getHeight());
         this.setAlive(true);
 
+        /*if (_parent.getPlayerState() == _parent.getPlayerState().REVERSEWALKING) {
+            this.modifiedVelX = _parent.getVelX() * this.VEL_X_FACTOR * -1;
+            this.modifiedVelY = _parent.getVelY() * this.VEL_Y_FACTOR * -1;
+        } 
+        
+        else {
+            this.modifiedVelX = _parent.getVelX() * this.VEL_X_FACTOR;
+            this.modifiedVelY = _parent.getVelY() * this.VEL_Y_FACTOR;
+        }*/
+        
         this.modifiedVelX = _parent.getVelX() * this.VEL_X_FACTOR;
         this.modifiedVelY = _parent.getVelY() * this.VEL_Y_FACTOR;
 
@@ -88,7 +97,7 @@ public class BulletGameObject extends StandardGameObject {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (this.sc.SGOInBounds(this)) {
             this.setX(this.getX() + this.modifiedVelX);
             this.setY(this.getY() + this.modifiedVelY);
@@ -97,14 +106,13 @@ public class BulletGameObject extends StandardGameObject {
             if (this.isAlive()) {
                 this.getAnimationController().tick();
             }
-        }
-        else {
+        } else {
             this.sch.removeEntity(this);
         }
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         // If they're alive, draw the frame that the bullet animation is on.
         // Otherwise, render the explosion handler
         if (this.isAlive()) {
@@ -118,7 +126,7 @@ public class BulletGameObject extends StandardGameObject {
      *
      * @return
      */
-    private static BufferedImage[] initImages () {
+    private static BufferedImage[] initImages() {
 
         BulletGameObject.frames[0] = StdOps.loadImage("src/res/img/bullet/bullet_sprite/new_bullet/bullet.png");
 
