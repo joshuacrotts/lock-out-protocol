@@ -52,6 +52,6 @@ public class Pistol extends Gun {
                 (int) super.getPlayer().getX() + super.getPlayer().getWidth() / 2,
                 (int) super.getPlayer().getY() + super.getPlayer().getHeight() / 2,
                 super.getPlayer().getAngle(), super.getGame(), super.getHandler(),
-                super.getPlayer().getCamera(), super.getPlayer()));
+                super.getPlayer()));
     }
 }

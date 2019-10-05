@@ -6,14 +6,16 @@ import com.dsd.game.commands.AttackCommand;
 import com.dsd.game.commands.DebugCommand;
 import com.dsd.game.commands.DecrementWeaponCommand;
 import com.dsd.game.commands.IncrementWeaponCommand;
-import com.dsd.game.commands.MoveCommand;
+import com.dsd.game.commands.MoveBackwardCommand;
+import com.dsd.game.commands.MoveForwardCommand;
 import com.dsd.game.commands.ReloadCommand;
+import com.dsd.game.controller.DebugController;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.main.StandardCamera;
-import com.revivedstandards.main.StandardGame;
 import com.revivedstandards.model.DeathListener;
 import com.revivedstandards.model.StandardID;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import javax.swing.JOptionPane;
 import org.apache.commons.math3.util.FastMath;
@@ -46,7 +48,8 @@ public class Player extends Entity implements DeathListener {
     //
     //  Commands for the player's actions
     //
-    private final MoveCommand moveCommand;
+    private final MoveForwardCommand moveForwardCommand;
+    private final MoveBackwardCommand moveBackwardCommand;
     private final AttackCommand attackCommand;
     private final ReloadCommand reloadCommand;
     private final IncrementWeaponCommand incWeaponCommand;
@@ -56,7 +59,6 @@ public class Player extends Entity implements DeathListener {
     //
     //  Variables representing the angle and approach velocity
     //
-    private float angle;
     private final float APPROACH_VEL = -3.0f;
 
     //
@@ -64,21 +66,22 @@ public class Player extends Entity implements DeathListener {
     //
     private int money;
 
-    public Player(int _x, int _y, StandardGame _game, StandardCamera _sc, StandardCollisionHandler _sch) {
+    public Player (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, 100, StandardID.Player, (Game) _game, _sch);
 
         //  Instantiate the inventory
         this.inventory = new Inventory(this.getGame(), this, _sch);
 
         //  Initializes the miscellaneous variables
-        this.sc = _sc;
+        this.sc = this.getGame().getCamera();
 
         //  Sets the default animation
         this.setAnimation(this.inventory.getCurrentWeapon().getWalkFrames());
 
         //  Instantiate commands
         this.attackCommand = new AttackCommand(this.getGame(), this, this.getHandler(), this.inventory.getCurrentWeapon().getAttackFrames());
-        this.moveCommand = new MoveCommand(this.getGame(), this);
+        this.moveForwardCommand = new MoveForwardCommand(this.getGame(), this);
+        this.moveBackwardCommand = new MoveBackwardCommand(this.getGame(), this);
         this.reloadCommand = new ReloadCommand(this.getGame(), this);
         this.incWeaponCommand = new IncrementWeaponCommand(this.getGame(), this);
         this.decWeaponCommand = new DecrementWeaponCommand(this.getGame(), this);
@@ -94,16 +97,16 @@ public class Player extends Entity implements DeathListener {
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         this.setAlive(this.getHealth() > 0);
 
         if (this.isAlive()) {
             //  If the player is not standing still, update the animation controller.
-            if (this.getPlayerState() != PlayerState.STANDING) {
+            if (!this.isStanding()) {
                 this.getAnimationController().tick();
             }
 
-            this.getAnimationController().getStandardAnimation().setRotation(this.angle);
+            this.getAnimationController().getStandardAnimation().setRotation(this.getAngle());
             this.updateDimensions();
 
             // Save the mouse position
@@ -120,20 +123,29 @@ public class Player extends Entity implements DeathListener {
             //      cursor                                                     //
             //*****************************************************************//
             this.faceCursor((int) mx, (int) my);
-        } else {
+        }
+        else {
             this.uponDeath();
         }
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
+        if (DebugController.DEBUG_MODE) {
+            this.drawBorder(_g2);
+        }
         this.getAnimationController().renderFrame(_g2);
     }
 
     @Override
-    public void uponDeath() {
-        JOptionPane.showMessageDialog(null, "You have died!");
+    public void uponDeath () {
+        JOptionPane.showMessageDialog(this.getGame(), "You have died!");
         this.getGame().stopGame();
+    }
+
+    private void drawBorder (Graphics2D _g2) {
+        _g2.setColor(Color.RED);
+        _g2.draw(this.getBounds());
     }
 
     /**
@@ -143,16 +155,16 @@ public class Player extends Entity implements DeathListener {
      * @param _mx
      * @param _my
      */
-    private void faceCursor(int _mx, int _my) {
+    private void faceCursor (int _mx, int _my) {
         float xSign = (float) FastMath.signum(_mx - this.getX());
         double dx = FastMath.abs(_mx - this.getX());
         double dy = FastMath.abs(_my - this.getY());
 
-        this.angle = (float) ((xSign) * (FastMath.atan((dx) / (dy))));
+        this.setAngle((double) ((xSign) * (FastMath.atan((dx) / (dy)))));
 
         // If we're in Q1 (+x, -+y) or in Q2 (-x, +y)
         if ((_mx > this.getX() && _my > this.getY()) || (_mx < this.getX() && _my > this.getY())) {
-            this.angle = (float) ((FastMath.PI / 2) + (FastMath.PI / 2 - this.angle));
+            this.setAngle((float) ((FastMath.PI / 2) + (FastMath.PI / 2 - this.getAngle())));
         }
     }
 
@@ -162,7 +174,7 @@ public class Player extends Entity implements DeathListener {
      * @param _mx
      * @param _my
      */
-    private void followCursor(int _mx, int _my) {
+    private void followCursor (int _mx, int _my) {
         // Calculate the distance between the sprite and the mouse
         double diffX = this.getX() - _mx - Entity.APPROACH_FACTOR;
         double diffY = this.getY() - _my - Entity.APPROACH_FACTOR;
@@ -171,64 +183,72 @@ public class Player extends Entity implements DeathListener {
         double distance = (double) FastMath.sqrt(((this.getX() - _mx) * (this.getX() - _mx))
                 + ((this.getY() - _my) * (this.getY() - _my)));
 
-        // Sets the velocity according to how far away the sprite is from the cursor
-        this.setVelX((this.APPROACH_VEL / distance) * diffX);
-        this.setVelY((this.APPROACH_VEL / distance) * diffY);
+        // Sets the velocity according to how far away the sprite is from the cursor,
+        // and according to what direction the player is facing.
+        int directionSign = 0;
+        switch (this.playerState) {
+            case WALKING_FORWARD:
+                directionSign = 1;
+                break;
+            case WALKING_BACKWARD:
+                directionSign = -1;
+        }
+
+        this.setVelX(directionSign * ((this.APPROACH_VEL / distance) * diffX));
+        this.setVelY(directionSign * ((this.APPROACH_VEL / distance) * diffY));
     }
 
     /**
      * Updates the dimensions of the SGO according to the animation's current
      * sprite.
      */
-    private void updateDimensions() {
+    private void updateDimensions () {
         this.setWidth(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getWidth());
         this.setHeight(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getHeight());
     }
 
 //============================== GETTERS ================================//
-    public StandardCamera getCamera() {
-        return this.sc;
-    }
-
-    public PlayerState getPlayerState() {
-        return this.playerState;
-    }
-
-    public Inventory getInventory() {
+    public Inventory getInventory () {
         return this.inventory;
     }
 
-    public double getAngle() {
-        return this.angle;
-    }
-
-    public int getMoney() {
+    public int getMoney () {
         return this.money;
     }
 
-//=============================== SETTERS ================================//
-    public void setWalking() {
-        this.playerState = PlayerState.WALKING;
+    /**
+     * If either the state is walking forward OR backward, then we are
+     * "walking".
+     *
+     * @return
+     */
+    public boolean isWalking () {
+        return this.playerState == PlayerState.WALKING_FORWARD
+                ^ this.playerState == PlayerState.WALKING_BACKWARD;
     }
 
-    public void setCamera(StandardCamera _sc) {
+    public boolean isStanding () {
+        return this.playerState == PlayerState.STANDING;
+    }
+
+    public boolean isAttacking () {
+        return this.playerState == PlayerState.ATTACKING;
+    }
+
+//=============================== SETTERS ================================//
+    public void setCamera (StandardCamera _sc) {
         this.sc = _sc;
     }
 
-    public void setPlayerState(PlayerState _playerState) {
+    public void setPlayerState (PlayerState _playerState) {
         this.playerState = _playerState;
     }
 
-    public void setAttackAnimator(StandardAnimatorController sac) {
+    public void setAttackAnimator (StandardAnimatorController sac) {
         this.attackCommand.setAnimation(sac);
     }
 
-    public void setMoney(int _money) {
+    public void setMoney (int _money) {
         this.money = _money;
     }
-
-    static {
-
-    }
-
 }

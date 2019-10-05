@@ -17,6 +17,7 @@ import java.awt.Graphics2D;
  */
 public class DebugController implements Renderable {
 
+    //  Miscellaneous reference variables
     private final Game game;
     private final Player player;
     private final StandardCamera camera;
@@ -37,8 +38,8 @@ public class DebugController implements Renderable {
         int posY = (int) (this.camera.getY() - Screen.gameHalfHeight / 2) - 150;
 
         this.renderPlayerCoordinates(_g2, posX, posY);
-        this.renderEntityCount(_g2, posX, posY + 40);
-        this.renderCameraCoordinates(_g2, posX, posY + 60);
+        this.renderEntityCount(_g2, posX, posY + 80);
+        this.renderCameraCoordinates(_g2, posX, posY + 100);
         this.renderDebugText(_g2, (int) this.camera.getX(), (int) this.camera.getY() - Screen.gameHalfHeight);
 
     }
@@ -47,6 +48,8 @@ public class DebugController implements Renderable {
         _g2.setColor(Color.ORANGE);
         _g2.drawString("Player X: " + this.player.getX(), _x, _y);
         _g2.drawString("Player Y: " + this.player.getY(), _x, _y + 20);
+        _g2.drawString("Player sprite width: " + this.player.getWidth(), _x, _y + 40);
+        _g2.drawString("Player sprite height: " + this.player.getHeight(), _x, _y + 60);
     }
 
     private void renderEntityCount (Graphics2D _g2, int _x, int _y) {

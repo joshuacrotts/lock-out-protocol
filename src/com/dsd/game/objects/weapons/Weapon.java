@@ -48,7 +48,6 @@ public abstract class Weapon {
         this.weaponType = _type;
         this.weaponState = WeaponState.READY;
         this.setSFXPath("src/res/audio/sfx/" + _type + ".wav");
-        System.out.println(_type);
         this.setIcon(StdOps.loadImage("src/res/img/items/icons/" + _type.getType() + "_icon.png"));
 
     }
