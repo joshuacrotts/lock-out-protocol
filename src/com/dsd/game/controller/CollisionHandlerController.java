@@ -121,7 +121,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      */
     private void handlePlayerMonsterCollision(Player _player, BasicMonster _monster) {
         _player.setHealth(_player.getHealth() - _monster.getDamage());
-        if (_player.getPlayerState() == PlayerState.ATTACKING) {
+        if (_player.isAttacking()) {
             int dmg = (int) _player.getInventory().getCurrentWeapon().getDamage();
             this.addDamageText(_monster, dmg);
 

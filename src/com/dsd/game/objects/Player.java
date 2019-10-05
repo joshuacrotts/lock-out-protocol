@@ -6,7 +6,8 @@ import com.dsd.game.commands.AttackCommand;
 import com.dsd.game.commands.DebugCommand;
 import com.dsd.game.commands.DecrementWeaponCommand;
 import com.dsd.game.commands.IncrementWeaponCommand;
-import com.dsd.game.commands.MoveCommand;
+import com.dsd.game.commands.MoveBackwardCommand;
+import com.dsd.game.commands.MoveForwardCommand;
 import com.dsd.game.commands.ReloadCommand;
 import com.dsd.game.controller.DebugController;
 import com.revivedstandards.controller.StandardAnimatorController;
@@ -47,7 +48,8 @@ public class Player extends Entity implements DeathListener {
     //
     //  Commands for the player's actions
     //
-    private final MoveCommand moveCommand;
+    private final MoveForwardCommand moveForwardCommand;
+    private final MoveBackwardCommand moveBackwardCommand;
     private final AttackCommand attackCommand;
     private final ReloadCommand reloadCommand;
     private final IncrementWeaponCommand incWeaponCommand;
@@ -78,7 +80,8 @@ public class Player extends Entity implements DeathListener {
 
         //  Instantiate commands
         this.attackCommand = new AttackCommand(this.getGame(), this, this.getHandler(), this.inventory.getCurrentWeapon().getAttackFrames());
-        this.moveCommand = new MoveCommand(this.getGame(), this);
+        this.moveForwardCommand = new MoveForwardCommand(this.getGame(), this);
+        this.moveBackwardCommand = new MoveBackwardCommand(this.getGame(), this);
         this.reloadCommand = new ReloadCommand(this.getGame(), this);
         this.incWeaponCommand = new IncrementWeaponCommand(this.getGame(), this);
         this.decWeaponCommand = new DecrementWeaponCommand(this.getGame(), this);
@@ -99,7 +102,7 @@ public class Player extends Entity implements DeathListener {
 
         if (this.isAlive()) {
             //  If the player is not standing still, update the animation controller.
-            if (this.getPlayerState() != PlayerState.STANDING) {
+            if (!this.isStanding()) {
                 this.getAnimationController().tick();
             }
 
@@ -180,9 +183,19 @@ public class Player extends Entity implements DeathListener {
         double distance = (double) FastMath.sqrt(((this.getX() - _mx) * (this.getX() - _mx))
                 + ((this.getY() - _my) * (this.getY() - _my)));
 
-        // Sets the velocity according to how far away the sprite is from the cursor
-        this.setVelX((this.APPROACH_VEL / distance) * diffX);
-        this.setVelY((this.APPROACH_VEL / distance) * diffY);
+        // Sets the velocity according to how far away the sprite is from the cursor,
+        // and according to what direction the player is facing.
+        int directionSign = 0;
+        switch (this.playerState) {
+            case WALKING_FORWARD:
+                directionSign = 1;
+                break;
+            case WALKING_BACKWARD:
+                directionSign = -1;
+        }
+
+        this.setVelX(directionSign * ((this.APPROACH_VEL / distance) * diffX));
+        this.setVelY(directionSign * ((this.APPROACH_VEL / distance) * diffY));
     }
 
     /**
@@ -195,10 +208,6 @@ public class Player extends Entity implements DeathListener {
     }
 
 //============================== GETTERS ================================//
-    public PlayerState getPlayerState () {
-        return this.playerState;
-    }
-
     public Inventory getInventory () {
         return this.inventory;
     }
@@ -207,11 +216,26 @@ public class Player extends Entity implements DeathListener {
         return this.money;
     }
 
-//=============================== SETTERS ================================//
-    public void setWalking () {
-        this.playerState = PlayerState.WALKING;
+    /**
+     * If either the state is walking forward OR backward, then we are
+     * "walking".
+     *
+     * @return
+     */
+    public boolean isWalking () {
+        return this.playerState == PlayerState.WALKING_FORWARD
+                ^ this.playerState == PlayerState.WALKING_BACKWARD;
     }
 
+    public boolean isStanding () {
+        return this.playerState == PlayerState.STANDING;
+    }
+
+    public boolean isAttacking () {
+        return this.playerState == PlayerState.ATTACKING;
+    }
+
+//=============================== SETTERS ================================//
     public void setCamera (StandardCamera _sc) {
         this.sc = _sc;
     }
@@ -227,9 +251,4 @@ public class Player extends Entity implements DeathListener {
     public void setMoney (int _money) {
         this.money = _money;
     }
-
-    static {
-
-    }
-
 }
