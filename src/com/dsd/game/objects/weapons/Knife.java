@@ -19,7 +19,7 @@ public class Knife extends Weapon {
     private static final int ATTACK_KNIFE_FPS = 20;
 
     private final int DELAY = 1250;
-    private final int KNIFE_DAMAGE = 2;
+    private final int KNIFE_DAMAGE = 20;
 
     public Knife(Player _player) {
         super(WeaponType.KNIFE);

@@ -27,7 +27,7 @@ public class CoinLabel extends StandardLabel {
     //
     //  Position and sizing of health elements
     //
-    private final int COIN_X_OFFSET = 220;
+    private final int COIN_X_OFFSET = 230;
     private final int COIN_Y_OFFSET = 140;
 
     public CoinLabel(Game _game, Player _player) {
