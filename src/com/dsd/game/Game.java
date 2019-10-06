@@ -165,7 +165,7 @@ public class Game extends StandardGame {
      * instantiate the Spawner controllers, level controllers, etc.
      */
     public void uponPlay () {
-        //this.levelController.addLevel(new ForestLevel(this.player, this));
+        this.levelController.getCurrentLevel().loadLevelData();
     }
 
     private void instantiateLevels () {
