@@ -8,7 +8,7 @@ import com.dsd.game.PlayerState;
 import java.awt.event.KeyEvent;
 
 /**
- * Command representing when the user runs forward
+ * Command representing when the user shoots their weapon.
  *
  * [Group Name: Data Structure Deadheads]
  *

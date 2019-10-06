@@ -89,7 +89,7 @@ public class SpawnerController extends StandardGameObject {
 
         @Override
         public void run () {
-            this.spawnerController.spawn(1);
+            this.spawnerController.spawn(StdOps.rand(0, 5));
         }
     }
 

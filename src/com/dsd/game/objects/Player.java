@@ -6,8 +6,8 @@ import com.dsd.game.commands.AttackCommand;
 import com.dsd.game.commands.DebugCommand;
 import com.dsd.game.commands.DecrementWeaponCommand;
 import com.dsd.game.commands.IncrementWeaponCommand;
-import com.dsd.game.commands.MoveCommand;
-import com.dsd.game.commands.ReverseMoveCommand;
+import com.dsd.game.commands.MoveBackwardCommand;
+import com.dsd.game.commands.MoveForwardCommand;
 import com.dsd.game.commands.ReloadCommand;
 import com.dsd.game.controller.DebugController;
 import com.revivedstandards.controller.StandardAnimatorController;
@@ -48,8 +48,8 @@ public class Player extends Entity implements DeathListener {
     //
     //  Commands for the player's actions
     //
-    private final MoveCommand moveCommand;
-    private final ReverseMoveCommand reverseMoveCommand;
+    private final MoveForwardCommand moveForwardCommand;
+    private final MoveBackwardCommand moveBackwardCommand;
     private final AttackCommand attackCommand;
     private final ReloadCommand reloadCommand;
     private final IncrementWeaponCommand incWeaponCommand;
@@ -80,8 +80,8 @@ public class Player extends Entity implements DeathListener {
 
         //  Instantiate commands
         this.attackCommand = new AttackCommand(this.getGame(), this, this.getHandler(), this.inventory.getCurrentWeapon().getAttackFrames());
-        this.moveCommand = new MoveCommand(this.getGame(), this);
-        this.reverseMoveCommand = new ReverseMoveCommand(this.getGame(), this);
+        this.moveForwardCommand = new MoveForwardCommand(this.getGame(), this);
+        this.moveBackwardCommand = new MoveBackwardCommand(this.getGame(), this);
         this.reloadCommand = new ReloadCommand(this.getGame(), this);
         this.incWeaponCommand = new IncrementWeaponCommand(this.getGame(), this);
         this.decWeaponCommand = new DecrementWeaponCommand(this.getGame(), this);
@@ -170,7 +170,7 @@ public class Player extends Entity implements DeathListener {
 
     /**
      * Makes the player move towards the cursor whenever they press W.
-     * Also makes the player move backwards to the cursor whenever they press S.
+     *
      * @param _mx
      * @param _my
      */
@@ -183,16 +183,19 @@ public class Player extends Entity implements DeathListener {
         double distance = (double) FastMath.sqrt(((this.getX() - _mx) * (this.getX() - _mx))
                 + ((this.getY() - _my) * (this.getY() - _my)));
 
-        // Sets the velocity according to how far away the sprite is from the cursor
-        if (this.playerState == playerState.WALKING) {
-            this.setVelX((this.APPROACH_VEL / distance) * diffX);
-            this.setVelY((this.APPROACH_VEL / distance) * diffY);
+        // Sets the velocity according to how far away the sprite is from the cursor,
+        // and according to what direction the player is facing.
+        int directionSign = 0;
+        switch (this.playerState) {
+            case WALKING_FORWARD:
+                directionSign = 1;
+                break;
+            case WALKING_BACKWARD:
+                directionSign = -1;
         }
 
-        else if (this.playerState == playerState.REVERSEWALKING) {
-            this.setVelX((this.APPROACH_VEL / distance) * diffX * -1);
-            this.setVelY((this.APPROACH_VEL / distance) * diffY * -1);
-        }
+        this.setVelX(directionSign * ((this.APPROACH_VEL / distance) * diffX));
+        this.setVelY(directionSign * ((this.APPROACH_VEL / distance) * diffY));
     }
 
     /**
