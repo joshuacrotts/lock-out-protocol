@@ -49,6 +49,11 @@ public abstract class Screen implements Renderable, Updatable {
         StandardDraw.Handler(this.sih);
     }
 
+    /**
+     * Adds a default interactor to the list of interactors.
+     *
+     * @param _interactor
+     */
     public void addInteractor (Interactor _interactor) {
         this.sih.addInteractor(_interactor);
     }

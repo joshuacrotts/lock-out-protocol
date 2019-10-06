@@ -1,5 +1,7 @@
-package com.dsd.game;
+package com.dsd.game.levels;
 
+import com.dsd.game.EnemyType;
+import com.dsd.game.Game;
 import com.dsd.game.controller.SpawnerController;
 import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.Screen;
@@ -49,6 +51,7 @@ public class ForestLevel extends StandardLevel {
     public void loadLevelData () {
         System.out.println("is this called!?!?");
         this.addEntity(new SpawnerController(900, 900, EnemyType.BASIC_MONSTER, 5000, 200, this.game, (StandardCollisionHandler) this.getHandler()));
+        this.addEntity(new SpawnerController(2200, 2600, EnemyType.GREEN_MONSTER, 5000, 200, this.game, (StandardCollisionHandler) this.getHandler()));
     }
 
     @Override

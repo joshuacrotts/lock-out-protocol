@@ -28,7 +28,7 @@ public class AmmoLabel extends StandardLabel {
     //
     //  Position and sizing of health elements
     //
-    private final int AMMO_X_OFFSET = 220;
+    private final int AMMO_X_OFFSET = 230;
     private final int AMMO_Y_OFFSET = 100;
     private boolean hasGun = false;
 

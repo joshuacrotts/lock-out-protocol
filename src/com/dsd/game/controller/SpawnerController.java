@@ -2,7 +2,8 @@ package com.dsd.game.controller;
 
 import com.dsd.game.EnemyType;
 import com.dsd.game.Game;
-import com.dsd.game.objects.BasicMonster;
+import com.dsd.game.enemies.BasicMonster;
+import com.dsd.game.enemies.GreenMonster;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.model.StandardGameObject;
 import com.revivedstandards.model.StandardID;
@@ -19,21 +20,15 @@ import java.util.TimerTask;
  */
 public class SpawnerController extends StandardGameObject {
 
-    //
     //  Miscellaneous reference variables
-    //
     private final StandardCollisionHandler parentContainer;
     private final EnemyType spawnerID;
     private final Game game;
 
-    //
     //  Timer object controlling the spawn-rate.
-    //
     private final Timer spawnerTimer;
 
-    //
     //  Delay and radius of the timer.
-    //
     private final long delay;
     private final int radius;
 
@@ -71,6 +66,9 @@ public class SpawnerController extends StandardGameObject {
             switch (this.spawnerID) {
                 case BASIC_MONSTER:
                     this.parentContainer.addEntity(new BasicMonster(xPos, yPos, this.game, this.parentContainer));
+                    break;
+                case GREEN_MONSTER:
+                    this.parentContainer.addEntity(new GreenMonster(xPos, yPos, this.game, this.parentContainer));
             }
         }
     }

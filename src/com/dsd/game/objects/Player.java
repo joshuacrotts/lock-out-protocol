@@ -29,32 +29,21 @@ import org.apache.commons.math3.util.FastMath;
  */
 public class Player extends Entity implements DeathListener {
 
-    //
     //  Miscellaneous reference variables
-    //
     private StandardCamera sc;
 
     //  Refers to the player's current state (walking, shooting, etc.)
     //  PlayerState is set by commands
-    //
     private PlayerState playerState;
 
-    //
     //  Inventory of the player, tells how much money they have, the current
     //  weapon, etc.
-    //
     private final Inventory inventory;
 
     //
-    //  Commands for the player's actions
+    //  Global commands
     //
-    private final MoveForwardCommand moveForwardCommand;
-    private final MoveBackwardCommand moveBackwardCommand;
-    private final AttackCommand attackCommand;
-    private final ReloadCommand reloadCommand;
-    private final IncrementWeaponCommand incWeaponCommand;
-    private final DecrementWeaponCommand decWeaponCommand;
-    private final DebugCommand debugCommand;
+    private AttackCommand attackCommand;
 
     //
     //  Variables representing the angle and approach velocity
@@ -79,14 +68,9 @@ public class Player extends Entity implements DeathListener {
         this.setAnimation(this.inventory.getCurrentWeapon().getWalkFrames());
 
         //  Instantiate commands
-        this.attackCommand = new AttackCommand(this.getGame(), this, this.getHandler(), this.inventory.getCurrentWeapon().getAttackFrames());
-        this.moveForwardCommand = new MoveForwardCommand(this.getGame(), this);
-        this.moveBackwardCommand = new MoveBackwardCommand(this.getGame(), this);
-        this.reloadCommand = new ReloadCommand(this.getGame(), this);
-        this.incWeaponCommand = new IncrementWeaponCommand(this.getGame(), this);
-        this.decWeaponCommand = new DecrementWeaponCommand(this.getGame(), this);
-        this.debugCommand = new DebugCommand(this.getGame());
+        this.initCommands();
 
+        //  Initializes the player's default state to standing
         this.playerState = PlayerState.STANDING;
 
         //  Adds the player to the list of collidable objects
@@ -185,14 +169,7 @@ public class Player extends Entity implements DeathListener {
 
         // Sets the velocity according to how far away the sprite is from the cursor,
         // and according to what direction the player is facing.
-        int directionSign = 0;
-        switch (this.playerState) {
-            case WALKING_FORWARD:
-                directionSign = 1;
-                break;
-            case WALKING_BACKWARD:
-                directionSign = -1;
-        }
+        int directionSign = this.getPlayerDirection();
 
         this.setVelX(directionSign * ((this.APPROACH_VEL / distance) * diffX));
         this.setVelY(directionSign * ((this.APPROACH_VEL / distance) * diffY));
@@ -205,6 +182,16 @@ public class Player extends Entity implements DeathListener {
     private void updateDimensions () {
         this.setWidth(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getWidth());
         this.setHeight(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getHeight());
+    }
+
+    private void initCommands () {
+        this.attackCommand = new AttackCommand(this.getGame(), this, this.getHandler(), this.inventory.getCurrentWeapon().getAttackFrames());
+        MoveForwardCommand moveForwardCommand = new MoveForwardCommand(this.getGame(), this);
+        MoveBackwardCommand moveBackwardCommand = new MoveBackwardCommand(this.getGame(), this);
+        ReloadCommand reloadCommand = new ReloadCommand(this.getGame(), this);
+        IncrementWeaponCommand incWeaponCommand = new IncrementWeaponCommand(this.getGame(), this);
+        DecrementWeaponCommand decWeaponCommand = new DecrementWeaponCommand(this.getGame(), this);
+        DebugCommand debugCommand = new DebugCommand(this.getGame());
     }
 
 //============================== GETTERS ================================//
@@ -233,6 +220,19 @@ public class Player extends Entity implements DeathListener {
 
     public boolean isAttacking () {
         return this.playerState == PlayerState.ATTACKING;
+    }
+
+    public int getPlayerDirection () {
+        int directionSign = 0;
+        switch (this.playerState) {
+            case WALKING_FORWARD:
+                directionSign = 1;
+                break;
+            case WALKING_BACKWARD:
+                directionSign = -1;
+        }
+
+        return directionSign;
     }
 
 //=============================== SETTERS ================================//

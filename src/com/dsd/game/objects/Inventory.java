@@ -3,7 +3,6 @@ package com.dsd.game.objects;
 import com.dsd.game.objects.weapons.Weapon;
 import com.dsd.game.objects.weapons.Gun;
 import com.dsd.game.Game;
-import com.dsd.game.PlayerState;
 import com.dsd.game.WeaponSelection;
 import com.dsd.game.objects.weapons.Knife;
 import com.dsd.game.objects.weapons.Pistol;

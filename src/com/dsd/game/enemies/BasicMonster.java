@@ -1,18 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.dsd.game.objects;
+package com.dsd.game.enemies;
 
 import com.dsd.game.Game;
+import com.dsd.game.objects.Entity;
 import com.dsd.game.objects.items.Coin;
 import com.dsd.game.util.Utilities;
 import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.handlers.StandardHandler;
 import com.revivedstandards.handlers.StandardParticleHandler;
-import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.main.StandardDraw;
 import com.revivedstandards.model.DeathListener;
 import com.revivedstandards.model.StandardBoxParticle;
@@ -42,28 +37,41 @@ public class BasicMonster extends Enemy implements DeathListener {
     //  loading in upon instantiation of a new monster
     private static final BufferedImage[] WALK_FRAMES;
     private static final BufferedImage[] DEATH_FRAMES;
+    private static final BufferedImage[] ATTACK_FRAMES;
 
     //  Animation frame per second setting
-    private static final int WALKING_FPS = 10;
+    private final int walkingFPS;
+    private final int WALKING_FPS_MIN = 7;
+    private final int WALKING_FPS_MAX = 13;
+    private static final int ATTACK_FPS = 9;
     private static final int DEATH_FPS = 5;
 
     //  One-time variable for tracking the "alive" to "death state" transition
     private boolean aliveFlag = true;
 
     //  Variables representing the angle and approach velocity
-    private final float APPROACH_VEL = -1.5f;
+    private final double APPROACH_VEL = -1.5f;
     private final double DAMAGE = 0.20;
 
     //  Health factor for this BasicMonster object.
-    private static int health = 100;
+    private static final int HEALTH = 100;
+
+    //  AlphaComposite factor for when the BasicMonster dies
+    private static final float DEATH_ALPHA_FACTOR = 0.001f;
 
     public BasicMonster (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
-        super(_x, _y, BasicMonster.health, StandardID.BasicMonster, _game, _sch);
+        super(_x, _y, BasicMonster.HEALTH, StandardID.BasicMonster, _game, _sch);
         this.setTarget(_game.getPlayer());
 
-        super.initWalkingFrames(BasicMonster.WALK_FRAMES, WALKING_FPS);
-        super.initDeathFrames(BasicMonster.DEATH_FRAMES, DEATH_FPS, 5);
+        //  Randomly generates the walking frames per second for variability
+        this.walkingFPS = StdOps.rand(this.WALKING_FPS_MIN, this.WALKING_FPS_MAX);
 
+        //  Sets the walking/death frames for this monster
+        super.initWalkingFrames(BasicMonster.WALK_FRAMES, this.walkingFPS);
+        super.initAttackingFrames(BasicMonster.ATTACK_FRAMES, BasicMonster.ATTACK_FPS);
+        super.initDeathFrames(BasicMonster.DEATH_FRAMES, BasicMonster.DEATH_FPS, 5);
+
+        //  Sets the default animation
         super.setAnimation(super.getWalkingAnimation());
 
         //  The width/height of the model is set by the buffered image backing it.
@@ -73,7 +81,7 @@ public class BasicMonster extends Enemy implements DeathListener {
         super.getHandler().addCollider(this.getId());
         super.getHandler().flagAlive(this.getId());
 
-        super.setTransparentFactor((float) 0.001);
+        super.setTransparentFactor((float) DEATH_ALPHA_FACTOR);
     }
 
     @Override
@@ -243,5 +251,6 @@ public class BasicMonster extends Enemy implements DeathListener {
     static {
         WALK_FRAMES = Utilities.loadFrames("src/res/img/enemies/monster1/walk/", 9);
         DEATH_FRAMES = Utilities.loadFrames("src/res/img/enemies/monster1/death/", 6);
+        ATTACK_FRAMES = Utilities.loadFrames("src/res/img/enemies/monster1/attack/", 9);
     }
 }

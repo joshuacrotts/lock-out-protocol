@@ -20,9 +20,7 @@ import org.apache.commons.math3.util.FastMath;
  */
 public class RainController implements Renderable, Updatable {
 
-    //
     //  Reference variables
-    //
     private final StandardParticleHandler sph;
     private final StandardCamera sc;
     private final Game game;
@@ -30,27 +28,19 @@ public class RainController implements Renderable, Updatable {
     //  Serves as a debugging feature
     private static final boolean toggleDownfall = true;
 
-    //
     //  If it is raining, this boolean is toggled true.
-    //
     private final boolean isRaining;
 
-    //
     //  Defines the range in which rain can spawn for the user
-    //
     private static final int X_BORDER = 600;
     private static final int Y_BORDER = 400;
 
-    //
     //  Velocity constants and factors for the rain drop object.
-    //
     private static final double RAIN_DIRECTION = -FastMath.PI * 1.5;
     private static final int VEL_FACTOR = 5;
     private static final int Y_BOUND_FACTOR = 2;
 
-    //
     //  Constants for how many rain particles should spawn
-    //
     private static final int MAX_RAIN_PARTICLES = 5000;
 
     public RainController (Game _game, String _weather) {

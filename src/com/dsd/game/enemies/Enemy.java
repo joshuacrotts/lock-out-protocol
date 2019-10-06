@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.dsd.game.objects;
+package com.dsd.game.enemies;
 
+import com.dsd.game.EnemyState;
 import com.dsd.game.Game;
+import com.dsd.game.objects.Entity;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.main.StandardCamera;
@@ -29,32 +31,25 @@ import java.util.Collections;
  */
 public abstract class Enemy extends Entity {
 
-    //
     //  Miscellaneous reference variables
-    //
     private Entity target;
     private final StandardCamera sc;
+    private EnemyState enemyState;
 
-    //
     //  Animation controllers
-    //
     private StandardAnimatorController walkingController;
     private StandardAnimatorController attackingController;
     private StandardAnimatorController deathController;
 
-    //
     //  Variables for the disappearing effect when the monster
     //  dies.
-    //
     private float deathTransparencyFactor;
     private float deathTransparency = 1.0f;
 
     //  How much damage the enemy does when running into the player
     protected double damage;
 
-    //
     //  Alpha composition object for when the monster dies.
-    //
     protected AlphaComposite deathTransparentComposite;
 
     public Enemy (int _x, int _y, int _health, StandardID _id, Game _game, StandardCollisionHandler _sch) {
@@ -190,6 +185,14 @@ public abstract class Enemy extends Entity {
         return this.deathTransparency;
     }
 
+    public boolean isAttacking () {
+        return this.enemyState == EnemyState.ATTACKING;
+    }
+
+    public boolean isWalking () {
+        return this.enemyState == EnemyState.WALKING;
+    }
+
 //================================ SETTERS ===================================//
     public void setTarget (Entity _target) {
         this.target = _target;
@@ -201,6 +204,10 @@ public abstract class Enemy extends Entity {
 
     public void setTransparentFactor (float _alphaFactor) {
         this.deathTransparencyFactor = _alphaFactor;
+    }
+
+    public void setEnemyState (EnemyState _state) {
+        this.enemyState = _state;
     }
 
 }

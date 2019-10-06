@@ -1,5 +1,6 @@
 package com.dsd.game;
 
+import com.dsd.game.levels.ForestLevel;
 import com.dsd.game.api.CityLocator;
 import com.dsd.game.api.WeatherConnector;
 import com.dsd.game.controller.AudioBoxController;
@@ -168,6 +169,9 @@ public class Game extends StandardGame {
         this.levelController.getCurrentLevel().loadLevelData();
     }
 
+    /**
+     * Loads the level data when the game starts so the timers can be instantiated.
+     */
     private void instantiateLevels () {
         this.levelController.addLevel(new ForestLevel(this.player, this, this.sch));
     }

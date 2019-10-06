@@ -25,11 +25,10 @@ public class Coin extends StandardGameObject {
     //
     private final StandardCollisionHandler parentContainer;
 
+    //  Frames of animation for the coins
     private static final BufferedImage[] coinOneFrames;
     private static final BufferedImage[] coinTwoFrames;
 
-    //
-    //
     //  Randomness for the scatter of the coin
     //
     //  This the value at which the coins can scatter
@@ -53,6 +52,7 @@ public class Coin extends StandardGameObject {
      * @param _small
      * @param _medium
      * @param _large
+     * @param _sch
      */
     public Coin (int _x, int _y, double _small, double _medium, double _large, StandardCollisionHandler _sch) {
         super(_x, _y, StandardID.Coin);
@@ -72,7 +72,8 @@ public class Coin extends StandardGameObject {
             this.getAnimationController().tick();
             this.slowVelocities();
             this.updatePosition();
-        } else {
+        }
+        else {
             this.parentContainer.removeEntity(this);
         }
     }
@@ -92,6 +93,13 @@ public class Coin extends StandardGameObject {
         this.setVelY(this.getVelY() * SCATTER_RANGE);
     }
 
+    /**
+     * Generates a coin type depending on the probability of the coins.
+     *
+     * @param _small
+     * @param _medium
+     * @param _large
+     */
     private void generateCoinType (double _small, double _medium, double _large) {
         int coin = StdOps.rand(0, 100);
         if (coin < _small * 100) {
