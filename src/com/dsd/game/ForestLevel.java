@@ -43,12 +43,11 @@ public class ForestLevel extends StandardLevel {
 
         this.setCameraBounds(this.getBgImage().getWidth() - Screen.gameHalfWidth,
                 this.getBgImage().getHeight() - Screen.gameHalfHeight);
-
-        this.loadLevelData();
     }
 
     @Override
     public void loadLevelData () {
+        System.out.println("is this called!?!?");
         this.addEntity(new SpawnerController(900, 900, EnemyType.BASIC_MONSTER, 5000, 200, this.game, (StandardCollisionHandler) this.getHandler()));
     }
 
