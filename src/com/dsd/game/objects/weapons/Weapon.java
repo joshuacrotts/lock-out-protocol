@@ -16,32 +16,24 @@ import java.awt.image.BufferedImage;
  */
 public abstract class Weapon {
 
-    //
     //  Type of weapon, standard animator controllers,
     //  the icon (for the inventoryview)
-    //
     private WeaponType weaponType;
     private StandardAnimatorController walkWeaponFrames;
     private StandardAnimatorController attackWeaponFrames;
     private BufferedImage weaponIcon;
 
-    //
     //  State of the weapon (when applicable), and the sfx
     //  it makes when attacking.
-    //
     private WeaponState weaponState;
     private String attackSFXPath;
 
-    //
     //  Variables to determine how long to wait in between attacks.
-    //
     private long delay = 0;
     private boolean ready = true;
 
-    //
     //  Some weapons will have damage that the actual weapons do as opposed
     //  to just a projectile exiting the weapon (like a bullet).
-    //
     private int damage;
 
     public Weapon (WeaponType _type) {

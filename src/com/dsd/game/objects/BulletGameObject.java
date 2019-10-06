@@ -4,7 +4,6 @@ import com.dsd.game.Game;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.main.StandardCamera;
-import com.revivedstandards.main.StandardGame;
 import com.revivedstandards.model.StandardAnimation;
 import com.revivedstandards.model.StandardGameObject;
 import com.revivedstandards.model.StandardID;

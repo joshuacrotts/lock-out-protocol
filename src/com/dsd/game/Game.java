@@ -1,5 +1,6 @@
 package com.dsd.game;
 
+import com.dsd.game.levels.ForestLevel;
 import com.dsd.game.api.CityLocator;
 import com.dsd.game.api.WeatherConnector;
 import com.dsd.game.controller.AudioBoxController;
@@ -11,6 +12,8 @@ import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.HUDScreen;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.PauseScreen;
+import com.dsd.game.userinterface.PreambleScreen;
+import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.handlers.StandardHandler;
 import com.revivedstandards.main.StandardCamera;
@@ -39,6 +42,7 @@ public class Game extends StandardGame {
     //  UI Element views
     private final MenuScreen menuScreen;
     private final PauseScreen pauseScreen;
+    private final PreambleScreen preambleScreen;
     private final HUDScreen hudScreen;
 
     //  Rain controller which contacts the API for the logic of
@@ -85,15 +89,15 @@ public class Game extends StandardGame {
         this.rainController = new RainController(this, WeatherConnector.getWeather(CityLocator.getCity()));
         this.debugController = new DebugController(this, this.sch);
         this.levelController = new LevelController();
+        this.instantiateLevels();
 
         // Instantiates the levels @TODO: (should move this to a method and to
         // some type of controller to determine HOW levels transition)
         //  Creates the UI views
         this.menuScreen = new MenuScreen(this);
         this.pauseScreen = new PauseScreen(this);
+        this.preambleScreen = new PreambleScreen(this);
         this.hudScreen = new HUDScreen(this, this.player, this.sch);
-
-        this.instantiateLevels();
 
         this.startGame();
     }
@@ -110,6 +114,7 @@ public class Game extends StandardGame {
             case PAUSED:
                 this.pauseScreen.tick();
                 break;
+            case PREAMBLE:
             case RUNNING:
                 //  Update the level background first
                 this.levelController.tickLevel();
@@ -119,6 +124,8 @@ public class Game extends StandardGame {
                 this.rainController.tick();
                 //  Then the heads up display
                 this.hudScreen.tick();
+                //  Update the preamble text/effect
+                this.preambleScreen.tick();
                 //  And lastly the camera
                 StandardHandler.Object(this.sc);
         }
@@ -144,6 +151,8 @@ public class Game extends StandardGame {
             StandardDraw.Handler(this.sch);
             //  Then render the heads up display
             this.hudScreen.render(StandardDraw.Renderer);
+            //  Then render the preamble effect
+            this.preambleScreen.render(StandardDraw.Renderer);
 
             //  If the game is paused, draw the paused text and
             //  transparent background.
@@ -166,8 +175,13 @@ public class Game extends StandardGame {
      */
     public void uponPlay () {
         this.levelController.getCurrentLevel().loadLevelData();
+        StandardAudioController.play("src/res/audio/sfx/round_change.wav");
     }
 
+    /**
+     * Loads the level data when the game starts so the timers can be
+     * instantiated.
+     */
     private void instantiateLevels () {
         this.levelController.addLevel(new ForestLevel(this.player, this, this.sch));
     }
@@ -187,6 +201,22 @@ public class Game extends StandardGame {
 
     public StandardLevel getCurrentLevel () {
         return this.levelController.getCurrentLevel();
+    }
+
+    public int getCurrentLevelID () {
+        return this.levelController.getCurrentLevelID();
+    }
+
+    public int getLogicalCurrentLevelID () {
+        return this.levelController.getLogicalCurrentLevelID();
+    }
+
+    public boolean isPaused () {
+        return this.gameState == GameState.PAUSED;
+    }
+
+    public boolean isPreamble () {
+        return this.gameState == GameState.PREAMBLE;
     }
 
 //========================== SETTERS =============================/

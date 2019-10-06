@@ -4,6 +4,7 @@ import com.dsd.game.Game;
 import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.model.Interactor;
 import com.revivedstandards.handlers.StandardCollisionHandler;
+import com.revivedstandards.main.StandardDraw;
 import com.revivedstandards.model.StandardGameObject;
 import com.revivedstandards.model.StandardID;
 import com.revivedstandards.util.StdOps;
@@ -56,7 +57,6 @@ public class Minimap extends Interactor {
     private final int TRIANGLE_Y_SCALE = 12;
 
     //private final Color TRANS_BLACK = new Color(0f, 0f, 0f, 0.5f);
-
     public Minimap (Game _game, StandardCollisionHandler _sch) {
         this.game = _game;
         this.globalHandler = _sch;
@@ -81,8 +81,11 @@ public class Minimap extends Interactor {
 
                 }
                 else if (obj.getId() == StandardID.BasicMonster) {
-                    this.drawObject(_g2, obj, Color.RED);
+                    this.drawObject(_g2, obj, StandardDraw.RED);
+                }
 
+                else if (obj.getId() == StandardID.Monster2) {
+                    this.drawObject(_g2, obj, StandardDraw.BRUNSWICK_GREEN);
                 }
             }
         }
@@ -138,7 +141,7 @@ public class Minimap extends Interactor {
         AffineTransform backup = _g2.getTransform();
         AffineTransform transform = new AffineTransform();
         transform.rotate(_player.getAngle(), scaledPX, scaledPY);
-        _g2.setColor(Color.GREEN);
+        _g2.setColor(StandardDraw.GREEN);
         _g2.transform(transform);
         _g2.fill(new Polygon(this.X_POINTS, this.Y_POINTS, this.X_POINTS.length));
         _g2.setTransform(backup);

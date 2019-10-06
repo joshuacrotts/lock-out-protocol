@@ -40,6 +40,9 @@ public class HUDScreen extends Screen {
         this.player.getInventory().getView().render(_g2);
     }
 
+    /**
+     * Creates the interactor elements for this HUD Screen.
+     */
     private void createUIElements () {
         this.addInteractor(new HealthLabel(super.getGame(), this.player));
         this.addInteractor(new AmmoLabel(super.getGame(), this.player));
