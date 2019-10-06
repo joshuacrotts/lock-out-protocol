@@ -30,4 +30,15 @@ public abstract class Utilities extends StdOps {
         }
         return frames;
     }
+
+    public static float clampFloat (float _num, float _min, float _max) {
+        if (_num < _min) {
+            return _min;
+        }
+        else if (_num > _max) {
+            return _max;
+        }
+
+        return _num;
+    }
 }

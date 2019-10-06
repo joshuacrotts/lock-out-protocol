@@ -65,6 +65,15 @@ public abstract class Enemy extends Entity {
     public abstract void tick ();
 
     /**
+     * Generates a random track to play when the monster is hurt. _sfxTrack
+     * should be a number between 1 and the number of sfx are available for that
+     * monster.
+     *
+     * @param _sfxTrack
+     */
+    public abstract void generateHurtSound (int _sfxTrack);
+
+    /**
      * Sets the dimensions of the enemy to the animation's current frame
      * dimensions.
      */

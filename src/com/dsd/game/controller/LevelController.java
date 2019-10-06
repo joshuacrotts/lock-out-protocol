@@ -61,6 +61,16 @@ public class LevelController {
         return this.levels.get(this.currentLevelID);
     }
 
+    /**
+     * Instead of returning the INDEX in the array of levels, we return the
+     * natural level ID.
+     *
+     * @return
+     */
+    public int getLogicalCurrentLevelID () {
+        return this.currentLevelID + 1;
+    }
+
 //============================= SETTERS ======================================//
     protected void changeLevelID (int _levelID) {
         this.currentLevelID = _levelID;

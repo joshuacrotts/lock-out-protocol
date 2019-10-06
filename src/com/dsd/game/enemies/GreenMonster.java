@@ -81,6 +81,9 @@ public class GreenMonster extends Enemy implements DeathListener {
         super.setTransparentFactor((float) DEATH_ALPHA_FACTOR);
     }
 
+    /**
+     * Updates the animation, health, position and status of the monster.
+     */
     @Override
     public void tick () {
         //  If the monster's health is less than 0, we can flag it as dead.
@@ -121,6 +124,11 @@ public class GreenMonster extends Enemy implements DeathListener {
         }
     }
 
+    /**
+     * Draws the current frame of animation for the monster. If they are dead,
+     * it also draws the explosion handler particles.
+     * @param _g2
+     */
     @Override
     public void render (Graphics2D _g2) {
         //
@@ -172,8 +180,9 @@ public class GreenMonster extends Enemy implements DeathListener {
      *
      * @param _sfx
      */
+    @Override
     public void generateHurtSound (int _sfx) {
-        StandardAudioController.play("src/res/audio/sfx/zombies/zombie-" + _sfx + ".wav");
+        StandardAudioController.play("src/res/audio/sfx/green_monster/pain" + _sfx + ".wav");
     }
 
     /**

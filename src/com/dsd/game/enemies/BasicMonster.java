@@ -175,8 +175,9 @@ public class BasicMonster extends Enemy implements DeathListener {
      *
      * @param _sfx
      */
+    @Override
     public void generateHurtSound (int _sfx) {
-        StandardAudioController.play("src/res/audio/sfx/zombies/zombie-" + _sfx + ".wav");
+        StandardAudioController.play("src/res/audio/sfx/basic_monster/zombie-" + _sfx + ".wav");
     }
 
     /**

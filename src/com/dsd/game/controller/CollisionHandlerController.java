@@ -1,10 +1,8 @@
 package com.dsd.game.controller;
 
-import com.dsd.game.EnemyState;
 import com.dsd.game.Game;
 import com.dsd.game.PlayerState;
 import com.dsd.game.objects.BulletGameObject;
-import com.dsd.game.enemies.BasicMonster;
 import com.dsd.game.enemies.Enemy;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.items.Coin;
@@ -108,7 +106,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
 
         if (_monster.isAlive()) {
             // Plays random monster hurt sfx
-            //_monster.generateHurtSound(StdOps.rand(1, 5));
+            _monster.generateHurtSound(StdOps.rand(1, 5));
             this.addDamageText(_monster, _bullet.getDamage());
         }
     }
@@ -128,7 +126,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
             this.addDamageText(_monster, dmg);
 
             _monster.setHealth(_monster.getHealth() - dmg);
-            // _monster.generateHurtSound(StdOps.rand(1, 5));
+            _monster.generateHurtSound(StdOps.rand(1, 5));
             _player.setPlayerState(PlayerState.STANDING);
         }
     }

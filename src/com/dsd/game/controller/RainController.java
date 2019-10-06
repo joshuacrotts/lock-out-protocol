@@ -26,7 +26,7 @@ public class RainController implements Renderable, Updatable {
     private final Game game;
 
     //  Serves as a debugging feature
-    private static final boolean toggleDownfall = true;
+    private static final boolean toggleDownfall = false;
 
     //  If it is raining, this boolean is toggled true.
     private final boolean isRaining;
