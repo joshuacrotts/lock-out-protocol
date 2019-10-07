@@ -71,14 +71,28 @@ public class RainController implements Renderable, Updatable {
             int yGenMin = (int) (this.sc.getY() - RainController.Y_BORDER);
             int yGenMax = (int) (this.sc.getY() + RainController.Y_BORDER / 4);
 
-            int xPos = StdOps.rand(xGenMin, xGenMax);
-            int yPos = StdOps.rand(yGenMin, yGenMax);
-
-            this.sph.addEntity(new RainDrop(xPos, yPos, RAIN_DIRECTION, this.getRandomSpeed(VEL_FACTOR),
-                    (int) (this.sc.getY() + this.sc.getVph() * Y_BOUND_FACTOR)));
+            this.sph.addEntity(this.generateRainDrop(xGenMin, xGenMax, yGenMin, yGenMax));
 
             this.sph.tick();
         }
+    }
+
+    /**
+     * Generates a rain drop object given a range to spawn them in.
+     *
+     * @param _xGenMin
+     * @param _xGenMax
+     * @param _yGenMin
+     * @param _yGenMax
+     * @return
+     */
+    private RainDrop generateRainDrop (int _xGenMin, int _xGenMax, int _yGenMin, int _yGenMax) {
+
+        int xPos = StdOps.rand(_xGenMin, _xGenMax);
+        int yPos = StdOps.rand(_yGenMin, _yGenMax);
+
+        return new RainDrop(xPos, yPos, RAIN_DIRECTION, this.getRandomSpeed(VEL_FACTOR),
+                (int) (this.sc.getY() + this.sc.getVph() * Y_BOUND_FACTOR));
     }
 
     //========================== GETTERS ==============================
