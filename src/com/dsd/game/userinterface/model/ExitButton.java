@@ -33,7 +33,7 @@ public class ExitButton extends StandardButton implements MouseEventInterface {
         super();
 
         this.game = _game;
-        this.font = StdOps.initFont("src/res/fonts/chargen.ttf", 24f);
+        this.font = StdOps.initFont("src/resources/fonts/chargen.ttf", 24f);
 
         this.setX(Screen.gameHalfWidth - xOffset);
         this.setY(this.game.getGameHeight() - yOffset);

@@ -33,7 +33,7 @@ public class PlayButton extends StandardButton implements MouseEventInterface {
     public PlayButton (Game _game) {
         this.game = _game;
 
-        this.font = StdOps.initFont("src/res/fonts/chargen.ttf", 24f);
+        this.font = StdOps.initFont("src/resources/fonts/chargen.ttf", 24f);
 
         this.setX(Screen.gameHalfWidth - X_OFFSET);
         this.setY(this.game.getGameHeight() - Y_OFFSET);

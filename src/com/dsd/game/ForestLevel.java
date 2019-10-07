@@ -34,7 +34,7 @@ public class ForestLevel extends StandardLevel {
     //  All levels need to share the same collision handler so the player can
     //  directly interact with other entities.
     public ForestLevel (Player _player, Game _sg, StandardCollisionHandler _sch) {
-        super("src/res/img/bg/resized_bg/panel1.jpg");
+        super("src/resources/img/bg/resized_bg/panel1.jpg");
 
         this.game = _sg;
         this.player = _player;

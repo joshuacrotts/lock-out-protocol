@@ -115,6 +115,8 @@ public class Game extends StandardGame {
                 this.pauseScreen.tick();
                 break;
             case PREAMBLE:
+                //  Update the preamble text/effect
+                this.preambleScreen.tick();
             case RUNNING:
                 //  Update the level background first
                 this.levelController.tickLevel();
@@ -124,8 +126,6 @@ public class Game extends StandardGame {
                 this.rainController.tick();
                 //  Then the heads up display
                 this.hudScreen.tick();
-                //  Update the preamble text/effect
-                this.preambleScreen.tick();
                 //  And lastly the camera
                 StandardHandler.Object(this.sc);
         }
@@ -140,7 +140,6 @@ public class Game extends StandardGame {
             this.menuScreen.render(StandardDraw.Renderer);
         }
         else {
-
             //  First things first: render the camera
             StandardDraw.Object(this.sc);
             //  Then render the current [active] level
@@ -151,18 +150,18 @@ public class Game extends StandardGame {
             StandardDraw.Handler(this.sch);
             //  Then render the heads up display
             this.hudScreen.render(StandardDraw.Renderer);
-            //  Then render the preamble effect
-            this.preambleScreen.render(StandardDraw.Renderer);
+            //  Then render the preamble effect if necessary
+            if (this.isPreamble()) {
+                this.preambleScreen.render(StandardDraw.Renderer);
+            }
 
             //  If the game is paused, draw the paused text and
             //  transparent background.
-            if (this.gameState == GameState.PAUSED) {
+            if (this.isPaused()) {
                 this.pauseScreen.render(StandardDraw.Renderer);
             }
 
-            //
             //  If we are in debug mode, we can draw the text.
-            //
             if (DebugController.DEBUG_MODE) {
                 this.debugController.render(StandardDraw.Renderer);
             }
@@ -175,7 +174,7 @@ public class Game extends StandardGame {
      */
     public void uponPlay () {
         this.levelController.getCurrentLevel().loadLevelData();
-        StandardAudioController.play("src/res/audio/sfx/round_change.wav");
+        StandardAudioController.play("src/resources/audio/sfx/round_change.wav");
     }
 
     /**

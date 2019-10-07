@@ -4,6 +4,7 @@ import com.dsd.game.Game;
 import com.dsd.game.PlayerState;
 import com.dsd.game.objects.BulletGameObject;
 import com.dsd.game.enemies.Enemy;
+import com.dsd.game.objects.Health;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.items.Coin;
 import com.dsd.game.userinterface.StandardInteractorHandler;
@@ -85,6 +86,9 @@ public class CollisionHandlerController extends StandardCollisionHandler {
         else if (_obj1.getId() == StandardID.Player && _obj2.getId() == StandardID.Coin && _obj2.isAlive()) {
             this.handlePlayerCoinCollision((Player) _obj1, (Coin) _obj2);
         }
+        else if (_obj1.getId() == StandardID.Player && _obj2 instanceof Health) {
+            this.handlePlayerHealthCollision((Player) _obj1, (Health) _obj2);
+        }
 
     }
 
@@ -120,6 +124,8 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      * @param _monster
      */
     private void handlePlayerMonsterCollision (Player _player, Enemy _monster) {
+        System.out.println("here");
+        System.out.println(_player.isAttacking());
         _player.setHealth(_player.getHealth() - _monster.getDamage());
         if (_player.isAttacking()) {
             int dmg = (int) _player.getInventory().getCurrentWeapon().getDamage();
@@ -129,14 +135,32 @@ public class CollisionHandlerController extends StandardCollisionHandler {
             _monster.generateHurtSound(StdOps.rand(1, 5));
             _player.setPlayerState(PlayerState.STANDING);
         }
+        System.out.println("after "+_player.isAttacking());
     }
 
+    /**
+     * Collision for when the player runs into a coin object.
+     *
+     * @param _player
+     * @param _coin
+     */
     private void handlePlayerCoinCollision (Player _player, Coin _coin) {
         _player.setMoney(_player.getMoney() + _coin.getValue());
         _coin.setAlive(false);
-        StandardAudioController.play("src/res/audio/sfx/coin.wav");
+        StandardAudioController.play("src/resources/audio/sfx/coin.wav");
     }
 
+    private void handlePlayerHealthCollision (Player _player, Health _health) {
+        _health.addHealth();
+        _health.setAlive(false);
+    }
+
+    /**
+     * Adds the text _damage above the Enemy _monster's body.
+     *
+     * @param _monster
+     * @param _damage
+     */
     private void addDamageText (Enemy _monster, int _damage) {
         damageText.addInteractor(new DamageText((int) _monster.getX() + _monster.getWidth() / 2,
                 (int) _monster.getY(), "-" + _damage, damageText));

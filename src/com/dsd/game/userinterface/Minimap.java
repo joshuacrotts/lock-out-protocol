@@ -6,7 +6,6 @@ import com.dsd.game.userinterface.model.Interactor;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.main.StandardDraw;
 import com.revivedstandards.model.StandardGameObject;
-import com.revivedstandards.model.StandardID;
 import com.revivedstandards.util.StdOps;
 import java.awt.AlphaComposite;
 import java.awt.Color;
@@ -56,13 +55,12 @@ public class Minimap extends Interactor {
     private final int TRIANGLE_X_SCALE = 6;
     private final int TRIANGLE_Y_SCALE = 12;
 
-    //private final Color TRANS_BLACK = new Color(0f, 0f, 0f, 0.5f);
     public Minimap (Game _game, StandardCollisionHandler _sch) {
         this.game = _game;
         this.globalHandler = _sch;
         this.X_POINTS = new int[]{0, 0, 0, 0};
         this.Y_POINTS = new int[]{0, 0, 0, 0};
-        this.border = StdOps.loadImage("src/res/img/bg/borders/minimap_border2.png");
+        this.border = StdOps.loadImage("src/resources/img/bg/borders/minimap_border2.png");
     }
 
     @Override
@@ -75,19 +73,20 @@ public class Minimap extends Interactor {
         //
         for (int i = 0 ; i < this.globalHandler.size() ; i++) {
             StandardGameObject obj = this.globalHandler.get(i);
-            if (obj.isAlive()) {
-                if (obj.getId() == StandardID.Player) {
-                    this.drawPlayer(_g2, (Player) obj);
 
-                }
-                else if (obj.getId() == StandardID.BasicMonster) {
-                    this.drawObject(_g2, obj, StandardDraw.RED);
-                }
-
-                else if (obj.getId() == StandardID.Monster2) {
-                    this.drawObject(_g2, obj, StandardDraw.BRUNSWICK_GREEN);
+            if (obj != null && obj.isAlive()) {
+                switch (obj.getId()) {
+                    case Player:
+                        this.drawPlayer(_g2, (Player) obj);
+                        break;
+                    case BasicMonster:
+                        this.drawObject(_g2, obj, StandardDraw.RED);
+                        break;
+                    case Monster2:
+                        this.drawObject(_g2, obj, StandardDraw.BRUNSWICK_GREEN);
                 }
             }
+
         }
 
         this.drawBorder(_g2);
@@ -100,10 +99,6 @@ public class Minimap extends Interactor {
      * @param _g2
      */
     private void drawMapBackground (Graphics2D _g2) {
-//        _g2.setColor(TRANS_BLACK);
-//        _g2.fillRect((int) this.game.getCamera().getX() + Screen.gameHalfWidth - this.MMX_OFFSET,
-//                (int) this.game.getCamera().getY() - Screen.gameHalfHeight + this.MMY_OFFSET,
-//                MAP_DIMENSION, this.MAP_DIMENSION);
         AlphaComposite oldComposite = (AlphaComposite) _g2.getComposite();
         _g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
         _g2.drawImage(this.game.getCurrentLevel().getBgImage(), (int) this.game.getCamera().getX() + Screen.gameHalfWidth - this.MMX_OFFSET,

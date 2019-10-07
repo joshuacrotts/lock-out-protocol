@@ -16,7 +16,7 @@ public class TitleLabel extends StandardLabel {
 
     public TitleLabel (Game _game) {
         super(Screen.gameHalfWidth - TitleLabel.TITLE_X_OFFSET, TitleLabel.TITLE_Y_OFFSET,
-                _game.getWindow().getTitle(), "src/res/fonts/chargen.ttf", 32f);
+                _game.getWindow().getTitle(), "src/resources/fonts/chargen.ttf", 32f);
     }
 
     @Override

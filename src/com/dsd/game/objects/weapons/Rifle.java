@@ -28,10 +28,10 @@ public class Rifle extends Gun {
 
         //  Instantiates the animation controllers
         StandardAnimatorController walkingAnimation = new StandardAnimatorController(
-                new StandardAnimation(_player, Utilities.loadFrames("src/res/img/player/player_walk_rifle/", 6), WALKING_FPS));
+                new StandardAnimation(_player, Utilities.loadFrames("src/resources/img/player/player_walk_rifle/", 6), WALKING_FPS));
 
         StandardAnimatorController shootingAnimation = new StandardAnimatorController(
-                new StandardAnimation(_player, Utilities.loadFrames("src/res/img/player/player_shoot_rifle/", 4), SHOOT_GUN_FPS));
+                new StandardAnimation(_player, Utilities.loadFrames("src/resources/img/player/player_shoot_rifle/", 4), SHOOT_GUN_FPS));
 
         super.setWalkFrames(walkingAnimation);
         super.setAttackFrames(shootingAnimation);

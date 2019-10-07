@@ -40,20 +40,17 @@ public class Player extends Entity implements DeathListener {
     //  weapon, etc.
     private final Inventory inventory;
 
-    //
     //  Global commands
-    //
     private AttackCommand attackCommand;
 
-    //
     //  Variables representing the angle and approach velocity
-    //
     private final float APPROACH_VEL = -3.0f;
 
-    //
     //  Money amount
-    //
     private int money;
+
+    //  Health vars (this may change with time)
+    private int maxHealth = 200;
 
     public Player (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, 100, StandardID.Player, (Game) _game, _sch);
@@ -77,7 +74,7 @@ public class Player extends Entity implements DeathListener {
         _sch.addCollider(StandardID.Player);
         _sch.flagAlive(StandardID.Player);
 
-        this.setHealth(200.0);
+        this.setHealth(this.maxHealth);
     }
 
     @Override
@@ -222,6 +219,18 @@ public class Player extends Entity implements DeathListener {
         return this.playerState == PlayerState.ATTACKING;
     }
 
+    public boolean isMovingForward () {
+        return this.playerState == PlayerState.WALKING_FORWARD;
+    }
+
+    public boolean isMovingBackward () {
+        return this.playerState == PlayerState.WALKING_BACKWARD;
+    }
+
+    public int getMaxHealth () {
+        return this.maxHealth;
+    }
+
     public int getPlayerDirection () {
         int directionSign = 0;
         switch (this.playerState) {
@@ -250,5 +259,9 @@ public class Player extends Entity implements DeathListener {
 
     public void setMoney (int _money) {
         this.money = _money;
+    }
+
+    public void setMaxHealth (int _max) {
+        this.maxHealth = _max;
     }
 }

@@ -1,7 +1,6 @@
 package com.dsd.game.commands;
 
 import com.dsd.game.Game;
-import com.dsd.game.GameState;
 import com.dsd.game.objects.Player;
 import com.revivedstandards.commands.Command;
 import com.dsd.game.PlayerState;
@@ -27,7 +26,7 @@ public class MoveBackwardCommand extends Command {
 
     @Override
     public void pressed (float _dt) {
-        if (this.game.getGameState() != GameState.PAUSED) {
+        if (!this.game.isPaused() && !this.player.isMovingForward()) {
             this.player.setPlayerState(PlayerState.WALKING_BACKWARD);
             this.player.updatePosition();
         }
@@ -40,7 +39,7 @@ public class MoveBackwardCommand extends Command {
 
     @Override
     public void down (float _dt) {
-        if (this.game.getGameState() != GameState.PAUSED) {
+        if (!this.game.isPaused() && !this.player.isMovingForward()) {
             this.player.setPlayerState(PlayerState.WALKING_BACKWARD);
             this.player.updatePosition();
         }

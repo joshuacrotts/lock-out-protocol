@@ -51,9 +51,11 @@ public class PreambleScreen extends Screen {
 
     @Override
     public void render (Graphics2D _g2) {
+        AlphaComposite oldComposite = (AlphaComposite)_g2.getComposite();
         _g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, this.alpha));
         this.lightningEffect.render(_g2);
         this.waveModel.render(_g2);
+        _g2.setComposite(oldComposite);
     }
 
     /**
