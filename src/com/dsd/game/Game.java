@@ -69,7 +69,7 @@ public class Game extends StandardGame {
         super(_width, _height, _title);
 
         //  Initialize the sound controller
-        AudioBoxController.initialize(16);
+        AudioBoxController.initialize(24);
 
         //  Create a new collision handler
         this.sch = new CollisionHandlerController(this);
@@ -104,9 +104,7 @@ public class Game extends StandardGame {
 
     @Override
     public void tick () {
-        //
         //  Depending on the game state, update different things.
-        //
         switch (this.gameState) {
             case MENU:
                 this.menuScreen.tick();
@@ -133,9 +131,7 @@ public class Game extends StandardGame {
 
     @Override
     public void render () {
-        //
         //  Depending on the game state, render different things.
-        //
         if (this.gameState == GameState.MENU) {
             this.menuScreen.render(StandardDraw.Renderer);
         }
@@ -174,6 +170,9 @@ public class Game extends StandardGame {
      */
     public void uponPlay () {
         this.levelController.getCurrentLevel().loadLevelData();
+    }
+
+    public void playWaveChangeSFX () {
         StandardAudioController.play("src/resources/audio/sfx/round_change.wav");
     }
 
@@ -222,9 +221,4 @@ public class Game extends StandardGame {
     public void setGameState (GameState _gs) {
         this.gameState = _gs;
     }
-
-    public static void main (String[] args) {
-        Game game = new Game(1280, 720, "Lock Out Protocol");
-    }
-
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dsd.game.userinterface;
 
 import com.dsd.game.Game;
@@ -27,46 +22,56 @@ public class WeaponIconView extends Interactor {
     private final BufferedImage weaponBorder;
 
     private final int ICON_X_OFFSET = 310;
-    private final int ICON_Y_OFFSET = 70;
+    private final int ICON_Y_OFFSET = 110;
 
-    public WeaponIconView(Game _game, Inventory _inventory) {
+    public WeaponIconView (Game _game, Inventory _inventory) {
         this.game = _game;
         this.inventory = _inventory;
         this.weaponBorder = StdOps.loadImage("src/resources/img/items/icons/item_holder.png");
     }
 
     @Override
-    public void tick() {
+    public void tick () {
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
 
         this.setX((int) (this.game.getCamera().getX() + Screen.gameHalfWidth - this.ICON_X_OFFSET));
-        this.setY((int) ((this.game.getCamera().getY() + Screen.gameHalfHeight / 2) + this.ICON_Y_OFFSET));
+        this.setY((int) ((this.game.getCamera().getY() + Screen.gameHalfHeight) - this.ICON_Y_OFFSET));
 
         this.drawWeaponBorder(_g2);
         this.drawIcon(_g2);
     }
 
-    public void drawWeaponBorder(Graphics2D _g2) {
+    /**
+     * Draws the background behind the actual icon of the weapon.
+     *
+     * @param _g2
+     */
+    private void drawWeaponBorder (Graphics2D _g2) {
         _g2.drawImage(this.weaponBorder, this.getX(), this.getY(), null);
     }
 
-    private void drawIcon(Graphics2D _g2) {
+    /**
+     * Draws the icon of the weapon.
+     *
+     * @param _g2
+     */
+    private void drawIcon (Graphics2D _g2) {
         _g2.drawImage(this.inventory.getCurrentWeapon().getIcon(), this.getX(), this.getY(), null);
 
     }
 
     @Override
-    public void onMouseClick() {
+    public void onMouseClick () {
     }
 
     @Override
-    public void onMouseEnterHover() {
+    public void onMouseEnterHover () {
     }
 
     @Override
-    public void onMouseExitHover() {
+    public void onMouseExitHover () {
     }
 }

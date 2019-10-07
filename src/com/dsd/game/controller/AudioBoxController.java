@@ -23,6 +23,7 @@ public abstract class AudioBoxController {
         StandardAudioController.load("src/resources/audio/sfx/rifle.wav", 16);
         StandardAudioController.load("src/resources/audio/sfx/coin.wav", 8);
         StandardAudioController.load("src/resources/audio/sfx/round_change.wav", 1);
+        StandardAudioController.load("src/resources/audio/sfx/restore_health.wav", 4);
 
         AudioBoxController.initBasicMonsterSFX(5);
         AudioBoxController.initGreenMonsterSFX(5);
