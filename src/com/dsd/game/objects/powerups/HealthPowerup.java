@@ -1,8 +1,10 @@
-package com.dsd.game.objects;
+package com.dsd.game.objects.powerups;
 
 import com.dsd.game.Game;
+import com.dsd.game.objects.Player;
 import com.dsd.game.util.Utilities;
 import com.revivedstandards.controller.StandardAnimatorController;
+import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.model.StandardAnimation;
 import com.revivedstandards.model.StandardGameObject;
@@ -16,7 +18,7 @@ import java.awt.image.BufferedImage;
  *
  * @author Joshua
  */
-public class Health extends StandardGameObject {
+public class HealthPowerup extends StandardGameObject {
 
     private final Player player;
     private final StandardCollisionHandler parentContainer;
@@ -25,7 +27,7 @@ public class Health extends StandardGameObject {
     private static final int HEALTH_FPS = 10;
     private static final int HEALTH_INCREASE = 25;
 
-    public Health (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
+    public HealthPowerup (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, StandardID.Powerup);
 
         this.player = _game.getPlayer();
@@ -43,6 +45,7 @@ public class Health extends StandardGameObject {
         if (this.isAlive()) {
             this.getAnimationController().tick();
         } else {
+            StandardAudioController.play("src/resources/audio/sfx/restore_health.wav");
             this.parentContainer.removeEntity(this);
         }
     }

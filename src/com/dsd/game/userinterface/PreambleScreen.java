@@ -74,7 +74,7 @@ public class PreambleScreen extends Screen {
         //  x seconds, then decrease the text/bolt effects.
         else {
             this.preambleTimer.schedule(new PreambleTimer(this), preambleTimerDuration);
-            if (this.state == PreambleScreenState.FADE_OUT && alpha > 0.0f) {
+            if (this.state == PreambleScreenState.FADE_OUT && this.alpha > 0.0f) {
                 this.alpha -= ALPHA_TIMER;
             }
 
