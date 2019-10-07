@@ -26,7 +26,7 @@ public class DamageText extends StandardLabel {
     private final StandardInteractorHandler sih;
 
     //  Font for the text
-    private static final Font font = StdOps.initFont("src/res/fonts/chargen.ttf", 12f);
+    private static final Font font = StdOps.initFont("src/resources/fonts/chargen.ttf", 12f);
 
     //
     //  Values regarding the color of the damage text, how fast it fades, and
@@ -43,7 +43,6 @@ public class DamageText extends StandardLabel {
         this.sih = _sih;
         this.fadeColor = new Color(this.generateRedColor(), 0, 0, 0xff);
         this.setVelY(-1);
-        System.out.println("color: " + redColorValue);
     }
 
     @Override

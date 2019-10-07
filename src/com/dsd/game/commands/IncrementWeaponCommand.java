@@ -1,7 +1,6 @@
 package com.dsd.game.commands;
 
 import com.dsd.game.Game;
-import com.dsd.game.PlayerState;
 import com.dsd.game.WeaponSelection;
 import com.dsd.game.objects.Player;
 import com.revivedstandards.commands.Command;
@@ -27,7 +26,7 @@ public class IncrementWeaponCommand extends Command {
 
     @Override
     public void pressed(float _dt) {
-        if (this.player.getPlayerState() == PlayerState.ATTACKING) {
+        if (this.player.isAttacking()) {
             return;
         }
         this.player.getInventory().changeWeapon(WeaponSelection.INCREMENT);

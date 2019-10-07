@@ -3,7 +3,6 @@ package com.dsd.game.objects;
 import com.dsd.game.objects.weapons.Weapon;
 import com.dsd.game.objects.weapons.Gun;
 import com.dsd.game.Game;
-import com.dsd.game.PlayerState;
 import com.dsd.game.WeaponSelection;
 import com.dsd.game.objects.weapons.Knife;
 import com.dsd.game.objects.weapons.Pistol;
@@ -71,13 +70,13 @@ public class Inventory {
      * have.
      */
     private void updateAnimation() {
-        if (this.player.getPlayerState() == PlayerState.WALKING || this.player.getPlayerState() == PlayerState.STANDING) {
-            this.player.setAnimation(this.weapons.get(currentWeapon).getWalkFrames());
-        } else if (this.player.getPlayerState() == PlayerState.ATTACKING) {
-            this.player.setAnimation(this.weapons.get(currentWeapon).getAttackFrames());
+        if (this.player.isWalking() || this.player.isStanding()) {
+            this.player.setAnimation(this.weapons.get(this.currentWeapon).getWalkFrames());
+        } else if (this.player.isAttacking()) {
+            this.player.setAnimation(this.weapons.get(this.currentWeapon).getAttackFrames());
         }
 
-        this.player.setAttackAnimator(this.weapons.get(currentWeapon).getAttackFrames());
+        this.player.setAttackAnimator(this.weapons.get(this.currentWeapon).getAttackFrames());
     }
 
 //============================= GETTERS ===================================//

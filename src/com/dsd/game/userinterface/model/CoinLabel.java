@@ -27,13 +27,13 @@ public class CoinLabel extends StandardLabel {
     //
     //  Position and sizing of health elements
     //
-    private final int COIN_X_OFFSET = 220;
-    private final int COIN_Y_OFFSET = 140;
+    private final int COIN_X_OFFSET = 230;
+    private final int COIN_Y_OFFSET = 40;
 
     public CoinLabel(Game _game, Player _player) {
         super((int) (Screen.gameHalfWidth + Screen.gameHalfWidth),
                 (int) (Screen.gameHalfHeight + Screen.gameHalfHeight / 2),
-                "$", "src/res/fonts/chargen.ttf", 32f);
+                "$", "src/resources/fonts/chargen.ttf", 32f);
 
         this.game = _game;
         this.player = _player;
@@ -48,7 +48,7 @@ public class CoinLabel extends StandardLabel {
         //  Update positioning here because the timing is crucial to the rendering;
         //  delegating it to tick() will cause flickering problems.
         this.setX((int) (this.game.getCamera().getX() + Screen.gameHalfWidth - this.COIN_X_OFFSET));
-        this.setY((int) ((this.game.getCamera().getY() + Screen.gameHalfHeight / 2) + this.COIN_Y_OFFSET));
+        this.setY((int) ((this.game.getCamera().getY() + Screen.gameHalfHeight) - this.COIN_Y_OFFSET));
         this.drawCoinText(_g2);
     }
 

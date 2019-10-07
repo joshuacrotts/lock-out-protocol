@@ -2,6 +2,7 @@ package com.dsd.game.userinterface.model;
 
 import com.dsd.game.Game;
 import com.dsd.game.GameState;
+import com.dsd.game.controller.DebugController;
 import com.dsd.game.userinterface.MouseEventInterface;
 import com.dsd.game.userinterface.Screen;
 import com.revivedstandards.main.StandardDraw;
@@ -33,7 +34,7 @@ public class PlayButton extends StandardButton implements MouseEventInterface {
     public PlayButton (Game _game) {
         this.game = _game;
 
-        this.font = StdOps.initFont("src/res/fonts/chargen.ttf", 24f);
+        this.font = StdOps.initFont("src/resources/fonts/chargen.ttf", 24f);
 
         this.setX(Screen.gameHalfWidth - X_OFFSET);
         this.setY(this.game.getGameHeight() - Y_OFFSET);
@@ -57,8 +58,15 @@ public class PlayButton extends StandardButton implements MouseEventInterface {
             return;
         }
 
-        this.game.setGameState(GameState.RUNNING);
+        if (!DebugController.DEBUG_MODE) {
+            this.game.setGameState(GameState.PREAMBLE);
+            this.game.playWaveChangeSFX();
+        }
+        else {
+            this.game.setGameState(GameState.RUNNING);
+        }
         this.game.uponPlay();
+
     }
 
     @Override
