@@ -47,7 +47,7 @@ public class HealthLabel extends StandardLabel {
 
     public HealthLabel (Game _game, Player _player) {
         super((int) (Screen.gameHalfWidth - Screen.gameHalfWidth),
-                (int) (Screen.gameHalfHeight + Screen.gameHalfHeight / 2), "Health: ", "src/res/fonts/chargen.ttf", 32f);
+                (int) (Screen.gameHalfHeight + Screen.gameHalfHeight / 2), "Health: ", "src/resources/fonts/chargen.ttf", 32f);
 
         this.darkGreen = new Color(0.0f, 0.5f, 0.0f);
         this.lightGreen = new Color(0.0f, 1.0f, 0.0f);

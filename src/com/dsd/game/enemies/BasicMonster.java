@@ -2,6 +2,7 @@ package com.dsd.game.enemies;
 
 import com.dsd.game.Game;
 import com.dsd.game.objects.Entity;
+import com.dsd.game.objects.Health;
 import com.dsd.game.objects.items.Coin;
 import com.dsd.game.util.Utilities;
 import com.revivedstandards.controller.StandardAudioController;
@@ -167,6 +168,7 @@ public class BasicMonster extends Enemy implements DeathListener {
 
         this.generateCoins(StdOps.rand(0, 5));
         this.generateDeathSound(StdOps.rand(1, 2));
+        this.generatePowerup();
         this.moveEntityToFront();
     }
 
@@ -177,7 +179,7 @@ public class BasicMonster extends Enemy implements DeathListener {
      */
     @Override
     public void generateHurtSound (int _sfx) {
-        StandardAudioController.play("src/res/audio/sfx/basic_monster/zombie-" + _sfx + ".wav");
+        StandardAudioController.play("src/resources/audio/sfx/basic_monster/zombie-" + _sfx + ".wav");
     }
 
     /**
@@ -231,7 +233,7 @@ public class BasicMonster extends Enemy implements DeathListener {
      * @param sfx either 1 or 2
      */
     private void generateDeathSound (int _sfx) {
-        StandardAudioController.play("src/res/audio/sfx/splat" + _sfx + ".wav");
+        StandardAudioController.play("src/resources/audio/sfx/splat" + _sfx + ".wav");
     }
 
     /**
@@ -246,12 +248,24 @@ public class BasicMonster extends Enemy implements DeathListener {
         }
     }
 
+    /**
+     * Generates a random powerup based on RNG (will definitely change).
+     */
+    private void generatePowerup () {
+        int luck = StdOps.rand(1, 5);
+        if (luck == 1) {
+            this.getHandler().addEntity(new Health((int) (this.getX() + this.getWidth() / 2),
+                    (int) (this.getY() + this.getHealth() / 2),
+                    this.getGame(), this.getHandler()));
+        }
+    }
+
     //
     //  Static block for instantiating the images.
     //
     static {
-        WALK_FRAMES = Utilities.loadFrames("src/res/img/enemies/monster1/walk/", 9);
-        DEATH_FRAMES = Utilities.loadFrames("src/res/img/enemies/monster1/death/", 6);
-        ATTACK_FRAMES = Utilities.loadFrames("src/res/img/enemies/monster1/attack/", 9);
+        WALK_FRAMES = Utilities.loadFrames("src/resources/img/enemies/monster1/walk/", 9);
+        DEATH_FRAMES = Utilities.loadFrames("src/resources/img/enemies/monster1/death/", 6);
+        ATTACK_FRAMES = Utilities.loadFrames("src/resources/img/enemies/monster1/attack/", 9);
     }
 }

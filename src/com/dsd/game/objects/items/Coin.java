@@ -118,7 +118,7 @@ public class Coin extends StandardGameObject {
     }
 
     static {
-        coinOneFrames = Utilities.loadFrames("src/res/img/items/coin/small", 4);
-        coinTwoFrames = Utilities.loadFrames("src/res/img/items/coin/medium", 4);
+        coinOneFrames = Utilities.loadFrames("src/resources/img/items/coin/small", 4);
+        coinTwoFrames = Utilities.loadFrames("src/resources/img/items/coin/medium", 4);
     }
 }

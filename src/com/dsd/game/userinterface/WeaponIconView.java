@@ -32,7 +32,7 @@ public class WeaponIconView extends Interactor {
     public WeaponIconView(Game _game, Inventory _inventory) {
         this.game = _game;
         this.inventory = _inventory;
-        this.weaponBorder = StdOps.loadImage("src/res/img/items/icons/item_holder.png");
+        this.weaponBorder = StdOps.loadImage("src/resources/img/items/icons/item_holder.png");
     }
 
     @Override

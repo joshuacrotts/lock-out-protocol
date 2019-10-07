@@ -41,7 +41,7 @@ public abstract class Gun extends Weapon {
         this.totalAmmo = _totalAmmo;
         this.currentAmmo = this.totalAmmo;
         this.magazineAmt = this.totalAmmo;
-        this.emptySFXPath = "src/res/audio/sfx/empty.wav";
+        this.emptySFXPath = "src/resources/audio/sfx/empty.wav";
         super.setWeaponState(WeaponState.READY);
 
     }

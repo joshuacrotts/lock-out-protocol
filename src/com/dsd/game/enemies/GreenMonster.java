@@ -2,6 +2,7 @@ package com.dsd.game.enemies;
 
 import com.dsd.game.Game;
 import com.dsd.game.objects.Entity;
+import com.dsd.game.objects.Health;
 import com.dsd.game.objects.items.Coin;
 import com.dsd.game.util.Utilities;
 import com.revivedstandards.controller.StandardAudioController;
@@ -127,6 +128,7 @@ public class GreenMonster extends Enemy implements DeathListener {
     /**
      * Draws the current frame of animation for the monster. If they are dead,
      * it also draws the explosion handler particles.
+     *
      * @param _g2
      */
     @Override
@@ -172,6 +174,7 @@ public class GreenMonster extends Enemy implements DeathListener {
 
         this.generateCoins(StdOps.rand(0, 5));
         this.generateDeathSound(StdOps.rand(1, 2));
+        this.generatePowerup();
         this.moveEntityToFront();
     }
 
@@ -182,7 +185,7 @@ public class GreenMonster extends Enemy implements DeathListener {
      */
     @Override
     public void generateHurtSound (int _sfx) {
-        StandardAudioController.play("src/res/audio/sfx/green_monster/pain" + _sfx + ".wav");
+        StandardAudioController.play("src/resources/audio/sfx/green_monster/pain" + _sfx + ".wav");
     }
 
     /**
@@ -236,7 +239,7 @@ public class GreenMonster extends Enemy implements DeathListener {
      * @param sfx either 1 or 2
      */
     private void generateDeathSound (int _sfx) {
-        StandardAudioController.play("src/res/audio/sfx/splat" + _sfx + ".wav");
+        StandardAudioController.play("src/resources/audio/sfx/splat" + _sfx + ".wav");
     }
 
     /**
@@ -251,11 +254,23 @@ public class GreenMonster extends Enemy implements DeathListener {
         }
     }
 
+    /**
+     * Generates a random powerup based on RNG (will definitely change).
+     */
+    private void generatePowerup () {
+        int luck = StdOps.rand(1, 10);
+        if (luck == 1) {
+            this.getHandler().addEntity(new Health((int) (this.getX() + this.getWidth() / 2),
+                    (int) (this.getY() + this.getHealth() / 2),
+                    this.getGame(), this.getHandler()));
+        }
+    }
+
     //
     //  Static block for instantiating the images.
     //
     static {
-        WALK_FRAMES = Utilities.loadFrames("src/res/img/enemies/monster2/walk/", 9);
-        DEATH_FRAMES = Utilities.loadFrames("src/res/img/enemies/monster2/death/", 6);
+        WALK_FRAMES = Utilities.loadFrames("src/resources/img/enemies/monster2/walk/", 9);
+        DEATH_FRAMES = Utilities.loadFrames("src/resources/img/enemies/monster2/death/", 6);
     }
 }

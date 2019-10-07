@@ -33,7 +33,7 @@ public class CoinLabel extends StandardLabel {
     public CoinLabel(Game _game, Player _player) {
         super((int) (Screen.gameHalfWidth + Screen.gameHalfWidth),
                 (int) (Screen.gameHalfHeight + Screen.gameHalfHeight / 2),
-                "$", "src/res/fonts/chargen.ttf", 32f);
+                "$", "src/resources/fonts/chargen.ttf", 32f);
 
         this.game = _game;
         this.player = _player;

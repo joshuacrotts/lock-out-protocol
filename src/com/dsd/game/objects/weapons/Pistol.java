@@ -28,14 +28,14 @@ public class Pistol extends Gun {
 
         //  Instantiates the animation controllers
         StandardAnimatorController walkingAnimation = new StandardAnimatorController(
-                new StandardAnimation(_player, Utilities.loadFrames("src/res/img/player/player_walk_gun/", 6), WALKING_FPS));
+                new StandardAnimation(_player, Utilities.loadFrames("src/resources/img/player/player_walk_gun/", 6), WALKING_FPS));
 
         StandardAnimatorController shootingAnimation = new StandardAnimatorController(
-                new StandardAnimation(_player, Utilities.loadFrames("src/res/img/player/player_shoot_gun/", 5), SHOOT_GUN_FPS));
+                new StandardAnimation(_player, Utilities.loadFrames("src/resources/img/player/player_shoot_gun/", 5), SHOOT_GUN_FPS));
 
         super.setWalkFrames(walkingAnimation);
         super.setAttackFrames(shootingAnimation);
-        super.setDelay(DELAY);
+        super.setDelay(this.DELAY);
     }
 
     @Override

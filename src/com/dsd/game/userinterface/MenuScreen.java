@@ -46,6 +46,6 @@ public class MenuScreen extends Screen {
         super.addInteractor(new ExitButton(this.getGame()));
 
         //  Instantiates the title label
-        super.addInteractor(new StandardLabel(this.getGame().getGameWidth() / 2 - 150, 40, this.getGame().getWindow().getTitle(), "src/res/fonts/chargen.ttf", 32f));
+        super.addInteractor(new StandardLabel(this.getGame().getGameWidth() / 2 - 150, 40, this.getGame().getWindow().getTitle(), "src/resources/fonts/chargen.ttf", 32f));
     }
 }
