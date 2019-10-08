@@ -28,7 +28,6 @@ public class Inventory {
     private final Player player;
     private final InventoryView view;
     private final List<Weapon> weapons;
-
     private int currentWeapon = 0;
     private boolean hasGun;
 
@@ -36,7 +35,6 @@ public class Inventory {
         this.game = _game;
         this.player = _player;
         this.weapons = new ArrayList<>();
-
         //  This will change with time (to a subclass of Weapon).
         this.weapons.add(new Knife(_player));
         this.weapons.add(new Pistol(_game, _player, _sch));
@@ -106,5 +104,4 @@ public class Inventory {
     public boolean hasGun() {
         return this.hasGun;
     }
-
 }

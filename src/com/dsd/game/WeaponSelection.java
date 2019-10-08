@@ -11,14 +11,13 @@ package com.dsd.game;
 public enum WeaponSelection {
 
     DECREMENT(-1), INCREMENT(1);
-
     private final int change;
 
     private WeaponSelection(int change) {
         this.change = change;
     }
 
-//================= GETTERS ============================
+//================= GETTERS ============================//
     public int getChange() {
         return this.change;
     }

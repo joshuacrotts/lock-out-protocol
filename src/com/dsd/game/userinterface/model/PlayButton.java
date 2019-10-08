@@ -22,9 +22,7 @@ import java.awt.Graphics2D;
 public class PlayButton extends StandardButton implements MouseEventInterface {
 
     private final Game game;
-
     private final Font font;
-
     private final int Y_OFFSET = 500;
     private final int X_OFFSET = 70;
     private final int TEXT_X_OFFSET = 30;
@@ -33,9 +31,7 @@ public class PlayButton extends StandardButton implements MouseEventInterface {
 
     public PlayButton(Game _game) {
         this.game = _game;
-
         this.font = StdOps.initFont("src/resources/fonts/chargen.ttf", 24f);
-
         this.setX(Screen.gameHalfWidth - X_OFFSET);
         this.setY(this.game.getGameHeight() - Y_OFFSET);
         this.setWidth(BUTTON_WIDTH);
@@ -57,7 +53,6 @@ public class PlayButton extends StandardButton implements MouseEventInterface {
         if (this.game.getGameState() != GameState.MENU) {
             return;
         }
-
         if (!DebugController.DEBUG_MODE) {
             this.game.setGameState(GameState.PREAMBLE);
             this.game.playWaveChangeSFX();

@@ -23,13 +23,10 @@ public class ReloadCommand extends Command {
     private final Timer reloadTimer;
     private final int RELOAD_DELAY = 3000;
 
-    //
     //  This may need to change with time.
-    //
     public ReloadCommand(Game _game, Player _obj) {
         this.game = _game;
         this.player = _obj;
-
         this.bind(_game.getKeyboard(), KeyEvent.VK_R);
         this.reloadTimer = new Timer(true);
     }
@@ -39,23 +36,19 @@ public class ReloadCommand extends Command {
         if (!this.player.getInventory().hasGun()) {
             return;
         }
-
         Gun gun = this.player.getInventory().getGun();
-
         if (!gun.hasAmmo() || gun.hasFullAmmo()) {
             return;
         }
-
         gun.setReloading(true);
         StandardAudioController.play("src/resources/audio/sfx/reload.wav");
         this.reloadTimer.schedule(new ReloadTimer(gun), this.RELOAD_DELAY);
-
     }
 
-    //
-    //  Private class that stops the player from firing their weapon
-    //  until they have "reloaded".
-    //
+    /**
+     * Private class that stops the player from firing their weapon until they
+     * have "reloaded".
+     */
     private class ReloadTimer extends TimerTask {
 
         private final Gun weapon;

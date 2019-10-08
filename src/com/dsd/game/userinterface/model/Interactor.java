@@ -23,7 +23,6 @@ public abstract class Interactor implements Renderable, Updatable, MouseEventInt
     private int velY;
     private int width;
     private int height;
-
     private boolean interactable = true;
 
     public Interactor () {

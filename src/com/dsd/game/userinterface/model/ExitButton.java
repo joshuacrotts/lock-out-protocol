@@ -20,40 +20,36 @@ import java.awt.Graphics2D;
 public class ExitButton extends StandardButton implements MouseEventInterface {
 
     private final Game game;
-
-    private final int yOffset = 200;
-    private final int xOffset = 70;
-    private final int textXOffset = 25;
-    private final int buttonWidth = 200;
-    private final int buttonHeight = 100;
-
+    private final int Y_OFFSET = 200;
+    private final int X_OFFSET = 70;
+    private final int TEXT_X_OFFSET = 25;
+    private final int BUTTON_WIDTH = 200;
+    private final int BUTTON_HEIGHT = 100;
     private final Font font;
 
-    public ExitButton (Game _game) {
+    public ExitButton(Game _game) {
         super();
-
         this.game = _game;
         this.font = StdOps.initFont("src/resources/fonts/chargen.ttf", 24f);
-
-        this.setX(Screen.gameHalfWidth - xOffset);
-        this.setY(this.game.getGameHeight() - yOffset);
-        this.setWidth(buttonWidth);
-        this.setHeight(buttonHeight);
+        this.setX(Screen.gameHalfWidth - X_OFFSET);
+        this.setY(this.game.getGameHeight() - Y_OFFSET);
+        this.setWidth(BUTTON_WIDTH);
+        this.setHeight(BUTTON_HEIGHT);
         this.setText("EXIT");
         this.setColor(Color.RED);
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         super.render(_g2);
         StandardDraw.text(this.getText(),
-                (this.getX() + (this.getWidth() / 2)) - textXOffset,
+                (this.getX() + (this.getWidth() / 2)) - TEXT_X_OFFSET,
                 (this.getY() + this.getHeight() / 2), this.font,
                 this.font.getSize(), Color.WHITE);
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         if (this.game.getGameState() != GameState.MENU) {
             return;
         }
@@ -61,7 +57,7 @@ public class ExitButton extends StandardButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         if (this.game.getGameState() != GameState.MENU) {
             return;
         }
@@ -69,7 +65,7 @@ public class ExitButton extends StandardButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         if (this.game.getGameState() != GameState.MENU) {
             return;
         }

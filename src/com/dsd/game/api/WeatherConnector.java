@@ -25,7 +25,6 @@ public class WeatherConnector {
     private static BufferedReader reader;
     private static InputStream inputStream;
     private static URL url;
-
     private static String line;
     private static String key;
 
@@ -35,8 +34,7 @@ public class WeatherConnector {
         WeatherConnector.reader = new BufferedReader(new InputStreamReader(WeatherConnector.inputStream));
         try {
             WeatherConnector.line = WeatherConnector.reader.readLine();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(WeatherConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
         //  Extracts the key from the line read in by the buffered reader
@@ -50,7 +48,7 @@ public class WeatherConnector {
      * @param city
      * @return
      */
-    private static String fetch (String city) {
+    private static String fetch(String city) {
         StringBuilder jsonInformation = null;
 
         try {
@@ -67,17 +65,15 @@ public class WeatherConnector {
                 jsonInformation.append(inputLine);
             }
             in.close();
-        }
-        catch (ProtocolException ex) {
+        } catch (ProtocolException ex) {
             Logger.getLogger(WeatherConnector.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(WeatherConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
         return jsonInformation.toString();
     }
 
-    //=================================== GETTERS =====================================
+    //=================================== GETTERS =====================================//
     /**
      * Returns the array from the collection of JSON objects from the API
      * connection.
@@ -85,7 +81,7 @@ public class WeatherConnector {
      * @param city
      * @return
      */
-    private static JSONArray getWeatherArray (String city) {
+    private static JSONArray getWeatherArray(String city) {
         JSONObject weatherJSON = new JSONObject(WeatherConnector.fetch(city));
         return (JSONArray) weatherJSON.get("weather");
     }
@@ -96,7 +92,7 @@ public class WeatherConnector {
      * @param weatherArray
      * @return
      */
-    private static String getWeatherType (JSONArray weatherArray) {
+    private static String getWeatherType(JSONArray weatherArray) {
         JSONObject indexOne = (JSONObject) weatherArray.getJSONObject(0);
         return (String) indexOne.get("description");
     }
@@ -107,7 +103,7 @@ public class WeatherConnector {
      * @param city
      * @return
      */
-    public static String getWeather (String city) {
+    public static String getWeather(String city) {
         return getWeatherType(getWeatherArray(city));
     }
 }

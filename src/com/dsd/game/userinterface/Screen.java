@@ -22,17 +22,15 @@ public abstract class Screen implements Renderable, Updatable {
 
     private final Game game;
     private final StandardInteractorHandler sih;
-
     public static int gameHalfWidth;
     public static int gameHalfHeight;
     public static int gameDoubleWidth;
     public static int gameDoubleHeight;
 
-    public Screen (Game _game) {
+    public Screen(Game _game) {
         this.game = _game;
         this.sih = new StandardInteractorHandler(this.game);
         this.addUIElementsAsListeners();
-
         gameHalfWidth = this.game.getGameWidth() / 2;
         gameHalfHeight = this.game.getGameHeight() / 2;
         gameDoubleWidth = this.game.getGameWidth() * 2;
@@ -40,12 +38,12 @@ public abstract class Screen implements Renderable, Updatable {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         StandardHandler.Handler(this.sih);
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         StandardDraw.Handler(this.sih);
     }
 
@@ -54,7 +52,7 @@ public abstract class Screen implements Renderable, Updatable {
      *
      * @param _interactor
      */
-    public void addInteractor (Interactor _interactor) {
+    public void addInteractor(Interactor _interactor) {
         this.sih.addInteractor(_interactor);
     }
 
@@ -62,13 +60,13 @@ public abstract class Screen implements Renderable, Updatable {
      * Iterates through the list of UI elements and adds them as listeners to
      * the StandardGame.
      */
-    private void addUIElementsAsListeners () {
+    private void addUIElementsAsListeners() {
         this.game.addMouseListener(this.sih);
         this.game.addMouseMotionListener(this.sih);
     }
 
 //============================ GETTERS =================================//
-    public Game getGame () {
+    public Game getGame() {
         return this.game;
     }
 }

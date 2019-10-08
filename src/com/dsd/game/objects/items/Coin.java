@@ -20,25 +20,18 @@ import java.awt.image.BufferedImage;
  */
 public class Coin extends StandardGameObject {
 
-    //
     //  Handler for the coins
-    //
     private final StandardCollisionHandler parentContainer;
-
     //  Frames of animation for the coins
     private static final BufferedImage[] coinOneFrames;
     private static final BufferedImage[] coinTwoFrames;
-
     //  Randomness for the scatter of the coin
-    //
     //  This the value at which the coins can scatter
     private final double SCATTER_RANGE = 0.99;
-
     //  Variables for changing the speed of the coins as they disperse
     private final double VEL_LOWER_BOUND = 0.5;
     private final double VEL_UPPER_BOUND = 1.5;
     private final int COIN_FPS = 5;
-
     private int value = 0;
 
     /**
@@ -54,12 +47,10 @@ public class Coin extends StandardGameObject {
      * @param _large
      * @param _sch
      */
-    public Coin (int _x, int _y, double _small, double _medium, double _large, StandardCollisionHandler _sch) {
+    public Coin(int _x, int _y, double _small, double _medium, double _large, StandardCollisionHandler _sch) {
         super(_x, _y, StandardID.Coin);
         this.parentContainer = _sch;
-
         this.generateCoinType(_small, _medium, _large);
-
         this.setVelX(StdOps.randBounds(-VEL_UPPER_BOUND, -VEL_LOWER_BOUND,
                 VEL_LOWER_BOUND, VEL_UPPER_BOUND));
         this.setVelY(StdOps.randBounds(-VEL_UPPER_BOUND, -VEL_LOWER_BOUND,
@@ -67,19 +58,18 @@ public class Coin extends StandardGameObject {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (this.isAlive()) {
             this.getAnimationController().tick();
             this.slowVelocities();
             this.updatePosition();
-        }
-        else {
+        } else {
             this.parentContainer.removeEntity(this);
         }
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (this.isAlive()) {
             this.getAnimationController().renderFrame(_g2);
         }
@@ -88,7 +78,7 @@ public class Coin extends StandardGameObject {
     /**
      * Slows the velocity of the coins gradually.
      */
-    private void slowVelocities () {
+    private void slowVelocities() {
         this.setVelX(this.getVelX() * SCATTER_RANGE);
         this.setVelY(this.getVelY() * SCATTER_RANGE);
     }
@@ -100,23 +90,23 @@ public class Coin extends StandardGameObject {
      * @param _medium
      * @param _large
      */
-    private void generateCoinType (double _small, double _medium, double _large) {
+    private void generateCoinType(double _small, double _medium, double _large) {
         int coin = StdOps.rand(0, 100);
         if (coin < _small * 100) {
             this.setAnimation(new StandardAnimatorController(this, coinOneFrames, COIN_FPS));
             this.value = 1;
-        }
-        else {
+        } else {
             this.setAnimation(new StandardAnimatorController(this, coinTwoFrames, COIN_FPS));
             this.value = 5;
         }
     }
 
 //================================= GETTERS ==================================//
-    public int getValue () {
+    public int getValue() {
         return this.value;
     }
 
+    //static value
     static {
         coinOneFrames = Utilities.loadFrames("src/resources/img/items/coin/small", 4);
         coinTwoFrames = Utilities.loadFrames("src/resources/img/items/coin/medium", 4);

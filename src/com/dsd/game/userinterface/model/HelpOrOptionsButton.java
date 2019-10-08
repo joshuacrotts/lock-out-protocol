@@ -22,9 +22,7 @@ import java.awt.Graphics2D;
 public class HelpOrOptionsButton extends StandardButton implements MouseEventInterface {
 
     private final Game game;
-
     private final Font font;
-
     private final int Y_OFFSET = 350;
     private final int X_OFFSET = 70;
     private final int TEXT_X_OFFSET = 85;
@@ -33,9 +31,7 @@ public class HelpOrOptionsButton extends StandardButton implements MouseEventInt
 
     public HelpOrOptionsButton(Game _game) {
         this.game = _game;
-
         this.font = StdOps.initFont("src/resources/fonts/chargen.ttf", 24f);
-
         this.setX(Screen.gameHalfWidth - X_OFFSET);
         this.setY(this.game.getGameHeight() - Y_OFFSET);
         this.setWidth(BUTTON_WIDTH);
@@ -57,7 +53,6 @@ public class HelpOrOptionsButton extends StandardButton implements MouseEventInt
         if (this.game.getGameState() != GameState.MENU) {
             return;
         }
-
         if (!DebugController.DEBUG_MODE) {
             this.game.setGameState(GameState.PREAMBLE);
             this.game.playWaveChangeSFX();
@@ -65,7 +60,6 @@ public class HelpOrOptionsButton extends StandardButton implements MouseEventInt
             this.game.setGameState(GameState.RUNNING);
         }
         this.game.uponPlay();
-
     }
 
     @Override

@@ -31,15 +31,12 @@ public class AttackCommand extends Command {
     private final Game game;
     private final Player player;
     private final StandardCollisionHandler globalHandler;
-
     private StandardAnimatorController animation;
     private Timer attackDelayTimer = null;
     private static boolean hasTimer = false;
 
-    //
     //  This may need to change with time.
-    //
-    public AttackCommand (Game _game, Player _obj, StandardCollisionHandler _gh, StandardAnimatorController animation) {
+    public AttackCommand(Game _game, Player _obj, StandardCollisionHandler _gh, StandardAnimatorController animation) {
         this.game = _game;
         this.player = _obj;
         this.globalHandler = _gh;
@@ -50,19 +47,14 @@ public class AttackCommand extends Command {
     }
 
     @Override
-    public void pressed (float _dt) {
+    public void pressed(float _dt) {
         if (this.game.getGameState() == GameState.PAUSED) {
             return;
         }
-
         Weapon weapon = this.player.getInventory().getCurrentWeapon();
-        //
         //  If the weapon's delay is not active, we can attack.
-        //
         if (weapon.ready()) {
-            //
             //  We need to do different things depending on what the weapon is.
-            //
             switch (weapon.getWeaponType()) {
                 case PISTOL:
                 case RIFLE:
@@ -71,14 +63,12 @@ public class AttackCommand extends Command {
                 case KNIFE:
                     this.knifeAttack((Knife) weapon);
             }
-
             weapon.setReady(false);
             AttackCommand.hasTimer = false;
-        }
-        //
-        //  If there's not already a delay present and the weapon isn't active,
-        //  we can create one.
-        //
+        } /**
+         * If there's not already a delay present and the weapon isn't active,
+         * we can create one.
+         */
         else if (!AttackCommand.hasTimer) {
             AttackCommand.hasTimer = true;
             this.attackDelayTimer.schedule(new AttackDelayTimer(this, weapon), weapon.getDelay());
@@ -86,7 +76,7 @@ public class AttackCommand extends Command {
     }
 
     @Override
-    public void down (float dt) {
+    public void down(float dt) {
         this.pressed(dt);
     }
 
@@ -95,17 +85,17 @@ public class AttackCommand extends Command {
      *
      * @param _gun
      */
-    private void gunAttack (Gun _gun) {
+    private void gunAttack(Gun _gun) {
         if (!_gun.isReloading()) {
             if (_gun.isWeaponEmpty()) {
                 StandardAudioController.play(_gun.getEmptySFXPath());
                 return;
             }
 
-            //
-            //  Play the animation and deduct ammunition from the gun
-            //  that the player is using.
-            //
+            /**
+             * Play the animation and deduct ammunition from the gun that the
+             * player is using.
+             */
             this.toggleAttackAnimation();
             _gun.shoot();
             StandardAudioController.play(_gun.getSFXPath());
@@ -117,7 +107,7 @@ public class AttackCommand extends Command {
      *
      * @param _knife
      */
-    private void knifeAttack (Weapon _knife) {
+    private void knifeAttack(Weapon _knife) {
         StandardAudioController.play(_knife.getSFXPath());
         this.toggleAttackAnimation();
     }
@@ -126,13 +116,13 @@ public class AttackCommand extends Command {
      * Changes the state of the player to ATTACKING, and sets their animation to
      * be the attacking one relevant to the weapon they're holding.
      */
-    private void toggleAttackAnimation () {
+    private void toggleAttackAnimation() {
         this.player.setAnimation(this.animation);
         this.player.setPlayerState(PlayerState.ATTACKING);
     }
 
 //============================ GETTERS ===================================//
-    public boolean hasTimer () {
+    public boolean hasTimer() {
         return AttackCommand.hasTimer;
     }
 
@@ -142,35 +132,34 @@ public class AttackCommand extends Command {
      *
      * @param _sac
      */
-    public void setAnimation (StandardAnimatorController _sac) {
+    public void setAnimation(StandardAnimatorController _sac) {
         this.animation = _sac;
         this.animation.getStandardAnimation().setReturnAnimation(this.player.getAnimationController());
     }
 
-    public void setTimer (boolean _timer) {
+    public void setTimer(boolean _timer) {
         AttackCommand.hasTimer = _timer;
     }
 
-    //
-    //  Private class similar to the reload timer, except for this class, we need
-    //  to determine how long to wait in between attacks (so the user can't just
-    //  spam the hell out of the attack key).
-    //
+    /**
+     * Private class similar to the reload timer, except for this class, we need
+     * to determine how long to wait in between attacks (so the user can't just
+     * spam the hell out of the attack key).
+     */
     private class AttackDelayTimer extends TimerTask {
 
         private final Weapon weapon;
         private final AttackCommand command;
 
-        public AttackDelayTimer (AttackCommand _command, Weapon _weapon) {
+        public AttackDelayTimer(AttackCommand _command, Weapon _weapon) {
             this.weapon = _weapon;
             this.command = _command;
         }
 
         @Override
-        public void run () {
+        public void run() {
             this.command.setTimer(false);
             this.weapon.setReady(true);
         }
     }
-
 }

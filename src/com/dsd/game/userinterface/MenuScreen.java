@@ -19,7 +19,6 @@ public class MenuScreen extends Screen {
 
     public MenuScreen(Game _game) {
         super(_game);
-
         this.createUIElements();
     }
 
@@ -44,10 +43,8 @@ public class MenuScreen extends Screen {
         super.addInteractor(new PlayButton(this.getGame()));
         //  Instantiates the exit button
         super.addInteractor(new ExitButton(this.getGame()));
-
         //  Instantiates the help/options button
         super.addInteractor(new HelpOrOptionsButton(this.getGame()));
-
         //  Instantiates the title label
         super.addInteractor(new StandardLabel(this.getGame().getGameWidth() / 2 - 150, 40, this.getGame().getWindow().getTitle(), "src/resources/fonts/chargen.ttf", 32f));
     }

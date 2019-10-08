@@ -21,20 +21,19 @@ public class PreambleScreen extends Screen {
     // Models for this screen.
     private final LightningModel lightningEffect;
     private final WaveLabel waveModel;
-
     // Transparency effect of all models on the screen.
     private final float ALPHA_TIMER = 0.005f;
     private float alpha = 0f;
-
-    // Timer that decides how long the text stays fully visible on the screen
-    // before fading out.
+    /**
+     * Timer that decides how long the text stays fully visible on the screen
+     * before fading out.
+     */
     private final Timer preambleTimer;
-    private final long preambleTimerDuration = 5000;
-
+    private final long PREAMBLE_TIMER_DURATION = 5000;
     // State that the menu is currently on (in terms of fading in/out).
     private PreambleScreenState state;
 
-    public PreambleScreen (Game _game) {
+    public PreambleScreen(Game _game) {
         super(_game);
         this.lightningEffect = new LightningModel(_game);
         this.waveModel = new WaveLabel(_game, _game.getLogicalCurrentLevelID());
@@ -43,15 +42,15 @@ public class PreambleScreen extends Screen {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.lightningEffect.tick();
         this.waveModel.tick();
         this.changeAlpha();
     }
 
     @Override
-    public void render (Graphics2D _g2) {
-        AlphaComposite oldComposite = (AlphaComposite)_g2.getComposite();
+    public void render(Graphics2D _g2) {
+        AlphaComposite oldComposite = (AlphaComposite) _g2.getComposite();
         _g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, this.alpha));
         this.lightningEffect.render(_g2);
         this.waveModel.render(_g2);
@@ -63,58 +62,58 @@ public class PreambleScreen extends Screen {
      * out. Once we're there, we schedule a new preambletimer to fade the
      * transparency back out after *preambleTimerDuration* time.
      */
-    private void changeAlpha () {
-        //  We can fade in if we are in the fade-in state, and our alpha
-        //  is lower than 1.
+    private void changeAlpha() {
+        /**
+         * We can fade in if we are in the fade-in state, and our alpha is lower
+         * than 1.
+         */
         if (this.state == PreambleScreenState.FADE_IN && this.alpha < 1.0f) {
             this.alpha += ALPHA_TIMER;
-        }
-
-        //  Once we hit an alpha of 1, we can schedule our timer to wait for
-        //  x seconds, then decrease the text/bolt effects.
+        } /**
+         * Once we hit an alpha of 1, we can schedule our timer to wait for x
+         * seconds, then decrease the text/bolt effects.
+         */
         else {
-            this.preambleTimer.schedule(new PreambleTimer(this), preambleTimerDuration);
+            this.preambleTimer.schedule(new PreambleTimer(this), PREAMBLE_TIMER_DURATION);
             if (this.state == PreambleScreenState.FADE_OUT && this.alpha > 0.0f) {
                 this.alpha -= ALPHA_TIMER;
-            }
-
-            //  Finally, once our alpha is below or equal to 0.0, we can flag
-            //  the game as running.
+            } /**
+             * Finally, once our alpha is below or equal to 0.0, we can flag the
+             * game as running.
+             */
             else if (this.alpha <= 0.0f) {
                 this.getGame().setGameState(GameState.RUNNING);
                 return;
             }
         }
-
-        //  We don't want our alpha to go above the 1f and below the 0f
-        //  values, so we can clamp it.
+        /**
+         * We don't want our alpha to go above the 1f and below the 0f values,
+         * so we can clamp it.
+         */
         this.alpha = Utilities.clampFloat(this.alpha, 0f, 1f);
     }
 
 //============================ GETTERS ====================================//
-    //
-    //  Timer class to keep the alpha transparency the same until we
-    //  begin to fade back out.
-    //
+    /**
+     * Timer class to keep the alpha transparency the same until we begin to
+     * fade back out.
+     */
     private class PreambleTimer extends TimerTask {
 
         private final PreambleScreen screen;
 
-        public PreambleTimer (PreambleScreen _screen) {
+        public PreambleTimer(PreambleScreen _screen) {
             this.screen = _screen;
         }
 
         @Override
-        public void run () {
+        public void run() {
             screen.state = PreambleScreenState.FADE_OUT;
         }
     }
 
-    //
     //  Enum for specifying the state of the preamble screen.
-    //
     private enum PreambleScreenState {
         FADE_IN, FADE_OUT, STAGNANT;
     }
-
 }

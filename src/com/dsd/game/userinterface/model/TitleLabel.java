@@ -14,18 +14,18 @@ public class TitleLabel extends StandardLabel {
     private static final int TITLE_X_OFFSET = 150;
     private static final int TITLE_Y_OFFSET = 40;
 
-    public TitleLabel (Game _game) {
+    public TitleLabel(Game _game) {
         super(Screen.gameHalfWidth - TitleLabel.TITLE_X_OFFSET, TitleLabel.TITLE_Y_OFFSET,
                 _game.getWindow().getTitle(), "src/resources/fonts/chargen.ttf", 32f);
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         super.tick();
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         super.render(_g2);
     }
 

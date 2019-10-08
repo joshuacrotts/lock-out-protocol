@@ -16,10 +16,8 @@ public class InventoryView extends Screen {
 
     public InventoryView(Game _game, Inventory _inventory) {
         super(_game);
-
         this.inventory = _inventory;
         this.createUIElements();
-
     }
 
     @Override
@@ -35,5 +33,4 @@ public class InventoryView extends Screen {
     private void createUIElements() {
         super.addInteractor(new WeaponIconView(this.getGame(), this.inventory));
     }
-
 }
