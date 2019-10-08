@@ -2,7 +2,7 @@ package com.dsd.game;
 
 import com.dsd.game.levels.ForestLevel;
 import com.dsd.game.api.CityLocator;
-import com.dsd.game.api.WeatherConnector;
+import com.dsd.game.api.TranslatorAPI;
 import com.dsd.game.controller.AudioBoxController;
 import com.dsd.game.controller.CollisionHandlerController;
 import com.dsd.game.controller.DebugController;
@@ -86,7 +86,7 @@ public class Game extends StandardGame {
         this.sch.setCamera(this.sc);
 
         // Instantiates the rain, debug, and level controllers.
-        this.rainController = new RainController(this, WeatherConnector.getWeather(CityLocator.getCity()));
+        this.rainController = new RainController(this, TranslatorAPI.getWeather());
         this.debugController = new DebugController(this, this.sch);
         this.levelController = new LevelController();
         this.instantiateLevels();

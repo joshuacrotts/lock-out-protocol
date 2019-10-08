@@ -30,8 +30,8 @@ public class ForestLevel extends StandardLevel {
     private final double SCROLL_X_FACTOR = 0.25;
 
     //  Define camera scroll minimum constants
-    private final int MIN_X = 640;
-    private final int MIN_Y = 350;
+    private final int MIN_X = Screen.gameHalfWidth;
+    private final int MIN_Y = Screen.gameHalfHeight;
 
     //  All levels need to share the same collision handler so the player can
     //  directly interact with other entities.
@@ -78,5 +78,4 @@ public class ForestLevel extends StandardLevel {
     private void setCameraBounds (int _maxX, int _maxY) {
         this.sc.restrict(_maxX, _maxY, this.MIN_X, this.MIN_Y);
     }
-
 }

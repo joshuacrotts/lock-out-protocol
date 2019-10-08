@@ -3,6 +3,7 @@ package com.dsd.game.userinterface;
 import com.dsd.game.userinterface.model.PlayButton;
 import com.dsd.game.Game;
 import com.dsd.game.userinterface.model.ExitButton;
+import com.dsd.game.userinterface.model.HelpOrOptionsButton;
 import com.dsd.game.userinterface.model.StandardLabel;
 import java.awt.Graphics2D;
 
@@ -16,19 +17,19 @@ import java.awt.Graphics2D;
  */
 public class MenuScreen extends Screen {
 
-    public MenuScreen (Game _game) {
+    public MenuScreen(Game _game) {
         super(_game);
 
         this.createUIElements();
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         super.tick();
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         super.render(_g2);
     }
 
@@ -38,12 +39,15 @@ public class MenuScreen extends Screen {
      *
      * @TODO: Somehow define these without using magic numbers.
      */
-    private void createUIElements () {
+    private void createUIElements() {
         //  Instantiates the play button
         super.addInteractor(new PlayButton(this.getGame()));
 
         //  Instantiates the exit button
         super.addInteractor(new ExitButton(this.getGame()));
+
+        //  Instantiates the help/options button
+        super.addInteractor(new HelpOrOptionsButton(this.getGame()));
 
         //  Instantiates the title label
         super.addInteractor(new StandardLabel(this.getGame().getGameWidth() / 2 - 150, 40, this.getGame().getWindow().getTitle(), "src/resources/fonts/chargen.ttf", 32f));

@@ -9,11 +9,19 @@ import java.util.List;
  * This class acts as the level controller; it will change the level depending
  * on certain circumstances.
  *
+ * We need to come up with some mathematical equation that will determine how
+ * many monster spawn on a given wave.
+ *
+ * With the current implementation, there will be several levels, each with
+ * their own respective background. Each level on the other hand will have its
+ * own respective wave.
+ *
  * @author Joshua
  */
 public class LevelController {
 
     private int currentLevelID = 0;
+    private int currentWave = 1;
     private final List<StandardLevel> levels;
 
     public LevelController () {
@@ -52,6 +60,14 @@ public class LevelController {
         this.currentLevelID++;
     }
 
+    /**
+     * Increments which wave the level is currently on. This will be used much
+     * more frequently than incrementLevel().
+     */
+    public void incrementWave () {
+        this.currentWave++;
+    }
+
 //============================= GETTERS ======================================//
     public int getCurrentLevelID () {
         return this.currentLevelID;
@@ -59,6 +75,10 @@ public class LevelController {
 
     public StandardLevel getCurrentLevel () {
         return this.levels.get(this.currentLevelID);
+    }
+
+    public int getWaveNumber () {
+        return this.currentWave;
     }
 
     /**
@@ -74,5 +94,9 @@ public class LevelController {
 //============================= SETTERS ======================================//
     protected void changeLevelID (int _levelID) {
         this.currentLevelID = _levelID;
+    }
+
+    public void setWaveNumber (int _waveNumber) {
+        this.currentLevelID = _waveNumber;
     }
 }
