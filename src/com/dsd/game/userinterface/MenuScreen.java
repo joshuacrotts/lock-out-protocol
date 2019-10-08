@@ -3,6 +3,7 @@ package com.dsd.game.userinterface;
 import com.dsd.game.userinterface.model.PlayButton;
 import com.dsd.game.Game;
 import com.dsd.game.userinterface.model.ExitButton;
+import com.dsd.game.userinterface.model.HelpOrOptionsButton;
 import com.dsd.game.userinterface.model.StandardLabel;
 import java.awt.Graphics2D;
 
@@ -41,10 +42,10 @@ public class MenuScreen extends Screen {
     private void createUIElements () {
         //  Instantiates the play button
         super.addInteractor(new PlayButton(this.getGame()));
-
         //  Instantiates the exit button
         super.addInteractor(new ExitButton(this.getGame()));
-
+        //  Instantiates the help/options button
+        super.addInteractor(new HelpOrOptionsButton(this.getGame()));
         //  Instantiates the title label
         super.addInteractor(new StandardLabel(this.getGame().getGameWidth() / 2 - 150, 40, this.getGame().getWindow().getTitle(), "src/resources/fonts/chargen.ttf", 32f));
     }

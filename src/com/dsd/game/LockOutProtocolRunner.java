@@ -9,6 +9,6 @@ package com.dsd.game;
 public class LockOutProtocolRunner {
 
     public static void main (String[] args) {
-        Game game = new Game(1920, 1080, "Lock Out Protocol");
+        Game game = new Game(1280, 720, "Lock Out Protocol");
     }
 }

@@ -25,7 +25,7 @@ public class PlayButton extends StandardButton implements MouseEventInterface {
 
     private final Font font;
 
-    private final int Y_OFFSET = 400;
+    private final int Y_OFFSET = 500;
     private final int X_OFFSET = 70;
     private final int TEXT_X_OFFSET = 30;
     private final int BUTTON_WIDTH = 200;
