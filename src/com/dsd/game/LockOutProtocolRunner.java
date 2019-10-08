@@ -1,5 +1,7 @@
 package com.dsd.game;
 
+import com.dsd.game.database.PersistentDatabase;
+
 /**
  * This is the main class for actually creating a Game object and running the
  * game.
@@ -11,6 +13,8 @@ package com.dsd.game;
 public class LockOutProtocolRunner {
 
     public static void main (String[] args) {
-        Game game = new Game(1280, 720, "Lock Out Protocol");
+        //Game game = new Game(1280, 720, "Lock Out Protocol");
+        PersistentDatabase db = new PersistentDatabase("_file.txt");
+        db.connect();
     }
 }

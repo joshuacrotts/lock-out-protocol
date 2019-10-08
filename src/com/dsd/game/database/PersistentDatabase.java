@@ -3,6 +3,11 @@ package com.dsd.game.database;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,6 +25,7 @@ public class PersistentDatabase {
 
     private TranslatorDatabase translatorDatabase;
     private BufferedWriter fileWriter;
+    private Connection remoteDBConnection;
 
     public PersistentDatabase (String _fileName) {
         try {
@@ -49,7 +55,57 @@ public class PersistentDatabase {
      * Connect to the SQL database... when applicable.
      */
     public void connect () {
-        throw new UnsupportedOperationException("Not supported at this time.");
+        //  SQL Database information
+        String ipAddress = "35.227.79.48";
+        //  Database NAME (db name in remote sql)
+        String instanceID = "testdb";
+        String dbUsername = "root";
+        String rootPswd = "lockoutprotocol340";
+
+        this.generateClassName();
+
+        String url = String.format("jdbc:mysql://%s:3306/%s", ipAddress, instanceID);
+        try {
+            this.remoteDBConnection = DriverManager.getConnection(url, dbUsername, rootPswd);
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("Connection successful!");
+        Scanner keyboard = new Scanner(System.in);
+        System.out.print("\nEnter your email: ");
+        String email = keyboard.nextLine();
+        System.out.print("\nEnter your password: ");
+        String password = keyboard.nextLine();
+        String insertStatement = String.format("INSERT INTO users " + "VALUES(%d, \'%s\', \'%s\');", (int) (Math.random() * 500), email, password);
+        System.out.println("SQL Statement " + insertStatement);
+        Statement stmt = null;
+        try {
+            stmt = this.remoteDBConnection.createStatement();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            stmt.executeUpdate(insertStatement);
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        System.out.println("User added.");
+    }
+
+    /**
+     * Generates the necessary classname to get the MySQL java driver working.s
+     */
+    private void generateClassName () {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        }
+        catch (ClassNotFoundException ex) {
+            Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
