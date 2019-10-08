@@ -20,25 +20,18 @@ import java.awt.image.BufferedImage;
  */
 public class Coin extends StandardGameObject {
 
-    //
     //  Handler for the coins
-    //
     private final StandardCollisionHandler parentContainer;
-
     //  Frames of animation for the coins
     private static final BufferedImage[] coinOneFrames;
     private static final BufferedImage[] coinTwoFrames;
-
     //  Randomness for the scatter of the coin
-    //
     //  This the value at which the coins can scatter
     private final double SCATTER_RANGE = 0.99;
-
     //  Variables for changing the speed of the coins as they disperse
     private final double VEL_LOWER_BOUND = 0.5;
     private final double VEL_UPPER_BOUND = 1.5;
     private final int COIN_FPS = 5;
-
     private int value = 0;
 
     /**
@@ -57,9 +50,7 @@ public class Coin extends StandardGameObject {
     public Coin (int _x, int _y, double _small, double _medium, double _large, StandardCollisionHandler _sch) {
         super(_x, _y, StandardID.Coin);
         this.parentContainer = _sch;
-
         this.generateCoinType(_small, _medium, _large);
-
         this.setVelX(StdOps.randBounds(-VEL_UPPER_BOUND, -VEL_LOWER_BOUND,
                 VEL_LOWER_BOUND, VEL_UPPER_BOUND));
         this.setVelY(StdOps.randBounds(-VEL_UPPER_BOUND, -VEL_LOWER_BOUND,
@@ -117,6 +108,7 @@ public class Coin extends StandardGameObject {
         return this.value;
     }
 
+    //static value
     static {
         coinOneFrames = Utilities.loadFrames("src/resources/img/items/coin/small", 4);
         coinTwoFrames = Utilities.loadFrames("src/resources/img/items/coin/medium", 4);

@@ -23,7 +23,6 @@ public abstract class Interactor implements Renderable, Updatable, MouseEventInt
     private int velY;
     private int width;
     private int height;
-
     private boolean interactable = true;
 
     public Interactor () {
@@ -66,11 +65,11 @@ public abstract class Interactor implements Renderable, Updatable, MouseEventInt
     public abstract void onMouseExitHover ();
 
 //============================ GETTERS =================================//
-    public Rectangle getBounds() {
+    public Rectangle getBounds () {
         return new Rectangle(this.x, this.y, this.width, this.height);
     }
 
-    public int getX() {
+    public int getX () {
         return this.x;
     }
 

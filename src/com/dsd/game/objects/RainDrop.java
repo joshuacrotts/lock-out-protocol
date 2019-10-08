@@ -16,11 +16,10 @@ import org.apache.commons.math3.util.FastMath;
  */
 public class RainDrop extends StandardGameObject {
 
-    //
-    //  Gravity pulling the rain drop to the bottom of the screen,
-    //  as well as its vanish factor (how long it lasts on screen
-    //  before it dies.
-    //
+    /**
+     * Gravity pulling the rain drop to the bottom of the screen, as well as its
+     * vanish factor (how long it lasts on screen before it dies.
+     */
     private final int vanish;
     private final double GRAVITY = 0.25d;
     private final int BLUE_COLOR = 100;
@@ -28,7 +27,6 @@ public class RainDrop extends StandardGameObject {
 
     public RainDrop (double _x, double _y, double _direction, double _speed, int _vanish) {
         super(_x, _y, StandardID.Particle);
-
         //Solve for horizontal leg of right triangle formed by velocity vector
         this.setVelX(_speed * FastMath.sin(_direction));
         this.vanish = _vanish;
@@ -39,11 +37,8 @@ public class RainDrop extends StandardGameObject {
         if (this.getY() > this.vanish) {
             this.setAlive(false);
         }
-
         this.setVelY(this.getVelY() + this.GRAVITY);
-
         this.updatePosition();
-
     }
 
     @Override

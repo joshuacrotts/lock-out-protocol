@@ -17,30 +17,24 @@ import java.awt.Graphics2D;
 public class StandardLabel extends Interactor implements MouseEventInterface {
 
     private final String text;
-
     private final int originX;
     private final int originY;
     private final int shakeFactor = 1;
-
     private final Font font;
 
     public StandardLabel (int _x, int _y, String _text, Font _fontPath) {
         super(_x, _y);
-
         this.originX = _x;
         this.originY = _y;
         this.text = _text;
-
         this.font = _fontPath;
     }
 
     public StandardLabel (int _x, int _y, String _text, String _fontPath, float _fontSize) {
         super(_x, _y);
-
         this.originX = _x;
         this.originY = _y;
         this.text = _text;
-
         this.font = StdOps.initFont(_fontPath, _fontSize);
     }
 

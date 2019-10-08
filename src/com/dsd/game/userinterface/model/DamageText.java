@@ -24,14 +24,12 @@ public class DamageText extends StandardLabel {
 
     //  Interactor handler that this damage text belongs to
     private final StandardInteractorHandler sih;
-
     //  Font for the text
     private static final Font font = StdOps.initFont("src/resources/fonts/chargen.ttf", 12f);
-
-    //
-    //  Values regarding the color of the damage text, how fast it fades, and
-    //  how quickly it changes colors.
-    //
+    /**
+     * Values regarding the color of the damage text, how fast it fades, and how
+     * quickly it changes colors.
+     */
     private static final int RED_INC_VALUE = 20;
     private static final int ORIGINAL_RED_VALUE = 90;
     private static int redColorValue = ORIGINAL_RED_VALUE;
@@ -80,6 +78,5 @@ public class DamageText extends StandardLabel {
     private int generateRedColor () {
         DamageText.redColorValue += RED_INC_VALUE;
         return DamageText.redColorValue > 255 ? (DamageText.redColorValue = ORIGINAL_RED_VALUE) : DamageText.redColorValue;
-
     }
 }

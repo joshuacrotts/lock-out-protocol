@@ -27,30 +27,23 @@ public class Minimap extends Interactor {
     //  Miscellaneous reference variables
     private final Game game;
     private final StandardCollisionHandler globalHandler;
-
     //  Border texture that surrounds the image with the objects
     private final BufferedImage border;
-
     //  Scale that is applied to all objects in the map
     private final int MINIMAP_SCALE = 20;
-
     private final int MMX_OFFSET = 230;
     private final int MMY_OFFSET = 20;
-
     //  Object and map size dimensions
     private final int MAP_DIMENSION = 200;
     private final int OBJECT_DIMENTION = 5;
-
     //  Points for describing the triangle that draws the player
     private final int[] X_POINTS;
     private final int[] Y_POINTS;
-
     //  Indices in the arrays of x/y points
     private final int POINT_ONE = 0;
     private final int POINT_TWO = 1;
     private final int POINT_THREE = 2;
     private final int POINT_FOUR = 3;
-
     //  Scale for the player's triangle
     private final int TRIANGLE_X_SCALE = 6;
     private final int TRIANGLE_Y_SCALE = 12;
@@ -66,11 +59,10 @@ public class Minimap extends Interactor {
     @Override
     public void render (Graphics2D _g2) {
         this.drawMapBackground(_g2);
-
-        //
-        //  Renders a copy of all entities on the screen, but by a factor of 20x
-        //  smaller.
-        //
+        /**
+         * Renders a copy of all entities on the screen, but by a factor of 20x
+         * smaller.
+         */
         for (int i = 0 ; i < this.globalHandler.size() ; i++) {
             StandardGameObject obj = this.globalHandler.get(i);
 
@@ -86,11 +78,8 @@ public class Minimap extends Interactor {
                         this.drawObject(_g2, obj, StandardDraw.BRUNSWICK_GREEN);
                 }
             }
-
         }
-
         this.drawBorder(_g2);
-
     }
 
     /**
@@ -105,7 +94,6 @@ public class Minimap extends Interactor {
                 (int) this.game.getCamera().getY() - Screen.gameHalfHeight + this.MMY_OFFSET,
                 MAP_DIMENSION, MAP_DIMENSION, null);
         _g2.setComposite(oldComposite);
-
     }
 
     /**
@@ -129,10 +117,11 @@ public class Minimap extends Interactor {
     private void drawPlayer (Graphics2D _g2, Player _player) {
         int scaledPX = (int) (this.game.getCamera().getX() + Screen.gameHalfWidth - this.MMX_OFFSET + (_player.getX() / this.MINIMAP_SCALE));
         int scaledPY = (int) (this.game.getCamera().getY() - Screen.gameHalfHeight + this.MMY_OFFSET + (_player.getY() / this.MINIMAP_SCALE));
-
         this.createPoints(scaledPX, scaledPY);
-        //  Instantiates the translation/transform object to rotate the triangle to whatever
-        //  angle the player is rotated to.
+        /**
+         * Instantiates the translation/transform object to rotate the triangle
+         * to whatever angle the player is rotated to.
+         */
         AffineTransform backup = _g2.getTransform();
         AffineTransform transform = new AffineTransform();
         transform.rotate(_player.getAngle(), scaledPX, scaledPY);
@@ -140,7 +129,6 @@ public class Minimap extends Interactor {
         _g2.transform(transform);
         _g2.fill(new Polygon(this.X_POINTS, this.Y_POINTS, this.X_POINTS.length));
         _g2.setTransform(backup);
-
     }
 
     /**
@@ -155,7 +143,6 @@ public class Minimap extends Interactor {
         _g2.fillRect((int) (this.game.getCamera().getX() + Screen.gameHalfWidth - this.MMX_OFFSET + (obj.getX() / this.MINIMAP_SCALE)),
                 (int) (this.game.getCamera().getY() - Screen.gameHalfHeight + this.MMY_OFFSET + (obj.getY() / this.MINIMAP_SCALE)),
                 OBJECT_DIMENTION, OBJECT_DIMENTION);
-
     }
 
     /**

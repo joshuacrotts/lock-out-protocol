@@ -31,14 +31,11 @@ public class AttackCommand extends Command {
     private final Game game;
     private final Player player;
     private final StandardCollisionHandler globalHandler;
-
     private StandardAnimatorController animation;
     private Timer attackDelayTimer = null;
     private static boolean hasTimer = false;
 
-    //
     //  This may need to change with time.
-    //
     public AttackCommand (Game _game, Player _obj, StandardCollisionHandler _gh, StandardAnimatorController animation) {
         this.game = _game;
         this.player = _obj;
@@ -54,15 +51,10 @@ public class AttackCommand extends Command {
         if (this.game.getGameState() == GameState.PAUSED) {
             return;
         }
-
         Weapon weapon = this.player.getInventory().getCurrentWeapon();
-        //
         //  If the weapon's delay is not active, we can attack.
-        //
         if (weapon.ready()) {
-            //
             //  We need to do different things depending on what the weapon is.
-            //
             switch (weapon.getWeaponType()) {
                 case PISTOL:
                 case RIFLE:
@@ -71,14 +63,13 @@ public class AttackCommand extends Command {
                 case KNIFE:
                     this.knifeAttack((Knife) weapon);
             }
-
             weapon.setReady(false);
             AttackCommand.hasTimer = false;
         }
-        //
-        //  If there's not already a delay present and the weapon isn't active,
-        //  we can create one.
-        //
+        /**
+         * If there's not already a delay present and the weapon isn't active,
+         * we can create one.
+         */
         else if (!AttackCommand.hasTimer) {
             AttackCommand.hasTimer = true;
             this.attackDelayTimer.schedule(new AttackDelayTimer(this, weapon), weapon.getDelay());
@@ -102,10 +93,10 @@ public class AttackCommand extends Command {
                 return;
             }
 
-            //
-            //  Play the animation and deduct ammunition from the gun
-            //  that the player is using.
-            //
+            /**
+             * Play the animation and deduct ammunition from the gun that the
+             * player is using.
+             */
             this.toggleAttackAnimation();
             _gun.shoot();
             StandardAudioController.play(_gun.getSFXPath());
@@ -151,11 +142,11 @@ public class AttackCommand extends Command {
         AttackCommand.hasTimer = _timer;
     }
 
-    //
-    //  Private class similar to the reload timer, except for this class, we need
-    //  to determine how long to wait in between attacks (so the user can't just
-    //  spam the hell out of the attack key).
-    //
+    /**
+     * Private class similar to the reload timer, except for this class, we need
+     * to determine how long to wait in between attacks (so the user can't just
+     * spam the hell out of the attack key).
+     */
     private class AttackDelayTimer extends TimerTask {
 
         private final Weapon weapon;
@@ -172,5 +163,4 @@ public class AttackCommand extends Command {
             this.weapon.setReady(true);
         }
     }
-
 }

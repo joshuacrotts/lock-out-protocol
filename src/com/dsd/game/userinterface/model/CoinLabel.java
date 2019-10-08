@@ -23,36 +23,34 @@ public class CoinLabel extends StandardLabel {
 
     private final Game game;
     private final Player player;
-
-    //
     //  Position and sizing of health elements
-    //
     private final int COIN_X_OFFSET = 230;
     private final int COIN_Y_OFFSET = 40;
 
-    public CoinLabel(Game _game, Player _player) {
+    public CoinLabel (Game _game, Player _player) {
         super((int) (Screen.gameHalfWidth + Screen.gameHalfWidth),
-                (int) (Screen.gameHalfHeight + Screen.gameHalfHeight / 2),
+                (int) (Screen.gameHalfHeight + Screen.gameFourthHeight),
                 "$", "src/resources/fonts/chargen.ttf", 32f);
-
         this.game = _game;
         this.player = _player;
     }
 
     @Override
-    public void tick() {
+    public void tick () {
     }
 
     @Override
-    public void render(Graphics2D _g2) {
-        //  Update positioning here because the timing is crucial to the rendering;
-        //  delegating it to tick() will cause flickering problems.
+    public void render (Graphics2D _g2) {
+        /**
+         * Update positioning here because the timing is crucial to the
+         * rendering; delegating it to tick() will cause flickering problems.
+         */
         this.setX((int) (this.game.getCamera().getX() + Screen.gameHalfWidth - this.COIN_X_OFFSET));
         this.setY((int) ((this.game.getCamera().getY() + Screen.gameHalfHeight) - this.COIN_Y_OFFSET));
         this.drawCoinText(_g2);
     }
 
-    private void drawCoinText(Graphics2D _g2) {
+    private void drawCoinText (Graphics2D _g2) {
         StandardDraw.text("$" + this.player.getMoney(), this.getX(), this.getY(), this.getFont(), this.getFont().getSize(), Color.WHITE);
     }
 }

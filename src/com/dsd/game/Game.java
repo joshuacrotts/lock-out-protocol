@@ -1,7 +1,6 @@
 package com.dsd.game;
 
 import com.dsd.game.levels.ForestLevel;
-import com.dsd.game.api.CityLocator;
 import com.dsd.game.api.TranslatorAPI;
 import com.dsd.game.controller.AudioBoxController;
 import com.dsd.game.controller.CollisionHandlerController;
@@ -38,34 +37,30 @@ public class Game extends StandardGame {
     //  Miscellaneous reference variables
     private final StandardCamera sc;
     private final StandardCollisionHandler sch;
-
     //  UI Element views
     private final MenuScreen menuScreen;
     private final PauseScreen pauseScreen;
     private final PreambleScreen preambleScreen;
     private final HUDScreen hudScreen;
-
-    //  Rain controller which contacts the API for the logic of
-    //  determining whether it should rain or not.
+    /**
+     * Rain controller which contacts the API for the logic of determining
+     * whether it should rain or not.
+     */
     private final RainController rainController;
-
     //  Debug controller
     private final DebugController debugController;
-
     //  Level controller
     private final LevelController levelController;
-
     //  Game state variable (paused, running, menu, etc.)
     private GameState gameState = GameState.MENU;
-
     //  Main player reference so other monsters can track them
     private final Player player;
 
     public Game (int _width, int _height, String _title) {
-        //
-        //  Note: Magic numbers for the player and the monster are just
-        //        for demonstration; they will NOT be in the final game.
-        //
+        /**
+         * Note: Magic numbers for the player and the monster are just for
+         * demonstration; they will NOT be in the final game.
+         */
         super(_width, _height, _title);
 
         //  Initialize the sound controller
@@ -73,32 +68,28 @@ public class Game extends StandardGame {
 
         //  Create a new collision handler
         this.sch = new CollisionHandlerController(this);
-
         //  Instantiates player & adds it to the handler
         this.player = new Player(200, 200, this, this.sch);
         this.sch.addEntity(player);
-
         //  Instantiate the camera
         this.sc = new StandardCamera(this, player, 1, this.getGameWidth(), this.getGameHeight());
-
         //  Sets the camera for the player and the handler
         this.player.setCamera(this.sc);
         this.sch.setCamera(this.sc);
-
         // Instantiates the rain, debug, and level controllers.
         this.rainController = new RainController(this, TranslatorAPI.getWeather());
         this.debugController = new DebugController(this, this.sch);
         this.levelController = new LevelController();
         this.instantiateLevels();
-
-        // Instantiates the levels @TODO: (should move this to a method and to
-        // some type of controller to determine HOW levels transition)
-        //  Creates the UI views
+        /**
+         * Instantiates the levels @TODO: (should move this to a method and to
+         * some type of controller to determine HOW levels transition) Creates
+         * the UI views
+         */
         this.menuScreen = new MenuScreen(this);
         this.pauseScreen = new PauseScreen(this);
         this.preambleScreen = new PreambleScreen(this);
         this.hudScreen = new HUDScreen(this, this.player, this.sch);
-
         this.startGame();
     }
 
@@ -150,13 +141,13 @@ public class Game extends StandardGame {
             if (this.isPreamble()) {
                 this.preambleScreen.render(StandardDraw.Renderer);
             }
-
-            //  If the game is paused, draw the paused text and
-            //  transparent background.
+            /**
+             * If the game is paused, draw the paused text and transparent
+             * background.
+             */
             if (this.isPaused()) {
                 this.pauseScreen.render(StandardDraw.Renderer);
             }
-
             //  If we are in debug mode, we can draw the text.
             if (DebugController.DEBUG_MODE) {
                 this.debugController.render(StandardDraw.Renderer);
@@ -184,7 +175,7 @@ public class Game extends StandardGame {
         this.levelController.addLevel(new ForestLevel(this.player, this, this.sch));
     }
 
-//========================== GETTERS =============================/
+//========================== GETTERS =============================//
     public Player getPlayer () {
         return this.player;
     }
@@ -217,7 +208,7 @@ public class Game extends StandardGame {
         return this.gameState == GameState.PREAMBLE;
     }
 
-//========================== SETTERS =============================/
+//========================== SETTERS =============================//
     public void setGameState (GameState _gs) {
         this.gameState = _gs;
     }

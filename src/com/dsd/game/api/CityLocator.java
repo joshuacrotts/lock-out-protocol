@@ -13,8 +13,8 @@ import java.util.logging.Logger;
 import org.json.JSONObject;
 
 /**
- * This class is an example of connecting to and loading data from the city locator
- * API, resolving the IP looked up by the Amazon API.
+ * This class is an example of connecting to and loading data from the city
+ * locator API, resolving the IP looked up by the Amazon API.
  *
  * [Group Name: Data Structure Deadheads]
  *
@@ -25,7 +25,6 @@ public class CityLocator {
     private static URL url;
     private static InputStream inputStream;
     private static BufferedReader reader;
-
     private static String line;
     private static String key;
 
@@ -40,39 +39,6 @@ public class CityLocator {
             Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
         }
         CityLocator.key = CityLocator.line.substring(CityLocator.line.lastIndexOf(":") + 1);
-    }
-
-    //=============================== GETTERS ======================================
-    /**
-     * Returns the city that the user is located in.
-     *
-     * @return
-     */
-    public static String getCity () {
-        return CityLocator.getCityJSON().getString("city");
-    }
-
-    /**
-     * Connects to the Amazon AWS API to generate the IP address of the user.
-     *
-     * @return string representation of IP address
-     */
-    public static String getIPAddress () {
-        String ipAddress = null;
-
-        try {
-            URL whatismyip = new URL("http://checkip.amazonaws.com");
-            BufferedReader in = new BufferedReader(new InputStreamReader(
-                    whatismyip.openStream()));
-            ipAddress = in.readLine();
-        }
-        catch (MalformedURLException ex) {
-            Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        catch (IOException ex) {
-            Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return ipAddress;
     }
 
     /**
@@ -106,6 +72,39 @@ public class CityLocator {
             Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
         }
         return jsonInformation.toString();
+    }
+
+    //=============================== GETTERS ======================================//
+    /**
+     * Returns the city that the user is located in.
+     *
+     * @return
+     */
+    protected static String getCity () {
+        return CityLocator.getCityJSON().getString("city");
+    }
+
+    /**
+     * Connects to the Amazon AWS API to generate the IP address of the user.
+     *
+     * @return string representation of IP address
+     */
+    protected static String getIPAddress () {
+        String ipAddress = null;
+
+        try {
+            URL whatismyip = new URL("http://checkip.amazonaws.com");
+            BufferedReader in = new BufferedReader(new InputStreamReader(
+                    whatismyip.openStream()));
+            ipAddress = in.readLine();
+        }
+        catch (MalformedURLException ex) {
+            Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (IOException ex) {
+            Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ipAddress;
     }
 
     /**

@@ -54,10 +54,6 @@ public class StandardInteractorHandler extends StandardHandler implements MouseL
         }
     }
 
-    public LinkedList<Interactor> getInteractors () {
-        return this.interactors;
-    }
-
     /**
      * Iterates over the interactors to determine which one was clicked
      *
@@ -114,5 +110,10 @@ public class StandardInteractorHandler extends StandardHandler implements MouseL
 
     @Override
     public void mouseExited (MouseEvent e) {
+    }
+
+//====================== GETTERS ===============================//
+    public LinkedList<Interactor> getInteractors () {
+        return this.interactors;
     }
 }

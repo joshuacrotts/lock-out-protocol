@@ -21,10 +21,8 @@ public class HUDScreen extends Screen {
 
     public HUDScreen (Game _game, Player _player, StandardCollisionHandler _sch) {
         super(_game);
-
         this.player = _player;
         this.globalHandler = _sch;
-
         this.createUIElements();
     }
 
@@ -49,5 +47,4 @@ public class HUDScreen extends Screen {
         this.addInteractor(new CoinLabel(super.getGame(), this.player));
         this.addInteractor(new Minimap(super.getGame(), this.globalHandler));
     }
-
 }

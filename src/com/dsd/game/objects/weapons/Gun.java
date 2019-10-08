@@ -20,16 +20,14 @@ public abstract class Gun extends Weapon {
     private final Game game;
     private final StandardCollisionHandler globalHandler;
     private final Player player;
-
-    //  Variables for how much ammo the gun can carry, how much is in a mag,
-    //  and how much they currently have.
+    /**
+     * Variables for how much ammo the gun can carry, how much is in a mag, and
+     * how much they currently have.
+     */
     private final int magazineAmt;
     private int totalAmmo;
     private int currentAmmo;
-
-    //
     //  Sound effects played when the gun is shot, or empty.
-    //
     private final String emptySFXPath;
 
     public Gun (WeaponType _type, int _totalAmmo, Game _game, Player _player, StandardCollisionHandler _sch) {
@@ -37,13 +35,11 @@ public abstract class Gun extends Weapon {
         this.game = _game;
         this.player = _player;
         this.globalHandler = _sch;
-
         this.totalAmmo = _totalAmmo;
         this.currentAmmo = this.totalAmmo;
         this.magazineAmt = this.totalAmmo;
         this.emptySFXPath = "src/resources/audio/sfx/empty.wav";
         super.setWeaponState(WeaponState.READY);
-
     }
 
     /**
@@ -62,22 +58,23 @@ public abstract class Gun extends Weapon {
      * Reloads a gun using the specified algorithm.
      */
     public void reload () {
-        //
-        //  Three cases:
-        //  1. The magazine is empty and we have enough to fill it
-        //  2. The magazine is not empty and we have enough to fill it
+        /**
+         * Three cases: 1. The magazine is empty and we have enough to fill it
+         * 2. The magazine is not empty and we have enough to fill it
+         */
         if (this.magExceedsTotalAmmo() && !this.magExceedsGunAmmo()) {
             this.currentAmmo += this.totalAmmo;
             this.totalAmmo = 0;
         }
         else {
-            //  If we don't have enough to fill the magazine but the
-            //  current + total > magazine
+            /**
+             * If we don't have enough to fill the magazine but the current +
+             * total > magazine
+             */
             int difference = this.magazineAmt - this.currentAmmo;
             this.totalAmmo -= difference;
             this.currentAmmo += difference;
         }
-
     }
 
     private boolean magExceedsTotalAmmo () {
@@ -137,5 +134,4 @@ public abstract class Gun extends Weapon {
     public void setReloading (boolean _reloading) {
         this.setWeaponState(_reloading ? WeaponState.RELOAD : WeaponState.READY);
     }
-
 }

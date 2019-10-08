@@ -20,10 +20,8 @@ public class PauseScreen extends Screen {
 
     public PauseScreen (Game _game) {
         super(_game);
-
         this.pauseLabel = new PauseLabel(_game);
         this.pauseCommand = new PauseCommand(_game);
-
         this.addInteractor(this.pauseLabel);
     }
 
@@ -36,5 +34,4 @@ public class PauseScreen extends Screen {
     public void render (Graphics2D _g2) {
         this.pauseLabel.render(_g2);
     }
-
 }

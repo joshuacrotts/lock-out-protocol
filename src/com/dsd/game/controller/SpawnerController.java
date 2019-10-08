@@ -24,17 +24,14 @@ public class SpawnerController extends StandardGameObject {
     private final StandardCollisionHandler parentContainer;
     private final EnemyType spawnerID;
     private final Game game;
-
     //  Timer object controlling the spawn-rate.
     private final Timer spawnerTimer;
-
     //  Delay and radius of the timer.
     private final long delay;
     private final int radius;
 
     public SpawnerController (int _x, int _y, EnemyType _id, long _delay, int _radius, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, StandardID.Spawner);
-
         this.game = _game;
         this.spawnerID = _id;
         this.parentContainer = _sch;
@@ -63,8 +60,7 @@ public class SpawnerController extends StandardGameObject {
             int xPos = (int) StdOps.rand(this.getX() - this.radius, this.getX() + this.radius);
             int yPos = (int) StdOps.rand(this.getY() - this.radius, this.getY() + this.radius);
 
-            //  Depending on what type of spawner we have, we spawn that type
-            //  of monster.
+            //Depending on what type of spawner we have, we spawn that type of mosnter.
             switch (this.spawnerID) {
                 case BASIC_MONSTER:
                     this.parentContainer.addEntity(new BasicMonster(xPos, yPos, this.game, this.parentContainer));
@@ -75,10 +71,11 @@ public class SpawnerController extends StandardGameObject {
         }
     }
 
-    //
-    //  Very similar to the AttackCommand, we need a delay
-    //  slash timer for mobs spawning. We only want mobs to
-    //  spawn at a certain interval, so this allows for that.
+    /**
+     * Very similar to the AttackCommand, we need a delay slash timer for mobs
+     * spawning. We only want mobs to spawn at a certain interval, so this
+     * allows for that.
+     */
     private class SpawnerDelayTimer extends TimerTask {
 
         private final SpawnerController spawnerController;
@@ -91,13 +88,14 @@ public class SpawnerController extends StandardGameObject {
 
         @Override
         public void run () {
-            //  If we're not paused AND the game isn't in its preamble state,
-            //  we can spawn the entities.
+            /**
+             * If we're not paused AND the game isn't in its preamble state, we
+             * can spawn the entities.
+             */
             if (this.game.isPaused() || this.game.isPreamble()) {
                 return;
             }
             this.spawnerController.spawn(StdOps.rand(1, 5));
         }
     }
-
 }

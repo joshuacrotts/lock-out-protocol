@@ -24,22 +24,17 @@ public class RainController implements Renderable, Updatable {
     private final StandardParticleHandler sph;
     private final StandardCamera sc;
     private final Game game;
-
     //  Serves as a debugging feature
     private static final boolean toggleDownfall = false;
-
     //  If it is raining, this boolean is toggled true.
     private final boolean isRaining;
-
     //  Defines the range in which rain can spawn for the user
     private static final int X_BORDER = 600;
     private static final int Y_BORDER = 400;
-
     //  Velocity constants and factors for the rain drop object.
     private static final double RAIN_DIRECTION = -FastMath.PI * 1.5;
     private static final int VEL_FACTOR = 5;
     private static final int Y_BOUND_FACTOR = 2;
-
     //  Constants for how many rain particles should spawn
     private static final int MAX_RAIN_PARTICLES = 5000;
 
@@ -47,10 +42,8 @@ public class RainController implements Renderable, Updatable {
         this.game = _game;
         this.sc = _game.getCamera();
         this.sph = new StandardParticleHandler(MAX_RAIN_PARTICLES);
-
         // Be sure to always set the SPH camera or it'll throw a NPE
         this.sph.setCamera(this.sc);
-
         this.isRaining = _weather.contains("rain") | RainController.toggleDownfall;
     }
 
@@ -72,7 +65,6 @@ public class RainController implements Renderable, Updatable {
             int yGenMax = (int) (this.sc.getY() + RainController.Y_BORDER / 4);
 
             this.sph.addEntity(this.generateRainDrop(xGenMin, xGenMax, yGenMin, yGenMax));
-
             this.sph.tick();
         }
     }
@@ -95,7 +87,7 @@ public class RainController implements Renderable, Updatable {
                 (int) (this.sc.getY() + this.sc.getVph() * Y_BOUND_FACTOR));
     }
 
-    //========================== GETTERS ==============================
+    //========================== GETTERS ==============================//
     /**
      * Returns a random speed between [0, speedFactor). Determines how fast each
      * rain drop will fall.
@@ -107,7 +99,7 @@ public class RainController implements Renderable, Updatable {
         return Math.random() * speedFactor;
     }
 
-//========================== SETTERS =======================/
+//========================== SETTERS =======================//
     public boolean isRaining () {
         return this.isRaining;
     }

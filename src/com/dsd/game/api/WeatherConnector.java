@@ -25,7 +25,6 @@ public class WeatherConnector {
     private static BufferedReader reader;
     private static InputStream inputStream;
     private static URL url;
-
     private static String line;
     private static String key;
 
@@ -77,7 +76,17 @@ public class WeatherConnector {
         return jsonInformation.toString();
     }
 
-    //=================================== GETTERS =====================================
+    //=================================== GETTERS =====================================//
+    /**
+     * Returns the weather type for the parameter city.
+     *
+     * @param city
+     * @return
+     */
+    protected static String getWeather (String city) {
+        return getWeatherType(getWeatherArray(city));
+    }
+
     /**
      * Returns the array from the collection of JSON objects from the API
      * connection.
@@ -99,15 +108,5 @@ public class WeatherConnector {
     private static String getWeatherType (JSONArray weatherArray) {
         JSONObject indexOne = (JSONObject) weatherArray.getJSONObject(0);
         return (String) indexOne.get("description");
-    }
-
-    /**
-     * Returns the weather type for the parameter city.
-     *
-     * @param city
-     * @return
-     */
-    public static String getWeather (String city) {
-        return getWeatherType(getWeatherArray(city));
     }
 }

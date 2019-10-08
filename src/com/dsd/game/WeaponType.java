@@ -17,12 +17,13 @@ public enum WeaponType {
         this.type = _type;
     }
 
-    public String getType () {
+    @Override
+    public String toString () {
         return this.type;
     }
 
-    @Override
-    public String toString () {
+//======================= GETTERS =======================//
+    public String getType () {
         return this.type;
     }
 }

@@ -18,11 +18,11 @@ public abstract class Entity extends StandardGameObject {
     //  Miscellaneous reference variables
     private final StandardCollisionHandler parentContainer;
     private final Game game;
-
-    //  For entities that follow another entity, this is the factor that
-    //  should be applied when detecting the angle to turn towards.
+    /**
+     * For entities that follow another entity, this is the factor that should
+     * be applied when detecting the angle to turn towards.
+     */
     public static final int APPROACH_FACTOR = 8;
-
     //  Health of entity
     private double health = 0;
 
@@ -54,5 +54,4 @@ public abstract class Entity extends StandardGameObject {
     public void setHealth (double _health) {
         this.health = _health;
     }
-
 }

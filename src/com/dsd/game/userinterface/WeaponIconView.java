@@ -20,7 +20,6 @@ public class WeaponIconView extends Interactor {
     private final Game game;
     private final Inventory inventory;
     private final BufferedImage weaponBorder;
-
     private final int ICON_X_OFFSET = 310;
     private final int ICON_Y_OFFSET = 110;
 
@@ -39,7 +38,6 @@ public class WeaponIconView extends Interactor {
 
         this.setX((int) (this.game.getCamera().getX() + Screen.gameHalfWidth - this.ICON_X_OFFSET));
         this.setY((int) ((this.game.getCamera().getY() + Screen.gameHalfHeight) - this.ICON_Y_OFFSET));
-
         this.drawWeaponBorder(_g2);
         this.drawIcon(_g2);
     }

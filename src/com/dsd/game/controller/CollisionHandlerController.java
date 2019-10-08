@@ -27,10 +27,10 @@ import java.awt.Graphics2D;
  */
 public class CollisionHandlerController extends StandardCollisionHandler {
 
-    //
-    //  We can probably decouple this later, but this is the handler
-    //  that holds all damageText objects.
-    //
+    /**
+     * We can probably decouple this later, but this is the handler that holds
+     * all damageText objects.
+     */
     private static StandardInteractorHandler damageText;
 
     public CollisionHandlerController (Game _game) {
@@ -60,10 +60,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      */
     @Override
     public void handleCollision (StandardGameObject _obj1, StandardGameObject _obj2) {
-        //
-        //  Handles bullet to monster collision
-        //  (kills bullet and takes damage away from monster).
-        //
+        //Handles bullet to monster collision (kills bullet and takes damage away from monster).
         if (_obj1.getId() == StandardID.Bullet && _obj2 instanceof Enemy) {
             this.handleBulletEnemyCollision((BulletGameObject) _obj1, (Enemy) _obj2);
         }
@@ -104,7 +101,6 @@ public class CollisionHandlerController extends StandardCollisionHandler {
 
         // Sets the bullet to dead
         _bullet.setAlive(false);
-
         // Casts the obj2 to a Monster so we can deduct health from it
         _monster.setHealth(_monster.getHealth() - _bullet.getDamage());
 
@@ -128,7 +124,6 @@ public class CollisionHandlerController extends StandardCollisionHandler {
         if (_player.isAttacking()) {
             int dmg = (int) _player.getInventory().getCurrentWeapon().getDamage();
             this.addDamageText(_monster, dmg);
-
             _monster.setHealth(_monster.getHealth() - dmg);
             _monster.generateHurtSound(StdOps.rand(1, 5));
             _player.setPlayerState(PlayerState.STANDING);

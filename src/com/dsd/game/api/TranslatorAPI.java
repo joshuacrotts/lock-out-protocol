@@ -11,6 +11,7 @@ package com.dsd.game.api;
  */
 public final class TranslatorAPI {
 
+//=================== GETTERS ====================================//
     /**
      * Returns the city retrieved by the CityLocator API.
      *

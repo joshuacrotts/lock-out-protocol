@@ -20,23 +20,23 @@ import java.awt.Graphics2D;
  */
 public abstract class Screen implements Renderable, Updatable {
 
-    private final Game game;
+    //  Miscellaneous reference variables
+    private static Game game;
     private final StandardInteractorHandler sih;
 
+    //  Variables for getting quickly-modified screen dimensions.
+    public static int gameFourthWidth;
+    public static int gameFourthHeight;
     public static int gameHalfWidth;
     public static int gameHalfHeight;
     public static int gameDoubleWidth;
     public static int gameDoubleHeight;
 
     public Screen (Game _game) {
-        this.game = _game;
-        this.sih = new StandardInteractorHandler(this.game);
+        Screen.game = _game;
+        this.sih = new StandardInteractorHandler(Screen.game);
         this.addUIElementsAsListeners();
-
-        gameHalfWidth = this.game.getGameWidth() / 2;
-        gameHalfHeight = this.game.getGameHeight() / 2;
-        gameDoubleWidth = this.game.getGameWidth() * 2;
-        gameDoubleHeight = this.game.getGameHeight() * 2;
+        Screen.setGameDimensions();
     }
 
     @Override
@@ -63,12 +63,24 @@ public abstract class Screen implements Renderable, Updatable {
      * the StandardGame.
      */
     private void addUIElementsAsListeners () {
-        this.game.addMouseListener(this.sih);
-        this.game.addMouseMotionListener(this.sih);
+        Screen.game.addMouseListener(this.sih);
+        Screen.game.addMouseMotionListener(this.sih);
+    }
+
+    /**
+     * Sets the game dimensions
+     */
+    private static void setGameDimensions () {
+        gameHalfWidth = game.getGameWidth() >> 1;
+        gameHalfHeight = game.getGameHeight() >> 1;
+        gameDoubleWidth = game.getGameWidth() << 1;
+        gameDoubleHeight = game.getGameHeight() << 1;
+        gameFourthWidth = game.getGameWidth() >> 2;
+        gameFourthHeight = game.getGameHeight() >> 2;
     }
 
 //============================ GETTERS =================================//
     public Game getGame () {
-        return this.game;
+        return Screen.game;
     }
 }

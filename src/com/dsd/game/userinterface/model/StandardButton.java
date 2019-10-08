@@ -16,14 +16,9 @@ import java.awt.image.BufferedImage;
  */
 public abstract class StandardButton extends Interactor {
 
-    //
     //  State of button
-    //
     private boolean isImage = false;
-
-    //
     //  Information regarding button's contents
-    //
     private String text;
     private Color color;
     private String fileLocation;
@@ -59,9 +54,7 @@ public abstract class StandardButton extends Interactor {
 
     public StandardButton (int _x, int _y, String fileLocation) {
         super(_x, _y);
-
         this.image = StdOps.loadImage(fileLocation);
-
         this.setWidth(this.image.getWidth());
         this.setHeight(this.image.getHeight());
         this.isImage = true;
@@ -69,7 +62,6 @@ public abstract class StandardButton extends Interactor {
 
     public StandardButton (int _x, int _y, BufferedImage _image) {
         this(_x, _y, _image.getWidth(), _image.getHeight());
-
         this.image = _image;
         this.isImage = true;
     }
@@ -129,5 +121,4 @@ public abstract class StandardButton extends Interactor {
     public void setText (String _t) {
         this.text = _t;
     }
-
 }

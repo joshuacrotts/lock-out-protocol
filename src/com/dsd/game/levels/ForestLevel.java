@@ -23,26 +23,26 @@ public class ForestLevel extends StandardLevel {
     private final Player player;
     private final Game game;
     private final StandardCamera sc;
-
-    //  Variables used to track where the background image is drawn.
-    //  The placement depends on the position and velocity of the player.
+    /**
+     * Variables used to track where the background image is drawn. The
+     * placement depends on the position and velocity of the player.
+     */
     private int trackX;
     private final double SCROLL_X_FACTOR = 0.25;
-
     //  Define camera scroll minimum constants
     private final int MIN_X = Screen.gameHalfWidth;
     private final int MIN_Y = Screen.gameHalfHeight;
 
-    //  All levels need to share the same collision handler so the player can
-    //  directly interact with other entities.
+    /**
+     * All levels need to share the same collision handler so the player can
+     * directly interact with other entities.
+     */
     public ForestLevel (Player _player, Game _sg, StandardCollisionHandler _sch) {
         super("src/resources/img/bg/resized_bg/panel1.jpg");
-
         this.game = _sg;
         this.player = _player;
         this.sc = _sg.getCamera();
         this.setHandler(_sch);
-
         this.setCameraBounds(this.getBgImage().getWidth() - Screen.gameHalfWidth,
                 this.getBgImage().getHeight() - Screen.gameHalfHeight);
     }
@@ -71,6 +71,7 @@ public class ForestLevel extends StandardLevel {
         }
     }
 
+//===================== SETTERS ==============================//
     /**
      * Sets the camera's field of view so as to prevent the camera from
      * scrolling too far to any of the sides

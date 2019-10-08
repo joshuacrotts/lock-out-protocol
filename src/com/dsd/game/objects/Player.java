@@ -32,65 +32,50 @@ public class Player extends Entity implements DeathListener {
 
     //  Miscellaneous reference variables
     private StandardCamera sc;
-
-    //  Refers to the player's current state (walking, shooting, etc.)
-    //  PlayerState is set by commands
+    /**
+     * Refers to the player's current state (walking, shooting, etc.)
+     * PlayerState is set by commands
+     */
     private PlayerState playerState;
-
-    //  Inventory of the player, tells how much money they have, the current
-    //  weapon, etc.
+    //  Inventory of the player, tells how much money they have, the current weapon, etc.
     private final Inventory inventory;
-
     //  Global commands
     private AttackCommand attackCommand;
-
     //  Variables representing the angle and approach velocity
     private final float APPROACH_VEL = -3.0f;
-
     //  Money amount
     private int money;
-
     //  Health vars (this may change with time)
     private int maxHealth = 200;
 
     public Player (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, 100, StandardID.Player, (Game) _game, _sch);
-
         //  Instantiate the inventory
         this.inventory = new Inventory(this.getGame(), this, _sch);
-
         //  Initializes the miscellaneous variables
         this.sc = this.getGame().getCamera();
-
         //  Sets the default animation
         this.setAnimation(this.inventory.getCurrentWeapon().getWalkFrames());
-
         //  Instantiate commands
         this.initCommands();
-
         //  Initializes the player's default state to standing
         this.playerState = PlayerState.STANDING;
-
         //  Adds the player to the list of collidable objects
         _sch.addCollider(StandardID.Player);
         _sch.flagAlive(StandardID.Player);
-
         this.setHealth(this.maxHealth);
     }
 
     @Override
     public void tick () {
         this.setAlive(this.getHealth() > 0);
-
         if (this.isAlive()) {
             //  If the player is not standing still, update the animation controller.
             if (!this.isStanding()) {
                 this.getAnimationController().tick();
             }
-
             this.getAnimationController().getStandardAnimation().setRotation(this.getAngle());
             this.updateDimensions();
-
             // Save the mouse position
             double mx = this.sc.getX() + this.getGame().getMouse().getMouseX() - this.sc.getVpw();
             double my = this.sc.getY() + this.getGame().getMouse().getMouseY() - this.sc.getVph();
@@ -188,9 +173,7 @@ public class Player extends Entity implements DeathListener {
         float xSign = (float) FastMath.signum(_mx - this.getX());
         double dx = FastMath.abs(_mx - this.getX());
         double dy = FastMath.abs(_my - this.getY());
-
         this.setAngle((double) ((xSign) * (FastMath.atan((dx) / (dy)))));
-
         // If we're in Q1 (+x, -+y) or in Q2 (-x, +y)
         if ((_mx > this.getX() && _my > this.getY()) || (_mx < this.getX() && _my > this.getY())) {
             this.setAngle((float) ((FastMath.PI / 2) + (FastMath.PI / 2 - this.getAngle())));
@@ -207,15 +190,14 @@ public class Player extends Entity implements DeathListener {
         // Calculate the distance between the sprite and the mouse
         double diffX = this.getX() - _mx - Entity.APPROACH_FACTOR;
         double diffY = this.getY() - _my - Entity.APPROACH_FACTOR;
-
         // Use the pythagorean theorem to solve for the hypotenuse distance
         double distance = (double) FastMath.sqrt(((this.getX() - _mx) * (this.getX() - _mx))
                 + ((this.getY() - _my) * (this.getY() - _my)));
-
-        // Sets the velocity according to how far away the sprite is from the cursor,
-        // and according to what direction the player is facing.
+        /**
+         * Sets the velocity according to how far away the sprite is from the
+         * cursor, and according to what direction the player is facing.
+         */
         int directionSign = this.getPlayerDirection();
-
         this.setVelX(directionSign * ((this.APPROACH_VEL / distance) * diffX));
         this.setVelY(directionSign * ((this.APPROACH_VEL / distance) * diffY));
     }
@@ -288,7 +270,6 @@ public class Player extends Entity implements DeathListener {
             case WALKING_BACKWARD:
                 directionSign = -1;
         }
-
         return directionSign;
     }
 

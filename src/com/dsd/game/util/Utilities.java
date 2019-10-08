@@ -38,7 +38,6 @@ public abstract class Utilities extends StdOps {
         else if (_num > _max) {
             return _max;
         }
-
         return _num;
     }
 }
