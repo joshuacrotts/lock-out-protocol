@@ -17,7 +17,7 @@ import java.awt.Graphics2D;
  *
  * @author Joshua, Ronald, Rinty
  */
-public class ForestLevel extends StandardLevel {
+public class MetalLevel extends StandardLevel {
 
     //  Miscellaneous reference variables
     private final Player player;
@@ -37,7 +37,7 @@ public class ForestLevel extends StandardLevel {
      * All levels need to share the same collision handler so the player can
      * directly interact with other entities.
      */
-    public ForestLevel (Player _player, Game _sg, StandardCollisionHandler _sch) {
+    public MetalLevel (Player _player, Game _sg, StandardCollisionHandler _sch) {
         super("src/resources/img/bg/resized_bg/panel1.jpg");
         this.game = _sg;
         this.player = _player;
@@ -49,8 +49,8 @@ public class ForestLevel extends StandardLevel {
 
     @Override
     public void loadLevelData () {
-        this.addEntity(new SpawnerController(900, 900, EnemyType.BASIC_MONSTER, 5000, 200, this.game, (StandardCollisionHandler) this.getHandler()));
-        this.addEntity(new SpawnerController(2200, 2400, EnemyType.GREEN_MONSTER, 5000, 200, this.game, (StandardCollisionHandler) this.getHandler()));
+        this.addEntity(new SpawnerController(900, 900, EnemyType.BASIC_MONSTER, 4000, 200, this.game, (StandardCollisionHandler) this.getHandler()));
+        this.addEntity(new SpawnerController(2200, 2400, EnemyType.GREEN_MONSTER, 4000, 200, this.game, (StandardCollisionHandler) this.getHandler()));
     }
 
     @Override

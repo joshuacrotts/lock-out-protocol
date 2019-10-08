@@ -95,7 +95,7 @@ public class SpawnerController extends StandardGameObject {
             if (this.game.isPaused() || this.game.isPreamble()) {
                 return;
             }
-            this.spawnerController.spawn(StdOps.rand(1, 5));
+            this.spawnerController.spawn(StdOps.rand(1, 2));
         }
     }
 }

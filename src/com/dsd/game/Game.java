@@ -1,6 +1,6 @@
 package com.dsd.game;
 
-import com.dsd.game.levels.ForestLevel;
+import com.dsd.game.levels.MetalLevel;
 import com.dsd.game.api.TranslatorAPI;
 import com.dsd.game.controller.AudioBoxController;
 import com.dsd.game.controller.CollisionHandlerController;
@@ -172,7 +172,7 @@ public class Game extends StandardGame {
      * instantiated.
      */
     private void instantiateLevels () {
-        this.levelController.addLevel(new ForestLevel(this.player, this, this.sch));
+        this.levelController.addLevel(new MetalLevel(this.player, this, this.sch));
     }
 
 //========================== GETTERS =============================//

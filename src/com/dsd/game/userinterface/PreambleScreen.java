@@ -29,7 +29,7 @@ public class PreambleScreen extends Screen {
      * before fading out.
      */
     private final Timer preambleTimer;
-    private final long PREAMBLE_TIMER_DURATION = 5000;
+    private final long PREAMBLE_TIMER_DURATION = 4000;
     // State that the menu is currently on (in terms of fading in/out).
     private PreambleScreenState state;
 
