@@ -19,19 +19,19 @@ import java.awt.Graphics2D;
  *
  * @author Joshua, Ronald, Rinty
  */
-public class PlayButton extends StandardButton implements MouseEventInterface {
+public class HelpOrOptionsButton extends StandardButton implements MouseEventInterface {
 
     private final Game game;
 
     private final Font font;
 
-    private final int Y_OFFSET = 500;
+    private final int Y_OFFSET = 350;
     private final int X_OFFSET = 70;
-    private final int TEXT_X_OFFSET = 30;
+    private final int TEXT_X_OFFSET = 85;
     private final int BUTTON_WIDTH = 200;
     private final int BUTTON_HEIGHT = 100;
 
-    public PlayButton(Game _game) {
+    public HelpOrOptionsButton(Game _game) {
         this.game = _game;
 
         this.font = StdOps.initFont("src/resources/fonts/chargen.ttf", 24f);
@@ -40,7 +40,7 @@ public class PlayButton extends StandardButton implements MouseEventInterface {
         this.setY(this.game.getGameHeight() - Y_OFFSET);
         this.setWidth(BUTTON_WIDTH);
         this.setHeight(BUTTON_HEIGHT);
-        this.setText("PLAY");
+        this.setText("Help/Options");
         this.setColor(Color.RED);
     }
 
@@ -73,7 +73,7 @@ public class PlayButton extends StandardButton implements MouseEventInterface {
         if (this.game.getGameState() != GameState.MENU) {
             return;
         }
-        this.setColor(Color.BLUE);
+        this.setColor(Color.ORANGE);
     }
 
     @Override
