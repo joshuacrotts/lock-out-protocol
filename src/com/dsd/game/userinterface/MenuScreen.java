@@ -42,7 +42,6 @@ public class MenuScreen extends Screen {
     private void createUIElements() {
         //  Instantiates the play button
         super.addInteractor(new PlayButton(this.getGame()));
-
         //  Instantiates the exit button
         super.addInteractor(new ExitButton(this.getGame()));
 
