@@ -4,6 +4,7 @@ import com.dsd.game.objects.weapons.Weapon;
 import com.dsd.game.objects.weapons.Gun;
 import com.dsd.game.Game;
 import com.dsd.game.WeaponSelection;
+import com.dsd.game.api.WeatherConnector;
 import com.dsd.game.objects.weapons.Knife;
 import com.dsd.game.objects.weapons.Pistol;
 import com.dsd.game.objects.weapons.Rifle;
@@ -11,6 +12,8 @@ import com.dsd.game.userinterface.InventoryView;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Model representing the player's current inventory.
@@ -90,7 +93,7 @@ public class Inventory {
         try {
             gun = (Gun) this.getCurrentWeapon();
         } catch (ClassCastException ex) {
-            System.err.println("Could not cast weapon to gun!");
+            Logger.getLogger(WeatherConnector.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
         return gun;

@@ -10,6 +10,7 @@ import com.dsd.game.commands.MoveBackwardCommand;
 import com.dsd.game.commands.MoveForwardCommand;
 import com.dsd.game.commands.ReloadCommand;
 import com.dsd.game.controller.DebugController;
+import com.dsd.game.userinterface.Screen;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.main.StandardCamera;
@@ -104,6 +105,7 @@ public class Player extends Entity implements DeathListener {
             //      cursor                                                     //
             //*****************************************************************//
             this.faceCursor((int) mx, (int) my);
+            this.checkCameraBounds();
         }
         else {
             this.uponDeath();
@@ -124,6 +126,52 @@ public class Player extends Entity implements DeathListener {
         this.getGame().stopGame();
     }
 
+    /**
+     * Adjusts the player's position so they aren't able to move outside the
+     * bounds of the camera.
+     */
+    private void checkCameraBounds () {
+        StandardCamera cam = this.getGame().getCamera();
+        this.checkXBounds(cam);
+        this.checkYBounds(cam);
+    }
+
+    /**
+     * Checks the x bounds of the player and makes sure they can't go too far to
+     * the left or right.
+     *
+     * @param _cam
+     */
+    private void checkXBounds (StandardCamera _cam) {
+
+        if (this.getX() <= _cam.getMinX() - Screen.gameHalfWidth) {
+            this.setX(_cam.getMinX() - Screen.gameHalfWidth);
+        }
+        if (this.getX() > _cam.getMaxX() + Screen.gameHalfWidth - this.getWidth()) {
+            this.setX(_cam.getMaxX() + Screen.gameHalfWidth - this.getWidth());
+        }
+    }
+
+    /**
+     * Checks the y bounds of the player and makes sure they can't go too far up
+     * or down.
+     *
+     * @param _cam
+     */
+    private void checkYBounds (StandardCamera _cam) {
+        if (this.getY() <= _cam.getMinY() - Screen.gameHalfHeight) {
+            this.setY(_cam.getMinY() - Screen.gameHalfHeight);
+        }
+        if (this.getY() > _cam.getMaxY() + Screen.gameHalfHeight - this.getHeight()) {
+            this.setY(_cam.getMaxY() + Screen.gameHalfHeight - this.getHeight());
+        }
+    }
+
+    /**
+     * Draws the bounds around the player when debug mode is enabled.
+     *
+     * @param _g2
+     */
     private void drawBorder (Graphics2D _g2) {
         _g2.setColor(Color.RED);
         _g2.draw(this.getBounds());
