@@ -19,14 +19,14 @@ public class DecrementWeaponCommand extends Command {
     private final Player player;
 
     //  This may need to change with time.
-    public DecrementWeaponCommand(Game _game, Player _player) {
+    public DecrementWeaponCommand (Game _game, Player _player) {
         this.game = _game;
         this.player = _player;
         this.bind(this.game.getKeyboard(), KeyEvent.VK_X);
     }
 
     @Override
-    public void pressed(float _dt) {
+    public void pressed (float _dt) {
         if (this.player.isAttacking()) {
             return;
         }

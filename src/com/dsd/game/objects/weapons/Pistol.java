@@ -22,7 +22,7 @@ public class Pistol extends Gun {
     private static final int SHOOT_GUN_FPS = 20;
     private final int DELAY = 1250;
 
-    public Pistol(Game _game, Player _player, StandardCollisionHandler _sch) {
+    public Pistol (Game _game, Player _player, StandardCollisionHandler _sch) {
         super(WeaponType.PISTOL, 16, _game, _player, _sch);
         //  Instantiates the animation controllers
         StandardAnimatorController walkingAnimation = new StandardAnimatorController(
@@ -35,7 +35,7 @@ public class Pistol extends Gun {
     }
 
     @Override
-    public void shoot() {
+    public void shoot () {
         this.addBullet();
         super.deductAmmo();
     }
@@ -43,7 +43,7 @@ public class Pistol extends Gun {
     /**
      * Adds a bullet to the global handler.
      */
-    private void addBullet() {
+    private void addBullet () {
         super.getHandler().addEntity(new BulletGameObject(
                 (int) super.getPlayer().getX() + super.getPlayer().getWidth() / 2,
                 (int) super.getPlayer().getY() + super.getPlayer().getHeight() / 2,

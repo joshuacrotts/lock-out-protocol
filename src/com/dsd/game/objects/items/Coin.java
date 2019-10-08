@@ -47,7 +47,7 @@ public class Coin extends StandardGameObject {
      * @param _large
      * @param _sch
      */
-    public Coin(int _x, int _y, double _small, double _medium, double _large, StandardCollisionHandler _sch) {
+    public Coin (int _x, int _y, double _small, double _medium, double _large, StandardCollisionHandler _sch) {
         super(_x, _y, StandardID.Coin);
         this.parentContainer = _sch;
         this.generateCoinType(_small, _medium, _large);
@@ -58,18 +58,19 @@ public class Coin extends StandardGameObject {
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         if (this.isAlive()) {
             this.getAnimationController().tick();
             this.slowVelocities();
             this.updatePosition();
-        } else {
+        }
+        else {
             this.parentContainer.removeEntity(this);
         }
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         if (this.isAlive()) {
             this.getAnimationController().renderFrame(_g2);
         }
@@ -78,7 +79,7 @@ public class Coin extends StandardGameObject {
     /**
      * Slows the velocity of the coins gradually.
      */
-    private void slowVelocities() {
+    private void slowVelocities () {
         this.setVelX(this.getVelX() * SCATTER_RANGE);
         this.setVelY(this.getVelY() * SCATTER_RANGE);
     }
@@ -90,19 +91,20 @@ public class Coin extends StandardGameObject {
      * @param _medium
      * @param _large
      */
-    private void generateCoinType(double _small, double _medium, double _large) {
+    private void generateCoinType (double _small, double _medium, double _large) {
         int coin = StdOps.rand(0, 100);
         if (coin < _small * 100) {
             this.setAnimation(new StandardAnimatorController(this, coinOneFrames, COIN_FPS));
             this.value = 1;
-        } else {
+        }
+        else {
             this.setAnimation(new StandardAnimatorController(this, coinTwoFrames, COIN_FPS));
             this.value = 5;
         }
     }
 
 //================================= GETTERS ==================================//
-    public int getValue() {
+    public int getValue () {
         return this.value;
     }
 

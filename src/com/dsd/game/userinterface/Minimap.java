@@ -48,7 +48,7 @@ public class Minimap extends Interactor {
     private final int TRIANGLE_X_SCALE = 6;
     private final int TRIANGLE_Y_SCALE = 12;
 
-    public Minimap(Game _game, StandardCollisionHandler _sch) {
+    public Minimap (Game _game, StandardCollisionHandler _sch) {
         this.game = _game;
         this.globalHandler = _sch;
         this.X_POINTS = new int[]{0, 0, 0, 0};
@@ -57,13 +57,13 @@ public class Minimap extends Interactor {
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         this.drawMapBackground(_g2);
         /**
          * Renders a copy of all entities on the screen, but by a factor of 20x
          * smaller.
          */
-        for (int i = 0; i < this.globalHandler.size(); i++) {
+        for (int i = 0 ; i < this.globalHandler.size() ; i++) {
             StandardGameObject obj = this.globalHandler.get(i);
 
             if (obj != null && obj.isAlive()) {
@@ -87,7 +87,7 @@ public class Minimap extends Interactor {
      *
      * @param _g2
      */
-    private void drawMapBackground(Graphics2D _g2) {
+    private void drawMapBackground (Graphics2D _g2) {
         AlphaComposite oldComposite = (AlphaComposite) _g2.getComposite();
         _g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
         _g2.drawImage(this.game.getCurrentLevel().getBgImage(), (int) this.game.getCamera().getX() + Screen.gameHalfWidth - this.MMX_OFFSET,
@@ -101,7 +101,7 @@ public class Minimap extends Interactor {
      *
      * @param _g2
      */
-    private void drawBorder(Graphics2D _g2) {
+    private void drawBorder (Graphics2D _g2) {
         _g2.drawImage(this.border, (int) this.game.getCamera().getX() + Screen.gameHalfWidth - this.MMX_OFFSET,
                 (int) this.game.getCamera().getY() - Screen.gameHalfHeight + this.MMY_OFFSET,
                 null);
@@ -114,7 +114,7 @@ public class Minimap extends Interactor {
      * @param _g2
      * @param _player
      */
-    private void drawPlayer(Graphics2D _g2, Player _player) {
+    private void drawPlayer (Graphics2D _g2, Player _player) {
         int scaledPX = (int) (this.game.getCamera().getX() + Screen.gameHalfWidth - this.MMX_OFFSET + (_player.getX() / this.MINIMAP_SCALE));
         int scaledPY = (int) (this.game.getCamera().getY() - Screen.gameHalfHeight + this.MMY_OFFSET + (_player.getY() / this.MINIMAP_SCALE));
         this.createPoints(scaledPX, scaledPY);
@@ -138,7 +138,7 @@ public class Minimap extends Interactor {
      * @param obj
      * @param color
      */
-    private void drawObject(Graphics2D _g2, StandardGameObject obj, Color color) {
+    private void drawObject (Graphics2D _g2, StandardGameObject obj, Color color) {
         _g2.setColor(color);
         _g2.fillRect((int) (this.game.getCamera().getX() + Screen.gameHalfWidth - this.MMX_OFFSET + (obj.getX() / this.MINIMAP_SCALE)),
                 (int) (this.game.getCamera().getY() - Screen.gameHalfHeight + this.MMY_OFFSET + (obj.getY() / this.MINIMAP_SCALE)),
@@ -152,7 +152,7 @@ public class Minimap extends Interactor {
      * @param _scaledPX
      * @param _scaledPY
      */
-    private void createPoints(int _scaledPX, int _scaledPY) {
+    private void createPoints (int _scaledPX, int _scaledPY) {
         //  Creates the points necessary for the triangle
         this.X_POINTS[POINT_ONE] = _scaledPX;
         this.X_POINTS[POINT_TWO] = _scaledPX - TRIANGLE_X_SCALE;
@@ -165,19 +165,19 @@ public class Minimap extends Interactor {
     }
 
     @Override
-    public void tick() {
+    public void tick () {
     }
 
     @Override
-    public void onMouseClick() {
+    public void onMouseClick () {
     }
 
     @Override
-    public void onMouseEnterHover() {
+    public void onMouseEnterHover () {
     }
 
     @Override
-    public void onMouseExitHover() {
+    public void onMouseExitHover () {
     }
 
 }

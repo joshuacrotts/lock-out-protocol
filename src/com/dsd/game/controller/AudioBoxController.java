@@ -11,7 +11,7 @@ import com.revivedstandards.controller.StandardAudioController;
  */
 public abstract class AudioBoxController {
 
-    public static void initialize(int _buffers) {
+    public static void initialize (int _buffers) {
         StandardAudioController.init(_buffers);
         StandardAudioController.load("src/resources/audio/sfx/pistol.wav", 16);
         StandardAudioController.load("src/resources/audio/sfx/splat1.wav", 2);
@@ -27,14 +27,14 @@ public abstract class AudioBoxController {
         AudioBoxController.initGreenMonsterSFX(5);
     }
 
-    private static void initBasicMonsterSFX(int _sfxCount) {
-        for (int i = 1; i < _sfxCount; i++) {
+    private static void initBasicMonsterSFX (int _sfxCount) {
+        for (int i = 1 ; i < _sfxCount ; i++) {
             StandardAudioController.load("src/resources/audio/sfx/basic_monster/zombie-" + i + ".wav", 2);
         }
     }
 
-    private static void initGreenMonsterSFX(int _sfxCount) {
-        for (int i = 1; i < _sfxCount; i++) {
+    private static void initGreenMonsterSFX (int _sfxCount) {
+        for (int i = 1 ; i < _sfxCount ; i++) {
             StandardAudioController.load("src/resources/audio/sfx/green_monster/pain" + i + ".wav", 2);
         }
     }

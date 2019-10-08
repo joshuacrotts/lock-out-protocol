@@ -36,7 +36,7 @@ public class DamageText extends StandardLabel {
     private final int FADE_TIMER = 5;
     private Color fadeColor;
 
-    public DamageText(int _x, int _y, String _text, StandardInteractorHandler _sih) {
+    public DamageText (int _x, int _y, String _text, StandardInteractorHandler _sih) {
         super(_x, _y, _text, font);
         this.sih = _sih;
         this.fadeColor = new Color(this.generateRedColor(), 0, 0, 0xff);
@@ -44,24 +44,25 @@ public class DamageText extends StandardLabel {
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         if (this.fadeColor.getAlpha() <= 0) {
             this.sih.getInteractors().remove(this);
-        } else {
+        }
+        else {
             this.updateColor();
             this.setY(this.getY() + this.getVelY());
         }
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         StandardDraw.text(this.getText(), this.getX(), this.getY(), font, font.getSize(), this.fadeColor);
     }
 
     /**
      * Updates the color of the text being drawn above the monster when hurt.
      */
-    private void updateColor() {
+    private void updateColor () {
         this.fadeColor = new Color(this.fadeColor.getRed(),
                 this.fadeColor.getGreen(),
                 this.fadeColor.getBlue(),
@@ -74,7 +75,7 @@ public class DamageText extends StandardLabel {
      *
      * @return redValue if leq 255, original red value otherwise.
      */
-    private int generateRedColor() {
+    private int generateRedColor () {
         DamageText.redColorValue += RED_INC_VALUE;
         return DamageText.redColorValue > 255 ? (DamageText.redColorValue = ORIGINAL_RED_VALUE) : DamageText.redColorValue;
     }

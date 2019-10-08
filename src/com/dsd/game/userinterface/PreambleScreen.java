@@ -33,7 +33,7 @@ public class PreambleScreen extends Screen {
     // State that the menu is currently on (in terms of fading in/out).
     private PreambleScreenState state;
 
-    public PreambleScreen(Game _game) {
+    public PreambleScreen (Game _game) {
         super(_game);
         this.lightningEffect = new LightningModel(_game);
         this.waveModel = new WaveLabel(_game, _game.getLogicalCurrentLevelID());
@@ -42,14 +42,14 @@ public class PreambleScreen extends Screen {
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         this.lightningEffect.tick();
         this.waveModel.tick();
         this.changeAlpha();
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         AlphaComposite oldComposite = (AlphaComposite) _g2.getComposite();
         _g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, this.alpha));
         this.lightningEffect.render(_g2);
@@ -62,14 +62,15 @@ public class PreambleScreen extends Screen {
      * out. Once we're there, we schedule a new preambletimer to fade the
      * transparency back out after *preambleTimerDuration* time.
      */
-    private void changeAlpha() {
+    private void changeAlpha () {
         /**
          * We can fade in if we are in the fade-in state, and our alpha is lower
          * than 1.
          */
         if (this.state == PreambleScreenState.FADE_IN && this.alpha < 1.0f) {
             this.alpha += ALPHA_TIMER;
-        } /**
+        }
+        /**
          * Once we hit an alpha of 1, we can schedule our timer to wait for x
          * seconds, then decrease the text/bolt effects.
          */
@@ -77,7 +78,8 @@ public class PreambleScreen extends Screen {
             this.preambleTimer.schedule(new PreambleTimer(this), PREAMBLE_TIMER_DURATION);
             if (this.state == PreambleScreenState.FADE_OUT && this.alpha > 0.0f) {
                 this.alpha -= ALPHA_TIMER;
-            } /**
+            }
+            /**
              * Finally, once our alpha is below or equal to 0.0, we can flag the
              * game as running.
              */
@@ -102,12 +104,12 @@ public class PreambleScreen extends Screen {
 
         private final PreambleScreen screen;
 
-        public PreambleTimer(PreambleScreen _screen) {
+        public PreambleTimer (PreambleScreen _screen) {
             this.screen = _screen;
         }
 
         @Override
-        public void run() {
+        public void run () {
             screen.state = PreambleScreenState.FADE_OUT;
         }
     }

@@ -24,14 +24,14 @@ public class LevelController {
     private int currentWave = 1;
     private final List<StandardLevel> levels;
 
-    public LevelController() {
+    public LevelController () {
         this.levels = new ArrayList<>();
     }
 
     /**
      * Ticks the level pointed at in the List of levels.
      */
-    public void tickLevel() {
+    public void tickLevel () {
         this.levels.get(this.currentLevelID).tick();
     }
 
@@ -40,7 +40,7 @@ public class LevelController {
      *
      * @param _g2
      */
-    public void renderLevel(Graphics2D _g2) {
+    public void renderLevel (Graphics2D _g2) {
         this.levels.get(this.currentLevelID).render(_g2);
     }
 
@@ -49,14 +49,14 @@ public class LevelController {
      *
      * @param _level object.
      */
-    public void addLevel(StandardLevel _level) {
+    public void addLevel (StandardLevel _level) {
         this.levels.add(_level);
     }
 
     /**
      * Increments the level pointer.
      */
-    public void incrementLevel() {
+    public void incrementLevel () {
         this.currentLevelID++;
     }
 
@@ -64,20 +64,20 @@ public class LevelController {
      * Increments which wave the level is currently on. This will be used much
      * more frequently than incrementLevel().
      */
-    public void incrementWave() {
+    public void incrementWave () {
         this.currentWave++;
     }
 
 //============================= GETTERS ======================================//
-    public int getCurrentLevelID() {
+    public int getCurrentLevelID () {
         return this.currentLevelID;
     }
 
-    public StandardLevel getCurrentLevel() {
+    public StandardLevel getCurrentLevel () {
         return this.levels.get(this.currentLevelID);
     }
 
-    public int getWaveNumber() {
+    public int getWaveNumber () {
         return this.currentWave;
     }
 
@@ -87,16 +87,16 @@ public class LevelController {
      *
      * @return
      */
-    public int getLogicalCurrentLevelID() {
+    public int getLogicalCurrentLevelID () {
         return this.currentLevelID + 1;
     }
 
 //============================= SETTERS ======================================//
-    protected void changeLevelID(int _levelID) {
+    protected void changeLevelID (int _levelID) {
         this.currentLevelID = _levelID;
     }
 
-    public void setWaveNumber(int _waveNumber) {
+    public void setWaveNumber (int _waveNumber) {
         this.currentLevelID = _waveNumber;
     }
 }

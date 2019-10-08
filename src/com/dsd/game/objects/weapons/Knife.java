@@ -20,7 +20,7 @@ public class Knife extends Weapon {
     private final int DELAY = 1250;
     private final int KNIFE_DAMAGE = 20;
 
-    public Knife(Player _player) {
+    public Knife (Player _player) {
         super(WeaponType.KNIFE);
         //  Instantiates the animation controllers
         StandardAnimatorController walkingAnimation = new StandardAnimatorController(

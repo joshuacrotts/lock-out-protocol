@@ -27,7 +27,7 @@ public class ExitButton extends StandardButton implements MouseEventInterface {
     private final int BUTTON_HEIGHT = 100;
     private final Font font;
 
-    public ExitButton(Game _game) {
+    public ExitButton (Game _game) {
         super();
         this.game = _game;
         this.font = StdOps.initFont("src/resources/fonts/chargen.ttf", 24f);
@@ -40,7 +40,7 @@ public class ExitButton extends StandardButton implements MouseEventInterface {
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         super.render(_g2);
         StandardDraw.text(this.getText(),
                 (this.getX() + (this.getWidth() / 2)) - TEXT_X_OFFSET,
@@ -49,7 +49,7 @@ public class ExitButton extends StandardButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseClick() {
+    public void onMouseClick () {
         if (this.game.getGameState() != GameState.MENU) {
             return;
         }
@@ -57,7 +57,7 @@ public class ExitButton extends StandardButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseEnterHover() {
+    public void onMouseEnterHover () {
         if (this.game.getGameState() != GameState.MENU) {
             return;
         }
@@ -65,7 +65,7 @@ public class ExitButton extends StandardButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseExitHover() {
+    public void onMouseExitHover () {
         if (this.game.getGameState() != GameState.MENU) {
             return;
         }

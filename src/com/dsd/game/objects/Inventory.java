@@ -31,7 +31,7 @@ public class Inventory {
     private int currentWeapon = 0;
     private boolean hasGun;
 
-    public Inventory(Game _game, Player _player, StandardCollisionHandler _sch) {
+    public Inventory (Game _game, Player _player, StandardCollisionHandler _sch) {
         this.game = _game;
         this.player = _player;
         this.weapons = new ArrayList<>();
@@ -48,7 +48,7 @@ public class Inventory {
      *
      * @param choice
      */
-    public void changeWeapon(WeaponSelection choice) {
+    public void changeWeapon (WeaponSelection choice) {
         this.currentWeapon += choice.getChange();
         this.clampWeapon();
         this.updateAnimation();
@@ -58,10 +58,11 @@ public class Inventory {
     /**
      * Clamps the pointer for the current weapon to values in the arraylist.
      */
-    private void clampWeapon() {
+    private void clampWeapon () {
         if (this.currentWeapon < 0) {
             this.currentWeapon = this.weapons.size() - 1;
-        } else if (this.currentWeapon >= this.weapons.size()) {
+        }
+        else if (this.currentWeapon >= this.weapons.size()) {
             this.currentWeapon = 0;
         }
     }
@@ -70,10 +71,11 @@ public class Inventory {
      * Updates the animation set by the player determined by which weapon they
      * have.
      */
-    private void updateAnimation() {
+    private void updateAnimation () {
         if (this.player.isWalking() || this.player.isStanding()) {
             this.player.setAnimation(this.weapons.get(this.currentWeapon).getWalkFrames());
-        } else if (this.player.isAttacking()) {
+        }
+        else if (this.player.isAttacking()) {
             this.player.setAnimation(this.weapons.get(this.currentWeapon).getAttackFrames());
         }
 
@@ -81,27 +83,28 @@ public class Inventory {
     }
 
 //============================= GETTERS ===================================//
-    public Weapon getCurrentWeapon() {
+    public Weapon getCurrentWeapon () {
         return weapons.get(this.currentWeapon);
     }
 
-    public Gun getGun() {
+    public Gun getGun () {
         Gun gun = null;
 
         try {
             gun = (Gun) this.getCurrentWeapon();
-        } catch (ClassCastException ex) {
+        }
+        catch (ClassCastException ex) {
             Logger.getLogger(WeatherConnector.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
         return gun;
     }
 
-    public InventoryView getView() {
+    public InventoryView getView () {
         return this.view;
     }
 
-    public boolean hasGun() {
+    public boolean hasGun () {
         return this.hasGun;
     }
 }

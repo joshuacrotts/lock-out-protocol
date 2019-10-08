@@ -37,7 +37,7 @@ public class BulletGameObject extends StandardGameObject {
     //  Animation frame per second setting
     private static final int BULLET_FPS = 20;
 
-    public BulletGameObject(int _x, int _y, double _angle, Game _game,
+    public BulletGameObject (int _x, int _y, double _angle, Game _game,
             StandardCollisionHandler _parentContainer, Player _parent) {
         super(_x, _y, StandardID.Bullet);
         this.game = _game;
@@ -55,7 +55,7 @@ public class BulletGameObject extends StandardGameObject {
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         if (this.camera.SGOInBounds(this)) {
             this.setX(this.getX() + this.getVelX());
             this.setY(this.getY() + this.getVelY());
@@ -63,13 +63,14 @@ public class BulletGameObject extends StandardGameObject {
             if (this.isAlive()) {
                 this.getAnimationController().tick();
             }
-        } else {
+        }
+        else {
             this.sch.removeEntity(this);
         }
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         /**
          * If they're alive, draw the frame that the bullet animation is on.
          * Otherwise, render the explosion handler
@@ -85,7 +86,7 @@ public class BulletGameObject extends StandardGameObject {
      *
      * @return
      */
-    private static BufferedImage[] initImages() {
+    private static BufferedImage[] initImages () {
         BulletGameObject.frames[0] = StdOps.loadImage("src/resources/img/bullet/bullet_sprite/new_bullet/bullet.png");
         return BulletGameObject.frames;
     }
@@ -100,7 +101,7 @@ public class BulletGameObject extends StandardGameObject {
      * @param _mx
      * @param _my
      */
-    private void setVelocity(double _x, double _y, int _mx, int _my) {
+    private void setVelocity (double _x, double _y, int _mx, int _my) {
         double deltaX = (_mx - _x);
         double deltaY = (_my - _y);
         // Use the pythagorean theorem to solve for the hypotenuse distance
@@ -113,7 +114,7 @@ public class BulletGameObject extends StandardGameObject {
     }
 
 //========================== GETTERS =======================================//
-    public int getDamage() {
+    public int getDamage () {
         return this.DAMAGE;
     }
 

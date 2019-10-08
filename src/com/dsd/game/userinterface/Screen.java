@@ -20,30 +20,32 @@ import java.awt.Graphics2D;
  */
 public abstract class Screen implements Renderable, Updatable {
 
-    private final Game game;
+    //  Miscellaneous reference variables
+    private static Game game;
     private final StandardInteractorHandler sih;
+
+    //  Variables for getting quickly-modified screen dimensions.
+    public static int gameFourthWidth;
+    public static int gameFourthHeight;
     public static int gameHalfWidth;
     public static int gameHalfHeight;
     public static int gameDoubleWidth;
     public static int gameDoubleHeight;
 
-    public Screen(Game _game) {
-        this.game = _game;
-        this.sih = new StandardInteractorHandler(this.game);
+    public Screen (Game _game) {
+        Screen.game = _game;
+        this.sih = new StandardInteractorHandler(Screen.game);
         this.addUIElementsAsListeners();
-        gameHalfWidth = this.game.getGameWidth() / 2;
-        gameHalfHeight = this.game.getGameHeight() / 2;
-        gameDoubleWidth = this.game.getGameWidth() * 2;
-        gameDoubleHeight = this.game.getGameHeight() * 2;
+        Screen.setGameDimensions();
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         StandardHandler.Handler(this.sih);
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         StandardDraw.Handler(this.sih);
     }
 
@@ -52,7 +54,7 @@ public abstract class Screen implements Renderable, Updatable {
      *
      * @param _interactor
      */
-    public void addInteractor(Interactor _interactor) {
+    public void addInteractor (Interactor _interactor) {
         this.sih.addInteractor(_interactor);
     }
 
@@ -60,13 +62,25 @@ public abstract class Screen implements Renderable, Updatable {
      * Iterates through the list of UI elements and adds them as listeners to
      * the StandardGame.
      */
-    private void addUIElementsAsListeners() {
-        this.game.addMouseListener(this.sih);
-        this.game.addMouseMotionListener(this.sih);
+    private void addUIElementsAsListeners () {
+        Screen.game.addMouseListener(this.sih);
+        Screen.game.addMouseMotionListener(this.sih);
+    }
+
+    /**
+     * Sets the game dimensions
+     */
+    private static void setGameDimensions () {
+        gameHalfWidth = game.getGameWidth() >> 1;
+        gameHalfHeight = game.getGameHeight() >> 1;
+        gameDoubleWidth = game.getGameWidth() << 1;
+        gameDoubleHeight = game.getGameHeight() << 1;
+        gameFourthWidth = game.getGameWidth() >> 2;
+        gameFourthHeight = game.getGameHeight() >> 2;
     }
 
 //============================ GETTERS =================================//
-    public Game getGame() {
-        return this.game;
+    public Game getGame () {
+        return Screen.game;
     }
 }

@@ -18,7 +18,7 @@ public class PauseScreen extends Screen {
     private final PauseLabel pauseLabel;
     private final PauseCommand pauseCommand;
 
-    public PauseScreen(Game _game) {
+    public PauseScreen (Game _game) {
         super(_game);
         this.pauseLabel = new PauseLabel(_game);
         this.pauseCommand = new PauseCommand(_game);
@@ -26,12 +26,12 @@ public class PauseScreen extends Screen {
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         this.pauseLabel.tick();
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         this.pauseLabel.render(_g2);
     }
 }

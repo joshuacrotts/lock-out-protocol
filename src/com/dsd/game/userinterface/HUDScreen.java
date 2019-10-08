@@ -19,7 +19,7 @@ public class HUDScreen extends Screen {
     private final Player player;
     private final StandardCollisionHandler globalHandler;
 
-    public HUDScreen(Game _game, Player _player, StandardCollisionHandler _sch) {
+    public HUDScreen (Game _game, Player _player, StandardCollisionHandler _sch) {
         super(_game);
         this.player = _player;
         this.globalHandler = _sch;
@@ -27,13 +27,13 @@ public class HUDScreen extends Screen {
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         super.tick();
         this.player.getInventory().getView().tick();
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         super.render(_g2);
         this.player.getInventory().getView().render(_g2);
     }
@@ -41,7 +41,7 @@ public class HUDScreen extends Screen {
     /**
      * Creates the interactor elements for this HUD Screen.
      */
-    private void createUIElements() {
+    private void createUIElements () {
         this.addInteractor(new HealthLabel(super.getGame(), this.player));
         this.addInteractor(new AmmoLabel(super.getGame(), this.player));
         this.addInteractor(new CoinLabel(super.getGame(), this.player));

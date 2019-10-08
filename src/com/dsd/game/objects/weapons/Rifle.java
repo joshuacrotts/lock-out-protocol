@@ -18,13 +18,16 @@ import com.revivedstandards.model.StandardAnimation;
  */
 public class Rifle extends Gun {
 
+    //  FPS variables for how fast the rifle frames animate.
     private static final int WALKING_FPS = 10;
     private static final int SHOOT_GUN_FPS = 20;
+
+    //  Delay between shooting one bullet and the next (in ms).
     private final int DELAY = 100;
 
-    public Rifle(Game _game, Player _player, StandardCollisionHandler _sch) {
+    public Rifle (Game _game, Player _player, StandardCollisionHandler _sch) {
         super(WeaponType.RIFLE, 31, _game, _player, _sch);
-        //  Instantiates the animation controllers
+        //  Instantiates the animation controllers.
         StandardAnimatorController walkingAnimation = new StandardAnimatorController(
                 new StandardAnimation(_player, Utilities.loadFrames("src/resources/img/player/player_walk_rifle/", 6), WALKING_FPS));
         StandardAnimatorController shootingAnimation = new StandardAnimatorController(
@@ -35,7 +38,7 @@ public class Rifle extends Gun {
     }
 
     @Override
-    public void shoot() {
+    public void shoot () {
         this.addBullet();
         super.deductAmmo();
     }
@@ -43,7 +46,7 @@ public class Rifle extends Gun {
     /**
      * Adds a bullet to the global handler.
      */
-    private void addBullet() {
+    private void addBullet () {
         super.getHandler().addEntity(new BulletGameObject(
                 (int) super.getPlayer().getX() + super.getPlayer().getWidth() / 2,
                 (int) super.getPlayer().getY() + super.getPlayer().getHeight() / 2,

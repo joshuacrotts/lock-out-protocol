@@ -1,7 +1,6 @@
 package com.dsd.game;
 
 import com.dsd.game.levels.ForestLevel;
-import com.dsd.game.api.CityLocator;
 import com.dsd.game.api.TranslatorAPI;
 import com.dsd.game.controller.AudioBoxController;
 import com.dsd.game.controller.CollisionHandlerController;
@@ -57,7 +56,7 @@ public class Game extends StandardGame {
     //  Main player reference so other monsters can track them
     private final Player player;
 
-    public Game(int _width, int _height, String _title) {
+    public Game (int _width, int _height, String _title) {
         /**
          * Note: Magic numbers for the player and the monster are just for
          * demonstration; they will NOT be in the final game.
@@ -95,7 +94,7 @@ public class Game extends StandardGame {
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         //  Depending on the game state, update different things.
         switch (this.gameState) {
             case MENU:
@@ -122,11 +121,12 @@ public class Game extends StandardGame {
     }
 
     @Override
-    public void render() {
+    public void render () {
         //  Depending on the game state, render different things.
         if (this.gameState == GameState.MENU) {
             this.menuScreen.render(StandardDraw.Renderer);
-        } else {
+        }
+        else {
             //  First things first: render the camera
             StandardDraw.Object(this.sc);
             //  Then render the current [active] level
@@ -159,11 +159,11 @@ public class Game extends StandardGame {
      * Once the game turns to the PLAY state, this method is called. It will
      * instantiate the Spawner controllers, level controllers, etc.
      */
-    public void uponPlay() {
+    public void uponPlay () {
         this.levelController.getCurrentLevel().loadLevelData();
     }
 
-    public void playWaveChangeSFX() {
+    public void playWaveChangeSFX () {
         StandardAudioController.play("src/resources/audio/sfx/round_change.wav");
     }
 
@@ -171,45 +171,45 @@ public class Game extends StandardGame {
      * Loads the level data when the game starts so the timers can be
      * instantiated.
      */
-    private void instantiateLevels() {
+    private void instantiateLevels () {
         this.levelController.addLevel(new ForestLevel(this.player, this, this.sch));
     }
 
 //========================== GETTERS =============================//
-    public Player getPlayer() {
+    public Player getPlayer () {
         return this.player;
     }
 
-    public GameState getGameState() {
+    public GameState getGameState () {
         return this.gameState;
     }
 
-    public StandardCamera getCamera() {
+    public StandardCamera getCamera () {
         return this.sc;
     }
 
-    public StandardLevel getCurrentLevel() {
+    public StandardLevel getCurrentLevel () {
         return this.levelController.getCurrentLevel();
     }
 
-    public int getCurrentLevelID() {
+    public int getCurrentLevelID () {
         return this.levelController.getCurrentLevelID();
     }
 
-    public int getLogicalCurrentLevelID() {
+    public int getLogicalCurrentLevelID () {
         return this.levelController.getLogicalCurrentLevelID();
     }
 
-    public boolean isPaused() {
+    public boolean isPaused () {
         return this.gameState == GameState.PAUSED;
     }
 
-    public boolean isPreamble() {
+    public boolean isPreamble () {
         return this.gameState == GameState.PREAMBLE;
     }
 
 //========================== SETTERS =============================//
-    public void setGameState(GameState _gs) {
+    public void setGameState (GameState _gs) {
         this.gameState = _gs;
     }
 }

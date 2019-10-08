@@ -25,7 +25,7 @@ public class RainDrop extends StandardGameObject {
     private final int BLUE_COLOR = 100;
     private final int VEL_FACTOR = 2;
 
-    public RainDrop(double _x, double _y, double _direction, double _speed, int _vanish) {
+    public RainDrop (double _x, double _y, double _direction, double _speed, int _vanish) {
         super(_x, _y, StandardID.Particle);
         //Solve for horizontal leg of right triangle formed by velocity vector
         this.setVelX(_speed * FastMath.sin(_direction));
@@ -33,7 +33,7 @@ public class RainDrop extends StandardGameObject {
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         if (this.getY() > this.vanish) {
             this.setAlive(false);
         }
@@ -42,7 +42,7 @@ public class RainDrop extends StandardGameObject {
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         _g2.setColor(new Color(BLUE_COLOR, BLUE_COLOR, StdOps.rand(BLUE_COLOR, 0xFF)));
         _g2.drawLine((int) this.getX(), (int) this.getY(), (int) (this.getX() - this.getVelX() * VEL_FACTOR),
                 (int) (this.getY() - this.getVelY() * VEL_FACTOR));
