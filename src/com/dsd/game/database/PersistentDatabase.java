@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
@@ -53,6 +54,8 @@ public class PersistentDatabase {
 
     /**
      * Connect to the SQL database... when applicable.
+     *
+     * @TODO: COMPLETELY REFACTOR THIS. IT IS JUST FOR TESTING*!!!!*!*!*!*
      */
     public void connect () {
         //  SQL Database information
@@ -77,17 +80,12 @@ public class PersistentDatabase {
         String email = keyboard.nextLine();
         System.out.print("\nEnter your password: ");
         String password = keyboard.nextLine();
-        String insertStatement = String.format("INSERT INTO users " + "VALUES(%d, \'%s\', \'%s\');", (int) (Math.random() * 500), email, password);
-        System.out.println("SQL Statement " + insertStatement);
-        Statement stmt = null;
+        PreparedStatement insertStatement = null;
         try {
-            stmt = this.remoteDBConnection.createStatement();
-        }
-        catch (SQLException ex) {
-            Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            stmt.executeUpdate(insertStatement);
+            insertStatement = this.remoteDBConnection.prepareStatement(String.format("INSERT INTO user_accounts " + "VALUES(DEFAULT, ?, MD5(?));"));
+            insertStatement.setString(1, email);
+            insertStatement.setString(2, password);
+            insertStatement.executeUpdate();
         }
         catch (SQLException ex) {
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
