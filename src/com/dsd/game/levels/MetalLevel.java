@@ -49,8 +49,8 @@ public class MetalLevel extends StandardLevel {
 
     @Override
     public void loadLevelData () {
-        this.addEntity(new SpawnerController(900, 900, EnemyType.BASIC_MONSTER, 6000, 200, this.game, (StandardCollisionHandler) this.getHandler()));
-        this.addEntity(new SpawnerController(2200, 2400, EnemyType.GREEN_MONSTER, 6000, 200, this.game, (StandardCollisionHandler) this.getHandler()));
+        this.addEntity(new SpawnerController(900, 900, EnemyType.BASIC_MONSTER, 4000, 200, this.game, (StandardCollisionHandler) this.getHandler()));
+        this.addEntity(new SpawnerController(2200, 2400, EnemyType.GREEN_MONSTER, 4000, 200, this.game, (StandardCollisionHandler) this.getHandler()));
     }
 
     @Override

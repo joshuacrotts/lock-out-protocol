@@ -23,6 +23,13 @@ import org.apache.commons.math3.util.FastMath;
 
 /**
  * This class encompasses the model for the Player object.
+ * The player itself is instantiated with its own camera,
+ * an inventory in the form of an ArrayList, its list key
+ * commands accepted from the keyboard, its speed value,
+ * its currency held in the form of an integer, its
+ * designated health value from the Entity-Class, and
+ * finally, its own collider for collision detection
+ * purposes, which is added to the Standard Collision Handler
  *
  * [Group Name: Data Structure Deadheads]
  *
@@ -97,6 +104,11 @@ public class Player extends Entity implements DeathListener {
         }
     }
 
+    /**
+     * Renders the player's animation sprites and draws them
+     * to the screen
+     * @param _g2
+     */
     @Override
     public void render (Graphics2D _g2) {
         if (DebugController.DEBUG_MODE) {
@@ -105,6 +117,10 @@ public class Player extends Entity implements DeathListener {
         this.getAnimationController().renderFrame(_g2);
     }
 
+    /**
+     * Displays a death message upon player's health reaching 0,
+     * and then closes out the application (currently WIP)
+     */
     @Override
     public void uponDeath () {
         JOptionPane.showMessageDialog(this.getGame(), "You have died!");
