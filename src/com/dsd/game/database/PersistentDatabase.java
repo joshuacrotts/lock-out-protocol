@@ -56,9 +56,9 @@ public class PersistentDatabase {
      */
     public void connect () {
         //  SQL Database information
-        String ipAddress = "35.227.79.48";
+        String ipAddress = "35.226.95.88";
         //  Database NAME (db name in remote sql)
-        String instanceID = "testdb";
+        String instanceID = "users";
         String dbUsername = "root";
         String rootPswd = "lockoutprotocol340";
 
