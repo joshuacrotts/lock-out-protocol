@@ -42,7 +42,7 @@ public class Player extends Entity implements DeathListener {
     //  Global commands
     private AttackCommand attackCommand;
     //  Variables representing the angle and approach velocity
-    private final float APPROACH_VEL = -3.0f;
+    private final float APPROACH_VEL = -5.0f;
     //  Money amount
     private int money;
     //  Health vars (this may change with time)
