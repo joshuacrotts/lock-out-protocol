@@ -2,13 +2,12 @@ package com.dsd.game.userinterface.model;
 
 import com.dsd.game.Game;
 import com.dsd.game.GameState;
-import com.dsd.game.controller.DebugController;
+import com.dsd.game.userinterface.MenuScreen;
+import com.dsd.game.userinterface.MenuState;
 import com.dsd.game.userinterface.MouseEventInterface;
 import com.dsd.game.userinterface.Screen;
 import com.revivedstandards.main.StandardDraw;
-import com.revivedstandards.util.StdOps;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics2D;
 
 /**
@@ -19,64 +18,53 @@ import java.awt.Graphics2D;
  *
  * @author Joshua, Ronald, Rinty
  */
-public class PlayButton extends StandardButton implements MouseEventInterface {
+public class PlayButton extends MenuButton implements MouseEventInterface {
 
-    private final Game game;
-    private final Font font;
-    private final int Y_OFFSET = 500;
-    private final int X_OFFSET = 70;
-    private final int TEXT_X_OFFSET = 30;
-    private final int BUTTON_WIDTH = 200;
-    private final int BUTTON_HEIGHT = 100;
+    private static final int BUTTON_X_OFFSET = 120;
+    private static final int BUTTON_Y_OFFSET = 100;
+    private final int BUTTON_WIDTH = 300;
+    private final int BUTTON_HEIGHT = 200;
 
-    public PlayButton (Game _game) {
-        this.game = _game;
-        this.font = StdOps.initFont("src/resources/fonts/chargen.ttf", 24f);
-        this.setX(Screen.gameHalfWidth - X_OFFSET);
-        this.setY(this.game.getGameHeight() - Y_OFFSET);
-        this.setWidth(BUTTON_WIDTH);
-        this.setHeight(BUTTON_HEIGHT);
-        this.setText("PLAY");
-        this.setColor(Color.RED);
+    public PlayButton (Game _game, MenuScreen _menuScreen) {
+        super(Screen.gameHalfWidth - BUTTON_X_OFFSET,
+                Screen.gameHalfHeight - BUTTON_Y_OFFSET,
+                300, 200, "PLAY", _game, _menuScreen);
     }
 
     @Override
     public void render (Graphics2D _g2) {
+        if (!this.getMenuScreen().isOnMainMenu()) {
+            return;
+        }
+
         super.render(_g2);
-        StandardDraw.text(this.getText(), (this.getX() + (this.getWidth() / 2)) - TEXT_X_OFFSET,
-                this.getY() + this.getHeight() / 2, this.font,
-                this.font.getSize(), Color.WHITE);
+        StandardDraw.text(this.getText(), this.getX() + BUTTON_X_OFFSET,
+                this.getY() + BUTTON_Y_OFFSET, this.font, 24f, Color.WHITE);
     }
 
     @Override
     public void onMouseClick () {
-        if (this.game.getGameState() != GameState.MENU) {
+        if (this.getGame().getGameState() != GameState.MENU
+                || !this.getMenuScreen().isOnMainMenu()) {
             return;
         }
-        if (!DebugController.DEBUG_MODE) {
-            this.game.setGameState(GameState.PREAMBLE);
-            this.game.playWaveChangeSFX();
-        }
-        else {
-            this.game.setGameState(GameState.RUNNING);
-        }
-        this.game.uponPlay();
-
+        this.getMenuScreen().setMenuState(MenuState.DIFFICULTY);
     }
 
     @Override
     public void onMouseEnterHover () {
-        if (this.game.getGameState() != GameState.MENU) {
+        if (this.getGame().getGameState() != GameState.MENU || !this.getMenuScreen().isOnMainMenu()) {
             return;
         }
-        this.setColor(Color.BLUE);
+        activeImage = onHoverButtonImg;
+
     }
 
     @Override
     public void onMouseExitHover () {
-        if (this.game.getGameState() != GameState.MENU) {
+        if (this.getGame().getGameState() != GameState.MENU) {
             return;
         }
-        this.setColor(Color.RED);
+        activeImage = buttonImg;
     }
 }

@@ -2,12 +2,10 @@ package com.dsd.game.userinterface.model;
 
 import com.dsd.game.Game;
 import com.dsd.game.GameState;
+import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MouseEventInterface;
-import com.dsd.game.userinterface.Screen;
 import com.revivedstandards.main.StandardDraw;
-import com.revivedstandards.util.StdOps;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics2D;
 
 /**
@@ -17,58 +15,53 @@ import java.awt.Graphics2D;
  *
  * @author Joshua, Ronald, Rinty
  */
-public class ExitButton extends StandardButton implements MouseEventInterface {
+public class ExitButton extends MenuButton implements MouseEventInterface {
 
-    private final Game game;
-    private final int Y_OFFSET = 200;
-    private final int X_OFFSET = 70;
-    private final int TEXT_X_OFFSET = 25;
-    private final int BUTTON_WIDTH = 200;
-    private final int BUTTON_HEIGHT = 100;
-    private final Font font;
+    private static final int BUTTON_X_OFFSET = 155;
+    private static final int BUTTON_Y_OFFSET = 180;
+    private static final int TEXT_X_OFFSET = 75;
+    private static final int TEXT_Y_OFFSET = 100;
+    private static final int BUTTON_WIDTH = 300;
+    private static final int BUTTON_HEIGHT = 200;
 
-    public ExitButton (Game _game) {
-        super();
-        this.game = _game;
-        this.font = StdOps.initFont("src/resources/fonts/chargen.ttf", 24f);
-        this.setX(Screen.gameHalfWidth - X_OFFSET);
-        this.setY(this.game.getGameHeight() - Y_OFFSET);
-        this.setWidth(BUTTON_WIDTH);
-        this.setHeight(BUTTON_HEIGHT);
-        this.setText("EXIT");
-        this.setColor(Color.RED);
+    public ExitButton (Game _game, MenuScreen _menuScreen) {
+        super(_game.getGameWidth() - BUTTON_X_OFFSET - BUTTON_WIDTH / 2,
+                _game.getGameHeight() - BUTTON_Y_OFFSET,
+                BUTTON_WIDTH, BUTTON_HEIGHT, "EXIT BUTTON", _game, _menuScreen);
     }
 
     @Override
     public void render (Graphics2D _g2) {
+        if (!this.getMenuScreen().isOnMainMenu()) {
+            return;
+        }
         super.render(_g2);
-        StandardDraw.text(this.getText(),
-                (this.getX() + (this.getWidth() / 2)) - TEXT_X_OFFSET,
-                (this.getY() + this.getHeight() / 2), this.font,
-                this.font.getSize(), Color.WHITE);
+        StandardDraw.text(this.getText(), this.getX() + TEXT_X_OFFSET,
+                this.getY() + TEXT_Y_OFFSET, this.font, 24f, Color.WHITE);
     }
 
     @Override
     public void onMouseClick () {
-        if (this.game.getGameState() != GameState.MENU) {
+        if (this.getGame().getGameState() != GameState.MENU) {
             return;
         }
-        this.game.stopGame();
+        this.getGame().stopGame();
     }
 
     @Override
     public void onMouseEnterHover () {
-        if (this.game.getGameState() != GameState.MENU) {
+        if (this.getGame().getGameState() != GameState.MENU
+                || !this.getMenuScreen().isOnMainMenu()) {
             return;
         }
-        this.setColor(Color.GREEN);
+        this.activeImage = this.onHoverButtonImg;
     }
 
     @Override
     public void onMouseExitHover () {
-        if (this.game.getGameState() != GameState.MENU) {
+        if (this.getGame().getGameState() != GameState.MENU) {
             return;
         }
-        this.setColor(Color.RED);
+        this.activeImage = this.buttonImg;
     }
 }

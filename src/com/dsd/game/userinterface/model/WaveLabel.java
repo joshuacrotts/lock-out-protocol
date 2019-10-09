@@ -33,4 +33,8 @@ public class WaveLabel extends StandardLabel {
     public void render (Graphics2D _g2) {
         super.render(_g2);
     }
+
+    public void setWaveNumber (int _waveNumber) {
+        this.setText("Wave " + _waveNumber);
+    }
 }

@@ -21,7 +21,7 @@ public class ReloadCommand extends Command {
     private final Game game;
     private final Player player;
     private final Timer reloadTimer;
-    
+
     private final int RELOAD_DELAY = 3000;
 
     //  This may need to change with time.

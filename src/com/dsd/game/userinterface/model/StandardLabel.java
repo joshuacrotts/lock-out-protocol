@@ -16,7 +16,7 @@ import java.awt.Graphics2D;
  */
 public class StandardLabel extends Interactor implements MouseEventInterface {
 
-    private final String text;
+    private String text;
     private final int originX;
     private final int originY;
     private final int shakeFactor = 1;
@@ -71,5 +71,9 @@ public class StandardLabel extends Interactor implements MouseEventInterface {
 
     public String getText () {
         return this.text;
+    }
+
+    public void setText (String _text) {
+        this.text = _text;
     }
 }

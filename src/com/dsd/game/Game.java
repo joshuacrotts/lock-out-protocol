@@ -1,10 +1,10 @@
 package com.dsd.game;
 
 import com.dsd.game.levels.MetalLevel;
-import com.dsd.game.api.TranslatorAPI;
 import com.dsd.game.controller.AudioBoxController;
 import com.dsd.game.controller.CollisionHandlerController;
 import com.dsd.game.controller.DebugController;
+import com.dsd.game.controller.DifficultyController;
 import com.dsd.game.controller.LevelController;
 import com.dsd.game.controller.RainController;
 import com.dsd.game.objects.Player;
@@ -37,11 +37,13 @@ public class Game extends StandardGame {
     //  Miscellaneous reference variables
     private final StandardCamera sc;
     private final StandardCollisionHandler sch;
+
     //  UI Element views
     private final MenuScreen menuScreen;
     private final PauseScreen pauseScreen;
     private final PreambleScreen preambleScreen;
     private final HUDScreen hudScreen;
+
     /**
      * Rain controller which contacts the API for the logic of determining
      * whether it should rain or not.
@@ -49,6 +51,8 @@ public class Game extends StandardGame {
     private final RainController rainController;
     //  Debug controller
     private final DebugController debugController;
+    //  Difficulty controller
+    private final DifficultyController difficultyController;
     //  Level controller
     private final LevelController levelController;
     //  Game state variable (paused, running, menu, etc.)
@@ -68,19 +72,25 @@ public class Game extends StandardGame {
 
         //  Create a new collision handler
         this.sch = new CollisionHandlerController(this);
+
         //  Instantiates player & adds it to the handler
         this.player = new Player(200, 200, this, this.sch);
         this.sch.addEntity(player);
+
         //  Instantiate the camera
         this.sc = new StandardCamera(this, player, 1, this.getGameWidth(), this.getGameHeight());
+
         //  Sets the camera for the player and the handler
         this.player.setCamera(this.sc);
         this.sch.setCamera(this.sc);
+
         // Instantiates the rain, debug, and level controllers.
-        this.rainController = new RainController(this, TranslatorAPI.getWeather());
+        this.rainController = new RainController(this);
         this.debugController = new DebugController(this, this.sch);
-        this.levelController = new LevelController();
+        this.difficultyController = new DifficultyController(this);
+        this.levelController = new LevelController(this);
         this.instantiateLevels();
+
         /**
          * Instantiates the levels @TODO: (should move this to a method and to
          * some type of controller to determine HOW levels transition) Creates
@@ -160,11 +170,25 @@ public class Game extends StandardGame {
      * instantiate the Spawner controllers, level controllers, etc.
      */
     public void uponPlay () {
+        DifficultyController.setDifficultyFactor();
         this.levelController.getCurrentLevel().loadLevelData();
+        this.levelController.startWaveTimer();
     }
 
+    /**
+     * Plays the wave change sfx.
+     */
     public void playWaveChangeSFX () {
         StandardAudioController.play("src/resources/audio/sfx/round_change.wav");
+    }
+
+    /**
+     * Sets the game to the preamble state and reset the alpha transparency of it.
+     */
+    public void setPreambleState () {
+        this.gameState = GameState.PREAMBLE;
+        this.playWaveChangeSFX();
+        this.preambleScreen.resetPreambleScreen();
     }
 
     /**
@@ -198,6 +222,10 @@ public class Game extends StandardGame {
 
     public int getLogicalCurrentLevelID () {
         return this.levelController.getLogicalCurrentLevelID();
+    }
+
+    public int getWaveNumber () {
+        return this.levelController.getWaveNumber();
     }
 
     public boolean isPaused () {

@@ -30,12 +30,10 @@ public class WeaponIconView extends Interactor {
     }
 
     @Override
-    public void tick () {
-    }
+    public void tick () {}
 
     @Override
     public void render (Graphics2D _g2) {
-
         this.setX((int) (this.game.getCamera().getX() + Screen.gameHalfWidth - this.ICON_X_OFFSET));
         this.setY((int) ((this.game.getCamera().getY() + Screen.gameHalfHeight) - this.ICON_Y_OFFSET));
         this.drawWeaponBorder(_g2);

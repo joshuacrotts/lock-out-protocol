@@ -21,15 +21,18 @@ public class PreambleScreen extends Screen {
     // Models for this screen.
     private final LightningModel lightningEffect;
     private final WaveLabel waveModel;
+
     // Transparency effect of all models on the screen.
     private final float ALPHA_TIMER = 0.005f;
     private float alpha = 0f;
+
     /**
      * Timer that decides how long the text stays fully visible on the screen
      * before fading out.
      */
     private final Timer preambleTimer;
     private final long PREAMBLE_TIMER_DURATION = 4000;
+
     // State that the menu is currently on (in terms of fading in/out).
     private PreambleScreenState state;
 
@@ -69,6 +72,7 @@ public class PreambleScreen extends Screen {
          */
         if (this.state == PreambleScreenState.FADE_IN && this.alpha < 1.0f) {
             this.alpha += ALPHA_TIMER;
+
         }
         /**
          * Once we hit an alpha of 1, we can schedule our timer to wait for x
@@ -93,6 +97,15 @@ public class PreambleScreen extends Screen {
          * so we can clamp it.
          */
         this.alpha = Utilities.clampFloat(this.alpha, 0f, 1f);
+    }
+
+    /**
+     * Resets the alpha of the transparency, and begins to re-fade in the timer.
+     */
+    public void resetPreambleScreen () {
+        this.alpha = 0;
+        this.state = PreambleScreenState.FADE_IN;
+        this.waveModel.setWaveNumber(this.getGame().getWaveNumber());
     }
 
 //============================ GETTERS ====================================//

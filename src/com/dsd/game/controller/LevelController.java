@@ -1,9 +1,12 @@
 package com.dsd.game.controller;
 
+import com.dsd.game.Game;
 import com.revivedstandards.model.StandardLevel;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * This class acts as the level controller; it will change the level depending
@@ -23,9 +26,13 @@ public class LevelController {
     private int currentLevelID = 0;
     private int currentWave = 1;
     private final List<StandardLevel> levels;
+    private final Game game;
+    private final Timer levelTimer;
 
-    public LevelController () {
+    public LevelController (Game _game) {
         this.levels = new ArrayList<>();
+        this.levelTimer = new Timer(true);
+        this.game = _game;
     }
 
     /**
@@ -68,6 +75,15 @@ public class LevelController {
         this.currentWave++;
     }
 
+    /**
+     * Begins the wave timer, depending on what difficulty the game is on.
+     */
+    public void startWaveTimer () {
+        this.levelTimer.scheduleAtFixedRate(new LevelTimer(this.game, this),
+                (long) DifficultyController.levelTransitionTimer,
+                (long) DifficultyController.levelTransitionTimer);
+    }
+
 //============================= GETTERS ======================================//
     public int getCurrentLevelID () {
         return this.currentLevelID;
@@ -98,5 +114,29 @@ public class LevelController {
 
     public void setWaveNumber (int _waveNumber) {
         this.currentLevelID = _waveNumber;
+    }
+
+    private class LevelTimer extends TimerTask {
+
+        private final Game game;
+        private final LevelController levelController;
+
+        public LevelTimer (Game _game, LevelController _levelController) {
+            this.levelController = _levelController;
+            this.game = _game;
+        }
+
+        @Override
+        public void run () {
+            this.levelController.incrementWave();
+            if (this.levelController.getWaveNumber() % 5 == 0) {
+                this.updateLevelDifficulty();
+            }
+            this.game.setPreambleState();
+        }
+
+        private void updateLevelDifficulty () {
+            DifficultyController.incrementMobHealth();
+        }
     }
 }

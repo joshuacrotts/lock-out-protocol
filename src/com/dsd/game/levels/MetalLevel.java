@@ -2,12 +2,13 @@ package com.dsd.game.levels;
 
 import com.dsd.game.EnemyType;
 import com.dsd.game.Game;
-import com.dsd.game.controller.SpawnerController;
+import com.dsd.game.factories.SpawnerFactory;
 import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.Screen;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.model.StandardLevel;
+import com.revivedstandards.util.StdOps;
 import java.awt.Graphics2D;
 
 /**
@@ -29,6 +30,7 @@ public class MetalLevel extends StandardLevel {
      */
     private int trackX;
     private final double SCROLL_X_FACTOR = 0.25;
+    
     //  Define camera scroll minimum constants
     private final int MIN_X = Screen.gameHalfWidth;
     private final int MIN_Y = Screen.gameHalfHeight;
@@ -36,6 +38,10 @@ public class MetalLevel extends StandardLevel {
     /**
      * All levels need to share the same collision handler so the player can
      * directly interact with other entities.
+     *
+     * @param _player
+     * @param _sg
+     * @param _sch
      */
     public MetalLevel (Player _player, Game _sg, StandardCollisionHandler _sch) {
         super("src/resources/img/bg/resized_bg/panel1.jpg");
@@ -49,8 +55,12 @@ public class MetalLevel extends StandardLevel {
 
     @Override
     public void loadLevelData () {
-        this.addEntity(new SpawnerController(900, 900, EnemyType.BASIC_MONSTER, 4000, 200, this.game, (StandardCollisionHandler) this.getHandler()));
-        this.addEntity(new SpawnerController(2200, 2400, EnemyType.GREEN_MONSTER, 4000, 200, this.game, (StandardCollisionHandler) this.getHandler()));
+        this.addEntity(SpawnerFactory.generateSpawner(EnemyType.BASIC_MONSTER,
+                StdOps.rand(400, 4000), StdOps.rand(400, 4000), 10000, 150,
+                this.game, (StandardCollisionHandler) this.getHandler()));
+        this.addEntity(SpawnerFactory.generateSpawner(EnemyType.GREEN_MONSTER,
+                StdOps.rand(400, 4000), StdOps.rand(400, 4000), 10000, 150,
+                this.game, (StandardCollisionHandler) this.getHandler()));
     }
 
     @Override

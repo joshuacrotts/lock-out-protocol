@@ -24,8 +24,10 @@ public class SpawnerController extends StandardGameObject {
     private final StandardCollisionHandler parentContainer;
     private final EnemyType spawnerID;
     private final Game game;
+
     //  Timer object controlling the spawn-rate.
     private final Timer spawnerTimer;
+
     //  Delay and radius of the timer.
     private final long delay;
     private final int radius;

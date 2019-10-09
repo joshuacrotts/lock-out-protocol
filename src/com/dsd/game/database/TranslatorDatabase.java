@@ -23,9 +23,9 @@ import com.dsd.game.Game;
  */
 public class TranslatorDatabase {
 
-    private Game game;
-    private PersistentDatabase database;
-    private String fileName;
+    private final Game game;
+    private final PersistentDatabase database;
+    private final String fileName;
 
     public TranslatorDatabase (Game _game, String _fileName) {
         this.game = _game;

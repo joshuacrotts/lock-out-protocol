@@ -2,8 +2,11 @@ package com.dsd.game.userinterface;
 
 import com.dsd.game.userinterface.model.PlayButton;
 import com.dsd.game.Game;
+import com.dsd.game.userinterface.model.EasyButton;
 import com.dsd.game.userinterface.model.ExitButton;
+import com.dsd.game.userinterface.model.HardButton;
 import com.dsd.game.userinterface.model.HelpOrOptionsButton;
+import com.dsd.game.userinterface.model.MediumButton;
 import com.dsd.game.userinterface.model.StandardLabel;
 import java.awt.Graphics2D;
 
@@ -17,8 +20,11 @@ import java.awt.Graphics2D;
  */
 public class MenuScreen extends Screen {
 
+    private MenuState menuState;
+
     public MenuScreen (Game _game) {
         super(_game);
+        this.menuState = MenuState.MAIN;
         this.createUIElements();
     }
 
@@ -40,12 +46,28 @@ public class MenuScreen extends Screen {
      */
     private void createUIElements () {
         //  Instantiates the play button
-        super.addInteractor(new PlayButton(this.getGame()));
+        super.addInteractor(new PlayButton(this.getGame(), this));
         //  Instantiates the exit button
-        super.addInteractor(new ExitButton(this.getGame()));
+        super.addInteractor(new ExitButton(this.getGame(), this));
         //  Instantiates the help/options button
-        super.addInteractor(new HelpOrOptionsButton(this.getGame()));
+        super.addInteractor(new HelpOrOptionsButton(this.getGame(), this));
         //  Instantiates the title label
-        super.addInteractor(new StandardLabel(this.getGame().getGameWidth() / 2 - 150, 40, this.getGame().getWindow().getTitle(), "src/resources/fonts/chargen.ttf", 32f));
+        super.addInteractor(new StandardLabel(this.getGame().getGameWidth() / 2 - 130, 40, this.getGame().getWindow().getTitle(), "src/resources/fonts/chargen.ttf", 32f));
+        //  Instantiate the difficulty buttons
+        super.addInteractor(new EasyButton(this.getGame(), this));
+        super.addInteractor(new MediumButton(this.getGame(), this));
+        super.addInteractor(new HardButton(this.getGame(), this));
+    }
+
+    public boolean isOnMainMenu () {
+        return this.menuState == MenuState.MAIN;
+    }
+
+    public boolean isOnDifficulty () {
+        return this.menuState == MenuState.DIFFICULTY;
+    }
+
+    public void setMenuState (MenuState _menuState) {
+        this.menuState = _menuState;
     }
 }
