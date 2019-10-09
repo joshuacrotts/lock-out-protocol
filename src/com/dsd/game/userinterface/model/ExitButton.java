@@ -42,7 +42,7 @@ public class ExitButton extends MenuButton implements MouseEventInterface {
 
     @Override
     public void onMouseClick () {
-        if (this.getGame().getGameState() != GameState.MENU) {
+        if (this.getGame().getGameState() != GameState.MENU || !this.getMenuScreen().isOnMainMenu()) {
             return;
         }
         this.getGame().stopGame();

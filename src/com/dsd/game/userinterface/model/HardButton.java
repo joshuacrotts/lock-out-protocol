@@ -23,7 +23,7 @@ import java.awt.Graphics2D;
 public class HardButton extends MenuButton implements MouseEventInterface {
 
     private static final int BUTTON_X_OFFSET = 350;
-    private static final int BUTTON_Y_OFFSET = 150;
+    private static final int BUTTON_Y_OFFSET = 50;
     private static final int TEXT_X_OFFSET = 110;
     private static final int TEXT_Y_OFFSET = 100;
     private static final int BUTTON_WIDTH = 350;

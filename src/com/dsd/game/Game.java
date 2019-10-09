@@ -171,6 +171,7 @@ public class Game extends StandardGame {
      */
     public void uponPlay () {
         DifficultyController.setDifficultyFactor();
+        DifficultyController.setLevelTransitionTimer();
         this.levelController.getCurrentLevel().loadLevelData();
         this.levelController.startWaveTimer();
     }

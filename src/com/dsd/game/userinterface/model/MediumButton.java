@@ -23,7 +23,7 @@ import java.awt.Graphics2D;
 public class MediumButton extends MenuButton implements MouseEventInterface {
 
     private static final int BUTTON_X_OFFSET = 140;
-    private static final int BUTTON_Y_OFFSET = 150;
+    private static final int BUTTON_Y_OFFSET = 50;
     private static final int TEXT_X_OFFSET = 75;
     private static final int TEXT_Y_OFFSET = 100;
     private static final int BUTTON_WIDTH = 350;
