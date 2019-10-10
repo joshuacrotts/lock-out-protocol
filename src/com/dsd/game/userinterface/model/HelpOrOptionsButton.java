@@ -19,43 +19,29 @@ import java.awt.image.BufferedImage;
  *
  * @author Joshua, Ronald, Rinty
  */
-public class HelpOrOptionsButton extends StandardButton implements MouseEventInterface {
+public class HelpOrOptionsButton extends MenuButton implements MouseEventInterface {
 
-    private final Game game;
-    private final MenuScreen menuScreen;
-    private final Font font;
-    private final int Y_OFFSET = 175;
-    private final int X_OFFSET = 0;
-    private final int TEXT_X_OFFSET = 85;
-    private final int BUTTON_WIDTH = 300;
-    private final int BUTTON_HEIGHT = 200;
-
-    private BufferedImage onHoverButtonImg;
-    private BufferedImage buttonImg;
-    private BufferedImage activeImage;
+    private static final int BUTTON_X_OFFSET = 0;
+    private static final int BUTTON_Y_OFFSET = 120;
+    private static final int TEXT_X_OFFSET = 60;
+    private static final int TEXT_Y_OFFSET = 45;
+    private static final int BUTTON_WIDTH = 300;
+    private static final int BUTTON_HEIGHT = 82;
 
     public HelpOrOptionsButton (Game _game, MenuScreen _menuScreen) {
-        this.game = _game;
-        this.menuScreen = _menuScreen;
-        this.font = StdOps.initFont("src/resources/fonts/chargen.ttf", 24f);
-        this.setX(X_OFFSET);
-        this.setY(this.game.getGameHeight() - Y_OFFSET);
-        this.setWidth(BUTTON_WIDTH);
-        this.setHeight(BUTTON_HEIGHT);
-        this.setText("Help/Options");
-        this.initializeButtonImages();
+        super(BUTTON_X_OFFSET, _game.getGameHeight() - BUTTON_Y_OFFSET,
+                BUTTON_WIDTH, BUTTON_HEIGHT, "HELP/OPTIONS", _game, _menuScreen);
     }
 
     @Override
     public void render (Graphics2D _g2) {
-        if (!this.menuScreen.isOnMainMenu()) {
+        if (!this.getMenuScreen().isOnMainMenu()) {
             return;
         }
-        _g2.drawImage(this.activeImage, (int) (this.getX()),
-                (int) (this.getY()), BUTTON_WIDTH, BUTTON_HEIGHT, game);
-        StandardDraw.text(this.getText(), (this.getX() + (this.getWidth() / 2)) - TEXT_X_OFFSET,
-                this.getY() + this.getHeight() / 2, this.font,
-                this.font.getSize(), Color.WHITE);
+
+        super.render(_g2);
+        StandardDraw.text(this.getText(), this.getX() + TEXT_X_OFFSET,
+                this.getY() + TEXT_Y_OFFSET, this.font, 24f, Color.WHITE);
     }
 
     @Override
@@ -64,7 +50,7 @@ public class HelpOrOptionsButton extends StandardButton implements MouseEventInt
 
     @Override
     public void onMouseEnterHover () {
-        if (this.game.getGameState() != GameState.MENU || !this.menuScreen.isOnMainMenu()) {
+        if (this.getGame().getGameState() != GameState.MENU || !this.getMenuScreen().isOnMainMenu()) {
             return;
         }
         this.activeImage = this.onHoverButtonImg;
@@ -73,14 +59,9 @@ public class HelpOrOptionsButton extends StandardButton implements MouseEventInt
 
     @Override
     public void onMouseExitHover () {
-        if (this.game.getGameState() != GameState.MENU) {
+        if (this.getGame().getGameState() != GameState.MENU) {
             return;
         }
         this.activeImage = this.buttonImg;
-    }
-
-    private void initializeButtonImages () {
-        this.buttonImg = StdOps.loadImage("src/resources/img/ui/buttonStock1.png");
-        this.onHoverButtonImg = StdOps.loadImage("src/resources/img/ui/buttonStock1h.png");
     }
 }

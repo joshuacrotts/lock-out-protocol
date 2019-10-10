@@ -22,12 +22,12 @@ import java.awt.Graphics2D;
  */
 public class MediumButton extends MenuButton implements MouseEventInterface {
 
-    private static final int BUTTON_X_OFFSET = 140;
-    private static final int BUTTON_Y_OFFSET = 50;
-    private static final int TEXT_X_OFFSET = 75;
-    private static final int TEXT_Y_OFFSET = 100;
-    private static final int BUTTON_WIDTH = 350;
-    private static final int BUTTON_HEIGHT = 200;
+    private static final int BUTTON_X_OFFSET = 125;
+    private static final int BUTTON_Y_OFFSET = 30;
+    private static final int TEXT_X_OFFSET = 50;
+    private static final int TEXT_Y_OFFSET = 45;
+    private static final int BUTTON_WIDTH = 300;
+    private static final int BUTTON_HEIGHT = 82;
 
     public MediumButton (Game _game, MenuScreen _menuScreen) {
         super(Screen.gameHalfWidth - BUTTON_X_OFFSET,
@@ -48,9 +48,14 @@ public class MediumButton extends MenuButton implements MouseEventInterface {
 
     @Override
     public void onMouseClick () {
-        if (this.getGame().getGameState() != GameState.MENU && !this.getMenuScreen().isOnDifficulty()) {
+        if (this.getGame().getGameState() != GameState.MENU || !this.getMenuScreen().isOnDifficulty()) {
+            System.out.println("HER!!!?!?");
             return;
         }
+
+        System.out.println(this.getGame().getGameState());
+        System.out.println(this.getMenuScreen().isOnDifficulty());
+
         if (!DebugController.DEBUG_MODE) {
             this.getGame().setGameState(GameState.PREAMBLE);
             this.getGame().playWaveChangeSFX();
@@ -58,9 +63,10 @@ public class MediumButton extends MenuButton implements MouseEventInterface {
         else {
             this.getGame().setGameState(GameState.RUNNING);
         }
-        
+
         DifficultyController.difficultyType = DifficultyType.MEDIUM;
         this.getGame().uponPlay();
+         System.out.println("why are we here?!");
     }
 
     @Override

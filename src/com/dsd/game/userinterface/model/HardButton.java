@@ -22,15 +22,15 @@ import java.awt.Graphics2D;
  */
 public class HardButton extends MenuButton implements MouseEventInterface {
 
-    private static final int BUTTON_X_OFFSET = 350;
-    private static final int BUTTON_Y_OFFSET = 50;
-    private static final int TEXT_X_OFFSET = 110;
-    private static final int TEXT_Y_OFFSET = 100;
-    private static final int BUTTON_WIDTH = 350;
-    private static final int BUTTON_HEIGHT = 200;
+    private static final int BUTTON_X_OFFSET = 125;
+    private static final int BUTTON_Y_OFFSET = 250;
+    private static final int TEXT_X_OFFSET = 85;
+    private static final int TEXT_Y_OFFSET = 45;
+    private static final int BUTTON_WIDTH = 300;
+    private static final int BUTTON_HEIGHT = 82;
 
     public HardButton (Game _game, MenuScreen _menuScreen) {
-        super(_game.getGameWidth() - BUTTON_WIDTH,
+        super(Screen.gameHalfWidth - BUTTON_X_OFFSET,
                 Screen.gameHalfHeight + BUTTON_Y_OFFSET,
                 BUTTON_WIDTH, BUTTON_HEIGHT, DifficultyType.HARD.getDifficultyLabel(), _game, _menuScreen);
     }
@@ -48,7 +48,8 @@ public class HardButton extends MenuButton implements MouseEventInterface {
 
     @Override
     public void onMouseClick () {
-        if (this.getGame().getGameState() != GameState.MENU && !this.getMenuScreen().isOnDifficulty()) {
+        if (this.getGame().getGameState() != GameState.MENU || !this.getMenuScreen().isOnDifficulty()) {
+            System.out.println("HER!!!?!?");
             return;
         }
         if (!DebugController.DEBUG_MODE) {
@@ -60,6 +61,7 @@ public class HardButton extends MenuButton implements MouseEventInterface {
         }
         DifficultyController.difficultyType = DifficultyType.HARD;
         this.getGame().uponPlay();
+       
     }
 
     @Override

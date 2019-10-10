@@ -18,16 +18,16 @@ import java.awt.Graphics2D;
 public class ExitButton extends MenuButton implements MouseEventInterface {
 
     private static final int BUTTON_X_OFFSET = 155;
-    private static final int BUTTON_Y_OFFSET = 180;
-    private static final int TEXT_X_OFFSET = 75;
-    private static final int TEXT_Y_OFFSET = 100;
+    private static final int BUTTON_Y_OFFSET = 120;
+    private static final int TEXT_X_OFFSET = 120;
+    private static final int TEXT_Y_OFFSET = 45;
     private static final int BUTTON_WIDTH = 300;
-    private static final int BUTTON_HEIGHT = 200;
+    private static final int BUTTON_HEIGHT = 82;
 
     public ExitButton (Game _game, MenuScreen _menuScreen) {
         super(_game.getGameWidth() - BUTTON_X_OFFSET - BUTTON_WIDTH / 2,
                 _game.getGameHeight() - BUTTON_Y_OFFSET,
-                BUTTON_WIDTH, BUTTON_HEIGHT, "EXIT BUTTON", _game, _menuScreen);
+                BUTTON_WIDTH, BUTTON_HEIGHT, "EXIT", _game, _menuScreen);
     }
 
     @Override

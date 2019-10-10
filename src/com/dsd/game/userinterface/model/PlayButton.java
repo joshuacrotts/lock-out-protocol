@@ -22,13 +22,15 @@ public class PlayButton extends MenuButton implements MouseEventInterface {
 
     private static final int BUTTON_X_OFFSET = 120;
     private static final int BUTTON_Y_OFFSET = 100;
-    private final int BUTTON_WIDTH = 300;
-    private final int BUTTON_HEIGHT = 200;
+    private static final int TEXT_X_OFFSET = 120;
+    private static final int TEXT_Y_OFFSET = 45;
+    private static final int BUTTON_WIDTH = 300;
+    private static final int BUTTON_HEIGHT = 82;
 
     public PlayButton (Game _game, MenuScreen _menuScreen) {
         super(Screen.gameHalfWidth - BUTTON_X_OFFSET,
                 Screen.gameHalfHeight - BUTTON_Y_OFFSET,
-                300, 200, "PLAY", _game, _menuScreen);
+                BUTTON_WIDTH, BUTTON_HEIGHT, "PLAY", _game, _menuScreen);
     }
 
     @Override
@@ -38,8 +40,8 @@ public class PlayButton extends MenuButton implements MouseEventInterface {
         }
 
         super.render(_g2);
-        StandardDraw.text(this.getText(), this.getX() + BUTTON_X_OFFSET,
-                this.getY() + BUTTON_Y_OFFSET, this.font, 24f, Color.WHITE);
+        StandardDraw.text(this.getText(), this.getX() + TEXT_X_OFFSET,
+                this.getY() + TEXT_Y_OFFSET, this.font, 24f, Color.WHITE);
     }
 
     @Override

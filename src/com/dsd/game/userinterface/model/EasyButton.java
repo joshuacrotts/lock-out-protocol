@@ -22,15 +22,15 @@ import java.awt.Graphics2D;
  */
 public class EasyButton extends MenuButton implements MouseEventInterface {
 
-    private static final int BUTTON_Y_OFFSET = 50;
-    private static final int BUTTON_X_OFFSET = 0;
-    private static final int TEXT_X_OFFSET = 45;
-    private static final int TEXT_Y_OFFSET = 100;
-    private static final int BUTTON_WIDTH = 350;
-    private static final int BUTTON_HEIGHT = 200;
+    private static final int BUTTON_X_OFFSET = 125;
+    private static final int BUTTON_Y_OFFSET = -180;
+    private static final int TEXT_X_OFFSET = 50;
+    private static final int TEXT_Y_OFFSET = 45;
+    private static final int BUTTON_WIDTH = 300;
+    private static final int BUTTON_HEIGHT = 82;
 
     public EasyButton (Game _game, MenuScreen _menuScreen) {
-        super(BUTTON_X_OFFSET,
+        super(Screen.gameHalfWidth - BUTTON_X_OFFSET,
                 Screen.gameHalfHeight + BUTTON_Y_OFFSET,
                 BUTTON_WIDTH, BUTTON_HEIGHT, DifficultyType.EASY.getDifficultyLabel(), _game, _menuScreen);
     }
@@ -48,7 +48,7 @@ public class EasyButton extends MenuButton implements MouseEventInterface {
 
     @Override
     public void onMouseClick () {
-        if (this.getGame().getGameState() != GameState.MENU && !this.getMenuScreen().isOnDifficulty()) {
+        if (this.getGame().getGameState() != GameState.MENU || !this.getMenuScreen().isOnDifficulty()) {
             return;
         }
         if (!DebugController.DEBUG_MODE) {

@@ -21,7 +21,7 @@ public enum DifficultyType {
 
         switch (_difficultyLevel) {
             case 1:
-                text = "I\'M TOO YOUNG TO DIE";
+                text = "FAR TOO SIMPLE";
                 break;
             case 2:
                 text = "HURT ME PLENTY";
