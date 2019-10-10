@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dsd.game.userinterface.model;
 
 import com.dsd.game.Game;
@@ -89,6 +84,10 @@ public class TextFieldModel extends Interactor implements MouseEventInterface {
 
     public boolean isEmpty () {
         return this.string.length() == 0;
+    }
+
+    public void clearString () {
+        this.string.setLength(0);
     }
 
 //================================= GETTERS ===================================//

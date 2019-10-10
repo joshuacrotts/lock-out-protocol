@@ -15,9 +15,8 @@ import java.awt.event.KeyListener;
 public class LetterInputListener implements KeyListener {
 
     private final Game game;
+    private final TextFieldModel textElement;
     private char character;
-
-    private TextFieldModel textElement;
 
     public LetterInputListener (Game _game, TextFieldModel _textElement) {
         this.game = _game;

@@ -23,7 +23,7 @@ public class LoginButton extends MenuButton implements MouseEventInterface {
 
     private static final int BUTTON_X_OFFSET = 120;
     private static final int BUTTON_Y_OFFSET = -250;
-    private static final int TEXT_X_OFFSET = 98;
+    private static final int TEXT_X_OFFSET = 115;
     private static final int TEXT_Y_OFFSET = 45;
     private static final int BUTTON_WIDTH = 300;
     private static final int BUTTON_HEIGHT = 82;
@@ -58,6 +58,7 @@ public class LoginButton extends MenuButton implements MouseEventInterface {
         }
         TranslatorDatabase.connect(this.emailModel.getString(), this.pswdModel.getString());
         this.getMenuScreen().setMenuState(MenuState.MAIN);
+        this.clearTextboxes();
     }
 
     @Override
@@ -75,5 +76,10 @@ public class LoginButton extends MenuButton implements MouseEventInterface {
             return;
         }
         this.activeImage = this.buttonImg;
+    }
+    
+    private void clearTextboxes() {
+        this.emailModel.clearString();
+        this.pswdModel.clearString();
     }
 }
