@@ -1,13 +1,14 @@
 package com.dsd.game.database;
 
+import com.dsd.game.AccountStatus;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -54,9 +55,9 @@ public class PersistentDatabase {
     /**
      * Connect to the SQL database... when applicable.
      *
-     * @TODO: COMPLETELY REFACTOR THIS. IT IS JUST FOR TESTING*!!!!*!*!*!*
+     * @return true if a connection was successful, false otherwise.
      */
-    public void connect () {
+    public boolean connect () {
         //  SQL Database information
         String ipAddress = "35.226.95.88";
         //  Database NAME (db name in remote sql)
@@ -72,25 +73,10 @@ public class PersistentDatabase {
         }
         catch (SQLException ex) {
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
         System.out.println("Connection successful!");
-        Scanner keyboard = new Scanner(System.in);
-        System.out.print("\nEnter your email: ");
-        String email = keyboard.nextLine();
-        System.out.print("\nEnter your password: ");
-        String password = keyboard.nextLine();
-        PreparedStatement insertStatement = null;
-        try {
-            insertStatement = this.remoteDBConnection.prepareStatement(String.format("INSERT INTO user_accounts " + "VALUES(DEFAULT, ?, MD5(?));"));
-            insertStatement.setString(1, email);
-            insertStatement.setString(2, password);
-            insertStatement.executeUpdate();
-        }
-        catch (SQLException ex) {
-            Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        System.out.println("User added.");
+        return true;
     }
 
     /**
@@ -115,7 +101,53 @@ public class PersistentDatabase {
      *
      * @return
      */
-    public boolean userAuthenticated (String _email, char[] _password) {
-        throw new UnsupportedOperationException("Not supported at this time.");
+    public AccountStatus userAuthenticated (String _email, String _password) {
+        PreparedStatement insertStatement = null;
+        ResultSet resultQuery = null;
+        try {
+            //  Verify the email
+            insertStatement = this.remoteDBConnection.prepareStatement(String.format("SELECT * FROM user_accounts WHERE Email = ?;"));
+            insertStatement.setString(1, _email);
+            resultQuery = insertStatement.executeQuery();
+
+            if (!resultQuery.next()) {
+                return AccountStatus.DOES_NOT_EXIST;
+            }
+
+            //  Verify the email AND the password.
+            insertStatement = this.remoteDBConnection.prepareStatement(String.format("SELECT * FROM user_accounts WHERE Email = ? AND Password = MD5(?);"));
+            insertStatement.setString(1, _email);
+            insertStatement.setString(2, _password);
+            resultQuery = insertStatement.executeQuery();
+            if (!resultQuery.next()) {
+                return AccountStatus.INCORRECT_PASS;
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return AccountStatus.EXISTS;
+    }
+
+    /**
+     * Adds a user to the SQL database.
+     *
+     * @param _email
+     * @param _password
+     */
+    public void addUser (String _email, String _password) {
+        PreparedStatement insertStatement = null;
+        try {
+            insertStatement = this.remoteDBConnection.prepareStatement(String.format("INSERT INTO user_accounts " + "VALUES(DEFAULT, ?, MD5(?));"));
+            insertStatement.setString(1, _email);
+            insertStatement.setString(2, _password);
+            insertStatement.executeUpdate();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        System.out.println("User added.");
     }
 }

@@ -1,7 +1,9 @@
-package com.dsd.game.userinterface;
+package com.dsd.game.userinterface.view;
 
+import com.dsd.game.userinterface.view.WeaponIconView;
 import com.dsd.game.Game;
 import com.dsd.game.objects.Inventory;
+import com.dsd.game.userinterface.Screen;
 import java.awt.Graphics2D;
 
 /**

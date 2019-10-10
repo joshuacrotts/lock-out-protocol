@@ -1,7 +1,8 @@
-package com.dsd.game.userinterface;
+package com.dsd.game.userinterface.view;
 
 import com.dsd.game.Game;
 import com.dsd.game.objects.Inventory;
+import com.dsd.game.userinterface.Screen;
 import com.dsd.game.userinterface.model.Interactor;
 import com.revivedstandards.util.StdOps;
 import java.awt.Graphics2D;

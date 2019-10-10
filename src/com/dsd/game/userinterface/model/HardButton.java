@@ -14,7 +14,7 @@ import java.awt.Graphics2D;
 
 /**
  * Subclass of StandardButton - switches the game state from Menu to Running
- * when the user clicks it.
+ * when the user clicks it, with hard difficulty.
  *
  * [Group Name: Data Structure Deadheads]
  *
@@ -49,7 +49,6 @@ public class HardButton extends MenuButton implements MouseEventInterface {
     @Override
     public void onMouseClick () {
         if (this.getGame().getGameState() != GameState.MENU || !this.getMenuScreen().isOnDifficulty()) {
-            System.out.println("HER!!!?!?");
             return;
         }
         if (!DebugController.DEBUG_MODE) {
@@ -61,7 +60,7 @@ public class HardButton extends MenuButton implements MouseEventInterface {
         }
         DifficultyController.difficultyType = DifficultyType.HARD;
         this.getGame().uponPlay();
-       
+
     }
 
     @Override

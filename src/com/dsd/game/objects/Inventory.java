@@ -8,7 +8,7 @@ import com.dsd.game.api.WeatherConnector;
 import com.dsd.game.objects.weapons.Knife;
 import com.dsd.game.objects.weapons.Pistol;
 import com.dsd.game.objects.weapons.Rifle;
-import com.dsd.game.userinterface.InventoryView;
+import com.dsd.game.userinterface.view.InventoryView;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import java.util.List;
 import java.util.ArrayList;

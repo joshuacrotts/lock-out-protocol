@@ -48,7 +48,7 @@ public class AttackCommand extends Command {
 
     @Override
     public void pressed (float _dt) {
-        if (this.game.getGameState() == GameState.PAUSED) {
+        if (this.game.getGameState() != GameState.RUNNING && !this.game.isPreamble()) {
             return;
         }
         Weapon weapon = this.player.getInventory().getCurrentWeapon();

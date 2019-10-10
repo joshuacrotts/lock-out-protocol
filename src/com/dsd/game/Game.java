@@ -7,6 +7,7 @@ import com.dsd.game.controller.DebugController;
 import com.dsd.game.controller.DifficultyController;
 import com.dsd.game.controller.LevelController;
 import com.dsd.game.controller.RainController;
+import com.dsd.game.database.TranslatorDatabase;
 import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.HUDScreen;
 import com.dsd.game.userinterface.MenuScreen;
@@ -37,6 +38,9 @@ public class Game extends StandardGame {
     //  Miscellaneous reference variables
     private final StandardCamera sc;
     private final StandardCollisionHandler sch;
+
+    //  Database references
+    private final TranslatorDatabase translatorDatabase;
 
     //  UI Element views
     private final MenuScreen menuScreen;
@@ -100,6 +104,11 @@ public class Game extends StandardGame {
         this.pauseScreen = new PauseScreen(this);
         this.preambleScreen = new PreambleScreen(this);
         this.hudScreen = new HUDScreen(this, this.player, this.sch);
+
+        /**
+         * Initialize the database translator
+         */
+        this.translatorDatabase = new TranslatorDatabase(this, "test.txt");
         this.startGame();
     }
 
@@ -184,7 +193,8 @@ public class Game extends StandardGame {
     }
 
     /**
-     * Sets the game to the preamble state and reset the alpha transparency of it.
+     * Sets the game to the preamble state and reset the alpha transparency of
+     * it.
      */
     public void setPreambleState () {
         this.gameState = GameState.PREAMBLE;
