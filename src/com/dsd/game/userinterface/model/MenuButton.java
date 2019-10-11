@@ -61,7 +61,7 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
             case DOES_NOT_EXIST:
                 JOptionPane.showMessageDialog(null, "Error: Your account does not exist.");
                 break;
-            case EXISTS:
+            case ALREADY_EXISTS:
                 JOptionPane.showMessageDialog(null, "You already have an account!");
                 break;
             case ACCOUNT_CREATED:
@@ -69,6 +69,12 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
                 break;
             case INCORRECT_PASS:
                 JOptionPane.showMessageDialog(null, "Your password is incorrect.");
+                break;
+            case INVALID_EMAIL:
+                JOptionPane.showMessageDialog(null, "Invalid email.");
+                break;
+            case CORRECT:
+                JOptionPane.showMessageDialog(null, "Logged in successfully!");
         }
     }
 }

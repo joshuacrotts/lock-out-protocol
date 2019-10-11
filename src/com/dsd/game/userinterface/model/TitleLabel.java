@@ -11,7 +11,7 @@ import java.awt.Graphics2D;
  */
 public class TitleLabel extends StandardLabel {
 
-    private static final int TITLE_X_OFFSET = 150;
+    private static final int TITLE_X_OFFSET = 140;
     private static final int TITLE_Y_OFFSET = 40;
 
     public TitleLabel (Game _game) {
@@ -27,9 +27,5 @@ public class TitleLabel extends StandardLabel {
     @Override
     public void render (Graphics2D _g2) {
         super.render(_g2);
-    }
-
-    static {
-
     }
 }

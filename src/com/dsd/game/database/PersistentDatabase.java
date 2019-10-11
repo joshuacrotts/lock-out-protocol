@@ -1,6 +1,7 @@
 package com.dsd.game.database;
 
 import com.dsd.game.AccountStatus;
+import com.dsd.game.api.EmailValidator;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -112,7 +113,7 @@ public class PersistentDatabase {
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return AccountStatus.EXISTS;
+        return AccountStatus.CORRECT;
     }
 
     /**
@@ -124,12 +125,15 @@ public class PersistentDatabase {
      */
     public AccountStatus addUser (String _email, String _password) {
         PreparedStatement insertStatement = null;
+        if (!EmailValidator.isValid(_email)) {
+            return AccountStatus.INVALID_EMAIL;
+        }
         try {
             if (this.userInDatabase(_email, _password)) {
-                return AccountStatus.EXISTS;
+                return AccountStatus.ALREADY_EXISTS;
             }
             else {
-                insertStatement = this.remoteDBConnection.prepareStatement(String.format("INSERT INTO user_accounts " + "VALUES(DEFAULT, ?, MD5(?));"));
+                insertStatement = this.remoteDBConnection.prepareStatement(String.format("INSERT INTO user_accounts " + "VALUES(DEFAULT, ?, SHA1(?));"));
                 insertStatement.setString(1, _email);
                 insertStatement.setString(2, _password);
                 insertStatement.executeUpdate();
@@ -156,7 +160,7 @@ public class PersistentDatabase {
         PreparedStatement insertStatement = null;
         ResultSet resultQuery = null;
         try {
-            insertStatement = this.remoteDBConnection.prepareStatement(String.format("SELECT * FROM user_accounts WHERE Email = ? AND Password = MD5(?);"));
+            insertStatement = this.remoteDBConnection.prepareStatement(String.format("SELECT * FROM user_accounts WHERE Email = ? AND Password = SHA1(?);"));
             insertStatement.setString(1, _email);
             insertStatement.setString(2, _password);
             resultQuery = insertStatement.executeQuery();
@@ -168,6 +172,9 @@ public class PersistentDatabase {
         return resultQuery.next();
     }
 
+    /**
+     * Queries the database to see if the email is already in the database.
+     */
     private boolean userEmailInDatabase (String _email) throws SQLException {
         PreparedStatement insertStatement = this.remoteDBConnection.prepareStatement(String.format("SELECT * FROM user_accounts WHERE Email = ?;"));
         insertStatement.setString(1, _email);

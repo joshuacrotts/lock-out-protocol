@@ -14,6 +14,7 @@ import com.dsd.game.userinterface.model.MakeAccountButton;
 import com.dsd.game.userinterface.model.MediumButton;
 import com.dsd.game.userinterface.model.PasswordTextFieldModel;
 import com.dsd.game.userinterface.model.StandardLabel;
+import com.dsd.game.userinterface.model.TitleLabel;
 import java.awt.Graphics2D;
 import java.util.Stack;
 
@@ -69,7 +70,7 @@ public class MenuScreen extends Screen {
         //  Instantiates the help/options button
         super.addInteractor(new HelpOrOptionsButton(this.getGame(), this));
         //  Instantiates the title label
-        super.addInteractor(new StandardLabel(Screen.gameHalfWidth - 130, 40, this.getGame().getWindow().getTitle(), "src/resources/fonts/chargen.ttf", 32f));
+        super.addInteractor(new TitleLabel(this.getGame()));
         //  Instantiates the account label (to access the submenu).
         super.addInteractor(new AccountButton(this.getGame(), this));
 

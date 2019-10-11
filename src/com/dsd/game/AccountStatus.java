@@ -10,5 +10,5 @@ package com.dsd.game;
  * @author Joshua
  */
 public enum AccountStatus {
-    DOES_NOT_EXIST, EXISTS, INCORRECT_PASS, ACCOUNT_CREATED;
+    DOES_NOT_EXIST, ALREADY_EXISTS, INCORRECT_PASS, ACCOUNT_CREATED, CORRECT, INVALID_EMAIL;
 }
