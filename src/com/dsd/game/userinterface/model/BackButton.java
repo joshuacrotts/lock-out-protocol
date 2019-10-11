@@ -18,24 +18,27 @@ import java.awt.Graphics2D;
  *
  * @author Joshua, Ronald, Rinty
  */
-public class AccountButton extends MenuButton implements MouseEventInterface {
+public class BackButton extends MenuButton implements MouseEventInterface {
 
-    private static final int BUTTON_X_OFFSET = 120;
-    private static final int BUTTON_Y_OFFSET = -50;
-    private static final int TEXT_X_OFFSET = 98;
+    private static final int BUTTON_X_OFFSET = 155;
+    private static final int BUTTON_Y_OFFSET = 120;
+    private static final int TEXT_X_OFFSET = 115;
     private static final int TEXT_Y_OFFSET = 45;
     private static final int BUTTON_WIDTH = 300;
     private static final int BUTTON_HEIGHT = 82;
 
-    public AccountButton (Game _game, MenuScreen _menuScreen) {
-        super(Screen.gameHalfWidth - BUTTON_X_OFFSET,
-                Screen.gameHalfHeight - BUTTON_Y_OFFSET,
-                BUTTON_WIDTH, BUTTON_HEIGHT, "ACCOUNT", _game, _menuScreen);
+    public BackButton (Game _game, MenuScreen _menuScreen) {
+        super(_game.getGameWidth() - BUTTON_X_OFFSET - BUTTON_WIDTH / 2,
+                _game.getGameHeight() - BUTTON_Y_OFFSET, BUTTON_WIDTH, BUTTON_HEIGHT, "BACK", _game, _menuScreen);
+    }
+
+    public BackButton (int _x, int _y, Game _game, MenuScreen _menuScreen) {
+        super(_x, _y, BUTTON_WIDTH, BUTTON_HEIGHT, "BACK", _game, _menuScreen);
     }
 
     @Override
     public void render (Graphics2D _g2) {
-        if (!this.getMenuScreen().isOnMainMenu()) {
+        if (this.getMenuScreen().isOnMainMenu()) {
             return;
         }
 
@@ -46,17 +49,16 @@ public class AccountButton extends MenuButton implements MouseEventInterface {
 
     @Override
     public void onMouseClick () {
-        if (this.getGame().getGameState() != GameState.MENU || !this.getMenuScreen().isOnMainMenu()) {
+        if (this.getGame().getGameState() != GameState.MENU) {
             return;
         }
 
-        this.getMenuScreen().pushMenuStack(MenuState.MAIN);
-        this.getMenuScreen().setMenuState(MenuState.LOGIN);
+        this.getMenuScreen().setMenuState(this.getMenuScreen().popMenuStack());
     }
 
     @Override
     public void onMouseEnterHover () {
-        if (this.getGame().getGameState() != GameState.MENU || !this.getMenuScreen().isOnMainMenu()) {
+        if (this.getGame().getGameState() != GameState.MENU) {
             return;
         }
         this.activeImage = this.onHoverButtonImg;

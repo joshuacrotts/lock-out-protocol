@@ -27,12 +27,10 @@ public class TranslatorDatabase {
 
     private final Game game;
     private static PersistentDatabase database;
-    private final String fileName;
 
-    public TranslatorDatabase (Game _game, String _fileName) {
+    public TranslatorDatabase (Game _game) {
         this.game = _game;
-        this.fileName = _fileName;
-        TranslatorDatabase.database = new PersistentDatabase(this.fileName);
+        TranslatorDatabase.database = new PersistentDatabase();
     }
 
     /**
@@ -51,20 +49,19 @@ public class TranslatorDatabase {
         TranslatorDatabase.database.load();
     }
 
-    public static void connect (String _email, String _password) {
-        if (database.connect()) {
-            AccountStatus resultStatus = database.userAuthenticated(_email, _password);
-
-            switch (resultStatus) {
-                case DOES_NOT_EXIST:
-                    JOptionPane.showMessageDialog(null, "Your account does not exist.");
-                    break;
-                case INCORRECT_PASS:
-                    JOptionPane.showMessageDialog(null, "Incorrect password.");
-                    break;
-                case EXISTS:
-                    JOptionPane.showMessageDialog(null, "Logged in!");
-            }
+    public static AccountStatus authenticateUser (String _email, String _password) {
+        if (database.connect("users")) {
+            return database.userAuthenticated(_email, _password);
         }
+
+        throw new IllegalStateException("Could not connect to db!");
+    }
+
+    public static AccountStatus addUser (String _email, String _password) {
+        if (database.connect("users")) {
+            return database.addUser(_email, _password);
+        }
+
+        throw new IllegalStateException("Could not connect to db!");
     }
 }

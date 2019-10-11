@@ -20,11 +20,11 @@ import java.awt.Graphics2D;
  *
  * @author Joshua, Ronald, Rinty
  */
-public class LoginButton extends MenuButton implements MouseEventInterface {
+public class MakeAccountButton extends MenuButton implements MouseEventInterface {
 
     private static final int BUTTON_X_OFFSET = 0;
     private static final int BUTTON_Y_OFFSET = -250;
-    private static final int TEXT_X_OFFSET = 115;
+    private static final int TEXT_X_OFFSET = 55;
     private static final int TEXT_Y_OFFSET = 45;
     private static final int BUTTON_WIDTH = 300;
     private static final int BUTTON_HEIGHT = 82;
@@ -32,10 +32,10 @@ public class LoginButton extends MenuButton implements MouseEventInterface {
     private final EmailTextFieldModel emailModel;
     private final PasswordTextFieldModel pswdModel;
 
-    public LoginButton (Game _game, MenuScreen _menuScreen, EmailTextFieldModel _email, PasswordTextFieldModel _pswd) {
-        super(Screen.gameHalfWidth - BUTTON_X_OFFSET - BUTTON_WIDTH,
+    public MakeAccountButton (Game _game, MenuScreen _menuScreen, EmailTextFieldModel _email, PasswordTextFieldModel _pswd) {
+        super(Screen.gameHalfWidth + BUTTON_X_OFFSET,
                 Screen.gameHalfHeight - BUTTON_Y_OFFSET,
-                BUTTON_WIDTH, BUTTON_HEIGHT, "LOGIN", _game, _menuScreen);
+                BUTTON_WIDTH, BUTTON_HEIGHT, "MAKE ACCOUNT", _game, _menuScreen);
 
         this.emailModel = _email;
         this.pswdModel = _pswd;
@@ -57,7 +57,7 @@ public class LoginButton extends MenuButton implements MouseEventInterface {
         if (this.getGame().getGameState() != GameState.MENU || !this.getMenuScreen().isOnAccountScreen()) {
             return;
         }
-        AccountStatus accountStatus = TranslatorDatabase.authenticateUser(this.emailModel.getString(), this.pswdModel.getString());
+        AccountStatus accountStatus = TranslatorDatabase.addUser(this.emailModel.getString(), this.pswdModel.getString());
         this.displayAccountStatus(accountStatus);
         this.getMenuScreen().setMenuState(MenuState.MAIN);
         this.clearTextboxes();

@@ -13,6 +13,7 @@ public class PasswordTextFieldModel extends TextFieldModel {
 
     public PasswordTextFieldModel (int _x, int _y, Game _game, MenuScreen _menuScreen) {
         super(_x, _y, _game, _menuScreen);
+        this.toggleStringVisible();
     }
 
     @Override

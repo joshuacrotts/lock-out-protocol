@@ -108,7 +108,7 @@ public class Game extends StandardGame {
         /**
          * Initialize the database translator
          */
-        this.translatorDatabase = new TranslatorDatabase(this, "test.txt");
+        this.translatorDatabase = new TranslatorDatabase(this);
         this.startGame();
     }
 

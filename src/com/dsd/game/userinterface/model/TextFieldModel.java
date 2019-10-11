@@ -2,6 +2,7 @@ package com.dsd.game.userinterface.model;
 
 import com.dsd.game.Game;
 import com.dsd.game.commands.LetterInputListener;
+import com.dsd.game.controller.TextFieldController;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MouseEventInterface;
 import com.dsd.game.userinterface.view.TextFieldView;
@@ -25,6 +26,7 @@ public class TextFieldModel extends Interactor implements MouseEventInterface {
     private final int FIELD_WIDTH = 600;
     private final int FIELD_HEIGHT = 30;
     private boolean fieldActive;
+    private boolean visible = true;
 
     private final LetterInputListener inputListener;
     private final StringBuilder string;
@@ -42,6 +44,8 @@ public class TextFieldModel extends Interactor implements MouseEventInterface {
         this.view = new TextFieldView(this);
         this.string = new StringBuilder();
         this.inputListener = new LetterInputListener(_game, this);
+
+        TextFieldController.addField(this);
     }
 
     @Override
@@ -56,6 +60,7 @@ public class TextFieldModel extends Interactor implements MouseEventInterface {
     @Override
     public void onMouseClick () {
         this.fieldActive = !this.fieldActive;
+        TextFieldController.deactivate(this);
     }
 
     @Override
@@ -90,6 +95,19 @@ public class TextFieldModel extends Interactor implements MouseEventInterface {
         this.string.setLength(0);
     }
 
+    public void toggleStringVisible () {
+        this.visible = !this.visible;
+    }
+
+    public String getMaskedString () {
+        StringBuilder hiddenStr = new StringBuilder();
+        for (int i = 0 ; i < this.string.length() ; i++) {
+            hiddenStr.append("*");
+        }
+
+        return hiddenStr.toString();
+    }
+
 //================================= GETTERS ===================================//
     public Game getGame () {
         return this.game;
@@ -101,5 +119,13 @@ public class TextFieldModel extends Interactor implements MouseEventInterface {
 
     public String getString () {
         return this.string.toString();
+    }
+
+    public boolean isHidden () {
+        return !this.visible;
+    }
+
+    public void setActive (boolean _active) {
+        this.fieldActive = _active;
     }
 }

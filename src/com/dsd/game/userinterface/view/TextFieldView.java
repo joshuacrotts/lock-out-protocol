@@ -67,13 +67,18 @@ public class TextFieldView implements Renderable, Updatable {
     }
 
     /**
-     * Draws the string that is stored in the stringbuilder.
+     * Draws the string that is stored in the stringbuilder. If it is "masked"
+     * in the model, then we will only draw asterisks.
      *
      * @param _g2
      */
     private void drawString (Graphics2D _g2) {
         _g2.setColor(TEXT_COLOR);
-        _g2.drawString(this.model.getString(), this.model.getX(), this.model.getY() + 24);
+        if (!this.model.isHidden()) {
+            _g2.drawString(this.model.getString(), this.model.getX(), this.model.getY() + 24);
+        }
+        else {
+            _g2.drawString(this.model.getMaskedString(), this.model.getX(), this.model.getY() + 24);
+        }
     }
-
 }

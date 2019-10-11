@@ -1,5 +1,6 @@
 package com.dsd.game.userinterface.model;
 
+import com.dsd.game.AccountStatus;
 import com.dsd.game.Game;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MouseEventInterface;
@@ -7,6 +8,7 @@ import com.revivedstandards.util.StdOps;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -52,5 +54,21 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
 
     public MenuScreen getMenuScreen () {
         return this.menuScreen;
+    }
+
+    public void displayAccountStatus (AccountStatus _status) {
+        switch (_status) {
+            case DOES_NOT_EXIST:
+                JOptionPane.showMessageDialog(null, "Error: Your account does not exist.");
+                break;
+            case EXISTS:
+                JOptionPane.showMessageDialog(null, "You already have an account!");
+                break;
+            case ACCOUNT_CREATED:
+                JOptionPane.showMessageDialog(null, "Your account has been created. You may log in now.");
+                break;
+            case INCORRECT_PASS:
+                JOptionPane.showMessageDialog(null, "Your password is incorrect.");
+        }
     }
 }

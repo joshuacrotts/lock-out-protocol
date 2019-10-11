@@ -3,12 +3,14 @@ package com.dsd.game.userinterface;
 import com.dsd.game.userinterface.model.PlayButton;
 import com.dsd.game.Game;
 import com.dsd.game.userinterface.model.AccountButton;
+import com.dsd.game.userinterface.model.BackButton;
 import com.dsd.game.userinterface.model.EasyButton;
 import com.dsd.game.userinterface.model.EmailTextFieldModel;
 import com.dsd.game.userinterface.model.ExitButton;
 import com.dsd.game.userinterface.model.HardButton;
 import com.dsd.game.userinterface.model.HelpOrOptionsButton;
 import com.dsd.game.userinterface.model.LoginButton;
+import com.dsd.game.userinterface.model.MakeAccountButton;
 import com.dsd.game.userinterface.model.MediumButton;
 import com.dsd.game.userinterface.model.PasswordTextFieldModel;
 import com.dsd.game.userinterface.model.StandardLabel;
@@ -80,6 +82,7 @@ public class MenuScreen extends Screen {
         super.addInteractor(new EasyButton(this.getGame(), this));
         super.addInteractor(new MediumButton(this.getGame(), this));
         super.addInteractor(new HardButton(this.getGame(), this));
+        super.addInteractor(new BackButton(this.getGame(), this));
     }
 
     /**
@@ -91,6 +94,15 @@ public class MenuScreen extends Screen {
         super.addInteractor(emailModel);
         super.addInteractor(pswdModel);
         super.addInteractor(new LoginButton(this.getGame(), this, emailModel, pswdModel));
+        super.addInteractor(new MakeAccountButton(this.getGame(), this, emailModel, pswdModel));
+    }
+
+    public MenuState popMenuStack () {
+        return this.menuStateStack.pop();
+    }
+
+    public void pushMenuStack (MenuState _state) {
+        this.menuStateStack.push(_state);
     }
 
 //====================== GETTERS ===============================//

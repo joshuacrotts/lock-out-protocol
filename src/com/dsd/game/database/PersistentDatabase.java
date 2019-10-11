@@ -28,13 +28,12 @@ public class PersistentDatabase {
     private BufferedWriter fileWriter;
     private Connection remoteDBConnection;
 
-    public PersistentDatabase (String _fileName) {
-        try {
-            this.fileWriter = new BufferedWriter(new FileWriter(_fileName));
-        }
-        catch (IOException ex) {
-            Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    //  SQL Database information
+    private static final String IP_ADDRESS = "35.226.95.88";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "lockoutprotocol340";
+
+    public PersistentDatabase () {
     }
 
     /**
@@ -57,19 +56,15 @@ public class PersistentDatabase {
      *
      * @return true if a connection was successful, false otherwise.
      */
-    public boolean connect () {
-        //  SQL Database information
-        String ipAddress = "35.226.95.88";
+    public boolean connect (String _dbName) {
         //  Database NAME (db name in remote sql)
-        String instanceID = "users";
-        String dbUsername = "root";
-        String rootPswd = "lockoutprotocol340";
+        String instanceID = _dbName;
 
         this.generateClassName();
 
-        String url = String.format("jdbc:mysql://%s:3306/%s", ipAddress, instanceID);
+        String url = String.format("jdbc:mysql://%s:3306/%s", IP_ADDRESS, instanceID);
         try {
-            this.remoteDBConnection = DriverManager.getConnection(url, dbUsername, rootPswd);
+            this.remoteDBConnection = DriverManager.getConnection(url, USERNAME, PASSWORD);
         }
         catch (SQLException ex) {
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
@@ -102,24 +97,14 @@ public class PersistentDatabase {
      * @return
      */
     public AccountStatus userAuthenticated (String _email, String _password) {
-        PreparedStatement insertStatement = null;
-        ResultSet resultQuery = null;
         try {
             //  Verify the email
-            insertStatement = this.remoteDBConnection.prepareStatement(String.format("SELECT * FROM user_accounts WHERE Email = ?;"));
-            insertStatement.setString(1, _email);
-            resultQuery = insertStatement.executeQuery();
-
-            if (!resultQuery.next()) {
+            if (!this.userEmailInDatabase(_email)) {
                 return AccountStatus.DOES_NOT_EXIST;
             }
 
             //  Verify the email AND the password.
-            insertStatement = this.remoteDBConnection.prepareStatement(String.format("SELECT * FROM user_accounts WHERE Email = ? AND Password = MD5(?);"));
-            insertStatement.setString(1, _email);
-            insertStatement.setString(2, _password);
-            resultQuery = insertStatement.executeQuery();
-            if (!resultQuery.next()) {
+            else if (!this.userInDatabase(_email, _password)) {
                 return AccountStatus.INCORRECT_PASS;
             }
         }
@@ -135,19 +120,59 @@ public class PersistentDatabase {
      *
      * @param _email
      * @param _password
+     * @return
      */
-    public void addUser (String _email, String _password) {
+    public AccountStatus addUser (String _email, String _password) {
         PreparedStatement insertStatement = null;
         try {
-            insertStatement = this.remoteDBConnection.prepareStatement(String.format("INSERT INTO user_accounts " + "VALUES(DEFAULT, ?, MD5(?));"));
+            if (this.userInDatabase(_email, _password)) {
+                return AccountStatus.EXISTS;
+            }
+            else {
+                insertStatement = this.remoteDBConnection.prepareStatement(String.format("INSERT INTO user_accounts " + "VALUES(DEFAULT, ?, MD5(?));"));
+                insertStatement.setString(1, _email);
+                insertStatement.setString(2, _password);
+                insertStatement.executeUpdate();
+                return AccountStatus.ACCOUNT_CREATED;
+            }
+
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    /**
+     * Queries the database to see if their username AND password are in the
+     * database.
+     *
+     * @param _email
+     * @param _password
+     * @return
+     * @throws SQLException
+     */
+    private boolean userInDatabase (String _email, String _password) throws SQLException {
+        PreparedStatement insertStatement = null;
+        ResultSet resultQuery = null;
+        try {
+            insertStatement = this.remoteDBConnection.prepareStatement(String.format("SELECT * FROM user_accounts WHERE Email = ? AND Password = MD5(?);"));
             insertStatement.setString(1, _email);
             insertStatement.setString(2, _password);
-            insertStatement.executeUpdate();
+            resultQuery = insertStatement.executeQuery();
         }
         catch (SQLException ex) {
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        System.out.println("User added.");
+        return resultQuery.next();
+    }
+
+    private boolean userEmailInDatabase (String _email) throws SQLException {
+        PreparedStatement insertStatement = this.remoteDBConnection.prepareStatement(String.format("SELECT * FROM user_accounts WHERE Email = ?;"));
+        insertStatement.setString(1, _email);
+        ResultSet resultQuery = insertStatement.executeQuery();
+
+        return resultQuery.next();
     }
 }
