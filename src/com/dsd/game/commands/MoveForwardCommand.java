@@ -26,7 +26,7 @@ public class MoveForwardCommand extends Command {
 
     @Override
     public void pressed (float _dt) {
-        if (!this.game.isPaused() && !this.player.isMovingBackward()) {
+        if (this.game.isRunning() && !this.player.isMovingBackward()) {
             this.player.setPlayerState(PlayerState.WALKING_FORWARD);
             this.player.updatePosition();
         }
@@ -39,7 +39,7 @@ public class MoveForwardCommand extends Command {
 
     @Override
     public void down (float _dt) {
-        if (!this.game.isPaused() && !this.player.isMovingBackward()) {
+        if (this.game.isRunning()&& !this.player.isMovingBackward()) {
             this.player.setPlayerState(PlayerState.WALKING_FORWARD);
             this.player.updatePosition();
         }

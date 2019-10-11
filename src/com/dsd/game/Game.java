@@ -13,6 +13,7 @@ import com.dsd.game.userinterface.HUDScreen;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.PauseScreen;
 import com.dsd.game.userinterface.PreambleScreen;
+import com.dsd.game.userinterface.ShopScreen;
 import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.handlers.StandardHandler;
@@ -47,6 +48,7 @@ public class Game extends StandardGame {
     private final PauseScreen pauseScreen;
     private final PreambleScreen preambleScreen;
     private final HUDScreen hudScreen;
+    private final ShopScreen shopScreen;
 
     /**
      * Rain controller which contacts the API for the logic of determining
@@ -103,6 +105,7 @@ public class Game extends StandardGame {
         this.menuScreen = new MenuScreen(this);
         this.pauseScreen = new PauseScreen(this);
         this.preambleScreen = new PreambleScreen(this);
+        this.shopScreen = new ShopScreen(this);
         this.hudScreen = new HUDScreen(this, this.player, this.sch);
 
         /**
@@ -121,6 +124,9 @@ public class Game extends StandardGame {
                 break;
             case PAUSED:
                 this.pauseScreen.tick();
+                break;
+            case SHOP:
+                this.shopScreen.tick();
                 break;
             case PREAMBLE:
                 //  Update the preamble text/effect
@@ -159,6 +165,10 @@ public class Game extends StandardGame {
             //  Then render the preamble effect if necessary
             if (this.isPreamble()) {
                 this.preambleScreen.render(StandardDraw.Renderer);
+            }
+
+            if (this.isShop()) {
+                this.shopScreen.render(StandardDraw.Renderer);
             }
             /**
              * If the game is paused, draw the paused text and transparent
@@ -245,6 +255,14 @@ public class Game extends StandardGame {
 
     public boolean isPreamble () {
         return this.gameState == GameState.PREAMBLE;
+    }
+
+    public boolean isRunning () {
+        return this.gameState == GameState.RUNNING;
+    }
+
+    public boolean isShop () {
+        return this.gameState == GameState.SHOP;
     }
 
 //========================== SETTERS =============================//
