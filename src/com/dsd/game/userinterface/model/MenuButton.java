@@ -69,6 +69,9 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
                 break;
             case INCORRECT_PASS:
                 JOptionPane.showMessageDialog(null, "Your password is incorrect.");
+                break;
+            case CORRECT:
+                JOptionPane.showMessageDialog(null, "Logged in successfully!");
         }
     }
 }

@@ -23,7 +23,7 @@ import java.awt.Graphics2D;
 public class LoginButton extends MenuButton implements MouseEventInterface {
 
     private static final int BUTTON_X_OFFSET = 0;
-    private static final int BUTTON_Y_OFFSET = -250;
+    private static final int BUTTON_Y_OFFSET = 120;
     private static final int TEXT_X_OFFSET = 115;
     private static final int TEXT_Y_OFFSET = 45;
     private static final int BUTTON_WIDTH = 300;
@@ -34,7 +34,7 @@ public class LoginButton extends MenuButton implements MouseEventInterface {
 
     public LoginButton (Game _game, MenuScreen _menuScreen, EmailTextFieldModel _email, PasswordTextFieldModel _pswd) {
         super(Screen.gameHalfWidth - BUTTON_X_OFFSET - BUTTON_WIDTH,
-                Screen.gameHalfHeight - BUTTON_Y_OFFSET,
+                _game.getGameHeight() - BUTTON_Y_OFFSET,
                 BUTTON_WIDTH, BUTTON_HEIGHT, "LOGIN", _game, _menuScreen);
 
         this.emailModel = _email;

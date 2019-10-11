@@ -261,8 +261,16 @@ public class Game extends StandardGame {
         return this.gameState == GameState.RUNNING;
     }
 
+    public boolean isInGameState () {
+        return this.isRunning() | this.isPreamble();
+    }
+
     public boolean isShop () {
         return this.gameState == GameState.SHOP;
+    }
+
+    public boolean isMenu () {
+        return this.gameState == GameState.MENU;
     }
 
 //========================== SETTERS =============================//

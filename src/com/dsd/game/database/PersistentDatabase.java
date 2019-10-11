@@ -112,7 +112,7 @@ public class PersistentDatabase {
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return AccountStatus.EXISTS;
+        return AccountStatus.CORRECT;
     }
 
     /**
