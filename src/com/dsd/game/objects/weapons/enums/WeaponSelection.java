@@ -1,4 +1,4 @@
-package com.dsd.game;
+package com.dsd.game.objects.weapons.enums;
 
 /**
  * Enums for determining how the player wants to switch their weapon (forwards

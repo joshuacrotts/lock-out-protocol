@@ -76,6 +76,12 @@ public class Minimap extends Interactor {
                         break;
                     case Monster2:
                         this.drawObject(_g2, obj, StandardDraw.BRUNSWICK_GREEN);
+                        break;
+                    case Monster3:
+                        this.drawObject(_g2, obj, StandardDraw.PURPLE);
+                        break;
+                    case Monster4:
+                        this.drawObject(_g2, obj, StandardDraw.PINK);
                 }
             }
         }

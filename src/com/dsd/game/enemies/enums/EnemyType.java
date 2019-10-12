@@ -1,4 +1,4 @@
-package com.dsd.game;
+package com.dsd.game.enemies.enums;
 
 /**
  * Enum that lists the differing enemy types (mostly for spawners).
@@ -6,5 +6,5 @@ package com.dsd.game;
  * @author Joshua
  */
 public enum EnemyType {
-    BASIC_MONSTER, GREEN_MONSTER;
+    BASIC_MONSTER, GREEN_MONSTER, FEMALE_BOSS_MONSTER, DARK_FEMALE_MONSTER;
 }

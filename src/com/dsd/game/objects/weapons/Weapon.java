@@ -1,7 +1,7 @@
 package com.dsd.game.objects.weapons;
 
-import com.dsd.game.WeaponState;
-import com.dsd.game.WeaponType;
+import com.dsd.game.objects.weapons.enums.WeaponState;
+import com.dsd.game.objects.weapons.enums.WeaponType;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.util.StdOps;
 import java.awt.image.BufferedImage;

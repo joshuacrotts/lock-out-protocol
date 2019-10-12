@@ -5,7 +5,7 @@
  */
 package com.dsd.game.enemies;
 
-import com.dsd.game.EnemyState;
+import com.dsd.game.enemies.enums.EnemyState;
 import com.dsd.game.Game;
 import com.dsd.game.objects.Entity;
 import com.revivedstandards.controller.StandardAnimatorController;
@@ -35,15 +35,19 @@ public abstract class Enemy extends Entity {
     private Entity target;
     private final StandardCamera sc;
     private EnemyState enemyState;
+
     //  Animation controllers
     private StandardAnimatorController walkingController;
     private StandardAnimatorController attackingController;
     private StandardAnimatorController deathController;
+
     //  Variables for the disappearing effect when the monster dies.
     private float deathTransparencyFactor;
     private float deathTransparency = 1.0f;
+
     //  How much damage the enemy does when running into the player
     protected double damage;
+
     //  Alpha composition object for when the monster dies.
     protected AlphaComposite deathTransparentComposite;
 

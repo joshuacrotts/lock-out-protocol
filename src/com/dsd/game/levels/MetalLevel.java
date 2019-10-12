@@ -1,6 +1,6 @@
 package com.dsd.game.levels;
 
-import com.dsd.game.EnemyType;
+import com.dsd.game.enemies.enums.EnemyType;
 import com.dsd.game.Game;
 import com.dsd.game.factories.SpawnerFactory;
 import com.dsd.game.objects.Player;
@@ -59,6 +59,9 @@ public class MetalLevel extends StandardLevel {
                 StdOps.rand(600, 3400), StdOps.rand(600, 3400), 10000, 150,
                 this.game, (StandardCollisionHandler) this.getHandler()));
         this.addEntity(SpawnerFactory.generateSpawner(EnemyType.GREEN_MONSTER,
+                StdOps.rand(600, 3400), StdOps.rand(600, 3400), 10000, 150,
+                this.game, (StandardCollisionHandler) this.getHandler()));
+        this.addEntity(SpawnerFactory.generateSpawner(EnemyType.DARK_FEMALE_MONSTER,
                 StdOps.rand(600, 3400), StdOps.rand(600, 3400), 10000, 150,
                 this.game, (StandardCollisionHandler) this.getHandler()));
     }

@@ -1,6 +1,6 @@
 package com.dsd.game.objects;
 
-import com.dsd.game.PlayerState;
+import com.dsd.game.objects.enums.PlayerState;
 import com.dsd.game.Game;
 import com.dsd.game.commands.AttackCommand;
 import com.dsd.game.commands.DebugCommand;

@@ -5,7 +5,7 @@ import com.dsd.game.GameState;
 import com.dsd.game.objects.Player;
 import com.revivedstandards.commands.Command;
 import com.revivedstandards.handlers.StandardCollisionHandler;
-import com.dsd.game.PlayerState;
+import com.dsd.game.objects.enums.PlayerState;
 import com.dsd.game.objects.weapons.Gun;
 import com.dsd.game.objects.weapons.Knife;
 import com.dsd.game.objects.weapons.Weapon;

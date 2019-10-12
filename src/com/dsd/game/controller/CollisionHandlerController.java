@@ -1,7 +1,7 @@
 package com.dsd.game.controller;
 
 import com.dsd.game.Game;
-import com.dsd.game.PlayerState;
+import com.dsd.game.objects.enums.PlayerState;
 import com.dsd.game.objects.BulletGameObject;
 import com.dsd.game.enemies.Enemy;
 import com.dsd.game.objects.powerups.HealthPowerup;

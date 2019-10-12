@@ -162,21 +162,18 @@ public class Game extends StandardGame {
             StandardDraw.Handler(this.sch);
             //  Then render the heads up display
             this.hudScreen.render(StandardDraw.Renderer);
-            //  Then render the preamble effect if necessary
-            if (this.isPreamble()) {
-                this.preambleScreen.render(StandardDraw.Renderer);
+            //  Then render the preamble, pause or shop effect if necessary
+            switch (this.gameState) {
+                case PREAMBLE:
+                    this.preambleScreen.render(StandardDraw.Renderer);
+                    break;
+                case SHOP:
+                    this.shopScreen.render(StandardDraw.Renderer);
+                    break;  
+                case PAUSED:
+                    this.pauseScreen.render(StandardDraw.Renderer);
             }
 
-            if (this.isShop()) {
-                this.shopScreen.render(StandardDraw.Renderer);
-            }
-            /**
-             * If the game is paused, draw the paused text and transparent
-             * background.
-             */
-            if (this.isPaused()) {
-                this.pauseScreen.render(StandardDraw.Renderer);
-            }
             //  If we are in debug mode, we can draw the text.
             if (DebugController.DEBUG_MODE) {
                 this.debugController.render(StandardDraw.Renderer);

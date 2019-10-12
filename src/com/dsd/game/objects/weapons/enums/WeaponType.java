@@ -1,4 +1,4 @@
-package com.dsd.game;
+package com.dsd.game.objects.weapons.enums;
 
 /**
  * To avoid the whole fiasco with using instanceof when it's unwarranted and

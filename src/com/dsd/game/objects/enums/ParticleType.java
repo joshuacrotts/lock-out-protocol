@@ -1,4 +1,4 @@
-package com.dsd.game;
+package com.dsd.game.objects.enums;
 
 /**
  * Enum describing the types of particles that can be used in the

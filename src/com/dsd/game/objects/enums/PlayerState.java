@@ -1,4 +1,4 @@
-package com.dsd.game;
+package com.dsd.game.objects.enums;
 
 /**
  * Enum that describes the states that the player can have.
