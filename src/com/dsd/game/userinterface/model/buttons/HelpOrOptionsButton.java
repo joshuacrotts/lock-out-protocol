@@ -1,7 +1,6 @@
 package com.dsd.game.userinterface.model.buttons;
 
 import com.dsd.game.Game;
-import com.dsd.game.GameState;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MenuState;
 import com.dsd.game.userinterface.MouseEventInterface;
@@ -53,6 +52,8 @@ public class HelpOrOptionsButton extends MenuButton implements MouseEventInterfa
         if (!this.getGame().isMenu() || !this.getMenuScreen().isOnMainMenu()) {
             return;
         }
+        super.onMouseClick();
+
         this.getMenuScreen().pushMenuStack(MenuState.MAIN);
         this.getMenuScreen().setMenuState(MenuState.OPTIONS);
     }

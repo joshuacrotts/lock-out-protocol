@@ -27,7 +27,7 @@ public class ResolutionMenuButton extends MenuButton implements MouseEventInterf
 
     public ResolutionMenuButton (Game _game, MenuScreen _menuScreen) {
         super(ResolutionMenuButton.BUTTON_X_OFFSET, _game.getGameHeight() - ResolutionMenuButton.BUTTON_Y_OFFSET,
-              ResolutionMenuButton.BUTTON_WIDTH, ResolutionMenuButton.BUTTON_HEIGHT, "CHANGE RESOLUTION", _game, _menuScreen);
+                ResolutionMenuButton.BUTTON_WIDTH, ResolutionMenuButton.BUTTON_HEIGHT, "CHANGE RESOLUTION", _game, _menuScreen);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ResolutionMenuButton extends MenuButton implements MouseEventInterf
 
         super.render(_g2);
         StandardDraw.text(this.getText(), this.getX() + ResolutionMenuButton.TEXT_X_OFFSET,
-                          this.getY() + ResolutionMenuButton.TEXT_Y_OFFSET, this.font, 24f, Color.WHITE);
+                this.getY() + ResolutionMenuButton.TEXT_Y_OFFSET, this.font, 24f, Color.WHITE);
     }
 
     @Override
@@ -52,6 +52,8 @@ public class ResolutionMenuButton extends MenuButton implements MouseEventInterf
         if (!this.getMenuScreen().isOnOptions() || !this.getGame().isMenu()) {
             return;
         }
+
+        super.onMouseClick();
 
         this.getMenuScreen().setMenuState(MenuState.RESOLUTION);
     }

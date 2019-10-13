@@ -31,7 +31,8 @@ public class WeaponIconView extends Interactor {
     }
 
     @Override
-    public void tick () {}
+    public void tick () {
+    }
 
     @Override
     public void render (Graphics2D _g2) {

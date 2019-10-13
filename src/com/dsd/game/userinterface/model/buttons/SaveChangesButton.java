@@ -66,7 +66,9 @@ public class SaveChangesButton extends MenuButton implements MouseEventInterface
         if (!this.getGame().isMenu() || !this.getMenuScreen().isOnResolution()) {
             return;
         }
-        
+
+        super.onMouseClick();
+
         //  Once the user presses the save changes button, it will update the game's resolution.
         Dimension changedDimension = ResolutionEnum.getDimension();
         this.getGame().changeResolution((int) changedDimension.getWidth(), (int) changedDimension.getHeight());

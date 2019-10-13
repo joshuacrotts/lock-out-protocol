@@ -134,9 +134,9 @@ public class InfiniteAmmoPowerup extends StandardGameObject {
         Stroke oldStroke = _g2.getStroke();
         _g2.setStroke(new BasicStroke(RECT_STROKE));
         Rectangle view = new Rectangle((int) this.camera.getX() - Screen.gameHalfWidth + RECT_STROKE / 2,
-                                       (int) this.camera.getY() - Screen.gameHalfHeight + RECT_STROKE / 2,
-                                        this.game.getGameWidth() - (int) STROKE_X_OFFSET,
-                                        this.game.getGameHeight() - (int) STROKE_Y_OFFSET);
+                (int) this.camera.getY() - Screen.gameHalfHeight + RECT_STROKE / 2,
+                this.game.getGameWidth() - (int) STROKE_X_OFFSET,
+                this.game.getGameHeight() - (int) STROKE_Y_OFFSET);
         _g2.draw(view);
         _g2.setStroke(oldStroke);
     }

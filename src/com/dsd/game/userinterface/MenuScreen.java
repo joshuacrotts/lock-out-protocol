@@ -15,7 +15,9 @@ import com.dsd.game.userinterface.model.buttons.MediumButton;
 import com.dsd.game.userinterface.model.PasswordTextFieldModel;
 import com.dsd.game.userinterface.model.buttons.ResolutionMenuButton;
 import com.dsd.game.userinterface.model.labels.TitleLabel;
+import com.dsd.game.userinterface.view.MenuView;
 import com.dsd.game.userinterface.view.ResolutionView;
+import com.revivedstandards.controller.StandardAudioController;
 import java.awt.Graphics2D;
 import java.util.Stack;
 
@@ -32,10 +34,12 @@ public class MenuScreen extends Screen {
     private MenuState menuState;
     private final Stack<MenuState> menuStateStack;
 
+    private MenuView menuView;
     private ResolutionView changeResView;
 
     public MenuScreen (Game _game) {
         super(_game);
+        this.menuView = new MenuView(_game, this);
         this.menuState = MenuState.MAIN;
         this.menuStateStack = new Stack<>();
         this.menuStateStack.push(this.menuState);
@@ -45,6 +49,8 @@ public class MenuScreen extends Screen {
 
     @Override
     public void tick () {
+        this.menuView.tick();
+
         super.tick();
 
         this.changeResView.tick();
@@ -52,9 +58,15 @@ public class MenuScreen extends Screen {
 
     @Override
     public void render (Graphics2D _g2) {
+        this.menuView.render(_g2);
+
         super.render(_g2);
 
         this.changeResView.render(_g2);
+    }
+
+    public void stopMenuMusic () {
+        StandardAudioController.stop("src/resources/audio/music/menu.wav");
     }
 
     /**

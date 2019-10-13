@@ -3,6 +3,7 @@ package com.dsd.game.controller;
 import com.dsd.game.Game;
 import com.dsd.game.api.TranslatorAPI;
 import com.dsd.game.objects.RainDrop;
+import com.dsd.game.userinterface.Screen;
 import com.revivedstandards.handlers.StandardParticleHandler;
 import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.util.StdOps;
@@ -33,8 +34,8 @@ public class RainController implements Renderable, Updatable {
     private final boolean isRaining;
 
     //  Defines the range in which rain can spawn for the user
-    private static final int X_BORDER = 600;
-    private static final int Y_BORDER = 400;
+    private static final int X_BORDER = Screen.gameDoubleWidth;
+    private static final int Y_BORDER = Screen.gameDoubleHeight;
 
     //  Velocity constants and factors for the rain drop object.
     private static final double RAIN_DIRECTION = -FastMath.PI * 1.5;
@@ -48,7 +49,7 @@ public class RainController implements Renderable, Updatable {
         this.game = _game;
         this.sc = _game.getCamera();
         this.sph = new StandardParticleHandler(MAX_RAIN_PARTICLES);
-        
+
         // Be sure to always set the SPH camera or it'll throw a NPE
         this.sph.setCamera(this.sc);
         this.isRaining = TranslatorAPI.getWeather().contains("rain") | RainController.toggleDownfall;

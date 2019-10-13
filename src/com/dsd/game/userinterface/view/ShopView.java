@@ -46,7 +46,7 @@ public class ShopView extends Interactor {
 
     @Override
     public void render (Graphics2D _g2) {
-        _g2.drawImage(backingImage, (int)this.camera.getX() - Screen.gameHalfWidth, (int)this.camera.getY() - Screen.gameHalfHeight, this.getWidth(), this.getHeight(), null);
+        _g2.drawImage(backingImage, (int) this.camera.getX() - Screen.gameHalfWidth, (int) this.camera.getY() - Screen.gameHalfHeight, this.getWidth(), this.getHeight(), null);
 
     }
 

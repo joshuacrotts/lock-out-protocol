@@ -3,9 +3,7 @@ package com.dsd.game.userinterface.model.buttons;
 import com.dsd.game.Game;
 import com.dsd.game.GameState;
 import com.dsd.game.userinterface.MenuScreen;
-import com.dsd.game.userinterface.MenuState;
 import com.dsd.game.userinterface.MouseEventInterface;
-import com.dsd.game.userinterface.Screen;
 import com.revivedstandards.main.StandardDraw;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -58,6 +56,8 @@ public class BackButton extends MenuButton implements MouseEventInterface {
         if (this.getGame().getGameState() != GameState.MENU) {
             return;
         }
+
+        super.onMouseClick();
 
         this.getMenuScreen().setMenuState(this.getMenuScreen().popMenuStack());
     }

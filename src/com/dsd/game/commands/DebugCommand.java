@@ -2,7 +2,6 @@ package com.dsd.game.commands;
 
 import com.dsd.game.Game;
 import com.dsd.game.controller.DebugController;
-import com.dsd.game.userinterface.Screen;
 import com.revivedstandards.commands.Command;
 import java.awt.event.KeyEvent;
 

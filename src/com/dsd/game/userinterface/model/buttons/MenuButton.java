@@ -4,6 +4,7 @@ import com.dsd.game.AccountStatus;
 import com.dsd.game.Game;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MouseEventInterface;
+import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.util.StdOps;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -73,5 +74,10 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
             case CORRECT:
                 JOptionPane.showMessageDialog(null, "Logged in successfully!");
         }
+    }
+
+    @Override
+    public void onMouseClick () {
+        StandardAudioController.play("src/resources/audio/sfx/menuselect.wav");
     }
 }

@@ -13,6 +13,7 @@ public abstract class AudioBoxController {
 
     public static void initialize (int _buffers) {
         StandardAudioController.init(_buffers);
+        StandardAudioController.load("src/resources/audio/music/menu.wav", 1);
         StandardAudioController.load("src/resources/audio/sfx/pistol.wav", 16);
         StandardAudioController.load("src/resources/audio/sfx/splat1.wav", 2);
         StandardAudioController.load("src/resources/audio/sfx/splat2.wav", 2);
@@ -24,6 +25,7 @@ public abstract class AudioBoxController {
         StandardAudioController.load("src/resources/audio/sfx/round_change.wav", 1);
         StandardAudioController.load("src/resources/audio/sfx/restore_health.wav", 4);
         StandardAudioController.load("src/resources/audio/sfx/berserk.wav", 2);
+        StandardAudioController.load("src/resources/audio/sfx/menuselect.wav", 5);
         AudioBoxController.initBasicMonsterSFX(5);
         AudioBoxController.initGreenMonsterSFX(5);
     }

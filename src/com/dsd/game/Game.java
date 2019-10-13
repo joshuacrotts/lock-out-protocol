@@ -22,10 +22,6 @@ import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.main.StandardDraw;
 import com.revivedstandards.main.StandardGame;
 import com.revivedstandards.model.StandardLevel;
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Rectangle;
-import java.awt.Stroke;
 
 /**
  * This is the main class.
@@ -194,6 +190,7 @@ public class Game extends StandardGame {
         DifficultyController.setLevelTransitionTimer();
         this.levelController.getCurrentLevel().loadLevelData();
         this.levelController.startWaveTimer();
+        this.menuScreen.stopMenuMusic();
     }
 
     /**
