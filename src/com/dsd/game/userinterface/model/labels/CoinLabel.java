@@ -25,12 +25,12 @@ public class CoinLabel extends StandardLabel {
     private final Player player;
     //  Position and sizing of health elements
     private final int COIN_X_OFFSET = 230;
-    private final int COIN_Y_OFFSET = 40;
+    private final int COIN_Y_OFFSET = 60;
 
     public CoinLabel (Game _game, Player _player) {
         super((int) (Screen.gameHalfWidth + Screen.gameHalfWidth),
                 (int) (Screen.gameHalfHeight + Screen.gameFourthHeight),
-                "$", "src/resources/fonts/chargen.ttf", 32f);
+                "$", "src/resources/fonts/chargen.ttf", 30f);
         this.game = _game;
         this.player = _player;
     }

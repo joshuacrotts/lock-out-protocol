@@ -20,6 +20,7 @@ public abstract class Gun extends Weapon {
     private final Game game;
     private final StandardCollisionHandler globalHandler;
     private final Player player;
+
     /**
      * Variables for how much ammo the gun can carry, how much is in a mag, and
      * how much they currently have.
@@ -27,6 +28,7 @@ public abstract class Gun extends Weapon {
     private final int magazineAmt;
     private int totalAmmo;
     private int currentAmmo;
+
     //  Sound effects played when the gun is shot, or empty.
     private final String emptySFXPath;
 
@@ -92,6 +94,10 @@ public abstract class Gun extends Weapon {
 
     public int getCurrentAmmo () {
         return this.currentAmmo;
+    }
+
+    public int getMagazineCapacity () {
+        return this.magazineAmt;
     }
 
     public boolean isWeaponEmpty () {

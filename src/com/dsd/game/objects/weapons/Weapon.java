@@ -21,18 +21,24 @@ public abstract class Weapon {
     private StandardAnimatorController walkWeaponFrames;
     private StandardAnimatorController attackWeaponFrames;
     private BufferedImage weaponIcon;
+
     //  State of the weapon (when applicable), and the sfx
     //  it makes when attacking.
     private WeaponState weaponState;
     private String attackSFXPath;
+
     //  Variables to determine how long to wait in between attacks.
     private long delay = 0;
     private boolean ready = true;
+
     /**
      * Some weapons will have damage that the actual weapons do as opposed to
      * just a projectile exiting the weapon (like a bullet).
      */
     private int damage;
+
+    //  Some powerups will increase the weapon's damage. This variable handles that.
+    private int damageFactor = 1;
 
     public Weapon (WeaponType _type) {
         this.weaponType = _type;
@@ -92,6 +98,10 @@ public abstract class Weapon {
         return this.damage;
     }
 
+    public int getDamageFactor () {
+        return this.damageFactor;
+    }
+
 //============================== SETTERS ===================================//
     public void setWeaponState (WeaponState _state) {
         this.weaponState = _state;
@@ -123,5 +133,9 @@ public abstract class Weapon {
 
     public void setReady (boolean _ready) {
         this.ready = _ready;
+    }
+
+    public void setDamageFactor (int _factor) {
+        this.damageFactor = _factor;
     }
 }

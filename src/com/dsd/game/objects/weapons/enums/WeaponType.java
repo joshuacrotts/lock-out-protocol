@@ -9,7 +9,11 @@ package com.dsd.game.objects.weapons.enums;
  * @author Joshua, Ronald, Rinty
  */
 public enum WeaponType {
-    RIFLE("rifle"), PISTOL("pistol"), KNIFE("knife"), BAT("bat"), FLAMETHROWER("flamethrower");
+    RIFLE("rifle"),
+    PISTOL("pistol"),
+    KNIFE("knife"),
+    BAT("bat"),
+    FLAMETHROWER("flamethrower");
 
     private final String type;
 

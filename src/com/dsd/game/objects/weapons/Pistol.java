@@ -18,9 +18,15 @@ import com.revivedstandards.model.StandardAnimation;
  */
 public class Pistol extends Gun {
 
+    //  Information regarding the FPS of the pistol animations for the player.
     private static final int WALKING_FPS = 10;
     private static final int SHOOT_GUN_FPS = 20;
+
+    //  Delay between shots.
     private final int DELAY = 1250;
+
+    //  Damage from the pistol.
+    private static final int BULLET_DAMAGE = 35;
 
     public Pistol (Game _game, Player _player, StandardCollisionHandler _sch) {
         super(WeaponType.PISTOL, 16, _game, _player, _sch);
@@ -47,7 +53,7 @@ public class Pistol extends Gun {
         super.getHandler().addEntity(new BulletGameObject(
                 (int) super.getPlayer().getX() + super.getPlayer().getWidth() / 2,
                 (int) super.getPlayer().getY() + super.getPlayer().getHeight() / 2,
-                super.getPlayer().getAngle(), super.getGame(), super.getHandler(),
-                super.getPlayer()));
+                super.getPlayer().getAngle(), BULLET_DAMAGE * this.getDamageFactor(),
+                super.getGame(), super.getHandler(), super.getPlayer()));
     }
 }

@@ -25,6 +25,9 @@ public class Rifle extends Gun {
     //  Delay between shooting one bullet and the next (in ms).
     private final int DELAY = 100;
 
+    //  Damage from the rifle.
+    private static final int BULLET_DAMAGE = 25;
+
     public Rifle (Game _game, Player _player, StandardCollisionHandler _sch) {
         super(WeaponType.RIFLE, 31, _game, _player, _sch);
         //  Instantiates the animation controllers.
@@ -50,7 +53,7 @@ public class Rifle extends Gun {
         super.getHandler().addEntity(new BulletGameObject(
                 (int) super.getPlayer().getX() + super.getPlayer().getWidth() / 2,
                 (int) super.getPlayer().getY() + super.getPlayer().getHeight() / 2,
-                super.getPlayer().getAngle(), super.getGame(), super.getHandler(),
-                super.getPlayer()));
+                super.getPlayer().getAngle(), BULLET_DAMAGE * this.getDamageFactor(),
+                super.getGame(), super.getHandler(), super.getPlayer()));
     }
 }

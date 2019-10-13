@@ -27,9 +27,9 @@ public class BulletGameObject extends StandardGameObject {
     private final Game game;
     private final StandardCollisionHandler sch;
     private final StandardCamera camera;
+    
+    private int damage = 0;
 
-    //  Angle of bullet according to current rotation of player, and damage of bullet.
-    private final int DAMAGE = 25;
     //  Velocity factor applied to the bullet.
     private final int VEL_FACTOR = 20;
     //  Static reference to the BufferedImages
@@ -37,11 +37,12 @@ public class BulletGameObject extends StandardGameObject {
     //  Animation frame per second setting
     private static final int BULLET_FPS = 20;
 
-    public BulletGameObject (int _x, int _y, double _angle, Game _game,
+    public BulletGameObject (int _x, int _y, double _angle, int _damage, Game _game,
             StandardCollisionHandler _parentContainer, Player _parent) {
         super(_x, _y, StandardID.Bullet);
         this.game = _game;
         this.sch = _parentContainer;
+        this.damage = _damage;
         this.setAnimation(new StandardAnimatorController(
                 new StandardAnimation(this, BulletGameObject.frames, BulletGameObject.BULLET_FPS)));
         this.setWidth(this.getWidth());
@@ -115,7 +116,7 @@ public class BulletGameObject extends StandardGameObject {
 
 //========================== GETTERS =======================================//
     public int getDamage () {
-        return this.DAMAGE;
+        return this.damage;
     }
 
     //  Initializes the bullet frames

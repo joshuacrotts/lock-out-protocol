@@ -38,8 +38,9 @@ public class HealthLabel extends StandardLabel {
     private final int MAX_HEALTH = 200;
     private final int HEALTH_BAR_Y_OFFSET = 5;
     private final int HEALTH_BAR_HEIGHT = 35;
-    private final int HEALTH_X_OFFSET = 150;
-    private final int HEALTH_Y_OFFSET = 40;
+    private final int HEALTH_X_OFFSET = 170;
+    private final int HEALTH_Y_OFFSET = 55;
+    private final int TEXT_X_OFFSET = 30;
     private final int ARC_WIDTH = 10;
     private final int ARC_HEIGHT = 10;
 
@@ -72,7 +73,7 @@ public class HealthLabel extends StandardLabel {
     }
 
     private void drawHealthText (Graphics2D _g2) {
-        StandardDraw.text("HEALTH: ", this.getX(), this.getY(), this.getFont(), this.getFont().getSize(), Color.WHITE);
+        StandardDraw.text("HEALTH: ", this.getX() + TEXT_X_OFFSET, this.getY(), this.getFont(), this.getFont().getSize(), Color.WHITE);
     }
 
     private void drawHealthBar (Graphics2D _g2) {

@@ -7,6 +7,8 @@ import com.dsd.game.enemies.Enemy;
 import com.dsd.game.objects.powerups.HealthPowerup;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.items.Coin;
+import com.dsd.game.objects.powerups.BerserkPowerup;
+import com.dsd.game.objects.powerups.InfiniteAmmoPowerup;
 import com.dsd.game.userinterface.StandardInteractorHandler;
 import com.dsd.game.userinterface.model.DamageText;
 import com.revivedstandards.controller.StandardAudioController;
@@ -46,7 +48,9 @@ public class CollisionHandlerController extends StandardCollisionHandler {
 
     @Override
     public void render (Graphics2D _g2) {
-        super.render(_g2);
+        for (int i = 0 ; i < this.getEntities().size() ; i++) {
+            this.getEntities().get(i).render(_g2);
+        }
         damageText.render(_g2);
     }
 
@@ -80,13 +84,22 @@ public class CollisionHandlerController extends StandardCollisionHandler {
         if (_obj1.getId() == StandardID.Player && _obj2 instanceof Enemy && _obj2.isAlive()) {
             this.handlePlayerMonsterCollision((Player) _obj1, (Enemy) _obj2);
         }
+
+        //
+        //  TODO: Refactor this into a PowerUp superclass with some type of activate() method.
+        //
         else if (_obj1.getId() == StandardID.Player && _obj2.getId() == StandardID.Coin && _obj2.isAlive()) {
             this.handlePlayerCoinCollision((Player) _obj1, (Coin) _obj2);
         }
         else if (_obj1.getId() == StandardID.Player && _obj2 instanceof HealthPowerup) {
             this.handlePlayerHealthCollision((Player) _obj1, (HealthPowerup) _obj2);
         }
-
+        else if (_obj1.getId() == StandardID.Player && _obj2 instanceof BerserkPowerup) {
+            this.handlePlayerBerserkCollision((Player) _obj1, (BerserkPowerup) _obj2);
+        }
+        else if (_obj1.getId() == StandardID.Player && _obj2 instanceof InfiniteAmmoPowerup) {
+            this.handlePlayerAmmoCollision((Player) _obj1, (InfiniteAmmoPowerup) _obj2);
+        }
     }
 
     /**
@@ -145,6 +158,18 @@ public class CollisionHandlerController extends StandardCollisionHandler {
     private void handlePlayerHealthCollision (Player _player, HealthPowerup _health) {
         _health.addHealth();
         _health.setAlive(false);
+    }
+
+    private void handlePlayerBerserkCollision (Player _player, BerserkPowerup _berserk) {
+        _berserk.setAlive(false);
+        _berserk.activate();
+        _berserk.playBerserkSFX();
+        _berserk.setCollected();
+    }
+
+    private void handlePlayerAmmoCollision (Player _player, InfiniteAmmoPowerup _ammo) {
+        _ammo.setAlive(false);
+        _ammo.activate();
     }
 
     /**

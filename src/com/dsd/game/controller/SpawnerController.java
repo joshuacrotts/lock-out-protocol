@@ -70,6 +70,7 @@ public class SpawnerController extends StandardGameObject {
                     break;
                 case GREEN_MONSTER:
                     this.parentContainer.addEntity(new GreenMonster(xPos, yPos, this.game, this.parentContainer));
+                    break;
                 case DARK_FEMALE_MONSTER:
                     this.parentContainer.addEntity(new DarkFemaleMonster(xPos, yPos, this.game, this.parentContainer));
             }

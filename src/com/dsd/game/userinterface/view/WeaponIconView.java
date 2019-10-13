@@ -22,7 +22,7 @@ public class WeaponIconView extends Interactor {
     private final Inventory inventory;
     private final BufferedImage weaponBorder;
     private final int ICON_X_OFFSET = 310;
-    private final int ICON_Y_OFFSET = 110;
+    private final int ICON_Y_OFFSET = 130;
 
     public WeaponIconView (Game _game, Inventory _inventory) {
         this.game = _game;

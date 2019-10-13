@@ -27,6 +27,7 @@ public class Knife extends Weapon {
                 new StandardAnimation(_player, Utilities.loadFrames("src/resources/img/player/player_walk_knife/", 6), WALKING_FPS));
         StandardAnimatorController shootingAnimation = new StandardAnimatorController(
                 new StandardAnimation(_player, Utilities.loadFrames("src/resources/img/player/player_attack_knife/", 8), ATTACK_KNIFE_FPS));
+        
         this.setWalkFrames(walkingAnimation);
         this.setAttackFrames(shootingAnimation);
         super.setDamage(this.KNIFE_DAMAGE);

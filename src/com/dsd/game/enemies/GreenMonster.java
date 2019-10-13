@@ -4,6 +4,8 @@ import com.dsd.game.Game;
 import com.dsd.game.objects.Entity;
 import com.dsd.game.objects.powerups.HealthPowerup;
 import com.dsd.game.objects.items.Coin;
+import com.dsd.game.objects.powerups.BerserkPowerup;
+import com.dsd.game.objects.powerups.InfiniteAmmoPowerup;
 import com.dsd.game.util.Utilities;
 import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
@@ -245,6 +247,17 @@ public class GreenMonster extends Enemy implements DeathListener {
         int luck = StdOps.rand(1, 10);
         if (luck == 1) {
             this.getHandler().addEntity(new HealthPowerup((int) (this.getX() + this.getWidth() / 2),
+                    (int) (this.getY() + this.getHealth() / 2),
+                    this.getGame(), this.getHandler()));
+        }
+
+        else if (luck == 2) {
+            this.getHandler().addEntity(new BerserkPowerup((int) (this.getX() + this.getWidth() / 2),
+                    (int) (this.getY() + this.getHealth() / 2),
+                    this.getGame(), this.getHandler()));
+        }
+        else {
+            this.getHandler().addEntity(new InfiniteAmmoPowerup((int) (this.getX() + this.getWidth() / 2),
                     (int) (this.getY() + this.getHealth() / 2),
                     this.getGame(), this.getHandler()));
         }
