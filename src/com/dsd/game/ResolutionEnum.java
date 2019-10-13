@@ -77,6 +77,6 @@ public enum ResolutionEnum {
      */
     private String getDimensionString () {
         return (int) this.resolution.getWidth() + " x "
-             + (int) this.resolution.getHeight();
+                + (int) this.resolution.getHeight();
     }
 }

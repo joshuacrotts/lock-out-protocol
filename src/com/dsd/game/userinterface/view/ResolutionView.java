@@ -4,9 +4,9 @@ import com.dsd.game.Game;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MouseEventInterface;
 import com.dsd.game.userinterface.Screen;
-import com.dsd.game.userinterface.model.buttons.PlayButton;
 import com.dsd.game.userinterface.model.buttons.SaveChangesButton;
 import com.dsd.game.userinterface.model.labels.ResolutionLabel;
+import com.revivedstandards.controller.StandardAudioController;
 import java.awt.Graphics2D;
 
 /**
@@ -24,6 +24,7 @@ public class ResolutionView extends Screen implements MouseEventInterface {
         this.menuScreen = _menuScreen;
         super.addInteractor(new ResolutionLabel(super.getGame(), this.menuScreen));
         super.addInteractor(new SaveChangesButton(super.getGame(), this.menuScreen));
+        StandardAudioController.play("src/resources/audio/music/menu.wav");
     }
 
     @Override

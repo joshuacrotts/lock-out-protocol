@@ -65,6 +65,8 @@ public class MakeAccountButton extends MenuButton implements MouseEventInterface
         if (this.getGame().getGameState() != GameState.MENU || !this.getMenuScreen().isOnAccountScreen()) {
             return;
         }
+        super.onMouseClick();
+
         AccountStatus accountStatus = TranslatorDatabase.addUser(this.emailModel.getString(), this.pswdModel.getString());
         this.displayAccountStatus(accountStatus);
         this.getMenuScreen().setMenuState(MenuState.MAIN);

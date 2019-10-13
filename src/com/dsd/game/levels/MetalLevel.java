@@ -32,8 +32,8 @@ public class MetalLevel extends StandardLevel {
     private final double SCROLL_X_FACTOR = 0.25;
 
     //  Define camera scroll minimum constants
-    private final int MIN_X = Screen.gameHalfWidth;
-    private final int MIN_Y = Screen.gameHalfHeight;
+    private final int MIN_X = (int) (Screen.gameHalfWidth * 1.5);
+    private final int MIN_Y = (int) (Screen.gameHalfHeight * 1.5);
 
     /**
      * All levels need to share the same collision handler so the player can
@@ -55,15 +55,15 @@ public class MetalLevel extends StandardLevel {
 
     @Override
     public void loadLevelData () {
-//        this.addEntity(SpawnerFactory.generateSpawner(EnemyType.BASIC_MONSTER,
-//                StdOps.rand(600, 3400), StdOps.rand(600, 3400), 10000, 150,
-//                this.game, (StandardCollisionHandler) this.getHandler()));
+        this.addEntity(SpawnerFactory.generateSpawner(EnemyType.BASIC_MONSTER,
+                StdOps.rand(600, 3400), StdOps.rand(600, 3400), 10000, 150,
+                this.game, (StandardCollisionHandler) this.getHandler()));
         this.addEntity(SpawnerFactory.generateSpawner(EnemyType.GREEN_MONSTER,
                 StdOps.rand(600, 3400), StdOps.rand(600, 3400), 10000, 150,
                 this.game, (StandardCollisionHandler) this.getHandler()));
-//        this.addEntity(SpawnerFactory.generateSpawner(EnemyType.DARK_FEMALE_MONSTER,
-//                StdOps.rand(600, 3400), StdOps.rand(600, 3400), 10000, 150,
-//                this.game, (StandardCollisionHandler) this.getHandler()));
+        this.addEntity(SpawnerFactory.generateSpawner(EnemyType.DARK_FEMALE_MONSTER,
+                StdOps.rand(600, 3400), StdOps.rand(600, 3400), 10000, 150,
+                this.game, (StandardCollisionHandler) this.getHandler()));
     }
 
     @Override

@@ -27,7 +27,7 @@ public class BulletGameObject extends StandardGameObject {
     private final Game game;
     private final StandardCollisionHandler sch;
     private final StandardCamera camera;
-    
+
     private int damage = 0;
 
     //  Velocity factor applied to the bullet.

@@ -57,6 +57,8 @@ public class PlayButton extends MenuButton implements MouseEventInterface {
             return;
         }
 
+        super.onMouseClick();
+
         this.getMenuScreen().pushMenuStack(MenuState.MAIN);
         this.getMenuScreen().setMenuState(MenuState.DIFFICULTY);
     }

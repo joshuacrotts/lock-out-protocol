@@ -38,7 +38,7 @@ public class TitleLabel extends StandardLabel {
 
     private void shakeText () {
         this.setX(StdOps.rand(Screen.gameHalfWidth - TitleLabel.TITLE_X_OFFSET - shakeFactor,
-                              Screen.gameHalfWidth - TitleLabel.TITLE_X_OFFSET + this.shakeFactor));
+                Screen.gameHalfWidth - TitleLabel.TITLE_X_OFFSET + this.shakeFactor));
 
         this.setY(StdOps.rand(TitleLabel.TITLE_Y_OFFSET - shakeFactor, TitleLabel.TITLE_Y_OFFSET + this.shakeFactor));
     }
