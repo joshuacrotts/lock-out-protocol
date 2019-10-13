@@ -1,19 +1,21 @@
 package com.dsd.game.userinterface;
 
-import com.dsd.game.userinterface.model.PlayButton;
+import com.dsd.game.userinterface.model.buttons.PlayButton;
 import com.dsd.game.Game;
-import com.dsd.game.userinterface.model.AccountButton;
-import com.dsd.game.userinterface.model.BackButton;
-import com.dsd.game.userinterface.model.EasyButton;
+import com.dsd.game.userinterface.model.buttons.AccountButton;
+import com.dsd.game.userinterface.model.buttons.BackButton;
+import com.dsd.game.userinterface.model.buttons.EasyButton;
 import com.dsd.game.userinterface.model.EmailTextFieldModel;
-import com.dsd.game.userinterface.model.ExitButton;
-import com.dsd.game.userinterface.model.HardButton;
-import com.dsd.game.userinterface.model.HelpOrOptionsButton;
-import com.dsd.game.userinterface.model.LoginButton;
-import com.dsd.game.userinterface.model.MakeAccountButton;
-import com.dsd.game.userinterface.model.MediumButton;
+import com.dsd.game.userinterface.model.buttons.ExitButton;
+import com.dsd.game.userinterface.model.buttons.HardButton;
+import com.dsd.game.userinterface.model.buttons.HelpOrOptionsButton;
+import com.dsd.game.userinterface.model.buttons.LoginButton;
+import com.dsd.game.userinterface.model.buttons.MakeAccountButton;
+import com.dsd.game.userinterface.model.buttons.MediumButton;
 import com.dsd.game.userinterface.model.PasswordTextFieldModel;
-import com.dsd.game.userinterface.model.StandardLabel;
+import com.dsd.game.userinterface.model.buttons.ResolutionMenuButton;
+import com.dsd.game.userinterface.model.labels.TitleLabel;
+import com.dsd.game.userinterface.view.ResolutionView;
 import java.awt.Graphics2D;
 import java.util.Stack;
 
@@ -30,22 +32,29 @@ public class MenuScreen extends Screen {
     private MenuState menuState;
     private final Stack<MenuState> menuStateStack;
 
+    private ResolutionView changeResView;
+
     public MenuScreen (Game _game) {
         super(_game);
         this.menuState = MenuState.MAIN;
         this.menuStateStack = new Stack<>();
         this.menuStateStack.push(this.menuState);
         this.createUIElements();
+        this.createUIScreens();
     }
 
     @Override
     public void tick () {
         super.tick();
+
+        this.changeResView.tick();
     }
 
     @Override
     public void render (Graphics2D _g2) {
         super.render(_g2);
+
+        this.changeResView.render(_g2);
     }
 
     /**
@@ -56,6 +65,7 @@ public class MenuScreen extends Screen {
         this.initializeMainMenuButtons();
         this.initializeDifficultyButtons();
         this.initializeAccountButtons();
+        this.initializeOptionsButtons();
     }
 
     /**
@@ -69,10 +79,9 @@ public class MenuScreen extends Screen {
         //  Instantiates the help/options button
         super.addInteractor(new HelpOrOptionsButton(this.getGame(), this));
         //  Instantiates the title label
-        super.addInteractor(new StandardLabel(Screen.gameHalfWidth - 130, 40, this.getGame().getWindow().getTitle(), "src/resources/fonts/chargen.ttf", 32f));
+        super.addInteractor(new TitleLabel(this.getGame()));
         //  Instantiates the account label (to access the submenu).
         super.addInteractor(new AccountButton(this.getGame(), this));
-
     }
 
     /**
@@ -85,6 +94,10 @@ public class MenuScreen extends Screen {
         super.addInteractor(new BackButton(this.getGame(), this));
     }
 
+    private void initializeOptionsButtons () {
+        super.addInteractor(new ResolutionMenuButton(this.getGame(), this));
+    }
+
     /**
      * Initializes the buttons located on the Account status submenu.
      */
@@ -95,6 +108,15 @@ public class MenuScreen extends Screen {
         super.addInteractor(pswdModel);
         super.addInteractor(new LoginButton(this.getGame(), this, emailModel, pswdModel));
         super.addInteractor(new MakeAccountButton(this.getGame(), this, emailModel, pswdModel));
+    }
+
+    /**
+     * Some models will require extra views (example: the change resolution
+     * button requires a view for the different resolutions). This will
+     * instantiate them.
+     */
+    private void createUIScreens () {
+        this.changeResView = new ResolutionView(this.getGame(), this);
     }
 
     public MenuState popMenuStack () {
@@ -116,6 +138,14 @@ public class MenuScreen extends Screen {
 
     public boolean isOnAccountScreen () {
         return this.menuState == MenuState.LOGIN;
+    }
+
+    public boolean isOnOptions () {
+        return this.menuState == MenuState.OPTIONS;
+    }
+
+    public boolean isOnResolution () {
+        return this.menuState == MenuState.RESOLUTION;
     }
 
 //====================== SETTERS ===============================//

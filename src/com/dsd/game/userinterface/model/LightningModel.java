@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dsd.game.userinterface.model;
 
 import com.dsd.game.Game;
@@ -27,6 +22,7 @@ public class LightningModel extends Interactor {
     private final Game game;
     private final StandardCamera camera;
     private Line2D[] lightningLines;
+
     private final int MIN_X_VARIABILITY = 5;
     private final int MAX_X_VARIABILITY = 30;
     private final int Y_VARIABILITY = 3;

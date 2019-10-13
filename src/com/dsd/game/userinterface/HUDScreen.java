@@ -2,9 +2,9 @@ package com.dsd.game.userinterface;
 
 import com.dsd.game.Game;
 import com.dsd.game.objects.Player;
-import com.dsd.game.userinterface.model.AmmoLabel;
-import com.dsd.game.userinterface.model.CoinLabel;
-import com.dsd.game.userinterface.model.HealthLabel;
+import com.dsd.game.userinterface.model.labels.AmmoLabel;
+import com.dsd.game.userinterface.model.labels.CoinLabel;
+import com.dsd.game.userinterface.model.labels.HealthLabel;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import java.awt.Graphics2D;
 

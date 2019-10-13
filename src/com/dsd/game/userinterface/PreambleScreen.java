@@ -3,7 +3,7 @@ package com.dsd.game.userinterface;
 import com.dsd.game.Game;
 import com.dsd.game.GameState;
 import com.dsd.game.userinterface.model.LightningModel;
-import com.dsd.game.userinterface.model.WaveLabel;
+import com.dsd.game.userinterface.model.labels.WaveLabel;
 import com.dsd.game.util.Utilities;
 import java.awt.AlphaComposite;
 import java.awt.Graphics2D;

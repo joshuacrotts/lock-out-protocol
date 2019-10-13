@@ -70,7 +70,7 @@ public abstract class Screen implements Renderable, Updatable {
     /**
      * Sets the game dimensions
      */
-    private static void setGameDimensions () {
+    public static void setGameDimensions () {
         gameHalfWidth = game.getGameWidth() >> 1;
         gameHalfHeight = game.getGameHeight() >> 1;
         gameDoubleWidth = game.getGameWidth() << 1;

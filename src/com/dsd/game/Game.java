@@ -13,6 +13,7 @@ import com.dsd.game.userinterface.HUDScreen;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.PauseScreen;
 import com.dsd.game.userinterface.PreambleScreen;
+import com.dsd.game.userinterface.Screen;
 import com.dsd.game.userinterface.ShopScreen;
 import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
@@ -37,7 +38,7 @@ import com.revivedstandards.model.StandardLevel;
 public class Game extends StandardGame {
 
     //  Miscellaneous reference variables
-    private final StandardCamera sc;
+    private StandardCamera sc;
     private final StandardCollisionHandler sch;
 
     //  Database references
@@ -78,7 +79,6 @@ public class Game extends StandardGame {
 
         //  Create a new collision handler
         this.sch = new CollisionHandlerController(this);
-
         //  Instantiates player & adds it to the handler
         this.player = new Player(200, 200, this, this.sch);
         this.sch.addEntity(player);
@@ -169,7 +169,7 @@ public class Game extends StandardGame {
                     break;
                 case SHOP:
                     this.shopScreen.render(StandardDraw.Renderer);
-                    break;  
+                    break;
                 case PAUSED:
                     this.pauseScreen.render(StandardDraw.Renderer);
             }
@@ -215,6 +215,18 @@ public class Game extends StandardGame {
      */
     private void instantiateLevels () {
         this.levelController.addLevel(new MetalLevel(this.player, this, this.sch));
+    }
+
+    private void reinstantiateCamera () {
+        this.sc.setVpw(this.getGameWidth() >> 1);
+        this.sc.setVph(this.getGameHeight() >> 1);
+    }
+
+    public void changeResolution (int _width, int _height) {
+        this.setGameWidth(_width);
+        this.setGameHeight(_height);
+        Screen.setGameDimensions();
+        this.reinstantiateCamera();
     }
 
 //========================== GETTERS =============================//

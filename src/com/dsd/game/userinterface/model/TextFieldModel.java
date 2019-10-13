@@ -50,6 +50,7 @@ public class TextFieldModel extends Interactor implements MouseEventInterface {
 
     @Override
     public void tick () {
+        this.view.tick();
     }
 
     @Override

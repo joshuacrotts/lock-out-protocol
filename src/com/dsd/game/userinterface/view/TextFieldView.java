@@ -17,7 +17,7 @@ import java.awt.Rectangle;
 public class TextFieldView implements Renderable, Updatable {
 
     private final TextFieldModel model;
-    private final Rectangle rectangleView;
+    private Rectangle rectangleView;
 
     private static final Color BORDER_COLOR = Color.BLUE;
     private static final Color ACTIVE_COLOR = Color.WHITE;
@@ -31,7 +31,7 @@ public class TextFieldView implements Renderable, Updatable {
 
     @Override
     public void tick () {
-
+        this.rectangleView = new Rectangle(this.model.getX(), this.model.getY(), this.model.getWidth(), this.model.getHeight());
     }
 
     @Override

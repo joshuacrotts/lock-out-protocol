@@ -54,7 +54,7 @@ public abstract class Interactor implements Renderable, Updatable, MouseEventInt
 
     @Override
     public abstract void render (Graphics2D _g2);
-
+    
 //============================ GETTERS =================================//
     public Rectangle getBounds () {
         return new Rectangle(this.x, this.y, this.width, this.height);
