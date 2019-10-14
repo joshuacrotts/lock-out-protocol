@@ -24,7 +24,6 @@ public abstract class Utilities extends StdOps {
         File folder = new File(_directory);
         File[] listOfFiles = folder.listFiles();
         BufferedImage[] frames = new BufferedImage[_frameCount];
-
         for (int i = 0 ; i < frames.length ; i++) {
             frames[i] = StdOps.loadImage(listOfFiles[i].getPath());
         }

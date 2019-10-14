@@ -5,7 +5,7 @@ import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MenuState;
 import com.dsd.game.userinterface.MouseEventInterface;
 import com.dsd.game.userinterface.view.PlayerView;
-import com.revivedstandards.util.StdOps;
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 /**
@@ -16,51 +16,55 @@ import java.awt.Graphics2D;
  */
 public class FemalePlayerButton extends StandardButton implements MouseEventInterface {
 
-    private static final int BUTTON_X_OFFSET = 0;
-    private static final int BUTTON_Y_OFFSET = 780; //680
-    private static final int BUTTON_WIDTH = 300;
-    private static final int BUTTON_HEIGHT = 82;
     private final Game game;
     private final MenuScreen menuScreen;
-    private static final PlayerView maleFemaleView = new PlayerView("female");
+    private static PlayerView playerView;
 
-    public FemalePlayerButton(Game _game, MenuScreen _menuScreen) {
+    private static final int BUTTON_X_OFFSET = 0;
+    private static final int BUTTON_Y_OFFSET = 300; //680
+    private static final int BUTTON_WIDTH = 200;
+    private static final int BUTTON_HEIGHT = 200;
+
+    public FemalePlayerButton (Game _game, MenuScreen _menuScreen) {
         super(FemalePlayerButton.BUTTON_X_OFFSET, _game.getGameHeight() - FemalePlayerButton.BUTTON_Y_OFFSET,
                 FemalePlayerButton.BUTTON_WIDTH, FemalePlayerButton.BUTTON_HEIGHT);
         this.game = _game;
         this.menuScreen = _menuScreen;
+        FemalePlayerButton.playerView = new PlayerView(this.game, this.menuScreen, this, "female");
     }
 
     @Override
-    public void tick() {
-        if (!this.game.isMenu() || !this.menuScreen.isOnPlayerGender()) {
+    public void tick () {
+        if (!this.menuScreen.isOnPlayerGender()) {
             return;
         }
+
         this.setX(FemalePlayerButton.BUTTON_X_OFFSET);
-        this.setY(game.getGameHeight() - FemalePlayerButton.BUTTON_Y_OFFSET);
+        this.setY(this.game.getGameHeight() - FemalePlayerButton.BUTTON_Y_OFFSET);
     }
 
     @Override
-    public void render(Graphics2D _g2) {
-        if (!this.game.isMenu() || !this.menuScreen.isOnPlayerGender()) {
+    public void render (Graphics2D _g2) {
+        if (!this.menuScreen.isOnPlayerGender()) {
             return;
         }
-        maleFemaleView.render(_g2);
+        FemalePlayerButton.playerView.render(_g2);
     }
 
     @Override
-    public void onMouseClick() {
-        if (!this.game.isMenu() || !this.menuScreen.isOnPlayerGender()) {
+    public void onMouseClick () {
+        if (!this.menuScreen.isOnPlayerGender()) {
             return;
         }
+        this.game.getPlayer().setPlayerSex("female");
         this.menuScreen.setMenuState(MenuState.DIFFICULTY);
     }
 
     @Override
-    public void onMouseEnterHover() {
+    public void onMouseEnterHover () {
     }
 
     @Override
-    public void onMouseExitHover() {
+    public void onMouseExitHover () {
     }
 }

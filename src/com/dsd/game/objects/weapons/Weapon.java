@@ -1,5 +1,6 @@
 package com.dsd.game.objects.weapons;
 
+import com.dsd.game.objects.Player;
 import com.dsd.game.objects.weapons.enums.WeaponState;
 import com.dsd.game.objects.weapons.enums.WeaponType;
 import com.revivedstandards.controller.StandardAnimatorController;
@@ -56,6 +57,8 @@ public abstract class Weapon {
     public boolean ready () {
         return this.ready;
     }
+
+    public abstract void loadAssets (Player _player);
 
 //============================== GETTERS ===================================//
     public long getDelay () {

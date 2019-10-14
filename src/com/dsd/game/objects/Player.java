@@ -53,7 +53,7 @@ public class Player extends Entity implements DeathListener {
     //  Health vars (this may change with time)
     private int maxHealth = 200;
     //  Sex of player
-    private String sex = "player_female";
+    private String sex = "male";
 
     public Player (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, 100, StandardID.Player, (Game) _game, _sch);
@@ -314,7 +314,15 @@ public class Player extends Entity implements DeathListener {
         this.maxHealth = _max;
     }
 
+    /**
+     * Sets the player's sex, while also reloading the game's assets. It also
+     * defaults the player's animation to be the one associated with their sex.
+     *
+     * @param _sex
+     */
     public void setPlayerSex (String _sex) {
         this.sex = _sex;
+        this.inventory.reloadInventoryAssets();
+        this.setAnimation(this.inventory.getCurrentWeapon().getWalkFrames());
     }
 }

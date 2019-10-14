@@ -35,6 +35,7 @@ public class Inventory {
         this.game = _game;
         this.player = _player;
         this.weapons = new ArrayList<>();
+
         //  This will change with time (to a subclass of Weapon).
         this.weapons.add(new Knife(_player));
         this.weapons.add(new Pistol(_game, _player, _sch));
@@ -53,6 +54,12 @@ public class Inventory {
         this.clampWeapon();
         this.updateAnimation();
         this.hasGun = this.weapons.get(this.currentWeapon) instanceof Gun;
+    }
+
+    public void reloadInventoryAssets () {
+        for (int i = 0 ; i < this.weapons.size() ; i++) {
+            this.weapons.get(i).loadAssets(this.player);
+        }
     }
 
     /**

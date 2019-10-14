@@ -15,51 +15,57 @@ import java.awt.Graphics2D;
  */
 public class MalePlayerButton extends StandardButton implements MouseEventInterface {
 
-    private static final int BUTTON_X_OFFSET = 0;
-    private static final int BUTTON_Y_OFFSET = 680; //680
-    private static final int BUTTON_WIDTH = 300;
-    private static final int BUTTON_HEIGHT = 82;
     private final Game game;
     private final MenuScreen menuScreen;
-    private static final PlayerView maleFemaleView = new PlayerView("male");
+    private static PlayerView playerView;
 
-    public MalePlayerButton(Game _game, MenuScreen _menuScreen) {
+    private static final int BUTTON_X_OFFSET = 0;
+    private static final int BUTTON_Y_OFFSET = 680; //680
+    private static final int BUTTON_WIDTH = 200;
+    private static final int BUTTON_HEIGHT = 200;
+
+    public MalePlayerButton (Game _game, MenuScreen _menuScreen) {
         super(MalePlayerButton.BUTTON_X_OFFSET, _game.getGameHeight() - MalePlayerButton.BUTTON_Y_OFFSET,
                 MalePlayerButton.BUTTON_WIDTH, MalePlayerButton.BUTTON_HEIGHT);
         this.game = _game;
         this.menuScreen = _menuScreen;
+        MalePlayerButton.playerView = new PlayerView(this.game, this.menuScreen, this, "male");
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         if (!this.game.isMenu() || !this.menuScreen.isOnPlayerGender()) {
             return;
         }
+
         this.setX(MalePlayerButton.BUTTON_X_OFFSET);
         this.setY(game.getGameHeight() - MalePlayerButton.BUTTON_Y_OFFSET);
     }
 
     @Override
-    public void render(Graphics2D _g2) {
-        if (!this.game.isMenu() || !this.menuScreen.isOnPlayerGender()) {
+    public void render (Graphics2D _g2) {
+        if (!this.menuScreen.isOnPlayerGender()) {
             return;
         }
-        maleFemaleView.render(_g2);
+
+        MalePlayerButton.playerView.render(_g2);
     }
 
     @Override
-    public void onMouseClick() {
-        if (!this.game.isMenu() || !this.menuScreen.isOnPlayerGender()) {
+    public void onMouseClick () {
+        if (!this.menuScreen.isOnPlayerGender()) {
             return;
         }
+
+        this.game.getPlayer().setPlayerSex("male");
         this.menuScreen.setMenuState(MenuState.DIFFICULTY);
     }
 
     @Override
-    public void onMouseEnterHover() {
+    public void onMouseEnterHover () {
     }
 
     @Override
-    public void onMouseExitHover() {
+    public void onMouseExitHover () {
     }
 }

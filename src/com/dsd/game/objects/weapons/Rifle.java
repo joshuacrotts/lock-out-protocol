@@ -28,20 +28,15 @@ public class Rifle extends Gun {
     //  Damage from the rifle.
     private static final int BULLET_DAMAGE = 25;
 
-    public Rifle(Game _game, Player _player, StandardCollisionHandler _sch) {
+    public Rifle (Game _game, Player _player, StandardCollisionHandler _sch) {
         super(WeaponType.RIFLE, 31, _game, _player, _sch);
         //  Instantiates the animation controllers.
-        StandardAnimatorController walkingAnimation = new StandardAnimatorController(
-                new StandardAnimation(_player, Utilities.loadFrames("src/resources/img/player/" + _player.getPlayerSex() + "/player_walk_rifle/", 6), WALKING_FPS));
-        StandardAnimatorController shootingAnimation = new StandardAnimatorController(
-                new StandardAnimation(_player, Utilities.loadFrames("src/resources/img/player/" + _player.getPlayerSex() + "/player_shoot_rifle/", 4), SHOOT_GUN_FPS));
-        super.setWalkFrames(walkingAnimation);
-        super.setAttackFrames(shootingAnimation);
+        this.loadAssets(_player);
         super.setDelay(DELAY);
     }
 
     @Override
-    public void shoot() {
+    public void shoot () {
         this.addBullet();
         super.deductAmmo();
     }
@@ -49,11 +44,22 @@ public class Rifle extends Gun {
     /**
      * Adds a bullet to the global handler.
      */
-    private void addBullet() {
+    private void addBullet () {
         super.getHandler().addEntity(new BulletGameObject(
                 (int) super.getPlayer().getX() + super.getPlayer().getWidth() / 2,
                 (int) super.getPlayer().getY() + super.getPlayer().getHeight() / 2,
                 super.getPlayer().getAngle(), BULLET_DAMAGE * this.getDamageFactor(),
                 super.getGame(), super.getHandler(), super.getPlayer()));
+    }
+
+    @Override
+    public void loadAssets (Player _player) {
+        //  Instantiates the animation controllers.
+        StandardAnimatorController walkingAnimation = new StandardAnimatorController(
+                new StandardAnimation(_player, Utilities.loadFrames("src/resources/img/player/player_" + _player.getPlayerSex() + "/player_walk_rifle/", 6), WALKING_FPS));
+        StandardAnimatorController shootingAnimation = new StandardAnimatorController(
+                new StandardAnimation(_player, Utilities.loadFrames("src/resources/img/player/player_" + _player.getPlayerSex() + "/player_shoot_rifle/", 4), SHOOT_GUN_FPS));
+        super.setWalkFrames(walkingAnimation);
+        super.setAttackFrames(shootingAnimation);
     }
 }
