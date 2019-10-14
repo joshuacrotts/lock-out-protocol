@@ -33,6 +33,7 @@ public enum DifficultyType {
         this.difficultyString = text;
     }
 
+//==================== GETTERS ==========================//
     public String getDifficultyLabel () {
         return this.difficultyString;
     }
