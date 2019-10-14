@@ -52,6 +52,8 @@ public class Player extends Entity implements DeathListener {
     private int money;
     //  Health vars (this may change with time)
     private int maxHealth = 200;
+    //  Sex of player
+    private String sex = "player_female";
 
     public Player (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, 100, StandardID.Player, (Game) _game, _sch);
@@ -287,6 +289,10 @@ public class Player extends Entity implements DeathListener {
         return directionSign;
     }
 
+    public String getPlayerSex () {
+        return this.sex;
+    }
+
 //=============================== SETTERS ================================//
     public void setCamera (StandardCamera _sc) {
         this.sc = _sc;
@@ -306,5 +312,9 @@ public class Player extends Entity implements DeathListener {
 
     public void setMaxHealth (int _max) {
         this.maxHealth = _max;
+    }
+
+    public void setPlayerSex (String _sex) {
+        this.sex = _sex;
     }
 }
