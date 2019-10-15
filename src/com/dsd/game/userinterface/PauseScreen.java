@@ -3,6 +3,7 @@ package com.dsd.game.userinterface;
 import com.dsd.game.Game;
 import com.dsd.game.commands.PauseCommand;
 import com.dsd.game.userinterface.model.labels.PauseLabel;
+import com.dsd.game.userinterface.model.buttons.SaveButton;
 import java.awt.Graphics2D;
 
 /**
@@ -18,20 +19,29 @@ public class PauseScreen extends Screen {
     private final PauseLabel pauseLabel;
     private final PauseCommand pauseCommand;
 
-    public PauseScreen (Game _game) {
+    public PauseScreen(Game _game) {
         super(_game);
         this.pauseLabel = new PauseLabel(_game);
         this.pauseCommand = new PauseCommand(_game);
         this.addInteractor(this.pauseLabel);
+        this.createUIElements();
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.pauseLabel.tick();
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         this.pauseLabel.render(_g2);
+    }
+
+    private void createUIElements() {
+        this.initializeSaveButton();
+    }
+
+    private void initializeSaveButton() {
+        super.addInteractor(new SaveButton(this.getGame(), null));
     }
 }
