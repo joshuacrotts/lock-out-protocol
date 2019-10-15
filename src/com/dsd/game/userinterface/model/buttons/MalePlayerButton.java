@@ -4,6 +4,7 @@ import com.dsd.game.Game;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MenuState;
 import com.dsd.game.userinterface.MouseEventInterface;
+import com.dsd.game.userinterface.Screen;
 import com.dsd.game.userinterface.view.PlayerView;
 import java.awt.Graphics2D;
 
@@ -19,13 +20,13 @@ public class MalePlayerButton extends StandardButton implements MouseEventInterf
     private final MenuScreen menuScreen;
     private static PlayerView playerView;
 
-    private static final int BUTTON_X_OFFSET = 680;
-    private static final int BUTTON_Y_OFFSET = 480;
-    private static final int BUTTON_WIDTH = 200;
-    private static final int BUTTON_HEIGHT = 200;
+    private static final int BUTTON_WIDTH = 500;
+    private static final int BUTTON_HEIGHT = 500;
+    private static final int BUTTON_X_OFFSET = 20;
+    private static final int BUTTON_Y_OFFSET = 650;
 
     public MalePlayerButton (Game _game, MenuScreen _menuScreen) {
-        super(MalePlayerButton.BUTTON_X_OFFSET, _game.getGameHeight() - MalePlayerButton.BUTTON_Y_OFFSET,
+        super(Screen.gameWidth - BUTTON_WIDTH - BUTTON_X_OFFSET, _game.getGameHeight() - MalePlayerButton.BUTTON_Y_OFFSET,
                 MalePlayerButton.BUTTON_WIDTH, MalePlayerButton.BUTTON_HEIGHT);
         this.game = _game;
         this.menuScreen = _menuScreen;
@@ -38,7 +39,7 @@ public class MalePlayerButton extends StandardButton implements MouseEventInterf
             return;
         }
 
-        this.setX(MalePlayerButton.BUTTON_X_OFFSET);
+        this.setX(Screen.gameWidth - BUTTON_WIDTH - BUTTON_X_OFFSET);
         this.setY(game.getGameHeight() - MalePlayerButton.BUTTON_Y_OFFSET);
     }
 
@@ -63,9 +64,11 @@ public class MalePlayerButton extends StandardButton implements MouseEventInterf
 
     @Override
     public void onMouseEnterHover () {
+        MalePlayerButton.playerView.setMouseOver(true);
     }
 
     @Override
     public void onMouseExitHover () {
+        MalePlayerButton.playerView.setMouseOver(false);
     }
 }

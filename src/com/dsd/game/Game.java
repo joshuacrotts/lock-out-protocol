@@ -227,6 +227,7 @@ public class Game extends StandardGame {
         this.setGameWidth(_width);
         this.setGameHeight(_height);
         Screen.setGameDimensions();
+        System.out.println(Screen.gameWidth);
         this.reinstantiateCamera();
     }
 

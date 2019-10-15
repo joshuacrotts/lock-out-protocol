@@ -31,6 +31,8 @@ public abstract class Screen implements Renderable, Updatable {
     public static int gameHalfHeight;
     public static int gameDoubleWidth;
     public static int gameDoubleHeight;
+    public static int gameWidth;
+    public static int gameHeight;
 
     public Screen (Game _game) {
         Screen.game = _game;
@@ -71,6 +73,8 @@ public abstract class Screen implements Renderable, Updatable {
      * Sets the game dimensions
      */
     public static void setGameDimensions () {
+        gameWidth = game.getGameWidth();
+        gameHeight = game.getGameHeight();
         gameHalfWidth = game.getGameWidth() >> 1;
         gameHalfHeight = game.getGameHeight() >> 1;
         gameDoubleWidth = game.getGameWidth() << 1;

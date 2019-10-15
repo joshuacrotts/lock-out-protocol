@@ -5,7 +5,6 @@ import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MenuState;
 import com.dsd.game.userinterface.MouseEventInterface;
 import com.dsd.game.userinterface.view.PlayerView;
-import java.awt.Color;
 import java.awt.Graphics2D;
 
 /**
@@ -20,10 +19,10 @@ public class FemalePlayerButton extends StandardButton implements MouseEventInte
     private final MenuScreen menuScreen;
     private static PlayerView playerView;
 
-    private static final int BUTTON_X_OFFSET = 400;
-    private static final int BUTTON_Y_OFFSET = 480;
-    private static final int BUTTON_WIDTH = 200;
-    private static final int BUTTON_HEIGHT = 200;
+    private static final int BUTTON_WIDTH = 500;
+    private static final int BUTTON_HEIGHT = 500;
+    private static final int BUTTON_X_OFFSET = 20;
+    private static final int BUTTON_Y_OFFSET = 650;
 
     public FemalePlayerButton (Game _game, MenuScreen _menuScreen) {
         super(FemalePlayerButton.BUTTON_X_OFFSET, _game.getGameHeight() - FemalePlayerButton.BUTTON_Y_OFFSET,
@@ -62,9 +61,11 @@ public class FemalePlayerButton extends StandardButton implements MouseEventInte
 
     @Override
     public void onMouseEnterHover () {
+        FemalePlayerButton.playerView.setMouseOver(true);
     }
 
     @Override
     public void onMouseExitHover () {
+        FemalePlayerButton.playerView.setMouseOver(false);
     }
 }
