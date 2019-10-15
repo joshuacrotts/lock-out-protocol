@@ -22,7 +22,7 @@ public class MalePlayerButton extends StandardButton implements MouseEventInterf
 
     private static final int BUTTON_WIDTH = 500;
     private static final int BUTTON_HEIGHT = 500;
-    private static final int BUTTON_X_OFFSET = 20;
+    private static final int BUTTON_X_OFFSET = 85;
     private static final int BUTTON_Y_OFFSET = 650;
 
     public MalePlayerButton (Game _game, MenuScreen _menuScreen) {

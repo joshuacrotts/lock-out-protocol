@@ -21,7 +21,7 @@ public class FemalePlayerButton extends StandardButton implements MouseEventInte
 
     private static final int BUTTON_WIDTH = 500;
     private static final int BUTTON_HEIGHT = 500;
-    private static final int BUTTON_X_OFFSET = 20;
+    private static final int BUTTON_X_OFFSET = 85;
     private static final int BUTTON_Y_OFFSET = 650;
 
     public FemalePlayerButton (Game _game, MenuScreen _menuScreen) {
