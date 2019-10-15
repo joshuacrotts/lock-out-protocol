@@ -19,8 +19,8 @@ public class MalePlayerButton extends StandardButton implements MouseEventInterf
     private final MenuScreen menuScreen;
     private static PlayerView playerView;
 
-    private static final int BUTTON_X_OFFSET = 0;
-    private static final int BUTTON_Y_OFFSET = 680; //680
+    private static final int BUTTON_X_OFFSET = 680;
+    private static final int BUTTON_Y_OFFSET = 480;
     private static final int BUTTON_WIDTH = 200;
     private static final int BUTTON_HEIGHT = 200;
 
@@ -34,7 +34,7 @@ public class MalePlayerButton extends StandardButton implements MouseEventInterf
 
     @Override
     public void tick () {
-        if (!this.game.isMenu() || !this.menuScreen.isOnPlayerGender()) {
+        if (!this.menuScreen.isOnPlayerGender()) {
             return;
         }
 
