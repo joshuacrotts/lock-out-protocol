@@ -2,7 +2,9 @@ package com.dsd.game.userinterface.model.labels;
 
 import com.dsd.game.Game;
 import com.dsd.game.userinterface.Screen;
+import com.revivedstandards.controller.StandardFadeController;
 import com.revivedstandards.util.StdOps;
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 /**
@@ -12,7 +14,11 @@ import java.awt.Graphics2D;
  */
 public class TitleLabel extends StandardLabel {
 
+    //  Miscellaneous reference variables
     private final Game game;
+    private final StandardFadeController fadeController;
+
+    //  Variability in the shaking of the text.
     private final int shakeFactor = 1;
 
     private static final int TITLE_X_OFFSET = 140;
@@ -24,6 +30,7 @@ public class TitleLabel extends StandardLabel {
                 "src/resources/fonts/chargen.ttf", 32f);
 
         this.game = _game;
+        this.fadeController = new StandardFadeController(Color.white, Color.gray, 0.01f);
     }
 
     @Override
@@ -33,9 +40,13 @@ public class TitleLabel extends StandardLabel {
 
     @Override
     public void render (Graphics2D _g2) {
+        _g2.setColor(fadeController.combine());
         super.render(_g2);
     }
 
+    /**
+     * Causes the label to shake violently.
+     */
     private void shakeText () {
         this.setX(StdOps.rand(Screen.gameHalfWidth - TitleLabel.TITLE_X_OFFSET - shakeFactor,
                 Screen.gameHalfWidth - TitleLabel.TITLE_X_OFFSET + this.shakeFactor));
