@@ -2,7 +2,6 @@ package com.dsd.game.userinterface.model.labels;
 
 import com.dsd.game.Game;
 import com.dsd.game.userinterface.Screen;
-import java.awt.Color;
 import java.awt.Graphics2D;
 
 /**
@@ -16,29 +15,24 @@ import java.awt.Graphics2D;
 public class PauseLabel extends StandardLabel {
 
     private final Game game;
-    private final Color transparentBlack;
+    private final int LABEL_X_OFFSET = 20;
+    private final int LABEL_Y_OFFSET = 100;
 
     public PauseLabel (Game _game) {
         super((int) Screen.gameHalfWidth,
                 (int) Screen.gameHalfHeight,
                 "PAUSED", "src/resources/fonts/chargen.ttf", 32f);
         this.game = _game;
-        this.transparentBlack = new Color(0f, 0f, 0f, 0.5f);
     }
 
     @Override
     public void tick () {
-        this.setX((int) this.game.getCamera().getX());
-        this.setY((int) this.game.getCamera().getY());
+        this.setX((int) this.game.getCamera().getX() - this.LABEL_X_OFFSET);
+        this.setY((int) this.game.getCamera().getY() - this.LABEL_Y_OFFSET);
     }
 
     @Override
     public void render (Graphics2D _g2) {
-        _g2.setColor(this.transparentBlack);
-        _g2.fillRect((int) (this.game.getCamera().getX() - Screen.gameHalfWidth),
-                (int) (this.game.getCamera().getY() - Screen.gameHalfHeight),
-                (int) (this.game.getCamera().getX() + Screen.gameDoubleWidth),
-                (int) (this.game.getCamera().getY() + Screen.gameDoubleHeight));
         super.render(_g2);
     }
 }

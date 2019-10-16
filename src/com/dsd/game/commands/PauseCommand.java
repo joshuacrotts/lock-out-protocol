@@ -29,7 +29,7 @@ public class PauseCommand extends Command {
 
     @Override
     public void pressed (float dt) {
-        if (this.game.isPreamble()) {
+        if (this.game.isPreamble() || !this.game.isInGameState()) {
             return;
         }
         else if (!this.game.isPaused()) {

@@ -15,14 +15,16 @@ import java.awt.Graphics2D;
  */
 public class FemalePlayerButton extends StandardButton implements MouseEventInterface {
 
+    //  Miscellaneous reference variables.
     private final Game game;
     private final MenuScreen menuScreen;
     private static PlayerView playerView;
 
-    private static final int BUTTON_WIDTH = 500;
-    private static final int BUTTON_HEIGHT = 500;
+    //  Female Player Button dimensions and position.
+    private static final int BUTTON_WIDTH = 350;
+    private static final int BUTTON_HEIGHT = 350;
     private static final int BUTTON_X_OFFSET = 85;
-    private static final int BUTTON_Y_OFFSET = 650;
+    private static final int BUTTON_Y_OFFSET = 550;
 
     public FemalePlayerButton (Game _game, MenuScreen _menuScreen) {
         super(FemalePlayerButton.BUTTON_X_OFFSET, _game.getGameHeight() - FemalePlayerButton.BUTTON_Y_OFFSET,
@@ -40,6 +42,8 @@ public class FemalePlayerButton extends StandardButton implements MouseEventInte
 
         this.setX(FemalePlayerButton.BUTTON_X_OFFSET);
         this.setY(this.game.getGameHeight() - FemalePlayerButton.BUTTON_Y_OFFSET);
+
+        FemalePlayerButton.playerView.tick();
     }
 
     @Override
@@ -56,6 +60,7 @@ public class FemalePlayerButton extends StandardButton implements MouseEventInte
             return;
         }
         this.game.getPlayer().setPlayerSex("female");
+        this.menuScreen.pushMenuStack(MenuState.PLAYER_GENDER);
         this.menuScreen.setMenuState(MenuState.DIFFICULTY);
     }
 

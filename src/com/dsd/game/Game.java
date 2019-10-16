@@ -210,6 +210,18 @@ public class Game extends StandardGame {
         this.preambleScreen.resetPreambleScreen();
     }
 
+    public void changeResolution (int _width, int _height) {
+        this.setGameWidth(_width);
+        this.setGameHeight(_height);
+        Screen.setGameDimensions();
+        this.reinstantiateCamera();
+    }
+
+    public void resetGame () {
+        this.sch.clearEntities();
+        System.out.println(sch.getEntities().size());
+    }
+
     /**
      * Loads the level data when the game starts so the timers can be
      * instantiated.
@@ -221,14 +233,6 @@ public class Game extends StandardGame {
     private void reinstantiateCamera () {
         this.sc.setVpw(this.getGameWidth() >> 1);
         this.sc.setVph(this.getGameHeight() >> 1);
-    }
-
-    public void changeResolution (int _width, int _height) {
-        this.setGameWidth(_width);
-        this.setGameHeight(_height);
-        Screen.setGameDimensions();
-        System.out.println(Screen.gameWidth);
-        this.reinstantiateCamera();
     }
 
 //========================== GETTERS =============================//
