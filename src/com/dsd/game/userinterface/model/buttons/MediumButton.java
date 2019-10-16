@@ -54,13 +54,13 @@ public class MediumButton extends MenuButton implements MouseEventInterface {
 
     @Override
     public void onMouseClick () {
-        if (this.getGame().getGameState() != GameState.MENU || !this.getMenuScreen().isOnDifficulty()) {
+        if (!this.getGame().isMenu() || !this.getMenuScreen().isOnDifficulty()) {
             return;
         }
         super.onMouseClick();
 
         if (!DebugController.DEBUG_MODE) {
-            this.getGame().setGameState(GameState.PREAMBLE);
+            this.getGame().setPreambleState();
             this.getGame().playWaveChangeSFX();
         }
         else {
@@ -73,7 +73,7 @@ public class MediumButton extends MenuButton implements MouseEventInterface {
 
     @Override
     public void onMouseEnterHover () {
-        if (this.getGame().getGameState() != GameState.MENU || !this.getMenuScreen().isOnDifficulty()) {
+        if (!this.getGame().isMenu() || !this.getMenuScreen().isOnDifficulty()) {
             return;
         }
         this.activeImage = this.onHoverButtonImg;
@@ -82,7 +82,7 @@ public class MediumButton extends MenuButton implements MouseEventInterface {
 
     @Override
     public void onMouseExitHover () {
-        if (this.getGame().getGameState() != GameState.MENU) {
+        if (!this.getGame().isMenu()) {
             return;
         }
         this.activeImage = this.buttonImg;

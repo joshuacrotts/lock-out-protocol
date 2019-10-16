@@ -1,6 +1,7 @@
 package com.dsd.game.commands;
 
 import com.dsd.game.Game;
+import com.dsd.game.controller.TimerController;
 import com.dsd.game.objects.weapons.Gun;
 import com.dsd.game.objects.Player;
 import com.revivedstandards.commands.Command;
@@ -20,7 +21,7 @@ public class ReloadCommand extends Command {
 
     private final Game game;
     private final Player player;
-    private final Timer reloadTimer;
+    private Timer reloadTimer;
 
     private final int RELOAD_DELAY = 3000;
 
@@ -30,6 +31,7 @@ public class ReloadCommand extends Command {
         this.player = _obj;
         this.bind(_game.getKeyboard(), KeyEvent.VK_R);
         this.reloadTimer = new Timer(true);
+        TimerController.addTimer(reloadTimer);
     }
 
     @Override
@@ -43,6 +45,7 @@ public class ReloadCommand extends Command {
         }
         gun.setReloading(true);
         StandardAudioController.play("src/resources/audio/sfx/reload.wav");
+        this.reloadTimer = new Timer(true);
         this.reloadTimer.schedule(new ReloadTimer(gun), this.RELOAD_DELAY);
     }
 

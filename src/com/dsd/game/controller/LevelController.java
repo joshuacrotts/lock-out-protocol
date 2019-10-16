@@ -27,11 +27,12 @@ public class LevelController {
     private int currentWave = 1;
     private final List<StandardLevel> levels;
     private final Game game;
-    private final Timer levelTimer;
+    private Timer levelTimer;
 
     public LevelController (Game _game) {
         this.levels = new ArrayList<>();
         this.levelTimer = new Timer(true);
+        TimerController.addTimer(levelTimer);
         this.game = _game;
     }
 
@@ -79,9 +80,14 @@ public class LevelController {
      * Begins the wave timer, depending on what difficulty the game is on.
      */
     public void startWaveTimer () {
+        this.levelTimer = new Timer(true);
         this.levelTimer.scheduleAtFixedRate(new LevelTimer(this.game, this),
                 (long) DifficultyController.levelTransitionTimer,
                 (long) DifficultyController.levelTransitionTimer);
+    }
+    
+    public void clearLevels() {
+        this.levels.clear();
     }
 
 //============================= GETTERS ======================================//

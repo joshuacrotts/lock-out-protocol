@@ -53,7 +53,7 @@ public class BackButton extends MenuButton implements MouseEventInterface {
 
     @Override
     public void onMouseClick () {
-        if (this.getGame().getGameState() != GameState.MENU) {
+        if (!this.getGame().isMenu()) {
             return;
         }
 
@@ -64,7 +64,7 @@ public class BackButton extends MenuButton implements MouseEventInterface {
 
     @Override
     public void onMouseEnterHover () {
-        if (this.getGame().getGameState() != GameState.MENU) {
+        if (!this.getGame().isMenu()) {
             return;
         }
         this.activeImage = this.onHoverButtonImg;
@@ -73,7 +73,7 @@ public class BackButton extends MenuButton implements MouseEventInterface {
 
     @Override
     public void onMouseExitHover () {
-        if (this.getGame().getGameState() != GameState.MENU) {
+        if (!this.getGame().isMenu()) {
             return;
         }
         this.activeImage = this.buttonImg;

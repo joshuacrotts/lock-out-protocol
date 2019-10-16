@@ -1,6 +1,7 @@
 package com.dsd.game.objects.powerups;
 
 import com.dsd.game.Game;
+import com.dsd.game.controller.TimerController;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.weapons.Gun;
 import com.dsd.game.objects.weapons.Weapon;
@@ -51,7 +52,7 @@ public class InfiniteAmmoPowerup extends StandardGameObject {
     private boolean isActivated = false;
     private boolean isCollected = false;
 
-    public InfiniteAmmoPowerup (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
+    public InfiniteAmmoPowerup(int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, StandardID.Item2);
         this.game = _game;
         this.camera = _game.getCamera();
@@ -68,18 +69,17 @@ public class InfiniteAmmoPowerup extends StandardGameObject {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (this.isAlive()) {
             this.getAnimationController().tick();
         }
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (this.isAlive()) {
             this.getAnimationController().renderFrame(_g2);
-        }
-        else if (this.isActivated) {
+        } else if (this.isActivated) {
             this.drawFlashingBorder(_g2);
             this.activateInfiniteAmmo();
         }
@@ -88,12 +88,18 @@ public class InfiniteAmmoPowerup extends StandardGameObject {
     /**
      * Turns the timer on and instantiates the associated timer task.
      */
-    public void activate () {
+    public void activate() {
         if (this.isActivated) {
             return;
         }
+
+        /**
+         * We need to instantiate a new timer in the event that the previous one
+         * was canceled.
+         */
         this.powerupTimer = new Timer(true);
         this.powerupTimer.schedule(new InfiniteAmmoTimer(this), timer);
+        TimerController.addTimer(powerupTimer);
         this.isActivated = true;
         this.playInfAmmoSFX();
     }
@@ -102,7 +108,7 @@ public class InfiniteAmmoPowerup extends StandardGameObject {
      * Sets the player's ammo to their current magazine ammount, thus simulating
      * infinite ammo.
      */
-    private void activateInfiniteAmmo () {
+    private void activateInfiniteAmmo() {
         Weapon curr = this.game.getPlayer().getInventory().getCurrentWeapon();
         if (!(curr instanceof Gun)) {
             return;
@@ -116,7 +122,7 @@ public class InfiniteAmmoPowerup extends StandardGameObject {
     /**
      * Plays the sound effect associated with collecting the infinite ammo item.
      */
-    public void playInfAmmoSFX () {
+    public void playInfAmmoSFX() {
         if (this.isCollected) {
             return;
         }
@@ -129,7 +135,7 @@ public class InfiniteAmmoPowerup extends StandardGameObject {
      *
      * @param _g2
      */
-    private void drawFlashingBorder (Graphics2D _g2) {
+    private void drawFlashingBorder(Graphics2D _g2) {
         _g2.setColor(this.getTransparentColor(this.color.combine()));
         Stroke oldStroke = _g2.getStroke();
         _g2.setStroke(new BasicStroke(RECT_STROKE));
@@ -141,11 +147,11 @@ public class InfiniteAmmoPowerup extends StandardGameObject {
         _g2.setStroke(oldStroke);
     }
 
-    private Color getTransparentColor (Color _c) {
+    private Color getTransparentColor(Color _c) {
         return new Color(_c.getRed(), _c.getGreen(), _c.getBlue(), 127);
     }
 
-    public void setCollected () {
+    public void setCollected() {
         this.isCollected = true;
     }
 
@@ -162,12 +168,12 @@ public class InfiniteAmmoPowerup extends StandardGameObject {
 
         private final InfiniteAmmoPowerup powerup;
 
-        public InfiniteAmmoTimer (InfiniteAmmoPowerup _powerup) {
+        public InfiniteAmmoTimer(InfiniteAmmoPowerup _powerup) {
             this.powerup = _powerup;
         }
 
         @Override
-        public void run () {
+        public void run() {
             this.powerup.setAlive(false);
             this.powerup.isActivated = false;
         }
