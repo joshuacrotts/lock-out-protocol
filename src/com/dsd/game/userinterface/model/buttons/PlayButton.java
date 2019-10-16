@@ -52,7 +52,7 @@ public class PlayButton extends MenuButton implements MouseEventInterface {
 
     @Override
     public void onMouseClick() {
-        if (this.getGame().getGameState() != GameState.MENU
+        if (!this.getGame().isMenu()
                 || !this.getMenuScreen().isOnMainMenu()) {
             return;
         }
@@ -64,7 +64,7 @@ public class PlayButton extends MenuButton implements MouseEventInterface {
 
     @Override
     public void onMouseEnterHover() {
-        if (this.getGame().getGameState() != GameState.MENU || !this.getMenuScreen().isOnMainMenu()) {
+        if (!this.getGame().isMenu() || !this.getMenuScreen().isOnMainMenu()) {
             return;
         }
         activeImage = onHoverButtonImg;
@@ -73,7 +73,7 @@ public class PlayButton extends MenuButton implements MouseEventInterface {
 
     @Override
     public void onMouseExitHover() {
-        if (this.getGame().getGameState() != GameState.MENU) {
+        if (!this.getGame().isMenu()) {
             return;
         }
         activeImage = buttonImg;

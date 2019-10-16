@@ -62,7 +62,7 @@ public class LoginButton extends MenuButton implements MouseEventInterface {
 
     @Override
     public void onMouseClick () {
-        if (this.getGame().getGameState() != GameState.MENU || !this.getMenuScreen().isOnAccountScreen()) {
+        if (!this.getGame().isMenu() || !this.getMenuScreen().isOnAccountScreen()) {
             return;
         }
         super.onMouseClick();
@@ -75,7 +75,7 @@ public class LoginButton extends MenuButton implements MouseEventInterface {
 
     @Override
     public void onMouseEnterHover () {
-        if (this.getGame().getGameState() != GameState.MENU || !this.getMenuScreen().isOnAccountScreen()) {
+        if (!this.getGame().isMenu() || !this.getMenuScreen().isOnAccountScreen()) {
             return;
         }
         this.activeImage = this.onHoverButtonImg;
@@ -84,7 +84,7 @@ public class LoginButton extends MenuButton implements MouseEventInterface {
 
     @Override
     public void onMouseExitHover () {
-        if (this.getGame().getGameState() != GameState.MENU) {
+        if (!this.getGame().isMenu()) {
             return;
         }
         this.activeImage = this.buttonImg;

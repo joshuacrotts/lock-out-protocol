@@ -26,21 +26,20 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
     protected BufferedImage activeImage;
 
     public MenuButton (int _x, int _y, int _width, int _height, String _text, Game _game, MenuScreen _menuScreen) {
+        super(_x, _y, _width, _height);
         this.game = _game;
         this.menuScreen = _menuScreen;
         this.font = StdOps.initFont("src/resources/fonts/chargen.ttf", 24f);
-        this.setX(_x);
-        this.setY(_y);
-        this.setWidth(_width);
-        this.setHeight(_height);
         this.setText(_text);
         this.initializeButtonImages();
+
     }
 
     @Override
     public void render (Graphics2D _g2) {
         _g2.drawImage(activeImage, (int) (this.getX()),
-                (int) (this.getY()), this.getWidth(), this.getHeight(), game);
+                (int) (this.getY()),
+                this.getWidth(), this.getHeight(), game);
     }
 
     private void initializeButtonImages () {

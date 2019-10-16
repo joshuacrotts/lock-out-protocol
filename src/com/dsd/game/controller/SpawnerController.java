@@ -27,7 +27,7 @@ public class SpawnerController extends StandardGameObject {
     private final Game game;
 
     //  Timer object controlling the spawn-rate.
-    private final Timer spawnerTimer;
+    private Timer spawnerTimer;
 
     //  Delay and radius of the timer.
     private final long delay;
@@ -41,17 +41,20 @@ public class SpawnerController extends StandardGameObject {
         this.delay = _delay;
         this.radius = _radius;
         this.spawnerTimer = new Timer(true);
+        TimerController.addTimer(spawnerTimer);
         this.spawnerTimer.scheduleAtFixedRate(new SpawnerDelayTimer(this, this.game), this.delay, this.delay);
     }
 
     @Override
-    public void tick () {
+    public void tick() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void render (Graphics2D _gd) {
-    }
-
+    public void render(Graphics2D gd) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }    
+    
     /**
      * Spawns _n mobs randomly in the specified radius of the spawner.
      *
@@ -63,7 +66,8 @@ public class SpawnerController extends StandardGameObject {
             int xPos = (int) StdOps.rand(this.getX() - this.radius, this.getX() + this.radius);
             int yPos = (int) StdOps.rand(this.getY() - this.radius, this.getY() + this.radius);
 
-            //Depending on what type of spawner we have, we spawn that type of mosnter.
+            //  Depending on what type of spawner we have, we spawn that type of monster.
+            //  Eventually we will probably want to use reflection classes to make this easier/cleaner.
             switch (this.spawnerID) {
                 case BASIC_MONSTER:
                     this.parentContainer.addEntity(new BasicMonster(xPos, yPos, this.game, this.parentContainer));
@@ -77,8 +81,9 @@ public class SpawnerController extends StandardGameObject {
         }
     }
 
+
     /**
-     * Very similar to the AttackCommand, we need a delay slash timer for mobs
+     * Very similar to the AttackCommand, we need a delay timer for mobs
      * spawning. We only want mobs to spawn at a certain interval, so this
      * allows for that.
      */

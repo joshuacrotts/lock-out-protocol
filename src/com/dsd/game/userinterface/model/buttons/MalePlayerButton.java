@@ -6,6 +6,7 @@ import com.dsd.game.userinterface.MenuState;
 import com.dsd.game.userinterface.MouseEventInterface;
 import com.dsd.game.userinterface.Screen;
 import com.dsd.game.userinterface.view.PlayerView;
+import com.revivedstandards.controller.StandardAudioController;
 import java.awt.Graphics2D;
 
 /**
@@ -16,14 +17,16 @@ import java.awt.Graphics2D;
  */
 public class MalePlayerButton extends StandardButton implements MouseEventInterface {
 
+    //  Miscellaneous reference variables.
     private final Game game;
     private final MenuScreen menuScreen;
     private static PlayerView playerView;
 
-    private static final int BUTTON_WIDTH = 500;
-    private static final int BUTTON_HEIGHT = 500;
+    //  Male Player Button dimensions and position.
+    private static final int BUTTON_WIDTH = 350;
+    private static final int BUTTON_HEIGHT = 350;
     private static final int BUTTON_X_OFFSET = 85;
-    private static final int BUTTON_Y_OFFSET = 650;
+    private static final int BUTTON_Y_OFFSET = 550;
 
     public MalePlayerButton (Game _game, MenuScreen _menuScreen) {
         super(Screen.gameWidth - BUTTON_WIDTH - BUTTON_X_OFFSET, _game.getGameHeight() - MalePlayerButton.BUTTON_Y_OFFSET,
@@ -41,6 +44,8 @@ public class MalePlayerButton extends StandardButton implements MouseEventInterf
 
         this.setX(Screen.gameWidth - BUTTON_WIDTH - BUTTON_X_OFFSET);
         this.setY(game.getGameHeight() - MalePlayerButton.BUTTON_Y_OFFSET);
+
+        MalePlayerButton.playerView.tick();
     }
 
     @Override
@@ -57,8 +62,9 @@ public class MalePlayerButton extends StandardButton implements MouseEventInterf
         if (!this.menuScreen.isOnPlayerGender()) {
             return;
         }
-
+        StandardAudioController.play("src/resources/audio/sfx/menuselect.wav");
         this.game.getPlayer().setPlayerSex("male");
+        this.menuScreen.pushMenuStack(MenuState.PLAYER_GENDER);
         this.menuScreen.setMenuState(MenuState.DIFFICULTY);
     }
 

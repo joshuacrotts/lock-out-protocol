@@ -41,10 +41,9 @@ public class DebugController implements Renderable {
     private final int CAMERA_MIN_Y_OFFSET = 40;
     private final int CAMERA_MAX_Y_OFFSET = 80;
 
+    //  Offsets for drawing the actual information in the top-left.
     private final int DEBUG_MODE_TEXT_Y_OFFSET = 20;
-
     private final int ENTITY_COUNT_Y_OFFSET = 80;
-
     private final int CAMERA_COORDINATE_Y_OFFSET = 100;
 
     public DebugController (Game _game, StandardCollisionHandler _sch) {

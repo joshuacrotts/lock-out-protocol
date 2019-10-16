@@ -7,6 +7,7 @@ import com.dsd.game.controller.DebugController;
 import com.dsd.game.controller.DifficultyController;
 import com.dsd.game.controller.LevelController;
 import com.dsd.game.controller.RainController;
+import com.dsd.game.controller.TimerController;
 import com.dsd.game.database.TranslatorDatabase;
 import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.HUDScreen;
@@ -56,18 +57,23 @@ public class Game extends StandardGame {
      * whether it should rain or not.
      */
     private final RainController rainController;
+    
     //  Debug controller
     private final DebugController debugController;
+    
     //  Difficulty controller
     private final DifficultyController difficultyController;
+    
     //  Level controller
     private final LevelController levelController;
+    
     //  Game state variable (paused, running, menu, etc.)
     private GameState gameState = GameState.MENU;
+    
     //  Main player reference so other monsters can track them
     private final Player player;
 
-    public Game (int _width, int _height, String _title) {
+    public Game(int _width, int _height, String _title) {
         /**
          * Note: Magic numbers for the player and the monster are just for
          * demonstration; they will NOT be in the final game.
@@ -116,7 +122,7 @@ public class Game extends StandardGame {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         //  Depending on the game state, update different things.
         switch (this.gameState) {
             case MENU:
@@ -146,12 +152,11 @@ public class Game extends StandardGame {
     }
 
     @Override
-    public void render () {
+    public void render() {
         //  Depending on the game state, render different things.
         if (this.gameState == GameState.MENU) {
             this.menuScreen.render(StandardDraw.Renderer);
-        }
-        else {
+        } else {
             //  First things first: render the camera
             StandardDraw.Object(this.sc);
             //  Then render the current [active] level
@@ -185,7 +190,7 @@ public class Game extends StandardGame {
      * Once the game turns to the PLAY state, this method is called. It will
      * instantiate the Spawner controllers, level controllers, etc.
      */
-    public void uponPlay () {
+    public void uponPlay() {
         DifficultyController.setDifficultyFactor();
         DifficultyController.setLevelTransitionTimer();
         this.levelController.getCurrentLevel().loadLevelData();
@@ -196,7 +201,7 @@ public class Game extends StandardGame {
     /**
      * Plays the wave change sfx.
      */
-    public void playWaveChangeSFX () {
+    public void playWaveChangeSFX() {
         StandardAudioController.play("src/resources/audio/sfx/round_change.wav");
     }
 
@@ -204,88 +209,95 @@ public class Game extends StandardGame {
      * Sets the game to the preamble state and reset the alpha transparency of
      * it.
      */
-    public void setPreambleState () {
+    public void setPreambleState() {
         this.gameState = GameState.PREAMBLE;
         this.playWaveChangeSFX();
         this.preambleScreen.resetPreambleScreen();
+    }
+
+    public void changeResolution(int _width, int _height) {
+        this.setGameWidth(_width);
+        this.setGameHeight(_height);
+        Screen.setGameDimensions();
+        this.reinstantiateCamera();
+    }
+
+    public void resetGame() {
+        this.sch.clearEntities();
+        this.levelController.clearLevels();
+        this.instantiateLevels();
+        TimerController.stopTimers();
+        DifficultyController.resetDifficultyFactors();
     }
 
     /**
      * Loads the level data when the game starts so the timers can be
      * instantiated.
      */
-    private void instantiateLevels () {
+    private void instantiateLevels() {
         this.levelController.addLevel(new MetalLevel(this.player, this, this.sch));
     }
 
-    private void reinstantiateCamera () {
+    private void reinstantiateCamera() {
         this.sc.setVpw(this.getGameWidth() >> 1);
         this.sc.setVph(this.getGameHeight() >> 1);
     }
 
-    public void changeResolution (int _width, int _height) {
-        this.setGameWidth(_width);
-        this.setGameHeight(_height);
-        Screen.setGameDimensions();
-        System.out.println(Screen.gameWidth);
-        this.reinstantiateCamera();
-    }
-
 //========================== GETTERS =============================//
-    public Player getPlayer () {
+    public Player getPlayer() {
         return this.player;
     }
 
-    public GameState getGameState () {
+    public GameState getGameState() {
         return this.gameState;
     }
 
-    public StandardCamera getCamera () {
+    public StandardCamera getCamera() {
         return this.sc;
     }
 
-    public StandardLevel getCurrentLevel () {
+    public StandardLevel getCurrentLevel() {
         return this.levelController.getCurrentLevel();
     }
 
-    public int getCurrentLevelID () {
+    public int getCurrentLevelID() {
         return this.levelController.getCurrentLevelID();
     }
 
-    public int getLogicalCurrentLevelID () {
+    public int getLogicalCurrentLevelID() {
         return this.levelController.getLogicalCurrentLevelID();
     }
 
-    public int getWaveNumber () {
+    public int getWaveNumber() {
         return this.levelController.getWaveNumber();
     }
 
-    public boolean isPaused () {
+    public boolean isPaused() {
         return this.gameState == GameState.PAUSED;
     }
 
-    public boolean isPreamble () {
+    public boolean isPreamble() {
         return this.gameState == GameState.PREAMBLE;
     }
 
-    public boolean isRunning () {
+    public boolean isRunning() {
         return this.gameState == GameState.RUNNING;
     }
 
-    public boolean isInGameState () {
+    public boolean isInGameState() {
         return this.isRunning() | this.isPreamble();
     }
 
-    public boolean isShop () {
+    public boolean isShop() {
         return this.gameState == GameState.SHOP;
     }
 
-    public boolean isMenu () {
+    public boolean isMenu() {
         return this.gameState == GameState.MENU;
     }
 
 //========================== SETTERS =============================//
-    public void setGameState (GameState _gs) {
+    public void setGameState(GameState _gs) {
         this.gameState = _gs;
     }
 }

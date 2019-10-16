@@ -27,11 +27,17 @@ public class ShopScreen extends Screen {
 
     @Override
     public void tick () {
+        if (this.getGame().isMenu()) {
+            return;
+        }
         this.shopView.tick();
     }
 
     @Override
     public void render (Graphics2D _g2) {
+        if (this.getGame().isMenu()) {
+            return;
+        }
         this.shopView.render(_g2);
     }
 }

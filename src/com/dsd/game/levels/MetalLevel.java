@@ -51,6 +51,7 @@ public class MetalLevel extends StandardLevel {
         this.setHandler(_sch);
         this.setCameraBounds(this.getBgImage().getWidth() - Screen.gameHalfWidth,
                 this.getBgImage().getHeight() - Screen.gameHalfHeight);
+        System.out.println("Instantiating the level...");
     }
 
     @Override

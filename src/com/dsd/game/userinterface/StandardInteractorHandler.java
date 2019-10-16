@@ -63,8 +63,19 @@ public class StandardInteractorHandler extends StandardHandler implements MouseL
     public void mousePressed (MouseEvent e) {
         for (int i = 0 ; i < interactors.size() ; i++) {
             Interactor inter = this.interactors.get(i);
+            int scaleXOffset = 0;
+            int scaleYOffset = 0;
+
+            //  If the interactor is on the main game screen (where it will be
+            //  scaled with the main camera, we apply an offset to its bounds
+            //  so the mouse-over detection can be called.
+            if (inter.isScaled()) {
+                scaleXOffset = (int) this.game.getCamera().getX() - Screen.gameHalfWidth;
+                scaleYOffset = (int) this.game.getCamera().getY() - Screen.gameHalfHeight;
+            }
+
             if (StdOps.mouseOver(this.game.getMouse().getMouseX(), this.game.getMouse().getMouseY(),
-                    inter.getX(), inter.getY(), inter.getWidth(), inter.getHeight())) {
+                    inter.getX() - scaleXOffset, inter.getY() - scaleYOffset, inter.getWidth(), inter.getHeight())) {
 
                 inter.onMouseClick();
 
@@ -82,8 +93,18 @@ public class StandardInteractorHandler extends StandardHandler implements MouseL
     public void mouseMoved (MouseEvent e) {
         for (int i = 0 ; i < interactors.size() ; i++) {
             Interactor inter = this.interactors.get(i);
+            int scaleXOffset = 0;
+            int scaleYOffset = 0;
+
+            //  If the interactor is on the main game screen (where it will be
+            //  scaled with the main camera, we apply an offset to its bounds
+            //  so the mouse-over detection can be called.
+            if (inter.isScaled()) {
+                scaleXOffset = (int) this.game.getCamera().getX() - Screen.gameHalfWidth;
+                scaleYOffset = (int) this.game.getCamera().getY() - Screen.gameHalfHeight;
+            }
             if (StdOps.mouseOver(this.game.getMouse().getMouseX(), this.game.getMouse().getMouseY(),
-                    inter.getX(), inter.getY(), inter.getWidth(), inter.getHeight())) {
+                    inter.getX() - scaleXOffset, inter.getY() - scaleYOffset, inter.getWidth(), inter.getHeight())) {
                 inter.onMouseEnterHover();
             }
             else {

@@ -2,6 +2,7 @@ package com.dsd.game.userinterface.view;
 
 import com.dsd.game.Game;
 import com.dsd.game.userinterface.MenuScreen;
+import com.dsd.game.userinterface.Screen;
 import com.dsd.game.userinterface.model.buttons.StandardButton;
 import com.revivedstandards.controller.StandardFadeController;
 import com.revivedstandards.util.StdOps;
@@ -54,12 +55,18 @@ public class PlayerView implements Renderable, Updatable {
     }
 
     @Override
+    public void tick () {
+        if (!this.menuScreen.isOnPlayerGender()) {
+            return;
+        }
+        this.iconOutline = new Rectangle(this.parentButton.getX(), this.parentButton.getY(), imageWidth, imageHeight);
+    }
+
+    @Override
     public void render (Graphics2D _g2) {
         if (!this.menuScreen.isOnPlayerGender()) {
             return;
         }
-
-        _g2.drawImage(this.icon, this.parentButton.getX(), this.parentButton.getY(), this.imageWidth, this.imageHeight, null);
 
         if (this.mouseOver) {
             _g2.setColor(this.fadeController.combine());
@@ -68,15 +75,8 @@ public class PlayerView implements Renderable, Updatable {
             _g2.setColor(Color.BLACK);
         }
 
+        _g2.drawImage(this.icon, this.parentButton.getX(), this.parentButton.getY(), this.imageWidth, this.imageHeight, null);
         this.drawBorder(_g2);
-
-    }
-
-    @Override
-    public void tick () {
-        if (!this.menuScreen.isOnPlayerGender()) {
-            return;
-        }
     }
 
     public void setMouseOver (boolean _mouseOn) {
@@ -85,6 +85,7 @@ public class PlayerView implements Renderable, Updatable {
 
     private void drawBorder (Graphics2D _g2) {
         Stroke oldStroke = _g2.getStroke();
+
         _g2.setStroke(new BasicStroke(STROKE_WIDTH));
         _g2.draw(this.iconOutline);
         _g2.setStroke(oldStroke);
@@ -97,9 +98,7 @@ public class PlayerView implements Renderable, Updatable {
                 break;
             case "male":
                 this.fadeController = new StandardFadeController(Color.blue, Color.green, 0.05f);
-                break;
         }
-
         this.iconOutline = new Rectangle(this.parentButton.getX(), this.parentButton.getY(), imageWidth, imageHeight);
     }
 }

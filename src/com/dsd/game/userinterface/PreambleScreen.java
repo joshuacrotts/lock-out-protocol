@@ -2,6 +2,7 @@ package com.dsd.game.userinterface;
 
 import com.dsd.game.Game;
 import com.dsd.game.GameState;
+import com.dsd.game.controller.TimerController;
 import com.dsd.game.userinterface.model.LightningModel;
 import com.dsd.game.userinterface.model.labels.WaveLabel;
 import com.dsd.game.util.Utilities;
@@ -30,7 +31,7 @@ public class PreambleScreen extends Screen {
      * Timer that decides how long the text stays fully visible on the screen
      * before fading out.
      */
-    private final Timer preambleTimer;
+    private Timer preambleTimer;
     private final long PREAMBLE_TIMER_DURATION = 4000;
 
     // State that the menu is currently on (in terms of fading in/out).
@@ -41,11 +42,15 @@ public class PreambleScreen extends Screen {
         this.lightningEffect = new LightningModel(_game);
         this.waveModel = new WaveLabel(_game, _game.getLogicalCurrentLevelID());
         this.preambleTimer = new Timer(true);
+        TimerController.addTimer(preambleTimer);
         this.state = PreambleScreenState.FADE_IN;
     }
 
     @Override
     public void tick () {
+        if (this.getGame().isMenu()) {
+            return;
+        }
         this.lightningEffect.tick();
         this.waveModel.tick();
         this.changeAlpha();
@@ -53,6 +58,10 @@ public class PreambleScreen extends Screen {
 
     @Override
     public void render (Graphics2D _g2) {
+        if (this.getGame().isMenu()) {
+            return;
+        }
+
         AlphaComposite oldComposite = (AlphaComposite) _g2.getComposite();
         _g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, this.alpha));
         this.lightningEffect.render(_g2);
@@ -103,9 +112,11 @@ public class PreambleScreen extends Screen {
      * Resets the alpha of the transparency, and begins to re-fade in the timer.
      */
     public void resetPreambleScreen () {
+        System.out.println("Resetting the preamble screen...");
         this.alpha = 0;
         this.state = PreambleScreenState.FADE_IN;
         this.waveModel.setWaveNumber(this.getGame().getWaveNumber());
+        this.preambleTimer = new Timer(true);
     }
 
 //============================ GETTERS ====================================//
