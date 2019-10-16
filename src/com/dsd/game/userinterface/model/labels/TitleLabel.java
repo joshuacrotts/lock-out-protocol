@@ -40,8 +40,10 @@ public class TitleLabel extends StandardLabel {
 
     @Override
     public void render (Graphics2D _g2) {
+        Color oldColor = _g2.getColor();
         _g2.setColor(fadeController.combine());
         super.render(_g2);
+        _g2.setColor(oldColor);
     }
 
     /**

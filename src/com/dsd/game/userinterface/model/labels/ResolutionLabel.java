@@ -4,6 +4,7 @@ import com.dsd.game.Game;
 import com.dsd.game.ResolutionEnum;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.Screen;
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 /**
@@ -37,6 +38,7 @@ public class ResolutionLabel extends StandardLabel {
 
     @Override
     public void render (Graphics2D _g2) {
+        _g2.setColor(Color.WHITE);
         super.render(_g2);
     }
 }
