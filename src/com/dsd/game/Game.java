@@ -227,6 +227,7 @@ public class Game extends StandardGame {
         this.levelController.clearLevels();
         this.instantiateLevels();
         TimerController.stopTimers();
+        DifficultyController.resetDifficultyFactors();
     }
 
     /**

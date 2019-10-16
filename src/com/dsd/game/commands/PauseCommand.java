@@ -29,7 +29,8 @@ public class PauseCommand extends Command {
 
     @Override
     public void pressed (float dt) {
-        if (this.game.isPreamble() || !this.game.isInGameState()) {
+        //  If we're on the preamble screen OR the menu screen, we need to leave.
+        if (this.game.isPreamble() || this.game.isMenu()) {
             return;
         }
         else if (!this.game.isPaused()) {

@@ -19,7 +19,7 @@ import com.dsd.game.enemies.GreenMonster;
 public class DifficultyController {
 
     private final Game game;
-    private static int spawnerNumber = 0;
+    private static int spawnerAmount = 0;
 
     public static float difficultyFactor;
     public static float basicMonsterSpawnRate = 1.0f;
@@ -33,7 +33,7 @@ public class DifficultyController {
     }
 
     public static void incrementSpawnerAmount () {
-        spawnerNumber++;
+        spawnerAmount++;
     }
 
     public static void setDifficultyFactor () {
@@ -59,5 +59,12 @@ public class DifficultyController {
     public static void incrementMobHealth () {
         BasicMonster.originalHealth *= difficultyFactor;
         GreenMonster.originalHealth *= difficultyFactor;
+    }
+    public static void resetDifficultyFactors() {
+        DifficultyController.levelTransitionTimer = 50000;
+        DifficultyController.difficultyFactor = 1.0f;
+        DifficultyController.basicMonsterSpawnRate = 1.0f;
+        DifficultyController.greenMonsterSpawnRate = 0.0f;
+        DifficultyController.spawnerAmount = 0;
     }
 }

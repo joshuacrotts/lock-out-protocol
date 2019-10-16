@@ -6,6 +6,7 @@ import com.dsd.game.userinterface.MenuState;
 import com.dsd.game.userinterface.MouseEventInterface;
 import com.dsd.game.userinterface.Screen;
 import com.dsd.game.userinterface.view.PlayerView;
+import com.revivedstandards.controller.StandardAudioController;
 import java.awt.Graphics2D;
 
 /**
@@ -61,7 +62,7 @@ public class MalePlayerButton extends StandardButton implements MouseEventInterf
         if (!this.menuScreen.isOnPlayerGender()) {
             return;
         }
-
+        StandardAudioController.play("src/resources/audio/sfx/menuselect.wav");
         this.game.getPlayer().setPlayerSex("male");
         this.menuScreen.pushMenuStack(MenuState.PLAYER_GENDER);
         this.menuScreen.setMenuState(MenuState.DIFFICULTY);

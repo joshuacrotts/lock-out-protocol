@@ -85,9 +85,11 @@ public class LevelController {
                 (long) DifficultyController.levelTransitionTimer,
                 (long) DifficultyController.levelTransitionTimer);
     }
-    
-    public void clearLevels() {
+
+    public void clearLevels () {
         this.levels.clear();
+        this.currentLevelID = 0;
+        this.currentWave = 1;
     }
 
 //============================= GETTERS ======================================//
@@ -134,6 +136,9 @@ public class LevelController {
 
         @Override
         public void run () {
+            if (!this.game.isRunning()) {
+                return;
+            }
             this.levelController.incrementWave();
             if (this.levelController.getWaveNumber() % 5 == 0) {
                 this.updateLevelDifficulty();

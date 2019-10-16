@@ -48,6 +48,9 @@ public class PreambleScreen extends Screen {
 
     @Override
     public void tick () {
+        if (this.getGame().isMenu()) {
+            return;
+        }
         this.lightningEffect.tick();
         this.waveModel.tick();
         this.changeAlpha();
@@ -55,6 +58,10 @@ public class PreambleScreen extends Screen {
 
     @Override
     public void render (Graphics2D _g2) {
+        if (this.getGame().isMenu()) {
+            return;
+        }
+
         AlphaComposite oldComposite = (AlphaComposite) _g2.getComposite();
         _g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, this.alpha));
         this.lightningEffect.render(_g2);
@@ -91,7 +98,6 @@ public class PreambleScreen extends Screen {
              */
             else if (this.alpha <= 0.0f) {
                 this.getGame().setGameState(GameState.RUNNING);
-                this.resetPreambleScreen();
                 return;
             }
         }

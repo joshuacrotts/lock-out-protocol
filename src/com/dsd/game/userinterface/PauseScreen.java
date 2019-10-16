@@ -29,12 +29,18 @@ public class PauseScreen extends Screen {
 
     @Override
     public void tick () {
+        if (this.getGame().isMenu()) {
+            return;
+        }
         super.tick();
 
     }
 
     @Override
     public void render (Graphics2D _g2) {
+        if (this.getGame().isMenu()) {
+            return;
+        }
         this.drawTransparentScreen(_g2);
         super.render(_g2);
     }
@@ -48,9 +54,9 @@ public class PauseScreen extends Screen {
         Color oldColor = _g2.getColor();
         _g2.setColor(this.transparentBlack);
         _g2.fillRect((int) (this.getGame().getCamera().getX() - Screen.gameHalfWidth),
-                     (int) (this.getGame().getCamera().getY() - Screen.gameHalfHeight),
-                     (int) (this.getGame().getCamera().getX() + Screen.gameDoubleWidth),
-                     (int) (this.getGame().getCamera().getY() + Screen.gameDoubleHeight));
+                (int) (this.getGame().getCamera().getY() - Screen.gameHalfHeight),
+                (int) (this.getGame().getCamera().getX() + Screen.gameDoubleWidth),
+                (int) (this.getGame().getCamera().getY() + Screen.gameDoubleHeight));
         _g2.setColor(oldColor);
     }
 
