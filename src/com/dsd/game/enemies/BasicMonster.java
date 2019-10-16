@@ -66,12 +66,15 @@ public class BasicMonster extends Enemy implements DeathListener {
         this.setTarget(_game.getPlayer());
         //  Randomly generates the walking frames per second for variability
         this.walkingFPS = StdOps.rand(this.WALKING_FPS_MIN, this.WALKING_FPS_MAX);
+
         //  Sets the walking/death frames for this monster
         super.initWalkingFrames(BasicMonster.WALK_FRAMES, this.walkingFPS);
         super.initAttackingFrames(BasicMonster.ATTACK_FRAMES, BasicMonster.ATTACK_FPS);
         super.initDeathFrames(BasicMonster.DEATH_FRAMES, BasicMonster.DEATH_FPS, 5);
+
         //  Sets the default animation
         super.setAnimation(super.getWalkingAnimation());
+
         //  The width/height of the model is set by the buffered image backing it.
         super.setDimensions();
         super.setDamage(this.DAMAGE);

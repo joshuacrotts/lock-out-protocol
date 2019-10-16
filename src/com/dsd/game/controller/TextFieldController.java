@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class TextFieldController {
 
     public static ArrayList<TextFieldModel> textFieldController = new ArrayList<>();
+    private static int selectedTextField = -1;
 
     public static void deactivate (TextFieldModel _field) {
         for (int i = 0 ; i < textFieldController.size() ; i++) {
@@ -27,5 +28,18 @@ public class TextFieldController {
 
     public static void addField (TextFieldModel _model) {
         textFieldController.add(_model);
+    }
+
+    public static void incrementSelectedTextField () {
+        if (TextFieldController.selectedTextField + 1 >= TextFieldController.textFieldController.size()) {
+            TextFieldController.selectedTextField = 0;
+        }
+        else {
+            TextFieldController.selectedTextField++;
+        }
+        TextFieldModel selectedField = TextFieldController.textFieldController.get(selectedTextField);
+        selectedField.setActive(true);
+        TextFieldController.deactivate(selectedField);
+
     }
 }

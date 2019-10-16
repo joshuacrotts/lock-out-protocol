@@ -24,6 +24,9 @@ public class IncreaseResolutionCommand extends Command {
 
     @Override
     public void pressed (float _dt) {
+        if(!this.game.isMenu()) {
+            return;
+        }
         ResolutionEnum.increaseResolution();
     }
 }

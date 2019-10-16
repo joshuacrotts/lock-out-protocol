@@ -23,11 +23,12 @@ import java.util.TimerTask;
  */
 public class LevelController {
 
+    private final Game game;
+    private final List<StandardLevel> levels;
+    private Timer levelTimer;
+
     private int currentLevelID = 0;
     private int currentWave = 1;
-    private final List<StandardLevel> levels;
-    private final Game game;
-    private Timer levelTimer;
 
     public LevelController (Game _game) {
         this.levels = new ArrayList<>();
@@ -86,6 +87,10 @@ public class LevelController {
                 (long) DifficultyController.levelTransitionTimer);
     }
 
+    /**
+     * Removes all levels from the ArrayList, and sets the wave to 1, and the
+     * currentID back to 0.
+     */
     public void clearLevels () {
         this.levels.clear();
         this.currentLevelID = 0;

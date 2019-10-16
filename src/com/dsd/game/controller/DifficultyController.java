@@ -18,24 +18,36 @@ import com.dsd.game.enemies.GreenMonster;
  */
 public class DifficultyController {
 
+    //  Miscellaneous reference variables
     private final Game game;
+    public static DifficultyType difficultyType;
+
+    //  How many spawners are currently defined.
     private static int spawnerAmount = 0;
 
+    //  Difficulty factor, spawn rates of enemies, and other timer vars.
     public static float difficultyFactor;
     public static float basicMonsterSpawnRate = 1.0f;
     public static float greenMonsterSpawnRate = 0.0f;
     public static float levelTransitionTimer = 50000;
-    public static DifficultyType difficultyType;
     private static final int LEVEL_TRANS_LIMIT = 20000;
 
     public DifficultyController (Game _game) {
         this.game = _game;
     }
 
+    /**
+     * Increases the amount of spawners that are currently in the level.
+     */
     public static void incrementSpawnerAmount () {
         spawnerAmount++;
     }
 
+    /**
+     * Sets the difficulty multiplication factor (the higher the difficulty, the
+     * higher the difficulty factor variable). Determines how quickly the levels
+     * transition, and how much health the mobs continue to gain overtime.
+     */
     public static void setDifficultyFactor () {
         switch (difficultyType) {
             case EASY:
@@ -49,6 +61,11 @@ public class DifficultyController {
         }
     }
 
+    /**
+     * Defines the level transition timer (i.e. how long each level lasts). As
+     * the wave number gets higher and higher, waves start getting quicker and
+     * quicker until the plateau is hit (LEVEL_TRANS_LIMIT).
+     */
     public static void setLevelTransitionTimer () {
         if (levelTransitionTimer <= LEVEL_TRANS_LIMIT) {
             return;
@@ -56,15 +73,25 @@ public class DifficultyController {
         levelTransitionTimer *= (2 - difficultyFactor);
     }
 
-    public static void incrementMobHealth () {
-        BasicMonster.originalHealth *= difficultyFactor;
-        GreenMonster.originalHealth *= difficultyFactor;
-    }
-    public static void resetDifficultyFactors() {
+    /**
+     * Resets the difficulty factor variables if the game is start from scratch
+     * from within a game (if they quit and start a brand-new game).
+     */
+    public static void resetDifficultyFactors () {
         DifficultyController.levelTransitionTimer = 50000;
         DifficultyController.difficultyFactor = 1.0f;
         DifficultyController.basicMonsterSpawnRate = 1.0f;
         DifficultyController.greenMonsterSpawnRate = 0.0f;
         DifficultyController.spawnerAmount = 0;
     }
+
+    /**
+     * Slowly increments the mob health depending on what difficulty the game
+     * is.
+     */
+    protected static void incrementMobHealth () {
+        BasicMonster.originalHealth *= difficultyFactor;
+        GreenMonster.originalHealth *= difficultyFactor;
+    }
+
 }

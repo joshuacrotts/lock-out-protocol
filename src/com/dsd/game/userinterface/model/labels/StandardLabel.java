@@ -47,7 +47,10 @@ public class StandardLabel extends Interactor implements MouseEventInterface {
 
     @Override
     public void render (Graphics2D _g2) {
-        StandardDraw.text(this.text, this.getX(), this.getY(), this.font, this.font.getSize(), Color.WHITE);
+        Font oldFont = _g2.getFont();
+        _g2.setFont(this.font);
+        _g2.drawString(this.text, (int) this.getX(), (int) this.getY());
+        _g2.setFont(oldFont);
     }
 
     @Override

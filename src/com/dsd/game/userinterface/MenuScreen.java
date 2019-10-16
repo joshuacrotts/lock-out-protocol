@@ -2,6 +2,7 @@ package com.dsd.game.userinterface;
 
 import com.dsd.game.userinterface.model.buttons.PlayButton;
 import com.dsd.game.Game;
+import com.dsd.game.commands.TabTextFieldCommand;
 import com.dsd.game.userinterface.model.buttons.AccountButton;
 import com.dsd.game.userinterface.model.buttons.BackButton;
 import com.dsd.game.userinterface.model.buttons.EasyButton;
@@ -36,7 +37,7 @@ public class MenuScreen extends Screen {
     private MenuState menuState;
     private final Stack<MenuState> menuStateStack;
 
-    private MenuView menuView;
+    private final MenuView menuView;
     private ResolutionView changeResView;
 
     public MenuScreen (Game _game) {
@@ -47,6 +48,7 @@ public class MenuScreen extends Screen {
         this.menuStateStack.push(this.menuState);
         this.createUIElements();
         this.createUIScreens();
+        TabTextFieldCommand tabCommand = new TabTextFieldCommand(this.getGame());
     }
 
     @Override

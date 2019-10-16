@@ -103,7 +103,9 @@ public class TextFieldModel extends Interactor implements MouseEventInterface {
     public String getMaskedString () {
         StringBuilder hiddenStr = new StringBuilder();
         for (int i = 0 ; i < this.string.length() ; i++) {
-            hiddenStr.append("*");
+            if (this.string.charAt(i) != '\0') {
+                hiddenStr.append("*");
+            }
         }
 
         return hiddenStr.toString();
