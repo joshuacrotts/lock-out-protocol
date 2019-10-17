@@ -2,7 +2,6 @@ package com.dsd.game.userinterface.model.labels;
 
 import com.dsd.game.Game;
 import com.dsd.game.userinterface.Screen;
-import java.awt.Color;
 import java.awt.Graphics2D;
 
 /**
@@ -15,7 +14,6 @@ import java.awt.Graphics2D;
  */
 public class PauseLabel extends StandardLabel {
 
-    //  Miscellaneous reference variables
     private final Game game;
     private final int LABEL_X_OFFSET = 20;
     private final int LABEL_Y_OFFSET = 100;
@@ -35,7 +33,6 @@ public class PauseLabel extends StandardLabel {
 
     @Override
     public void render (Graphics2D _g2) {
-        _g2.setColor(Color.WHITE);
         super.render(_g2);
     }
 }

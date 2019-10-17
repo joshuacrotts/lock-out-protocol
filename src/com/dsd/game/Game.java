@@ -16,6 +16,7 @@ import com.dsd.game.userinterface.PauseScreen;
 import com.dsd.game.userinterface.PreambleScreen;
 import com.dsd.game.userinterface.Screen;
 import com.dsd.game.userinterface.ShopScreen;
+import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.handlers.StandardHandler;
 import com.revivedstandards.main.StandardCamera;
@@ -38,7 +39,7 @@ import com.revivedstandards.model.StandardLevel;
 public class Game extends StandardGame {
 
     //  Miscellaneous reference variables
-    private final StandardCamera sc;
+    private StandardCamera sc;
     private final StandardCollisionHandler sch;
 
     //  Database references
@@ -199,12 +200,19 @@ public class Game extends StandardGame {
     }
 
     /**
+     * Plays the wave change sfx.
+     */
+    public void playWaveChangeSFX () {
+        StandardAudioController.play("src/resources/audio/sfx/round_change.wav");
+    }
+
+    /**
      * Sets the game to the preamble state and reset the alpha transparency of
      * it.
      */
     public void setPreambleState () {
         this.gameState = GameState.PREAMBLE;
-        this.preambleScreen.playWaveChangeSFX();
+        this.playWaveChangeSFX();
         this.preambleScreen.resetPreambleScreen();
     }
 
@@ -218,7 +226,6 @@ public class Game extends StandardGame {
     public void resetGame () {
         this.sch.clearEntities();
         this.levelController.clearLevels();
-        this.player.getInventory().reloadInventory();
         this.instantiateLevels();
         TimerController.stopTimers();
         DifficultyController.resetDifficultyFactors();

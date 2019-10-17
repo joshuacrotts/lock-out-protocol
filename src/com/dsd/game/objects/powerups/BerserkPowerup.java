@@ -52,7 +52,7 @@ public class BerserkPowerup extends StandardGameObject {
     private boolean isActivated = false;
     private boolean isCollected = false;
 
-    public BerserkPowerup (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
+    public BerserkPowerup(int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, StandardID.Item1);
         this.game = _game;
         this.camera = _game.getCamera();
@@ -69,18 +69,17 @@ public class BerserkPowerup extends StandardGameObject {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (this.isAlive()) {
             this.getAnimationController().tick();
         }
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (this.isAlive()) {
             this.getAnimationController().renderFrame(_g2);
-        }
-        else if (this.isActivated) {
+        } else if (this.isActivated) {
             this.drawFlashingBorder(_g2);
         }
     }
@@ -88,7 +87,7 @@ public class BerserkPowerup extends StandardGameObject {
     /**
      * Turns the timer on and instantiates the associated timer task.
      */
-    public void activate () {
+    public void activate() {
         if (this.isActivated) {
             return;
         }
@@ -108,7 +107,7 @@ public class BerserkPowerup extends StandardGameObject {
     /**
      * Adds the 2x damage multiplier to the player's current weapon.
      */
-    private void activateDamageBoost () {
+    private void activateDamageBoost() {
         Weapon curr = this.game.getPlayer().getInventory().getCurrentWeapon();
         curr.setDamageFactor(DAMAGE_INCREASE_FACTOR);
 
@@ -117,7 +116,7 @@ public class BerserkPowerup extends StandardGameObject {
     /**
      * Removes the 2x damage multiplier from the player's current weapon.
      */
-    private void deactivateDamageBoost () {
+    private void deactivateDamageBoost() {
         Weapon curr = this.game.getPlayer().getInventory().getCurrentWeapon();
         curr.setDamageFactor(DAMAGE_INCREASE_FACTOR >> 1);
     }
@@ -125,7 +124,7 @@ public class BerserkPowerup extends StandardGameObject {
     /**
      * Plays the sound effect associated with collecting the berserk item.
      */
-    public void playBerserkSFX () {
+    public void playBerserkSFX() {
         if (this.isCollected) {
             return;
         }
@@ -138,7 +137,7 @@ public class BerserkPowerup extends StandardGameObject {
      *
      * @param _g2
      */
-    private void drawFlashingBorder (Graphics2D _g2) {
+    private void drawFlashingBorder(Graphics2D _g2) {
         _g2.setColor(this.getTransparentColor(this.color.combine()));
         Stroke oldStroke = _g2.getStroke();
         _g2.setStroke(new BasicStroke(RECT_STROKE));
@@ -150,11 +149,11 @@ public class BerserkPowerup extends StandardGameObject {
         _g2.setStroke(oldStroke);
     }
 
-    private Color getTransparentColor (Color _c) {
+    private Color getTransparentColor(Color _c) {
         return new Color(_c.getRed(), _c.getGreen(), _c.getBlue(), 127);
     }
 
-    public void setCollected () {
+    public void setCollected() {
         this.isCollected = true;
     }
 
@@ -166,12 +165,12 @@ public class BerserkPowerup extends StandardGameObject {
 
         private BerserkPowerup powerup;
 
-        public BerserkTimer (BerserkPowerup _powerup) {
+        public BerserkTimer(BerserkPowerup _powerup) {
             this.powerup = _powerup;
         }
 
         @Override
-        public void run () {
+        public void run() {
             this.powerup.setAlive(false);
             this.powerup.isActivated = false;
             this.powerup.deactivateDamageBoost();

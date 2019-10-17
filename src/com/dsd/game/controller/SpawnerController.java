@@ -46,15 +46,15 @@ public class SpawnerController extends StandardGameObject {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void render (Graphics2D gd) {
+    public void render(Graphics2D gd) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    }    
+    
     /**
      * Spawns _n mobs randomly in the specified radius of the spawner.
      *
@@ -80,6 +80,7 @@ public class SpawnerController extends StandardGameObject {
             }
         }
     }
+
 
     /**
      * Very similar to the AttackCommand, we need a delay timer for mobs

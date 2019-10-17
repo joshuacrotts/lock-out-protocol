@@ -2,6 +2,7 @@ package com.dsd.game.userinterface.model.buttons;
 
 import com.dsd.game.AccountStatus;
 import com.dsd.game.Game;
+import com.dsd.game.GameState;
 import com.dsd.game.database.TranslatorDatabase;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MenuState;
