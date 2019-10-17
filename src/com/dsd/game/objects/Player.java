@@ -1,6 +1,5 @@
 package com.dsd.game.objects;
 
-import com.dsd.game.objects.enums.PlayerState;
 import com.dsd.game.Game;
 import com.dsd.game.commands.AttackCommand;
 import com.dsd.game.commands.DebugCommand;
@@ -10,6 +9,7 @@ import com.dsd.game.commands.MoveBackwardCommand;
 import com.dsd.game.commands.MoveForwardCommand;
 import com.dsd.game.commands.ReloadCommand;
 import com.dsd.game.controller.DebugController;
+import com.dsd.game.objects.enums.PlayerState;
 import com.dsd.game.userinterface.Screen;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
@@ -37,21 +37,28 @@ public class Player extends Entity implements DeathListener {
 
     //  Miscellaneous reference variables
     private StandardCamera sc;
+
     /**
      * Refers to the player's current state (walking, shooting, etc.)
      * PlayerState is set by commands
      */
     private PlayerState playerState;
+
     //  Inventory of the player, tells how much money they have, the current weapon, etc.
     private final Inventory inventory;
+
     //  Global commands
     private AttackCommand attackCommand;
+
     //  Variables representing the angle and approach velocity
     private final float APPROACH_VEL = -3.0f;
+
     //  Money amount
     private int money;
+
     //  Health vars (this may change with time)
     private int maxHealth = 200;
+
     //  Sex of player
     private String sex = "male";
 
@@ -59,14 +66,19 @@ public class Player extends Entity implements DeathListener {
         super(_x, _y, 100, StandardID.Player, (Game) _game, _sch);
         //  Instantiate the inventory
         this.inventory = new Inventory(this.getGame(), this, _sch);
+
         //  Initializes the miscellaneous variables
         this.sc = this.getGame().getCamera();
+
         //  Sets the default animation
         this.setAnimation(this.inventory.getCurrentWeapon().getWalkFrames());
+
         //  Instantiate commands
         this.initCommands();
+
         //  Initializes the player's default state to standing
         this.playerState = PlayerState.STANDING;
+
         //  Adds the player to the list of collidable objects
         _sch.addCollider(StandardID.Player);
         _sch.flagAlive(StandardID.Player);
@@ -83,6 +95,7 @@ public class Player extends Entity implements DeathListener {
             }
             this.getAnimationController().getStandardAnimation().setRotation(this.getAngle());
             this.updateDimensions();
+
             // Save the mouse position
             double mx = this.sc.getX() + this.getGame().getMouse().getMouseX() - this.sc.getVpw();
             double my = this.sc.getY() + this.getGame().getMouse().getMouseY() - this.sc.getVph();
@@ -119,7 +132,7 @@ public class Player extends Entity implements DeathListener {
 
     /**
      * Displays a death message upon player's health reaching 0, and then closes
-     * out the application (currently WIP)
+     * out the application (currently WIP).
      */
     @Override
     public void uponDeath () {
@@ -206,9 +219,11 @@ public class Player extends Entity implements DeathListener {
         // Calculate the distance between the sprite and the mouse
         double diffX = this.getX() - _mx - Entity.APPROACH_FACTOR;
         double diffY = this.getY() - _my - Entity.APPROACH_FACTOR;
+
         // Use the pythagorean theorem to solve for the hypotenuse distance
         double distance = (double) FastMath.sqrt(((this.getX() - _mx) * (this.getX() - _mx))
                 + ((this.getY() - _my) * (this.getY() - _my)));
+
         /**
          * Sets the velocity according to how far away the sprite is from the
          * cursor, and according to what direction the player is facing.
@@ -227,6 +242,10 @@ public class Player extends Entity implements DeathListener {
         this.setHeight(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getHeight());
     }
 
+    /**
+     * Instantiates the commmands and adds them to the listener (within the
+     * command classes themselves).
+     */
     private void initCommands () {
         this.attackCommand = new AttackCommand(this.getGame(), this, this.getHandler(), this.inventory.getCurrentWeapon().getAttackFrames());
         MoveForwardCommand moveForwardCommand = new MoveForwardCommand(this.getGame(), this);
@@ -324,5 +343,6 @@ public class Player extends Entity implements DeathListener {
         this.sex = _sex;
         this.inventory.reloadInventoryAssets();
         this.setAnimation(this.inventory.getCurrentWeapon().getWalkFrames());
+        this.setAttackAnimator(this.inventory.getCurrentWeapon().getAttackFrames());
     }
 }

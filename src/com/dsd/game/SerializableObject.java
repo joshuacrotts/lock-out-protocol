@@ -11,7 +11,7 @@ package com.dsd.game;
  */
 public interface SerializableObject {
 
-    public void createObject (SerializableObject _obj);
+    public String createObject ();
 
     public SerializableObject readObject (SerializableObject _obj);
 

@@ -34,4 +34,5 @@ public class InventoryView extends Screen {
     private void createUIElements () {
         super.addInteractor(new WeaponIconView(this.getGame(), this.inventory));
     }
+
 }

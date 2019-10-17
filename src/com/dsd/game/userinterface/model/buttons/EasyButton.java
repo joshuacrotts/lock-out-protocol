@@ -24,7 +24,7 @@ public class EasyButton extends MenuButton implements MouseEventInterface {
 
     private static final int BUTTON_X_OFFSET = 125;
     private static final int BUTTON_Y_OFFSET = -180;
-    private static final int TEXT_X_OFFSET = 50;
+    private static final int TEXT_X_OFFSET = 21;
     private static final int TEXT_Y_OFFSET = 45;
     private static final int BUTTON_WIDTH = 300;
     private static final int BUTTON_HEIGHT = 82;

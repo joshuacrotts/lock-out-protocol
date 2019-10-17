@@ -5,8 +5,8 @@
  */
 package com.dsd.game.enemies;
 
-import com.dsd.game.enemies.enums.EnemyState;
 import com.dsd.game.Game;
+import com.dsd.game.enemies.enums.EnemyState;
 import com.dsd.game.objects.Entity;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.handlers.StandardCollisionHandler;

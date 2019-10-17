@@ -1,6 +1,5 @@
 package com.dsd.game;
 
-import com.dsd.game.levels.MetalLevel;
 import com.dsd.game.controller.AudioBoxController;
 import com.dsd.game.controller.CollisionHandlerController;
 import com.dsd.game.controller.DebugController;
@@ -9,6 +8,7 @@ import com.dsd.game.controller.LevelController;
 import com.dsd.game.controller.RainController;
 import com.dsd.game.controller.TimerController;
 import com.dsd.game.database.TranslatorDatabase;
+import com.dsd.game.levels.MetalLevel;
 import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.HUDScreen;
 import com.dsd.game.userinterface.MenuScreen;
@@ -71,7 +71,7 @@ public class Game extends StandardGame {
     private GameState gameState = GameState.MENU;
 
     //  Main player reference so other monsters can track them
-    private final Player player;
+    private Player player;
 
     public Game (int _width, int _height, String _title) {
         /**
@@ -87,7 +87,6 @@ public class Game extends StandardGame {
         this.sch = new CollisionHandlerController(this);
         //  Instantiates player & adds it to the handler
         this.player = new Player(200, 200, this, this.sch);
-        this.sch.addEntity(player);
 
         //  Instantiate the camera
         this.sc = new StandardCamera(this, player, 1, this.getGameWidth(), this.getGameHeight());
@@ -231,6 +230,14 @@ public class Game extends StandardGame {
         DifficultyController.resetDifficultyFactors();
     }
 
+    public void saveToDatabase () {
+        this.translatorDatabase.save();
+    }
+
+    public void loadFromDatabase () {
+        this.translatorDatabase.load();
+    }
+
     /**
      * Loads the level data when the game starts so the timers can be
      * instantiated.
@@ -255,6 +262,10 @@ public class Game extends StandardGame {
 
     public StandardCamera getCamera () {
         return this.sc;
+    }
+
+    public StandardCollisionHandler getHandler () {
+        return this.sch;
     }
 
     public StandardLevel getCurrentLevel () {
@@ -300,5 +311,11 @@ public class Game extends StandardGame {
 //========================== SETTERS =============================//
     public void setGameState (GameState _gs) {
         this.gameState = _gs;
+    }
+
+    public void setPlayer (Player _player) {
+        this.player = _player;
+        this.player.setCamera(sc);
+        this.player.setHandler(this.sch);
     }
 }

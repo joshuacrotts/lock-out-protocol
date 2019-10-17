@@ -2,7 +2,6 @@ package com.dsd.game.userinterface.view;
 
 import com.dsd.game.Game;
 import com.dsd.game.userinterface.MenuScreen;
-import com.dsd.game.userinterface.Screen;
 import com.dsd.game.userinterface.model.buttons.StandardButton;
 import com.revivedstandards.controller.StandardFadeController;
 import com.revivedstandards.util.StdOps;
@@ -79,10 +78,6 @@ public class PlayerView implements Renderable, Updatable {
         this.drawBorder(_g2);
     }
 
-    public void setMouseOver (boolean _mouseOn) {
-        this.mouseOver = _mouseOn;
-    }
-
     private void drawBorder (Graphics2D _g2) {
         Stroke oldStroke = _g2.getStroke();
 
@@ -91,6 +86,10 @@ public class PlayerView implements Renderable, Updatable {
         _g2.setStroke(oldStroke);
     }
 
+    /**
+     * The outline color around the playerview's icon is determined by which sex
+     * the player is currently hovering over.
+     */
     private void setFadeController () {
         switch (this.sex) {
             case "female":
@@ -100,5 +99,10 @@ public class PlayerView implements Renderable, Updatable {
                 this.fadeController = new StandardFadeController(Color.blue, Color.green, 0.05f);
         }
         this.iconOutline = new Rectangle(this.parentButton.getX(), this.parentButton.getY(), imageWidth, imageHeight);
+    }
+
+//=============================== SETTERS ==================================//
+    public void setMouseOver (boolean _mouseOn) {
+        this.mouseOver = _mouseOn;
     }
 }

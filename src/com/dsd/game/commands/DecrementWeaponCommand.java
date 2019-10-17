@@ -1,8 +1,8 @@
 package com.dsd.game.commands;
 
 import com.dsd.game.Game;
-import com.dsd.game.objects.weapons.enums.WeaponSelection;
 import com.dsd.game.objects.Player;
+import com.dsd.game.objects.weapons.enums.WeaponSelection;
 import com.revivedstandards.commands.Command;
 import com.sun.glass.events.KeyEvent;
 

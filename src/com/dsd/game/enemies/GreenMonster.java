@@ -2,9 +2,9 @@ package com.dsd.game.enemies;
 
 import com.dsd.game.Game;
 import com.dsd.game.objects.Entity;
-import com.dsd.game.objects.powerups.HealthPowerup;
 import com.dsd.game.objects.items.Coin;
 import com.dsd.game.objects.powerups.BerserkPowerup;
+import com.dsd.game.objects.powerups.HealthPowerup;
 import com.dsd.game.objects.powerups.InfiniteAmmoPowerup;
 import com.dsd.game.util.Utilities;
 import com.revivedstandards.controller.StandardAudioController;

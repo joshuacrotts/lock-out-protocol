@@ -2,13 +2,13 @@ package com.dsd.game.commands;
 
 import com.dsd.game.Game;
 import com.dsd.game.controller.TimerController;
-import com.dsd.game.objects.weapons.Gun;
 import com.dsd.game.objects.Player;
+import com.dsd.game.objects.weapons.Gun;
 import com.revivedstandards.commands.Command;
 import com.revivedstandards.controller.StandardAudioController;
 import java.awt.event.KeyEvent;
-import java.util.TimerTask;
 import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Command representing when the user shoots their weapon.

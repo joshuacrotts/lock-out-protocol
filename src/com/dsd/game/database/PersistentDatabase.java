@@ -1,6 +1,7 @@
 package com.dsd.game.database;
 
 import com.dsd.game.AccountStatus;
+import com.dsd.game.Game;
 import java.io.BufferedWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,20 +23,24 @@ import java.util.logging.Logger;
  */
 public class PersistentDatabase {
 
+    private final Game game;
+
+    //  Relative database information (depending on if it's local or not).
     private TranslatorDatabase translatorDatabase;
     private BufferedWriter fileWriter;
     private Connection remoteDBConnection;
 
-    //  SQL Database information
+    //  SQL Database information.
     private static final String IP_ADDRESS = "35.226.95.88";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "lockoutprotocol340";
 
-    public PersistentDatabase () {
+    public PersistentDatabase (Game _game) {
+        this.game = _game;
     }
 
     /**
-     * Write the contents of the supplied information to the file.
+     * Write the contents of the supplied information to the db type.
      */
     public void save () {
         throw new UnsupportedOperationException("Not supported at this time.");
@@ -52,6 +57,7 @@ public class PersistentDatabase {
     /**
      * Connect to the SQL database... when applicable.
      *
+     * @param _dbName
      * @return true if a connection was successful, false otherwise.
      */
     public boolean connect (String _dbName) {
@@ -68,20 +74,9 @@ public class PersistentDatabase {
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
+
         System.out.println("Connection successful!");
         return true;
-    }
-
-    /**
-     * Generates the necessary classname to get the MySQL java driver working.s
-     */
-    private void generateClassName () {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        }
-        catch (ClassNotFoundException ex) {
-            Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**
@@ -166,11 +161,30 @@ public class PersistentDatabase {
         return resultQuery.next();
     }
 
+    /**
+     * Queries the DB to determine if the email is in the db or not.
+     *
+     * @param _email
+     * @return
+     * @throws SQLException
+     */
     private boolean userEmailInDatabase (String _email) throws SQLException {
         PreparedStatement insertStatement = this.remoteDBConnection.prepareStatement(String.format("SELECT * FROM user_accounts WHERE Email = ?;"));
         insertStatement.setString(1, _email);
         ResultSet resultQuery = insertStatement.executeQuery();
 
         return resultQuery.next();
+    }
+
+    /**
+     * Generates the necessary classname to get the MySQL java driver working.s
+     */
+    private void generateClassName () {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        }
+        catch (ClassNotFoundException ex) {
+            Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

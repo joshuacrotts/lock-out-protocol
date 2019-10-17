@@ -29,7 +29,7 @@ public class TranslatorDatabase {
 
     public TranslatorDatabase (Game _game) {
         this.game = _game;
-        TranslatorDatabase.database = new PersistentDatabase();
+        TranslatorDatabase.database = new PersistentDatabase(this.game);
     }
 
     /**

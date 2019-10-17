@@ -1,5 +1,6 @@
 package com.dsd.game.objects.weapons;
 
+import com.dsd.game.SerializableObject;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.weapons.enums.WeaponState;
 import com.dsd.game.objects.weapons.enums.WeaponType;
@@ -15,7 +16,7 @@ import java.awt.image.BufferedImage;
  *
  * @author Joshua, Ronald, Rinty
  */
-public abstract class Weapon {
+public abstract class Weapon implements SerializableObject {
 
     //  Type of weapon, standard animator controllers, the icon (for the inventoryview)
     private WeaponType weaponType;
@@ -59,6 +60,36 @@ public abstract class Weapon {
     }
 
     public abstract void loadAssets (Player _player);
+
+    @Override
+    public String createObject () {
+        StringBuilder object = new StringBuilder();
+        object.append("weapon:").append("\n");
+        object.append("type=").append(this.weaponType).append("\n");
+        object.append("gun=").append(this instanceof Gun).append("\n");
+        if (this instanceof Gun) {
+            Gun gun = (Gun) this;
+            object.append("ammo=").append(gun.getCurrentAmmo()).append("\n");
+            object.append("total=").append(gun.getTotalAmmo()).append("\n");
+            object.append("mag=").append(gun.getMagazineCapacity()).append("\n");
+        }
+        return object.toString();
+    }
+
+    @Override
+    public SerializableObject readObject (SerializableObject _obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void updateObject (SerializableObject _obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void destroyObject (SerializableObject _obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 //============================== GETTERS ===================================//
     public long getDelay () {

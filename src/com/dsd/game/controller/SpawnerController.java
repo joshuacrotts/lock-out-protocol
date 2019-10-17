@@ -1,10 +1,10 @@
 package com.dsd.game.controller;
 
-import com.dsd.game.enemies.enums.EnemyType;
 import com.dsd.game.Game;
 import com.dsd.game.enemies.BasicMonster;
 import com.dsd.game.enemies.DarkFemaleMonster;
 import com.dsd.game.enemies.GreenMonster;
+import com.dsd.game.enemies.enums.EnemyType;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.model.StandardGameObject;
 import com.revivedstandards.model.StandardID;

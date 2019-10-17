@@ -16,12 +16,18 @@ public enum DifficultyType {
         this.setDifficultyString(this.difficultyLevel);
     }
 
+    /**
+     * Depending on the difficulty int, we will set the labels of the enums to
+     * their respective titles.
+     *
+     * @param _difficultyLevel
+     */
     private void setDifficultyString (int _difficultyLevel) {
         String text = "";
 
         switch (_difficultyLevel) {
             case 1:
-                text = "FAR TOO SIMPLE";
+                text = "I\'M TOO YOUNG TO DIE";
                 break;
             case 2:
                 text = "HURT ME PLENTY";

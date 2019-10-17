@@ -6,7 +6,6 @@
 package com.dsd.game.commands;
 
 import com.dsd.game.Game;
-import com.dsd.game.GameState;
 import com.dsd.game.controller.TextFieldController;
 import com.revivedstandards.commands.Command;
 import java.awt.event.KeyEvent;

@@ -21,9 +21,11 @@ import java.awt.Graphics2D;
  */
 public class SaveButton extends MenuButton implements MouseEventInterface {
 
+    //  Miscellaneous reference variables.
     private final Game game;
     private final MenuScreen menuScreen;
 
+    //  Button offsets and dimensions.
     private static final int BUTTON_X_OFFSET = 100;
     private static final int BUTTON_Y_OFFSET = 100;
     private static final int TEXT_X_OFFSET = 80;
@@ -71,6 +73,7 @@ public class SaveButton extends MenuButton implements MouseEventInterface {
             return;
         }
         //  Once the user presses the save button, it will stop the game (for now).
+        this.getGame().saveToDatabase();
         this.getGame().setGameState(GameState.MENU);
         this.getGame().resetGame();
     }

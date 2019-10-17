@@ -2,8 +2,8 @@ package com.dsd.game.userinterface;
 
 import com.dsd.game.Game;
 import com.dsd.game.commands.PauseCommand;
-import com.dsd.game.userinterface.model.labels.PauseLabel;
 import com.dsd.game.userinterface.model.buttons.SaveButton;
+import com.dsd.game.userinterface.model.labels.PauseLabel;
 import java.awt.Color;
 import java.awt.Graphics2D;
 

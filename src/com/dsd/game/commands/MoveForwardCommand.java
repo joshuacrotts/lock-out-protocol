@@ -2,8 +2,8 @@ package com.dsd.game.commands;
 
 import com.dsd.game.Game;
 import com.dsd.game.objects.Player;
-import com.revivedstandards.commands.Command;
 import com.dsd.game.objects.enums.PlayerState;
+import com.revivedstandards.commands.Command;
 import java.awt.event.KeyEvent;
 
 /**

@@ -1,17 +1,17 @@
 package com.dsd.game.objects;
 
-import com.dsd.game.objects.weapons.Weapon;
-import com.dsd.game.objects.weapons.Gun;
 import com.dsd.game.Game;
-import com.dsd.game.objects.weapons.enums.WeaponSelection;
 import com.dsd.game.api.WeatherConnector;
+import com.dsd.game.objects.weapons.Gun;
 import com.dsd.game.objects.weapons.Knife;
 import com.dsd.game.objects.weapons.Pistol;
 import com.dsd.game.objects.weapons.Rifle;
+import com.dsd.game.objects.weapons.Weapon;
+import com.dsd.game.objects.weapons.enums.WeaponSelection;
 import com.dsd.game.userinterface.view.InventoryView;
 import com.revivedstandards.handlers.StandardCollisionHandler;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,6 +28,7 @@ public class Inventory {
     private final Player player;
     private final InventoryView view;
     private final List<Weapon> weapons;
+
     private int currentWeapon = 0;
     private boolean hasGun;
 

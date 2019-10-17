@@ -1,7 +1,6 @@
 package com.dsd.game.userinterface.model.buttons;
 
 import com.dsd.game.Game;
-import com.dsd.game.GameState;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MenuState;
 import com.dsd.game.userinterface.MouseEventInterface;
@@ -20,7 +19,8 @@ import java.awt.Graphics2D;
  */
 public class AccountButton extends MenuButton implements MouseEventInterface {
 
-    private static final int BUTTON_X_OFFSET = 120;
+    //  Offsets and button dimensions.
+    private static final int BUTTON_X_OFFSET = 300;
     private static final int BUTTON_Y_OFFSET = -50;
     private static final int TEXT_X_OFFSET = 98;
     private static final int TEXT_Y_OFFSET = 45;

@@ -1,22 +1,23 @@
 package com.dsd.game.userinterface;
 
-import com.dsd.game.userinterface.model.buttons.PlayButton;
 import com.dsd.game.Game;
 import com.dsd.game.commands.TabTextFieldCommand;
+import com.dsd.game.userinterface.model.EmailTextFieldModel;
+import com.dsd.game.userinterface.model.PasswordTextFieldModel;
 import com.dsd.game.userinterface.model.buttons.AccountButton;
 import com.dsd.game.userinterface.model.buttons.BackButton;
 import com.dsd.game.userinterface.model.buttons.EasyButton;
-import com.dsd.game.userinterface.model.EmailTextFieldModel;
 import com.dsd.game.userinterface.model.buttons.ExitButton;
+import com.dsd.game.userinterface.model.buttons.FemalePlayerButton;
 import com.dsd.game.userinterface.model.buttons.HardButton;
 import com.dsd.game.userinterface.model.buttons.HelpOrOptionsButton;
+import com.dsd.game.userinterface.model.buttons.LoadButton;
 import com.dsd.game.userinterface.model.buttons.LoginButton;
 import com.dsd.game.userinterface.model.buttons.MakeAccountButton;
-import com.dsd.game.userinterface.model.buttons.MediumButton;
-import com.dsd.game.userinterface.model.PasswordTextFieldModel;
-import com.dsd.game.userinterface.model.buttons.ResolutionMenuButton;
 import com.dsd.game.userinterface.model.buttons.MalePlayerButton;
-import com.dsd.game.userinterface.model.buttons.FemalePlayerButton;
+import com.dsd.game.userinterface.model.buttons.MediumButton;
+import com.dsd.game.userinterface.model.buttons.PlayButton;
+import com.dsd.game.userinterface.model.buttons.ResolutionMenuButton;
 import com.dsd.game.userinterface.model.labels.TitleLabel;
 import com.dsd.game.userinterface.view.MenuView;
 import com.dsd.game.userinterface.view.ResolutionView;
@@ -98,6 +99,8 @@ public class MenuScreen extends Screen {
         super.addInteractor(new PlayButton(this.getGame(), this));
         //  Instantiates the exit button
         super.addInteractor(new ExitButton(this.getGame(), this));
+        //  Instantiates load button
+        super.addInteractor(new LoadButton(this.getGame(), this));
         //  Instantiates the help/options button
         super.addInteractor(new HelpOrOptionsButton(this.getGame(), this));
         //  Instantiates the title label

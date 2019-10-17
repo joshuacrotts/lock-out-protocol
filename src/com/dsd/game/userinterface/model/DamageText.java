@@ -5,8 +5,8 @@
  */
 package com.dsd.game.userinterface.model;
 
-import com.dsd.game.userinterface.model.labels.StandardLabel;
 import com.dsd.game.userinterface.StandardInteractorHandler;
+import com.dsd.game.userinterface.model.labels.StandardLabel;
 import com.revivedstandards.main.StandardDraw;
 import com.revivedstandards.util.StdOps;
 import java.awt.Color;
