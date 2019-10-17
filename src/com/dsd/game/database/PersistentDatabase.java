@@ -2,7 +2,11 @@ package com.dsd.game.database;
 
 import com.dsd.game.AccountStatus;
 import com.dsd.game.Game;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -31,9 +35,9 @@ public class PersistentDatabase {
     private Connection remoteDBConnection;
 
     //  SQL Database information.
-    private static final String IP_ADDRESS = "35.226.95.88";
-    private static final String USERNAME = "root";
-    private static final String PASSWORD = "lockoutprotocol340";
+    private static String IP_ADDRESS;
+    private static String USERNAME;
+    private static String PASSWORD;
 
     public PersistentDatabase (Game _game) {
         this.game = _game;
@@ -65,6 +69,8 @@ public class PersistentDatabase {
         String instanceID = _dbName;
 
         this.generateClassName();
+
+        this.loadDatabaseCreds();
 
         String url = String.format("jdbc:mysql://%s:3306/%s", IP_ADDRESS, instanceID);
         try {
@@ -184,6 +190,36 @@ public class PersistentDatabase {
             Class.forName("com.mysql.jdbc.Driver");
         }
         catch (ClassNotFoundException ex) {
+            Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * Opens the database info file to retrieve the ip address, username, and
+     * password.
+     */
+    private void loadDatabaseCreds () {
+        try {
+            BufferedReader databaseFile = null;
+
+            try {
+                databaseFile = new BufferedReader(new FileReader("src/.config/.database_info.txt"));
+            }
+            catch (FileNotFoundException ex) {
+                Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            String ip = databaseFile.readLine();
+            PersistentDatabase.IP_ADDRESS = ip.substring(ip.indexOf("=") + 1);
+
+            String user = databaseFile.readLine();
+            PersistentDatabase.USERNAME = user.substring(user.indexOf("=") + 1);
+
+            String pswd = databaseFile.readLine();
+            PersistentDatabase.PASSWORD = pswd.substring(pswd.indexOf("=") + 1);
+            
+        }
+        catch (IOException ex) {
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -85,6 +85,7 @@ public class Game extends StandardGame {
 
         //  Create a new collision handler
         this.sch = new CollisionHandlerController(this);
+        
         //  Instantiates player & adds it to the handler
         this.player = new Player(200, 200, this, this.sch);
 
