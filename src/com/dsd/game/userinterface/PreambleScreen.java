@@ -6,6 +6,7 @@ import com.dsd.game.controller.TimerController;
 import com.dsd.game.userinterface.model.LightningModel;
 import com.dsd.game.userinterface.model.labels.WaveLabel;
 import com.dsd.game.util.Utilities;
+import com.revivedstandards.controller.StandardAudioController;
 import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.util.Timer;
@@ -117,6 +118,13 @@ public class PreambleScreen extends Screen {
         this.state = PreambleScreenState.FADE_IN;
         this.waveModel.setWaveNumber(this.getGame().getWaveNumber());
         this.preambleTimer = new Timer(true);
+    }
+
+    /**
+     * Plays the wave change sfx.
+     */
+    public void playWaveChangeSFX () {
+        StandardAudioController.play("src/resources/audio/sfx/round_change.wav");
     }
 
 //============================ GETTERS ====================================//

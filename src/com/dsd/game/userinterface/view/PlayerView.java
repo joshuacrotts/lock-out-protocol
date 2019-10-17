@@ -2,7 +2,6 @@ package com.dsd.game.userinterface.view;
 
 import com.dsd.game.Game;
 import com.dsd.game.userinterface.MenuScreen;
-import com.dsd.game.userinterface.Screen;
 import com.dsd.game.userinterface.model.buttons.StandardButton;
 import com.revivedstandards.controller.StandardFadeController;
 import com.revivedstandards.util.StdOps;

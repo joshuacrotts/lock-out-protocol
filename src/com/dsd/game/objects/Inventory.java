@@ -56,9 +56,25 @@ public class Inventory {
         this.hasGun = this.weapons.get(this.currentWeapon) instanceof Gun;
     }
 
+    /**
+     * If there was a change in the gender of the player, then we need to reload
+     * the image assets.
+     */
     public void reloadInventoryAssets () {
         for (int i = 0 ; i < this.weapons.size() ; i++) {
             this.weapons.get(i).loadAssets(this.player);
+        }
+    }
+
+    /**
+     * When the game is reset, the amo
+     */
+    public void reloadInventory () {
+        for (int i = 0 ; i < this.weapons.size() ; i++) {
+            if (this.weapons.get(i) instanceof Gun) {
+                Gun gun = (Gun) this.weapons.get(i);
+                gun.resetAmmo();
+            }
         }
     }
 

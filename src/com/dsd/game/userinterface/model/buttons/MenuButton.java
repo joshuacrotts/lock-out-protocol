@@ -17,9 +17,11 @@ import javax.swing.JOptionPane;
  */
 public abstract class MenuButton extends StandardButton implements MouseEventInterface {
 
+    //  Miscellaneous reference variables
     private final Game game;
     private final MenuScreen menuScreen;
 
+    //  Variables for the font and the actual buttons
     protected final Font font;
     protected BufferedImage onHoverButtonImg;
     protected BufferedImage buttonImg;
@@ -37,7 +39,8 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
 
     @Override
     public void render (Graphics2D _g2) {
-        _g2.drawImage(activeImage, (int) (this.getX()),
+        _g2.drawImage(this.activeImage,
+                (int) (this.getX()),
                 (int) (this.getY()),
                 this.getWidth(), this.getHeight(), game);
     }
@@ -56,6 +59,12 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
         return this.menuScreen;
     }
 
+    /**
+     * Displays a JOptionPane to the screen displaying if the user was able to
+     * log in to the SQL server successfully or not.
+     *
+     * @param _status
+     */
     public void displayAccountStatus (AccountStatus _status) {
         switch (_status) {
             case DOES_NOT_EXIST:

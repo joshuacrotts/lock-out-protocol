@@ -14,6 +14,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 /**
+ * View for the shop in the game.
  *
  * @author Joshua
  */
@@ -30,6 +31,7 @@ public class ShopView extends Interactor {
         ShopView.backingImage = StdOps.loadImage("src/resources/img/ui/shop.png");
         this.setWidth(this.game.getGameWidth());
         this.setHeight(this.game.getGameHeight());
+        this.setScaled(true);
     }
 
     @Override

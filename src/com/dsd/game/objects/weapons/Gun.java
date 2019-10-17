@@ -79,6 +79,11 @@ public abstract class Gun extends Weapon {
         }
     }
 
+    public void resetAmmo () {
+        this.currentAmmo = this.magazineAmt;
+        this.totalAmmo = this.magazineAmt;
+    }
+
     private boolean magExceedsTotalAmmo () {
         return this.totalAmmo < this.magazineAmt;
     }
