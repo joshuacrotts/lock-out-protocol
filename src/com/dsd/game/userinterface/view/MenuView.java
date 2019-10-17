@@ -23,14 +23,12 @@ public class MenuView implements Renderable, Updatable {
     private final Game game;
     private final MenuScreen menuScreen;
     private static final BufferedImage background;
-
     //  Position, sizing and velocity of shadow.
     private final float shadowRadius = 800f;
     private float shadowXPos = 100f;
     private float shadowYPos = 100f;
     private float shadowVelX = 1f;
     private float shadowVelY = 1f;
-
     //  Visualization of the shadow.
     private RadialGradientPaint shadowPaint;
     private Point2D shadowCenter;
@@ -50,7 +48,6 @@ public class MenuView implements Renderable, Updatable {
     public void tick () {
         this.shadowCenter = new Point2D.Float(this.shadowXPos, this.shadowYPos);
         this.shadowPaint = new RadialGradientPaint(this.shadowCenter, this.shadowRadius, this.shadowDistance, this.colors);
-
         this.updateShadowPosition();
         this.checkShadowBounds();
     }
@@ -79,7 +76,6 @@ public class MenuView implements Renderable, Updatable {
         if (this.shadowXPos <= 0 || this.shadowXPos > this.game.getGameWidth()) {
             this.shadowVelX = -this.shadowVelX;
         }
-
         if (this.shadowYPos <= 0 || this.shadowYPos > this.game.getGameHeight()) {
             this.shadowVelY = -this.shadowVelY;
         }

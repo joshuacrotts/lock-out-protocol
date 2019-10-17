@@ -6,6 +6,7 @@
 package com.dsd.game;
 
 /**
+ * This is the list of enumeration that can be used on Account button.
  *
  * @author Joshua
  */

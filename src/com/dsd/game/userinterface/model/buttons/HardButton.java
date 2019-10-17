@@ -57,9 +57,7 @@ public class HardButton extends MenuButton implements MouseEventInterface {
         if (!this.getGame().isMenu() || !this.getMenuScreen().isOnDifficulty()) {
             return;
         }
-
         super.onMouseClick();
-
         if (!DebugController.DEBUG_MODE) {
             this.getGame().setPreambleState();
             this.getGame().playWaveChangeSFX();

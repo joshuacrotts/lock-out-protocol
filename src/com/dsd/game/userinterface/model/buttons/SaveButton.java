@@ -24,7 +24,6 @@ public class SaveButton extends MenuButton implements MouseEventInterface {
     //  Miscellaneous reference variables.
     private final Game game;
     private final MenuScreen menuScreen;
-
     //  Button offsets and dimensions.
     private static final int BUTTON_X_OFFSET = 100;
     private static final int BUTTON_Y_OFFSET = 100;

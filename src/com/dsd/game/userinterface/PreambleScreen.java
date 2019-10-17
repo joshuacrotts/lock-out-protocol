@@ -22,7 +22,6 @@ public class PreambleScreen extends Screen {
     // Models for this screen.
     private final LightningModel lightningEffect;
     private final WaveLabel waveModel;
-
     // Transparency effect of all models on the screen.
     private final float ALPHA_TIMER = 0.005f;
     private float alpha = 0f;
@@ -33,7 +32,6 @@ public class PreambleScreen extends Screen {
      */
     private Timer preambleTimer;
     private final long PREAMBLE_TIMER_DURATION = 4000;
-
     // State that the menu is currently on (in terms of fading in/out).
     private PreambleScreenState state;
 

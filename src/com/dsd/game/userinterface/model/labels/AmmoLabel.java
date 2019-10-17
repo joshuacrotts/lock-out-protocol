@@ -19,7 +19,6 @@ public class AmmoLabel extends StandardLabel {
 
     private final Game game;
     private final Player player;
-
     //  Position and sizing of health elements
     private final int AMMO_X_OFFSET = 230;
     private final int AMMO_Y_OFFSET = 90;

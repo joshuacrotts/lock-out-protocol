@@ -46,19 +46,14 @@ public class Player extends Entity implements DeathListener {
 
     //  Inventory of the player, tells how much money they have, the current weapon, etc.
     private final Inventory inventory;
-
     //  Global commands
     private AttackCommand attackCommand;
-
     //  Variables representing the angle and approach velocity
     private final float APPROACH_VEL = -3.0f;
-
     //  Money amount
     private int money;
-
     //  Health vars (this may change with time)
     private int maxHealth = 200;
-
     //  Sex of player
     private String sex = "male";
 
@@ -66,19 +61,14 @@ public class Player extends Entity implements DeathListener {
         super(_x, _y, 100, StandardID.Player, (Game) _game, _sch);
         //  Instantiate the inventory
         this.inventory = new Inventory(this.getGame(), this, _sch);
-
         //  Initializes the miscellaneous variables
         this.sc = this.getGame().getCamera();
-
         //  Sets the default animation
         this.setAnimation(this.inventory.getCurrentWeapon().getWalkFrames());
-
         //  Instantiate commands
         this.initCommands();
-
         //  Initializes the player's default state to standing
         this.playerState = PlayerState.STANDING;
-
         //  Adds the player to the list of collidable objects
         _sch.addCollider(StandardID.Player);
         _sch.flagAlive(StandardID.Player);

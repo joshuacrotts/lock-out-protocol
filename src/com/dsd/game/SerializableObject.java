@@ -11,11 +11,11 @@ package com.dsd.game;
  */
 public interface SerializableObject {
 
-    public String createObject ();
+    public String createObject();
 
-    public SerializableObject readObject (SerializableObject _obj);
+    public SerializableObject readObject(SerializableObject _obj);
 
-    public void updateObject (SerializableObject _obj);
+    public void updateObject(SerializableObject _obj);
 
-    public void destroyObject (SerializableObject _obj);
+    public void destroyObject(SerializableObject _obj);
 }

@@ -40,23 +40,18 @@ public class GreenMonster extends Enemy implements DeathListener {
      */
     private static final BufferedImage[] WALK_FRAMES;
     private static final BufferedImage[] DEATH_FRAMES;
-
     //  Animation frame per second setting
     private final int walkingFPS;
     private final int WALKING_FPS_MIN = 13;
     private final int WALKING_FPS_MAX = 16;
     private static final int DEATH_FPS = 5;
-
     //  One-time variable for tracking the "alive" to "death state" transition
     private boolean aliveFlag = true;
-
     //  Variables representing the angle and approach velocity
     private final double APPROACH_VEL = -2.5f;
     private final double DAMAGE = 0.50;
-
     //  AlphaComposite factor for when the GreenMonster dies
     private static final float DEATH_ALPHA_FACTOR = 0.001f;
-
     //  Health factor for this GreenMonster object.
     public static int originalHealth = 200;
 

@@ -28,25 +28,23 @@ import java.util.logging.Logger;
 public class PersistentDatabase {
 
     private final Game game;
-
     //  Relative database information (depending on if it's local or not).
     private TranslatorDatabase translatorDatabase;
     private BufferedWriter fileWriter;
     private Connection remoteDBConnection;
-
     //  SQL Database information.
     private static String IP_ADDRESS;
     private static String USERNAME;
     private static String PASSWORD;
 
-    public PersistentDatabase (Game _game) {
+    public PersistentDatabase(Game _game) {
         this.game = _game;
     }
 
     /**
      * Write the contents of the supplied information to the db type.
      */
-    public void save () {
+    public void save() {
         throw new UnsupportedOperationException("Not supported at this time.");
     }
 
@@ -54,7 +52,7 @@ public class PersistentDatabase {
      * Parse through the file, load the contents, and return as some type of
      * list, perhaps?
      */
-    public void load () {
+    public void load() {
         throw new UnsupportedOperationException("Not supported at this time.");
     }
 
@@ -64,7 +62,7 @@ public class PersistentDatabase {
      * @param _dbName
      * @return true if a connection was successful, false otherwise.
      */
-    public boolean connect (String _dbName) {
+    public boolean connect(String _dbName) {
         //  Database NAME (db name in remote sql)
         String instanceID = _dbName;
 
@@ -75,8 +73,7 @@ public class PersistentDatabase {
         String url = String.format("jdbc:mysql://%s:3306/%s", IP_ADDRESS, instanceID);
         try {
             this.remoteDBConnection = DriverManager.getConnection(url, USERNAME, PASSWORD);
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
@@ -95,19 +92,16 @@ public class PersistentDatabase {
      *
      * @return
      */
-    public AccountStatus userAuthenticated (String _email, String _password) {
+    public AccountStatus userAuthenticated(String _email, String _password) {
         try {
             //  Verify the email
             if (!this.userEmailInDatabase(_email)) {
                 return AccountStatus.DOES_NOT_EXIST;
-            }
-
-            //  Verify the email AND the password.
+            } //  Verify the email AND the password.
             else if (!this.userInDatabase(_email, _password)) {
                 return AccountStatus.INCORRECT_PASS;
             }
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -121,13 +115,12 @@ public class PersistentDatabase {
      * @param _password
      * @return
      */
-    public AccountStatus addUser (String _email, String _password) {
+    public AccountStatus addUser(String _email, String _password) {
         PreparedStatement insertStatement = null;
         try {
             if (this.userInDatabase(_email, _password)) {
                 return AccountStatus.EXISTS;
-            }
-            else {
+            } else {
                 insertStatement = this.remoteDBConnection.prepareStatement(String.format("INSERT INTO user_accounts " + "VALUES(DEFAULT, ?, MD5(?));"));
                 insertStatement.setString(1, _email);
                 insertStatement.setString(2, _password);
@@ -135,8 +128,7 @@ public class PersistentDatabase {
                 return AccountStatus.ACCOUNT_CREATED;
             }
 
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
@@ -151,7 +143,7 @@ public class PersistentDatabase {
      * @return
      * @throws SQLException
      */
-    private boolean userInDatabase (String _email, String _password) throws SQLException {
+    private boolean userInDatabase(String _email, String _password) throws SQLException {
         PreparedStatement insertStatement = null;
         ResultSet resultQuery = null;
         try {
@@ -159,8 +151,7 @@ public class PersistentDatabase {
             insertStatement.setString(1, _email);
             insertStatement.setString(2, _password);
             resultQuery = insertStatement.executeQuery();
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -174,7 +165,7 @@ public class PersistentDatabase {
      * @return
      * @throws SQLException
      */
-    private boolean userEmailInDatabase (String _email) throws SQLException {
+    private boolean userEmailInDatabase(String _email) throws SQLException {
         PreparedStatement insertStatement = this.remoteDBConnection.prepareStatement(String.format("SELECT * FROM user_accounts WHERE Email = ?;"));
         insertStatement.setString(1, _email);
         ResultSet resultQuery = insertStatement.executeQuery();
@@ -185,11 +176,10 @@ public class PersistentDatabase {
     /**
      * Generates the necessary classname to get the MySQL java driver working.s
      */
-    private void generateClassName () {
+    private void generateClassName() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-        }
-        catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -198,14 +188,13 @@ public class PersistentDatabase {
      * Opens the database info file to retrieve the ip address, username, and
      * password.
      */
-    private void loadDatabaseCreds () {
+    private void loadDatabaseCreds() {
         try {
             BufferedReader databaseFile = null;
 
             try {
                 databaseFile = new BufferedReader(new FileReader("src/.config/.database_info.txt"));
-            }
-            catch (FileNotFoundException ex) {
+            } catch (FileNotFoundException ex) {
                 Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -218,8 +207,7 @@ public class PersistentDatabase {
             String pswd = databaseFile.readLine();
             PersistentDatabase.PASSWORD = pswd.substring(pswd.indexOf("=") + 1);
             
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

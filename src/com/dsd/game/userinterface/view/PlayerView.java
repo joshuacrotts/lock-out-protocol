@@ -26,15 +26,12 @@ public class PlayerView implements Renderable, Updatable {
     private final Game game;
     private final MenuScreen menuScreen;
     private final StandardButton parentButton;
-
     //  Variables that define the outline around the icons
     private Rectangle iconOutline;
     private StandardFadeController fadeController;
-
     //  Backing buffered image
     private final BufferedImage icon;
     private final String sex;
-
     //  Image dimension info
     private final int STROKE_WIDTH = 10;
     private final int imageWidth;
@@ -49,7 +46,6 @@ public class PlayerView implements Renderable, Updatable {
         this.sex = _sex;
         this.imageWidth = _parentButton.getWidth();
         this.imageHeight = _parentButton.getHeight();
-
         this.setFadeController();
     }
 

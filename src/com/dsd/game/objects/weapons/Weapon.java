@@ -23,12 +23,9 @@ public abstract class Weapon implements SerializableObject {
     private StandardAnimatorController walkWeaponFrames;
     private StandardAnimatorController attackWeaponFrames;
     private BufferedImage weaponIcon;
-
-    //  State of the weapon (when applicable), and the sfx
-    //  it makes when attacking.
+    //  State of the weapon (when applicable), and the sfx it makes when attacking.
     private WeaponState weaponState;
     private String attackSFXPath;
-
     //  Variables to determine how long to wait in between attacks.
     private long delay = 0;
     private boolean ready = true;
@@ -38,7 +35,7 @@ public abstract class Weapon implements SerializableObject {
      * just a projectile exiting the weapon (like a bullet).
      */
     private int damage;
-
+    
     //  Some powerups will increase the weapon's damage. This variable handles that.
     private int damageFactor = 1;
 

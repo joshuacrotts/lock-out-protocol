@@ -33,7 +33,7 @@ public class SpawnerController extends StandardGameObject {
     private final long delay;
     private final int radius;
 
-    public SpawnerController (int _x, int _y, EnemyType _id, long _delay, int _radius, Game _game, StandardCollisionHandler _sch) {
+    public SpawnerController(int _x, int _y, EnemyType _id, long _delay, int _radius, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, StandardID.Spawner);
         this.game = _game;
         this.spawnerID = _id;
@@ -47,22 +47,24 @@ public class SpawnerController extends StandardGameObject {
 
     @Override
     public void tick() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet.");
+        //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void render(Graphics2D gd) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }    
-    
+        //throw new UnsupportedOperationException("Not supported yet.");
+        //To change body of generated methods, choose Tools | Templates.
+    }
+
     /**
      * Spawns _n mobs randomly in the specified radius of the spawner.
      *
      * @param _n
      */
-    protected void spawn (int _n) {
+    protected void spawn(int _n) {
 
-        for (int i = 0 ; i < _n ; i++) {
+        for (int i = 0; i < _n; i++) {
             int xPos = (int) StdOps.rand(this.getX() - this.radius, this.getX() + this.radius);
             int yPos = (int) StdOps.rand(this.getY() - this.radius, this.getY() + this.radius);
 
@@ -81,7 +83,6 @@ public class SpawnerController extends StandardGameObject {
         }
     }
 
-
     /**
      * Very similar to the AttackCommand, we need a delay timer for mobs
      * spawning. We only want mobs to spawn at a certain interval, so this
@@ -92,13 +93,13 @@ public class SpawnerController extends StandardGameObject {
         private final SpawnerController spawnerController;
         private final Game game;
 
-        public SpawnerDelayTimer (SpawnerController _spawnerController, Game _game) {
+        public SpawnerDelayTimer(SpawnerController _spawnerController, Game _game) {
             this.spawnerController = _spawnerController;
             this.game = _game;
         }
 
         @Override
-        public void run () {
+        public void run() {
             /**
              * If we're not paused AND the game isn't in its preamble state, we
              * can spawn the entities.

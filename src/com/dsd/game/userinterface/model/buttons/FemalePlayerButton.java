@@ -20,7 +20,6 @@ public class FemalePlayerButton extends StandardButton implements MouseEventInte
     private final Game game;
     private final MenuScreen menuScreen;
     private static PlayerView playerView;
-
     //  Female Player Button dimensions and position.
     private static final int BUTTON_WIDTH = 350;
     private static final int BUTTON_HEIGHT = 350;

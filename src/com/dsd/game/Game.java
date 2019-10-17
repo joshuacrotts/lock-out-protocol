@@ -73,7 +73,7 @@ public class Game extends StandardGame {
     //  Main player reference so other monsters can track them
     private Player player;
 
-    public Game (int _width, int _height, String _title) {
+    public Game(int _width, int _height, String _title) {
         /**
          * Note: Magic numbers for the player and the monster are just for
          * demonstration; they will NOT be in the final game.
@@ -85,7 +85,7 @@ public class Game extends StandardGame {
 
         //  Create a new collision handler
         this.sch = new CollisionHandlerController(this);
-        
+
         //  Instantiates player & adds it to the handler
         this.player = new Player(200, 200, this, this.sch);
 
@@ -122,7 +122,7 @@ public class Game extends StandardGame {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         //  Depending on the game state, update different things.
         switch (this.gameState) {
             case MENU:
@@ -152,12 +152,11 @@ public class Game extends StandardGame {
     }
 
     @Override
-    public void render () {
+    public void render() {
         //  Depending on the game state, render different things.
         if (this.gameState == GameState.MENU) {
             this.menuScreen.render(StandardDraw.Renderer);
-        }
-        else {
+        } else {
             //  First things first: render the camera
             StandardDraw.Object(this.sc);
             //  Then render the current [active] level
@@ -191,7 +190,7 @@ public class Game extends StandardGame {
      * Once the game turns to the PLAY state, this method is called. It will
      * instantiate the Spawner controllers, level controllers, etc.
      */
-    public void uponPlay () {
+    public void uponPlay() {
         DifficultyController.setDifficultyFactor();
         DifficultyController.setLevelTransitionTimer();
         this.levelController.getCurrentLevel().loadLevelData();
@@ -202,28 +201,18 @@ public class Game extends StandardGame {
     /**
      * Plays the wave change sfx.
      */
-    public void playWaveChangeSFX () {
+    public void playWaveChangeSFX() {
         StandardAudioController.play("src/resources/audio/sfx/round_change.wav");
     }
 
-    /**
-     * Sets the game to the preamble state and reset the alpha transparency of
-     * it.
-     */
-    public void setPreambleState () {
-        this.gameState = GameState.PREAMBLE;
-        this.playWaveChangeSFX();
-        this.preambleScreen.resetPreambleScreen();
-    }
-
-    public void changeResolution (int _width, int _height) {
+    public void changeResolution(int _width, int _height) {
         this.setGameWidth(_width);
         this.setGameHeight(_height);
         Screen.setGameDimensions();
         this.reinstantiateCamera();
     }
 
-    public void resetGame () {
+    public void resetGame() {
         this.sch.clearEntities();
         this.levelController.clearLevels();
         this.instantiateLevels();
@@ -231,11 +220,11 @@ public class Game extends StandardGame {
         DifficultyController.resetDifficultyFactors();
     }
 
-    public void saveToDatabase () {
+    public void saveToDatabase() {
         this.translatorDatabase.save();
     }
 
-    public void loadFromDatabase () {
+    public void loadFromDatabase() {
         this.translatorDatabase.load();
     }
 
@@ -243,80 +232,90 @@ public class Game extends StandardGame {
      * Loads the level data when the game starts so the timers can be
      * instantiated.
      */
-    private void instantiateLevels () {
+    private void instantiateLevels() {
         this.levelController.addLevel(new MetalLevel(this.player, this, this.sch));
     }
 
-    private void reinstantiateCamera () {
+    private void reinstantiateCamera() {
         this.sc.setVpw(this.getGameWidth() >> 1);
         this.sc.setVph(this.getGameHeight() >> 1);
     }
 
 //========================== GETTERS =============================//
-    public Player getPlayer () {
+    public Player getPlayer() {
         return this.player;
     }
 
-    public GameState getGameState () {
+    public GameState getGameState() {
         return this.gameState;
     }
 
-    public StandardCamera getCamera () {
+    public StandardCamera getCamera() {
         return this.sc;
     }
 
-    public StandardCollisionHandler getHandler () {
+    public StandardCollisionHandler getHandler() {
         return this.sch;
     }
 
-    public StandardLevel getCurrentLevel () {
+    public StandardLevel getCurrentLevel() {
         return this.levelController.getCurrentLevel();
     }
 
-    public int getCurrentLevelID () {
+    public int getCurrentLevelID() {
         return this.levelController.getCurrentLevelID();
     }
 
-    public int getLogicalCurrentLevelID () {
+    public int getLogicalCurrentLevelID() {
         return this.levelController.getLogicalCurrentLevelID();
     }
 
-    public int getWaveNumber () {
+    public int getWaveNumber() {
         return this.levelController.getWaveNumber();
     }
 
-    public boolean isPaused () {
+    public boolean isPaused() {
         return this.gameState == GameState.PAUSED;
     }
 
-    public boolean isPreamble () {
+    public boolean isPreamble() {
         return this.gameState == GameState.PREAMBLE;
     }
 
-    public boolean isRunning () {
+    public boolean isRunning() {
         return this.gameState == GameState.RUNNING;
     }
 
-    public boolean isInGameState () {
+    public boolean isInGameState() {
         return this.isRunning() | this.isPreamble();
     }
 
-    public boolean isShop () {
+    public boolean isShop() {
         return this.gameState == GameState.SHOP;
     }
 
-    public boolean isMenu () {
+    public boolean isMenu() {
         return this.gameState == GameState.MENU;
     }
 
 //========================== SETTERS =============================//
-    public void setGameState (GameState _gs) {
+    public void setGameState(GameState _gs) {
         this.gameState = _gs;
     }
 
-    public void setPlayer (Player _player) {
+    public void setPlayer(Player _player) {
         this.player = _player;
         this.player.setCamera(sc);
         this.player.setHandler(this.sch);
+    }
+
+    /**
+     * Sets the game to the preamble state and reset the alpha transparency of
+     * it.
+     */
+    public void setPreambleState() {
+        this.gameState = GameState.PREAMBLE;
+        this.playWaveChangeSFX();
+        this.preambleScreen.resetPreambleScreen();
     }
 }

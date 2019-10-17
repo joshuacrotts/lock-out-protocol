@@ -20,7 +20,6 @@ import java.awt.image.BufferedImage;
 public class ShopView extends Interactor {
 
     private static BufferedImage backingImage;
-
     private final Game game;
     private final StandardCamera camera;
 

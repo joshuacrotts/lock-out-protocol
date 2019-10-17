@@ -25,7 +25,6 @@ public class LoadButton extends MenuButton implements MouseEventInterface {
     //  Miscellaneous reference variables.
     private final Game game;
     private final MenuScreen menuScreen;
-
     private static final int BUTTON_X_OFFSET = 20;
     private static final int BUTTON_Y_OFFSET = -50;
     private static final int TEXT_X_OFFSET = 80;
@@ -33,17 +32,16 @@ public class LoadButton extends MenuButton implements MouseEventInterface {
     private static final int BUTTON_WIDTH = 300;
     private static final int BUTTON_HEIGHT = 82;
 
-    public LoadButton (Game _game, MenuScreen _menuScreen) {
+    public LoadButton(Game _game, MenuScreen _menuScreen) {
         super(Screen.gameHalfWidth + BUTTON_X_OFFSET,
                 Screen.gameHalfHeight - BUTTON_Y_OFFSET,
                 BUTTON_WIDTH, BUTTON_HEIGHT, "LOAD GAME", _game, _menuScreen);
-
         this.game = _game;
         this.menuScreen = _menuScreen;
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (!this.getGame().isMenu()
                 || !this.getMenuScreen().isOnMainMenu()) {
             return;
@@ -53,7 +51,7 @@ public class LoadButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.getGame().isMenu()
                 || !this.getMenuScreen().isOnMainMenu()) {
             return;
@@ -67,20 +65,21 @@ public class LoadButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         if (!this.getGame().isMenu()
                 || !this.getMenuScreen().isOnMainMenu()) {
             return;
         }
-
-        //  Once the user presses the load button, it will contact the database,
-        //  and update the game information.
+        /**
+         * Once the user presses the load button, it will contact the database,
+         * and update the game information.
+         */
         this.getGame().loadFromDatabase();
         this.getGame().setGameState(GameState.RUNNING);
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         if (!this.getGame().isMenu()
                 || !this.getMenuScreen().isOnMainMenu()) {
             return;
@@ -89,7 +88,7 @@ public class LoadButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         if (!this.getGame().isMenu()
                 || !this.getMenuScreen().isOnMainMenu()) {
             return;

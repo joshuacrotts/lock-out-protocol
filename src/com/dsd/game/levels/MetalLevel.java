@@ -30,7 +30,6 @@ public class MetalLevel extends StandardLevel {
      */
     private int trackX;
     private final double SCROLL_X_FACTOR = 0.25;
-
     //  Define camera scroll minimum constants
     private final int MIN_X = (int) (Screen.gameHalfWidth * 1.5);
     private final int MIN_Y = (int) (Screen.gameHalfHeight * 1.5);
@@ -85,7 +84,7 @@ public class MetalLevel extends StandardLevel {
         }
     }
 
-//===================== SETTERS ==============================//
+//============================== SETTERS ==============================//
     /**
      * Sets the camera's field of view so as to prevent the camera from
      * scrolling too far to any of the sides

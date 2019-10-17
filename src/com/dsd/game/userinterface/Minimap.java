@@ -27,29 +27,23 @@ public class Minimap extends Interactor {
     //  Miscellaneous reference variables
     private final Game game;
     private final StandardCollisionHandler globalHandler;
-
     //  Border texture that surrounds the image with the objects
     private final BufferedImage border;
-
     //  Scale that is applied to all objects in the map
     private final int MINIMAP_SCALE = 20;
     private final int MMX_OFFSET = 230;
     private final int MMY_OFFSET = 20;
-
     //  Object and map size dimensions
     private final int MAP_DIMENSION = 200;
     private final int OBJECT_DIMENTION = 5;
-
     //  Points for describing the triangle that draws the player
     private final int[] X_POINTS;
     private final int[] Y_POINTS;
-
     //  Indices in the arrays of x/y points
     private final int POINT_ONE = 0;
     private final int POINT_TWO = 1;
     private final int POINT_THREE = 2;
     private final int POINT_FOUR = 3;
-
     //  Scale for the player's triangle
     private final int TRIANGLE_X_SCALE = 6;
     private final int TRIANGLE_Y_SCALE = 12;
@@ -193,5 +187,4 @@ public class Minimap extends Interactor {
     @Override
     public void onMouseExitHover () {
     }
-
 }

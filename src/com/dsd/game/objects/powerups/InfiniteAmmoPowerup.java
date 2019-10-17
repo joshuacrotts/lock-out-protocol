@@ -37,7 +37,6 @@ public class InfiniteAmmoPowerup extends StandardGameObject {
     private final StandardCamera camera;
     private final StandardCollisionHandler parentContainer;
     private Timer powerupTimer;
-
     //  View
     private final StandardFadeController color;
     private static final BufferedImage[] INFINITE_AMMO_FRAMES;
@@ -45,10 +44,8 @@ public class InfiniteAmmoPowerup extends StandardGameObject {
     private static final int RECT_STROKE = 20;
     private static final int STROKE_X_OFFSET = (int) (RECT_STROKE * 1.5);
     private static final int STROKE_Y_OFFSET = (int) (RECT_STROKE * 2.4);
-
     //  Timer for how long the powerup is active (in milliseconds)
     private int timer = 10000;
-
     private boolean isActivated = false;
     private boolean isCollected = false;
 
@@ -58,13 +55,10 @@ public class InfiniteAmmoPowerup extends StandardGameObject {
         this.camera = _game.getCamera();
         this.player = _game.getPlayer();
         this.parentContainer = _sch;
-
         StandardAnimatorController berserkAnimation = new StandardAnimatorController(this, INFINITE_AMMO_FRAMES, INF_AMMO_FPS);
-
         this.setAnimation(berserkAnimation);
         this.setWidth(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getWidth());
         this.setHeight(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getHeight());
-
         this.color = new StandardFadeController(Color.blue, Color.green, 0.05f);
     }
 
@@ -159,11 +153,11 @@ public class InfiniteAmmoPowerup extends StandardGameObject {
         INFINITE_AMMO_FRAMES = Utilities.loadFrames("src/resources/img/items/drops/infammo/", 27);
     }
 
-    //
-    //  Private class for the infinite ammo. Once the player picks up the
-    //  powerup, the timer starts and continues until x milliseconds have
-    //  passed, then deactivates the powerup.
-    //
+    /**
+     * Private class for the infinite ammo. Once the player picks up the
+     * powerup, the timer starts and continues until x milliseconds have passed,
+     * then deactivates the powerup.
+     */
     private class InfiniteAmmoTimer extends TimerTask {
 
         private final InfiniteAmmoPowerup powerup;

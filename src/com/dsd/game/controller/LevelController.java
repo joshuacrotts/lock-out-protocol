@@ -26,7 +26,6 @@ public class LevelController {
     private final Game game;
     private final List<StandardLevel> levels;
     private Timer levelTimer;
-
     private int currentLevelID = 0;
     private int currentWave = 1;
 

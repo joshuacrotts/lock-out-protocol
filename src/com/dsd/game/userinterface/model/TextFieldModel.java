@@ -21,13 +21,11 @@ public class TextFieldModel extends Interactor implements MouseEventInterface {
     private final Game game;
     private final MenuScreen menuScreen;
     private final TextFieldView view;
-
     //  Dimensions of text field.
     private final int FIELD_WIDTH = 600;
     private final int FIELD_HEIGHT = 30;
     private boolean fieldActive;
     private boolean visible = true;
-
     private final LetterInputListener inputListener;
     private final StringBuilder string;
 
@@ -39,7 +37,6 @@ public class TextFieldModel extends Interactor implements MouseEventInterface {
         this.setWidth(FIELD_WIDTH);
         this.setHeight(FIELD_HEIGHT);
         super.setX(this.getX() - this.getWidth() / 2);
-
         //  Instantiate the variables associated with the view of this model.
         this.view = new TextFieldView(this);
         this.string = new StringBuilder();

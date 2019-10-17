@@ -22,7 +22,6 @@ public class LightningModel extends Interactor {
     private final Game game;
     private final StandardCamera camera;
     private Line2D[] lightningLines;
-
     private final int MIN_X_VARIABILITY = 5;
     private final int MAX_X_VARIABILITY = 30;
     private final int Y_VARIABILITY = 3;
@@ -90,7 +89,6 @@ public class LightningModel extends Interactor {
         int prevYPos = (int) StdOps.rand(this.camera.getY() - Y_VARIABILITY, this.camera.getY() + Y_VARIABILITY);
         //  Add initial pair
         boltPositions.add(new Pair(prevXPos, prevYPos));
-
         //  While the bolt still hasn't reached the edge of the screen
         while (prevXPos < this.camera.getX() + Screen.gameHalfWidth) {
             int deltaX = StdOps.rand(MIN_X_VARIABILITY, MAX_X_VARIABILITY);

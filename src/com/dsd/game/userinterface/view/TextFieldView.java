@@ -18,7 +18,6 @@ public class TextFieldView implements Renderable, Updatable {
 
     private final TextFieldModel model;
     private Rectangle rectangleView;
-
     private static final Color BORDER_COLOR = Color.BLUE;
     private static final Color ACTIVE_COLOR = Color.WHITE;
     private static final Color UNACTIVE_COLOR = Color.GRAY;

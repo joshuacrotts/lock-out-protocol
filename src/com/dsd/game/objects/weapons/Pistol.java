@@ -21,10 +21,8 @@ public class Pistol extends Gun {
     //  Information regarding the FPS of the pistol animations for the player.
     private static final int WALKING_FPS = 10;
     private static final int SHOOT_GUN_FPS = 20;
-
     //  Delay between shots.
     private final int DELAY = 1250;
-
     //  Damage from the pistol.
     private static final int BULLET_DAMAGE = 35;
 
