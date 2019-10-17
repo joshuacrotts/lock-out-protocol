@@ -1,7 +1,6 @@
 package com.dsd.game.userinterface.model.buttons;
 
 import com.dsd.game.Game;
-import com.dsd.game.GameState;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MenuState;
 import com.dsd.game.userinterface.MouseEventInterface;
@@ -27,20 +26,20 @@ public class PlayButton extends MenuButton implements MouseEventInterface {
     private static final int BUTTON_WIDTH = 300;
     private static final int BUTTON_HEIGHT = 82;
 
-    public PlayButton(Game _game, MenuScreen _menuScreen) {
+    public PlayButton (Game _game, MenuScreen _menuScreen) {
         super(Screen.gameHalfWidth - BUTTON_X_OFFSET,
                 Screen.gameHalfHeight - BUTTON_Y_OFFSET,
                 BUTTON_WIDTH, BUTTON_HEIGHT, "PLAY", _game, _menuScreen);
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         this.setX(Screen.gameHalfWidth - BUTTON_X_OFFSET);
         this.setY(Screen.gameHalfHeight - BUTTON_Y_OFFSET);
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         if (!this.getMenuScreen().isOnMainMenu()) {
             return;
         }
@@ -51,7 +50,7 @@ public class PlayButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseClick() {
+    public void onMouseClick () {
         if (!this.getGame().isMenu()
                 || !this.getMenuScreen().isOnMainMenu()) {
             return;
@@ -63,7 +62,7 @@ public class PlayButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseEnterHover() {
+    public void onMouseEnterHover () {
         if (!this.getGame().isMenu() || !this.getMenuScreen().isOnMainMenu()) {
             return;
         }
@@ -72,7 +71,7 @@ public class PlayButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseExitHover() {
+    public void onMouseExitHover () {
         if (!this.getGame().isMenu()) {
             return;
         }

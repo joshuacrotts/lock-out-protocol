@@ -16,13 +16,13 @@ public class TimerController {
 
     private static final ArrayList<Timer> timers = new ArrayList<>();
 
-    public static void addTimer(Timer _timer) {
+    public static void addTimer (Timer _timer) {
         timers.add(_timer);
         System.out.println("Added a timer");
     }
 
-    public static void stopTimers() {
-        for (int i = 0; i < TimerController.timers.size(); i++) {
+    public static void stopTimers () {
+        for (int i = 0 ; i < TimerController.timers.size() ; i++) {
             Timer currentTimer = timers.get(i);
             currentTimer.cancel();
         }

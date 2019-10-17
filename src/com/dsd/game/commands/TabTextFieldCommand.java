@@ -6,7 +6,6 @@
 package com.dsd.game.commands;
 
 import com.dsd.game.Game;
-import com.dsd.game.GameState;
 import com.dsd.game.controller.TextFieldController;
 import com.revivedstandards.commands.Command;
 import java.awt.event.KeyEvent;
@@ -25,7 +24,7 @@ public class TabTextFieldCommand extends Command {
 
     public TabTextFieldCommand (Game _game) {
         this.game = _game;
-        
+
         //  We need to tell the Canvas within the Game class to stop listening
         //  for tab events because the focus subsystem consumes focus traversal
         //  keys (for Swing mechanisms).
