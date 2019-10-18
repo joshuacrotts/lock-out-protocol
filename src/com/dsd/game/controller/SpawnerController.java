@@ -4,6 +4,8 @@ import com.dsd.game.Game;
 import com.dsd.game.enemies.BasicMonster;
 import com.dsd.game.enemies.DarkFemaleMonster;
 import com.dsd.game.enemies.GreenMonster;
+import com.dsd.game.enemies.RedHeadMonster;
+import com.dsd.game.enemies.TinyMonster;
 import com.dsd.game.enemies.enums.EnemyType;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.model.StandardGameObject;
@@ -78,6 +80,12 @@ public class SpawnerController extends StandardGameObject {
                     break;
                 case DARK_FEMALE_MONSTER:
                     this.parentContainer.addEntity(new DarkFemaleMonster(xPos, yPos, this.game, this.parentContainer));
+                    break;
+                case RED_HEAD_MONSTER:
+                    this.parentContainer.addEntity(new RedHeadMonster(xPos, yPos, this.game, this.parentContainer));
+                    break;
+                case TINY_MONSTER:
+                    this.parentContainer.addEntity(new TinyMonster(xPos, yPos, this.game, this.parentContainer));
             }
         }
     }

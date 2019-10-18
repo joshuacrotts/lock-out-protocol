@@ -10,11 +10,16 @@ import com.dsd.game.enemies.enums.EnemyState;
 import com.dsd.game.objects.Entity;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
+import com.revivedstandards.handlers.StandardParticleHandler;
 import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.model.StandardAnimation;
+import com.revivedstandards.model.StandardBoxParticle;
 import com.revivedstandards.model.StandardGameObject;
 import com.revivedstandards.model.StandardID;
+import com.revivedstandards.util.StdOps;
+import com.revivedstandards.view.ShapeType;
 import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -31,10 +36,16 @@ import java.util.Collections;
  */
 public abstract class Enemy extends Entity {
 
-    //  Miscellaneous reference variables
-    private Entity target;
+    //  Miscellaneous reference variables.
     private final StandardCamera sc;
+
+    //  Handler for blood particles.
+    private final StandardParticleHandler bloodHandler;
+
+    //  Information about the enemy's state in the game, and who they're
+    //  moving towards.
     private EnemyState enemyState;
+    private Entity target;
 
     //  Animation controllers
     private StandardAnimatorController walkingController;
@@ -45,22 +56,31 @@ public abstract class Enemy extends Entity {
     private float deathTransparencyFactor;
     private float deathTransparency = 1.0f;
 
-    //  How much damage the enemy does when running into the player
+    //  How much damage the enemy does when running into the player.
     protected double damage;
 
     //  Alpha composition object for when the monster dies.
     protected AlphaComposite deathTransparentComposite;
 
+    private static final int MAX_BLOOD_PARTICLES = 50;
+    private static final int BLOOD_PARTICLES = 10;
+
     public Enemy (int _x, int _y, int _health, StandardID _id, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, _health, _id, _game, _sch);
         this.sc = this.getGame().getCamera();
+        this.bloodHandler = new StandardParticleHandler(MAX_BLOOD_PARTICLES);
+        this.bloodHandler.setCamera(this.sc);
     }
 
     @Override
-    public abstract void render (Graphics2D _g2);
+    public void render (Graphics2D _g2) {
+        this.bloodHandler.render(_g2);
+    }
 
     @Override
-    public abstract void tick ();
+    public void tick () {
+        this.bloodHandler.tick();
+    }
 
     /**
      * Generates a random track to play when the monster is hurt. _sfxTrack
@@ -78,6 +98,19 @@ public abstract class Enemy extends Entity {
     public void setDimensions () {
         this.setWidth(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getWidth());
         this.setHeight(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getHeight());
+    }
+
+    /**
+     * Generates ten blood particles. Will probably make this more flexible
+     * later.
+     */
+    public void generateBloodParticles () {
+        for (int i = 0 ; i < BLOOD_PARTICLES ; i++) {
+            this.bloodHandler.addEntity(new StandardBoxParticle(this.getX(), this.getY(),
+                    StdOps.rand(1.0, 5.0), StdOps.randBounds(-10.0, -3.0, 3.0, 10.0),
+                    StdOps.randBounds(-10.0, -3.0, 3.0, 10.0), Color.RED, 3f, this.bloodHandler,
+                    this.getAngle(), ShapeType.CIRCLE, false));
+        }
     }
 
     /**
