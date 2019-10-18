@@ -5,6 +5,7 @@ import com.dsd.game.GameState;
 import com.dsd.game.controller.TimerController;
 import com.dsd.game.userinterface.model.LightningModel;
 import com.dsd.game.userinterface.model.labels.WaveLabel;
+import com.dsd.game.util.StdConsole;
 import com.dsd.game.util.Utilities;
 import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
@@ -112,7 +113,7 @@ public class PreambleScreen extends Screen {
      * Resets the alpha of the transparency, and begins to re-fade in the timer.
      */
     public void resetPreambleScreen () {
-        System.out.println("Resetting the preamble screen...");
+        StdConsole.println(StdConsole.CYAN, "Resetting the preamble screen...");
         this.alpha = 0;
         this.state = PreambleScreenState.FADE_IN;
         this.waveModel.setWaveNumber(this.getGame().getWaveNumber());

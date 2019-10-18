@@ -27,7 +27,7 @@ public class SpawnerController extends StandardGameObject {
     private final Game game;
 
     //  Timer object controlling the spawn-rate.
-    private Timer spawnerTimer;
+    private final Timer spawnerTimer;
 
     //  Delay and radius of the timer.
     private final long delay;
@@ -41,20 +41,21 @@ public class SpawnerController extends StandardGameObject {
         this.delay = _delay;
         this.radius = _radius;
         this.spawnerTimer = new Timer(true);
-        TimerController.addTimer(spawnerTimer);
         this.spawnerTimer.scheduleAtFixedRate(new SpawnerDelayTimer(this, this.game), this.delay, this.delay);
+
+        TimerController.addTimer(spawnerTimer);
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void render(Graphics2D gd) {
+    public void render (Graphics2D gd) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }    
-    
+    }
+
     /**
      * Spawns _n mobs randomly in the specified radius of the spawner.
      *
@@ -80,7 +81,6 @@ public class SpawnerController extends StandardGameObject {
             }
         }
     }
-
 
     /**
      * Very similar to the AttackCommand, we need a delay timer for mobs

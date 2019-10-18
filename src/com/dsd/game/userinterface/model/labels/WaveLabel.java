@@ -3,6 +3,7 @@ package com.dsd.game.userinterface.model.labels;
 import com.dsd.game.Game;
 import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.util.StdOps;
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 /**
@@ -31,7 +32,10 @@ public class WaveLabel extends StandardLabel {
 
     @Override
     public void render (Graphics2D _g2) {
+        Color oldColor = _g2.getColor();
+        _g2.setColor(Color.WHITE);
         super.render(_g2);
+        _g2.setColor(oldColor);
     }
 
     public void setWaveNumber (int _waveNumber) {

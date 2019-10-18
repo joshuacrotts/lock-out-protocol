@@ -30,6 +30,14 @@ public abstract class Utilities extends StdOps {
         return frames;
     }
 
+    /**
+     * Clamps a number to a specific range.
+     *
+     * @param _num
+     * @param _min
+     * @param _max
+     * @return
+     */
     public static float clampFloat (float _num, float _min, float _max) {
         if (_num < _min) {
             return _min;

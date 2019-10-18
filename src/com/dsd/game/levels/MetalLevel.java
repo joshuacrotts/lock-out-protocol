@@ -5,6 +5,7 @@ import com.dsd.game.enemies.enums.EnemyType;
 import com.dsd.game.factories.SpawnerFactory;
 import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.Screen;
+import com.dsd.game.util.StdConsole;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.model.StandardLevel;
@@ -21,9 +22,10 @@ import java.awt.Graphics2D;
 public class MetalLevel extends StandardLevel {
 
     //  Miscellaneous reference variables
-    private final Player player;
     private final Game game;
+    private final Player player;
     private final StandardCamera sc;
+
     /**
      * Variables used to track where the background image is drawn. The
      * placement depends on the position and velocity of the player.
@@ -50,8 +52,8 @@ public class MetalLevel extends StandardLevel {
         this.sc = _sg.getCamera();
         this.setHandler(_sch);
         this.setCameraBounds(this.getBgImage().getWidth() - Screen.gameHalfWidth,
-                this.getBgImage().getHeight() - Screen.gameHalfHeight);
-        System.out.println("Instantiating the level...");
+                             this.getBgImage().getHeight() - Screen.gameHalfHeight);
+        StdConsole.println(StdConsole.GREEN, "Instantiating the level...");
     }
 
     @Override

@@ -73,7 +73,7 @@ public class SaveButton extends MenuButton implements MouseEventInterface {
             return;
         }
         //  Once the user presses the save button, it will stop the game (for now).
-        this.getGame().saveToDatabase();
+        //this.getGame().saveToDatabase();
         this.getGame().setGameState(GameState.MENU);
         this.getGame().resetGame();
     }
