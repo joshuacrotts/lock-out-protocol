@@ -1,3 +1,0 @@
-IP_ADDRESS=35.226.95.88
-USERNAME=root
-PASSWORD=lockoutprotocol340
