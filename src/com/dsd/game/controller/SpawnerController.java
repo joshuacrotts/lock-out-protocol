@@ -27,7 +27,7 @@ public class SpawnerController extends StandardGameObject {
     private final Game game;
 
     //  Timer object controlling the spawn-rate.
-    private Timer spawnerTimer;
+    private final Timer spawnerTimer;
 
     //  Delay and radius of the timer.
     private final long delay;
@@ -41,8 +41,9 @@ public class SpawnerController extends StandardGameObject {
         this.delay = _delay;
         this.radius = _radius;
         this.spawnerTimer = new Timer(true);
-        TimerController.addTimer(spawnerTimer);
         this.spawnerTimer.scheduleAtFixedRate(new SpawnerDelayTimer(this, this.game), this.delay, this.delay);
+
+        TimerController.addTimer(spawnerTimer);
     }
 
     @Override

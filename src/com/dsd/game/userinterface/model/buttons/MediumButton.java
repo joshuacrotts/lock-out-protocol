@@ -6,6 +6,7 @@ import com.dsd.game.GameState;
 import com.dsd.game.controller.DebugController;
 import com.dsd.game.controller.DifficultyController;
 import com.dsd.game.userinterface.MenuScreen;
+import com.dsd.game.userinterface.MenuState;
 import com.dsd.game.userinterface.MouseEventInterface;
 import com.dsd.game.userinterface.Screen;
 import com.revivedstandards.main.StandardDraw;
@@ -68,6 +69,7 @@ public class MediumButton extends MenuButton implements MouseEventInterface {
         }
 
         DifficultyController.difficultyType = DifficultyType.MEDIUM;
+        this.getMenuScreen().setMenuState(MenuState.MAIN);
         this.getGame().uponPlay();
     }
 

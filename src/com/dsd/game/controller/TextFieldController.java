@@ -1,20 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dsd.game.controller;
 
 import com.dsd.game.userinterface.model.TextFieldModel;
 import java.util.ArrayList;
 
 /**
+ * This class holds all text-fields in the game (currently only 2). When one is
+ * active, all others need to be deactivated so text-input is not read into
+ * them.
  *
  * @author Joshua
  */
 public class TextFieldController {
 
+    //  ArrayList of text fields
     public static ArrayList<TextFieldModel> textFieldController = new ArrayList<>();
+
+    //  The selected text field index in the arraylist.
     private static int selectedTextField = -1;
 
     public static void deactivate (TextFieldModel _field) {

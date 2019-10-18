@@ -41,6 +41,7 @@ public class Game extends StandardGame {
     //  Miscellaneous reference variables
     private StandardCamera sc;
     private final StandardCollisionHandler sch;
+    public static final String ANSI_RED = "\u001B[31m";
 
     //  Database references
     private final TranslatorDatabase translatorDatabase;
@@ -215,6 +216,7 @@ public class Game extends StandardGame {
     public void resetGame() {
         this.sch.clearEntities();
         this.levelController.clearLevels();
+        this.player.resetPlayer();
         this.instantiateLevels();
         TimerController.stopTimers();
         DifficultyController.resetDifficultyFactors();

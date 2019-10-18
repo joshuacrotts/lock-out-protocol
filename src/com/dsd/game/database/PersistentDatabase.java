@@ -2,6 +2,7 @@ package com.dsd.game.database;
 
 import com.dsd.game.AccountStatus;
 import com.dsd.game.Game;
+import com.dsd.game.util.StdConsole;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -78,7 +79,7 @@ public class PersistentDatabase {
             return false;
         }
 
-        System.out.println("Connection successful!");
+        StdConsole.println(StdConsole.GREEN, "Connection successful!");
         return true;
     }
 

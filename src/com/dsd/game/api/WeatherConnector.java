@@ -24,6 +24,7 @@ public class WeatherConnector {
 
     private static BufferedReader reader;
     private static InputStream inputStream;
+
     private static URL url;
     private static String line;
     private static String key;

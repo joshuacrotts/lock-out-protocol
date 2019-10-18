@@ -131,6 +131,14 @@ public class Player extends Entity implements DeathListener {
     }
 
     /**
+     * Resets all information about the player.
+     */
+    public void resetPlayer () {
+        this.money = 0;
+        this.setHealth(maxHealth);
+    }
+
+    /**
      * Adjusts the player's position so they aren't able to move outside the
      * bounds of the camera.
      */

@@ -84,6 +84,10 @@ public class LevelController {
         this.levelTimer.scheduleAtFixedRate(new LevelTimer(this.game, this),
                 (long) DifficultyController.levelTransitionTimer,
                 (long) DifficultyController.levelTransitionTimer);
+
+        TimerController.addTimer(levelTimer);
+
+        TimerController.findTimer(levelTimer);
     }
 
     /**
