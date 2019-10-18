@@ -210,6 +210,7 @@ public class Game extends StandardGame {
         this.setGameHeight(_height);
         Screen.setGameDimensions();
         this.reinstantiateCamera();
+        this.menuScreen.loadMenuBackground();
     }
 
     public void resetGame() {

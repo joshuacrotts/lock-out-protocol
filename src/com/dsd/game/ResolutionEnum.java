@@ -15,7 +15,7 @@ public enum ResolutionEnum {
     RES_1440_900(new Dimension(1440, 900)),
     RES_1600_900(new Dimension(1600, 900)),
     RES_1920_1080(new Dimension(1920, 1080)),
-    RES_2560_1080(new Dimension(2560, 1440)),
+    RES_2560_1440(new Dimension(2560, 1440)),
     RES_3840_2160(new Dimension(3840, 2160));
 
     private final Dimension resolution;
@@ -28,7 +28,7 @@ public enum ResolutionEnum {
         RES_1440_900,
         RES_1600_900,
         RES_1920_1080,
-        RES_2560_1080};
+        RES_2560_1440};
 
     /**
      * Increases the index pointer for the RESOLUTION_LIST array.
@@ -83,8 +83,8 @@ public enum ResolutionEnum {
      *
      * @return
      */
-    private String getDimensionString() {
-        return (int) resolution.getWidth() + " x "
+    private String getDimensionString () {
+        return (int) resolution.getWidth() + "x"
                 + (int) resolution.getHeight();
     }
 

@@ -6,5 +6,10 @@ package com.dsd.game.enemies.enums;
  * @author Joshua
  */
 public enum EnemyType {
-    BASIC_MONSTER, GREEN_MONSTER, FEMALE_BOSS_MONSTER, DARK_FEMALE_MONSTER;
+    BASIC_MONSTER,
+    GREEN_MONSTER,
+    FEMALE_BOSS_MONSTER,
+    DARK_FEMALE_MONSTER,
+    RED_HEAD_MONSTER,
+    TINY_MONSTER;
 }

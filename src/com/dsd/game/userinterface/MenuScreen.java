@@ -80,6 +80,17 @@ public class MenuScreen extends Screen {
         StandardAudioController.stop("src/resources/audio/music/menu.wav");
     }
 
+    public MenuState popMenuStack () {
+        return this.menuStateStack.pop();
+    }
+
+    public void pushMenuStack (MenuState _state) {
+        this.menuStateStack.push(_state);
+    }
+
+    public void loadMenuBackground() {
+        this.menuView.loadBackgroundImage();
+    }
     /**
      * Initializes the position of all the buttons for the user-interface when
      * the user is in the menu state.
@@ -146,14 +157,6 @@ public class MenuScreen extends Screen {
      */
     private void createUIScreens () {
         this.changeResView = new ResolutionView(this.getGame(), this);
-    }
-
-    public MenuState popMenuStack () {
-        return this.menuStateStack.pop();
-    }
-
-    public void pushMenuStack (MenuState _state) {
-        this.menuStateStack.push(_state);
     }
 
 //====================== GETTERS ===============================//
