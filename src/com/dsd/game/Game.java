@@ -206,16 +206,6 @@ public class Game extends StandardGame {
     }
 
     /**
-     * Sets the game to the preamble state and reset the alpha transparency of
-     * it.
-     */
-    public void setPreambleState () {
-        this.gameState = GameState.PREAMBLE;
-        this.playWaveChangeSFX();
-        this.preambleScreen.resetPreambleScreen();
-    }
-
-    /**
      * Changes the resolution of the game window. The user cannot set the
      * resolution higher than their monitor's current resolution. Once the
      * resolution of the JFrame window changes, the Screen variables will
@@ -225,7 +215,7 @@ public class Game extends StandardGame {
      * @param _width
      * @param _height
      */
-    public void changeResolution (int _width, int _height) {
+    public void changeResolution(int _width, int _height) {
         this.setGameWidth(_width);
         this.setGameHeight(_height);
         Screen.setGameDimensions();
@@ -241,7 +231,7 @@ public class Game extends StandardGame {
      * likewise reset), cancel all timers, and finally resets the difficulty
      * factors from the previous game's progression.
      */
-    public void resetGame () {
+    public void resetGame() {
         this.sch.clearEntities();
         this.levelController.clearLevels();
         this.player.resetPlayer();
@@ -253,14 +243,14 @@ public class Game extends StandardGame {
     /**
      * Calls the translator DB class to save the game's current state.
      */
-    public void saveToDatabase () {
+    public void saveToDatabase() {
         this.translatorDatabase.save();
     }
 
     /**
      * Calls the translator DB class to load a previously-saved file.ß
      */
-    public void loadFromDatabase () {
+    public void loadFromDatabase() {
         this.translatorDatabase.load();
     }
 
@@ -275,7 +265,7 @@ public class Game extends StandardGame {
     /**
      * Resets the camera's viewport to account for a resized window.
      */
-    private void reinstantiateCamera () {
+    private void reinstantiateCamera() {
         this.sc.setVpw(this.getGameWidth() >> 1);
         this.sc.setVph(this.getGameHeight() >> 1);
     }
