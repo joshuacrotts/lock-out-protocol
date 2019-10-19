@@ -78,6 +78,8 @@ public class GreenMonster extends Enemy implements DeathListener {
      */
     @Override
     public void tick () {
+        super.tick();
+
         //  If the monster's health is less than 0, we can flag it as dead.
         this.setAlive(this.getHealth() > 0);
         this.getAnimationController().tick();
@@ -121,6 +123,7 @@ public class GreenMonster extends Enemy implements DeathListener {
      */
     @Override
     public void render (Graphics2D _g2) {
+        super.render(_g2);
         /**
          * We need to save the old alpha composition, apply the new one, render,
          * THEN set the old one back.

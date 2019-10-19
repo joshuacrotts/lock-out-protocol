@@ -60,8 +60,12 @@ public abstract class Enemy extends Entity {
     //  Alpha composition object for when the monster dies.
     protected AlphaComposite deathTransparentComposite;
 
+    //  Max amount of particles that can be summoned in the particle handler
     private static final int MAX_BLOOD_PARTICLES = 50;
     private static final int BLOOD_PARTICLES = 10;
+
+    //  Vector force factor
+    private static final int PUSH_FACTOR = 2;
 
     public Enemy (int _x, int _y, int _health, StandardID _id, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, _health, _id, _game, _sch);
@@ -96,6 +100,17 @@ public abstract class Enemy extends Entity {
     public void setDimensions () {
         this.setWidth(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getWidth());
         this.setHeight(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getHeight());
+    }
+
+    /**
+     * Applys an x and y force to the enemy object.
+     *
+     * @param _forceX
+     * @param _forceY
+     */
+    public void applyPushForce (double _forceX, double _forceY) {
+        this.setX(this.getX() + (_forceX * Enemy.PUSH_FACTOR));
+        this.setY(this.getY() + (_forceY * Enemy.PUSH_FACTOR));
     }
 
     /**

@@ -19,10 +19,13 @@ import java.util.TimerTask;
  */
 public class ReloadCommand extends Command {
 
+    //  Miscellaneous reference variables
     private final Game game;
     private final Player player;
     private Timer reloadTimer;
 
+    //  How long the timer should wait before letting the player fire after
+    //  reloading their gun.
     private final int RELOAD_DELAY = 3000;
 
     //  This may need to change with time.
@@ -36,15 +39,20 @@ public class ReloadCommand extends Command {
 
     @Override
     public void pressed (float _dt) {
+        //  No point in trying to reload if they have a melee weapon.
         if (!this.player.getInventory().hasGun()) {
             return;
         }
+
         Gun gun = this.player.getInventory().getGun();
+
         if (!gun.hasAmmo() || gun.hasFullAmmo()) {
             return;
         }
+
         gun.setReloading(true);
         StandardAudioController.play("src/resources/audio/sfx/reload.wav");
+        
         this.reloadTimer = new Timer(true);
         this.reloadTimer.schedule(new ReloadTimer(gun), this.RELOAD_DELAY);
     }

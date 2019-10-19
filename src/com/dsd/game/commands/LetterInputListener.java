@@ -14,8 +14,11 @@ import java.awt.event.KeyListener;
  */
 public class LetterInputListener implements KeyListener {
 
+    //  Miscellaneous reference variables.
     private final Game game;
     private final TextFieldModel textElement;
+
+    //  Last inputted char by the user.
     private char character;
 
     public LetterInputListener(Game _game, TextFieldModel _textElement) {
@@ -64,8 +67,8 @@ public class LetterInputListener implements KeyListener {
      * @param _char
      * @return
      */
-    private boolean isValidTypedChar(char _char) {
-        return _char != KeyEvent.VK_TAB;
+    private boolean isValidTypedChar (char _char) {
+        return _char != KeyEvent.VK_TAB && _char != KeyEvent.VK_ENTER;
     }
 
 //====================== GETTERS ========================//

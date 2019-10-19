@@ -48,6 +48,14 @@ public class TranslatorDatabase {
         TranslatorDatabase.database.load();
     }
 
+    /**
+     * Contacts the remote SQL database to authenticate a user's password and
+     * username.
+     *
+     * @param _email
+     * @param _password
+     * @return
+     */
     public static AccountStatus authenticateUser (String _email, String _password) {
         if (database.connect("users")) {
             return database.userAuthenticated(_email, _password);
@@ -56,6 +64,14 @@ public class TranslatorDatabase {
         throw new IllegalStateException("Could not connect to db!");
     }
 
+    /**
+     * If the user tries to create an account, this method will contact the SQL
+     * database and insert them into the db.
+     *
+     * @param _email
+     * @param _password
+     * @return
+     */
     public static AccountStatus addUser (String _email, String _password) {
         if (database.connect("users")) {
             return database.addUser(_email, _password);

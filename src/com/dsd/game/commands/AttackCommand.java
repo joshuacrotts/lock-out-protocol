@@ -7,11 +7,13 @@ import com.dsd.game.objects.enums.PlayerState;
 import com.dsd.game.objects.weapons.Gun;
 import com.dsd.game.objects.weapons.Knife;
 import com.dsd.game.objects.weapons.Weapon;
+import com.dsd.game.util.StdConsole;
 import com.revivedstandards.commands.Command;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -33,6 +35,7 @@ public class AttackCommand extends Command {
     private final StandardCollisionHandler globalHandler;
     private StandardAnimatorController animation;
     private Timer attackDelayTimer = null;
+
     private static boolean hasTimer = false;
 
     //  This may need to change with time.
@@ -46,6 +49,7 @@ public class AttackCommand extends Command {
         TimerController.addTimer(this.attackDelayTimer);
 
         this.bind(_game.getKeyboard(), KeyEvent.VK_SPACE);
+        this.bind(_game.getMouse(), MouseEvent.BUTTON1);
     }
 
     @Override
@@ -132,6 +136,7 @@ public class AttackCommand extends Command {
     private void toggleAttackAnimation() {
         //  Update the animation if the player has chosen a different gender.
         this.player.setAnimation(this.animation);
+        StdConsole.println(StdConsole.RED, "ATTACKING WITH KNIFE");
         this.player.setPlayerState(PlayerState.ATTACKING);
     }
 

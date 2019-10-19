@@ -79,7 +79,9 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
      * Updates the animation, health, position and status of the monster.
      */
     @Override
-    public void tick() {
+    public void tick () {
+        super.tick();
+        
         //  If the monster's health is less than 0, we can flag it as dead.
         this.setAlive(this.getHealth() > 0);
         this.getAnimationController().tick();
