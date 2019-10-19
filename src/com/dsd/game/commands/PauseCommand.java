@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dsd.game.commands;
 
 import com.dsd.game.Game;
@@ -20,7 +15,8 @@ import java.awt.event.KeyEvent;
  */
 public class PauseCommand extends Command {
 
-    public Game game;
+    //  Miscellaneous reference variables.
+    public final Game game;
 
     public PauseCommand (Game _game) {
         this.game = _game;

@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  * This class acts as the persistent data store for the game information. Once
@@ -129,9 +130,10 @@ public class PersistentDatabase {
                 return AccountStatus.EXISTS;
             }
             else {
-                insertStatement = this.remoteDBConnection.prepareStatement(String.format("INSERT INTO user_accounts " + "VALUES(DEFAULT, ?, MD5(?));"));
+                String hashed = BCrypt.hashpw(_password, BCrypt.gensalt());
+                insertStatement = this.remoteDBConnection.prepareStatement(String.format("INSERT INTO user_accounts " + "VALUES(DEFAULT, ?, ?);"));
                 insertStatement.setString(1, _email);
-                insertStatement.setString(2, _password);
+                insertStatement.setString(2, hashed);
                 insertStatement.executeUpdate();
                 return AccountStatus.ACCOUNT_CREATED;
             }
@@ -153,19 +155,7 @@ public class PersistentDatabase {
      * @throws SQLException
      */
     private boolean userInDatabase (String _email, String _password) throws SQLException {
-        PreparedStatement insertStatement = null;
-        ResultSet resultQuery = null;
-        try {
-            insertStatement = this.remoteDBConnection.prepareStatement(String.format("SELECT * FROM user_accounts WHERE Email = ? AND Password = MD5(?);"));
-            insertStatement.setString(1, _email);
-            insertStatement.setString(2, _password);
-            resultQuery = insertStatement.executeQuery();
-        }
-        catch (SQLException ex) {
-            Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return resultQuery.next();
+        return this.isValidPassword(_email, _password);
     }
 
     /**
@@ -184,7 +174,28 @@ public class PersistentDatabase {
     }
 
     /**
-     * Generates the necessary classname to get the MySQL java driver working.s
+     * Queries the SQL database for the salted n hashed password.
+     *
+     * @param _email
+     * @param _password
+     * @return
+     * @throws SQLException
+     */
+    private boolean isValidPassword (String _email, String _password) throws SQLException {
+        //  Returns the salted and hashed pswd with the associated email.
+        PreparedStatement insertStatement = this.remoteDBConnection.prepareStatement(String.format("SELECT Password FROM user_accounts WHERE Email = ?;"));
+        insertStatement.setString(1, _email);
+        ResultSet resultQuery = insertStatement.executeQuery();
+
+        //  If we have a result query value, then we check the password against the hashed pswd.
+        if (resultQuery.next()) {
+            return BCrypt.checkpw(_password, resultQuery.getString("Password"));
+        }
+        return false;
+    }
+
+    /**
+     * Generates the necessary classname to get the MySQL java driver working.
      */
     private void generateClassName () {
         try {

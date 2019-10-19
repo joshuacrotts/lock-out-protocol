@@ -11,6 +11,7 @@ import com.dsd.game.objects.powerups.HealthPowerup;
 import com.dsd.game.objects.powerups.InfiniteAmmoPowerup;
 import com.dsd.game.userinterface.StandardInteractorHandler;
 import com.dsd.game.userinterface.model.DamageText;
+import com.dsd.game.util.StdConsole;
 import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.model.StandardGameObject;
@@ -87,6 +88,9 @@ public class CollisionHandlerController extends StandardCollisionHandler {
         if (_obj1.getId() == StandardID.Player && _obj2 instanceof Enemy && _obj2.isAlive()) {
             this.handlePlayerMonsterCollision((Player) _obj1, (Enemy) _obj2);
         }
+        else if (_obj1.getId() == StandardID.Bullet && _obj2 instanceof Enemy) {
+            this.handleBulletEnemyCollision((BulletGameObject) _obj1, (Enemy) _obj2);
+        }
         //
         //  TODO: Refactor this into a PowerUp superclass with some type of activate() method.
         //
@@ -115,13 +119,17 @@ public class CollisionHandlerController extends StandardCollisionHandler {
     private void handleBulletEnemyCollision (BulletGameObject _bullet, Enemy _monster) {
         // Sets the bullet to dead
         // Casts the obj2 to a Monster so we can deduct health from it
-        if (_monster.isAlive()) {
+        if (_monster.isAlive() && _bullet.isAlive()) {
             _bullet.setAlive(false);
             _monster.setHealth(_monster.getHealth() - _bullet.getDamage());
 
-            // Plays random monster hurt sfx
+            //  Plays random monster hurt sfx
             _monster.generateHurtSound(StdOps.rand(1, 5));
+            //  Generates the blood particles for the monster
             _monster.generateBloodParticles();
+            //  Applys a force to the enemy based on the velocity of the
+            //  projectile.
+            _monster.applyPushForce(_bullet.getVelX(), _bullet.getVelY());
             this.addDamageText(_monster, _bullet.getDamage());
         }
     }
@@ -152,14 +160,14 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      * @param _coin
      */
     private void handlePlayerCoinCollision (Player _player, Coin _coin) {
-        _player.setMoney(_player.getMoney() + _coin.getValue());
         _coin.setAlive(false);
+        _player.setMoney(_player.getMoney() + _coin.getValue());
         StandardAudioController.play("src/resources/audio/sfx/coin.wav");
     }
 
     private void handlePlayerHealthCollision (Player _player, HealthPowerup _health) {
-        _health.addHealth();
         _health.setAlive(false);
+        _health.addHealth();
     }
 
     private void handlePlayerBerserkCollision (Player _player, BerserkPowerup _berserk) {

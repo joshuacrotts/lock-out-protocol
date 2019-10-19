@@ -39,8 +39,8 @@ import com.revivedstandards.model.StandardLevel;
 public class Game extends StandardGame {
 
     //  Miscellaneous reference variables
-    private StandardCamera sc;
     private final StandardCollisionHandler sch;
+    private StandardCamera sc;
 
     //  Database references
     private final TranslatorDatabase translatorDatabase;
@@ -216,6 +216,16 @@ public class Game extends StandardGame {
         this.preambleScreen.resetPreambleScreen();
     }
 
+    /**
+     * Changes the resolution of the game window. The user cannot set the
+     * resolution higher than their monitor's current resolution. Once the
+     * resolution of the JFrame window changes, the Screen variables will
+     * update, and all components relying on these variables will update
+     * themselves accordingly.
+     *
+     * @param _width
+     * @param _height
+     */
     public void changeResolution (int _width, int _height) {
         this.setGameWidth(_width);
         this.setGameHeight(_height);
@@ -224,6 +234,14 @@ public class Game extends StandardGame {
         this.menuScreen.loadMenuBackground();
     }
 
+    /**
+     * Resets the game to its original state. Clears all entities from the
+     * handler, removes all levels from the level controller, resets the player
+     * state and its variables (health, money, etc), then proceeds to
+     * reinstantiate the levels (so the timers of spawnercontrollers are
+     * likewise reset), cancel all timers, and finally resets the difficulty
+     * factors from the previous game's progression.
+     */
     public void resetGame () {
         this.sch.clearEntities();
         this.levelController.clearLevels();
@@ -233,10 +251,16 @@ public class Game extends StandardGame {
         DifficultyController.resetDifficultyFactors();
     }
 
+    /**
+     * Calls the translator DB class to save the game's current state.
+     */
     public void saveToDatabase () {
         this.translatorDatabase.save();
     }
 
+    /**
+     * Calls the translator DB class to load a previously-saved file.ß
+     */
     public void loadFromDatabase () {
         this.translatorDatabase.load();
     }
@@ -249,6 +273,9 @@ public class Game extends StandardGame {
         this.levelController.addLevel(new MetalLevel(this.player, this, this.sch));
     }
 
+    /**
+     * Resets the camera's viewport to account for a resized window.
+     */
     private void reinstantiateCamera () {
         this.sc.setVpw(this.getGameWidth() >> 1);
         this.sc.setVph(this.getGameHeight() >> 1);

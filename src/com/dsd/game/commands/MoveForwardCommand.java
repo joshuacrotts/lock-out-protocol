@@ -15,6 +15,7 @@ import java.awt.event.KeyEvent;
  */
 public class MoveForwardCommand extends Command {
 
+    //  Miscellaneous reference variables.
     private final Game game;
     private final Player player;
 

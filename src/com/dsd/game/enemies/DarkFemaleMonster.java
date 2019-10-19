@@ -90,6 +90,8 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
      */
     @Override
     public void tick () {
+        super.tick();
+        
         //  If the monster's health is less than 0, we can flag it as dead.
         this.setAlive(this.getHealth() > 0);
         this.getAnimationController().tick();
