@@ -67,7 +67,7 @@ public class PersistentDatabase {
      * @return true if a connection was successful, false otherwise.
      */
     public boolean connect (String _dbName) {
-        //  Database NAME (db name in remote sql)
+        //  Database name (db name in remote sql).
         String instanceID = _dbName;
 
         this.generateClassName();
@@ -174,7 +174,9 @@ public class PersistentDatabase {
     }
 
     /**
-     * Queries the SQL database for the salted n hashed password.
+     * Queries the SQL database for the salted and hashed password. The hashed
+     * and salted password is selected from the table, and compared using
+     * JBCrypt to verify if it's correct or not.
      *
      * @param _email
      * @param _password

@@ -268,7 +268,7 @@ public class GreenMonster extends Enemy implements DeathListener {
 
     //  Static block for instantiating the images.
     static {
-        WALK_FRAMES = Utilities.loadFrames("src/resources/img/enemies/monster2/walk/", 9);
+        WALK_FRAMES = Utilities.loadFrames("src/resources/img/enemies/monster2/walk/", 11);
         DEATH_FRAMES = Utilities.loadFrames("src/resources/img/enemies/monster2/death/", 6);
     }
 }

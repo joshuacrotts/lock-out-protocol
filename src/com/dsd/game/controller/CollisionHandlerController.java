@@ -11,7 +11,6 @@ import com.dsd.game.objects.powerups.HealthPowerup;
 import com.dsd.game.objects.powerups.InfiniteAmmoPowerup;
 import com.dsd.game.userinterface.StandardInteractorHandler;
 import com.dsd.game.userinterface.model.DamageText;
-import com.dsd.game.util.StdConsole;
 import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.model.StandardGameObject;

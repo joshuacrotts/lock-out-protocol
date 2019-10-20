@@ -130,7 +130,7 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
     @Override
     public void render (Graphics2D _g2) {
         super.render(_g2);
-        
+
         /**
          * We need to save the old alpha composition, apply the new one, render,
          * THEN set the old one back.
@@ -259,7 +259,7 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
 
     //  Static block for instantiating the images.
     static {
-        WALK_FRAMES = Utilities.loadFrames("src/resources/img/enemies/monster5/walk/", 9);
+        WALK_FRAMES = Utilities.loadFrames("src/resources/img/enemies/monster5/walk/", 11);
         DEATH_FRAMES = Utilities.loadFrames("src/resources/img/enemies/monster5/death/", 6);
     }
 }

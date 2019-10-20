@@ -136,7 +136,6 @@ public class AttackCommand extends Command {
     private void toggleAttackAnimation () {
         //  Update the animation if the player has chosen a different gender.
         this.player.setAnimation(this.animation);
-        StdConsole.println(StdConsole.RED, "ATTACKING WITH KNIFE");
         this.player.setPlayerState(PlayerState.ATTACKING);
     }
 
