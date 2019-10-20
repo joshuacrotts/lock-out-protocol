@@ -1,6 +1,7 @@
-package com.dsd.game.objects;
+package com.dsd.game.objects.weapons.projectiles;
 
 import com.dsd.game.Game;
+import com.dsd.game.objects.Player;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.main.StandardCamera;
@@ -12,12 +13,11 @@ import java.awt.image.BufferedImage;
 import org.apache.commons.math3.util.FastMath;
 
 /**
- * Bullet game object
- *
- * @TODO: Re-factor this to couple it on a per-weapon basis rather than its own
- * object fired/instantiated from AttackCommand.
+ * This class represents some arbitrary projectile in the game. This can range
+ * from bullets shot from the player, or projectiles shot by the enemy, etc.
  *
  * [Group Name: Data Structure Deadheads]
+ *
  * @author Joshua, Ronald, Rinty
  */
 public class ProjectileGameObject extends StandardGameObject {
@@ -30,13 +30,13 @@ public class ProjectileGameObject extends StandardGameObject {
     private int damage = 0;
 
     //  Velocity factor applied to the bullet.
-    private final int VEL_FACTOR = 20;
+    private final int VEL_FACTOR;
 
     //  Animation frame per second setting
     private static final int BULLET_FPS = 20;
 
     public ProjectileGameObject (int _x, int _y, double _angle, int _damage,
-            BufferedImage[] _frames, int _projectileFPS, Game _game,
+            int _velFactor, BufferedImage[] _frames, int _projectileFPS, Game _game,
             StandardCollisionHandler _parentContainer, Player _parent) {
         super(_x, _y, StandardID.Bullet);
         this.game = _game;
@@ -48,6 +48,7 @@ public class ProjectileGameObject extends StandardGameObject {
         this.setHeight(this.getHeight());
         this.setAlive(true);
         this.setAngle(_angle);
+        this.VEL_FACTOR = _velFactor;
         this.setVelocity(_parent.getX(), _parent.getY(), _game.getCamera().getCamMouseX(), _game.getCamera().getCamMouseY());
 
         this.sch.flagAlive(this.getId());

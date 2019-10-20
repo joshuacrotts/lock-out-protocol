@@ -1,46 +1,61 @@
-package com.dsd.game.objects;
+package com.dsd.game.objects.weapons.projectiles;
 
 import com.dsd.game.Game;
+import com.dsd.game.objects.Player;
+import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
+import com.revivedstandards.model.DeathListener;
 import com.revivedstandards.util.StdOps;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import org.apache.commons.math3.util.FastMath;
 
 /**
- * Bullet game object
- *
- * @TODO: Re-factor this to couple it on a per-weapon basis rather than its own
- * object fired/instantiated from AttackCommand.
+ * Grenade launcher bullet game object.
  *
  * [Group Name: Data Structure Deadheads]
+ *
  * @author Joshua, Ronald, Rinty
  */
-public class ShotgunBulletObject extends ProjectileGameObject {
+public class GrenadeBulletObject extends ProjectileGameObject implements DeathListener {
 
     //  Velocity factor applied to the bullet.
-    private final int VEL_FACTOR = 20;
+    private static final int VEL_FACTOR = 40;
     //  Static reference to the BufferedImages
     private static final BufferedImage[] frames = new BufferedImage[1];
     //  Animation frame per second setting
     private static final int BULLET_FPS = 20;
 
-    private static int damage = 100;
+    private static int damage = 250;
 
-    public ShotgunBulletObject (int _x, int _y, double _angle, int _damage, Game _game,
+    private boolean uponDeathFlag = false;
+
+    public GrenadeBulletObject (int _x, int _y, double _angle, int _damage, Game _game,
             StandardCollisionHandler _parentContainer, Player _parent) {
-        super(_x, _y, _angle, _damage, ShotgunBulletObject.frames,
-                ShotgunBulletObject.BULLET_FPS, _game, _parentContainer, _parent);
+        super(_x, _y, _angle, _damage, VEL_FACTOR, GrenadeBulletObject.frames,
+                GrenadeBulletObject.BULLET_FPS, _game, _parentContainer, _parent);
+
     }
 
     @Override
     public void tick () {
-        super.tick();
+        if (this.isAlive() && !this.uponDeathFlag) {
+            super.tick();
+        }
+        else if (!this.uponDeathFlag) {
+            this.uponDeathFlag = true;
+            this.uponDeath();
+        }
     }
 
     @Override
     public void render (Graphics2D _g2) {
         super.render(_g2);
+    }
+
+    @Override
+    public void uponDeath () {
+        StandardAudioController.play("src/resources/audio/sfx/grenade_explosion.wav");
     }
 
     /**
@@ -49,7 +64,7 @@ public class ShotgunBulletObject extends ProjectileGameObject {
      * @return
      */
     private static void initImages () {
-        ShotgunBulletObject.frames[0] = StdOps.loadImage("src/resources/img/bullet/bullet_sprite/new_bullet/shotgun_bullet.png");
+        GrenadeBulletObject.frames[0] = StdOps.loadImage("src/resources/img/bullet/bullet_sprite/new_bullet/grenade_bullet.png");
     }
 
 //============================ SETTERS ====================================//
@@ -70,6 +85,8 @@ public class ShotgunBulletObject extends ProjectileGameObject {
                 + ((deltaY) * (deltaY)));
         deltaX = (deltaX / distance) * this.VEL_FACTOR;
         deltaY = (deltaY / distance) * this.VEL_FACTOR;
+        System.out.println(deltaX);
+        System.out.println(deltaY);
         this.setVelX(deltaX);
         this.setVelY(deltaY);
     }
@@ -77,6 +94,7 @@ public class ShotgunBulletObject extends ProjectileGameObject {
 //========================== GETTERS =======================================//
     //  Initializes the bullet frames
     static {
-        ShotgunBulletObject.initImages();
+        GrenadeBulletObject.initImages();
     }
+
 }

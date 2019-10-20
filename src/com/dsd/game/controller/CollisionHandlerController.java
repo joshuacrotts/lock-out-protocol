@@ -3,9 +3,11 @@ package com.dsd.game.controller;
 import com.dsd.game.Game;
 import com.dsd.game.enemies.Enemy;
 import com.dsd.game.objects.Explosion;
+import com.dsd.game.objects.weapons.projectiles.GrenadeBulletObject;
 import com.dsd.game.objects.Player;
-import com.dsd.game.objects.ProjectileGameObject;
-import com.dsd.game.objects.ShotgunBulletObject;
+import com.dsd.game.objects.weapons.projectiles.ProjectileGameObject;
+import com.dsd.game.objects.weapons.projectiles.ShotgunBulletObject;
+import com.dsd.game.objects.enums.ExplosionType;
 import com.dsd.game.objects.enums.PlayerState;
 import com.dsd.game.objects.items.Coin;
 import com.dsd.game.objects.powerups.BerserkPowerup;
@@ -91,8 +93,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
         }
         else if (_obj1.getId() == StandardID.Bullet && _obj2 instanceof Enemy) {
             this.handleBulletEnemyCollision((ProjectileGameObject) _obj1, (Enemy) _obj2);
-        }
-        //
+        } //
         //  TODO: Refactor this into a PowerUp superclass with some type of activate() method.
         //
         else if (_obj1.getId() == StandardID.Player && _obj2.getId() == StandardID.Coin && _obj2.isAlive()) {
@@ -106,6 +107,9 @@ public class CollisionHandlerController extends StandardCollisionHandler {
         }
         else if (_obj1.getId() == StandardID.Player && _obj2 instanceof InfiniteAmmoPowerup) {
             this.handlePlayerAmmoCollision((Player) _obj1, (InfiniteAmmoPowerup) _obj2);
+        }
+        else if (_obj1.getId() == StandardID.Tile1 && _obj2 instanceof Enemy) {
+            this.handleEnemyExplosionCollision((Explosion) _obj1, (Enemy) _obj2);
         }
     }
 
@@ -122,8 +126,16 @@ public class CollisionHandlerController extends StandardCollisionHandler {
         // Casts the obj2 to a Monster so we can deduct health from it
 
         if (_monster.isAlive() && _bullet.isAlive()) {
-            if (_bullet instanceof ShotgunBulletObject) {
-                this.addEntity(new Explosion((int) _monster.getX(), (int) _monster.getY()));
+            //  If the object is a grenade bullet, then we'll create an explosion with
+            //  a damage radius.
+            if (_bullet instanceof GrenadeBulletObject) {
+                this.addEntity(new Explosion((int) _monster.getX(), (int) _monster.getY(),
+                        _bullet.getDamage(), ExplosionType.GRENADE_EXPLOSION, this));
+            } //  For shotugns, we just add an explosion sprite and make the damage factor 0.
+            else if (_bullet instanceof ShotgunBulletObject) {
+                this.addEntity(new Explosion((int) _monster.getX(), (int) _monster.getY(),
+                        0, ExplosionType.SHOTGUN_EXPLOSION, this));
+
             }
             _bullet.setAlive(false);
             _monster.setHealth(_monster.getHealth() - _bullet.getDamage());
@@ -170,11 +182,25 @@ public class CollisionHandlerController extends StandardCollisionHandler {
         StandardAudioController.play("src/resources/audio/sfx/coin.wav");
     }
 
+    /**
+     * When the player collides with a health powerup, the player's health is
+     * restored slightly.
+     *
+     * @param _player
+     * @param _health
+     */
     private void handlePlayerHealthCollision (Player _player, HealthPowerup _health) {
         _health.setAlive(false);
         _health.addHealth();
     }
 
+    /**
+     * When the player collides with the Berserk powerup, the player's weapons
+     * do double damage for a few seconds.
+     *
+     * @param _player
+     * @param _berserk
+     */
     private void handlePlayerBerserkCollision (Player _player, BerserkPowerup _berserk) {
         _berserk.setAlive(false);
         _berserk.activate();
@@ -182,9 +208,30 @@ public class CollisionHandlerController extends StandardCollisionHandler {
         _berserk.setCollected();
     }
 
+    /**
+     * When the player picks up the infinite ammo powerup, all of their guns
+     * have infinite ammo for a few seconds.
+     *
+     * @param _player
+     * @param _ammo
+     */
     private void handlePlayerAmmoCollision (Player _player, InfiniteAmmoPowerup _ammo) {
         _ammo.setAlive(false);
         _ammo.activate();
+    }
+
+    /**
+     * If the enemy collides with a collision, their health is impacted by the
+     * radius of any other explosions, unless the explosion is not supposed to
+     * do any damage.
+     *
+     * @param _explosion
+     * @param _enemy
+     */
+    private void handleEnemyExplosionCollision (Explosion _explosion, Enemy _enemy) {
+        if (_enemy.isAlive() && _explosion.isAlive()) {
+            _enemy.setHealth(_enemy.getHealth() - _explosion.getDamage());
+        }
     }
 
     /**

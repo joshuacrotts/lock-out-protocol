@@ -14,6 +14,9 @@ public enum WeaponType {
     PISTOL("pistol"),
     KNIFE("knife"),
     BAT("bat"),
+    GRENADE_LAUNCHER("grenade_launcher"),
+    //  PPSH-41 equivalent.
+    FAST_RIFLE("fast_rifle"),
     FLAMETHROWER("flamethrower");
 
     private final String type;

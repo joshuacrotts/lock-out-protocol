@@ -52,7 +52,7 @@ public class ReloadCommand extends Command {
 
         gun.setReloading(true);
         StandardAudioController.play("src/resources/audio/sfx/reload.wav");
-        
+
         this.reloadTimer = new Timer(true);
         this.reloadTimer.schedule(new ReloadTimer(gun), this.RELOAD_DELAY);
     }
