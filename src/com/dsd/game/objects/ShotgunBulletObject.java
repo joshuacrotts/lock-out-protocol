@@ -8,10 +8,7 @@ import java.awt.image.BufferedImage;
 import org.apache.commons.math3.util.FastMath;
 
 /**
- * Bullet game object
- *
- * @TODO: Re-factor this to couple it on a per-weapon basis rather than its own
- * object fired/instantiated from AttackCommand.
+ * Shotgun bullet game object.
  *
  * [Group Name: Data Structure Deadheads]
  * @author Joshua, Ronald, Rinty
@@ -19,7 +16,7 @@ import org.apache.commons.math3.util.FastMath;
 public class ShotgunBulletObject extends ProjectileGameObject {
 
     //  Velocity factor applied to the bullet.
-    private final int VEL_FACTOR = 20;
+    private final int VEL_FACTOR = 40;
     //  Static reference to the BufferedImages
     private static final BufferedImage[] frames = new BufferedImage[1];
     //  Animation frame per second setting
