@@ -34,6 +34,7 @@ public enum DifficultyType {
                 break;
             case 3:
                 text = "NIGHTMARE";
+                break;
         }
 
         this.difficultyString = text;

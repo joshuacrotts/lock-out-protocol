@@ -86,6 +86,7 @@ public class SpawnerController extends StandardGameObject {
                     break;
                 case TINY_MONSTER:
                     this.parentContainer.addEntity(new TinyMonster(xPos, yPos, this.game, this.parentContainer));
+                    break;
             }
         }
     }

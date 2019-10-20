@@ -58,6 +58,7 @@ public class DifficultyController {
                 break;
             case HARD:
                 difficultyFactor = 1.25f;
+                break;
         }
     }
 

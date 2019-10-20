@@ -18,24 +18,24 @@ import java.awt.image.BufferedImage;
  * This is the view that will be shown when the user wants to change their
  * player gender.
  *
- * @author rinty
+ * @author Rinty
  */
 public class PlayerView implements Renderable, Updatable {
 
-    //  Miscellaneous reference variables
+    //  Miscellaneous reference variables.
     private final Game game;
     private final MenuScreen menuScreen;
     private final StandardButton parentButton;
 
-    //  Variables that define the outline around the icons
+    //  Variables that define the outline around the icons.
     private Rectangle iconOutline;
     private StandardFadeController fadeController;
 
-    //  Backing buffered image
+    //  Backing buffered image.
     private final BufferedImage icon;
     private final String sex;
 
-    //  Image dimension info
+    //  Image dimension info.
     private final int STROKE_WIDTH = 10;
     private final int imageWidth;
     private final int imageHeight;
@@ -81,7 +81,7 @@ public class PlayerView implements Renderable, Updatable {
     private void drawBorder (Graphics2D _g2) {
         Stroke oldStroke = _g2.getStroke();
 
-        _g2.setStroke(new BasicStroke(STROKE_WIDTH));
+        _g2.setStroke(new BasicStroke(this.STROKE_WIDTH));
         _g2.draw(this.iconOutline);
         _g2.setStroke(oldStroke);
     }
@@ -97,6 +97,7 @@ public class PlayerView implements Renderable, Updatable {
                 break;
             case "male":
                 this.fadeController = new StandardFadeController(Color.blue, Color.green, 0.05f);
+                break;
         }
         this.iconOutline = new Rectangle(this.parentButton.getX(), this.parentButton.getY(), imageWidth, imageHeight);
     }

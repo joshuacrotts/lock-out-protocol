@@ -1,6 +1,5 @@
 package com.dsd.game.controller;
 
-import com.dsd.game.util.StdConsole;
 import java.util.ArrayList;
 import java.util.Timer;
 
@@ -16,7 +15,6 @@ public class TimerController {
 
     public static void addTimer (Timer _timer) {
         timers.add(_timer);
-        StdConsole.println(StdConsole.YELLOW, "Added a timer");
     }
 
     public static void stopTimers () {
@@ -25,16 +23,13 @@ public class TimerController {
 
             currentTimer.cancel();
         }
-        StdConsole.println(StdConsole.YELLOW, "Stopping all timers...");
     }
 
     public static void findTimer (Timer _timer) {
         for (Timer t : timers) {
             if (_timer == t) {
-                StdConsole.println(StdConsole.GREEN, "Found your timer!");
                 return;
             }
         }
-        StdConsole.println(StdConsole.RED, "Did not find your timer.");
     }
 }

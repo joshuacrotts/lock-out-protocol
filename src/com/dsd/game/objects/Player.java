@@ -312,6 +312,7 @@ public class Player extends Entity implements DeathListener {
                 break;
             case WALKING_BACKWARD:
                 directionSign = -1;
+                break;
         }
         return directionSign;
     }

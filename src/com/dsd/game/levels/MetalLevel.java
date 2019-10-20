@@ -5,7 +5,6 @@ import com.dsd.game.enemies.enums.EnemyType;
 import com.dsd.game.factories.SpawnerFactory;
 import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.Screen;
-import com.dsd.game.util.StdConsole;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.model.StandardLevel;
@@ -53,7 +52,6 @@ public class MetalLevel extends StandardLevel {
         this.setHandler(_sch);
         this.setCameraBounds(this.getBgImage().getWidth() - Screen.gameHalfWidth,
                 this.getBgImage().getHeight() - Screen.gameHalfHeight);
-        StdConsole.println(StdConsole.GREEN, "Instantiating the level...");
     }
 
     @Override

@@ -20,6 +20,7 @@ public abstract class AudioBoxController {
         StandardAudioController.load("src/resources/audio/sfx/empty.wav", 1);
         StandardAudioController.load("src/resources/audio/sfx/reload.wav", 1);
         StandardAudioController.load("src/resources/audio/sfx/knife.wav", 3);
+        StandardAudioController.load("src/resources/audio/sfx/shotgun.wav", 4);
         StandardAudioController.load("src/resources/audio/sfx/rifle.wav", 16);
         StandardAudioController.load("src/resources/audio/sfx/coin.wav", 8);
         StandardAudioController.load("src/resources/audio/sfx/round_change.wav", 1);

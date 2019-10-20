@@ -72,6 +72,7 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
                 break;
             case CORRECT:
                 JOptionPane.showMessageDialog(null, "Logged in successfully!");
+                break;
         }
     }
 

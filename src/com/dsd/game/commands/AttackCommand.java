@@ -7,13 +7,11 @@ import com.dsd.game.objects.enums.PlayerState;
 import com.dsd.game.objects.weapons.Gun;
 import com.dsd.game.objects.weapons.Knife;
 import com.dsd.game.objects.weapons.Weapon;
-import com.dsd.game.util.StdConsole;
 import com.revivedstandards.commands.Command;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -26,14 +24,15 @@ import java.util.TimerTask;
  */
 public class AttackCommand extends Command {
 
-    //
-    //  @TODO: Delegate THAT to the GUN; NOT the attack command.
-    //  Needs to support multiple bullet types!!!
-    //
+    //  Miscellaneous reference variables.
     private final Game game;
     private final Player player;
     private final StandardCollisionHandler globalHandler;
+
+    //  The animation controller for the current weapon's animation.
     private StandardAnimatorController animation;
+
+    //  The delay for each attack.
     private Timer attackDelayTimer = null;
 
     private static boolean hasTimer = false;
@@ -46,10 +45,10 @@ public class AttackCommand extends Command {
         this.animation = animation;
         this.animation.getStandardAnimation().setReturnAnimation(this.player.getAnimationController());
         this.attackDelayTimer = new Timer(true);
+
         TimerController.addTimer(this.attackDelayTimer);
 
         this.bind(_game.getKeyboard(), KeyEvent.VK_SPACE);
-        this.bind(_game.getMouse(), MouseEvent.BUTTON1);
     }
 
     @Override
@@ -64,10 +63,12 @@ public class AttackCommand extends Command {
             switch (weapon.getWeaponType()) {
                 case PISTOL:
                 case RIFLE:
+                case SHOTGUN:
                     this.gunAttack((Gun) weapon);
                     break;
                 case KNIFE:
                     this.knifeAttack((Knife) weapon);
+                    break;
             }
 
             //  Once the weapon is used, we need to toggle it to false so the

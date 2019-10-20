@@ -148,6 +148,8 @@ public class Game extends StandardGame {
                 this.hudScreen.tick();
                 //  And lastly the camera
                 StandardHandler.Object(this.sc);
+                break;
+
         }
     }
 
@@ -178,6 +180,7 @@ public class Game extends StandardGame {
                     break;
                 case PAUSED:
                     this.pauseScreen.render(StandardDraw.Renderer);
+                    break;
             }
 
             //  If we are in debug mode, we can draw the text.

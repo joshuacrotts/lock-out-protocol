@@ -23,6 +23,7 @@ import java.awt.Graphics2D;
  */
 public class EasyButton extends MenuButton implements MouseEventInterface {
 
+    //  Button position and dimension offsets.
     private static final int BUTTON_X_OFFSET = 125;
     private static final int BUTTON_Y_OFFSET = -180;
     private static final int TEXT_X_OFFSET = 21;
