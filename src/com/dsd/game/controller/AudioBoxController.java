@@ -24,11 +24,13 @@ public abstract class AudioBoxController {
         StandardAudioController.load("src/resources/audio/sfx/grenade_launcher.wav", 2);
         StandardAudioController.load("src/resources/audio/sfx/grenade_explosion.wav", 4);
         StandardAudioController.load("src/resources/audio/sfx/rifle.wav", 16);
+        StandardAudioController.load("src/resources/audio/sfx/fast_rifle.wav", 32);
         StandardAudioController.load("src/resources/audio/sfx/coin.wav", 8);
         StandardAudioController.load("src/resources/audio/sfx/round_change.wav", 1);
         StandardAudioController.load("src/resources/audio/sfx/restore_health.wav", 4);
         StandardAudioController.load("src/resources/audio/sfx/berserk.wav", 2);
         StandardAudioController.load("src/resources/audio/sfx/menuselect.wav", 5);
+        
         AudioBoxController.initBasicMonsterSFX(5);
         AudioBoxController.initGreenMonsterSFX(5);
     }

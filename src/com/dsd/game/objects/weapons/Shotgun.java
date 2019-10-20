@@ -2,7 +2,7 @@ package com.dsd.game.objects.weapons;
 
 import com.dsd.game.Game;
 import com.dsd.game.objects.Player;
-import com.dsd.game.objects.ShotgunBulletObject;
+import com.dsd.game.objects.weapons.projectiles.ShotgunBulletObject;
 import com.dsd.game.objects.weapons.enums.WeaponType;
 import com.dsd.game.util.Utilities;
 import com.revivedstandards.controller.StandardAnimatorController;

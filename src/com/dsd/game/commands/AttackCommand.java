@@ -62,6 +62,7 @@ public class AttackCommand extends Command {
             //  We need to do different things depending on what the weapon is.
             switch (weapon.getWeaponType()) {
                 case PISTOL:
+                case FAST_RIFLE:
                 case RIFLE:
                 case SHOTGUN:
                 case GRENADE_LAUNCHER:

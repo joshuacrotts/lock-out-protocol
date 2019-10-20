@@ -2,6 +2,7 @@ package com.dsd.game.objects;
 
 import com.dsd.game.Game;
 import com.dsd.game.api.WeatherConnector;
+import com.dsd.game.objects.weapons.FastRifle;
 import com.dsd.game.objects.weapons.GrenadeLauncher;
 import com.dsd.game.objects.weapons.Gun;
 import com.dsd.game.objects.weapons.Knife;
@@ -26,6 +27,7 @@ import java.util.logging.Logger;
  */
 public class Inventory {
 
+    //  Miscellaneous reference variables
     private final Game game;
     private final Player player;
     private final InventoryView view;
@@ -43,9 +45,10 @@ public class Inventory {
         this.weapons.add(new Knife(_player));
         this.weapons.add(new Pistol(_game, _player, _sch));
         this.weapons.add(new Rifle(_game, _player, _sch));
+        this.weapons.add(new FastRifle(_game, _player, _sch));
         this.weapons.add(new Shotgun(_game, _player, _sch));
         this.weapons.add(new GrenadeLauncher(_game, _player, _sch));
-        
+
         this.view = new InventoryView(this.game, this);
     }
 

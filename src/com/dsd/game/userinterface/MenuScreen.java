@@ -88,9 +88,10 @@ public class MenuScreen extends Screen {
         this.menuStateStack.push(_state);
     }
 
-    public void loadMenuBackground() {
+    public void loadMenuBackground () {
         this.menuView.loadBackgroundImage();
     }
+
     /**
      * Initializes the position of all the buttons for the user-interface when
      * the user is in the menu state.
