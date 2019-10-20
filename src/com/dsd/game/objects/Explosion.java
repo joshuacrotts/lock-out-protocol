@@ -1,14 +1,12 @@
 package com.dsd.game.objects;
 
 import com.dsd.game.objects.enums.ExplosionType;
-import com.dsd.game.util.Utilities;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.model.StandardAnimation;
 import com.revivedstandards.model.StandardGameObject;
 import com.revivedstandards.model.StandardID;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 
 /**
  * This class is a simple explosion artifact in the game.

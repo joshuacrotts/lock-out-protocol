@@ -81,7 +81,7 @@ public class Game extends StandardGame {
         super(_width, _height, _title);
 
         //  Initialize the sound controller
-        AudioBoxController.initialize(24);
+        AudioBoxController.initialize(32);
 
         //  Create a new collision handler
         this.sch = new CollisionHandlerController(this);

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dsd.game.userinterface.model.labels;
 
 import com.dsd.game.Game;
@@ -22,6 +17,7 @@ import java.awt.Graphics2D;
  */
 public class HealthLabel extends StandardLabel {
 
+    //  Miscellaneous reference variables.
     private final Game game;
     private final Player player;
 
@@ -34,6 +30,7 @@ public class HealthLabel extends StandardLabel {
     private final Color lightGreen;
     private final int TRANSPARENCY = 127;
     private final float FADE_INTERVAL = 0.005f;
+
     //  Position and sizing of health elements
     private final int MAX_HEALTH = 200;
     private final int HEALTH_BAR_Y_OFFSET = 5;
@@ -56,8 +53,6 @@ public class HealthLabel extends StandardLabel {
 
     @Override
     public void tick () {
-        this.setX(Screen.gameHalfWidth - Screen.gameHalfWidth);
-        this.setY(Screen.gameHalfHeight + Screen.gameFourthHeight);
     }
 
     @Override

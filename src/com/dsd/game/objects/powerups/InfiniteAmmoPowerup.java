@@ -6,6 +6,7 @@ import com.dsd.game.objects.Player;
 import com.dsd.game.objects.weapons.Gun;
 import com.dsd.game.objects.weapons.Weapon;
 import com.dsd.game.userinterface.Screen;
+import com.dsd.game.userinterface.TimerInterface;
 import com.dsd.game.util.Utilities;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.controller.StandardAudioController;
@@ -29,7 +30,7 @@ import java.util.TimerTask;
  *
  * @author Joshua
  */
-public class InfiniteAmmoPowerup extends StandardGameObject {
+public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInterface {
 
     // Miscellaneous reference variables
     private final Game game;
@@ -94,9 +95,15 @@ public class InfiniteAmmoPowerup extends StandardGameObject {
          */
         this.powerupTimer = new Timer(true);
         this.powerupTimer.schedule(new InfiniteAmmoTimer(this), timer);
-        TimerController.addTimer(powerupTimer);
+        TimerController.addTimer(this);
+
         this.isActivated = true;
         this.playInfAmmoSFX();
+    }
+
+    @Override
+    public void cancelTimer () {
+        this.powerupTimer.cancel();
     }
 
     /**

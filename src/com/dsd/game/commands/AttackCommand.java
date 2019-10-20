@@ -7,6 +7,7 @@ import com.dsd.game.objects.enums.PlayerState;
 import com.dsd.game.objects.weapons.Gun;
 import com.dsd.game.objects.weapons.Knife;
 import com.dsd.game.objects.weapons.Weapon;
+import com.dsd.game.userinterface.TimerInterface;
 import com.revivedstandards.commands.Command;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.controller.StandardAudioController;
@@ -22,7 +23,7 @@ import java.util.TimerTask;
  *
  * @author Joshua, Ronald, Rinty
  */
-public class AttackCommand extends Command {
+public class AttackCommand extends Command implements TimerInterface {
 
     //  Miscellaneous reference variables.
     private final Game game;
@@ -37,8 +38,7 @@ public class AttackCommand extends Command {
 
     private static boolean hasTimer = false;
 
-    //  This may need to change with time.
-    public AttackCommand(Game _game, Player _obj, StandardCollisionHandler _gh, StandardAnimatorController animation) {
+    public AttackCommand (Game _game, Player _obj, StandardCollisionHandler _gh, StandardAnimatorController animation) {
         this.game = _game;
         this.player = _obj;
         this.globalHandler = _gh;
@@ -46,7 +46,7 @@ public class AttackCommand extends Command {
         this.animation.getStandardAnimation().setReturnAnimation(this.player.getAnimationController());
         this.attackDelayTimer = new Timer(true);
 
-        TimerController.addTimer(this.attackDelayTimer);
+        TimerController.addTimer(this);
 
         this.bind(_game.getKeyboard(), KeyEvent.VK_SPACE);
     }
@@ -96,6 +96,11 @@ public class AttackCommand extends Command {
         //  down(dt) is essentially just multiple pressed(dt) calls in
         //  succession.
         this.pressed(dt);
+    }
+
+    @Override
+    public void cancelTimer () {
+        this.attackDelayTimer.cancel();
     }
 
     /**
