@@ -5,6 +5,7 @@ import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.model.labels.AmmoLabel;
 import com.dsd.game.userinterface.model.labels.CoinLabel;
 import com.dsd.game.userinterface.model.labels.HealthLabel;
+import com.dsd.game.userinterface.model.labels.TimeLabel;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import java.awt.Graphics2D;
 
@@ -52,5 +53,6 @@ public class HUDScreen extends Screen {
         this.addInteractor(new AmmoLabel(super.getGame(), this.player));
         this.addInteractor(new CoinLabel(super.getGame(), this.player));
         this.addInteractor(new Minimap(super.getGame(), this.globalHandler));
+        this.addInteractor(new TimeLabel(super.getGame()));
     }
 }

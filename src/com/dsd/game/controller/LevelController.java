@@ -1,6 +1,7 @@
 package com.dsd.game.controller;
 
 import com.dsd.game.Game;
+import com.dsd.game.userinterface.TimerInterface;
 import com.revivedstandards.model.StandardLevel;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import java.util.TimerTask;
  *
  * @author Joshua
  */
-public class LevelController {
+public class LevelController implements TimerInterface {
 
     private final Game game;
     private final List<StandardLevel> levels;
@@ -33,7 +34,7 @@ public class LevelController {
     public LevelController (Game _game) {
         this.levels = new ArrayList<>();
         this.levelTimer = new Timer(true);
-        TimerController.addTimer(levelTimer);
+        TimerController.addTimer(this);
         this.game = _game;
     }
 
@@ -86,9 +87,7 @@ public class LevelController {
                 (long) DifficultyController.levelTransitionTimer,
                 (long) DifficultyController.levelTransitionTimer);
 
-        TimerController.addTimer(levelTimer);
-
-        TimerController.findTimer(levelTimer);
+        TimerController.addTimer(this);
     }
 
     /**
@@ -99,6 +98,11 @@ public class LevelController {
         this.levels.clear();
         this.currentLevelID = 0;
         this.currentWave = 1;
+    }
+
+    @Override
+    public void cancelTimer () {
+        this.levelTimer.cancel();
     }
 
 //============================= GETTERS ======================================//

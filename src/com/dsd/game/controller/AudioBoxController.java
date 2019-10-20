@@ -30,20 +30,20 @@ public abstract class AudioBoxController {
         StandardAudioController.load("src/resources/audio/sfx/restore_health.wav", 4);
         StandardAudioController.load("src/resources/audio/sfx/berserk.wav", 2);
         StandardAudioController.load("src/resources/audio/sfx/menuselect.wav", 5);
-        
+
         AudioBoxController.initBasicMonsterSFX(5);
         AudioBoxController.initGreenMonsterSFX(5);
     }
 
     private static void initBasicMonsterSFX (int _sfxCount) {
         for (int i = 1 ; i < _sfxCount ; i++) {
-            StandardAudioController.load("src/resources/audio/sfx/basic_monster/zombie-" + i + ".wav", 2);
+            StandardAudioController.load("src/resources/audio/sfx/basic_monster/zombie-" + i + ".wav", 4);
         }
     }
 
     private static void initGreenMonsterSFX (int _sfxCount) {
         for (int i = 1 ; i < _sfxCount ; i++) {
-            StandardAudioController.load("src/resources/audio/sfx/green_monster/pain" + i + ".wav", 2);
+            StandardAudioController.load("src/resources/audio/sfx/green_monster/pain" + i + ".wav", 4);
         }
     }
 }

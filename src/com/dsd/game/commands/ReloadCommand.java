@@ -4,6 +4,7 @@ import com.dsd.game.Game;
 import com.dsd.game.controller.TimerController;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.weapons.Gun;
+import com.dsd.game.userinterface.TimerInterface;
 import com.revivedstandards.commands.Command;
 import com.revivedstandards.controller.StandardAudioController;
 import java.awt.event.KeyEvent;
@@ -17,7 +18,7 @@ import java.util.TimerTask;
  *
  * @author Joshua, Ronald, Rinty
  */
-public class ReloadCommand extends Command {
+public class ReloadCommand extends Command implements TimerInterface{
 
     //  Miscellaneous reference variables
     private final Game game;
@@ -34,7 +35,12 @@ public class ReloadCommand extends Command {
         this.player = _obj;
         this.bind(_game.getKeyboard(), KeyEvent.VK_R);
         this.reloadTimer = new Timer(true);
-        TimerController.addTimer(reloadTimer);
+        TimerController.addTimer(this);
+    }
+
+    @Override
+    public void cancelTimer () {
+        this.reloadTimer.cancel();
     }
 
     @Override

@@ -17,7 +17,7 @@ import java.util.TimerTask;
  *
  * @author Joshua
  */
-public class PreambleScreen extends Screen {
+public class PreambleScreen extends Screen implements TimerInterface {
 
     // Models for this screen.
     private final LightningModel lightningEffect;
@@ -42,7 +42,7 @@ public class PreambleScreen extends Screen {
         this.lightningEffect = new LightningModel(_game);
         this.waveModel = new WaveLabel(_game, _game.getLogicalCurrentLevelID());
         this.preambleTimer = new Timer(true);
-        TimerController.addTimer(preambleTimer);
+        TimerController.addTimer(this);
         this.state = PreambleScreenState.FADE_IN;
     }
 
@@ -116,6 +116,11 @@ public class PreambleScreen extends Screen {
         this.state = PreambleScreenState.FADE_IN;
         this.waveModel.setWaveNumber(this.getGame().getWaveNumber());
         this.preambleTimer = new Timer(true);
+    }
+
+    @Override
+    public void cancelTimer () {
+        this.preambleTimer.cancel();
     }
 
 //============================ GETTERS ====================================//

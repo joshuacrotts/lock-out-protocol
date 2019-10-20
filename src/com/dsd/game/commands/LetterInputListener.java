@@ -10,7 +10,7 @@ import java.awt.event.KeyListener;
  * password. We'll write a custom textfield UI element instead of using the
  * lousy Java Swing ones.
  *
- * @author joshuacrotts
+ * @author Joshua Crotts
  */
 public class LetterInputListener implements KeyListener {
 

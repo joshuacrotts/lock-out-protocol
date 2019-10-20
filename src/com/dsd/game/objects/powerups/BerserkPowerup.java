@@ -5,6 +5,7 @@ import com.dsd.game.controller.TimerController;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.weapons.Weapon;
 import com.dsd.game.userinterface.Screen;
+import com.dsd.game.userinterface.TimerInterface;
 import com.dsd.game.util.Utilities;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.controller.StandardAudioController;
@@ -28,7 +29,7 @@ import java.util.TimerTask;
  *
  * @author Joshua
  */
-public class BerserkPowerup extends StandardGameObject {
+public class BerserkPowerup extends StandardGameObject implements TimerInterface {
 
     //  Miscellaneous reference variables
     private final Game game;
@@ -99,10 +100,15 @@ public class BerserkPowerup extends StandardGameObject {
          */
         this.powerupTimer = new Timer(true);
         this.powerupTimer.schedule(new BerserkTimer(this), timer);
-        TimerController.addTimer(powerupTimer);
+        TimerController.addTimer(this);
+
         this.isActivated = true;
         this.activateDamageBoost();
+    }
 
+    @Override
+    public void cancelTimer () {
+        this.powerupTimer.cancel();
     }
 
     /**
@@ -111,7 +117,6 @@ public class BerserkPowerup extends StandardGameObject {
     private void activateDamageBoost () {
         Weapon curr = this.game.getPlayer().getInventory().getCurrentWeapon();
         curr.setDamageFactor(DAMAGE_INCREASE_FACTOR);
-
     }
 
     /**
@@ -154,6 +159,7 @@ public class BerserkPowerup extends StandardGameObject {
         return new Color(_c.getRed(), _c.getGreen(), _c.getBlue(), 127);
     }
 
+//============================= SETTERS ====================================//
     public void setCollected () {
         this.isCollected = true;
     }
@@ -164,7 +170,7 @@ public class BerserkPowerup extends StandardGameObject {
 
     private class BerserkTimer extends TimerTask {
 
-        private BerserkPowerup powerup;
+        private final BerserkPowerup powerup;
 
         public BerserkTimer (BerserkPowerup _powerup) {
             this.powerup = _powerup;

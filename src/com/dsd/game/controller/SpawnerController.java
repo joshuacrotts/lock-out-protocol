@@ -7,6 +7,7 @@ import com.dsd.game.enemies.GreenMonster;
 import com.dsd.game.enemies.RedHeadMonster;
 import com.dsd.game.enemies.TinyMonster;
 import com.dsd.game.enemies.enums.EnemyType;
+import com.dsd.game.userinterface.TimerInterface;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.model.StandardGameObject;
 import com.revivedstandards.model.StandardID;
@@ -21,7 +22,7 @@ import java.util.TimerTask;
  *
  * @author Joshua
  */
-public class SpawnerController extends StandardGameObject {
+public class SpawnerController extends StandardGameObject implements TimerInterface {
 
     //  Miscellaneous reference variables
     private final StandardCollisionHandler parentContainer;
@@ -45,7 +46,7 @@ public class SpawnerController extends StandardGameObject {
         this.spawnerTimer = new Timer(true);
         this.spawnerTimer.scheduleAtFixedRate(new SpawnerDelayTimer(this, this.game), this.delay, this.delay);
 
-        TimerController.addTimer(spawnerTimer);
+        TimerController.addTimer(this);
     }
 
     @Override
@@ -56,6 +57,11 @@ public class SpawnerController extends StandardGameObject {
     @Override
     public void render (Graphics2D gd) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void cancelTimer () {
+        this.spawnerTimer.cancel();
     }
 
     /**
