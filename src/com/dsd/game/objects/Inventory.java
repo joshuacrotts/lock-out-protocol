@@ -2,6 +2,7 @@ package com.dsd.game.objects;
 
 import com.dsd.game.Game;
 import com.dsd.game.api.WeatherConnector;
+import com.dsd.game.objects.weapons.GrenadeLauncher;
 import com.dsd.game.objects.weapons.Gun;
 import com.dsd.game.objects.weapons.Knife;
 import com.dsd.game.objects.weapons.Pistol;
@@ -43,6 +44,7 @@ public class Inventory {
         this.weapons.add(new Pistol(_game, _player, _sch));
         this.weapons.add(new Rifle(_game, _player, _sch));
         this.weapons.add(new Shotgun(_game, _player, _sch));
+        this.weapons.add(new GrenadeLauncher(_game, _player, _sch));
         
         this.view = new InventoryView(this.game, this);
     }

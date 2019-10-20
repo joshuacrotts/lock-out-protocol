@@ -64,6 +64,7 @@ public class AttackCommand extends Command {
                 case PISTOL:
                 case RIFLE:
                 case SHOTGUN:
+                case GRENADE_LAUNCHER:
                     this.gunAttack((Gun) weapon);
                     break;
                 case KNIFE:

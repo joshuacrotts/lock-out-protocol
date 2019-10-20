@@ -18,7 +18,7 @@ import java.awt.image.BufferedImage;
 public class BulletGameObject extends ProjectileGameObject {
 
     //  Velocity factor applied to the bullet.
-    private final int VEL_FACTOR = 20;
+    private static final int VEL_FACTOR = 20;
     //  Static reference to the BufferedImages
     private static final BufferedImage[] frames = new BufferedImage[1];
     //  Animation frame per second setting
@@ -28,7 +28,7 @@ public class BulletGameObject extends ProjectileGameObject {
 
     public BulletGameObject (int _x, int _y, double _angle, int _damage, Game _game,
             StandardCollisionHandler _parentContainer, Player _parent) {
-        super(_x, _y, _angle, _damage, BulletGameObject.frames,
+        super(_x, _y, _angle, _damage, BulletGameObject.VEL_FACTOR, BulletGameObject.frames,
                 BulletGameObject.BULLET_FPS, _game, _parentContainer, _parent);
     }
 

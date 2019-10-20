@@ -14,6 +14,7 @@ public enum WeaponType {
     PISTOL("pistol"),
     KNIFE("knife"),
     BAT("bat"),
+    GRENADE_LAUNCHER("grenade_launcher"),
     FLAMETHROWER("flamethrower");
 
     private final String type;
