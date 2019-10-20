@@ -6,6 +6,7 @@ import com.dsd.game.objects.weapons.Gun;
 import com.dsd.game.objects.weapons.Knife;
 import com.dsd.game.objects.weapons.Pistol;
 import com.dsd.game.objects.weapons.Rifle;
+import com.dsd.game.objects.weapons.Shotgun;
 import com.dsd.game.objects.weapons.Weapon;
 import com.dsd.game.objects.weapons.enums.WeaponSelection;
 import com.dsd.game.userinterface.view.InventoryView;
@@ -39,6 +40,8 @@ public class Inventory {
         this.weapons.add(new Knife(_player));
         this.weapons.add(new Pistol(_game, _player, _sch));
         this.weapons.add(new Rifle(_game, _player, _sch));
+        this.weapons.add(new Shotgun(_game, _player, _sch));
+        
         this.view = new InventoryView(this.game, this);
     }
 

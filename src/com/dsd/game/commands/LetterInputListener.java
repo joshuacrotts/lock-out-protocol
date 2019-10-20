@@ -48,6 +48,7 @@ public class LetterInputListener implements KeyListener {
                     break;
                 default:
                     textElement.appendToString(this.character);
+                    break;
             }
         }
     }

@@ -52,7 +52,7 @@ public class RedHeadMonster extends Enemy implements DeathListener {
     public static int originalHealth = 100;
 
     public RedHeadMonster (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
-        super(_x, _y, BasicMonster.originalHealth, StandardID.Monster6, _game, _sch);
+        super(_x, _y, RedHeadMonster.originalHealth, StandardID.Monster6, _game, _sch);
         this.setTarget(_game.getPlayer());
         //  Randomly generates the walking frames per second for variability
         // this.walkingFPS = StdOps.rand(this.WALKING_FPS_MIN, this.WALKING_FPS_MAX);

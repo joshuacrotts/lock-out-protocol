@@ -2,8 +2,10 @@ package com.dsd.game.controller;
 
 import com.dsd.game.Game;
 import com.dsd.game.enemies.Enemy;
-import com.dsd.game.objects.BulletGameObject;
+import com.dsd.game.objects.Explosion;
 import com.dsd.game.objects.Player;
+import com.dsd.game.objects.ProjectileGameObject;
+import com.dsd.game.objects.ShotgunBulletObject;
 import com.dsd.game.objects.enums.PlayerState;
 import com.dsd.game.objects.items.Coin;
 import com.dsd.game.objects.powerups.BerserkPowerup;
@@ -11,7 +13,6 @@ import com.dsd.game.objects.powerups.HealthPowerup;
 import com.dsd.game.objects.powerups.InfiniteAmmoPowerup;
 import com.dsd.game.userinterface.StandardInteractorHandler;
 import com.dsd.game.userinterface.model.DamageText;
-import com.dsd.game.util.StdConsole;
 import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.model.StandardGameObject;
@@ -70,7 +71,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
     public void handleCollision (StandardGameObject _obj1, StandardGameObject _obj2) {
         //Handles bullet to monster collision (kills bullet and takes damage away from monster).
         if (_obj1.getId() == StandardID.Bullet && _obj2 instanceof Enemy) {
-            this.handleBulletEnemyCollision((BulletGameObject) _obj1, (Enemy) _obj2);
+            this.handleBulletEnemyCollision((ProjectileGameObject) _obj1, (Enemy) _obj2);
         }
     }
 
@@ -89,7 +90,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
             this.handlePlayerMonsterCollision((Player) _obj1, (Enemy) _obj2);
         }
         else if (_obj1.getId() == StandardID.Bullet && _obj2 instanceof Enemy) {
-            this.handleBulletEnemyCollision((BulletGameObject) _obj1, (Enemy) _obj2);
+            this.handleBulletEnemyCollision((ProjectileGameObject) _obj1, (Enemy) _obj2);
         }
         //
         //  TODO: Refactor this into a PowerUp superclass with some type of activate() method.
@@ -116,10 +117,14 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      * @param bullet
      * @param monster
      */
-    private void handleBulletEnemyCollision (BulletGameObject _bullet, Enemy _monster) {
+    private void handleBulletEnemyCollision (ProjectileGameObject _bullet, Enemy _monster) {
         // Sets the bullet to dead
         // Casts the obj2 to a Monster so we can deduct health from it
+
         if (_monster.isAlive() && _bullet.isAlive()) {
+            if (_bullet instanceof ShotgunBulletObject) {
+                this.addEntity(new Explosion((int) _monster.getX(), (int) _monster.getY()));
+            }
             _bullet.setAlive(false);
             _monster.setHealth(_monster.getHealth() - _bullet.getDamage());
 

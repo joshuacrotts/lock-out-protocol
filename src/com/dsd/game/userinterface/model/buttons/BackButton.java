@@ -17,6 +17,7 @@ import java.awt.Graphics2D;
  */
 public class BackButton extends MenuButton implements MouseEventInterface {
 
+    //  Button position and dimension offsets.
     private static final int BUTTON_X_OFFSET = 155;
     private static final int BUTTON_Y_OFFSET = 120;
     private static final int TEXT_X_OFFSET = 115;
@@ -26,7 +27,8 @@ public class BackButton extends MenuButton implements MouseEventInterface {
 
     public BackButton (Game _game, MenuScreen _menuScreen) {
         super(_game.getGameWidth() - BUTTON_X_OFFSET - BUTTON_WIDTH / 2,
-                _game.getGameHeight() - BUTTON_Y_OFFSET, BUTTON_WIDTH, BUTTON_HEIGHT, "BACK", _game, _menuScreen);
+                _game.getGameHeight() - BUTTON_Y_OFFSET, BUTTON_WIDTH, BUTTON_HEIGHT,
+                "BACK", _game, _menuScreen);
     }
 
     public BackButton (int _x, int _y, Game _game, MenuScreen _menuScreen) {

@@ -85,6 +85,7 @@ public class Minimap extends Interactor {
                         break;
                     case Monster6:
                         this.drawObject(_g2, obj, StandardDraw.RED_VIOLET);
+                        break;
                 }
             }
         }

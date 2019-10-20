@@ -2,7 +2,6 @@ package com.dsd.game.database;
 
 import com.dsd.game.AccountStatus;
 import com.dsd.game.Game;
-import com.dsd.game.util.StdConsole;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -64,8 +63,8 @@ public class PersistentDatabase {
      * @param _dbName
      * @return true if a connection was successful, false otherwise.
      */
-    public boolean connect(String _dbName) {
-        //  Database NAME (db name in remote sql)
+    public boolean connect (String _dbName) {
+        //  Database name (db name in remote sql).
         String instanceID = _dbName;
 
         this.generateClassName();
@@ -79,8 +78,6 @@ public class PersistentDatabase {
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-
-        StdConsole.println(StdConsole.GREEN, "Connection successful!");
         return true;
     }
 
@@ -167,7 +164,9 @@ public class PersistentDatabase {
     }
 
     /**
-     * Queries the SQL database for the salted n hashed password.
+     * Queries the SQL database for the salted and hashed password. The hashed
+     * and salted password is selected from the table, and compared using
+     * JBCrypt to verify if it's correct or not.
      *
      * @param _email
      * @param _password

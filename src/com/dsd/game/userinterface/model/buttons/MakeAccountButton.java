@@ -23,6 +23,7 @@ import java.awt.Graphics2D;
  */
 public class MakeAccountButton extends MenuButton implements MouseEventInterface {
 
+    //  Button position and dimension offsets.
     private static final int BUTTON_X_OFFSET = 0;
     private static final int BUTTON_Y_OFFSET = 120;
     private static final int TEXT_X_OFFSET = 55;

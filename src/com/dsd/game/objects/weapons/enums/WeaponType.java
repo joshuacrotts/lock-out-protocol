@@ -10,6 +10,7 @@ package com.dsd.game.objects.weapons.enums;
  */
 public enum WeaponType {
     RIFLE("rifle"),
+    SHOTGUN("shotgun"),
     PISTOL("pistol"),
     KNIFE("knife"),
     BAT("bat"),
