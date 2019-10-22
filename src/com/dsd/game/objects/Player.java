@@ -51,7 +51,8 @@ public class Player extends Entity implements DeathListener {
     //  Variables representing the angle and approach velocity
     private final float APPROACH_VEL = -3.0f;
     //  Money amount
-    private int money;
+    private int money = 0;
+
     //  Health vars (this may change with time)
     private int maxHealth = 200;
     //  Sex of player

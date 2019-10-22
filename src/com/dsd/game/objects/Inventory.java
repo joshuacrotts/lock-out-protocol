@@ -43,8 +43,13 @@ public class Inventory {
         this.weapons = new ArrayList<>();
         this.parentHandler = _sch;
 
+        //  This will change with time (to a subclass of Weapon).
         this.weapons.add(new Knife(_player));
         this.weapons.add(new Pistol(_game, _player, _sch));
+        this.weapons.add(new Rifle(_game, _player, _sch));
+        this.weapons.add(new FastRifle(_game, _player, _sch));
+        this.weapons.add(new Shotgun(_game, _player, _sch));
+        this.weapons.add(new GrenadeLauncher(_game, _player, _sch));
 
         this.view = new InventoryView(this.game, this);
     }

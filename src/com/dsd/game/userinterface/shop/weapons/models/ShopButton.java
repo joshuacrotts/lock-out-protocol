@@ -76,17 +76,25 @@ public abstract class ShopButton extends Interactor {
 
     @Override
     public void tick () {
+        if (!this.getGame().isShop()) {
+            return;
+        }
         this.setX((int) this.getGame().getCamera().getX() - X_OFFSET);
         this.setY((int) this.getGame().getCamera().getY() - Y_OFFSET);
     }
 
     @Override
     public void render (Graphics2D _g2) {
+        if (!this.getGame().isShop()) {
+            return;
+        }
         _g2.drawImage(this.activeImage, this.getX(), this.getY(), null);
     }
 
     @Override
-    public abstract void onMouseClick ();
+    public void onMouseClick () {
+        this.game.getPlayer().setMoney(this.game.getPlayer().getMoney() - this.PRICE);
+    }
 
     @Override
     public void onMouseEnterHover () {

@@ -29,7 +29,7 @@ public class GrenadeLauncher extends Gun {
     private static final int BULLET_DAMAGE = 250;
 
     public GrenadeLauncher (Game _game, Player _player, StandardCollisionHandler _sch) {
-        super(WeaponType.GRENADE_LAUNCHER, 16, _game, _player, _sch);
+        super(WeaponType.GRENADE_LAUNCHER, 2, _game, _player, _sch);
         //  Instantiates the animation controllers.
         this.loadAssets(_player);
         super.setDelay(DELAY);

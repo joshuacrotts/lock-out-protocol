@@ -52,8 +52,13 @@ public class GrenadeLauncherButton extends ShopButton {
 
     @Override
     public void onMouseClick () {
+        if (!this.getGame().isShop()) {
+            return;
+        }
         //  If we have enough money...
         if (this.getGame().getPlayer().getMoney() > this.getPrice()) {
+
+            super.onMouseClick();
 
             Gun _weapon = (Gun) this.getInventory().hasWeapon(WeaponType.GRENADE_LAUNCHER);
 
