@@ -53,7 +53,12 @@ public class ShotgunButton extends ShopButton {
     @Override
     public void onMouseClick () {
         //  If we have enough money...
+        if (!this.getGame().isShop()) {
+            return;
+        }
         if (this.getGame().getPlayer().getMoney() > this.getPrice()) {
+
+            super.onMouseClick();
 
             Gun _weapon = (Gun) this.getInventory().hasWeapon(WeaponType.SHOTGUN);
 
