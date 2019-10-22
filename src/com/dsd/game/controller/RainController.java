@@ -31,7 +31,7 @@ public class RainController implements Renderable, Updatable {
     private static final boolean toggleDownfall = false;
 
     //  If it is raining, this boolean is toggled true.
-    private final boolean isRaining;
+    private boolean isRaining;
 
     //  Defines the range in which rain can spawn for the user.
     private static final int X_BORDER = Screen.gameDoubleWidth;
@@ -52,7 +52,13 @@ public class RainController implements Renderable, Updatable {
 
         // Be sure to always set the SPH camera or it'll throw a NPE
         this.sph.setCamera(this.sc);
-        this.isRaining = TranslatorAPI.getWeather().contains("rain") | RainController.toggleDownfall;
+        try {
+            this.isRaining = TranslatorAPI.getWeather().contains("rain") | RainController.toggleDownfall;
+        }
+        catch (Exception ex) {
+            System.err.println("Could not connect; continuing without rain.");
+            this.isRaining = false;
+        }
     }
 
     @Override

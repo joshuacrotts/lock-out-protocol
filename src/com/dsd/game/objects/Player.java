@@ -145,7 +145,8 @@ public class Player extends Entity implements DeathListener {
      */
     public void resetPlayer () {
         this.money = 0;
-        this.setHealth(maxHealth);
+        this.setHealth(this.maxHealth);
+        this.inventory.resetInventory();
     }
 
     /**

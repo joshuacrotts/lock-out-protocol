@@ -18,6 +18,8 @@ public class ShopView extends Interactor {
     //  Miscellaneous reference variables.
     private final Game game;
     private final StandardCamera camera;
+
+    //  The background for the corresponding shop view.
     private final Color shopRectColor;
     private Rectangle shopRectangle;
 
@@ -25,7 +27,7 @@ public class ShopView extends Interactor {
         this.game = _game;
         this.camera = _game.getCamera();
 
-        this.shopRectColor = new Color(0, 0, 0, 1f);
+        this.shopRectColor = new Color(0, 0, 0, 0.8f);
         this.shopRectangle = new Rectangle(0, 0, this.game.getGameWidth(), this.game.getGameHeight());
 
         this.setWidth(this.game.getGameWidth());
@@ -34,11 +36,6 @@ public class ShopView extends Interactor {
         this.setScaled(true);
     }
 
-    @Override
-    public void render (Graphics2D _g2) {
-        _g2.setColor(this.shopRectColor);
-        _g2.fill(this.shopRectangle);
-    }
 
     @Override
     public void tick () {
@@ -46,8 +43,14 @@ public class ShopView extends Interactor {
         this.setHeight(this.game.getGameHeight());
 
         this.shopRectangle = new Rectangle((int) this.camera.getX() - Screen.gameHalfWidth,
-                (int) this.camera.getY() - Screen.gameHalfHeight,
-                this.getWidth(), this.getHeight());
+                                           (int) this.camera.getY() - Screen.gameHalfHeight,
+                                           this.getWidth(), this.getHeight());
+    }
+
+    @Override
+    public void render (Graphics2D _g2) {
+        _g2.setColor(this.shopRectColor);
+        _g2.fill(this.shopRectangle);
     }
 
     @Override

@@ -4,7 +4,11 @@ import com.dsd.game.Game;
 import com.dsd.game.userinterface.shop.enums.ShopState;
 import com.dsd.game.commands.ShopCommand;
 import com.dsd.game.userinterface.shop.ShopTitleLabel;
-import com.dsd.game.userinterface.shop.weapons.RifleButton;
+import com.dsd.game.userinterface.shop.weapons.models.FastRifleButton;
+import com.dsd.game.userinterface.shop.weapons.models.GrenadeLauncherButton;
+import com.dsd.game.userinterface.shop.weapons.models.PistolButton;
+import com.dsd.game.userinterface.shop.weapons.models.RifleButton;
+import com.dsd.game.userinterface.shop.weapons.models.ShotgunButton;
 import com.dsd.game.userinterface.view.ShopView;
 import java.awt.Graphics2D;
 
@@ -18,15 +22,15 @@ import java.awt.Graphics2D;
  */
 public class ShopScreen extends Screen {
 
+    //  General state of the shop (i.e. whether we're looking at ammo or
+    //  other powerups, the shop command to access it, etc.
     private ShopState shopState;
-    private final ShopView shopView;
     private final ShopCommand shopCommand;
 
     public ShopScreen (Game _game) {
         super(_game);
-        this.shopView = new ShopView(_game);
+
         this.shopCommand = new ShopCommand(_game);
-        this.addInteractor(this.shopView);
         this.shopState = ShopState.WEAPONS;
 
         this.createUIElements();
@@ -48,9 +52,17 @@ public class ShopScreen extends Screen {
         super.render(_g2);
     }
 
+    /**
+     * Adds the interactors to the screen handler.
+     */
     private void createUIElements () {
+        super.addInteractor(new ShopView(this.getGame()));
         super.addInteractor(new ShopTitleLabel(this.getGame(), this));
+        super.addInteractor(new PistolButton(this.getGame(), this));
         super.addInteractor(new RifleButton(this.getGame(), this));
+        super.addInteractor(new GrenadeLauncherButton(this.getGame(), this));
+        super.addInteractor(new FastRifleButton(this.getGame(), this));
+        super.addInteractor(new ShotgunButton(this.getGame(), this));
     }
 
 //============================ GETTERS ====================================//

@@ -37,9 +37,9 @@ public abstract class Gun extends Weapon {
         this.game = _game;
         this.player = _player;
         this.globalHandler = _sch;
-        this.totalAmmo = _totalAmmo;
-        this.currentAmmo = this.totalAmmo;
-        this.magazineAmt = this.totalAmmo;
+        this.currentAmmo = _totalAmmo;
+        this.magazineAmt = _totalAmmo;
+        this.totalAmmo = _totalAmmo << 2;
         this.emptySFXPath = "src/resources/audio/sfx/empty.wav";
         super.setWeaponState(WeaponState.READY);
     }
@@ -73,7 +73,7 @@ public abstract class Gun extends Weapon {
              * If we don't have enough to fill the magazine but the current +
              * total > magazine
              */
-            int difference = this.magazineAmt - this.currentAmmo;
+            int difference = (this.magazineAmt - this.currentAmmo);
             this.totalAmmo -= difference;
             this.currentAmmo += difference;
         }
@@ -135,6 +135,10 @@ public abstract class Gun extends Weapon {
 
     public void setCurrentAmmo (int _ammo) {
         this.currentAmmo = _ammo;
+    }
+
+    public void setTotalAmmo (int _ammo) {
+        this.totalAmmo = _ammo;
     }
 
     public void setReloading (boolean _reloading) {
