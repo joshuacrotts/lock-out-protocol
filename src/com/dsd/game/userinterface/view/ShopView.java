@@ -4,26 +4,53 @@ import com.dsd.game.Game;
 import com.dsd.game.userinterface.Screen;
 import com.dsd.game.userinterface.model.Interactor;
 import com.revivedstandards.main.StandardCamera;
-import com.revivedstandards.util.StdOps;
+import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
+import java.awt.Rectangle;
 
 /**
+ * Shop background view.
  *
  * @author Joshua
  */
 public class ShopView extends Interactor {
 
-    private static BufferedImage backingImage;
+    //  Miscellaneous reference variables.
     private final Game game;
     private final StandardCamera camera;
+
+    //  The background for the corresponding shop view.
+    private final Color shopRectColor;
+    private Rectangle shopRectangle;
 
     public ShopView (Game _game) {
         this.game = _game;
         this.camera = _game.getCamera();
-        ShopView.backingImage = StdOps.loadImage("src/resources/img/ui/shop.png");
+
+        this.shopRectColor = new Color(0, 0, 0, 0.8f);
+        this.shopRectangle = new Rectangle(0, 0, this.game.getGameWidth(), this.game.getGameHeight());
+
         this.setWidth(this.game.getGameWidth());
         this.setHeight(this.game.getGameHeight());
+
+        this.setScaled(true);
+    }
+
+
+    @Override
+    public void tick () {
+        this.setWidth(this.game.getGameWidth());
+        this.setHeight(this.game.getGameHeight());
+
+        this.shopRectangle = new Rectangle((int) this.camera.getX() - Screen.gameHalfWidth,
+                                           (int) this.camera.getY() - Screen.gameHalfHeight,
+                                           this.getWidth(), this.getHeight());
+    }
+
+    @Override
+    public void render (Graphics2D _g2) {
+        _g2.setColor(this.shopRectColor);
+        _g2.fill(this.shopRectangle);
     }
 
     @Override
@@ -36,15 +63,5 @@ public class ShopView extends Interactor {
 
     @Override
     public void onMouseExitHover () {
-    }
-
-    @Override
-    public void render (Graphics2D _g2) {
-        _g2.drawImage(backingImage, (int) this.camera.getX() - Screen.gameHalfWidth, (int) this.camera.getY() - Screen.gameHalfHeight, this.getWidth(), this.getHeight(), null);
-
-    }
-
-    @Override
-    public void tick () {
     }
 }

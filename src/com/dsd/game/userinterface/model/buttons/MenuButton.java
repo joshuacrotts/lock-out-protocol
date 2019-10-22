@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
  */
 public abstract class MenuButton extends StandardButton implements MouseEventInterface {
 
+    //  Miscellaneous reference variables.
     private final Game game;
     private final MenuScreen menuScreen;
     protected final Font font;

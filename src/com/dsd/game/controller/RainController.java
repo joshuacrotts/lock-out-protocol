@@ -22,22 +22,26 @@ import org.apache.commons.math3.util.FastMath;
  */
 public class RainController implements Renderable, Updatable {
 
-    //  Reference variables
+    //  Reference variables.
+    private final Game game;
     private final StandardParticleHandler sph;
     private final StandardCamera sc;
-    private final Game game;
-    //  Serves as a debugging feature
-    private static final boolean TOGGLE_DOWNFALL = false;
+
+    //  Serves as a debugging feature.
+    private static final boolean toggleDownfall = false;
+
     //  If it is raining, this boolean is toggled true.
-    private final boolean isRaining;
-    //  Defines the range in which rain can spawn for the user
+    private boolean isRaining;
+
+    //  Defines the range in which rain can spawn for the user.
     private static final int X_BORDER = Screen.gameDoubleWidth;
     private static final int Y_BORDER = Screen.gameDoubleHeight;
     //  Velocity constants and factors for the rain drop object.
     private static final double RAIN_DIRECTION = -FastMath.PI * 1.5;
     private static final int VEL_FACTOR = 5;
     private static final int Y_BOUND_FACTOR = 2;
-    //  Constants for how many rain particles should spawn
+
+    //  Constants for how many rain particles should spawn.
     private static final int MAX_RAIN_PARTICLES = 5000;
 
     public RainController(Game _game) {
@@ -47,7 +51,13 @@ public class RainController implements Renderable, Updatable {
 
         // Be sure to always set the SPH camera or it'll throw a NPE
         this.sph.setCamera(this.sc);
-        this.isRaining = TranslatorAPI.getWeather().contains("rain") | RainController.TOGGLE_DOWNFALL;
+        try {
+            this.isRaining = TranslatorAPI.getWeather().contains("rain") | RainController.toggleDownfall;
+        }
+        catch (Exception ex) {
+            System.err.println("Could not connect; continuing without rain.");
+            this.isRaining = false;
+        }
     }
 
     @Override

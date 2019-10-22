@@ -46,6 +46,7 @@ public class AccountButton extends MenuButton implements MouseEventInterface {
         }
 
         super.render(_g2);
+
         StandardDraw.text(this.getText(), this.getX() + TEXT_X_OFFSET,
                 this.getY() + TEXT_Y_OFFSET, this.font, 24f, Color.WHITE);
     }

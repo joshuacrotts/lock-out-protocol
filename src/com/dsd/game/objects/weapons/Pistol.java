@@ -22,12 +22,14 @@ public class Pistol extends Gun {
     private static final int WALKING_FPS = 10;
     private static final int SHOOT_GUN_FPS = 20;
     //  Delay between shots.
-    private final int DELAY = 1250;
+    private final int DELAY = 750;
+
     //  Damage from the pistol.
-    private static final int BULLET_DAMAGE = 35;
+    private static final int BULLET_DAMAGE = 40;
 
     public Pistol (Game _game, Player _player, StandardCollisionHandler _sch) {
         super(WeaponType.PISTOL, 16, _game, _player, _sch);
+
         //  Instantiates the animation controllers
         this.loadAssets(_player);
         super.setDelay(this.DELAY);

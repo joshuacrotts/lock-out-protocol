@@ -11,6 +11,7 @@ import com.dsd.game.objects.weapons.Rifle;
 import com.dsd.game.objects.weapons.Shotgun;
 import com.dsd.game.objects.weapons.Weapon;
 import com.dsd.game.objects.weapons.enums.WeaponSelection;
+import com.dsd.game.objects.weapons.enums.WeaponType;
 import com.dsd.game.userinterface.view.InventoryView;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class Inventory {
     //  Miscellaneous reference variables
     private final Game game;
     private final Player player;
+    private final StandardCollisionHandler parentHandler;
     private final InventoryView view;
     private final List<Weapon> weapons;
     private int currentWeapon = 0;
@@ -39,13 +41,10 @@ public class Inventory {
         this.game = _game;
         this.player = _player;
         this.weapons = new ArrayList<>();
-        //  This will change with time (to a subclass of Weapon).
+        this.parentHandler = _sch;
+
         this.weapons.add(new Knife(_player));
         this.weapons.add(new Pistol(_game, _player, _sch));
-        this.weapons.add(new Rifle(_game, _player, _sch));
-        this.weapons.add(new FastRifle(_game, _player, _sch));
-        this.weapons.add(new Shotgun(_game, _player, _sch));
-        this.weapons.add(new GrenadeLauncher(_game, _player, _sch));
 
         this.view = new InventoryView(this.game, this);
     }
@@ -63,9 +62,41 @@ public class Inventory {
         this.hasGun = this.weapons.get(this.currentWeapon) instanceof Gun;
     }
 
+    /**
+     * When the user changes their sex, we need to reload the weapon assets
+     * since they're bound to the player's sex.
+     */
     public void reloadInventoryAssets () {
         for (int i = 0 ; i < this.weapons.size() ; i++) {
             this.weapons.get(i).loadAssets(this.player);
+        }
+    }
+
+    /**
+     * Checks the inventory to see if the player has this specific weapon.
+     *
+     * @param _type
+     * @return
+     */
+    public Weapon hasWeapon (WeaponType _type) {
+        for (int i = 0 ; i < this.weapons.size() ; i++) {
+            Weapon weapon = this.weapons.get(i);
+            if (weapon.getWeaponType() == _type) {
+                return weapon;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Adds a weapon to the inventory. This is mainly used in the shop classes.
+     *
+     * @param _weapon
+     */
+    public void addWeapon (Weapon _weapon) {
+        if (hasWeapon(_weapon.getWeaponType()) == null) {
+            this.weapons.add(_weapon);
         }
     }
 
@@ -94,6 +125,16 @@ public class Inventory {
         }
 
         this.player.setAttackAnimator(this.weapons.get(this.currentWeapon).getAttackFrames());
+    }
+
+    /**
+     * When the user resets the game, their inventory needs to be reset.
+     */
+    public void resetInventory () {
+        this.weapons.clear();
+
+        this.weapons.add(new Knife(this.player));
+        this.weapons.add(new Pistol(this.game, this.player, this.parentHandler));
     }
 
 //============================= GETTERS ===================================//

@@ -2,6 +2,7 @@ package com.dsd.game;
 
 import com.dsd.game.controller.AudioBoxController;
 import com.dsd.game.controller.CollisionHandlerController;
+import com.dsd.game.controller.CursorController;
 import com.dsd.game.controller.DebugController;
 import com.dsd.game.controller.DifficultyController;
 import com.dsd.game.controller.LevelController;
@@ -67,6 +68,9 @@ public class Game extends StandardGame {
     //  Level controller
     private final LevelController levelController;
 
+    //  Cursor controller
+    private final CursorController cursorController;
+
     //  Game state variable (paused, running, menu, etc.)
     private GameState gameState = GameState.MENU;
 
@@ -101,6 +105,7 @@ public class Game extends StandardGame {
         this.debugController = new DebugController(this, this.sch);
         this.difficultyController = new DifficultyController(this);
         this.levelController = new LevelController(this);
+        this.cursorController = new CursorController(this);
         this.instantiateLevels();
 
         /**
@@ -149,8 +154,10 @@ public class Game extends StandardGame {
                 //  And lastly the camera
                 StandardHandler.Object(this.sc);
                 break;
-
         }
+
+        this.cursorController.tick();
+
     }
 
     @Override
@@ -239,6 +246,7 @@ public class Game extends StandardGame {
         this.levelController.clearLevels();
         this.player.resetPlayer();
         this.instantiateLevels();
+
         TimerController.stopTimers();
         DifficultyController.resetDifficultyFactors();
     }
