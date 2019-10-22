@@ -118,7 +118,7 @@ public class SpawnerController extends StandardGameObject implements TimerInterf
              * If we're not paused AND the game isn't in its preamble state, we
              * can spawn the entities.
              */
-            if (this.game.isPaused() || this.game.isPreamble()) {
+            if (this.game.isPaused() || this.game.isPreamble() || this.game.isShop()) {
                 return;
             }
             this.spawnerController.spawn(StdOps.rand(1, 2));

@@ -22,18 +22,18 @@ import org.apache.commons.math3.util.FastMath;
  */
 public class RainController implements Renderable, Updatable {
 
-    //  Reference variables
+    //  Reference variables.
+    private final Game game;
     private final StandardParticleHandler sph;
     private final StandardCamera sc;
-    private final Game game;
 
-    //  Serves as a debugging feature
+    //  Serves as a debugging feature.
     private static final boolean toggleDownfall = false;
 
     //  If it is raining, this boolean is toggled true.
     private final boolean isRaining;
 
-    //  Defines the range in which rain can spawn for the user
+    //  Defines the range in which rain can spawn for the user.
     private static final int X_BORDER = Screen.gameDoubleWidth;
     private static final int Y_BORDER = Screen.gameDoubleHeight;
 
@@ -42,7 +42,7 @@ public class RainController implements Renderable, Updatable {
     private static final int VEL_FACTOR = 5;
     private static final int Y_BOUND_FACTOR = 2;
 
-    //  Constants for how many rain particles should spawn
+    //  Constants for how many rain particles should spawn.
     private static final int MAX_RAIN_PARTICLES = 5000;
 
     public RainController (Game _game) {
@@ -95,7 +95,7 @@ public class RainController implements Renderable, Updatable {
                 (int) (this.sc.getY() + this.sc.getVph() * Y_BOUND_FACTOR));
     }
 
-    //========================== GETTERS ==============================//
+//========================== GETTERS ==============================//
     /**
      * Returns a random speed between [0, speedFactor). Determines how fast each
      * rain drop will fall.

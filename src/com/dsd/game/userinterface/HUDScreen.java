@@ -17,6 +17,7 @@ import java.awt.Graphics2D;
  */
 public class HUDScreen extends Screen {
 
+    //  Miscellaneous reference variables.
     private final Player player;
     private final StandardCollisionHandler globalHandler;
 
