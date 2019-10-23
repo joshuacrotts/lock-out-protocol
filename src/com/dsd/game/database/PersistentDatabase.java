@@ -182,13 +182,13 @@ public class PersistentDatabase {
      */
     private boolean isValidPassword (String _email, String _password) throws SQLException {
         //  Returns the salted and hashed pswd with the associated email.
-        PreparedStatement insertStatement = this.remoteDBConnection.prepareStatement(String.format("SELECT Password FROM user_accounts WHERE Email = ?;"));
+        PreparedStatement insertStatement = this.remoteDBConnection.prepareStatement(String.format("SELECT Passwd FROM user_accounts WHERE Email = ?;"));
         insertStatement.setString(1, _email);
         ResultSet resultQuery = insertStatement.executeQuery();
 
         //  If we have a result query value, then we check the password against the hashed pswd.
         if (resultQuery.next()) {
-            return BCrypt.checkpw(_password, resultQuery.getString("Password"));
+            return BCrypt.checkpw(_password, resultQuery.getString("Passwd"));
         }
         return false;
     }
