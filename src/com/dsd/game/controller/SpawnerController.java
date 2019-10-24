@@ -51,22 +51,12 @@ public class SpawnerController extends StandardGameObject implements TimerInterf
 
     @Override
     public void tick () {
-<<<<<<< Updated upstream
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-=======
-        //throw new UnsupportedOperationException("Not supported yet.");
-        //To change body of generated methods, choose Tools | Templates.
->>>>>>> Stashed changes
     }
 
     @Override
     public void render (Graphics2D gd) {
-<<<<<<< Updated upstream
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-=======
-        //throw new UnsupportedOperationException("Not supported yet.");
-        //To change body of generated methods, choose Tools | Templates.
->>>>>>> Stashed changes
     }
 
     @Override

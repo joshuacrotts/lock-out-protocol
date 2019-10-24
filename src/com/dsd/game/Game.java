@@ -359,17 +359,4 @@ public class Game extends StandardGame {
         this.player.setCamera(sc);
         this.player.setHandler(this.sch);
     }
-<<<<<<< Updated upstream
-=======
-
-    /**
-     * Sets the game to the preamble state and reset the alpha transparency of
-     * it.
-     */
-    public void setPreambleState () {
-        this.gameState = GameState.PREAMBLE;
-        this.playWaveChangeSFX();
-        this.preambleScreen.resetPreambleScreen();
-    }
->>>>>>> Stashed changes
 }

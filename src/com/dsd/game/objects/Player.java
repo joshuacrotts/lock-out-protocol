@@ -54,7 +54,7 @@ public class Player extends Entity implements DeathListener {
     private final float APPROACH_VEL = -3.0f;
 
     //  Money amount
-    private int money = 500;
+    private int money = 0;
 
     //  Health vars (this may change with time)
     private int maxHealth = 200;
