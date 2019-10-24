@@ -57,7 +57,7 @@ public class TranslatorDatabase {
      * @return
      */
     public static AccountStatus authenticateUser (String _email, String _password) {
-        if (database.connect("ljcman_user_accounts")) {
+        if (database.connect("users")) {
             return database.userAuthenticated(_email, _password);
         }
 
@@ -73,7 +73,7 @@ public class TranslatorDatabase {
      * @return
      */
     public static AccountStatus addUser (String _email, String _password) {
-        if (database.connect("ljcman_user_accounts")) {
+        if (database.connect("users")) {
             return database.addUser(_email, _password);
         }
 

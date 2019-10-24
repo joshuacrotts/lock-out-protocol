@@ -73,7 +73,7 @@ public class LetterInputListener implements KeyListener {
     }
 
 //====================== GETTERS ========================//
-    public char getLastKeyTyped() {
+    public char getLastKeyTyped () {
         return this.character;
     }
 

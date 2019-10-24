@@ -26,8 +26,8 @@ public class ShopTextLabel extends StandardLabel {
 
     public ShopTextLabel (Game _game, int _xOffset, int _yOffset) {
         super((int) Screen.gameHalfWidth,
-              (int) Screen.gameHalfHeight,
-              "WEAPON", "src/resources/fonts/chargen.ttf", 20f);
+                (int) Screen.gameHalfHeight,
+                "WEAPON", "src/resources/fonts/chargen.ttf", 20f);
         this.game = _game;
         this.LABEL_X_OFFSET = _xOffset - WEAPON_BOX_X_OFFSET;
         this.LABEL_Y_OFFSET = _yOffset - WEAPON_BOX_Y_OFFSET;

@@ -18,7 +18,7 @@ import java.util.TimerTask;
  *
  * @author Joshua, Ronald, Rinty
  */
-public class ReloadCommand extends Command implements TimerInterface{
+public class ReloadCommand extends Command implements TimerInterface {
 
     //  Miscellaneous reference variables
     private final Game game;

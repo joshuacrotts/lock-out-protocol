@@ -49,7 +49,7 @@ public class MenuScreen extends Screen {
         this.menuStateStack.push(this.menuState);
         this.createUIElements();
         this.createUIScreens();
-        
+
         TabTextFieldCommand tabCommand = new TabTextFieldCommand(this.getGame());
     }
 

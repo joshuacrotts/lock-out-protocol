@@ -16,8 +16,10 @@ import java.awt.Graphics2D;
  */
 public class RifleButton extends ShopButton {
 
+    //  Rifle button view.
     private final RifleButtonView rifleButtonView;
 
+    //  Button offsets.
     public static final int X_OFFSET = -50;
     public static final int Y_OFFSET = 176;
 
@@ -53,22 +55,21 @@ public class RifleButton extends ShopButton {
             return;
         }
         //  If we have enough money...
-        if (this.getGame().getPlayer().getMoney() > this.getPrice()) {
 
-            super.onMouseClick();
+        Gun _weapon = (Gun) this.getInventory().hasWeapon(WeaponType.RIFLE);
 
-            Gun _weapon = (Gun) this.getInventory().hasWeapon(WeaponType.RIFLE);
+        //  If we don't have the weapon, add it to the user's inventory.
+        if (_weapon == null && this.getGame().getPlayer().getMoney() >= this.getPrice()) {
+            this.getGame().getPlayer().setMoney(this.getGame().getPlayer().getMoney() - this.getPrice());
 
-            //  If we don't have the weapon, add it to the user's inventory.
-            if (_weapon == null) {
+            this.getInventory().addWeapon(new Rifle(this.getGame(),
+                    this.getGame().getPlayer(), this.getGame().getPlayer().getHandler()));
+        }
+        //  Otherwise, add to the ammunition.
+        else if (this.getGame().getPlayer().getMoney() >= this.getPricePerMagazine()) {
+            this.getGame().getPlayer().setMoney(this.getGame().getPlayer().getMoney() - this.getPricePerMagazine());
 
-                this.getInventory().addWeapon(new Rifle(this.getGame(),
-                        this.getGame().getPlayer(), this.getGame().getPlayer().getHandler()));
-            }
-            //  Otherwise, add to the ammunition.
-            else {
-                _weapon.setTotalAmmo(_weapon.getTotalAmmo() + _weapon.getMagazineCapacity());
-            }
+            _weapon.setTotalAmmo(_weapon.getTotalAmmo() + _weapon.getMagazineCapacity());
         }
     }
 

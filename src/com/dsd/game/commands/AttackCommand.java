@@ -79,7 +79,8 @@ public class AttackCommand extends Command implements TimerInterface {
              */
             weapon.setReady(false);
             AttackCommand.hasTimer = false;
-        } /**
+        }
+        /**
          * If there's not already a delay present and the weapon isn't active,
          * we can create one. We need to instantiate a new timer in the event
          * that the previous one was canceled.

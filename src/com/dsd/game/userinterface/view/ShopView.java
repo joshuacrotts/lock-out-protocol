@@ -36,15 +36,14 @@ public class ShopView extends Interactor {
         this.setScaled(true);
     }
 
-
     @Override
     public void tick () {
         this.setWidth(this.game.getGameWidth());
         this.setHeight(this.game.getGameHeight());
 
         this.shopRectangle = new Rectangle((int) this.camera.getX() - Screen.gameHalfWidth,
-                                           (int) this.camera.getY() - Screen.gameHalfHeight,
-                                           this.getWidth(), this.getHeight());
+                (int) this.camera.getY() - Screen.gameHalfHeight,
+                this.getWidth(), this.getHeight());
     }
 
     @Override

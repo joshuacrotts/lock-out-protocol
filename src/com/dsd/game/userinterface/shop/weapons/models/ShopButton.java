@@ -92,9 +92,7 @@ public abstract class ShopButton extends Interactor {
     }
 
     @Override
-    public void onMouseClick () {
-        this.game.getPlayer().setMoney(this.game.getPlayer().getMoney() - this.PRICE);
-    }
+    public abstract void onMouseClick ();
 
     @Override
     public void onMouseEnterHover () {

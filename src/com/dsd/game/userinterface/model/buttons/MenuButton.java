@@ -49,7 +49,7 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
     }
 
     @Override
-    public void onMouseClick() {
+    public void onMouseClick () {
         StandardAudioController.play("src/resources/audio/sfx/menuselect.wav");
     }
 
@@ -74,11 +74,11 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
     }
 
 //================================== GETTERS ===================================//
-    public Game getGame() {
+    public Game getGame () {
         return this.game;
     }
 
-    public MenuScreen getMenuScreen() {
+    public MenuScreen getMenuScreen () {
         return this.menuScreen;
     }
 }
