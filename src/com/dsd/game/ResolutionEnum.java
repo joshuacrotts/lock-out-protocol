@@ -112,4 +112,35 @@ public enum ResolutionEnum {
         return (int) resolution.getWidth() + "x"
                 + (int) resolution.getHeight();
     }
+<<<<<<< Updated upstream
+=======
+
+    /**
+     * Returns a string representation of the resolution.
+     *
+     * @return
+     */
+    public static String getResolution () {
+        return RESOLUTION_LIST[resolutionIndex].getDimensionString();
+    }
+
+    /**
+     * Returns the actual dimension object associated with each ResolutionEnum.
+     *
+     * @return
+     */
+    public static Dimension getDimension () {
+        return RESOLUTION_LIST[resolutionIndex].resolution;
+    }
+
+    /**
+     * Returns the dimension object associated with the object at _index.
+     *
+     * @param _index
+     * @return
+     */
+    private static Dimension getDimension (int _index) {
+        return RESOLUTION_LIST[_index].resolution;
+    }
+>>>>>>> Stashed changes
 }

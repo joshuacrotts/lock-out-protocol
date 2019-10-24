@@ -56,22 +56,20 @@ public class ShotgunButton extends ShopButton {
         if (!this.getGame().isShop()) {
             return;
         }
-        if (this.getGame().getPlayer().getMoney() > this.getPrice()) {
+        Gun _weapon = (Gun) this.getInventory().hasWeapon(WeaponType.SHOTGUN);
 
-            super.onMouseClick();
+        //  If we don't have the weapon, add it to the user's inventory.
+        if (_weapon == null && this.getGame().getPlayer().getMoney() >= this.getPrice()) {
+            this.getGame().getPlayer().setMoney(this.getGame().getPlayer().getMoney() - this.getPrice());
 
-            Gun _weapon = (Gun) this.getInventory().hasWeapon(WeaponType.SHOTGUN);
+            this.getInventory().addWeapon(new Shotgun(this.getGame(),
+                    this.getGame().getPlayer(), this.getGame().getPlayer().getHandler()));
+        }
+        //  Otherwise, add to the ammunition.
+        else if (this.getGame().getPlayer().getMoney() >= this.getPricePerMagazine()) {
+            this.getGame().getPlayer().setMoney(this.getGame().getPlayer().getMoney() - this.getPricePerMagazine());
 
-            //  If we don't have the weapon, add it to the user's inventory.
-            if (_weapon == null) {
-
-                this.getInventory().addWeapon(new Shotgun(this.getGame(),
-                        this.getGame().getPlayer(), this.getGame().getPlayer().getHandler()));
-            }
-            //  Otherwise, add to the ammunition.
-            else {
-                _weapon.setTotalAmmo(_weapon.getTotalAmmo() + _weapon.getMagazineCapacity());
-            }
+            _weapon.setTotalAmmo(_weapon.getTotalAmmo() + _weapon.getMagazineCapacity());
         }
     }
 

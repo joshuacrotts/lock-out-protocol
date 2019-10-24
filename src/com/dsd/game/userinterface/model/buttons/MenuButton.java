@@ -49,12 +49,18 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
         this.activeImage = this.buttonImg;
     }
 
+<<<<<<< Updated upstream
     public Game getGame () {
         return this.game;
     }
 
     public MenuScreen getMenuScreen () {
         return this.menuScreen;
+=======
+    @Override
+    public void onMouseClick () {
+        StandardAudioController.play("src/resources/audio/sfx/menuselect.wav");
+>>>>>>> Stashed changes
     }
 
     public void displayAccountStatus (AccountStatus _status) {
@@ -77,8 +83,18 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
         }
     }
 
+<<<<<<< Updated upstream
     @Override
     public void onMouseClick () {
         StandardAudioController.play("src/resources/audio/sfx/menuselect.wav");
+=======
+//================================== GETTERS ===================================//
+    public Game getGame () {
+        return this.game;
+    }
+
+    public MenuScreen getMenuScreen () {
+        return this.menuScreen;
+>>>>>>> Stashed changes
     }
 }

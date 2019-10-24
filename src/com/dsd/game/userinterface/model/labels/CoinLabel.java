@@ -16,8 +16,10 @@ import java.awt.Graphics2D;
  */
 public class CoinLabel extends StandardLabel {
 
+    //  Miscellaenous reference variables.
     private final Game game;
     private final Player player;
+
     //  Position and sizing of health elements
     private final int COIN_X_OFFSET = 230;
     private final int COIN_Y_OFFSET = 60;

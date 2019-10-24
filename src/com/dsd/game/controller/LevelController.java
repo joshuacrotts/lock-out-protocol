@@ -24,6 +24,7 @@ import java.util.TimerTask;
  */
 public class LevelController implements TimerInterface {
 
+    //  Miscellaneous reference variables.
     private final Game game;
     private final List<StandardLevel> levels;
     private Timer levelTimer;

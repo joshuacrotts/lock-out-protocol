@@ -15,6 +15,7 @@ import com.sun.glass.events.KeyEvent;
  */
 public class IncrementWeaponCommand extends Command {
 
+    //  Miscellaneous reference variables.
     private final Game game;
     private final Player player;
 
@@ -26,7 +27,7 @@ public class IncrementWeaponCommand extends Command {
 
     @Override
     public void pressed (float _dt) {
-        if (this.player.isAttacking()) {
+        if (this.player.isAttacking() || this.game.isShop()) {
             return;
         }
         this.player.getInventory().changeWeapon(WeaponSelection.INCREMENT);
