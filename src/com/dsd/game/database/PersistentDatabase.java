@@ -26,7 +26,7 @@ import org.mindrot.jbcrypt.BCrypt;
  *
  * @author Joshua, Ronald, Rinty
  */
-public class PersistentDatabase {
+public class PersistentDatabase implements RemoteDatabase{
 
     private final Game game;
 
@@ -65,6 +65,7 @@ public class PersistentDatabase {
      * @param _dbName
      * @return true if a connection was successful, false otherwise.
      */
+    @Override
     public boolean connect (String _dbName) {
         //  Database name (db name in remote sql).
         String instanceID = _dbName;
@@ -94,6 +95,7 @@ public class PersistentDatabase {
      *
      * @return
      */
+    @Override
     public AccountStatus userAuthenticated (String _email, String _password) {
         try {
             //  Verify the email
@@ -120,6 +122,7 @@ public class PersistentDatabase {
      * @param _password
      * @return
      */
+    @Override
     public AccountStatus addUser (String _email, String _password) {
         PreparedStatement insertStatement = null;
         try {
