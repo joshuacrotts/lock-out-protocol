@@ -20,14 +20,14 @@ public class HelpOrOptionsButton extends MenuButton implements MouseEventInterfa
 
     private static final int BUTTON_X_OFFSET = 0;
     private static final int BUTTON_Y_OFFSET = 120;
-    private static final int TEXT_X_OFFSET = 60;
+    private static final int TEXT_X_OFFSET = 90;
     private static final int TEXT_Y_OFFSET = 45;
     private static final int BUTTON_WIDTH = 300;
     private static final int BUTTON_HEIGHT = 82;
 
     public HelpOrOptionsButton (Game _game, MenuScreen _menuScreen) {
         super(BUTTON_X_OFFSET, _game.getGameHeight() - BUTTON_Y_OFFSET,
-                BUTTON_WIDTH, BUTTON_HEIGHT, "HELP/OPTIONS", _game, _menuScreen);
+                BUTTON_WIDTH, BUTTON_HEIGHT, "SETTINGS", _game, _menuScreen);
     }
 
     @Override

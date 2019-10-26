@@ -6,5 +6,5 @@ package com.dsd.game.userinterface;
  * @author Joshua
  */
 public enum MenuState {
-    MAIN, DIFFICULTY, HELP, LOGIN, OPTIONS, RESOLUTION, PLAYER_GENDER;
+    MAIN, DIFFICULTY, HELP, LOGIN, OPTIONS, RESOLUTION, PLAYER_GENDER, VOLUME;
 }

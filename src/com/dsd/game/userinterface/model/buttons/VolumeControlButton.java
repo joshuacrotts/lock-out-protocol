@@ -9,32 +9,31 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 /**
- * Subclass of StandardButton - switches the game state from the main menu to
- * the resolution submenu.
+ * Subclass of StandardButton - turns the game volume on or off.
  *
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
  */
-public class ResolutionMenuButton extends MenuButton implements MouseEventInterface {
+public class VolumeControlButton extends MenuButton implements MouseEventInterface {
 
     //  Button position and dimension offsets.
     private static final int BUTTON_X_OFFSET = 145;
-    private static final int BUTTON_Y_OFFSET = 580;
-    private static final int TEXT_X_OFFSET = 25;
+    private static final int BUTTON_Y_OFFSET = 400;
+    private static final int TEXT_X_OFFSET = 65;
     private static final int TEXT_Y_OFFSET = 45;
     private static final int BUTTON_WIDTH = 300;
     private static final int BUTTON_HEIGHT = 82;
 
-    public ResolutionMenuButton (Game _game, MenuScreen _menuScreen) {
-        super(ResolutionMenuButton.BUTTON_X_OFFSET, _game.getGameHeight() - ResolutionMenuButton.BUTTON_Y_OFFSET,
-                ResolutionMenuButton.BUTTON_WIDTH, ResolutionMenuButton.BUTTON_HEIGHT, "CHANGE RESOLUTION", _game, _menuScreen);
+    public VolumeControlButton (Game _game, MenuScreen _menuScreen) {
+        super(VolumeControlButton.BUTTON_X_OFFSET, _game.getGameHeight() - VolumeControlButton.BUTTON_Y_OFFSET,
+                VolumeControlButton.BUTTON_WIDTH, VolumeControlButton.BUTTON_HEIGHT, "VOLUME", _game, _menuScreen);
     }
 
     @Override
     public void tick () {
-        this.setX(ResolutionMenuButton.BUTTON_X_OFFSET);
-        this.setY(this.getGame().getGameHeight() - ResolutionMenuButton.BUTTON_Y_OFFSET);
+        this.setX(VolumeControlButton.BUTTON_X_OFFSET);
+        this.setY(this.getGame().getGameHeight() - VolumeControlButton.BUTTON_Y_OFFSET);
     }
 
     @Override
@@ -44,8 +43,8 @@ public class ResolutionMenuButton extends MenuButton implements MouseEventInterf
         }
 
         super.render(_g2);
-        StandardDraw.text(this.getText(), this.getX() + ResolutionMenuButton.TEXT_X_OFFSET,
-                this.getY() + ResolutionMenuButton.TEXT_Y_OFFSET, this.font, 24f, Color.WHITE);
+        StandardDraw.text(this.getText(), this.getX() + VolumeControlButton.TEXT_X_OFFSET,
+                this.getY() + VolumeControlButton.TEXT_Y_OFFSET, this.font, 24f, Color.WHITE);
     }
 
     @Override
