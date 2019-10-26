@@ -2,6 +2,7 @@ package com.dsd.game.userinterface;
 
 import com.dsd.game.Game;
 import com.dsd.game.commands.PauseCommand;
+import com.dsd.game.userinterface.model.buttons.MainMenuButton;
 import com.dsd.game.userinterface.model.buttons.SaveButton;
 import com.dsd.game.userinterface.model.labels.PauseLabel;
 import java.awt.Color;
@@ -61,15 +62,9 @@ public class PauseScreen extends Screen {
     }
 
     private void createUIElements () {
-        this.initializePauseLabel();
-        this.initializeSaveButton();
-    }
-
-    private void initializePauseLabel () {
         super.addInteractor(new PauseLabel(this.getGame()));
+        super.addInteractor(new SaveButton(this.getGame(), null));
+        super.addInteractor(new MainMenuButton(this.getGame(), null));
     }
 
-    private void initializeSaveButton () {
-        super.addInteractor(new SaveButton(this.getGame(), null));
-    }
 }

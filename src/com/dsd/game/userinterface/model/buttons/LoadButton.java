@@ -70,7 +70,6 @@ public class LoadButton extends MenuButton implements MouseEventInterface {
          * and update the game information.
          */
         this.getGame().loadFromDatabase();
-        this.getGame().setGameState(GameState.RUNNING);
     }
 
     @Override
