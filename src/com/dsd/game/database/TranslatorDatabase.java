@@ -27,7 +27,7 @@ public class TranslatorDatabase {
     private final Game game;
     private static RemoteDatabase database;
 
-    public TranslatorDatabase(Game _game) {
+    public TranslatorDatabase (Game _game) {
         this.game = _game;
         TranslatorDatabase.database = new PersistentDatabase(this.game);
     }
@@ -35,17 +35,21 @@ public class TranslatorDatabase {
     /**
      * Save the Game state, the level state, the player's health, money, current
      * inventory.
+     *
+     * @return
      */
-    public void save() {
-        TranslatorDatabase.database.save();
+    public boolean save () {
+        return TranslatorDatabase.database.save();
     }
 
     /**
      * Load the game state, level state, player health, money and current
      * inventory
+     *
+     * @return
      */
-    public void load() {
-        TranslatorDatabase.database.load();
+    public boolean load () {
+        return TranslatorDatabase.database.load();
     }
 
     /**
@@ -58,7 +62,7 @@ public class TranslatorDatabase {
      * @param _password
      * @return
      */
-    public static AccountStatus authenticateUser(String _email, String _password) {
+    public static AccountStatus authenticateUser (String _email, String _password) {
         if (database.connect("users")) {
             return database.userAuthenticated(_email, _password);
         }
@@ -74,7 +78,7 @@ public class TranslatorDatabase {
      * @param _password
      * @return
      */
-    public static AccountStatus addUser(String _email, String _password) {
+    public static AccountStatus addUser (String _email, String _password) {
         if (database.connect("users")) {
             return database.addUser(_email, _password);
         }

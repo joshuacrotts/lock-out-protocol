@@ -28,14 +28,16 @@ public interface RemoteDatabase {
 
     /**
      * Write the contents of the supplied information to the db type.
+     * @return true if it saved successfully, false otherwise.
      */
-    public void save();
+    public boolean save();
 
     /**
      * Contacts the database and, with the account information, returns the
      * player's information in a parse-able way.
+     * @return true if loaded info successfully, false otherwise.
      */
-    public void load();
+    public boolean load();
 
     /**
      * Authenticates the user's account in the database. Returns true if correct

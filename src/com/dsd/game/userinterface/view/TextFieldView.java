@@ -4,8 +4,10 @@ import com.dsd.game.userinterface.model.TextFieldModel;
 import com.revivedstandards.view.Renderable;
 import com.revivedstandards.view.Updatable;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import static org.apache.commons.math3.stat.inference.TestUtils.g;
 
 /**
  * This class represents the view of a text-field model. We have a border color,

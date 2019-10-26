@@ -25,7 +25,7 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
     protected BufferedImage buttonImg;
     protected BufferedImage activeImage;
 
-    public MenuButton(int _x, int _y, int _width, int _height, String _text, Game _game, MenuScreen _menuScreen) {
+    public MenuButton (int _x, int _y, int _width, int _height, String _text, Game _game, MenuScreen _menuScreen) {
         super(_x, _y, _width, _height);
         this.game = _game;
         this.menuScreen = _menuScreen;
@@ -36,13 +36,13 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         _g2.drawImage(activeImage, (int) (this.getX()),
                 (int) (this.getY()),
                 this.getWidth(), this.getHeight(), game);
     }
 
-    private void initializeButtonImages() {
+    private void initializeButtonImages () {
         this.buttonImg = StdOps.loadImage("src/resources/img/ui/buttonStock1.png");
         this.onHoverButtonImg = StdOps.loadImage("src/resources/img/ui/buttonStock1h.png");
         this.activeImage = this.buttonImg;
@@ -53,7 +53,10 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
         StandardAudioController.play("src/resources/audio/sfx/menuselect.wav");
     }
 
-    public void displayAccountStatus(AccountStatus _status) {
+    public void displayAccountStatus (AccountStatus _status) {
+        if (_status == null) {
+            return;
+        }
         switch (_status) {
             case DOES_NOT_EXIST:
                 JOptionPane.showMessageDialog(null, "Error: Your account does not exist.");
