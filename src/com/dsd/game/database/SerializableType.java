@@ -6,5 +6,5 @@
 package com.dsd.game.database;
 
 public enum SerializableType {
-    PLAYER, LEVEL, GAME_INFO, WAVE_INFO;
+    PLAYER, LEVEL, GAME_INFO, WAVE_INFO, INVENTORY;
 }

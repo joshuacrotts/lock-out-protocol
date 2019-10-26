@@ -1,6 +1,7 @@
 package com.dsd.game.objects;
 
 import com.dsd.game.Game;
+import com.dsd.game.SerializableObject;
 import com.dsd.game.commands.AttackCommand;
 import com.dsd.game.commands.DebugCommand;
 import com.dsd.game.commands.DecrementWeaponCommand;
@@ -9,6 +10,7 @@ import com.dsd.game.commands.MoveBackwardCommand;
 import com.dsd.game.commands.MoveForwardCommand;
 import com.dsd.game.commands.ReloadCommand;
 import com.dsd.game.controller.DebugController;
+import com.dsd.game.database.SerializableType;
 import com.dsd.game.objects.enums.PlayerState;
 import com.dsd.game.userinterface.Screen;
 import com.revivedstandards.controller.StandardAnimatorController;
@@ -33,7 +35,7 @@ import org.apache.commons.math3.util.FastMath;
  *
  * @author Joshua, Ronald, Rinty
  */
-public class Player extends Entity implements DeathListener {
+public class Player extends Entity implements DeathListener, SerializableObject {
 
     //  Miscellaneous reference variables
     private StandardCamera sc;
@@ -147,6 +149,40 @@ public class Player extends Entity implements DeathListener {
         this.money = 0;
         this.setHealth(this.maxHealth);
         this.inventory.resetInventory();
+    }
+    
+//=========================== CRUD OPERATIONS ================================//
+    @Override
+    public String createObject (SerializableType _id) {
+        if (_id != SerializableType.PLAYER) {
+            return null;
+        }
+
+        StringBuilder playerDetails = new StringBuilder();
+
+        playerDetails.append((int) this.getX()).append(";");
+        playerDetails.append((int) this.getY()).append(";");
+        playerDetails.append((int) this.getMoney()).append(";");
+        playerDetails.append((int) this.getHealth()).append(";");
+
+        return playerDetails.toString();
+    }
+
+    public void readObject (int _x, int _y, int _money, int _health) {
+        this.setX(_x);
+        this.setY(_y);
+        this.setMoney(_money);
+        this.setHealth(_health);
+    }
+
+    @Override
+    public void updateObject (SerializableType _obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void destroyObject (SerializableType _obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

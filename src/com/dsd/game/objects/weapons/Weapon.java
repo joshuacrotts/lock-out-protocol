@@ -77,8 +77,7 @@ public abstract class Weapon implements SerializableObject {
         return object.toString();
     }
 
-    @Override
-    public SerializableObject readObject (SerializableType _id) {
+    public void readObject () {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

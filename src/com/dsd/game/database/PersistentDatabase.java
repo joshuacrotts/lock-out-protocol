@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +27,7 @@ import org.mindrot.jbcrypt.BCrypt;
  *
  * @author Joshua, Ronald, Rinty
  */
-public class PersistentDatabase implements RemoteDatabase{
+public class PersistentDatabase implements RemoteDatabase {
 
     private final Game game;
 
@@ -34,6 +35,7 @@ public class PersistentDatabase implements RemoteDatabase{
     private TranslatorDatabase translatorDatabase;
     private BufferedWriter fileWriter;
     private Connection remoteDBConnection;
+    private int connectedUserID = -1;
 
     //  SQL Database information.
     private static String IP_ADDRESS;
@@ -47,16 +49,84 @@ public class PersistentDatabase implements RemoteDatabase{
     /**
      * Write the contents of the supplied information to the db type.
      */
+    @Override
     public void save () {
-        throw new UnsupportedOperationException("Not supported at this time.");
+        String playerInfo = this.game.getPlayer().createObject(SerializableType.PLAYER);
+        String inventoryInfo = this.game.getPlayer().getInventory().createObject(SerializableType.INVENTORY);
+
+        //  Parse through player info
+        this.uploadPlayerInfo(playerInfo.split(";"));
+        this.uploadInventoryInfo(inventoryInfo.split(";"));
+    }
+
+    /**
+     * Uploads the player info to the SQL server.
+     *
+     * @param _playerData
+     */
+    private void uploadPlayerInfo (String[] _playerData) {
+        PreparedStatement updatePlayerQuery = null;
+
+        try {
+            updatePlayerQuery = this.remoteDBConnection.prepareStatement(String.format("UPDATE user_accounts SET PlayerX = ?, PlayerY = ?, Money = ?, Health = ? WHERE UserID = ? ;"));
+            for (int i = 0 ; i < _playerData.length ; i++) {
+                updatePlayerQuery.setInt(i + 1, Integer.parseInt(_playerData[i]));
+            }
+            updatePlayerQuery.setInt(_playerData.length + 1, this.connectedUserID);
+            updatePlayerQuery.executeUpdate();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * Uploads the inventory information to the SQL server.
+     *
+     * @param _inventoryData
+     */
+    private void uploadInventoryInfo (String[] _inventoryData) {
+        PreparedStatement updateInventoryQuery = null;
+
+        try {
+            updateInventoryQuery = this.remoteDBConnection.prepareStatement(String.format("UPDATE user_accounts SET Pistol = ?, PistolAmmo = ?, PistolTotalAmmo = ?, Rifle = ?, RifleAmmo = ?, RifleTotalAmmo = ?, FastRifle = ?, FastRifleAmmo = ?, FastRifleTotalAmmo = ?, Shotgun = ?, ShotgunAmmo = ?, ShotgunTotalAmmo = ?, GrenadeLauncher = ?, GrenadeLauncherAmmo = ?, GrenadeLauncherTotalAmmo = ? WHERE UserID = ?;"));
+            for (int i = 0 ; i < _inventoryData.length ; i++) {
+                updateInventoryQuery.setInt(i + 1, Integer.parseInt(_inventoryData[i]));
+            }
+            updateInventoryQuery.setInt(_inventoryData.length + 1, this.connectedUserID);
+            updateInventoryQuery.executeUpdate();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
      * Parse through the file, load the contents, and return as some type of
      * list, perhaps?
      */
+    @Override
     public void load () {
-        throw new UnsupportedOperationException("Not supported at this time.");
+        PreparedStatement playerStatsQuery = null;
+
+        try {
+            playerStatsQuery = this.remoteDBConnection.prepareStatement(String.format("SELECT PlayerX, PlayerY, Money, Health, Pistol, PistolAmmo, PistolTotalAmmo, Rifle, RifleAmmo, RifleTotalAmmo, FastRifle, FastRifleAmmo, FastRifleTotalAmmo, Shotgun, ShotgunAmmo, ShotgunTotalAmmo, GrenadeLauncher, GrenadeLauncherAmmo, GrenadeLauncherTotalAmmo FROM user_accounts WHERE UserID = ?;"));
+            playerStatsQuery.setInt(1, this.connectedUserID);
+            ResultSet playerStatsSet = playerStatsQuery.executeQuery();
+            if (!playerStatsSet.next()) {
+                return;
+            }
+            this.game.getPlayer().readObject(playerStatsSet.getInt(1), playerStatsSet.getInt(2), playerStatsSet.getInt(3), playerStatsSet.getInt(4));
+            this.game.getPlayer().getInventory().readObject(playerStatsSet.getInt(5), playerStatsSet.getInt(6), playerStatsSet.getInt(7),
+                                                            playerStatsSet.getInt(8), playerStatsSet.getInt(9), playerStatsSet.getInt(10),
+                                                            playerStatsSet.getInt(11), playerStatsSet.getInt(12), playerStatsSet.getInt(13),
+                                                            playerStatsSet.getInt(14), playerStatsSet.getInt(15), playerStatsSet.getInt(16),
+                                                            playerStatsSet.getInt(17), playerStatsSet.getInt(18), playerStatsSet.getInt(19));
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**
@@ -107,12 +177,39 @@ public class PersistentDatabase implements RemoteDatabase{
             else if (!this.userInDatabase(_email, _password)) {
                 return AccountStatus.INCORRECT_PASS;
             }
+
+            this.connectedUserID = -1;
         }
         catch (SQLException ex) {
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        this.connectedUserID = this.getUserID(_email);
         return AccountStatus.CORRECT;
+    }
+
+    private int getUserID (String _email) {
+        try {
+            PreparedStatement idStatement = null;
+            ResultSet idSet = null;
+            try {
+                idStatement = this.remoteDBConnection.prepareStatement(String.format("SELECT UserID FROM user_accounts WHERE Email = ?;"));
+                idStatement.setString(1, _email);
+                idSet = idStatement.executeQuery();
+            }
+            catch (SQLException ex) {
+                Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            if (idSet.next()) {
+                return idSet.getInt(1);
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return -1;
     }
 
     /**

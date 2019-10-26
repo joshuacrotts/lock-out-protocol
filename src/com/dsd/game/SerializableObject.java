@@ -15,8 +15,6 @@ public interface SerializableObject {
 
     public String createObject (SerializableType _id);
 
-    public SerializableObject readObject (SerializableType _obj);
-
     public void updateObject (SerializableType _obj);
 
     public void destroyObject (SerializableType _obj);
