@@ -124,6 +124,8 @@ public class Game extends StandardGame {
          * Initialize the database translator
          */
         this.translatorDatabase = new TranslatorDatabase(this);
+        this.getWindow().setWindowVisible(true);
+
         this.startGame();
     }
 
