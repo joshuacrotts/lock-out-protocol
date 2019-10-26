@@ -245,6 +245,7 @@ public class Game extends StandardGame {
         this.sch.clearEntities();
         this.levelController.clearLevels();
         this.player.resetPlayer();
+        this.player.getInventory().resetInventory();
         this.instantiateLevels();
 
         TimerController.stopTimers();

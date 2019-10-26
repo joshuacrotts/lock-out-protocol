@@ -17,6 +17,7 @@ import com.revivedstandards.handlers.StandardCollisionHandler;
  */
 public abstract class Gun extends Weapon {
 
+    //  Miscellaneous reference variables.
     private final Game game;
     private final StandardCollisionHandler globalHandler;
     private final Player player;
@@ -39,6 +40,18 @@ public abstract class Gun extends Weapon {
         this.globalHandler = _sch;
         this.currentAmmo = _totalAmmo;
         this.magazineAmt = _totalAmmo;
+        this.totalAmmo = _totalAmmo << 2;
+        this.emptySFXPath = "src/resources/audio/sfx/empty.wav";
+        super.setWeaponState(WeaponState.READY);
+    }
+
+    public Gun (WeaponType _type, int _currAmmo, int _totalAmmo, int magCapacity, Game _game, Player _player, StandardCollisionHandler _sch) {
+        super(_type);
+        this.game = _game;
+        this.player = _player;
+        this.globalHandler = _sch;
+        this.currentAmmo = _currAmmo;
+        this.magazineAmt = magCapacity;
         this.totalAmmo = _totalAmmo << 2;
         this.emptySFXPath = "src/resources/audio/sfx/empty.wav";
         super.setWeaponState(WeaponState.READY);

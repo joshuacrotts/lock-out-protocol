@@ -25,9 +25,9 @@ import com.dsd.game.Game;
 public class TranslatorDatabase {
 
     private final Game game;
-    private static PersistentDatabase database;
+    private static RemoteDatabase database;
 
-    public TranslatorDatabase (Game _game) {
+    public TranslatorDatabase(Game _game) {
         this.game = _game;
         TranslatorDatabase.database = new PersistentDatabase(this.game);
     }
@@ -36,7 +36,7 @@ public class TranslatorDatabase {
      * Save the Game state, the level state, the player's health, money, current
      * inventory.
      */
-    public void save () {
+    public void save() {
         TranslatorDatabase.database.save();
     }
 
@@ -44,19 +44,21 @@ public class TranslatorDatabase {
      * Load the game state, level state, player health, money and current
      * inventory
      */
-    public void load () {
+    public void load() {
         TranslatorDatabase.database.load();
     }
 
     /**
      * Contacts the remote SQL database to authenticate a user's password and
-     * username.
+     * username. It uses a RemoteDatabase object instead of a PersistentDB
+     * object as the parent superclass because all PersistentDB classes should
+     * implement the RemoteDatabase interface.
      *
      * @param _email
      * @param _password
      * @return
      */
-    public static AccountStatus authenticateUser (String _email, String _password) {
+    public static AccountStatus authenticateUser(String _email, String _password) {
         if (database.connect("users")) {
             return database.userAuthenticated(_email, _password);
         }
@@ -72,7 +74,7 @@ public class TranslatorDatabase {
      * @param _password
      * @return
      */
-    public static AccountStatus addUser (String _email, String _password) {
+    public static AccountStatus addUser(String _email, String _password) {
         if (database.connect("users")) {
             return database.addUser(_email, _password);
         }

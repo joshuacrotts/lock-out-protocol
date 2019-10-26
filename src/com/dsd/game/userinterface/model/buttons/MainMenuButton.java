@@ -14,11 +14,12 @@ import java.awt.Graphics2D;
  *
  * @author rinty
  */
-public class SaveButton extends MenuButton implements MouseEventInterface {
+public class MainMenuButton extends MenuButton implements MouseEventInterface {
 
     //  Miscellaneous reference variables.
     private final Game game;
     private final MenuScreen menuScreen;
+
     //  Button offsets and dimensions.
     private static final int BUTTON_X_OFFSET = 100;
     private static final int BUTTON_Y_OFFSET = 100;
@@ -27,13 +28,13 @@ public class SaveButton extends MenuButton implements MouseEventInterface {
     private static final int BUTTON_WIDTH = 300;
     private static final int BUTTON_HEIGHT = 82;
 
-    public SaveButton (Game _game, MenuScreen _menuScreen) {
+    public MainMenuButton (Game _game, MenuScreen _menuScreen) {
         super(BUTTON_X_OFFSET, BUTTON_Y_OFFSET,
-                BUTTON_WIDTH, BUTTON_HEIGHT, "SAVE GAME", _game, _menuScreen);
+                BUTTON_WIDTH, BUTTON_HEIGHT, "MAIN MENU", _game, _menuScreen);
         this.game = _game;
         this.menuScreen = _menuScreen;
         this.setX((int) this.game.getCamera().getX() - BUTTON_X_OFFSET);
-        this.setY((int) this.game.getCamera().getY());
+        this.setY((int) this.game.getCamera().getY() + BUTTON_Y_OFFSET);
 
         this.setScaled(true);
     }
@@ -45,7 +46,7 @@ public class SaveButton extends MenuButton implements MouseEventInterface {
         }
 
         this.setX((int) this.game.getCamera().getX() - BUTTON_X_OFFSET);
-        this.setY((int) this.game.getCamera().getY());
+        this.setY((int) this.game.getCamera().getY() + BUTTON_Y_OFFSET);
     }
 
     @Override
@@ -65,8 +66,6 @@ public class SaveButton extends MenuButton implements MouseEventInterface {
         if (!this.game.isPaused()) {
             return;
         }
-        //  Once the user presses the save button, it will stop the game (for now).
-        this.getGame().saveToDatabase();
         this.getGame().setGameState(GameState.MENU);
         this.getGame().resetGame();
     }

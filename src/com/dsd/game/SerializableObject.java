@@ -1,5 +1,7 @@
 package com.dsd.game;
 
+import com.dsd.game.database.SerializableType;
+
 /**
  * This class defines the basic CRUD operations for denoting how an object is to
  * be saved to the database; whichever that may be (detailed in the DBTranslator
@@ -11,11 +13,9 @@ package com.dsd.game;
  */
 public interface SerializableObject {
 
-    public String createObject();
+    public String createObject (SerializableType _id);
 
-    public SerializableObject readObject(SerializableObject _obj);
+    public void updateObject (SerializableType _obj);
 
-    public void updateObject(SerializableObject _obj);
-
-    public void destroyObject(SerializableObject _obj);
+    public void destroyObject (SerializableType _obj);
 }
