@@ -1,6 +1,7 @@
 package com.dsd.game.userinterface.view;
 
 import com.dsd.game.userinterface.model.TextFieldModel;
+import com.revivedstandards.util.StdOps;
 import com.revivedstandards.view.Renderable;
 import com.revivedstandards.view.Updatable;
 import java.awt.Color;
@@ -32,6 +33,7 @@ public class TextFieldView implements Renderable, Updatable {
     //  Font size.
     private static final int FONT_SIZE = 30;
     private static final double FONT_SIZE_FACTOR = 1.2;
+    private static final Font font = StdOps.initFont("src/resources/fonts/chargen.ttf", FONT_SIZE);
 
     //  Text position offsets.
     private static final int TEXT_X_OFFSET = 10;
@@ -60,7 +62,7 @@ public class TextFieldView implements Renderable, Updatable {
      * @param _g2
      */
     private void drawBorder (Graphics2D _g2) {
-        _g2.setColor(BORDER_COLOR);
+        _g2.setColor(TextFieldView.BORDER_COLOR);
         _g2.draw(this.rectangleView);
     }
 
@@ -71,12 +73,12 @@ public class TextFieldView implements Renderable, Updatable {
      */
     private void drawTextBox (Graphics2D _g2) {
         if (this.model.isActive()) {
-            _g2.setColor(ACTIVE_COLOR);
+            _g2.setColor(TextFieldView.ACTIVE_COLOR);
         }
         else {
-            _g2.setColor(UNACTIVE_COLOR);
+            _g2.setColor(TextFieldView.UNACTIVE_COLOR);
         }
-        
+
         _g2.fill(this.rectangleView);
     }
 
@@ -87,8 +89,8 @@ public class TextFieldView implements Renderable, Updatable {
      * @param _g2
      */
     private void drawString (Graphics2D _g2) {
-        _g2.setColor(TEXT_COLOR);
-        _g2.setFont(new Font("Times New Roman", Font.PLAIN, FONT_SIZE));
+        _g2.setColor(TextFieldView.TEXT_COLOR);
+        _g2.setFont(TextFieldView.font);
 
         if (!this.model.isHidden()) {
             _g2.drawString(this.model.getString(), this.model.getX() + TEXT_X_OFFSET, this.model.getY() + (int) (FONT_SIZE * FONT_SIZE_FACTOR));

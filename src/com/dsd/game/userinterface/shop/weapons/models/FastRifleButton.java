@@ -54,15 +54,9 @@ public class FastRifleButton extends ShopButton {
 
     @Override
     public void onMouseClick () {
-        System.out.println("das right we clique");
         if (!this.getGame().isShop()) {
-            System.out.println("nope we aint in it");
             return;
         }
-        //  If we have enough money...
-        System.out.println("money: " + this.getGame().getPlayer().getMoney());
-        System.out.println("Price: " + this.getPrice());
-        System.out.println("we got enuff");
 
         Gun _weapon = (Gun) this.getInventory().hasWeapon(WeaponType.FAST_RIFLE);
 

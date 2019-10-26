@@ -28,8 +28,10 @@ public class MetalLevel extends StandardLevel {
     private final Game game;
     private final Player player;
     private final StandardCamera sc;
+
     //  Handler for the random foliage.
     private static StandardCollisionHandler natureHandler;
+
     //  Images loaded in at runtime for random nature objects.
     private static final BufferedImage[] natureImages;
     /**
@@ -38,9 +40,11 @@ public class MetalLevel extends StandardLevel {
      */
     private int trackX;
     private final double SCROLL_X_FACTOR = 0.25;
+
     //  Define camera scroll minimum constants
     private final int MIN_X = (int) (Screen.gameHalfWidth * 1.5);
     private final int MIN_Y = (int) (Screen.gameHalfHeight * 1.5);
+
     //  Number of foliage objects to spawn.
     private final int FOLIAGE_OBJECT_COUNT = 30;
 
@@ -52,7 +56,7 @@ public class MetalLevel extends StandardLevel {
      * @param _sg
      * @param _sch
      */
-    public MetalLevel(Player _player, Game _sg, StandardCollisionHandler _sch) {
+    public MetalLevel (Player _player, Game _sg, StandardCollisionHandler _sch) {
         super("src/resources/img/bg/resized_bg/panel1.jpg");
         this.game = _sg;
         this.player = _player;
@@ -60,11 +64,12 @@ public class MetalLevel extends StandardLevel {
         this.setHandler(_sch);
         this.setCameraBounds(this.getBgImage().getWidth() - Screen.gameHalfWidth,
                 this.getBgImage().getHeight() - Screen.gameHalfHeight);
+        
         MetalLevel.natureHandler = new StandardCollisionHandler(this.sc);
     }
 
     @Override
-    public void loadLevelData() {
+    public void loadLevelData () {
         this.addEntity(SpawnerFactory.generateSpawner(EnemyType.BASIC_MONSTER,
                 StdOps.rand(600, 3400), StdOps.rand(600, 3400), 10000, 150,
                 this.game, (StandardCollisionHandler) this.getHandler()));
@@ -85,25 +90,26 @@ public class MetalLevel extends StandardLevel {
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         this.trackX -= (int) this.player.getVelX() * this.SCROLL_X_FACTOR;
     }
 
     @Override
-    public void render(Graphics2D g2) {
+    public void render (Graphics2D g2) {
         if (this.getBgImage() != null) {
 
             if (this.trackX <= 0) {
                 g2.drawImage(this.getBgImage(), this.trackX, 0, null);
-            } else {
+            }
+            else {
                 g2.drawImage(this.getBgImage(), 0, 0, null);
             }
         }
         MetalLevel.natureHandler.render(g2);
     }
 
-    private void loadFoliage() {
-        for (int i = 0; i < this.FOLIAGE_OBJECT_COUNT; i++) {
+    private void loadFoliage () {
+        for (int i = 0 ; i < this.FOLIAGE_OBJECT_COUNT ; i++) {
             MetalLevel.natureHandler.addEntity(new NatureObject(this.game,
                     MetalLevel.natureHandler,
                     StdOps.rand(400, 3600), StdOps.rand(400, 3600),
@@ -121,7 +127,7 @@ public class MetalLevel extends StandardLevel {
      * Sets the camera's field of view so as to prevent the camera from
      * scrolling too far to any of the sides
      */
-    private void setCameraBounds(int _maxX, int _maxY) {
+    private void setCameraBounds (int _maxX, int _maxY) {
         this.sc.restrict(_maxX, _maxY, this.MIN_X, this.MIN_Y);
     }
 }

@@ -1,6 +1,8 @@
 package com.dsd.game.controller;
 
 import com.dsd.game.Game;
+import com.dsd.game.SerializableObject;
+import com.dsd.game.database.SerializableType;
 import com.dsd.game.userinterface.TimerInterface;
 import com.revivedstandards.model.StandardLevel;
 import java.awt.Graphics2D;
@@ -22,12 +24,13 @@ import java.util.TimerTask;
  *
  * @author Joshua
  */
-public class LevelController implements TimerInterface {
+public class LevelController implements TimerInterface, SerializableObject {
 
     //  Miscellaneous reference variables.
     private final Game game;
     private final List<StandardLevel> levels;
     private Timer levelTimer;
+
     private int currentLevelID = 0;
     private int currentWave = 1;
 
@@ -105,6 +108,36 @@ public class LevelController implements TimerInterface {
         this.levelTimer.cancel();
     }
 
+//=========================== CRUD OPERATIONS ===============================//
+    @Override
+    public String createObject (SerializableType _id) {
+        if (_id != SerializableType.WAVE_INFO) {
+            return null;
+        }
+
+        StringBuilder levelInformation = new StringBuilder();
+
+        //  Appends the level ID and current wave info.
+        levelInformation.append(this.currentLevelID).append(";");
+        levelInformation.append(this.currentWave).append(";");
+        return levelInformation.toString();
+    }
+
+    public void readObject (int _currentLevelID, int _currentWave) {
+        this.currentLevelID = _currentLevelID;
+        this.currentWave = _currentWave;
+    }
+
+    @Override
+    public void updateObject (SerializableType _obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void destroyObject (SerializableType _obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 //============================= GETTERS ======================================//
     public int getCurrentLevelID () {
         return this.currentLevelID;
@@ -137,8 +170,10 @@ public class LevelController implements TimerInterface {
         this.currentLevelID = _waveNumber;
     }
 
+    //  This timer, overtime, will continuously increase the difficulty of the game
     private class LevelTimer extends TimerTask {
 
+        //  Miscellaneous level information.
         private final Game game;
         private final LevelController levelController;
 

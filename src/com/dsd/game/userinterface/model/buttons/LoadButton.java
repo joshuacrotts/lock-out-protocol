@@ -66,6 +66,8 @@ public class LoadButton extends MenuButton implements MouseEventInterface {
                 || !this.getMenuScreen().isOnMainMenu()) {
             return;
         }
+
+        super.onMouseClick();
         /**
          * Once the user presses the load button, it will contact the database,
          * and update the game information.

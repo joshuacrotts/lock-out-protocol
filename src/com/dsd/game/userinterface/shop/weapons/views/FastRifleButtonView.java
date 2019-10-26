@@ -21,10 +21,10 @@ public class FastRifleButtonView extends ShopButtonView {
     public void tick () {
         //  Only update the text if the user has the rifle in their inventory.
         if (this.parentButton.getGame().getPlayer().getInventory().hasWeapon(WeaponType.FAST_RIFLE) == null) {
-            this.text.setText("PPSh-41 $500");
+            this.text.setText("PPSh-41 $" + this.parentButton.getPrice());
         }
         else {
-            this.text.setText("PPSh-41 AMMO (71/$75)");
+            this.text.setText("PPSh-41 AMMO (71/$" + this.parentButton.getPricePerMagazine() + ")");
         }
 
         super.tick();

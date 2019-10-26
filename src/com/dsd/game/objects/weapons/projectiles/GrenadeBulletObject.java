@@ -85,8 +85,6 @@ public class GrenadeBulletObject extends ProjectileGameObject implements DeathLi
                 + ((deltaY) * (deltaY)));
         deltaX = (deltaX / distance) * this.VEL_FACTOR;
         deltaY = (deltaY / distance) * this.VEL_FACTOR;
-        System.out.println(deltaX);
-        System.out.println(deltaY);
         this.setVelX(deltaX);
         this.setVelY(deltaY);
     }

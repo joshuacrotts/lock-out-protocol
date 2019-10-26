@@ -307,6 +307,14 @@ public class Game extends StandardGame {
         return this.sch;
     }
 
+    public LevelController getLevelController () {
+        return this.levelController;
+    }
+
+    public DifficultyController getDifficultyController () {
+        return this.difficultyController;
+    }
+
     public StandardLevel getCurrentLevel () {
         return this.levelController.getCurrentLevel();
     }

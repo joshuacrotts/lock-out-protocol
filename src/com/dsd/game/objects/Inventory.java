@@ -36,6 +36,7 @@ public class Inventory implements SerializableObject {
     private final StandardCollisionHandler parentHandler;
     private final InventoryView view;
     private final List<Weapon> weapons;
+
     private int currentWeapon = 0;
     private boolean hasGun;
 
@@ -103,23 +104,28 @@ public class Inventory implements SerializableObject {
         }
     }
 
+    /**
+     * Adds the type _type of weapon to the user's inventory.
+     *
+     * @param _type
+     */
     public void addWeapon (WeaponType _type) {
         if (this.hasWeapon(_type) == null) {
             switch (_type) {
                 case PISTOL:
-                    this.weapons.add(new Pistol(game, player, parentHandler));
+                    this.weapons.add(new Pistol(this.game, this.player, this.parentHandler));
                     break;
                 case RIFLE:
-                    this.weapons.add(new Rifle(game, player, parentHandler));
+                    this.weapons.add(new Rifle(this.game, this.player, this.parentHandler));
                     break;
                 case FAST_RIFLE:
-                    this.weapons.add(new FastRifle(game, player, parentHandler));
+                    this.weapons.add(new FastRifle(this.game, this.player, this.parentHandler));
                     break;
                 case SHOTGUN:
-                    this.weapons.add(new Shotgun(game, player, parentHandler));
+                    this.weapons.add(new Shotgun(this.game, this.player, this.parentHandler));
                     break;
                 case GRENADE_LAUNCHER:
-                    this.weapons.add(new GrenadeLauncher(game, player, parentHandler));
+                    this.weapons.add(new GrenadeLauncher(this.game, this.player, this.parentHandler));
                     break;
 
             }
@@ -161,6 +167,7 @@ public class Inventory implements SerializableObject {
 
         this.weapons.add(new Knife(this.player));
         this.weapons.add(new Pistol(this.game, this.player, this.parentHandler));
+        this.currentWeapon = 0;
     }
 
 //============================== CRUD OPERATIONS =============================//
@@ -184,17 +191,14 @@ public class Inventory implements SerializableObject {
         return inventoryDetails.toString();
     }
 
-    public void readObject (int _hasPistol, int _pistolAmmo, int _pistolTotalAmmo,
-            int _hasRifle, int _rifleAmmo, int _rifleTotalAmmo,
-            int _hasFastRifle, int _fastRifleAmmo, int _fastRifleTotalAmmo,
-            int _hasShotgun, int _shotgunAmmo, int _shotgunTotalAmmo,
-            int _hasGrenadeLauncher, int _grenadeLauncherAmmo, int _grenadeLauncherTotalAmmo) {
+    public void readObject (ArrayList<Integer> _inventoryInfo) {
+        //  Use an array of the types to reduce copying/pasting.
+        WeaponType[] types = {WeaponType.PISTOL, WeaponType.RIFLE, WeaponType.FAST_RIFLE,
+            WeaponType.SHOTGUN, WeaponType.GRENADE_LAUNCHER};
 
-        this.loadWeaponFromDB(_hasPistol, WeaponType.PISTOL, _pistolAmmo, _pistolTotalAmmo);
-        this.loadWeaponFromDB(_hasRifle, WeaponType.RIFLE, _rifleAmmo, _rifleTotalAmmo);
-        this.loadWeaponFromDB(_hasFastRifle, WeaponType.FAST_RIFLE, _fastRifleAmmo, _fastRifleTotalAmmo);
-        this.loadWeaponFromDB(_hasShotgun, WeaponType.SHOTGUN, _shotgunAmmo, _shotgunTotalAmmo);
-        this.loadWeaponFromDB(_hasGrenadeLauncher, WeaponType.GRENADE_LAUNCHER, _grenadeLauncherAmmo, _grenadeLauncherTotalAmmo);
+        for (int i = 0, weaponIndex = 0 ; i < types.length ; i++, weaponIndex += 3) {
+            this.loadWeaponFromDB(_inventoryInfo.get(weaponIndex), types[i], _inventoryInfo.get(weaponIndex + 1), _inventoryInfo.get(weaponIndex + 2));
+        }
     }
 
     @Override

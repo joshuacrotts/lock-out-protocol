@@ -20,6 +20,7 @@ import com.revivedstandards.model.DeathListener;
 import com.revivedstandards.model.StandardID;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import org.apache.commons.math3.util.FastMath;
 
@@ -141,7 +142,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
         this.setHealth(this.maxHealth);
         this.inventory.resetInventory();
     }
-    
+
 //=========================== CRUD OPERATIONS ================================//
     @Override
     public String createObject (SerializableType _id) {
@@ -151,6 +152,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
 
         StringBuilder playerDetails = new StringBuilder();
 
+        playerDetails.append(this.getPlayerSex().equals("male") ? 1 : 0);
         playerDetails.append((int) this.getX()).append(";");
         playerDetails.append((int) this.getY()).append(";");
         playerDetails.append((int) this.getMoney()).append(";");
@@ -159,11 +161,12 @@ public class Player extends Entity implements DeathListener, SerializableObject 
         return playerDetails.toString();
     }
 
-    public void readObject (int _x, int _y, int _money, int _health) {
-        this.setX(_x);
-        this.setY(_y);
-        this.setMoney(_money);
-        this.setHealth(_health);
+    public void readObject (ArrayList<Integer> _playerInfo) {
+        this.setPlayerSex(_playerInfo.get(0) == 1 ? "male" : "female");
+        this.setX(_playerInfo.get(1));
+        this.setY(_playerInfo.get(2));
+        this.setMoney(_playerInfo.get(3));
+        this.setHealth(_playerInfo.get(4));
     }
 
     @Override

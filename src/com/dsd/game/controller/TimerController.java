@@ -21,7 +21,9 @@ public class TimerController {
         for (int i = 0 ; i < TimerController.timers.size() ; i++) {
             TimerInterface currentTimer = timers.get(i);
 
-            currentTimer.cancelTimer();
+            if (currentTimer != null) {
+                currentTimer.cancelTimer();
+            }
         }
     }
 
