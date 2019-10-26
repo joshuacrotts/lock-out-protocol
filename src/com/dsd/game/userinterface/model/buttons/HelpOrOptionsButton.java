@@ -18,8 +18,8 @@ import java.awt.Graphics2D;
  */
 public class HelpOrOptionsButton extends MenuButton implements MouseEventInterface {
 
-    private static final int BUTTON_X_OFFSET = 0;
-    private static final int BUTTON_Y_OFFSET = 120;
+    private static final int BUTTON_X_OFFSET = 822;
+    private static final int BUTTON_Y_OFFSET = 350;
     private static final int TEXT_X_OFFSET = 90;
     private static final int TEXT_Y_OFFSET = 45;
     private static final int BUTTON_WIDTH = 300;

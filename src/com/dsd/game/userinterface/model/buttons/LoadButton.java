@@ -20,8 +20,8 @@ public class LoadButton extends MenuButton implements MouseEventInterface {
     //  Miscellaneous reference variables.
     private final Game game;
     private final MenuScreen menuScreen;
-    private static final int BUTTON_X_OFFSET = 20;
-    private static final int BUTTON_Y_OFFSET = -50;
+    private static final int BUTTON_X_OFFSET = -145;
+    private static final int BUTTON_Y_OFFSET = -10;
     private static final int TEXT_X_OFFSET = 80;
     private static final int TEXT_Y_OFFSET = 45;
     private static final int BUTTON_WIDTH = 300;
