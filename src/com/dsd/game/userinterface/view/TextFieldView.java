@@ -7,7 +7,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import static org.apache.commons.math3.stat.inference.TestUtils.g;
 
 /**
  * This class represents the view of a text-field model. We have a border color,
@@ -18,25 +17,38 @@ import static org.apache.commons.math3.stat.inference.TestUtils.g;
  */
 public class TextFieldView implements Renderable, Updatable {
 
+    //  Backing model for this TextView
     private final TextFieldModel model;
+
+    //  Rectangle view object.
     private Rectangle rectangleView;
+
+    //  Miscellaneous colors.
     private static final Color BORDER_COLOR = Color.BLUE;
     private static final Color ACTIVE_COLOR = Color.WHITE;
     private static final Color UNACTIVE_COLOR = Color.GRAY;
     private static final Color TEXT_COLOR = Color.BLACK;
 
-    public TextFieldView(TextFieldModel _model) {
+    //  Font size.
+    private static final int FONT_SIZE = 30;
+    private static final double FONT_SIZE_FACTOR = 1.2;
+
+    //  Text position offsets.
+    private static final int TEXT_X_OFFSET = 10;
+    private static final int HIDDEN_TEXT_Y_OFFSET = 5;
+
+    public TextFieldView (TextFieldModel _model) {
         this.model = _model;
         this.rectangleView = new Rectangle(this.model.getX(), this.model.getY(), this.model.getWidth(), this.model.getHeight());
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         this.rectangleView = new Rectangle(this.model.getX(), this.model.getY(), this.model.getWidth(), this.model.getHeight());
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         this.drawTextBox(_g2);
         this.drawBorder(_g2);
         this.drawString(_g2);
@@ -47,7 +59,7 @@ public class TextFieldView implements Renderable, Updatable {
      *
      * @param _g2
      */
-    private void drawBorder(Graphics2D _g2) {
+    private void drawBorder (Graphics2D _g2) {
         _g2.setColor(BORDER_COLOR);
         _g2.draw(this.rectangleView);
     }
@@ -57,12 +69,14 @@ public class TextFieldView implements Renderable, Updatable {
      *
      * @param _g2
      */
-    private void drawTextBox(Graphics2D _g2) {
+    private void drawTextBox (Graphics2D _g2) {
         if (this.model.isActive()) {
             _g2.setColor(ACTIVE_COLOR);
-        } else {
+        }
+        else {
             _g2.setColor(UNACTIVE_COLOR);
         }
+        
         _g2.fill(this.rectangleView);
     }
 
@@ -72,14 +86,15 @@ public class TextFieldView implements Renderable, Updatable {
      *
      * @param _g2
      */
-    private void drawString(Graphics2D _g2) {
+    private void drawString (Graphics2D _g2) {
         _g2.setColor(TEXT_COLOR);
-        _g2.setFont(new Font("Times New Roman", Font.PLAIN, 30));
+        _g2.setFont(new Font("Times New Roman", Font.PLAIN, FONT_SIZE));
 
         if (!this.model.isHidden()) {
-            _g2.drawString(this.model.getString(), this.model.getX(), this.model.getY() + 24);
-        } else {
-            _g2.drawString(this.model.getMaskedString(), this.model.getX(), this.model.getY() + 24);
+            _g2.drawString(this.model.getString(), this.model.getX() + TEXT_X_OFFSET, this.model.getY() + (int) (FONT_SIZE * FONT_SIZE_FACTOR));
+        }
+        else {
+            _g2.drawString(this.model.getMaskedString(), this.model.getX() + TEXT_X_OFFSET, this.model.getY() + HIDDEN_TEXT_Y_OFFSET + (int) (FONT_SIZE * FONT_SIZE_FACTOR));
         }
     }
 }

@@ -20,15 +20,17 @@ public class LoadButton extends MenuButton implements MouseEventInterface {
     //  Miscellaneous reference variables.
     private final Game game;
     private final MenuScreen menuScreen;
-    private static final int BUTTON_X_OFFSET = -145;
+
+    //  Screen dimensions
+    private static final int BUTTON_X_OFFSET = 130;
     private static final int BUTTON_Y_OFFSET = -10;
     private static final int TEXT_X_OFFSET = 80;
     private static final int TEXT_Y_OFFSET = 45;
     private static final int BUTTON_WIDTH = 300;
     private static final int BUTTON_HEIGHT = 82;
 
-    public LoadButton(Game _game, MenuScreen _menuScreen) {
-        super(Screen.gameHalfWidth + BUTTON_X_OFFSET,
+    public LoadButton (Game _game, MenuScreen _menuScreen) {
+        super(Screen.gameHalfWidth - BUTTON_X_OFFSET,
                 Screen.gameHalfHeight - BUTTON_Y_OFFSET,
                 BUTTON_WIDTH, BUTTON_HEIGHT, "LOAD GAME", _game, _menuScreen);
         this.game = _game;
@@ -36,17 +38,17 @@ public class LoadButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         if (!this.getGame().isMenu()
                 || !this.getMenuScreen().isOnMainMenu()) {
             return;
         }
-        this.setX(Screen.gameHalfWidth + BUTTON_X_OFFSET);
+        this.setX(Screen.gameHalfWidth - BUTTON_X_OFFSET);
         this.setY(Screen.gameHalfHeight - BUTTON_Y_OFFSET);
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         if (!this.getGame().isMenu()
                 || !this.getMenuScreen().isOnMainMenu()) {
             return;
@@ -56,11 +58,10 @@ public class LoadButton extends MenuButton implements MouseEventInterface {
         StandardDraw.text(this.getText(), (int) this.getX() + TEXT_X_OFFSET,
                 (int) this.getY() + TEXT_Y_OFFSET,
                 this.font, 24f, Color.WHITE);
-
     }
 
     @Override
-    public void onMouseClick() {
+    public void onMouseClick () {
         if (!this.getGame().isMenu()
                 || !this.getMenuScreen().isOnMainMenu()) {
             return;
@@ -73,7 +74,7 @@ public class LoadButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseEnterHover() {
+    public void onMouseEnterHover () {
         if (!this.getGame().isMenu()
                 || !this.getMenuScreen().isOnMainMenu()) {
             return;
@@ -82,7 +83,7 @@ public class LoadButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseExitHover() {
+    public void onMouseExitHover () {
         if (!this.getGame().isMenu()
                 || !this.getMenuScreen().isOnMainMenu()) {
             return;

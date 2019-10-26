@@ -4,6 +4,7 @@ import com.dsd.game.Game;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MenuState;
 import com.dsd.game.userinterface.MouseEventInterface;
+import com.dsd.game.userinterface.Screen;
 import com.revivedstandards.main.StandardDraw;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -19,26 +20,26 @@ import java.awt.Graphics2D;
 public class AudioMenuButton extends MenuButton implements MouseEventInterface {
 
     //  Button position and dimension offsets.
-    private static final int BUTTON_X_OFFSET = 500;
+    private static final int BUTTON_X_OFFSET = 141;
     private static final int BUTTON_Y_OFFSET = 220;
     private static final int TEXT_X_OFFSET = 65;
     private static final int TEXT_Y_OFFSET = 45;
     private static final int BUTTON_WIDTH = 300;
     private static final int BUTTON_HEIGHT = 82;
 
-    public AudioMenuButton(Game _game, MenuScreen _menuScreen) {
+    public AudioMenuButton (Game _game, MenuScreen _menuScreen) {
         super(AudioMenuButton.BUTTON_X_OFFSET, _game.getGameHeight() - AudioMenuButton.BUTTON_Y_OFFSET,
                 AudioMenuButton.BUTTON_WIDTH, AudioMenuButton.BUTTON_HEIGHT, "CHANGE AUDIO", _game, _menuScreen);
     }
 
     @Override
-    public void tick() {
-        this.setX(AudioMenuButton.BUTTON_X_OFFSET);
-        this.setY(this.getGame().getGameHeight() - AudioMenuButton.BUTTON_Y_OFFSET);
+    public void tick () {
+        this.setX(Screen.gameHalfWidth - AudioMenuButton.BUTTON_X_OFFSET);
+        this.setY(Screen.gameHeight - AudioMenuButton.BUTTON_Y_OFFSET);
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         if (!this.getMenuScreen().isOnOptions() || !this.getGame().isMenu()) {
             return;
         }
@@ -49,7 +50,7 @@ public class AudioMenuButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseClick() {
+    public void onMouseClick () {
         if (!this.getMenuScreen().isOnOptions() || !this.getGame().isMenu()) {
             return;
         }
@@ -60,7 +61,7 @@ public class AudioMenuButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseEnterHover() {
+    public void onMouseEnterHover () {
         if (!this.getMenuScreen().isOnOptions() || !this.getGame().isMenu()) {
             return;
         }
@@ -68,7 +69,7 @@ public class AudioMenuButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseExitHover() {
+    public void onMouseExitHover () {
         if (!this.getMenuScreen().isOnOptions() || !this.getGame().isMenu()) {
             return;
         }

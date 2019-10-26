@@ -4,12 +4,14 @@ import com.dsd.game.Game;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MenuState;
 import com.dsd.game.userinterface.MouseEventInterface;
+import com.dsd.game.userinterface.Screen;
 import com.revivedstandards.main.StandardDraw;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
 /**
- * Subclass of StandardButton - turns the game volume on or off.
+ * Subclass of StandardButton - modifies the volume of the sound effects and the
+ * music.
  *
  * [Group Name: Data Structure Deadheads]
  *
@@ -18,7 +20,7 @@ import java.awt.Graphics2D;
 public class VolumeControlButton extends MenuButton implements MouseEventInterface {
 
     //  Button position and dimension offsets.
-    private static final int BUTTON_X_OFFSET = 500;
+    private static final int BUTTON_X_OFFSET = 141;
     private static final int BUTTON_Y_OFFSET = 400;
     private static final int TEXT_X_OFFSET = 100;
     private static final int TEXT_Y_OFFSET = 45;
@@ -32,8 +34,8 @@ public class VolumeControlButton extends MenuButton implements MouseEventInterfa
 
     @Override
     public void tick () {
-        this.setX(VolumeControlButton.BUTTON_X_OFFSET);
-        this.setY(this.getGame().getGameHeight() - VolumeControlButton.BUTTON_Y_OFFSET);
+        this.setX(Screen.gameHalfWidth - VolumeControlButton.BUTTON_X_OFFSET);
+        this.setY(Screen.gameHeight - VolumeControlButton.BUTTON_Y_OFFSET);
     }
 
     @Override

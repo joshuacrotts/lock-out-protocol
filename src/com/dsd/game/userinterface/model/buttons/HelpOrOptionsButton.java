@@ -4,6 +4,7 @@ import com.dsd.game.Game;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MenuState;
 import com.dsd.game.userinterface.MouseEventInterface;
+import com.dsd.game.userinterface.Screen;
 import com.revivedstandards.main.StandardDraw;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -18,8 +19,8 @@ import java.awt.Graphics2D;
  */
 public class HelpOrOptionsButton extends MenuButton implements MouseEventInterface {
 
-    private static final int BUTTON_X_OFFSET = 822;
-    private static final int BUTTON_Y_OFFSET = 350;
+    private static final int BUTTON_X_OFFSET = 185;
+    private static final int BUTTON_Y_OFFSET = -10;
     private static final int TEXT_X_OFFSET = 90;
     private static final int TEXT_Y_OFFSET = 45;
     private static final int BUTTON_WIDTH = 300;
@@ -32,8 +33,8 @@ public class HelpOrOptionsButton extends MenuButton implements MouseEventInterfa
 
     @Override
     public void tick () {
-        this.setX(BUTTON_X_OFFSET);
-        this.setY(this.getGame().getGameHeight() - BUTTON_Y_OFFSET);
+        this.setX(Screen.gameHalfWidth + BUTTON_X_OFFSET);
+        this.setY(Screen.gameHalfHeight - BUTTON_Y_OFFSET);
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.dsd.game.Game;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MenuState;
 import com.dsd.game.userinterface.MouseEventInterface;
+import com.dsd.game.userinterface.Screen;
 import com.revivedstandards.main.StandardDraw;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -19,7 +20,7 @@ import java.awt.Graphics2D;
 public class ResolutionMenuButton extends MenuButton implements MouseEventInterface {
 
     //  Button position and dimension offsets.
-    private static final int BUTTON_X_OFFSET = 500;
+    private static final int BUTTON_X_OFFSET = 141;
     private static final int BUTTON_Y_OFFSET = 580;
     private static final int TEXT_X_OFFSET = 25;
     private static final int TEXT_Y_OFFSET = 45;
@@ -33,7 +34,7 @@ public class ResolutionMenuButton extends MenuButton implements MouseEventInterf
 
     @Override
     public void tick () {
-        this.setX(ResolutionMenuButton.BUTTON_X_OFFSET);
+        this.setX(Screen.gameHalfWidth - ResolutionMenuButton.BUTTON_X_OFFSET);
         this.setY(this.getGame().getGameHeight() - ResolutionMenuButton.BUTTON_Y_OFFSET);
     }
 

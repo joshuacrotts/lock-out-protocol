@@ -268,7 +268,7 @@ public class Game extends StandardGame {
      */
     public void loadFromDatabase () {
         if (!this.translatorDatabase.load()) {
-            JOptionPane.showMessageDialog(null, "Unable to load data.");
+            JOptionPane.showMessageDialog(null, "Unable to load data, did you log in?.");
         }
     }
 

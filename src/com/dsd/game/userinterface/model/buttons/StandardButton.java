@@ -18,12 +18,13 @@ import java.awt.image.BufferedImage;
 public abstract class StandardButton extends Interactor {
 
     //  State of button
-    boolean isImage = false;
+    private boolean isImage = false;
+    
     //  Information regarding button's contents
     private String text;
     private Color color;
-    String fileLocation;
-    BufferedImage image;
+    private String fileLocation;
+    private BufferedImage image;
 
     public StandardButton () {
 

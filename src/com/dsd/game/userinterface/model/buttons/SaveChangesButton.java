@@ -22,6 +22,7 @@ public class SaveChangesButton extends MenuButton implements MouseEventInterface
     private final MenuScreen menuScreen;
     private final IncreaseResolutionCommand incResCommand;
     private final DecreaseResolutionCommand decResCommand;
+    
     private static final int BUTTON_X_OFFSET = 0;
     private static final int BUTTON_Y_OFFSET = 120;
     private static final int TEXT_X_OFFSET = 60;

@@ -20,9 +20,9 @@ import java.awt.Graphics2D;
 public class PlayButton extends MenuButton implements MouseEventInterface {
 
     //  Offsets and dimensions for the play button.
-    private static final int BUTTON_X_OFFSET = 145;
+    private static final int BUTTON_X_OFFSET = 130;
     private static final int BUTTON_Y_OFFSET = 160;
-    private static final int TEXT_X_OFFSET = 90;
+    private static final int TEXT_X_OFFSET = 85;
     private static final int TEXT_Y_OFFSET = 45;
     private static final int BUTTON_WIDTH = 300;
     private static final int BUTTON_HEIGHT = 82;
