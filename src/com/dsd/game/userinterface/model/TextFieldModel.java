@@ -23,7 +23,7 @@ public class TextFieldModel extends Interactor implements MouseEventInterface {
     private final TextFieldView view;
     //  Dimensions of text field.
     private final int FIELD_WIDTH = 600;
-    private final int FIELD_HEIGHT = 30;
+    private final int FIELD_HEIGHT = 50;
     private boolean fieldActive;
     private boolean visible = true;
     private final LetterInputListener inputListener;
