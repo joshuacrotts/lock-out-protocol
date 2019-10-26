@@ -67,7 +67,9 @@ public class TimeLabel extends StandardLabel implements TimerInterface {
         this.seconds = 0;
         this.minutes = 0;
         this.hours = 0;
-        this.timer.cancel();
+        if (timer != null) {
+            this.timer.cancel();
+        }
         this.timer = null;
     }
 
