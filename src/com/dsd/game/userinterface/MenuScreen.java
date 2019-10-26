@@ -18,6 +18,7 @@ import com.dsd.game.userinterface.model.buttons.MalePlayerButton;
 import com.dsd.game.userinterface.model.buttons.MediumButton;
 import com.dsd.game.userinterface.model.buttons.PlayButton;
 import com.dsd.game.userinterface.model.buttons.ResolutionMenuButton;
+import com.dsd.game.userinterface.model.buttons.AudioMenuButton;
 import com.dsd.game.userinterface.model.buttons.VolumeControlButton;
 import com.dsd.game.userinterface.model.labels.TitleLabel;
 import com.dsd.game.userinterface.view.MenuView;
@@ -140,6 +141,7 @@ public class MenuScreen extends Screen {
     private void initializeOptionsButtons() {
         super.addInteractor(new ResolutionMenuButton(this.getGame(), this));
         super.addInteractor(new VolumeControlButton(this.getGame(), this));
+        super.addInteractor(new AudioMenuButton(this.getGame(), this));
     }
 
     /**
@@ -190,6 +192,10 @@ public class MenuScreen extends Screen {
 
     public boolean isOnPlayerGender() {
         return this.menuState == MenuState.PLAYER_GENDER;
+    }
+
+    public boolean isOnAudio() {
+        return this.menuState == MenuState.AUDIO;
     }
 
 //====================== SETTERS ===============================//

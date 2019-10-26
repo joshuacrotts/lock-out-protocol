@@ -19,7 +19,7 @@ import java.awt.Graphics2D;
 public class ResolutionMenuButton extends MenuButton implements MouseEventInterface {
 
     //  Button position and dimension offsets.
-    private static final int BUTTON_X_OFFSET = 145;
+    private static final int BUTTON_X_OFFSET = 500;
     private static final int BUTTON_Y_OFFSET = 580;
     private static final int TEXT_X_OFFSET = 25;
     private static final int TEXT_Y_OFFSET = 45;

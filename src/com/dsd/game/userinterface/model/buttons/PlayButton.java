@@ -21,8 +21,8 @@ public class PlayButton extends MenuButton implements MouseEventInterface {
 
     //  Offsets and dimensions for the play button.
     private static final int BUTTON_X_OFFSET = 145;
-    private static final int BUTTON_Y_OFFSET = 100;
-    private static final int TEXT_X_OFFSET = 120;
+    private static final int BUTTON_Y_OFFSET = 160;
+    private static final int TEXT_X_OFFSET = 90;
     private static final int TEXT_Y_OFFSET = 45;
     private static final int BUTTON_WIDTH = 300;
     private static final int BUTTON_HEIGHT = 82;
@@ -30,7 +30,7 @@ public class PlayButton extends MenuButton implements MouseEventInterface {
     public PlayButton (Game _game, MenuScreen _menuScreen) {
         super(Screen.gameHalfWidth - BUTTON_X_OFFSET,
                 Screen.gameHalfHeight - BUTTON_Y_OFFSET,
-                BUTTON_WIDTH, BUTTON_HEIGHT, "PLAY", _game, _menuScreen);
+                BUTTON_WIDTH, BUTTON_HEIGHT, "NEW GAME", _game, _menuScreen);
 
         this.getGame().getHandler().addEntity(_game.getPlayer());
     }
