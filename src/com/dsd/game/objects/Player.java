@@ -49,15 +49,19 @@ public class Player extends Entity implements DeathListener, SerializableObject 
 
     //  Inventory of the player, tells how much money they have, the current weapon, etc.
     private final Inventory inventory;
+
     //  Global commands
     private AttackCommand attackCommand;
+
     //  Variables representing the angle and approach velocity
     private final float APPROACH_VEL = -3.0f;
+
     //  Money amount
     private int money = 0;
 
     //  Health vars (this may change with time)
     private int maxHealth = 200;
+
     //  Sex of player
     private String sex = "male";
 

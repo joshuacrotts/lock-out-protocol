@@ -58,7 +58,7 @@ public class ResolutionMenuButton extends MenuButton implements MouseEventInterf
         }
 
         super.onMouseClick();
-
+        this.getMenuScreen().pushMenuStack(MenuState.OPTIONS);
         this.getMenuScreen().setMenuState(MenuState.RESOLUTION);
     }
 

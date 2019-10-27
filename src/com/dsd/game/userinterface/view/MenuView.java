@@ -31,6 +31,7 @@ public class MenuView implements Renderable, Updatable {
     private float shadowYPos = 100f;
     private float shadowVelX = 1f;
     private float shadowVelY = 1f;
+
     //  Visualization of the shadow.
     private RadialGradientPaint shadowPaint;
     private Point2D shadowCenter;

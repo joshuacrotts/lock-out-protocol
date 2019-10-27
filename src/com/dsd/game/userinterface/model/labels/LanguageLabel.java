@@ -1,33 +1,34 @@
 package com.dsd.game.userinterface.model.labels;
 
 import com.dsd.game.Game;
-import com.dsd.game.ResolutionEnum;
+import com.dsd.game.LanguageEnum;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.Screen;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 
 /**
  * @author Joshua
  */
-public class ResolutionLabel extends StandardLabel {
+public class LanguageLabel extends StandardLabel {
 
     private final Game game;
     private final MenuScreen menuScreen;
 
-    public ResolutionLabel (Game _game, MenuScreen _menuScreen) {
+    public LanguageLabel (Game _game, MenuScreen _menuScreen) {
         super(Screen.gameHalfWidth, Screen.gameHalfHeight,
-                "", "src/resources/fonts/chargen.ttf", 32f);
+                "", new Font(Font.SANS_SERIF, Font.PLAIN, 32));
         this.game = _game;
         this.menuScreen = _menuScreen;
-        this.setText(this.game.getGameWidth() + " x " + this.game.getGameHeight());
+        this.setText(LanguageEnum.getLanguage());
     }
 
     @Override
     public void tick () {
         this.setX(Screen.gameHalfWidth);
         this.setY(Screen.gameHalfHeight);
-        this.setText(ResolutionEnum.getResolution());
+        this.setText(LanguageEnum.getLanguage());
     }
 
     @Override

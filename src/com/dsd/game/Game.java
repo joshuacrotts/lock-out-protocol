@@ -87,6 +87,13 @@ public class Game extends StandardGame {
          */
         super(_width, _height, _title);
 
+        /**
+         * Initialize the database translator
+         */
+        this.translatorDatabase = new TranslatorDatabase(this);
+
+        this.translatorDatabase.loadFromSettings();
+
         //  Initialize the sound controller
         AudioBoxController.initialize(32);
 
@@ -122,10 +129,6 @@ public class Game extends StandardGame {
         this.shopScreen = new ShopScreen(this);
         this.hudScreen = new HUDScreen(this, this.player, this.sch);
 
-        /**
-         * Initialize the database translator
-         */
-        this.translatorDatabase = new TranslatorDatabase(this);
         this.getWindow().setWindowVisible(true);
 
         this.startGame();
@@ -262,7 +265,7 @@ public class Game extends StandardGame {
      * Calls the translator DB class to save the game's current state.
      */
     public void saveToDatabase () {
-        if (!this.translatorDatabase.save()) {
+        if (!this.translatorDatabase.saveToDatabase()) {
             JOptionPane.showMessageDialog(null, LanguageController.translate("Unable to save data."));
         }
     }
@@ -271,8 +274,28 @@ public class Game extends StandardGame {
      * Calls the translator DB class to load a previously-saved file.ß
      */
     public void loadFromDatabase () {
-        if (!this.translatorDatabase.load()) {
+        if (!this.translatorDatabase.loadFromDatabase()) {
             JOptionPane.showMessageDialog(null, LanguageController.translate("Unable to load data, did you log in?."));
+        }
+    }
+
+    /**
+     * Calls the translator DB class to save the language and resolution
+     * preferences to a settings file.
+     */
+    public void saveToSettings () {
+        if (!this.translatorDatabase.saveToSettings()) {
+            JOptionPane.showMessageDialog(null, LanguageController.translate("Unable to save to the settings file."));
+        }
+    }
+
+    /**
+     * Calls the translator DB class to load the language and resolution
+     * preferences from a settings file.
+     */
+    public void loadFromSettings () {
+        if (!this.translatorDatabase.saveToSettings()) {
+            JOptionPane.showMessageDialog(null, LanguageController.translate("Unable to load from the settings file."));
         }
     }
 
@@ -307,6 +330,10 @@ public class Game extends StandardGame {
 
     public StandardCollisionHandler getHandler () {
         return this.sch;
+    }
+
+    public MenuScreen getMenuScreen () {
+        return this.menuScreen;
     }
 
     public LevelController getLevelController () {

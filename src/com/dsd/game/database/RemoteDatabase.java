@@ -12,7 +12,7 @@ import com.dsd.game.AccountStatus;
  *
  * @author Joshua, Ronald, Rinty
  */
-public interface RemoteDatabase {
+public interface RemoteDatabase extends Database {
 
     /**
      * Opens the connection with whatever library is necessary to connect to the
@@ -31,6 +31,7 @@ public interface RemoteDatabase {
      *
      * @return true if it saved successfully, false otherwise.
      */
+    @Override
     public boolean save ();
 
     /**
@@ -39,6 +40,7 @@ public interface RemoteDatabase {
      *
      * @return true if loaded info successfully, false otherwise.
      */
+    @Override
     public boolean load ();
 
     /**

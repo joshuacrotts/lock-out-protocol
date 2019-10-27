@@ -17,25 +17,26 @@ import java.awt.Graphics2D;
  *
  * @author Joshua, Ronald, Rinty
  */
-public class AudioMenuButton extends MenuButton implements MouseEventInterface {
+public class LanguageChangeButton extends MenuButton implements MouseEventInterface {
 
     //  Button position and dimension offsets.
     private static final int BUTTON_X_OFFSET = 141;
-    private static final int BUTTON_Y_OFFSET = 320;
-    private static final int TEXT_X_OFFSET = 65;
+    private static final int BUTTON_Y_OFFSET = 180;
+    private static final int TEXT_X_OFFSET = 35;
     private static final int TEXT_Y_OFFSET = 45;
     private static final int BUTTON_WIDTH = 300;
     private static final int BUTTON_HEIGHT = 82;
 
-    public AudioMenuButton (Game _game, MenuScreen _menuScreen) {
-        super(AudioMenuButton.BUTTON_X_OFFSET, _game.getGameHeight() - AudioMenuButton.BUTTON_Y_OFFSET,
-                AudioMenuButton.BUTTON_WIDTH, AudioMenuButton.BUTTON_HEIGHT, LanguageController.translate("CHANGE AUDIO"), _game, _menuScreen);
+    public LanguageChangeButton (Game _game, MenuScreen _menuScreen) {
+        super(LanguageChangeButton.BUTTON_X_OFFSET, _game.getGameHeight() - LanguageChangeButton.BUTTON_Y_OFFSET,
+                LanguageChangeButton.BUTTON_WIDTH, LanguageChangeButton.BUTTON_HEIGHT,
+                LanguageController.translate("CHANGE LANGUAGE"), _game, _menuScreen);
     }
 
     @Override
     public void tick () {
-        this.setX(Screen.gameHalfWidth - AudioMenuButton.BUTTON_X_OFFSET);
-        this.setY(Screen.gameHeight - AudioMenuButton.BUTTON_Y_OFFSET);
+        this.setX(Screen.gameHalfWidth - LanguageChangeButton.BUTTON_X_OFFSET);
+        this.setY(Screen.gameHeight - LanguageChangeButton.BUTTON_Y_OFFSET);
     }
 
     @Override
@@ -57,9 +58,8 @@ public class AudioMenuButton extends MenuButton implements MouseEventInterface {
         }
 
         super.onMouseClick();
-
         this.getMenuScreen().pushMenuStack(MenuState.OPTIONS);
-        this.getMenuScreen().setMenuState(MenuState.AUDIO);
+        this.getMenuScreen().setMenuState(MenuState.LANGUAGES);
     }
 
     @Override

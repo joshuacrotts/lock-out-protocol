@@ -1,7 +1,7 @@
 package com.dsd.game.commands;
 
 import com.dsd.game.Game;
-import com.dsd.game.ResolutionEnum;
+import com.dsd.game.LanguageEnum;
 import com.revivedstandards.commands.Command;
 import java.awt.event.KeyEvent;
 
@@ -13,20 +13,20 @@ import java.awt.event.KeyEvent;
  *
  * @author Joshua, Ronald, Rinty
  */
-public class IncreaseResolutionCommand extends Command {
+public class IncreaseLanguageCommand extends Command {
 
     private final Game game;
 
-    public IncreaseResolutionCommand (Game _game) {
+    public IncreaseLanguageCommand (Game _game) {
         this.game = _game;
         this.bind(this.game.getKeyboard(), KeyEvent.VK_RIGHT);
     }
 
     @Override
     public void pressed (float _dt) {
-        if (!this.game.isMenu() || !this.game.getMenuScreen().isOnResolution()) {
+        if (!this.game.isMenu() || !this.game.getMenuScreen().isOnLanguages()) {
             return;
         }
-        ResolutionEnum.increaseResolution();
+        LanguageEnum.increaseLanguage();
     }
 }

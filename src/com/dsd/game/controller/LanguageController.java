@@ -18,4 +18,7 @@ public class LanguageController {
         return TranslatorAPI.translate(_text, lang);
     }
 
+    public static String translate (String _text, String _lang) {
+        return TranslatorAPI.translate(_text, _lang);
+    }
 }

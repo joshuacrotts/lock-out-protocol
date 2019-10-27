@@ -33,7 +33,6 @@ public class PersistentDatabase implements RemoteDatabase {
 
     //  Relative database information (depending on if it's local or not).
     private TranslatorDatabase translatorDatabase;
-    private BufferedWriter fileWriter;
     private Connection remoteDBConnection;
 
     //  Unique ID for each user in the database.

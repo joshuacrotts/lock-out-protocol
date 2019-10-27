@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * This API calls the yandex language API for a language translation.
  *
  * @author Joshua
  */

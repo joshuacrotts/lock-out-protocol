@@ -19,9 +19,11 @@ import com.dsd.game.userinterface.model.buttons.MediumButton;
 import com.dsd.game.userinterface.model.buttons.PlayButton;
 import com.dsd.game.userinterface.model.buttons.ResolutionMenuButton;
 import com.dsd.game.userinterface.model.buttons.AudioMenuButton;
+import com.dsd.game.userinterface.model.buttons.LanguageChangeButton;
 import com.dsd.game.userinterface.model.buttons.VolumeControlButton;
 import com.dsd.game.userinterface.model.labels.TitleLabel;
 import com.dsd.game.userinterface.view.AudioView;
+import com.dsd.game.userinterface.view.LanguageChangeView;
 import com.dsd.game.userinterface.view.MenuView;
 import com.dsd.game.userinterface.view.ResolutionView;
 import com.revivedstandards.controller.StandardAudioController;
@@ -44,6 +46,7 @@ public class MenuScreen extends Screen {
 
     private MenuView menuView;
     private ResolutionView changeResView;
+    private LanguageChangeView changeLanguageView;
     private AudioView changeAudioView;
 
     public MenuScreen (Game _game) {
@@ -67,7 +70,12 @@ public class MenuScreen extends Screen {
 
         super.tick();
 
-        this.changeResView.tick();
+        if (this.isOnResolution()) {
+            this.changeResView.tick();
+        }
+        else if (this.isOnLanguages()) {
+            this.changeLanguageView.tick();
+        }
     }
 
     @Override
@@ -79,7 +87,12 @@ public class MenuScreen extends Screen {
 
         super.render(_g2);
 
-        this.changeResView.render(_g2);
+        if (this.isOnResolution()) {
+            this.changeResView.render(_g2);
+        }
+        else if (this.isOnLanguages()) {
+            this.changeLanguageView.render(_g2);
+        }
     }
 
     public void stopMenuMusic () {
@@ -148,6 +161,7 @@ public class MenuScreen extends Screen {
         super.addInteractor(new ResolutionMenuButton(this.getGame(), this));
         super.addInteractor(new VolumeControlButton(this.getGame(), this));
         super.addInteractor(new AudioMenuButton(this.getGame(), this));
+        super.addInteractor(new LanguageChangeButton(this.getGame(), this));
     }
 
     /**
@@ -169,6 +183,7 @@ public class MenuScreen extends Screen {
      */
     private void createUIScreens () {
         this.changeResView = new ResolutionView(this.getGame(), this);
+        this.changeLanguageView = new LanguageChangeView(this.getGame(), this);
         this.changeAudioView = new AudioView(this.getGame(), this);
     }
 
@@ -203,6 +218,10 @@ public class MenuScreen extends Screen {
 
     public boolean isOnAudio () {
         return this.menuState == MenuState.AUDIO;
+    }
+
+    public boolean isOnLanguages () {
+        return this.menuState == MenuState.LANGUAGES;
     }
 
 //====================== SETTERS ===============================//

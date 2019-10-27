@@ -23,15 +23,13 @@ public enum ResolutionEnum {
 
     //  Array of possible resolutions; more can be added later.
     private static final ResolutionEnum[] RESOLUTION_LIST = {
-        RES_1280_720,
-        RES_1366_768,
-        RES_1366_768,
-        RES_1440_900,
-        RES_1440_900,
-        RES_1600_900,
-        RES_1600_900,
-        RES_1920_1080,
-        RES_2560_1440};
+        RES_1280_720, RES_1280_720, RES_1280_720,
+        RES_1366_768, RES_1366_768, RES_1366_768,
+        RES_1440_900, RES_1440_900, RES_1440_900,
+        RES_1600_900, RES_1600_900, RES_1600_900,
+        RES_1920_1080, RES_1920_1080, RES_1920_1080,
+        RES_2560_1440, RES_2560_1440, RES_2560_1440
+    };
 
     /**
      * Increases the index pointer for the RESOLUTION_LIST array.
@@ -89,6 +87,14 @@ public enum ResolutionEnum {
     private String getDimensionString () {
         return (int) resolution.getWidth() + "x"
                 + (int) resolution.getHeight();
+    }
+
+    public static int getResolutionIndex () {
+        return resolutionIndex;
+    }
+
+    public static void setResolutionIndex (int _n) {
+        resolutionIndex = _n;
     }
 
     /**

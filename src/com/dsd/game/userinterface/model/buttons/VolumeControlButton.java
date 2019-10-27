@@ -21,7 +21,7 @@ public class VolumeControlButton extends MenuButton implements MouseEventInterfa
 
     //  Button position and dimension offsets.
     private static final int BUTTON_X_OFFSET = 141;
-    private static final int BUTTON_Y_OFFSET = 400;
+    private static final int BUTTON_Y_OFFSET = 450;
     private static final int TEXT_X_OFFSET = 100;
     private static final int TEXT_Y_OFFSET = 45;
     private static final int BUTTON_WIDTH = 300;
@@ -58,7 +58,7 @@ public class VolumeControlButton extends MenuButton implements MouseEventInterfa
         }
 
         super.onMouseClick();
-
+        this.getMenuScreen().pushMenuStack(MenuState.OPTIONS);
         this.getMenuScreen().setMenuState(MenuState.VOLUME);
     }
 

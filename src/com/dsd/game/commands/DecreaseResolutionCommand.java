@@ -24,7 +24,7 @@ public class DecreaseResolutionCommand extends Command {
 
     @Override
     public void pressed (float _dt) {
-        if (!this.game.isMenu()) {
+        if (!this.game.isMenu() || !this.game.getMenuScreen().isOnResolution()) {
             return;
         }
         ResolutionEnum.decreaseResolution();
