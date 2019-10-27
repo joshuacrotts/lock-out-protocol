@@ -35,7 +35,7 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
         super(_x, _y, _width, _height);
         this.game = _game;
         this.menuScreen = _menuScreen;
-        if (LanguageController.lang.equals("en")) {
+        if (LanguageController.lang.equals("en-en")) {
             this.font = StdOps.initFont("src/resources/fonts/chargen.ttf", 24f);
         }
         else {
