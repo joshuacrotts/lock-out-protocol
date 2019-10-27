@@ -24,7 +24,7 @@ public class HealthPowerup extends StandardGameObject {
     private final Player player;
     private final StandardCollisionHandler parentContainer;
     private static final BufferedImage[] HEALTH_FRAMES;
-    
+
     private static final int HEALTH_FPS = 10;
     private static final int HEALTH_INCREASE = 25;
 

@@ -1,6 +1,7 @@
 package com.dsd.game.userinterface.model.labels;
 
 import com.dsd.game.Game;
+import com.dsd.game.controller.LanguageController;
 import com.dsd.game.userinterface.Screen;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -22,7 +23,7 @@ public class PauseLabel extends StandardLabel {
     public PauseLabel (Game _game) {
         super((int) Screen.gameHalfWidth,
                 (int) Screen.gameHalfHeight,
-                "PAUSED", "src/resources/fonts/chargen.ttf", 32f);
+                LanguageController.translate("PAUSED"), "src/resources/fonts/chargen.ttf", 32f);
         this.game = _game;
     }
 

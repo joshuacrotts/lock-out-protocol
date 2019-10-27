@@ -2,6 +2,7 @@ package com.dsd.game.userinterface.model.buttons;
 
 import com.dsd.game.AccountStatus;
 import com.dsd.game.Game;
+import com.dsd.game.controller.LanguageController;
 import com.dsd.game.database.TranslatorDatabase;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MenuState;
@@ -37,7 +38,7 @@ public class LoginButton extends MenuButton implements MouseEventInterface {
     public LoginButton (Game _game, MenuScreen _menuScreen, EmailTextFieldModel _email, PasswordTextFieldModel _pswd) {
         super(Screen.gameHalfWidth - BUTTON_X_OFFSET - BUTTON_WIDTH,
                 _game.getGameHeight() - BUTTON_Y_OFFSET,
-                BUTTON_WIDTH, BUTTON_HEIGHT, "LOGIN", _game, _menuScreen);
+                BUTTON_WIDTH, BUTTON_HEIGHT, LanguageController.translate("LOGIN"), _game, _menuScreen);
 
         this.emailModel = _email;
         this.pswdModel = _pswd;
@@ -56,8 +57,9 @@ public class LoginButton extends MenuButton implements MouseEventInterface {
         }
 
         super.render(_g2);
-        StandardDraw.text(this.getText(), this.getX() + TEXT_X_OFFSET,
-                this.getY() + TEXT_Y_OFFSET, this.font, 24f, Color.WHITE);
+        _g2.setFont(this.font);
+        _g2.setColor(Color.WHITE);
+        _g2.drawString(this.getText(), this.getX() + TEXT_X_OFFSET, this.getY() + TEXT_Y_OFFSET);
     }
 
     @Override

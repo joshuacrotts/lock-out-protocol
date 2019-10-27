@@ -1,5 +1,6 @@
 package com.dsd.game.userinterface.model.labels;
 
+import com.dsd.game.controller.LanguageController;
 import com.dsd.game.userinterface.MouseEventInterface;
 import com.dsd.game.userinterface.model.Interactor;
 import com.revivedstandards.util.StdOps;
@@ -26,7 +27,12 @@ public class StandardLabel extends Interactor implements MouseEventInterface {
         this.originX = _x;
         this.originY = _y;
         this.text = _text;
-        this.font = _fontPath;
+        if (LanguageController.lang.equals("en")) {
+            this.font = _fontPath;
+        }
+        else {
+            this.font = new Font(Font.SANS_SERIF, Font.PLAIN, 16);
+        }
     }
 
     public StandardLabel (int _x, int _y, String _text, String _fontPath, float _fontSize) {
@@ -34,7 +40,13 @@ public class StandardLabel extends Interactor implements MouseEventInterface {
         this.originX = _x;
         this.originY = _y;
         this.text = _text;
-        this.font = StdOps.initFont(_fontPath, _fontSize);
+
+        if (LanguageController.lang.equals("en") || _text.equals("Lock Out Protocol")) {
+            this.font = StdOps.initFont(_fontPath, _fontSize);
+        }
+        else {
+            this.font = new Font(Font.SANS_SERIF, Font.PLAIN, (int) 16);
+        }
     }
 
     @Override

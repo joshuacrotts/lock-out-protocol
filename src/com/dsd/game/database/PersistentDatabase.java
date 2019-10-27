@@ -180,7 +180,6 @@ public class PersistentDatabase implements RemoteDatabase {
             //  I'm sure there's a MUCH more elegant way to do this, but we'll
             //  optimize the crap out of it later (or at the very LEAST encapsulate
             //  some of this into other methods.
-
             //  Firstly, we declare arraylists to hold the values retrieved from
             //  the SQL database. Then, we pass them to their respective objects
             //  and let them deal with it.

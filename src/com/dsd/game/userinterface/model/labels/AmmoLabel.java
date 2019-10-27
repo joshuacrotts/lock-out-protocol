@@ -1,6 +1,7 @@
 package com.dsd.game.userinterface.model.labels;
 
 import com.dsd.game.Game;
+import com.dsd.game.controller.LanguageController;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.weapons.Gun;
 import com.dsd.game.userinterface.Screen;
@@ -17,8 +18,10 @@ import java.awt.Graphics2D;
  */
 public class AmmoLabel extends StandardLabel {
 
+    //  Miscellaneous reference variables.
     private final Game game;
     private final Player player;
+
     //  Position and sizing of health elements
     private final int AMMO_X_OFFSET = 230;
     private final int AMMO_Y_OFFSET = 90;
@@ -27,7 +30,7 @@ public class AmmoLabel extends StandardLabel {
     public AmmoLabel (Game _game, Player _player) {
         super((int) (Screen.gameHalfWidth + Screen.gameHalfWidth),
                 (int) (Screen.gameHalfHeight + Screen.gameHalfHeight / 2),
-                "AMMO: ", "src/resources/fonts/chargen.ttf", 30f);
+                LanguageController.translate("AMMO: "), "src/resources/fonts/chargen.ttf", 30f);
         this.game = _game;
         this.player = _player;
     }
@@ -59,7 +62,9 @@ public class AmmoLabel extends StandardLabel {
      * @param _g2
      */
     private void drawAmmoText (Graphics2D _g2) {
-        StandardDraw.text("AMMO: " + this.getAmmoAmount(), this.getX(), this.getY(), this.getFont(), this.getFont().getSize(), Color.WHITE);
+        _g2.setFont(this.getFont());
+        _g2.setColor(Color.WHITE);
+        _g2.drawString(this.getText() + this.getAmmoAmount(), this.getX(), this.getY());
     }
 
 //=============================  GETTERS  ============================//

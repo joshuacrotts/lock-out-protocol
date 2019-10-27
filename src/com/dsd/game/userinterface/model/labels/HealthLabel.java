@@ -1,6 +1,7 @@
 package com.dsd.game.userinterface.model.labels;
 
 import com.dsd.game.Game;
+import com.dsd.game.controller.LanguageController;
 import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.Screen;
 import com.revivedstandards.controller.StandardFadeController;
@@ -43,7 +44,7 @@ public class HealthLabel extends StandardLabel {
 
     public HealthLabel (Game _game, Player _player) {
         super((int) (Screen.gameHalfWidth - Screen.gameHalfWidth),
-                (int) (Screen.gameHalfHeight + Screen.gameFourthHeight), "Health: ", "src/resources/fonts/chargen.ttf", 32f);
+                (int) (Screen.gameHalfHeight + Screen.gameFourthHeight), LanguageController.translate("Health: "), "src/resources/fonts/chargen.ttf", 32f);
         this.darkGreen = new Color(0.0f, 0.5f, 0.0f);
         this.lightGreen = new Color(0.0f, 1.0f, 0.0f);
         this.healthBarColor = new StandardFadeController(this.darkGreen, this.lightGreen, this.FADE_INTERVAL);
@@ -68,7 +69,7 @@ public class HealthLabel extends StandardLabel {
     }
 
     private void drawHealthText (Graphics2D _g2) {
-        StandardDraw.text("HEALTH: ", this.getX() + TEXT_X_OFFSET, this.getY(), this.getFont(), this.getFont().getSize(), Color.WHITE);
+        StandardDraw.text(this.getText(), this.getX() + TEXT_X_OFFSET, this.getY(), this.getFont(), this.getFont().getSize(), Color.WHITE);
     }
 
     private void drawHealthBar (Graphics2D _g2) {

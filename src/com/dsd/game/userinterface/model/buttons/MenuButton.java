@@ -2,6 +2,7 @@ package com.dsd.game.userinterface.model.buttons;
 
 import com.dsd.game.AccountStatus;
 import com.dsd.game.Game;
+import com.dsd.game.controller.LanguageController;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MouseEventInterface;
 import com.revivedstandards.controller.StandardAudioController;
@@ -34,7 +35,12 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
         super(_x, _y, _width, _height);
         this.game = _game;
         this.menuScreen = _menuScreen;
-        this.font = StdOps.initFont("src/resources/fonts/chargen.ttf", 24f);
+        if (LanguageController.lang.equals("en")) {
+            this.font = StdOps.initFont("src/resources/fonts/chargen.ttf", 24f);
+        }
+        else {
+            this.font = new Font("Arial Unicode MS", Font.BOLD,16);
+        }
         this.setText(_text);
         this.initializeButtonImages();
     }

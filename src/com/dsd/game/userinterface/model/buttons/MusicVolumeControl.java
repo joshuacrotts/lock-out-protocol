@@ -94,7 +94,6 @@ public class MusicVolumeControl extends Interactor {
     }
 
     public void decrementVolume () {
-        System.out.println(volume);
         if (MusicVolumeControl.volume < 0.1) {
             StandardAudioController.setVolumeOfTracks(0, StandardAudioType.MUSIC);
         }

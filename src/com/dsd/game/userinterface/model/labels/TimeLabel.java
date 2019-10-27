@@ -1,6 +1,7 @@
 package com.dsd.game.userinterface.model.labels;
 
 import com.dsd.game.Game;
+import com.dsd.game.controller.LanguageController;
 import com.dsd.game.controller.TimerController;
 import com.dsd.game.userinterface.Screen;
 import com.dsd.game.userinterface.TimerInterface;
@@ -29,12 +30,14 @@ public class TimeLabel extends StandardLabel implements TimerInterface {
     //  Time information; its position and how often it should increment.
     private static final int TIME_Y_OFFSET = 15;
     private static final int TIME_INTERVAL = 1000;
+    private final String waveString;
 
     public TimeLabel (Game _game) {
         super(Screen.gameHalfWidth, TimeLabel.TIME_Y_OFFSET, "00:00:00",
                 "src/resources/fonts/chargen.ttf", 14f);
 
         this.game = _game;
+        this.waveString = LanguageController.translate("Wave");
     }
 
     @Override
@@ -49,7 +52,7 @@ public class TimeLabel extends StandardLabel implements TimerInterface {
                 TimerController.addTimer(this);
             }
 
-            this.setText(String.format("%02d:%02d:%02d \u007C Wave %d", this.hours, this.minutes, this.seconds, this.game.getWaveNumber()));
+            this.setText(String.format("%02d:%02d:%02d \u007C %s %d", this.hours, this.minutes, this.seconds, this.waveString, this.game.getWaveNumber()));
         }
     }
 

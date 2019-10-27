@@ -44,7 +44,7 @@ public class RainController implements Renderable, Updatable {
     //  Constants for how many rain particles should spawn.
     private static final int MAX_RAIN_PARTICLES = 5000;
 
-    public RainController(Game _game) {
+    public RainController (Game _game) {
         this.game = _game;
         this.sc = _game.getCamera();
         this.sph = new StandardParticleHandler(MAX_RAIN_PARTICLES);
@@ -61,14 +61,14 @@ public class RainController implements Renderable, Updatable {
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         if (this.isRaining()) {
             this.sph.render(_g2);
         }
     }
 
     @Override
-    public void tick() {
+    public void tick () {
 
         if (this.isRaining()) {
             // Generates the min/max points for the rain to spawn
@@ -91,7 +91,7 @@ public class RainController implements Renderable, Updatable {
      * @param _yGenMax
      * @return
      */
-    private RainDrop generateRainDrop(int _xGenMin, int _xGenMax, int _yGenMin, int _yGenMax) {
+    private RainDrop generateRainDrop (int _xGenMin, int _xGenMax, int _yGenMin, int _yGenMax) {
 
         int xPos = StdOps.rand(_xGenMin, _xGenMax);
         int yPos = StdOps.rand(_yGenMin, _yGenMax);
@@ -108,12 +108,12 @@ public class RainController implements Renderable, Updatable {
      * @param speedFactor
      * @return
      */
-    private double getRandomSpeed(int speedFactor) {
+    private double getRandomSpeed (int speedFactor) {
         return Math.random() * speedFactor;
     }
 
 //========================== SETTERS =======================//
-    public boolean isRaining() {
+    public boolean isRaining () {
         return this.isRaining;
     }
 }

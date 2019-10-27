@@ -1,6 +1,7 @@
 package com.dsd.game.userinterface.model.labels;
 
 import com.dsd.game.Game;
+import com.dsd.game.controller.LanguageController;
 import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.util.StdOps;
 import java.awt.Color;
@@ -18,7 +19,7 @@ public class WaveLabel extends StandardLabel {
 
     public WaveLabel (Game _game, int _waveNumber) {
         super((int) _game.getCamera().getX(), (int) _game.getCamera().getY(),
-                "Wave " + _waveNumber, "src/resources/fonts/chargen.ttf", 32f);
+                LanguageController.translate("Wave ") + _waveNumber, "src/resources/fonts/chargen.ttf", 32f);
         this.camera = _game.getCamera();
     }
 
@@ -39,6 +40,6 @@ public class WaveLabel extends StandardLabel {
     }
 
     public void setWaveNumber (int _waveNumber) {
-        this.setText("Wave " + _waveNumber);
+        this.setText(LanguageController.translate("Wave ") + _waveNumber);
     }
 }

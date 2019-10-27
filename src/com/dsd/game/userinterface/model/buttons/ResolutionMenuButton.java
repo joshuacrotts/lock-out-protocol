@@ -1,6 +1,7 @@
 package com.dsd.game.userinterface.model.buttons;
 
 import com.dsd.game.Game;
+import com.dsd.game.controller.LanguageController;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MenuState;
 import com.dsd.game.userinterface.MouseEventInterface;
@@ -29,7 +30,8 @@ public class ResolutionMenuButton extends MenuButton implements MouseEventInterf
 
     public ResolutionMenuButton (Game _game, MenuScreen _menuScreen) {
         super(ResolutionMenuButton.BUTTON_X_OFFSET, _game.getGameHeight() - ResolutionMenuButton.BUTTON_Y_OFFSET,
-                ResolutionMenuButton.BUTTON_WIDTH, ResolutionMenuButton.BUTTON_HEIGHT, "CHANGE RESOLUTION", _game, _menuScreen);
+                ResolutionMenuButton.BUTTON_WIDTH, ResolutionMenuButton.BUTTON_HEIGHT, LanguageController.translate("CHANGE RESOLUTION"),
+                _game, _menuScreen);
     }
 
     @Override
@@ -45,8 +47,9 @@ public class ResolutionMenuButton extends MenuButton implements MouseEventInterf
         }
 
         super.render(_g2);
-        StandardDraw.text(this.getText(), this.getX() + ResolutionMenuButton.TEXT_X_OFFSET,
-                this.getY() + ResolutionMenuButton.TEXT_Y_OFFSET, this.font, 24f, Color.WHITE);
+        _g2.setFont(this.font);
+        _g2.setColor(Color.WHITE);
+        _g2.drawString(this.getText(), this.getX() + TEXT_X_OFFSET, this.getY() + TEXT_Y_OFFSET);
     }
 
     @Override

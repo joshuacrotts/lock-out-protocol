@@ -1,6 +1,7 @@
 package com.dsd.game.userinterface.model.buttons;
 
 import com.dsd.game.Game;
+import com.dsd.game.controller.LanguageController;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MenuState;
 import com.dsd.game.userinterface.MouseEventInterface;
@@ -29,7 +30,7 @@ public class AudioMenuButton extends MenuButton implements MouseEventInterface {
 
     public AudioMenuButton (Game _game, MenuScreen _menuScreen) {
         super(AudioMenuButton.BUTTON_X_OFFSET, _game.getGameHeight() - AudioMenuButton.BUTTON_Y_OFFSET,
-                AudioMenuButton.BUTTON_WIDTH, AudioMenuButton.BUTTON_HEIGHT, "CHANGE AUDIO", _game, _menuScreen);
+                AudioMenuButton.BUTTON_WIDTH, AudioMenuButton.BUTTON_HEIGHT, LanguageController.translate("CHANGE AUDIO"), _game, _menuScreen);
     }
 
     @Override
@@ -45,8 +46,9 @@ public class AudioMenuButton extends MenuButton implements MouseEventInterface {
         }
 
         super.render(_g2);
-        StandardDraw.text(this.getText(), this.getX() + AudioMenuButton.TEXT_X_OFFSET,
-                this.getY() + AudioMenuButton.TEXT_Y_OFFSET, this.font, 24f, Color.WHITE);
+        _g2.setFont(this.font);
+        _g2.setColor(Color.WHITE);
+        _g2.drawString(this.getText(), this.getX() + TEXT_X_OFFSET, this.getY() + TEXT_Y_OFFSET);
     }
 
     @Override

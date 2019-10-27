@@ -52,6 +52,13 @@ public final class TranslatorAPI {
         return WeatherConnector.getWeather(_city);
     }
 
+    public static String translate (String _text, String _lang) {
+        if (_lang.equals("en")) {
+            return _text;
+        }
+        return LanguageTranslation.translateText(_text, _lang);
+    }
+
     private TranslatorAPI () {
 
     }

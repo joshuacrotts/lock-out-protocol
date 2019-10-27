@@ -24,20 +24,22 @@ public interface RemoteDatabase {
      * @return true if a connection was successfully established. False
      * otherwise.
      */
-    public boolean connect(String _dbName);
+    public boolean connect (String _dbName);
 
     /**
      * Write the contents of the supplied information to the db type.
+     *
      * @return true if it saved successfully, false otherwise.
      */
-    public boolean save();
+    public boolean save ();
 
     /**
      * Contacts the database and, with the account information, returns the
      * player's information in a parse-able way.
+     *
      * @return true if loaded info successfully, false otherwise.
      */
-    public boolean load();
+    public boolean load ();
 
     /**
      * Authenticates the user's account in the database. Returns true if correct
@@ -49,7 +51,7 @@ public interface RemoteDatabase {
      *
      * @return
      */
-    public AccountStatus userAuthenticated(String _email, String _password);
+    public AccountStatus userAuthenticated (String _email, String _password);
 
     /**
      * Adds a user to the SQL database.
@@ -58,6 +60,6 @@ public interface RemoteDatabase {
      * @param _password
      * @return if the account exists, was created, or null for neither.
      */
-    public AccountStatus addUser(String _email, String _password);
+    public AccountStatus addUser (String _email, String _password);
 
 }

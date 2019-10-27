@@ -48,7 +48,7 @@ public class BulletGameObject extends ProjectileGameObject {
      *
      * @return
      */
-    private static BufferedImage[] initImages() {
+    private static BufferedImage[] initImages () {
         BulletGameObject.frames[0] = StdOps.loadImage("src/resources/img/bullet/bullet_sprite/new_bullet/bullet.png");
         return BulletGameObject.frames;
     }

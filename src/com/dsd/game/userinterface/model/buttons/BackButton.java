@@ -1,6 +1,7 @@
 package com.dsd.game.userinterface.model.buttons;
 
 import com.dsd.game.Game;
+import com.dsd.game.controller.LanguageController;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MouseEventInterface;
 import com.revivedstandards.main.StandardDraw;
@@ -28,11 +29,11 @@ public class BackButton extends MenuButton implements MouseEventInterface {
     public BackButton (Game _game, MenuScreen _menuScreen) {
         super(_game.getGameWidth() - BUTTON_X_OFFSET - BUTTON_WIDTH / 2,
                 _game.getGameHeight() - BUTTON_Y_OFFSET, BUTTON_WIDTH, BUTTON_HEIGHT,
-                "BACK", _game, _menuScreen);
+                LanguageController.translate("BACK"), _game, _menuScreen);
     }
 
     public BackButton (int _x, int _y, Game _game, MenuScreen _menuScreen) {
-        super(_x, _y, BUTTON_WIDTH, BUTTON_HEIGHT, "BACK", _game, _menuScreen);
+        super(_x, _y, BUTTON_WIDTH, BUTTON_HEIGHT, LanguageController.translate("BACK"), _game, _menuScreen);
     }
 
     @Override
@@ -48,8 +49,9 @@ public class BackButton extends MenuButton implements MouseEventInterface {
         }
 
         super.render(_g2);
-        StandardDraw.text(this.getText(), this.getX() + TEXT_X_OFFSET,
-                this.getY() + TEXT_Y_OFFSET, this.font, 24f, Color.WHITE);
+        _g2.setFont(this.font);
+        _g2.setColor(Color.WHITE);
+        _g2.drawString(this.getText(), this.getX() + TEXT_X_OFFSET, this.getY() + TEXT_Y_OFFSET);
     }
 
     @Override

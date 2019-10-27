@@ -1,10 +1,12 @@
 package com.dsd.game;
 
+import com.dsd.game.api.TranslatorAPI;
 import com.dsd.game.controller.AudioBoxController;
 import com.dsd.game.controller.CollisionHandlerController;
 import com.dsd.game.controller.CursorController;
 import com.dsd.game.controller.DebugController;
 import com.dsd.game.controller.DifficultyController;
+import com.dsd.game.controller.LanguageController;
 import com.dsd.game.controller.LevelController;
 import com.dsd.game.controller.RainController;
 import com.dsd.game.controller.TimerController;
@@ -262,7 +264,7 @@ public class Game extends StandardGame {
      */
     public void saveToDatabase () {
         if (!this.translatorDatabase.save()) {
-            JOptionPane.showMessageDialog(null, "Unable to save data.");
+            JOptionPane.showMessageDialog(null, LanguageController.translate("Unable to save data."));
         }
     }
 
@@ -271,7 +273,7 @@ public class Game extends StandardGame {
      */
     public void loadFromDatabase () {
         if (!this.translatorDatabase.load()) {
-            JOptionPane.showMessageDialog(null, "Unable to load data, did you log in?.");
+            JOptionPane.showMessageDialog(null, LanguageController.translate("Unable to load data, did you log in?."));
         }
     }
 

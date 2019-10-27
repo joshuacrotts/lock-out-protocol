@@ -36,7 +36,7 @@ public abstract class Weapon implements SerializableObject {
      * just a projectile exiting the weapon (like a bullet).
      */
     private int damage;
-    
+
     //  Some powerups will increase the weapon's damage. This variable handles that.
     private int damageFactor = 1;
 

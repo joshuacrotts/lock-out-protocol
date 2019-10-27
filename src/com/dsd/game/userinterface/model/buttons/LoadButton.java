@@ -2,6 +2,7 @@ package com.dsd.game.userinterface.model.buttons;
 
 import com.dsd.game.Game;
 import com.dsd.game.GameState;
+import com.dsd.game.controller.LanguageController;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MouseEventInterface;
 import com.dsd.game.userinterface.Screen;
@@ -32,7 +33,7 @@ public class LoadButton extends MenuButton implements MouseEventInterface {
     public LoadButton (Game _game, MenuScreen _menuScreen) {
         super(Screen.gameHalfWidth - BUTTON_X_OFFSET,
                 Screen.gameHalfHeight - BUTTON_Y_OFFSET,
-                BUTTON_WIDTH, BUTTON_HEIGHT, "LOAD GAME", _game, _menuScreen);
+                BUTTON_WIDTH, BUTTON_HEIGHT, LanguageController.translate("LOAD GAME"), _game, _menuScreen);
         this.game = _game;
         this.menuScreen = _menuScreen;
     }
@@ -55,9 +56,9 @@ public class LoadButton extends MenuButton implements MouseEventInterface {
         }
 
         super.render(_g2);
-        StandardDraw.text(this.getText(), (int) this.getX() + TEXT_X_OFFSET,
-                (int) this.getY() + TEXT_Y_OFFSET,
-                this.font, 24f, Color.WHITE);
+        _g2.setFont(this.font);
+        _g2.setColor(Color.WHITE);
+        _g2.drawString(this.getText(), this.getX() + TEXT_X_OFFSET, this.getY() + TEXT_Y_OFFSET);
     }
 
     @Override

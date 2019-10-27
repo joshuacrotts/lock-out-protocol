@@ -20,11 +20,11 @@ public class PistolButtonView extends ShopButtonView {
     @Override
     public void tick () {
         //  Only update the text if the user has the rifle in their inventory.
-        if (this.parentButton.getGame().getPlayer().getInventory().hasWeapon(WeaponType.RIFLE) == null) {
+        if (this.parentButton.getGame().getPlayer().getInventory().hasWeapon(WeaponType.PISTOL) == null) {
             this.text.setText("Glock-17 $" + this.parentButton.getPrice());
         }
         else {
-            this.text.setText("Glock-17 AMMO (16/$"+ this.parentButton.getPricePerMagazine() + ")");
+            this.text.setText("Glock-17 AMMO (16/$" + this.parentButton.getPricePerMagazine() + ")");
         }
         super.tick();
     }

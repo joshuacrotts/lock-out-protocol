@@ -19,7 +19,7 @@ public class ShotgunButtonView extends ShopButtonView {
     public void tick () {
         //  Only update the text if the user has the rifle in their inventory.
         if (this.parentButton.getGame().getPlayer().getInventory().hasWeapon(WeaponType.SHOTGUN) == null) {
-            this.text.setText("SPAS-12 $"+ this.parentButton.getPrice());
+            this.text.setText("SPAS-12 $" + this.parentButton.getPrice());
         }
         else {
             this.text.setText("SPAS-12 AMMO (12/$" + this.parentButton.getPricePerMagazine() + ")");

@@ -64,7 +64,7 @@ public class MetalLevel extends StandardLevel {
         this.setHandler(_sch);
         this.setCameraBounds(this.getBgImage().getWidth() - Screen.gameHalfWidth,
                 this.getBgImage().getHeight() - Screen.gameHalfHeight);
-        
+
         MetalLevel.natureHandler = new StandardCollisionHandler(this.sc);
     }
 
@@ -114,7 +114,7 @@ public class MetalLevel extends StandardLevel {
                     MetalLevel.natureHandler,
                     StdOps.rand(400, 3600), StdOps.rand(400, 3600),
                     StandardID.Tile3,
-                    MetalLevel.natureImages[StdOps.rand(0, MetalLevel.natureImages.length - 1)], false));
+                    MetalLevel.natureImages[StdOps.rand(0, MetalLevel.natureImages.length - 1)], true));
         }
     }
 
