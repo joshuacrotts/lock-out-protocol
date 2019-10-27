@@ -85,6 +85,10 @@ public class SoundEffectVolumeControl extends Interactor {
     public void onMouseExitHover () {
     }
 
+    /**
+     * Increments the volume by a factor of 0.1 until it hits the max. Once it
+     * hits it, we simply return to avoid going over 1.0.
+     */
     public void incrementVolume () {
         if (SoundEffectVolumeControl.volume >= IncreaseVolumeButton.MAX_VOLUME) {
             return;

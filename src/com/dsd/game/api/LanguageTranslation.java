@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dsd.game.api;
 
 import java.io.BufferedReader;
@@ -77,10 +72,26 @@ public class LanguageTranslation {
         return jsonInformation.toString().substring(jsonInformation.toString().indexOf("[") + 2, jsonInformation.toString().lastIndexOf("]") - 1);
     }
 
+    /**
+     * Intermediary method call by the TranslatorAPI class to translate a string
+     * of text to a certain language.
+     *
+     * @param _s
+     * @param _lang
+     * @return
+     */
     public static String translateText (String _s, String _lang) {
         return fixString(_s, _lang);
     }
 
+    /**
+     * If there are any spaces inside of the string to be translated, we need to
+     * replace them with %20 calls because the URL is unable to parse spaces.
+     *
+     * @param _s
+     * @param _lang
+     * @return
+     */
     private static String fixString (String _s, String _lang) {
         String fixedString = _s.replaceAll("\\s", "%20");
         return fetch(fixedString, _lang);

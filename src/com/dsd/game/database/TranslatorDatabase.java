@@ -47,7 +47,8 @@ public class TranslatorDatabase {
      * Load the game state, level state, player health, money and current
      * inventory
      *
-     * @return true if the load from the database was successful, false otherwise.
+     * @return true if the load from the database was successful, false
+     * otherwise.
      */
     public boolean loadFromDatabase () {
         return TranslatorDatabase.remoteDatabase.load();

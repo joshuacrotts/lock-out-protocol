@@ -14,7 +14,9 @@ import java.util.TimerTask;
  * This class will tell the user how long they've been playing, and what round
  * they're currently on.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class TimeLabel extends StandardLabel implements TimerInterface {
 

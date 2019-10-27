@@ -180,7 +180,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
     private void handlePlayerCoinCollision (Player _player, Coin _coin) {
         _coin.setAlive(false);
         _player.setMoney(_player.getMoney() + _coin.getValue());
-        StandardAudioController.play("src/resources/audio/sfx/coin.wav", StandardAudioType.SFX);
+        _coin.playCoinSFX();
     }
 
     /**

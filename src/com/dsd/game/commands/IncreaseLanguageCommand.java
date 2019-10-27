@@ -14,7 +14,8 @@ import java.awt.event.KeyEvent;
  * @author Joshua, Ronald, Rinty
  */
 public class IncreaseLanguageCommand extends Command {
-
+    
+    //  Miscellaneous reference variables.
     private final Game game;
 
     public IncreaseLanguageCommand (Game _game) {

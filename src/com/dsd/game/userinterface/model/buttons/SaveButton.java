@@ -29,11 +29,13 @@ public class SaveButton extends MenuButton implements MouseEventInterface {
     private static final int BUTTON_HEIGHT = 82;
 
     public SaveButton (Game _game, MenuScreen _menuScreen) {
-        super(BUTTON_X_OFFSET, BUTTON_Y_OFFSET,
-                BUTTON_WIDTH, BUTTON_HEIGHT, LanguageController.translate("SAVE GAME"), _game, _menuScreen);
+        super(SaveButton.BUTTON_X_OFFSET, SaveButton.BUTTON_Y_OFFSET,
+                SaveButton.BUTTON_WIDTH, SaveButton.BUTTON_HEIGHT,
+                LanguageController.translate("SAVE GAME"), _game, _menuScreen);
+
         this.game = _game;
         this.menuScreen = _menuScreen;
-        this.setX((int) this.game.getCamera().getX() - BUTTON_X_OFFSET);
+        this.setX((int) this.game.getCamera().getX() - SaveButton.BUTTON_X_OFFSET);
         this.setY((int) this.game.getCamera().getY());
 
         this.setScaled(true);
@@ -45,7 +47,7 @@ public class SaveButton extends MenuButton implements MouseEventInterface {
             return;
         }
 
-        this.setX((int) this.game.getCamera().getX() - BUTTON_X_OFFSET);
+        this.setX((int) this.game.getCamera().getX() - SaveButton.BUTTON_X_OFFSET);
         this.setY((int) this.game.getCamera().getY());
     }
 
@@ -58,7 +60,8 @@ public class SaveButton extends MenuButton implements MouseEventInterface {
         super.render(_g2);
         _g2.setFont(this.font);
         _g2.setColor(Color.WHITE);
-        _g2.drawString(this.getText(), this.getX() + TEXT_X_OFFSET, this.getY() + TEXT_Y_OFFSET);
+        _g2.drawString(this.getText(), this.getX() + SaveButton.TEXT_X_OFFSET,
+                this.getY() + SaveButton.TEXT_Y_OFFSET);
     }
 
     @Override

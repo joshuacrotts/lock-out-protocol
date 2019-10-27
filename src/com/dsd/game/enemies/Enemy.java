@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dsd.game.enemies;
 
 import com.dsd.game.Game;
@@ -51,12 +46,14 @@ public abstract class Enemy extends Entity {
     private StandardAnimatorController walkingController;
     private StandardAnimatorController attackingController;
     private StandardAnimatorController deathController;
+
     //  Variables for the disappearing effect when the monster dies.
     private float deathTransparencyFactor;
     private float deathTransparency = 1.0f;
 
     //  How much damage the enemy does when running into the player.
     protected double damage;
+
     //  Alpha composition object for when the monster dies.
     protected AlphaComposite deathTransparentComposite;
 
@@ -65,7 +62,7 @@ public abstract class Enemy extends Entity {
     private static final int BLOOD_PARTICLES = 10;
 
     //  Vector force factor
-    private static final int PUSH_FACTOR = 2;
+    private int pushFactor = 2;
 
     public Enemy (int _x, int _y, int _health, StandardID _id, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, _health, _id, _game, _sch);
@@ -109,8 +106,8 @@ public abstract class Enemy extends Entity {
      * @param _forceY
      */
     public void applyPushForce (double _forceX, double _forceY) {
-        this.setX(this.getX() + (_forceX * Enemy.PUSH_FACTOR));
-        this.setY(this.getY() + (_forceY * Enemy.PUSH_FACTOR));
+        this.setX(this.getX() + (_forceX * this.pushFactor));
+        this.setY(this.getY() + (_forceY * this.pushFactor));
     }
 
     /**

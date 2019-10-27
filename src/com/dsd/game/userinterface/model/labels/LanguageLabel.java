@@ -9,7 +9,11 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 
 /**
- * @author Joshua
+ * This class shows what language the user is currently selecting/has selected.
+ *
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class LanguageLabel extends StandardLabel {
 

@@ -10,7 +10,9 @@ import java.awt.Graphics2D;
 /**
  * Label that shows what wave we're about to transition to.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class WaveLabel extends StandardLabel {
 

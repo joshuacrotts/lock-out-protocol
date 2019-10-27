@@ -15,6 +15,7 @@ import java.awt.event.KeyEvent;
  */
 public class DebugCommand extends Command {
 
+    //  Miscellaneous reference variables.
     public Game game;
 
     public DebugCommand (Game _game) {

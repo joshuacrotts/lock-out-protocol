@@ -8,10 +8,17 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 /**
- * @author Joshua
+ * This label shows the current resolution/next/previous resolutions from within
+ * the ResolutionView. When the user changes a resolution, it is updated on this
+ * label.
+ *
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class ResolutionLabel extends StandardLabel {
 
+    //  Miscellaneous reference variables.
     private final Game game;
     private final MenuScreen menuScreen;
 

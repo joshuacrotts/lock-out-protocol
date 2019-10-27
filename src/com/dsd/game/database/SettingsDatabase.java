@@ -3,7 +3,6 @@ package com.dsd.game.database;
 import com.dsd.game.Game;
 import com.dsd.game.LanguageEnum;
 import com.dsd.game.ResolutionEnum;
-import com.dsd.game.controller.LanguageController;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;

@@ -14,7 +14,9 @@ import java.awt.Graphics2D;
  * much health the player has. The health bar decreases in size as the player
  * takes more and more damage.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class HealthLabel extends StandardLabel {
 

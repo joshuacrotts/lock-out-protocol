@@ -16,7 +16,10 @@ import java.awt.Graphics2D;
  */
 public class PauseLabel extends StandardLabel {
 
+    //  Miscellaneous reference variable.
     private final Game game;
+
+    //  Label x and y positioning offset.
     private final int LABEL_X_OFFSET = 20;
     private final int LABEL_Y_OFFSET = 100;
 
@@ -37,6 +40,7 @@ public class PauseLabel extends StandardLabel {
     public void render (Graphics2D _g2) {
         Color oldColor = _g2.getColor();
         _g2.setColor(Color.WHITE);
+
         super.render(_g2);
         _g2.setColor(oldColor);
     }

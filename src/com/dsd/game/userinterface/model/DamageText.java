@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dsd.game.userinterface.model;
 
 import com.dsd.game.userinterface.StandardInteractorHandler;
@@ -25,17 +20,19 @@ public class DamageText extends StandardLabel {
 
     //  Interactor handler that this damage text belongs to
     private final StandardInteractorHandler sih;
+
     //  Font for the text
     private static final Font font = StdOps.initFont("src/resources/fonts/chargen.ttf", 12f);
+
     /**
      * Values regarding the color of the damage text, how fast it fades, and how
      * quickly it changes colors.
      */
+    private Color fadeColor;
     private static final int RED_INC_VALUE = 20;
     private static final int ORIGINAL_RED_VALUE = 90;
     private static int redColorValue = ORIGINAL_RED_VALUE;
     private final int FADE_TIMER = 5;
-    private Color fadeColor;
 
     public DamageText (int _x, int _y, String _text, StandardInteractorHandler _sih) {
         super(_x, _y, _text, font);

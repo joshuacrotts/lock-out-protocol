@@ -6,13 +6,16 @@ import com.dsd.game.userinterface.Screen;
 import java.awt.Graphics2D;
 
 /**
- * @TODO
+ * This class is a view representation of what the user currently has in their
+ * inventory. It displays the current weapon in their hand.
  *
  * [Group Name: Data Structure Deadheads]
+ *
  * @author Joshua, Ronald, Rinty
  */
 public class InventoryView extends Screen {
 
+    //  Miscellaneous reference to the inventory.
     private final Inventory inventory;
 
     public InventoryView (Game _game, Inventory _inventory) {

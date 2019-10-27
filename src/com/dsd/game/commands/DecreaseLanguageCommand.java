@@ -15,6 +15,7 @@ import java.awt.event.KeyEvent;
  */
 public class DecreaseLanguageCommand extends Command {
 
+    //  Miscellaneous reference variables.
     private final Game game;
 
     public DecreaseLanguageCommand (Game _game) {

@@ -2,9 +2,7 @@ package com.dsd.game.userinterface.model.buttons;
 
 import com.dsd.game.Game;
 import com.dsd.game.ResolutionEnum;
-import com.dsd.game.commands.DecreaseLanguageCommand;
 import com.dsd.game.commands.DecreaseResolutionCommand;
-import com.dsd.game.commands.IncreaseLanguageCommand;
 import com.dsd.game.commands.IncreaseResolutionCommand;
 import com.dsd.game.controller.LanguageController;
 import com.dsd.game.userinterface.MenuScreen;
@@ -19,13 +17,11 @@ import java.awt.Graphics2D;
  *
  * @author Joshua
  */
-public class SaveChangesButton extends MenuButton implements MouseEventInterface {
+public class SaveResolutionChangesButton extends MenuButton implements MouseEventInterface {
 
     private final MenuScreen menuScreen;
     private final IncreaseResolutionCommand incResCommand;
-    private final IncreaseLanguageCommand incLangCommand;
     private final DecreaseResolutionCommand decResCommand;
-    private final DecreaseLanguageCommand decLangCommand;
 
     private static final int BUTTON_X_OFFSET = 0;
     private static final int BUTTON_Y_OFFSET = 120;
@@ -34,15 +30,13 @@ public class SaveChangesButton extends MenuButton implements MouseEventInterface
     private static final int BUTTON_WIDTH = 300;
     private static final int BUTTON_HEIGHT = 82;
 
-    public SaveChangesButton (Game _game, MenuScreen _menuScreen) {
+    public SaveResolutionChangesButton (Game _game, MenuScreen _menuScreen) {
         super(BUTTON_X_OFFSET, _game.getGameHeight() - BUTTON_Y_OFFSET,
                 BUTTON_WIDTH, BUTTON_HEIGHT, LanguageController.translate("SAVE CHANGES"), _game, _menuScreen);
 
         this.menuScreen = _menuScreen;
         this.incResCommand = new IncreaseResolutionCommand(this.getGame());
-        this.incLangCommand = new IncreaseLanguageCommand(this.getGame());
         this.decResCommand = new DecreaseResolutionCommand(this.getGame());
-        this.decLangCommand = new DecreaseLanguageCommand(this.getGame());
     }
 
     @Override
@@ -53,7 +47,7 @@ public class SaveChangesButton extends MenuButton implements MouseEventInterface
 
     @Override
     public void render (Graphics2D _g2) {
-        if (!this.getGame().isMenu() || !(this.getMenuScreen().isOnResolution() || this.getMenuScreen().isOnLanguages())) {
+        if (!this.getGame().isMenu() || !(this.getMenuScreen().isOnResolution())) {
             return;
         }
 
@@ -65,7 +59,7 @@ public class SaveChangesButton extends MenuButton implements MouseEventInterface
 
     @Override
     public void onMouseClick () {
-        if (!this.getGame().isMenu() || !(this.getMenuScreen().isOnResolution() || this.getMenuScreen().isOnLanguages())) {
+        if (!this.getGame().isMenu() || !(this.getMenuScreen().isOnResolution())) {
             return;
         }
 
@@ -79,7 +73,7 @@ public class SaveChangesButton extends MenuButton implements MouseEventInterface
 
     @Override
     public void onMouseEnterHover () {
-        if (!this.getGame().isMenu() || !(this.getMenuScreen().isOnResolution() || this.getMenuScreen().isOnLanguages())) {
+        if (!this.getGame().isMenu() || !(this.getMenuScreen().isOnResolution())) {
             return;
         }
         this.activeImage = this.onHoverButtonImg;
@@ -87,7 +81,7 @@ public class SaveChangesButton extends MenuButton implements MouseEventInterface
 
     @Override
     public void onMouseExitHover () {
-        if (!this.getGame().isMenu() || !(this.getMenuScreen().isOnResolution() || this.getMenuScreen().isOnLanguages())) {
+        if (!this.getGame().isMenu() || !(this.getMenuScreen().isOnResolution())) {
             return;
         }
         this.activeImage = this.buttonImg;

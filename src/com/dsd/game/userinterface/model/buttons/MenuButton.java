@@ -39,7 +39,7 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
             this.font = StdOps.initFont("src/resources/fonts/chargen.ttf", 24f);
         }
         else {
-            this.font = new Font("Arial Unicode MS", Font.BOLD,16);
+            this.font = new Font("Arial Unicode MS", Font.BOLD, 16);
         }
         this.setText(_text);
         this.initializeButtonImages();
@@ -63,23 +63,26 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
         }
         switch (_status) {
             case DOES_NOT_EXIST:
-                JOptionPane.showMessageDialog(null, "Error: Your account does not exist.");
+                JOptionPane.showMessageDialog(null, LanguageController.translate("Error: Your account does not exist."));
                 break;
             case EXISTS:
-                JOptionPane.showMessageDialog(null, "You already have an account!");
+                JOptionPane.showMessageDialog(null, LanguageController.translate("You already have an account!"));
                 break;
             case ACCOUNT_CREATED:
-                JOptionPane.showMessageDialog(null, "Your account has been created. You may log in now.");
+                JOptionPane.showMessageDialog(null, LanguageController.translate("Your account has been created. You may log in now."));
                 break;
             case INCORRECT_PASS:
-                JOptionPane.showMessageDialog(null, "Your password is incorrect.");
+                JOptionPane.showMessageDialog(null, LanguageController.translate("Your password is incorrect."));
                 break;
             case CORRECT:
-                JOptionPane.showMessageDialog(null, "Logged in successfully!");
+                JOptionPane.showMessageDialog(null, LanguageController.translate("Logged in successfully!"));
                 break;
         }
     }
 
+    /**
+     * Initializes the static images for button hovers/presses.
+     */
     private void initializeButtonImages () {
         this.buttonImg = StdOps.loadImage("src/resources/img/ui/buttonStock1.png");
         this.onHoverButtonImg = StdOps.loadImage("src/resources/img/ui/buttonStock1h.png");

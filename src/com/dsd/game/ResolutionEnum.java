@@ -23,12 +23,12 @@ public enum ResolutionEnum {
 
     //  Array of possible resolutions; more can be added later.
     private static final ResolutionEnum[] RESOLUTION_LIST = {
-        RES_1280_720, RES_1280_720, RES_1280_720,
-        RES_1366_768, RES_1366_768, RES_1366_768,
-        RES_1440_900, RES_1440_900, RES_1440_900,
-        RES_1600_900, RES_1600_900, RES_1600_900,
-        RES_1920_1080, RES_1920_1080, RES_1920_1080,
-        RES_2560_1440, RES_2560_1440, RES_2560_1440
+        RES_1280_720,
+        RES_1366_768,
+        RES_1440_900,
+        RES_1600_900,
+        RES_1920_1080,
+        RES_2560_1440
     };
 
     /**

@@ -27,6 +27,9 @@ public abstract class AudioBoxController {
         StandardAudioController.load("src/resources/audio/sfx/rifle.wav", 32, StandardAudioType.SFX);
         StandardAudioController.load("src/resources/audio/sfx/fast_rifle.wav", 32, StandardAudioType.SFX);
         StandardAudioController.load("src/resources/audio/sfx/coin.wav", 8, StandardAudioType.SFX);
+        StandardAudioController.load("src/resources/audio/sfx/coin0.wav", 4, StandardAudioType.SFX);
+        StandardAudioController.load("src/resources/audio/sfx/coin1.wav", 4, StandardAudioType.SFX);
+        StandardAudioController.load("src/resources/audio/sfx/coin2.wav", 4, StandardAudioType.SFX);
         StandardAudioController.load("src/resources/audio/sfx/round_change.wav", 1, StandardAudioType.SFX);
         StandardAudioController.load("src/resources/audio/sfx/restore_health.wav", 4, StandardAudioType.SFX);
         StandardAudioController.load("src/resources/audio/sfx/berserk.wav", 2, StandardAudioType.SFX);

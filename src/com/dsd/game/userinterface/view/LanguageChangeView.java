@@ -4,7 +4,7 @@ import com.dsd.game.Game;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MouseEventInterface;
 import com.dsd.game.userinterface.Screen;
-import com.dsd.game.userinterface.model.buttons.SaveChangesButton;
+import com.dsd.game.userinterface.model.buttons.SaveLanguageChangesButton;
 import com.dsd.game.userinterface.model.labels.LanguageLabel;
 import java.awt.Graphics2D;
 
@@ -22,7 +22,7 @@ public class LanguageChangeView extends Screen implements MouseEventInterface {
         super(_game);
         this.menuScreen = _menuScreen;
         super.addInteractor(new LanguageLabel(super.getGame(), this.menuScreen));
-        super.addInteractor(new SaveChangesButton(super.getGame(), this.menuScreen));
+        super.addInteractor(new SaveLanguageChangesButton(super.getGame(), this.menuScreen));
     }
 
     @Override

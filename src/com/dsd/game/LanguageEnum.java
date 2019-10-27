@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dsd.game;
 
 import com.dsd.game.controller.LanguageController;
 
 /**
+ * This enum defines the possible languages the user can switch to in the game.
  *
  * @author Joshua
  */
@@ -27,19 +23,20 @@ public enum LanguageEnum {
     RO(LanguageController.translate("Romanian", "ro"), "ro"),
     RU(LanguageController.translate("Russian", "ru"), "ru"),
     ES(LanguageController.translate("Spanish", "es"), "es"),
+    UR(LanguageController.translate("Urdu", "ur"), "ur"),
     VI(LanguageController.translate("Vietnamese", "vi"), "vi");
 
     private final String language;
     private final String isoCode;
 
-    private static int languageIndex = 12;
+    private static int languageIndex = 5;
 
     private static final LanguageEnum[] LANGUAGE_LIST = {
-        AR, AR, AR, ZH, ZH, ZH, CS, CS, CS, NL, NL, NL, EN, EN, EN, FR, FR, FR, DE, DE, DE, EL, EL, EL, IT, IT, IT, JA, JA, JA, PT, PT, PT, RO, RO, RO, RU, RU, RU, ES, ES, ES, VI, VI, VI
+        AR, ZH, CS, NL, EN, FR, DE, EL, IT, JA, PT, RO, RU, ES, UR, VI
     };
 
     /**
-     * Increases the index pointer for the RESOLUTION_LIST array.
+     * Increases the index pointer for the LANGUAGE_LIST array.
      */
     public static void increaseLanguage () {
         if (languageIndex < LANGUAGE_LIST.length - 1) {
@@ -49,7 +46,7 @@ public enum LanguageEnum {
     }
 
     /**
-     * Decreases the index pointer for the RESOLUTION_LIST array.
+     * Decreases the index pointer for the LANGUAGE_LIST array.
      */
     public static void decreaseLanguage () {
         if (languageIndex > 0) {
@@ -101,7 +98,8 @@ public enum LanguageEnum {
     }
 
     /**
-     * Returns the actual dimension object associated with each ResolutionEnum.
+     * Returns the language code for the language pointed at by languageIndex in
+     * the array.
      *
      * @return
      */
