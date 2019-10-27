@@ -21,9 +21,11 @@ import com.dsd.game.userinterface.model.buttons.ResolutionMenuButton;
 import com.dsd.game.userinterface.model.buttons.AudioMenuButton;
 import com.dsd.game.userinterface.model.buttons.VolumeControlButton;
 import com.dsd.game.userinterface.model.labels.TitleLabel;
+import com.dsd.game.userinterface.view.AudioView;
 import com.dsd.game.userinterface.view.MenuView;
 import com.dsd.game.userinterface.view.ResolutionView;
 import com.revivedstandards.controller.StandardAudioController;
+import com.revivedstandards.model.StandardAudioType;
 import java.awt.Graphics2D;
 import java.util.Stack;
 
@@ -40,10 +42,11 @@ public class MenuScreen extends Screen {
     private MenuState menuState;
     private final Stack<MenuState> menuStateStack;
 
-    private final MenuView menuView;
+    private MenuView menuView;
     private ResolutionView changeResView;
+    private AudioView changeAudioView;
 
-    public MenuScreen(Game _game) {
+    public MenuScreen (Game _game) {
         super(_game);
         this.menuView = new MenuView(_game, this);
         this.menuState = MenuState.MAIN;
@@ -56,7 +59,7 @@ public class MenuScreen extends Screen {
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         if (this.getGame().isInGameState()) {
             return;
         }
@@ -68,7 +71,7 @@ public class MenuScreen extends Screen {
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         if (this.getGame().isInGameState()) {
             return;
         }
@@ -79,19 +82,19 @@ public class MenuScreen extends Screen {
         this.changeResView.render(_g2);
     }
 
-    public void stopMenuMusic() {
-        StandardAudioController.stop("src/resources/audio/music/menu.wav");
+    public void stopMenuMusic () {
+        StandardAudioController.stop("src/resources/audio/music/menu.wav", StandardAudioType.SFX);
     }
 
-    public MenuState popMenuStack() {
+    public MenuState popMenuStack () {
         return this.menuStateStack.pop();
     }
 
-    public void pushMenuStack(MenuState _state) {
+    public void pushMenuStack (MenuState _state) {
         this.menuStateStack.push(_state);
     }
 
-    public void loadMenuBackground() {
+    public void loadMenuBackground () {
         this.menuView.loadBackgroundImage();
     }
 
@@ -99,7 +102,7 @@ public class MenuScreen extends Screen {
      * Initializes the position of all the buttons for the user-interface when
      * the user is in the menu state.
      */
-    private void createUIElements() {
+    private void createUIElements () {
         this.initializeMainMenuButtons();
         this.initializeDifficultyButtons();
         this.initializeAccountButtons();
@@ -109,7 +112,7 @@ public class MenuScreen extends Screen {
     /**
      * Instantiates the buttons that are on the MainMenu screen.
      */
-    private void initializeMainMenuButtons() {
+    private void initializeMainMenuButtons () {
         //  Instantiates the play button
         super.addInteractor(new PlayButton(this.getGame(), this));
         //  Instantiates the exit button
@@ -131,14 +134,17 @@ public class MenuScreen extends Screen {
     /**
      * Initializes the three difficulty buttons.
      */
-    private void initializeDifficultyButtons() {
+    private void initializeDifficultyButtons () {
         super.addInteractor(new EasyButton(this.getGame(), this));
         super.addInteractor(new MediumButton(this.getGame(), this));
         super.addInteractor(new HardButton(this.getGame(), this));
         super.addInteractor(new BackButton(this.getGame(), this));
     }
 
-    private void initializeOptionsButtons() {
+    /**
+     * Initializes the sub-options menu buttons.
+     */
+    private void initializeOptionsButtons () {
         super.addInteractor(new ResolutionMenuButton(this.getGame(), this));
         super.addInteractor(new VolumeControlButton(this.getGame(), this));
         super.addInteractor(new AudioMenuButton(this.getGame(), this));
@@ -147,7 +153,7 @@ public class MenuScreen extends Screen {
     /**
      * Initializes the buttons located on the Account status submenu.
      */
-    private void initializeAccountButtons() {
+    private void initializeAccountButtons () {
         EmailTextFieldModel emailModel = new EmailTextFieldModel(Screen.gameHalfWidth, Screen.gameFourthHeight, this.getGame(), this);
         PasswordTextFieldModel pswdModel = new PasswordTextFieldModel(Screen.gameHalfWidth, Screen.gameHalfHeight, this.getGame(), this);
         super.addInteractor(emailModel);
@@ -161,45 +167,46 @@ public class MenuScreen extends Screen {
      * button requires a view for the different resolutions). This will
      * instantiate them.
      */
-    private void createUIScreens() {
+    private void createUIScreens () {
         this.changeResView = new ResolutionView(this.getGame(), this);
+        this.changeAudioView = new AudioView(this.getGame(), this);
     }
 
 //====================== GETTERS ===============================//
-    public boolean isOnMainMenu() {
-        return this.menuState == MenuState.MAIN;
+    public boolean isOnMainMenu () {
+        return this.menuState == MenuState.MAIN || this.menuStateStack.isEmpty();
     }
 
-    public boolean isOnDifficulty() {
+    public boolean isOnDifficulty () {
         return this.menuState == MenuState.DIFFICULTY;
     }
 
-    public boolean isOnAccountScreen() {
+    public boolean isOnAccountScreen () {
         return this.menuState == MenuState.LOGIN;
     }
 
-    public boolean isOnOptions() {
+    public boolean isOnOptions () {
         return this.menuState == MenuState.OPTIONS;
     }
 
-    public boolean isOnResolution() {
+    public boolean isOnResolution () {
         return this.menuState == MenuState.RESOLUTION;
     }
 
-    public boolean isOnVolume() {
+    public boolean isOnVolume () {
         return this.menuState == MenuState.VOLUME;
     }
 
-    public boolean isOnPlayerGender() {
+    public boolean isOnPlayerGender () {
         return this.menuState == MenuState.PLAYER_GENDER;
     }
 
-    public boolean isOnAudio() {
+    public boolean isOnAudio () {
         return this.menuState == MenuState.AUDIO;
     }
 
 //====================== SETTERS ===============================//
-    public void setMenuState(MenuState _menuState) {
+    public void setMenuState (MenuState _menuState) {
         this.menuState = _menuState;
     }
 }

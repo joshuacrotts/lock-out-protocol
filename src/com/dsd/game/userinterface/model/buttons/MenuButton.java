@@ -5,6 +5,7 @@ import com.dsd.game.Game;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MouseEventInterface;
 import com.revivedstandards.controller.StandardAudioController;
+import com.revivedstandards.model.StandardAudioType;
 import com.revivedstandards.util.StdOps;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -12,6 +13,9 @@ import java.awt.image.BufferedImage;
 import javax.swing.JOptionPane;
 
 /**
+ * This class is the basic representation of a button displayed on the main menu
+ * or any of its sub-options. It contains the logic for changing between a
+ * button and if the user is hovering over it, etc.
  *
  * @author Joshua
  */
@@ -21,6 +25,7 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
     private final Game game;
     private final MenuScreen menuScreen;
     protected final Font font;
+
     protected BufferedImage onHoverButtonImg;
     protected BufferedImage buttonImg;
     protected BufferedImage activeImage;
@@ -32,7 +37,6 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
         this.font = StdOps.initFont("src/resources/fonts/chargen.ttf", 24f);
         this.setText(_text);
         this.initializeButtonImages();
-
     }
 
     @Override
@@ -42,15 +46,9 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
                 this.getWidth(), this.getHeight(), game);
     }
 
-    private void initializeButtonImages () {
-        this.buttonImg = StdOps.loadImage("src/resources/img/ui/buttonStock1.png");
-        this.onHoverButtonImg = StdOps.loadImage("src/resources/img/ui/buttonStock1h.png");
-        this.activeImage = this.buttonImg;
-    }
-
     @Override
     public void onMouseClick () {
-        StandardAudioController.play("src/resources/audio/sfx/menuselect.wav");
+        StandardAudioController.play("src/resources/audio/sfx/menuselect.wav", StandardAudioType.SFX);
     }
 
     public void displayAccountStatus (AccountStatus _status) {
@@ -74,6 +72,12 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
                 JOptionPane.showMessageDialog(null, "Logged in successfully!");
                 break;
         }
+    }
+
+    private void initializeButtonImages () {
+        this.buttonImg = StdOps.loadImage("src/resources/img/ui/buttonStock1.png");
+        this.onHoverButtonImg = StdOps.loadImage("src/resources/img/ui/buttonStock1h.png");
+        this.activeImage = this.buttonImg;
     }
 
 //================================== GETTERS ===================================//

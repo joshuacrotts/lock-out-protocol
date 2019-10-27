@@ -13,6 +13,7 @@ import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.controller.StandardFadeController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.main.StandardCamera;
+import com.revivedstandards.model.StandardAudioType;
 import com.revivedstandards.model.StandardGameObject;
 import com.revivedstandards.model.StandardID;
 import java.awt.BasicStroke;
@@ -38,6 +39,7 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
     private final StandardCamera camera;
     private final StandardCollisionHandler parentContainer;
     private Timer powerupTimer;
+
     //  View
     private final StandardFadeController color;
     private static final BufferedImage[] INFINITE_AMMO_FRAMES;
@@ -45,6 +47,7 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
     private static final int RECT_STROKE = 20;
     private static final int STROKE_X_OFFSET = (int) (RECT_STROKE * 1.5);
     private static final int STROKE_Y_OFFSET = (int) (RECT_STROKE * 2.4);
+
     //  Timer for how long the powerup is active (in milliseconds)
     private int timer = 10000;
     private boolean isActivated = false;
@@ -129,7 +132,7 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
             return;
         }
 
-        StandardAudioController.play("src/resources/audio/sfx/pickup.wav");
+        StandardAudioController.play("src/resources/audio/sfx/pickup.wav", StandardAudioType.SFX);
     }
 
     /**

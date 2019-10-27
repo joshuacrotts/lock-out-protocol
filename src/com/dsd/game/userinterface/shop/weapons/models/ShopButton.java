@@ -35,6 +35,7 @@ public abstract class ShopButton extends Interactor {
 
     //  Price of the actual item.
     private final int PRICE;
+    
     //  Price per magazine (if applicable)
     private final int PRICE_PER_MAGAZINE;
 

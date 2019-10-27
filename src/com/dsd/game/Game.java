@@ -23,6 +23,7 @@ import com.revivedstandards.handlers.StandardHandler;
 import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.main.StandardDraw;
 import com.revivedstandards.main.StandardGame;
+import com.revivedstandards.model.StandardAudioType;
 import com.revivedstandards.model.StandardLevel;
 import javax.swing.JOptionPane;
 
@@ -216,7 +217,7 @@ public class Game extends StandardGame {
      * Plays the wave change sfx.
      */
     public void playWaveChangeSFX () {
-        StandardAudioController.play("src/resources/audio/sfx/round_change.wav");
+        StandardAudioController.play("src/resources/audio/sfx/round_change.wav", StandardAudioType.SFX);
     }
 
     /**

@@ -47,4 +47,20 @@ public abstract class Utilities extends StdOps {
         }
         return _num;
     }
+
+    /**
+     * Calculates a value between 0 and 1, given the precondition that value is
+     * between min and max. 0 means value = max, and 1 means value = min.
+     *
+     * SRC:
+     * https://stackoverflow.com/questions/45841201/normalize-a-given-random-value-to-the-range-of-0-1-in-java
+     *
+     * @param value
+     * @param min
+     * @param max
+     * @return
+     */
+    public static float normalize (float value, float min, float max) {
+        return 1 - ((value - min) / (max - min));
+    }
 }

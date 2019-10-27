@@ -7,6 +7,7 @@ import com.dsd.game.objects.weapons.Gun;
 import com.dsd.game.userinterface.TimerInterface;
 import com.revivedstandards.commands.Command;
 import com.revivedstandards.controller.StandardAudioController;
+import com.revivedstandards.model.StandardAudioType;
 import java.awt.event.KeyEvent;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -57,7 +58,7 @@ public class ReloadCommand extends Command implements TimerInterface {
         }
 
         gun.setReloading(true);
-        StandardAudioController.play("src/resources/audio/sfx/reload.wav");
+        StandardAudioController.play("src/resources/audio/sfx/reload.wav", StandardAudioType.SFX);
 
         this.reloadTimer = new Timer(true);
         this.reloadTimer.schedule(new ReloadTimer(gun), this.RELOAD_DELAY);

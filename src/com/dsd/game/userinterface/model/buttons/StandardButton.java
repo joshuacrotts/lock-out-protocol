@@ -19,7 +19,7 @@ public abstract class StandardButton extends Interactor {
 
     //  State of button
     private boolean isImage = false;
-    
+
     //  Information regarding button's contents
     private String text;
     private Color color;

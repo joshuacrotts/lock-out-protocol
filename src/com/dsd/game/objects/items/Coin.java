@@ -22,12 +22,15 @@ public class Coin extends StandardGameObject {
 
     //  Handler for the coins
     private final StandardCollisionHandler parentContainer;
+
     //  Frames of animation for the coins
     private static final BufferedImage[] coinOneFrames;
     private static final BufferedImage[] coinTwoFrames;
+
     //  Randomness for the scatter of the coin
     //  This the value at which the coins can scatter
     private final double SCATTER_RANGE = 0.99;
+
     //  Variables for changing the speed of the coins as they disperse
     private final double VEL_LOWER_BOUND = 0.5;
     private final double VEL_UPPER_BOUND = 1.5;

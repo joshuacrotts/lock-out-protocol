@@ -54,7 +54,7 @@ public class BackButton extends MenuButton implements MouseEventInterface {
 
     @Override
     public void onMouseClick () {
-        if (!this.getGame().isMenu()) {
+        if (!this.getGame().isMenu() || this.getMenuScreen().isOnMainMenu()) {
             return;
         }
 

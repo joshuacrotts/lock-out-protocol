@@ -24,6 +24,7 @@ public abstract class Interactor implements Renderable, Updatable, MouseEventInt
     private int width;
     private int height;
     private boolean interactable = true;
+    private boolean isDraggable = false;
     private boolean isScaled = false;
 
     public Interactor () {
@@ -89,6 +90,10 @@ public abstract class Interactor implements Renderable, Updatable, MouseEventInt
         return this.interactable;
     }
 
+    public boolean isDraggable () {
+        return this.isDraggable;
+    }
+
     public boolean isScaled () {
         return this.isScaled;
     }
@@ -124,5 +129,9 @@ public abstract class Interactor implements Renderable, Updatable, MouseEventInt
 
     public void setScaled (boolean _scaled) {
         this.isScaled = _scaled;
+    }
+
+    public void setDraggable (boolean _draggable) {
+        this.isDraggable = _draggable;
     }
 }
