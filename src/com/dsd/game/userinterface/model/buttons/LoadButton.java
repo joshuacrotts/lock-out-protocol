@@ -1,12 +1,10 @@
 package com.dsd.game.userinterface.model.buttons;
 
 import com.dsd.game.Game;
-import com.dsd.game.GameState;
 import com.dsd.game.controller.LanguageController;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MouseEventInterface;
 import com.dsd.game.userinterface.Screen;
-import com.revivedstandards.main.StandardDraw;
 import java.awt.Color;
 import java.awt.Graphics2D;
 

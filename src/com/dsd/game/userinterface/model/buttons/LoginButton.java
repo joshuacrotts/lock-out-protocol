@@ -10,7 +10,6 @@ import com.dsd.game.userinterface.MouseEventInterface;
 import com.dsd.game.userinterface.Screen;
 import com.dsd.game.userinterface.model.EmailTextFieldModel;
 import com.dsd.game.userinterface.model.PasswordTextFieldModel;
-import com.revivedstandards.main.StandardDraw;
 import java.awt.Color;
 import java.awt.Graphics2D;
 

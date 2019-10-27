@@ -1,6 +1,5 @@
 package com.dsd.game;
 
-import com.dsd.game.api.TranslatorAPI;
 import com.dsd.game.controller.AudioBoxController;
 import com.dsd.game.controller.CollisionHandlerController;
 import com.dsd.game.controller.CursorController;

@@ -6,7 +6,6 @@ import com.revivedstandards.model.StandardGameObject;
 import com.revivedstandards.model.StandardID;
 import com.revivedstandards.view.Renderable;
 import com.revivedstandards.view.Updatable;
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 

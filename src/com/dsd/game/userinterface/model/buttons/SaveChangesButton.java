@@ -7,7 +7,6 @@ import com.dsd.game.commands.IncreaseResolutionCommand;
 import com.dsd.game.controller.LanguageController;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MouseEventInterface;
-import com.revivedstandards.main.StandardDraw;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;

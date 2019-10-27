@@ -5,7 +5,6 @@ import com.dsd.game.controller.LanguageController;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.weapons.Gun;
 import com.dsd.game.userinterface.Screen;
-import com.revivedstandards.main.StandardDraw;
 import java.awt.Color;
 import java.awt.Graphics2D;
 

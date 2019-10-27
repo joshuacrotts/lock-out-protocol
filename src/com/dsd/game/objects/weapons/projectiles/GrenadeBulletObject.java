@@ -9,7 +9,6 @@ import com.revivedstandards.model.StandardAudioType;
 import com.revivedstandards.util.StdOps;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import org.apache.commons.math3.util.FastMath;
 
 /**
  * Grenade launcher bullet game object.
