@@ -4,6 +4,7 @@ import com.dsd.game.Game;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.Screen;
 import com.dsd.game.userinterface.model.Interactor;
+import com.dsd.game.userinterface.model.labels.SFXLabel;
 import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.model.StandardAudioType;
 import java.awt.Color;
@@ -26,61 +27,58 @@ public class SoundEffectVolumeControl extends Interactor {
     //  Buttons to increase/decrease the sfx volume.
     private final IncreaseVolumeButton incVolumeButton;
     private final DecreaseVolumeButton decVolumeButton;
+    private final SFXLabel sfxLabel;
 
     //  SFX Button position offsets.
     private static final int BUTTON_X_OFFSET = 200;
     private static final int BUTTON_Y_OFFSET = 0;
-
+    
     private static float volume = 1.0f;
-
+    
     public SoundEffectVolumeControl (Game _game, MenuScreen _menuScreen) {
         super(0, 0, 0, 0);
-
+        
         this.game = _game;
         this.menuScreen = _menuScreen;
-
+        
         this.incVolumeButton = new IncreaseVolumeButton(_game, _menuScreen, this,
                 SoundEffectVolumeControl.BUTTON_X_OFFSET, SoundEffectVolumeControl.BUTTON_Y_OFFSET);
         this.decVolumeButton = new DecreaseVolumeButton(_game, _menuScreen, this,
                 SoundEffectVolumeControl.BUTTON_X_OFFSET, SoundEffectVolumeControl.BUTTON_Y_OFFSET);
-
+        this.sfxLabel = new SFXLabel(this, _menuScreen);
+        
         this.menuScreen.addInteractor(this.incVolumeButton);
         this.menuScreen.addInteractor(this.decVolumeButton);
-
+        this.menuScreen.addInteractor(this.sfxLabel);
         this.initializeVolumeBars();
     }
-
+    
     @Override
     public void tick () {
         if (!this.game.isMenu() || !this.menuScreen.isOnVolume()) {
             return;
         }
-
+        
         this.initializeVolumeBars();
-
-        this.incVolumeButton.tick();
-        this.decVolumeButton.tick();
     }
-
+    
     @Override
     public void render (Graphics2D _g2) {
         if (!this.game.isMenu() || !this.menuScreen.isOnVolume()) {
             return;
         }
-
-        this.incVolumeButton.render(_g2);
-        this.decVolumeButton.render(_g2);
+        
         this.renderVolumeBars(_g2);
     }
-
+    
     @Override
     public void onMouseClick () {
     }
-
+    
     @Override
     public void onMouseEnterHover () {
     }
-
+    
     @Override
     public void onMouseExitHover () {
     }
@@ -117,11 +115,11 @@ public class SoundEffectVolumeControl extends Interactor {
      */
     private void initializeVolumeBars () {
         this.volumeBars = new Rectangle[10];
-
+        
         for (int i = 0, xOffset = -120 ; i < this.volumeBars.length ; i++, xOffset += 30) {
             this.volumeBars[i] = new Rectangle(Screen.gameHalfWidth + xOffset, Screen.gameHalfHeight, 20, 60);
         }
-
+        
     }
 
     /**
@@ -131,16 +129,23 @@ public class SoundEffectVolumeControl extends Interactor {
      */
     private void renderVolumeBars (Graphics2D _g2) {
         _g2.setColor(Color.BLUE);
-
+        
         for (int i = 0 ; i < this.volumeBars.length ; i++) {
             if ((i + 1) <= Math.round(volume * 10)) {
                 _g2.fill(this.volumeBars[i]);
             }
             else {
                 _g2.draw(this.volumeBars[i]);
-
+                
             }
         }
     }
-
+    
+    public int getLeftButtonX () {
+        return this.decVolumeButton.getX();
+    }
+    
+    public int getLeftButtonY () {
+        return this.decVolumeButton.getY();
+    }
 }

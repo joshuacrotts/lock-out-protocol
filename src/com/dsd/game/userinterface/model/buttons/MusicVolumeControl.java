@@ -4,6 +4,7 @@ import com.dsd.game.Game;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.Screen;
 import com.dsd.game.userinterface.model.Interactor;
+import com.dsd.game.userinterface.model.labels.MusicLabel;
 import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.model.StandardAudioType;
 import java.awt.Color;
@@ -26,6 +27,7 @@ public class MusicVolumeControl extends Interactor {
     //  Buttons to increase/decrease the sfx volume.
     private final IncreaseVolumeButton incVolumeButton;
     private final DecreaseVolumeButton decVolumeButton;
+    private final MusicLabel volumeControlLabel;
 
     //  Music Button position offsets.
     private static final int BUTTON_X_OFFSET = 200;
@@ -43,9 +45,11 @@ public class MusicVolumeControl extends Interactor {
                 MusicVolumeControl.BUTTON_X_OFFSET, MusicVolumeControl.BUTTON_Y_OFFSET);
         this.decVolumeButton = new DecreaseVolumeButton(_game, _menuScreen, this,
                 MusicVolumeControl.BUTTON_X_OFFSET, MusicVolumeControl.BUTTON_Y_OFFSET);
+        this.volumeControlLabel = new MusicLabel(this, this.menuScreen);
 
         this.menuScreen.addInteractor(this.incVolumeButton);
         this.menuScreen.addInteractor(this.decVolumeButton);
+        this.menuScreen.addInteractor(this.volumeControlLabel);
 
         this.initializeVolumeBars();
     }
@@ -57,9 +61,6 @@ public class MusicVolumeControl extends Interactor {
         }
 
         this.initializeVolumeBars();
-
-        this.incVolumeButton.tick();
-        this.decVolumeButton.tick();
     }
 
     @Override
@@ -68,8 +69,6 @@ public class MusicVolumeControl extends Interactor {
             return;
         }
 
-        this.incVolumeButton.render(_g2);
-        this.decVolumeButton.render(_g2);
         this.renderVolumeBars(_g2);
     }
 
@@ -124,6 +123,14 @@ public class MusicVolumeControl extends Interactor {
 
             }
         }
+    }
+
+    public int getLeftButtonX () {
+        return this.decVolumeButton.getX();
+    }
+
+    public int getLeftButtonY () {
+        return this.decVolumeButton.getY();
     }
 
 }
