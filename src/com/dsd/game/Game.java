@@ -44,7 +44,7 @@ public class Game extends StandardGame {
 
     //  Miscellaneous reference variables
     private final StandardCollisionHandler sch;
-    private StandardCamera sc;
+    private final StandardCamera sc;
 
     //  Database references
     private final TranslatorDatabase translatorDatabase;
@@ -91,7 +91,6 @@ public class Game extends StandardGame {
          * Initialize the database translator
          */
         this.translatorDatabase = new TranslatorDatabase(this);
-
         this.translatorDatabase.loadFromSettings();
 
         //  Initialize the sound controller

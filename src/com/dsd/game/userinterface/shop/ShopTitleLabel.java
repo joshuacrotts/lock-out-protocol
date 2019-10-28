@@ -1,10 +1,10 @@
 package com.dsd.game.userinterface.shop;
 
-import com.dsd.game.userinterface.model.labels.*;
 import com.dsd.game.Game;
 import com.dsd.game.controller.LanguageController;
 import com.dsd.game.userinterface.Screen;
 import com.dsd.game.userinterface.ShopScreen;
+import com.dsd.game.userinterface.model.labels.*;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
