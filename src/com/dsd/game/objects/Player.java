@@ -9,7 +9,6 @@ import com.dsd.game.commands.IncrementWeaponCommand;
 import com.dsd.game.commands.MoveBackwardCommand;
 import com.dsd.game.commands.MoveForwardCommand;
 import com.dsd.game.commands.ReloadCommand;
-import com.dsd.game.commands.SprintCommand;
 import com.dsd.game.controller.DebugController;
 import com.dsd.game.database.SerializableType;
 import com.dsd.game.objects.enums.PlayerState;
@@ -298,7 +297,6 @@ public class Player extends Entity implements DeathListener, SerializableObject 
         IncrementWeaponCommand incWeaponCommand = new IncrementWeaponCommand(this.getGame(), this);
         DecrementWeaponCommand decWeaponCommand = new DecrementWeaponCommand(this.getGame(), this);
         DebugCommand debugCommand = new DebugCommand(this.getGame());
-        SprintCommand sprintCommand = new SprintCommand(this.getGame(), this);
     }
 
 //============================== GETTERS ================================//
