@@ -32,7 +32,7 @@ public class TextFieldView implements Renderable, Updatable {
 
     //  Font size.
     private static final int FONT_SIZE = 30;
-    private static final double FONT_SIZE_FACTOR = 1.2;
+    private static final double FONT_SIZE_FACTOR = 1.15;
     private static final Font font = StdOps.initFont("src/resources/fonts/chargen.ttf", FONT_SIZE);
 
     //  Text position offsets.

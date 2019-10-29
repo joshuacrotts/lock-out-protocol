@@ -27,6 +27,8 @@ public class TextFieldModel extends Interactor implements MouseEventInterface {
     private final int FIELD_HEIGHT = 50;
     private boolean fieldActive;
     private boolean visible = true;
+
+    //  Letter Input Listener along with the string for input.
     private final LetterInputListener inputListener;
     private final StringBuilder string;
 
