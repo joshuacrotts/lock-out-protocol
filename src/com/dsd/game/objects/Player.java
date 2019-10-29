@@ -156,7 +156,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
 
         StringBuilder playerDetails = new StringBuilder();
 
-        playerDetails.append(this.getPlayerSex().equals("male") ? 1 : 0);
+        playerDetails.append(this.getPlayerSex().equals("male") ? 1 : 0).append(";");
         playerDetails.append((int) this.getX()).append(";");
         playerDetails.append((int) this.getY()).append(";");
         playerDetails.append((int) this.getMoney()).append(";");

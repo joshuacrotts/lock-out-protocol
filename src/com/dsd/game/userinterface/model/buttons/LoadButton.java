@@ -1,6 +1,8 @@
 package com.dsd.game.userinterface.model.buttons;
 
 import com.dsd.game.Game;
+import com.dsd.game.GameState;
+import com.dsd.game.controller.DebugController;
 import com.dsd.game.controller.LanguageController;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MouseEventInterface;
@@ -28,7 +30,7 @@ public class LoadButton extends MenuButton implements MouseEventInterface {
     private static final int BUTTON_WIDTH = 300;
     private static final int BUTTON_HEIGHT = 82;
 
-    public LoadButton (Game _game, MenuScreen _menuScreen) {
+    public LoadButton(Game _game, MenuScreen _menuScreen) {
         super(Screen.gameHalfWidth - BUTTON_X_OFFSET,
                 Screen.gameHalfHeight - BUTTON_Y_OFFSET,
                 BUTTON_WIDTH, BUTTON_HEIGHT, LanguageController.translate("LOAD GAME"), _game, _menuScreen);
@@ -37,7 +39,7 @@ public class LoadButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (!this.getGame().isMenu()
                 || !this.getMenuScreen().isOnMainMenu()) {
             return;
@@ -47,7 +49,7 @@ public class LoadButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.getGame().isMenu()
                 || !this.getMenuScreen().isOnMainMenu()) {
             return;
@@ -60,22 +62,38 @@ public class LoadButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         if (!this.getGame().isMenu()
                 || !this.getMenuScreen().isOnMainMenu()) {
             return;
         }
 
         super.onMouseClick();
+        
         /**
          * Once the user presses the load button, it will contact the database,
          * and update the game information.
+         *
+         * If there is nothing to load (or there is no account present), we just
+         * return.
          */
-        this.getGame().loadFromDatabase();
+        if (!this.getGame().loadFromDatabase()) {
+            return;
+        }
+
+        //  If the user has debug mode enabled to skip the wave screen, go ahead
+        //  and toggle it.
+        if (!DebugController.DEBUG_MODE) {
+            this.getGame().setPreambleState();
+        } else {
+            this.getGame().setGameState(GameState.RUNNING);
+        }
+
+        this.getGame().uponPlay();
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         if (!this.getGame().isMenu()
                 || !this.getMenuScreen().isOnMainMenu()) {
             return;
@@ -84,7 +102,7 @@ public class LoadButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         if (!this.getGame().isMenu()
                 || !this.getMenuScreen().isOnMainMenu()) {
             return;

@@ -1,7 +1,5 @@
 package com.dsd.game;
 
-import com.dsd.game.controller.LanguageController;
-
 /**
  * This is the main class for actually creating a Game object and running the
  * game.
