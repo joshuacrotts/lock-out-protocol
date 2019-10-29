@@ -24,41 +24,69 @@ import com.dsd.game.Game;
  */
 public class TranslatorDatabase {
 
-    private final Game game;
-    private static PersistentDatabase database;
+    //  Miscellaneous reference variables.
+    private static RemoteDatabase remoteDatabase;
+    private static SettingsDatabase settingsDatabase;
 
     public TranslatorDatabase (Game _game) {
-        this.game = _game;
-        TranslatorDatabase.database = new PersistentDatabase(this.game);
+        TranslatorDatabase.remoteDatabase = new PersistentDatabase(_game);
+        TranslatorDatabase.settingsDatabase = new SettingsDatabase(_game);
     }
 
     /**
      * Save the Game state, the level state, the player's health, money, current
      * inventory.
+     *
+     * @return true if the save to the database was successful, false otherwise.
      */
-    public void save () {
-        TranslatorDatabase.database.save();
+    public boolean saveToDatabase () {
+        return TranslatorDatabase.remoteDatabase.save();
     }
 
     /**
      * Load the game state, level state, player health, money and current
      * inventory
+     *
+     * @return true if the load from the database was successful, false
+     * otherwise.
      */
-    public void load () {
-        TranslatorDatabase.database.load();
+    public boolean loadFromDatabase () {
+        return TranslatorDatabase.remoteDatabase.load();
+    }
+
+    /**
+     * Contacts the local settings file and saves the preferred resolution, and
+     * language preferences.
+     *
+     * @return true if successful save, false otherwise.
+     */
+    public boolean saveToSettings () {
+        return settingsDatabase.save();
+    }
+
+    /**
+     * Contacts the local settings file and loads the preferred resolution, and
+     * language preferences.
+     *
+     * @return true if successful load, false otherwise.
+     */
+    public boolean loadFromSettings () {
+        return settingsDatabase.load();
     }
 
     /**
      * Contacts the remote SQL database to authenticate a user's password and
-     * username.
+     * username. It uses a RemoteDatabase object instead of a PersistentDB
+     * object as the parent superclass because all PersistentDB classes should
+     * implement the RemoteDatabase interface.
      *
      * @param _email
      * @param _password
      * @return
      */
     public static AccountStatus authenticateUser (String _email, String _password) {
-        if (database.connect("users")) {
-            return database.userAuthenticated(_email, _password);
+        if (remoteDatabase.connect("users")) {
+            return remoteDatabase.userAuthenticated(_email, _password);
         }
 
         throw new IllegalStateException("Could not connect to db!");
@@ -73,8 +101,8 @@ public class TranslatorDatabase {
      * @return
      */
     public static AccountStatus addUser (String _email, String _password) {
-        if (database.connect("users")) {
-            return database.addUser(_email, _password);
+        if (remoteDatabase.connect("users")) {
+            return remoteDatabase.addUser(_email, _password);
         }
 
         throw new IllegalStateException("Could not connect to db!");

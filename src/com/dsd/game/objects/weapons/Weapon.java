@@ -1,6 +1,7 @@
 package com.dsd.game.objects.weapons;
 
 import com.dsd.game.SerializableObject;
+import com.dsd.game.database.SerializableType;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.weapons.enums.WeaponState;
 import com.dsd.game.objects.weapons.enums.WeaponType;
@@ -23,12 +24,9 @@ public abstract class Weapon implements SerializableObject {
     private StandardAnimatorController walkWeaponFrames;
     private StandardAnimatorController attackWeaponFrames;
     private BufferedImage weaponIcon;
-
-    //  State of the weapon (when applicable), and the sfx
-    //  it makes when attacking.
+    //  State of the weapon (when applicable), and the sfx it makes when attacking.
     private WeaponState weaponState;
     private String attackSFXPath;
-
     //  Variables to determine how long to wait in between attacks.
     private long delay = 0;
     private boolean ready = true;
@@ -62,9 +60,9 @@ public abstract class Weapon implements SerializableObject {
     public abstract void loadAssets (Player _player);
 
     @Override
-    public String createObject () {
+    public String createObject (SerializableType _id) {
         StringBuilder object = new StringBuilder();
-        object.append("weapon:").append("\n");
+        object.append("weapon=").append("\n");
         object.append("type=").append(this.weaponType).append("\n");
         object.append("gun=").append(this instanceof Gun).append("\n");
         if (this instanceof Gun) {
@@ -76,18 +74,17 @@ public abstract class Weapon implements SerializableObject {
         return object.toString();
     }
 
-    @Override
-    public SerializableObject readObject (SerializableObject _obj) {
+    public void readObject () {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void updateObject (SerializableObject _obj) {
+    public void updateObject (SerializableType _id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void destroyObject (SerializableObject _obj) {
+    public void destroyObject (SerializableType _id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

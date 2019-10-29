@@ -1,10 +1,11 @@
 package com.dsd.game.userinterface.model.buttons;
 
 import com.dsd.game.Game;
+import com.dsd.game.controller.LanguageController;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MenuState;
 import com.dsd.game.userinterface.MouseEventInterface;
-import com.revivedstandards.main.StandardDraw;
+import com.dsd.game.userinterface.Screen;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
@@ -18,22 +19,22 @@ import java.awt.Graphics2D;
  */
 public class HelpOrOptionsButton extends MenuButton implements MouseEventInterface {
 
-    private static final int BUTTON_X_OFFSET = 0;
-    private static final int BUTTON_Y_OFFSET = 120;
-    private static final int TEXT_X_OFFSET = 60;
+    private static final int BUTTON_X_OFFSET = 185;
+    private static final int BUTTON_Y_OFFSET = -10;
+    private static final int TEXT_X_OFFSET = 90;
     private static final int TEXT_Y_OFFSET = 45;
     private static final int BUTTON_WIDTH = 300;
     private static final int BUTTON_HEIGHT = 82;
 
     public HelpOrOptionsButton (Game _game, MenuScreen _menuScreen) {
         super(BUTTON_X_OFFSET, _game.getGameHeight() - BUTTON_Y_OFFSET,
-                BUTTON_WIDTH, BUTTON_HEIGHT, "HELP/OPTIONS", _game, _menuScreen);
+                BUTTON_WIDTH, BUTTON_HEIGHT, LanguageController.translate("SETTINGS"), _game, _menuScreen);
     }
 
     @Override
     public void tick () {
-        this.setX(BUTTON_X_OFFSET);
-        this.setY(this.getGame().getGameHeight() - BUTTON_Y_OFFSET);
+        this.setX(Screen.gameHalfWidth + BUTTON_X_OFFSET);
+        this.setY(Screen.gameHalfHeight - BUTTON_Y_OFFSET);
     }
 
     @Override
@@ -43,8 +44,9 @@ public class HelpOrOptionsButton extends MenuButton implements MouseEventInterfa
         }
 
         super.render(_g2);
-        StandardDraw.text(this.getText(), this.getX() + TEXT_X_OFFSET,
-                this.getY() + TEXT_Y_OFFSET, this.font, 24f, Color.WHITE);
+        _g2.setFont(this.font);
+        _g2.setColor(Color.WHITE);
+        _g2.drawString(this.getText(), this.getX() + TEXT_X_OFFSET, this.getY() + TEXT_Y_OFFSET);
     }
 
     @Override

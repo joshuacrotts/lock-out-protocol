@@ -1,9 +1,10 @@
 package com.dsd.game.userinterface.shop;
 
-import com.dsd.game.userinterface.model.labels.*;
 import com.dsd.game.Game;
+import com.dsd.game.controller.LanguageController;
 import com.dsd.game.userinterface.Screen;
 import com.dsd.game.userinterface.ShopScreen;
+import com.dsd.game.userinterface.model.labels.*;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
@@ -23,7 +24,7 @@ public class ShopTitleLabel extends StandardLabel {
 
     public ShopTitleLabel (Game _game, ShopScreen _shopScreen) {
         super(Screen.gameHalfWidth - ShopTitleLabel.TITLE_X_OFFSET,
-                ShopTitleLabel.TITLE_Y_OFFSET, "SHOP",
+                ShopTitleLabel.TITLE_Y_OFFSET, LanguageController.translate("SHOP"),
                 "src/resources/fonts/chargen.ttf", 64f);
 
         this.game = _game;

@@ -2,7 +2,9 @@ package com.dsd.game.objects.items;
 
 import com.dsd.game.util.Utilities;
 import com.revivedstandards.controller.StandardAnimatorController;
+import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
+import com.revivedstandards.model.StandardAudioType;
 import com.revivedstandards.model.StandardGameObject;
 import com.revivedstandards.model.StandardID;
 import com.revivedstandards.util.StdOps;
@@ -22,17 +24,23 @@ public class Coin extends StandardGameObject {
 
     //  Handler for the coins
     private final StandardCollisionHandler parentContainer;
+
     //  Frames of animation for the coins
     private static final BufferedImage[] coinOneFrames;
     private static final BufferedImage[] coinTwoFrames;
+
     //  Randomness for the scatter of the coin
     //  This the value at which the coins can scatter
     private final double SCATTER_RANGE = 0.99;
+
     //  Variables for changing the speed of the coins as they disperse
-    private final double VEL_LOWER_BOUND = 0.5;
-    private final double VEL_UPPER_BOUND = 1.5;
+    private static final double VEL_LOWER_BOUND = 0.5;
+    private static final double VEL_UPPER_BOUND = 1.5;
     private final int COIN_FPS = 5;
     private int value = 0;
+
+    //  Max number of sound effects for coins.
+    private static final int MAX_COIN_SFX = 3;
 
     /**
      * The _small, _medium, and _large parameters should be sequential, and go
@@ -51,10 +59,10 @@ public class Coin extends StandardGameObject {
         super(_x, _y, StandardID.Coin);
         this.parentContainer = _sch;
         this.generateCoinType(_small, _medium, _large);
-        this.setVelX(StdOps.randBounds(-VEL_UPPER_BOUND, -VEL_LOWER_BOUND,
-                VEL_LOWER_BOUND, VEL_UPPER_BOUND));
-        this.setVelY(StdOps.randBounds(-VEL_UPPER_BOUND, -VEL_LOWER_BOUND,
-                VEL_LOWER_BOUND, VEL_UPPER_BOUND));
+        this.setVelX(StdOps.randBounds(-Coin.VEL_UPPER_BOUND, -Coin.VEL_LOWER_BOUND,
+                Coin.VEL_LOWER_BOUND, Coin.VEL_UPPER_BOUND));
+        this.setVelY(StdOps.randBounds(-Coin.VEL_UPPER_BOUND, -Coin.VEL_LOWER_BOUND,
+                Coin.VEL_LOWER_BOUND, Coin.VEL_UPPER_BOUND));
     }
 
     @Override
@@ -77,11 +85,19 @@ public class Coin extends StandardGameObject {
     }
 
     /**
+     * Plays a random coin collection sfx.
+     */
+    public void playCoinSFX () {
+        StandardAudioController.play("src/resources/audio/sfx/coin"
+                + ((int) (Math.random() * Coin.MAX_COIN_SFX)) + ".wav", StandardAudioType.SFX);
+    }
+
+    /**
      * Slows the velocity of the coins gradually.
      */
     private void slowVelocities () {
-        this.setVelX(this.getVelX() * SCATTER_RANGE);
-        this.setVelY(this.getVelY() * SCATTER_RANGE);
+        this.setVelX(this.getVelX() * this.SCATTER_RANGE);
+        this.setVelY(this.getVelY() * this.SCATTER_RANGE);
     }
 
     /**
@@ -94,11 +110,11 @@ public class Coin extends StandardGameObject {
     private void generateCoinType (double _small, double _medium, double _large) {
         int coin = StdOps.rand(0, 100);
         if (coin < _small * 100) {
-            this.setAnimation(new StandardAnimatorController(this, coinOneFrames, COIN_FPS));
+            this.setAnimation(new StandardAnimatorController(this, Coin.coinOneFrames, this.COIN_FPS));
             this.value = 1;
         }
         else {
-            this.setAnimation(new StandardAnimatorController(this, coinTwoFrames, COIN_FPS));
+            this.setAnimation(new StandardAnimatorController(this, Coin.coinTwoFrames, this.COIN_FPS));
             this.value = 5;
         }
     }

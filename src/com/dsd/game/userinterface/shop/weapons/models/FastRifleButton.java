@@ -57,23 +57,19 @@ public class FastRifleButton extends ShopButton {
         if (!this.getGame().isShop()) {
             return;
         }
-        //  If we have enough money...
-        if (this.getGame().getPlayer().getMoney() > this.getPrice()) {
 
-            super.onMouseClick();
+        Gun _weapon = (Gun) this.getInventory().hasWeapon(WeaponType.FAST_RIFLE);
 
-            Gun _weapon = (Gun) this.getInventory().hasWeapon(WeaponType.FAST_RIFLE);
-
-            //  If we don't have the weapon, add it to the user's inventory.
-            if (_weapon == null) {
-
-                this.getInventory().addWeapon(new FastRifle(this.getGame(),
-                        this.getGame().getPlayer(), this.getGame().getPlayer().getHandler()));
-            }
-            //  Otherwise, add to the ammunition.
-            else {
-                _weapon.setTotalAmmo(_weapon.getTotalAmmo() + _weapon.getMagazineCapacity());
-            }
+        //  If we don't have the weapon, add it to the user's inventory.
+        if (_weapon == null && this.getGame().getPlayer().getMoney() >= this.getPrice()) {
+            this.getGame().getPlayer().setMoney(this.getGame().getPlayer().getMoney() - this.getPrice());
+            this.getInventory().addWeapon(new FastRifle(this.getGame(),
+                    this.getGame().getPlayer(), this.getGame().getPlayer().getHandler()));
+        }
+        //  Otherwise, add to the ammunition.
+        else if (this.getGame().getPlayer().getMoney() >= this.getPricePerMagazine()) {
+            this.getGame().getPlayer().setMoney(this.getGame().getPlayer().getMoney() - this.getPricePerMagazine());
+            _weapon.setTotalAmmo(_weapon.getTotalAmmo() + _weapon.getMagazineCapacity());
         }
     }
 

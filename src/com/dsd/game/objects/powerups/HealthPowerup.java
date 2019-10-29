@@ -7,6 +7,7 @@ import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.model.StandardAnimation;
+import com.revivedstandards.model.StandardAudioType;
 import com.revivedstandards.model.StandardGameObject;
 import com.revivedstandards.model.StandardID;
 import java.awt.Graphics2D;
@@ -23,6 +24,7 @@ public class HealthPowerup extends StandardGameObject {
     private final Player player;
     private final StandardCollisionHandler parentContainer;
     private static final BufferedImage[] HEALTH_FRAMES;
+
     private static final int HEALTH_FPS = 10;
     private static final int HEALTH_INCREASE = 25;
 
@@ -42,7 +44,7 @@ public class HealthPowerup extends StandardGameObject {
             this.getAnimationController().tick();
         }
         else {
-            StandardAudioController.play("src/resources/audio/sfx/restore_health.wav");
+            StandardAudioController.play("src/resources/audio/sfx/restore_health.wav", StandardAudioType.SFX);
             this.parentContainer.removeEntity(this);
         }
     }

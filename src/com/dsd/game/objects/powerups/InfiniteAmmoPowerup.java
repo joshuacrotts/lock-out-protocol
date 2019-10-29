@@ -13,6 +13,7 @@ import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.controller.StandardFadeController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.main.StandardCamera;
+import com.revivedstandards.model.StandardAudioType;
 import com.revivedstandards.model.StandardGameObject;
 import com.revivedstandards.model.StandardID;
 import java.awt.BasicStroke;
@@ -49,7 +50,6 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
 
     //  Timer for how long the powerup is active (in milliseconds)
     private int timer = 10000;
-
     private boolean isActivated = false;
     private boolean isCollected = false;
 
@@ -59,13 +59,10 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
         this.camera = _game.getCamera();
         this.player = _game.getPlayer();
         this.parentContainer = _sch;
-
         StandardAnimatorController berserkAnimation = new StandardAnimatorController(this, INFINITE_AMMO_FRAMES, INF_AMMO_FPS);
-
         this.setAnimation(berserkAnimation);
         this.setWidth(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getWidth());
         this.setHeight(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getHeight());
-
         this.color = new StandardFadeController(Color.blue, Color.green, 0.05f);
     }
 
@@ -135,7 +132,7 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
             return;
         }
 
-        StandardAudioController.play("src/resources/audio/sfx/pickup.wav");
+        StandardAudioController.play("src/resources/audio/sfx/pickup.wav", StandardAudioType.SFX);
     }
 
     /**
@@ -167,11 +164,11 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
         INFINITE_AMMO_FRAMES = Utilities.loadFrames("src/resources/img/items/drops/infammo/", 27);
     }
 
-    //
-    //  Private class for the infinite ammo. Once the player picks up the
-    //  powerup, the timer starts and continues until x milliseconds have
-    //  passed, then deactivates the powerup.
-    //
+    /**
+     * Private class for the infinite ammo. Once the player picks up the
+     * powerup, the timer starts and continues until x milliseconds have passed,
+     * then deactivates the powerup.
+     */
     private class InfiniteAmmoTimer extends TimerTask {
 
         private final InfiniteAmmoPowerup powerup;

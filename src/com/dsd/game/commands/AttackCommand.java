@@ -12,6 +12,7 @@ import com.revivedstandards.commands.Command;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
+import com.revivedstandards.model.StandardAudioType;
 import java.awt.event.KeyEvent;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -73,12 +74,13 @@ public class AttackCommand extends Command implements TimerInterface {
                     break;
             }
 
-            //  Once the weapon is used, we need to toggle it to false so the
-            //  timer can resume.
+            /**
+             * Once the weapon is used, we need to toggle it to false so the
+             * timer can resume.
+             */
             weapon.setReady(false);
             AttackCommand.hasTimer = false;
         }
-
         /**
          * If there's not already a delay present and the weapon isn't active,
          * we can create one. We need to instantiate a new timer in the event
@@ -113,7 +115,7 @@ public class AttackCommand extends Command implements TimerInterface {
     private void gunAttack (Gun _gun) {
         if (!_gun.isReloading()) {
             if (_gun.isWeaponEmpty()) {
-                StandardAudioController.play(_gun.getEmptySFXPath());
+                StandardAudioController.play(_gun.getEmptySFXPath(), StandardAudioType.SFX);
                 return;
             }
 
@@ -123,7 +125,7 @@ public class AttackCommand extends Command implements TimerInterface {
              */
             this.toggleAttackAnimation();
             _gun.shoot();
-            StandardAudioController.play(_gun.getSFXPath());
+            StandardAudioController.play(_gun.getSFXPath(), StandardAudioType.SFX);
         }
     }
 
@@ -133,7 +135,7 @@ public class AttackCommand extends Command implements TimerInterface {
      * @param _knife
      */
     private void knifeAttack (Weapon _knife) {
-        StandardAudioController.play(_knife.getSFXPath());
+        StandardAudioController.play(_knife.getSFXPath(), StandardAudioType.SFX);
         this.toggleAttackAnimation();
     }
 

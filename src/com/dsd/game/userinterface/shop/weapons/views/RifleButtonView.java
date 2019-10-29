@@ -30,10 +30,10 @@ public class RifleButtonView implements Updatable, Renderable {
     public void tick () {
         //  Only update the text if the user has the rifle in their inventory.
         if (this.parentButton.getGame().getPlayer().getInventory().hasWeapon(WeaponType.RIFLE) == null) {
-            this.text.setText("AK-47 $250");
+            this.text.setText("AK-47 $" + this.parentButton.getPrice());
         }
         else {
-            this.text.setText("AK-47 AMMO (31/$30)");
+            this.text.setText("AK-47 AMMO (31/$" + this.parentButton.getPricePerMagazine() + ")");
         }
         this.text.tick();
 

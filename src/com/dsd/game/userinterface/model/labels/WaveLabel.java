@@ -1,6 +1,8 @@
 package com.dsd.game.userinterface.model.labels;
 
 import com.dsd.game.Game;
+import com.dsd.game.controller.LanguageController;
+import com.dsd.game.util.Utilities;
 import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.util.StdOps;
 import java.awt.Color;
@@ -9,7 +11,9 @@ import java.awt.Graphics2D;
 /**
  * Label that shows what wave we're about to transition to.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class WaveLabel extends StandardLabel {
 
@@ -18,7 +22,7 @@ public class WaveLabel extends StandardLabel {
 
     public WaveLabel (Game _game, int _waveNumber) {
         super((int) _game.getCamera().getX(), (int) _game.getCamera().getY(),
-                "Wave " + _waveNumber, "src/resources/fonts/chargen.ttf", 32f);
+                LanguageController.translate("Wave ") + _waveNumber, "src/resources/fonts/chargen.ttf", 32f);
         this.camera = _game.getCamera();
     }
 
@@ -39,6 +43,6 @@ public class WaveLabel extends StandardLabel {
     }
 
     public void setWaveNumber (int _waveNumber) {
-        this.setText("Wave " + _waveNumber);
+        this.setText(LanguageController.translate("Wave ") + Utilities.toRoman(_waveNumber));
     }
 }

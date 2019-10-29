@@ -66,9 +66,11 @@ public class StandardInteractorHandler extends StandardHandler implements MouseL
             int scaleXOffset = 0;
             int scaleYOffset = 0;
 
-            //  If the interactor is on the main game screen (where it will be
-            //  scaled with the main camera, we apply an offset to its bounds
-            //  so the mouse-over detection can be called.
+            /**
+             * If the interactor is on the main game screen (where it will be
+             * scaled with the main camera, we apply an offset to its bounds so
+             * the mouse-over detection can be called.
+             */
             if (inter.isScaled()) {
                 scaleXOffset = (int) this.game.getCamera().getX() - Screen.gameHalfWidth;
                 scaleYOffset = (int) this.game.getCamera().getY() - Screen.gameHalfHeight;
@@ -78,7 +80,6 @@ public class StandardInteractorHandler extends StandardHandler implements MouseL
                     inter.getX() - scaleXOffset, inter.getY() - scaleYOffset, inter.getWidth(), inter.getHeight())) {
 
                 inter.onMouseClick();
-
             }
         }
     }
@@ -96,9 +97,11 @@ public class StandardInteractorHandler extends StandardHandler implements MouseL
             int scaleXOffset = 0;
             int scaleYOffset = 0;
 
-            //  If the interactor is on the main game screen (where it will be
-            //  scaled with the main camera, we apply an offset to its bounds
-            //  so the mouse-over detection can be called.
+            /**
+             * If the interactor is on the main game screen (where it will be
+             * scaled with the main camera, we apply an offset to its bounds so
+             * the mouse-over detection can be called.
+             */
             if (inter.isScaled()) {
                 scaleXOffset = (int) this.game.getCamera().getX() - Screen.gameHalfWidth;
                 scaleYOffset = (int) this.game.getCamera().getY() - Screen.gameHalfHeight;
@@ -115,6 +118,14 @@ public class StandardInteractorHandler extends StandardHandler implements MouseL
 
     @Override
     public void mouseDragged (MouseEvent e) {
+        for (int i = 0 ; i < interactors.size() ; i++) {
+            Interactor inter = this.interactors.get(i);
+            if (!inter.isDraggable()) {
+                continue;
+            }
+
+            inter.onMouseClick();
+        }
     }
 
     @Override

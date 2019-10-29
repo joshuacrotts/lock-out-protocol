@@ -1,9 +1,9 @@
 package com.dsd.game.userinterface;
 
 import com.dsd.game.Game;
-import com.dsd.game.userinterface.shop.enums.ShopState;
 import com.dsd.game.commands.ShopCommand;
 import com.dsd.game.userinterface.shop.ShopTitleLabel;
+import com.dsd.game.userinterface.shop.enums.ShopState;
 import com.dsd.game.userinterface.shop.weapons.models.FastRifleButton;
 import com.dsd.game.userinterface.shop.weapons.models.GrenadeLauncherButton;
 import com.dsd.game.userinterface.shop.weapons.models.PistolButton;

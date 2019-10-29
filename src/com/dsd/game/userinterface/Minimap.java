@@ -90,7 +90,7 @@ public class Minimap extends Interactor {
                         this.drawObject(_g2, obj, StandardDraw.PINK);
                         break;
                     case Monster6:
-                        this.drawObject(_g2, obj, StandardDraw.RED_VIOLET);
+                        this.drawObject(_g2, obj, StandardDraw.CRIMSON);
                         break;
                 }
             }
@@ -197,5 +197,4 @@ public class Minimap extends Interactor {
     @Override
     public void onMouseExitHover () {
     }
-
 }

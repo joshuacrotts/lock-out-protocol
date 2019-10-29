@@ -52,7 +52,6 @@ public class MenuView implements Renderable, Updatable {
     public void tick () {
         this.shadowCenter = new Point2D.Float(this.shadowXPos, this.shadowYPos);
         this.shadowPaint = new RadialGradientPaint(this.shadowCenter, this.shadowRadius, this.shadowDistance, this.colors);
-
         this.updateShadowPosition();
         this.checkShadowBounds();
     }
@@ -86,7 +85,6 @@ public class MenuView implements Renderable, Updatable {
         if (this.shadowXPos <= 0 || this.shadowXPos > this.game.getGameWidth()) {
             this.shadowVelX = -this.shadowVelX;
         }
-
         if (this.shadowYPos <= 0 || this.shadowYPos > this.game.getGameHeight()) {
             this.shadowVelY = -this.shadowVelY;
         }

@@ -5,6 +5,7 @@ import com.dsd.game.controller.CollisionHandlerController;
 import com.dsd.game.controller.CursorController;
 import com.dsd.game.controller.DebugController;
 import com.dsd.game.controller.DifficultyController;
+import com.dsd.game.controller.LanguageController;
 import com.dsd.game.controller.LevelController;
 import com.dsd.game.controller.RainController;
 import com.dsd.game.controller.TimerController;
@@ -23,7 +24,9 @@ import com.revivedstandards.handlers.StandardHandler;
 import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.main.StandardDraw;
 import com.revivedstandards.main.StandardGame;
+import com.revivedstandards.model.StandardAudioType;
 import com.revivedstandards.model.StandardLevel;
+import javax.swing.JOptionPane;
 
 /**
  * This is the main class.
@@ -41,7 +44,7 @@ public class Game extends StandardGame {
 
     //  Miscellaneous reference variables
     private final StandardCollisionHandler sch;
-    private StandardCamera sc;
+    private final StandardCamera sc;
 
     //  Database references
     private final TranslatorDatabase translatorDatabase;
@@ -77,12 +80,18 @@ public class Game extends StandardGame {
     //  Main player reference so other monsters can track them
     private Player player;
 
-    public Game (int _width, int _height, String _title) {
+    public Game(int _width, int _height, String _title) {
         /**
          * Note: Magic numbers for the player and the monster are just for
          * demonstration; they will NOT be in the final game.
          */
         super(_width, _height, _title);
+
+        /**
+         * Initialize the database translator
+         */
+        this.translatorDatabase = new TranslatorDatabase(this);
+        this.translatorDatabase.loadFromSettings();
 
         //  Initialize the sound controller
         AudioBoxController.initialize(32);
@@ -119,15 +128,13 @@ public class Game extends StandardGame {
         this.shopScreen = new ShopScreen(this);
         this.hudScreen = new HUDScreen(this, this.player, this.sch);
 
-        /**
-         * Initialize the database translator
-         */
-        this.translatorDatabase = new TranslatorDatabase(this);
+        this.getWindow().setWindowVisible(true);
+
         this.startGame();
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         //  Depending on the game state, update different things.
         switch (this.gameState) {
             case MENU:
@@ -161,12 +168,11 @@ public class Game extends StandardGame {
     }
 
     @Override
-    public void render () {
+    public void render() {
         //  Depending on the game state, render different things.
         if (this.gameState == GameState.MENU) {
             this.menuScreen.render(StandardDraw.Renderer);
-        }
-        else {
+        } else {
             //  First things first: render the camera
             StandardDraw.Object(this.sc);
             //  Then render the current [active] level
@@ -201,7 +207,7 @@ public class Game extends StandardGame {
      * Once the game turns to the PLAY state, this method is called. It will
      * instantiate the Spawner controllers, level controllers, etc.
      */
-    public void uponPlay () {
+    public void uponPlay() {
         DifficultyController.setDifficultyFactor();
         DifficultyController.setLevelTransitionTimer();
         this.levelController.getCurrentLevel().loadLevelData();
@@ -212,18 +218,8 @@ public class Game extends StandardGame {
     /**
      * Plays the wave change sfx.
      */
-    public void playWaveChangeSFX () {
-        StandardAudioController.play("src/resources/audio/sfx/round_change.wav");
-    }
-
-    /**
-     * Sets the game to the preamble state and reset the alpha transparency of
-     * it.
-     */
-    public void setPreambleState () {
-        this.gameState = GameState.PREAMBLE;
-        this.playWaveChangeSFX();
-        this.preambleScreen.resetPreambleScreen();
+    public void playWaveChangeSFX() {
+        StandardAudioController.play("src/resources/audio/sfx/round_change.wav", StandardAudioType.SFX);
     }
 
     /**
@@ -236,7 +232,7 @@ public class Game extends StandardGame {
      * @param _width
      * @param _height
      */
-    public void changeResolution (int _width, int _height) {
+    public void changeResolution(int _width, int _height) {
         this.setGameWidth(_width);
         this.setGameHeight(_height);
         Screen.setGameDimensions();
@@ -252,10 +248,11 @@ public class Game extends StandardGame {
      * likewise reset), cancel all timers, and finally resets the difficulty
      * factors from the previous game's progression.
      */
-    public void resetGame () {
+    public void resetGame() {
         this.sch.clearEntities();
         this.levelController.clearLevels();
         this.player.resetPlayer();
+        this.player.getInventory().resetInventory();
         this.instantiateLevels();
 
         TimerController.stopTimers();
@@ -264,99 +261,153 @@ public class Game extends StandardGame {
 
     /**
      * Calls the translator DB class to save the game's current state.
+     * @return 
      */
-    public void saveToDatabase () {
-        this.translatorDatabase.save();
+    public boolean saveToDatabase() {
+        if (!this.translatorDatabase.saveToDatabase()) {
+            JOptionPane.showMessageDialog(null, LanguageController.translate("Unable to save data."));
+            return false;
+        }
+        return true;
     }
 
     /**
      * Calls the translator DB class to load a previously-saved file.ß
+     *
+     * @return
      */
-    public void loadFromDatabase () {
-        this.translatorDatabase.load();
+    public boolean loadFromDatabase() {
+        if (!this.translatorDatabase.loadFromDatabase()) {
+            JOptionPane.showMessageDialog(null, LanguageController.translate("Unable to load data, did you log in?."));
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Calls the translator DB class to save the language and resolution
+     * preferences to a settings file.
+     */
+    public void saveToSettings() {
+        if (!this.translatorDatabase.saveToSettings()) {
+            JOptionPane.showMessageDialog(null, LanguageController.translate("Unable to save to the settings file."));
+        }
+    }
+
+    /**
+     * Calls the translator DB class to load the language and resolution
+     * preferences from a settings file.
+     */
+    public void loadFromSettings() {
+        if (!this.translatorDatabase.saveToSettings()) {
+            JOptionPane.showMessageDialog(null, LanguageController.translate("Unable to load from the settings file."));
+        }
     }
 
     /**
      * Loads the level data when the game starts so the timers can be
      * instantiated.
      */
-    private void instantiateLevels () {
+    private void instantiateLevels() {
         this.levelController.addLevel(new MetalLevel(this.player, this, this.sch));
     }
 
     /**
      * Resets the camera's viewport to account for a resized window.
      */
-    private void reinstantiateCamera () {
+    private void reinstantiateCamera() {
         this.sc.setVpw(this.getGameWidth() >> 1);
         this.sc.setVph(this.getGameHeight() >> 1);
     }
 
 //========================== GETTERS =============================//
-    public Player getPlayer () {
+    public Player getPlayer() {
         return this.player;
     }
 
-    public GameState getGameState () {
+    public GameState getGameState() {
         return this.gameState;
     }
 
-    public StandardCamera getCamera () {
+    public StandardCamera getCamera() {
         return this.sc;
     }
 
-    public StandardCollisionHandler getHandler () {
+    public StandardCollisionHandler getHandler() {
         return this.sch;
     }
 
-    public StandardLevel getCurrentLevel () {
+    public MenuScreen getMenuScreen() {
+        return this.menuScreen;
+    }
+
+    public LevelController getLevelController() {
+        return this.levelController;
+    }
+
+    public DifficultyController getDifficultyController() {
+        return this.difficultyController;
+    }
+
+    public StandardLevel getCurrentLevel() {
         return this.levelController.getCurrentLevel();
     }
 
-    public int getCurrentLevelID () {
+    public int getCurrentLevelID() {
         return this.levelController.getCurrentLevelID();
     }
 
-    public int getLogicalCurrentLevelID () {
+    public int getLogicalCurrentLevelID() {
         return this.levelController.getLogicalCurrentLevelID();
     }
 
-    public int getWaveNumber () {
+    public int getWaveNumber() {
         return this.levelController.getWaveNumber();
     }
 
-    public boolean isPaused () {
+    public boolean isPaused() {
         return this.gameState == GameState.PAUSED;
     }
 
-    public boolean isPreamble () {
+    public boolean isPreamble() {
         return this.gameState == GameState.PREAMBLE;
     }
 
-    public boolean isRunning () {
+    public boolean isRunning() {
         return this.gameState == GameState.RUNNING;
     }
 
-    public boolean isInGameState () {
+    public boolean isInGameState() {
         return this.isRunning() | this.isPreamble();
     }
 
-    public boolean isShop () {
+    public boolean isShop() {
         return this.gameState == GameState.SHOP;
     }
 
-    public boolean isMenu () {
+    public boolean isMenu() {
         return this.gameState == GameState.MENU;
     }
 
 //========================== SETTERS =============================//
-    public void setGameState (GameState _gs) {
+    public void setGameState(GameState _gs) {
         this.gameState = _gs;
     }
 
-    public void setPlayer (Player _player) {
+    public void setPlayer(Player _player) {
         this.player = _player;
         this.player.setCamera(sc);
         this.player.setHandler(this.sch);
+    }
+
+    /**
+     * Sets the game to the preamble state and reset the alpha transparency of
+     * it.
+     */
+    public void setPreambleState() {
+        this.gameState = GameState.PREAMBLE;
+        this.playWaveChangeSFX();
+        this.preambleScreen.resetPreambleScreen();
     }
 }

@@ -72,6 +72,7 @@ public class LetterInputListener implements KeyListener {
         return _char != KeyEvent.VK_TAB && _char != KeyEvent.VK_ENTER;
     }
 
+//====================== GETTERS ========================//
     public char getLastKeyTyped () {
         return this.character;
     }

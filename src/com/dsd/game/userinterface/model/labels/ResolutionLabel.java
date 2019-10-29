@@ -8,22 +8,23 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 /**
- * @author Joshua
+ * This label shows the current resolution/next/previous resolutions from within
+ * the ResolutionView. When the user changes a resolution, it is updated on this
+ * label.
+ *
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class ResolutionLabel extends StandardLabel {
 
+    //  Miscellaneous reference variables.
     private final Game game;
     private final MenuScreen menuScreen;
-
-    private static final int BUTTON_X_OFFSET = 0;
-    private static final int BUUTTON_Y_OFFSET = 0;
-    private static final int TITLE_X_OFFSET = 140;
-    private static final int TITLE_Y_OFFSET = 40;
 
     public ResolutionLabel (Game _game, MenuScreen _menuScreen) {
         super(Screen.gameHalfWidth, Screen.gameHalfHeight,
                 "", "src/resources/fonts/chargen.ttf", 32f);
-
         this.game = _game;
         this.menuScreen = _menuScreen;
         this.setText(this.game.getGameWidth() + " x " + this.game.getGameHeight());

@@ -3,19 +3,18 @@ package com.dsd.game.controller;
 import com.dsd.game.Game;
 import com.dsd.game.enemies.Enemy;
 import com.dsd.game.objects.Explosion;
-import com.dsd.game.objects.weapons.projectiles.GrenadeBulletObject;
 import com.dsd.game.objects.Player;
-import com.dsd.game.objects.weapons.projectiles.ProjectileGameObject;
-import com.dsd.game.objects.weapons.projectiles.ShotgunBulletObject;
 import com.dsd.game.objects.enums.ExplosionType;
 import com.dsd.game.objects.enums.PlayerState;
 import com.dsd.game.objects.items.Coin;
 import com.dsd.game.objects.powerups.BerserkPowerup;
 import com.dsd.game.objects.powerups.HealthPowerup;
 import com.dsd.game.objects.powerups.InfiniteAmmoPowerup;
+import com.dsd.game.objects.weapons.projectiles.GrenadeBulletObject;
+import com.dsd.game.objects.weapons.projectiles.ProjectileGameObject;
+import com.dsd.game.objects.weapons.projectiles.ShotgunBulletObject;
 import com.dsd.game.userinterface.StandardInteractorHandler;
 import com.dsd.game.userinterface.model.DamageText;
-import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.model.StandardGameObject;
 import com.revivedstandards.model.StandardID;
@@ -179,7 +178,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
     private void handlePlayerCoinCollision (Player _player, Coin _coin) {
         _coin.setAlive(false);
         _player.setMoney(_player.getMoney() + _coin.getValue());
-        StandardAudioController.play("src/resources/audio/sfx/coin.wav");
+        _coin.playCoinSFX();
     }
 
     /**

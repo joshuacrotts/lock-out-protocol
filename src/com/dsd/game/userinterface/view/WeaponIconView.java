@@ -18,9 +18,14 @@ import java.awt.image.BufferedImage;
  */
 public class WeaponIconView extends Interactor {
 
+    //  Miscellaneous reference variables.
     private final Game game;
     private final Inventory inventory;
+
+    //  Border behind the icon itself.
     private final BufferedImage weaponBorder;
+
+    //  Icon position x and y offset.
     private final int ICON_X_OFFSET = 310;
     private final int ICON_Y_OFFSET = 130;
 

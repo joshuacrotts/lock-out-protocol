@@ -1,6 +1,7 @@
 package com.dsd.game.objects;
 
 import com.dsd.game.Game;
+import com.dsd.game.SerializableObject;
 import com.dsd.game.commands.AttackCommand;
 import com.dsd.game.commands.DebugCommand;
 import com.dsd.game.commands.DecrementWeaponCommand;
@@ -9,6 +10,7 @@ import com.dsd.game.commands.MoveBackwardCommand;
 import com.dsd.game.commands.MoveForwardCommand;
 import com.dsd.game.commands.ReloadCommand;
 import com.dsd.game.controller.DebugController;
+import com.dsd.game.database.SerializableType;
 import com.dsd.game.objects.enums.PlayerState;
 import com.dsd.game.userinterface.Screen;
 import com.revivedstandards.controller.StandardAnimatorController;
@@ -18,6 +20,7 @@ import com.revivedstandards.model.DeathListener;
 import com.revivedstandards.model.StandardID;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import org.apache.commons.math3.util.FastMath;
 
@@ -33,7 +36,7 @@ import org.apache.commons.math3.util.FastMath;
  *
  * @author Joshua, Ronald, Rinty
  */
-public class Player extends Entity implements DeathListener {
+public class Player extends Entity implements DeathListener, SerializableObject {
 
     //  Miscellaneous reference variables
     private StandardCamera sc;
@@ -51,7 +54,7 @@ public class Player extends Entity implements DeathListener {
     private AttackCommand attackCommand;
 
     //  Variables representing the angle and approach velocity
-    private final float APPROACH_VEL = -3.0f;
+    private float APPROACH_VEL = -3.0f;
 
     //  Money amount
     private int money = 0;
@@ -66,19 +69,14 @@ public class Player extends Entity implements DeathListener {
         super(_x, _y, 100, StandardID.Player, (Game) _game, _sch);
         //  Instantiate the inventory
         this.inventory = new Inventory(this.getGame(), this, _sch);
-
         //  Initializes the miscellaneous variables
         this.sc = this.getGame().getCamera();
-
         //  Sets the default animation
         this.setAnimation(this.inventory.getCurrentWeapon().getWalkFrames());
-
         //  Instantiate commands
         this.initCommands();
-
         //  Initializes the player's default state to standing
         this.playerState = PlayerState.STANDING;
-
         //  Adds the player to the list of collidable objects
         _sch.addCollider(StandardID.Player);
         _sch.flagAlive(StandardID.Player);
@@ -147,6 +145,42 @@ public class Player extends Entity implements DeathListener {
         this.money = 0;
         this.setHealth(this.maxHealth);
         this.inventory.resetInventory();
+    }
+
+//=========================== CRUD OPERATIONS ================================//
+    @Override
+    public String createObject (SerializableType _id) {
+        if (_id != SerializableType.PLAYER) {
+            return null;
+        }
+
+        StringBuilder playerDetails = new StringBuilder();
+
+        playerDetails.append(this.getPlayerSex().equals("male") ? 1 : 0).append(";");
+        playerDetails.append((int) this.getX()).append(";");
+        playerDetails.append((int) this.getY()).append(";");
+        playerDetails.append((int) this.getMoney()).append(";");
+        playerDetails.append((int) this.getHealth()).append(";");
+
+        return playerDetails.toString();
+    }
+
+    public void readObject (ArrayList<Integer> _playerInfo) {
+        this.setPlayerSex(_playerInfo.get(0) == 1 ? "male" : "female");
+        this.setX(_playerInfo.get(1));
+        this.setY(_playerInfo.get(2));
+        this.setMoney(_playerInfo.get(3));
+        this.setHealth(_playerInfo.get(4));
+    }
+
+    @Override
+    public void updateObject (SerializableType _obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void destroyObject (SerializableType _obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -341,6 +375,10 @@ public class Player extends Entity implements DeathListener {
 
     public void setMaxHealth (int _max) {
         this.maxHealth = _max;
+    }
+
+    public void setApproachVelocity (float _vel) {
+        this.APPROACH_VEL = _vel;
     }
 
     /**

@@ -1,9 +1,9 @@
 package com.dsd.game.objects.weapons;
 
 import com.dsd.game.Game;
-import com.dsd.game.objects.weapons.projectiles.BulletGameObject;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.weapons.enums.WeaponType;
+import com.dsd.game.objects.weapons.projectiles.BulletGameObject;
 import com.dsd.game.util.Utilities;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
@@ -21,7 +21,6 @@ public class Pistol extends Gun {
     //  Information regarding the FPS of the pistol animations for the player.
     private static final int WALKING_FPS = 10;
     private static final int SHOOT_GUN_FPS = 20;
-
     //  Delay between shots.
     private final int DELAY = 750;
 

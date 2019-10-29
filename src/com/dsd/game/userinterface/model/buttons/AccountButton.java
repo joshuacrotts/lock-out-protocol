@@ -1,11 +1,11 @@
 package com.dsd.game.userinterface.model.buttons;
 
 import com.dsd.game.Game;
+import com.dsd.game.controller.LanguageController;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MenuState;
 import com.dsd.game.userinterface.MouseEventInterface;
 import com.dsd.game.userinterface.Screen;
-import com.revivedstandards.main.StandardDraw;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
@@ -20,8 +20,8 @@ import java.awt.Graphics2D;
 public class AccountButton extends MenuButton implements MouseEventInterface {
 
     //  Offsets and button dimensions.
-    private static final int BUTTON_X_OFFSET = 300;
-    private static final int BUTTON_Y_OFFSET = -50;
+    private static final int BUTTON_X_OFFSET = 445;
+    private static final int BUTTON_Y_OFFSET = -10;
     private static final int TEXT_X_OFFSET = 98;
     private static final int TEXT_Y_OFFSET = 45;
     private static final int BUTTON_WIDTH = 300;
@@ -30,7 +30,7 @@ public class AccountButton extends MenuButton implements MouseEventInterface {
     public AccountButton (Game _game, MenuScreen _menuScreen) {
         super(Screen.gameHalfWidth - BUTTON_X_OFFSET,
                 Screen.gameHalfHeight - BUTTON_Y_OFFSET,
-                BUTTON_WIDTH, BUTTON_HEIGHT, "ACCOUNT", _game, _menuScreen);
+                BUTTON_WIDTH, BUTTON_HEIGHT, LanguageController.translate("ACCOUNT"), _game, _menuScreen);
     }
 
     @Override
@@ -46,9 +46,9 @@ public class AccountButton extends MenuButton implements MouseEventInterface {
         }
 
         super.render(_g2);
-
-        StandardDraw.text(this.getText(), this.getX() + TEXT_X_OFFSET,
-                this.getY() + TEXT_Y_OFFSET, this.font, 24f, Color.WHITE);
+        _g2.setFont(this.font);
+        _g2.setColor(Color.WHITE);
+        _g2.drawString(this.getText(), this.getX() + TEXT_X_OFFSET, this.getY() + TEXT_Y_OFFSET);
     }
 
     @Override

@@ -10,7 +10,9 @@ import java.awt.Graphics2D;
 /**
  * Title label for the main menu. This is only used/instantiated once.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class TitleLabel extends StandardLabel {
 
@@ -21,6 +23,7 @@ public class TitleLabel extends StandardLabel {
     //  Variability in the shaking of the text.
     private final int shakeFactor = 1;
 
+    //  Title x and y positioning offsets.
     private static final int TITLE_X_OFFSET = 140;
     private static final int TITLE_Y_OFFSET = 40;
 

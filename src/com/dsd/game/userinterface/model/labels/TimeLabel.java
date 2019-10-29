@@ -1,9 +1,11 @@
 package com.dsd.game.userinterface.model.labels;
 
 import com.dsd.game.Game;
+import com.dsd.game.controller.LanguageController;
 import com.dsd.game.controller.TimerController;
 import com.dsd.game.userinterface.Screen;
 import com.dsd.game.userinterface.TimerInterface;
+import com.dsd.game.util.Utilities;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.Timer;
@@ -13,7 +15,9 @@ import java.util.TimerTask;
  * This class will tell the user how long they've been playing, and what round
  * they're currently on.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class TimeLabel extends StandardLabel implements TimerInterface {
 
@@ -29,12 +33,14 @@ public class TimeLabel extends StandardLabel implements TimerInterface {
     //  Time information; its position and how often it should increment.
     private static final int TIME_Y_OFFSET = 15;
     private static final int TIME_INTERVAL = 1000;
+    private final String waveString;
 
     public TimeLabel (Game _game) {
         super(Screen.gameHalfWidth, TimeLabel.TIME_Y_OFFSET, "00:00:00",
                 "src/resources/fonts/chargen.ttf", 14f);
 
         this.game = _game;
+        this.waveString = LanguageController.translate("Wave");
     }
 
     @Override
@@ -49,7 +55,8 @@ public class TimeLabel extends StandardLabel implements TimerInterface {
                 TimerController.addTimer(this);
             }
 
-            this.setText(String.format("%02d:%02d:%02d \u007C Wave %d", this.hours, this.minutes, this.seconds, this.game.getWaveNumber()));
+            this.setText(String.format("%02d:%02d:%02d \u007C %s %s", this.hours, this.minutes, this.seconds, this.waveString,
+                    Utilities.toRoman(this.game.getWaveNumber())));
         }
     }
 
@@ -67,7 +74,9 @@ public class TimeLabel extends StandardLabel implements TimerInterface {
         this.seconds = 0;
         this.minutes = 0;
         this.hours = 0;
-        this.timer.cancel();
+        if (timer != null) {
+            this.timer.cancel();
+        }
         this.timer = null;
     }
 

@@ -36,7 +36,6 @@ public class RainController implements Renderable, Updatable {
     //  Defines the range in which rain can spawn for the user.
     private static final int X_BORDER = Screen.gameDoubleWidth;
     private static final int Y_BORDER = Screen.gameDoubleHeight;
-
     //  Velocity constants and factors for the rain drop object.
     private static final double RAIN_DIRECTION = -FastMath.PI * 1.5;
     private static final int VEL_FACTOR = 5;

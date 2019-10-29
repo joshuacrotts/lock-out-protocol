@@ -5,12 +5,14 @@ import com.dsd.game.commands.TabTextFieldCommand;
 import com.dsd.game.userinterface.model.EmailTextFieldModel;
 import com.dsd.game.userinterface.model.PasswordTextFieldModel;
 import com.dsd.game.userinterface.model.buttons.AccountButton;
+import com.dsd.game.userinterface.model.buttons.AudioMenuButton;
 import com.dsd.game.userinterface.model.buttons.BackButton;
 import com.dsd.game.userinterface.model.buttons.EasyButton;
 import com.dsd.game.userinterface.model.buttons.ExitButton;
 import com.dsd.game.userinterface.model.buttons.FemalePlayerButton;
 import com.dsd.game.userinterface.model.buttons.HardButton;
 import com.dsd.game.userinterface.model.buttons.HelpOrOptionsButton;
+import com.dsd.game.userinterface.model.buttons.LanguageChangeButton;
 import com.dsd.game.userinterface.model.buttons.LoadButton;
 import com.dsd.game.userinterface.model.buttons.LoginButton;
 import com.dsd.game.userinterface.model.buttons.MakeAccountButton;
@@ -18,10 +20,14 @@ import com.dsd.game.userinterface.model.buttons.MalePlayerButton;
 import com.dsd.game.userinterface.model.buttons.MediumButton;
 import com.dsd.game.userinterface.model.buttons.PlayButton;
 import com.dsd.game.userinterface.model.buttons.ResolutionMenuButton;
+import com.dsd.game.userinterface.model.buttons.VolumeControlButton;
 import com.dsd.game.userinterface.model.labels.TitleLabel;
+import com.dsd.game.userinterface.view.AudioView;
+import com.dsd.game.userinterface.view.LanguageChangeView;
 import com.dsd.game.userinterface.view.MenuView;
 import com.dsd.game.userinterface.view.ResolutionView;
 import com.revivedstandards.controller.StandardAudioController;
+import com.revivedstandards.model.StandardAudioType;
 import java.awt.Graphics2D;
 import java.util.Stack;
 
@@ -38,8 +44,10 @@ public class MenuScreen extends Screen {
     private MenuState menuState;
     private final Stack<MenuState> menuStateStack;
 
-    private final MenuView menuView;
+    private MenuView menuView;
     private ResolutionView changeResView;
+    private LanguageChangeView changeLanguageView;
+    private AudioView changeAudioView;
 
     public MenuScreen (Game _game) {
         super(_game);
@@ -49,7 +57,7 @@ public class MenuScreen extends Screen {
         this.menuStateStack.push(this.menuState);
         this.createUIElements();
         this.createUIScreens();
-        
+
         TabTextFieldCommand tabCommand = new TabTextFieldCommand(this.getGame());
     }
 
@@ -62,7 +70,12 @@ public class MenuScreen extends Screen {
 
         super.tick();
 
-        this.changeResView.tick();
+        if (this.isOnResolution()) {
+            this.changeResView.tick();
+        }
+        else if (this.isOnLanguages()) {
+            this.changeLanguageView.tick();
+        }
     }
 
     @Override
@@ -74,11 +87,16 @@ public class MenuScreen extends Screen {
 
         super.render(_g2);
 
-        this.changeResView.render(_g2);
+        if (this.isOnResolution()) {
+            this.changeResView.render(_g2);
+        }
+        else if (this.isOnLanguages()) {
+            this.changeLanguageView.render(_g2);
+        }
     }
 
     public void stopMenuMusic () {
-        StandardAudioController.stop("src/resources/audio/music/menu.wav");
+        StandardAudioController.stop("src/resources/audio/music/menu.wav", StandardAudioType.SFX);
     }
 
     public MenuState popMenuStack () {
@@ -136,8 +154,14 @@ public class MenuScreen extends Screen {
         super.addInteractor(new BackButton(this.getGame(), this));
     }
 
+    /**
+     * Initializes the sub-options menu buttons.
+     */
     private void initializeOptionsButtons () {
         super.addInteractor(new ResolutionMenuButton(this.getGame(), this));
+        super.addInteractor(new VolumeControlButton(this.getGame(), this));
+        super.addInteractor(new AudioMenuButton(this.getGame(), this));
+        super.addInteractor(new LanguageChangeButton(this.getGame(), this));
     }
 
     /**
@@ -159,11 +183,13 @@ public class MenuScreen extends Screen {
      */
     private void createUIScreens () {
         this.changeResView = new ResolutionView(this.getGame(), this);
+        this.changeLanguageView = new LanguageChangeView(this.getGame(), this);
+        this.changeAudioView = new AudioView(this.getGame(), this);
     }
 
 //====================== GETTERS ===============================//
     public boolean isOnMainMenu () {
-        return this.menuState == MenuState.MAIN;
+        return this.menuState == MenuState.MAIN || this.menuStateStack.isEmpty();
     }
 
     public boolean isOnDifficulty () {
@@ -182,8 +208,20 @@ public class MenuScreen extends Screen {
         return this.menuState == MenuState.RESOLUTION;
     }
 
+    public boolean isOnVolume () {
+        return this.menuState == MenuState.VOLUME;
+    }
+
     public boolean isOnPlayerGender () {
         return this.menuState == MenuState.PLAYER_GENDER;
+    }
+
+    public boolean isOnAudio () {
+        return this.menuState == MenuState.AUDIO;
+    }
+
+    public boolean isOnLanguages () {
+        return this.menuState == MenuState.LANGUAGES;
     }
 
 //====================== SETTERS ===============================//

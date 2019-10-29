@@ -13,14 +13,14 @@ import java.awt.Graphics2D;
 public class GrenadeLauncherButtonView extends ShopButtonView {
 
     public GrenadeLauncherButtonView (GrenadeLauncherButton _grenadeButton) {
-        super(_grenadeButton, StdOps.loadImage("src/resources/img/items/icons/shotgun_icon.png"));
+        super(_grenadeButton, StdOps.loadImage("src/resources/img/items/icons/grenade_launcher_icon.png"));
     }
 
     @Override
     public void tick () {
         //  Only update the text if the user has the rifle in their inventory.
         if (this.parentButton.getGame().getPlayer().getInventory().hasWeapon(WeaponType.GRENADE_LAUNCHER) == null) {
-            this.text.setText("GRENADE LAUNCHER " + this.parentButton.getPrice());
+            this.text.setText("GREN. LAUNCHER $" + this.parentButton.getPrice());
         }
         else {
             this.text.setText("GRENADE AMMO (4/$" + this.parentButton.getPricePerMagazine() + ")");

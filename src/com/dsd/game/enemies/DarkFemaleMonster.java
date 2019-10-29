@@ -11,6 +11,7 @@ import com.revivedstandards.handlers.StandardHandler;
 import com.revivedstandards.handlers.StandardParticleHandler;
 import com.revivedstandards.main.StandardDraw;
 import com.revivedstandards.model.DeathListener;
+import com.revivedstandards.model.StandardAudioType;
 import com.revivedstandards.model.StandardBoxParticle;
 import com.revivedstandards.model.StandardID;
 import com.revivedstandards.util.StdOps;
@@ -185,7 +186,7 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
      */
     @Override
     public void generateHurtSound (int _sfx) {
-        StandardAudioController.play("src/resources/audio/sfx/green_monster/pain" + _sfx + ".wav");
+        StandardAudioController.play("src/resources/audio/sfx/green_monster/pain" + _sfx + ".wav", StandardAudioType.SFX);
     }
 
     /**
@@ -244,7 +245,7 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
      * @param sfx either 1 or 2
      */
     private void generateDeathSound (int _sfx) {
-        StandardAudioController.play("src/resources/audio/sfx/splat" + _sfx + ".wav");
+        StandardAudioController.play("src/resources/audio/sfx/splat" + _sfx + ".wav", StandardAudioType.SFX);
     }
 
     /**

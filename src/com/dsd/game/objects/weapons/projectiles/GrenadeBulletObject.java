@@ -5,10 +5,10 @@ import com.dsd.game.objects.Player;
 import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.model.DeathListener;
+import com.revivedstandards.model.StandardAudioType;
 import com.revivedstandards.util.StdOps;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import org.apache.commons.math3.util.FastMath;
 
 /**
  * Grenade launcher bullet game object.
@@ -26,7 +26,7 @@ public class GrenadeBulletObject extends ProjectileGameObject implements DeathLi
     //  Animation frame per second setting
     private static final int BULLET_FPS = 20;
 
-    private static int damage = 250;
+    private int damage = 250;
 
     private boolean uponDeathFlag = false;
 
@@ -55,7 +55,7 @@ public class GrenadeBulletObject extends ProjectileGameObject implements DeathLi
 
     @Override
     public void uponDeath () {
-        StandardAudioController.play("src/resources/audio/sfx/grenade_explosion.wav");
+        StandardAudioController.play("src/resources/audio/sfx/grenade_explosion.wav", StandardAudioType.SFX);
     }
 
     /**
@@ -65,30 +65,6 @@ public class GrenadeBulletObject extends ProjectileGameObject implements DeathLi
      */
     private static void initImages () {
         GrenadeBulletObject.frames[0] = StdOps.loadImage("src/resources/img/bullet/bullet_sprite/new_bullet/grenade_bullet.png");
-    }
-
-//============================ SETTERS ====================================//
-    /**
-     * Instantiates the velocity of the bullet depending on where the cursor is
-     * in relation to the player.
-     *
-     * @param _x
-     * @param _y
-     * @param _mx
-     * @param _my
-     */
-    private void setVelocity (double _x, double _y, int _mx, int _my) {
-        double deltaX = (_mx - _x);
-        double deltaY = (_my - _y);
-        // Use the pythagorean theorem to solve for the hypotenuse distance
-        double distance = (double) FastMath.sqrt(((deltaX) * (deltaX))
-                + ((deltaY) * (deltaY)));
-        deltaX = (deltaX / distance) * this.VEL_FACTOR;
-        deltaY = (deltaY / distance) * this.VEL_FACTOR;
-        System.out.println(deltaX);
-        System.out.println(deltaY);
-        this.setVelX(deltaX);
-        this.setVelY(deltaY);
     }
 
 //========================== GETTERS =======================================//

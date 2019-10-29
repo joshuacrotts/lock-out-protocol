@@ -16,8 +16,10 @@ import java.awt.Graphics2D;
  */
 public class PistolButton extends ShopButton {
 
+    //  View for this button.
     private final PistolButtonView pistolButtonView;
 
+    //  Offsets for the button.
     private static final int X_OFFSET = 400;
     private static final int Y_OFFSET = 176;
 
@@ -29,7 +31,7 @@ public class PistolButton extends ShopButton {
 
     public PistolButton (Game _game, ShopScreen _shopScreen) {
         super(_game, _shopScreen, PistolButton.X_OFFSET,
-                PistolButton.Y_OFFSET, PISTOL_PRICE);
+                PistolButton.Y_OFFSET, PISTOL_PRICE, PISTOL_AMMO_PRICE);
 
         this.pistolButtonView = new PistolButtonView(this);
     }
@@ -51,23 +53,19 @@ public class PistolButton extends ShopButton {
         if (!this.getGame().isShop()) {
             return;
         }
-        //  If we have enough money...
-        if (this.getGame().getPlayer().getMoney() > this.getPrice()) {
+        Gun _weapon = (Gun) this.getInventory().hasWeapon(WeaponType.PISTOL);
 
-            super.onMouseClick();
+        //  If we don't have the weapon, add it to the user's inventory.
+        if (_weapon == null && this.getGame().getPlayer().getMoney() >= this.getPrice()) {
+            this.getGame().getPlayer().setMoney(this.getGame().getPlayer().getMoney() - this.getPrice());
 
-            Gun _weapon = (Gun) this.getInventory().hasWeapon(WeaponType.PISTOL);
-
-            //  If we don't have the weapon, add it to the user's inventory.
-            if (_weapon == null) {
-
-                this.getInventory().addWeapon(new Pistol(this.getGame(),
-                        this.getGame().getPlayer(), this.getGame().getPlayer().getHandler()));
-            }
-            //  Otherwise, add to the ammunition.
-            else {
-                _weapon.setTotalAmmo(_weapon.getTotalAmmo() + _weapon.getMagazineCapacity());
-            }
+            this.getInventory().addWeapon(new Pistol(this.getGame(),
+                    this.getGame().getPlayer(), this.getGame().getPlayer().getHandler()));
+        }
+        //  Otherwise, add to the ammunition.
+        else if (this.getGame().getPlayer().getMoney() >= this.getPricePerMagazine()) {
+            this.getGame().getPlayer().setMoney(this.getGame().getPlayer().getMoney() - this.getPricePerMagazine());
+            _weapon.setTotalAmmo(_weapon.getTotalAmmo() + _weapon.getMagazineCapacity());
         }
     }
 

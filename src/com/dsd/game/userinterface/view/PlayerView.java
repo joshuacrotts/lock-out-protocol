@@ -49,7 +49,6 @@ public class PlayerView implements Renderable, Updatable {
         this.sex = _sex;
         this.imageWidth = _parentButton.getWidth();
         this.imageHeight = _parentButton.getHeight();
-
         this.setFadeController();
     }
 

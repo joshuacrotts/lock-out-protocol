@@ -12,6 +12,7 @@ import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.controller.StandardFadeController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.main.StandardCamera;
+import com.revivedstandards.model.StandardAudioType;
 import com.revivedstandards.model.StandardGameObject;
 import com.revivedstandards.model.StandardID;
 import java.awt.BasicStroke;
@@ -46,10 +47,9 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
     private static final int RECT_STROKE = 20;
     private static final int STROKE_X_OFFSET = (int) (RECT_STROKE * 1.5);
     private static final int STROKE_Y_OFFSET = (int) (RECT_STROKE * 2.4);
-
     //  Timer for how long the powerup is active (in milliseconds)
-    private int timer = 10000;
 
+    private int timer = 10000;
     private boolean isActivated = false;
     private boolean isCollected = false;
 
@@ -59,13 +59,10 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
         this.camera = _game.getCamera();
         this.player = _game.getPlayer();
         this.parentContainer = _sch;
-
         StandardAnimatorController berserkAnimation = new StandardAnimatorController(this, BERSERK_FRAMES, BERSERK_FPS);
-
         this.setAnimation(berserkAnimation);
         this.setWidth(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getWidth());
         this.setHeight(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getHeight());
-
         this.color = new StandardFadeController(Color.red, Color.yellow, 0.05f);
     }
 
@@ -135,7 +132,7 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
             return;
         }
 
-        StandardAudioController.play("src/resources/audio/sfx/berserk.wav");
+        StandardAudioController.play("src/resources/audio/sfx/berserk.wav", StandardAudioType.SFX);
     }
 
     /**

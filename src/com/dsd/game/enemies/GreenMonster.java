@@ -13,6 +13,7 @@ import com.revivedstandards.handlers.StandardHandler;
 import com.revivedstandards.handlers.StandardParticleHandler;
 import com.revivedstandards.main.StandardDraw;
 import com.revivedstandards.model.DeathListener;
+import com.revivedstandards.model.StandardAudioType;
 import com.revivedstandards.model.StandardBoxParticle;
 import com.revivedstandards.model.StandardID;
 import com.revivedstandards.util.StdOps;
@@ -34,6 +35,7 @@ public class GreenMonster extends Enemy implements DeathListener {
 
     //  Handler for particle explosions after the monster dies.
     private StandardParticleHandler explosionHandler;
+
     /**
      * Static bufferedimage array so the images aren't constantly loading in
      * upon instantiation of a new monster
@@ -63,13 +65,17 @@ public class GreenMonster extends Enemy implements DeathListener {
     public GreenMonster (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, GreenMonster.originalHealth, StandardID.Monster2, _game, _sch);
         this.setTarget(_game.getPlayer());
+
         //  Randomly generates the walking frames per second for variability
         this.walkingFPS = StdOps.rand(this.WALKING_FPS_MIN, this.WALKING_FPS_MAX);
+
         //  Sets the walking/death frames for this monster
         super.initWalkingFrames(GreenMonster.WALK_FRAMES, this.walkingFPS);
         super.initDeathFrames(GreenMonster.DEATH_FRAMES, GreenMonster.DEATH_FPS, 5);
+
         //  Sets the default animation
         super.setAnimation(super.getWalkingAnimation());
+
         //  The width/height of the model is set by the buffered image backing it.
         super.setDimensions();
         super.setDamage(this.DAMAGE);
@@ -179,7 +185,7 @@ public class GreenMonster extends Enemy implements DeathListener {
      */
     @Override
     public void generateHurtSound (int _sfx) {
-        StandardAudioController.play("src/resources/audio/sfx/green_monster/pain" + _sfx + ".wav");
+        StandardAudioController.play("src/resources/audio/sfx/green_monster/pain" + _sfx + ".wav", StandardAudioType.SFX);
     }
 
     /**
@@ -228,7 +234,7 @@ public class GreenMonster extends Enemy implements DeathListener {
      * @param sfx either 1 or 2
      */
     private void generateDeathSound (int _sfx) {
-        StandardAudioController.play("src/resources/audio/sfx/splat" + _sfx + ".wav");
+        StandardAudioController.play("src/resources/audio/sfx/splat" + _sfx + ".wav", StandardAudioType.SFX);
     }
 
     /**
@@ -248,21 +254,22 @@ public class GreenMonster extends Enemy implements DeathListener {
      */
     private void generatePowerup () {
         int luck = StdOps.rand(1, 10);
-        if (luck == 1) {
-            this.getHandler().addEntity(new HealthPowerup((int) (this.getX() + this.getWidth() / 2),
-                    (int) (this.getY() + this.getHealth() / 2),
-                    this.getGame(), this.getHandler()));
-        }
-
-        else if (luck == 2) {
-            this.getHandler().addEntity(new BerserkPowerup((int) (this.getX() + this.getWidth() / 2),
-                    (int) (this.getY() + this.getHealth() / 2),
-                    this.getGame(), this.getHandler()));
-        }
-        else {
-            this.getHandler().addEntity(new InfiniteAmmoPowerup((int) (this.getX() + this.getWidth() / 2),
-                    (int) (this.getY() + this.getHealth() / 2),
-                    this.getGame(), this.getHandler()));
+        switch (luck) {
+            case 1:
+                this.getHandler().addEntity(new HealthPowerup((int) (this.getX() + this.getWidth() / 2),
+                        (int) (this.getY() + this.getHealth() / 2),
+                        this.getGame(), this.getHandler()));
+                break;
+            case 2:
+                this.getHandler().addEntity(new BerserkPowerup((int) (this.getX() + this.getWidth() / 2),
+                        (int) (this.getY() + this.getHealth() / 2),
+                        this.getGame(), this.getHandler()));
+                break;
+            default:
+                this.getHandler().addEntity(new InfiniteAmmoPowerup((int) (this.getX() + this.getWidth() / 2),
+                        (int) (this.getY() + this.getHealth() / 2),
+                        this.getGame(), this.getHandler()));
+                break;
         }
     }
 

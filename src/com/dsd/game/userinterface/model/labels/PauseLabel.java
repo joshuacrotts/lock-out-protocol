@@ -1,6 +1,7 @@
 package com.dsd.game.userinterface.model.labels;
 
 import com.dsd.game.Game;
+import com.dsd.game.controller.LanguageController;
 import com.dsd.game.userinterface.Screen;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -15,14 +16,17 @@ import java.awt.Graphics2D;
  */
 public class PauseLabel extends StandardLabel {
 
+    //  Miscellaneous reference variable.
     private final Game game;
+
+    //  Label x and y positioning offset.
     private final int LABEL_X_OFFSET = 20;
     private final int LABEL_Y_OFFSET = 100;
 
     public PauseLabel (Game _game) {
         super((int) Screen.gameHalfWidth,
                 (int) Screen.gameHalfHeight,
-                "PAUSED", "src/resources/fonts/chargen.ttf", 32f);
+                LanguageController.translate("PAUSED"), "src/resources/fonts/chargen.ttf", 32f);
         this.game = _game;
     }
 
@@ -36,6 +40,7 @@ public class PauseLabel extends StandardLabel {
     public void render (Graphics2D _g2) {
         Color oldColor = _g2.getColor();
         _g2.setColor(Color.WHITE);
+
         super.render(_g2);
         _g2.setColor(oldColor);
     }

@@ -1,10 +1,11 @@
 package com.dsd.game.userinterface.model.buttons;
 
 import com.dsd.game.Game;
+import com.dsd.game.controller.LanguageController;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MenuState;
 import com.dsd.game.userinterface.MouseEventInterface;
-import com.revivedstandards.main.StandardDraw;
+import com.dsd.game.userinterface.Screen;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
@@ -19,8 +20,8 @@ import java.awt.Graphics2D;
 public class ResolutionMenuButton extends MenuButton implements MouseEventInterface {
 
     //  Button position and dimension offsets.
-    private static final int BUTTON_X_OFFSET = 0;
-    private static final int BUTTON_Y_OFFSET = 680;
+    private static final int BUTTON_X_OFFSET = 141;
+    private static final int BUTTON_Y_OFFSET = 580;
     private static final int TEXT_X_OFFSET = 25;
     private static final int TEXT_Y_OFFSET = 45;
     private static final int BUTTON_WIDTH = 300;
@@ -28,12 +29,13 @@ public class ResolutionMenuButton extends MenuButton implements MouseEventInterf
 
     public ResolutionMenuButton (Game _game, MenuScreen _menuScreen) {
         super(ResolutionMenuButton.BUTTON_X_OFFSET, _game.getGameHeight() - ResolutionMenuButton.BUTTON_Y_OFFSET,
-                ResolutionMenuButton.BUTTON_WIDTH, ResolutionMenuButton.BUTTON_HEIGHT, "CHANGE RESOLUTION", _game, _menuScreen);
+                ResolutionMenuButton.BUTTON_WIDTH, ResolutionMenuButton.BUTTON_HEIGHT, LanguageController.translate("CHANGE RESOLUTION"),
+                _game, _menuScreen);
     }
 
     @Override
     public void tick () {
-        this.setX(ResolutionMenuButton.BUTTON_X_OFFSET);
+        this.setX(Screen.gameHalfWidth - ResolutionMenuButton.BUTTON_X_OFFSET);
         this.setY(this.getGame().getGameHeight() - ResolutionMenuButton.BUTTON_Y_OFFSET);
     }
 
@@ -44,8 +46,9 @@ public class ResolutionMenuButton extends MenuButton implements MouseEventInterf
         }
 
         super.render(_g2);
-        StandardDraw.text(this.getText(), this.getX() + ResolutionMenuButton.TEXT_X_OFFSET,
-                this.getY() + ResolutionMenuButton.TEXT_Y_OFFSET, this.font, 24f, Color.WHITE);
+        _g2.setFont(this.font);
+        _g2.setColor(Color.WHITE);
+        _g2.drawString(this.getText(), this.getX() + TEXT_X_OFFSET, this.getY() + TEXT_Y_OFFSET);
     }
 
     @Override
@@ -55,7 +58,7 @@ public class ResolutionMenuButton extends MenuButton implements MouseEventInterf
         }
 
         super.onMouseClick();
-
+        this.getMenuScreen().pushMenuStack(MenuState.OPTIONS);
         this.getMenuScreen().setMenuState(MenuState.RESOLUTION);
     }
 

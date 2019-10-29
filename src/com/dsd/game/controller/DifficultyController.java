@@ -2,6 +2,8 @@ package com.dsd.game.controller;
 
 import com.dsd.game.DifficultyType;
 import com.dsd.game.Game;
+import com.dsd.game.SerializableObject;
+import com.dsd.game.database.SerializableType;
 import com.dsd.game.enemies.BasicMonster;
 import com.dsd.game.enemies.GreenMonster;
 
@@ -11,7 +13,7 @@ import com.dsd.game.enemies.GreenMonster;
  *
  * @author Joshua
  */
-public class DifficultyController {
+public class DifficultyController implements SerializableObject {
 
     //  Miscellaneous reference variables
     private final Game game;
@@ -24,7 +26,7 @@ public class DifficultyController {
     public static float difficultyFactor;
     public static float basicMonsterSpawnRate = 1.0f;
     public static float greenMonsterSpawnRate = 0.0f;
-    public static float levelTransitionTimer = 50000;
+    public static int levelTransitionTimer = 50000;
     private static final int LEVEL_TRANS_LIMIT = 20000;
 
     public DifficultyController (Game _game) {
@@ -35,7 +37,7 @@ public class DifficultyController {
      * Increases the amount of spawners that are currently in the level.
      */
     public static void incrementSpawnerAmount () {
-        spawnerAmount++;
+        DifficultyController.spawnerAmount++;
     }
 
     /**
@@ -44,15 +46,19 @@ public class DifficultyController {
      * transition, and how much health the mobs continue to gain overtime.
      */
     public static void setDifficultyFactor () {
-        switch (difficultyType) {
+        if (DifficultyController.difficultyType == null) {
+            return;
+        }
+
+        switch (DifficultyController.difficultyType) {
             case EASY:
-                difficultyFactor = 1f;
+                DifficultyController.difficultyFactor = 1f;
                 break;
             case MEDIUM:
-                difficultyFactor = 1.125f;
+                DifficultyController.difficultyFactor = 1.125f;
                 break;
             case HARD:
-                difficultyFactor = 1.25f;
+                DifficultyController.difficultyFactor = 1.25f;
                 break;
         }
     }
@@ -88,6 +94,44 @@ public class DifficultyController {
     protected static void incrementMobHealth () {
         BasicMonster.originalHealth *= difficultyFactor;
         GreenMonster.originalHealth *= difficultyFactor;
+    }
+
+    /**
+     * If we load in a save file from the database, we can use this to set them.
+     *
+     * @param _levelTransitionTimer
+     * @param _difficultyFactor
+     */
+    protected static void setDifficultyFactors (int _levelTransitionTimer, float _difficultyFactor) {
+        DifficultyController.levelTransitionTimer = _levelTransitionTimer;
+        DifficultyController.difficultyFactor = _difficultyFactor;
+    }
+
+//============================= CRUD OPERATIONS ===============================//
+    @Override
+    public String createObject (SerializableType _id) {
+        if (_id != SerializableType.LEVEL) {
+            return null;
+        }
+
+        StringBuilder difficultyControllerInfo = new StringBuilder();
+        difficultyControllerInfo.append(levelTransitionTimer).append(";");
+        difficultyControllerInfo.append(difficultyFactor).append(";");
+        return difficultyControllerInfo.toString();
+    }
+
+    public void readObject (int _levelTransitionTimer, double _difficultyType) {
+        DifficultyController.setDifficultyFactors(_levelTransitionTimer, (float) _difficultyType);
+    }
+
+    @Override
+    public void destroyObject (SerializableType _obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void updateObject (SerializableType _obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

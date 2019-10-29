@@ -28,25 +28,8 @@ public enum ResolutionEnum {
         RES_1440_900,
         RES_1600_900,
         RES_1920_1080,
-        RES_2560_1440};
-
-    /**
-     * Returns a string representation of the resolution.
-     *
-     * @return
-     */
-    public static String getResolution () {
-        return RESOLUTION_LIST[resolutionIndex].getDimensionString();
-    }
-
-    /**
-     * Returns the actual dimension object associated with each ResolutionEnum.
-     *
-     * @return
-     */
-    public static Dimension getDimension () {
-        return RESOLUTION_LIST[resolutionIndex].resolution;
-    }
+        RES_2560_1440
+    };
 
     /**
      * Increases the index pointer for the RESOLUTION_LIST array.
@@ -67,16 +50,6 @@ public enum ResolutionEnum {
     }
 
     /**
-     * Returns the dimension object associated with the object at _index.
-     *
-     * @param _index
-     * @return
-     */
-    private static Dimension getDimension (int _index) {
-        return RESOLUTION_LIST[_index].resolution;
-    }
-
-    /**
      * Compares the resolution of the monitor to the element that the resIndex
      * pointer is on. If the resolution of the screen is SMALLER than the
      * resIndex pointer, then we don't need to advance any further because the
@@ -87,9 +60,11 @@ public enum ResolutionEnum {
     private static boolean isAtResolutionLimit () {
         Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
 
-        //  Grabs the individual dimensions of the screen AND the one pointed at
-        //  by resIndex + 1 (we need to advance it by one because we'll be on the
-        //  current one, which is not wanted.
+        /**
+         * Grabs the individual dimensions of the screen AND the one pointed at
+         * by resIndex + 1 (we need to advance it by one because we'll be on the
+         * current one, which is not wanted.
+         */
         int screenResWidth = screenRes.width;
         int screenResHeight = screenRes.height;
         int gameResWidth = getDimension(resolutionIndex + 1).width;
@@ -102,6 +77,7 @@ public enum ResolutionEnum {
         resolution = _resolution;
     }
 
+//================================ GETTERS ==================================//
     /**
      * Returns a string representation of the dimension; it takes the width,
      * concatenates an x, then adds the height.
@@ -111,5 +87,41 @@ public enum ResolutionEnum {
     private String getDimensionString () {
         return (int) resolution.getWidth() + "x"
                 + (int) resolution.getHeight();
+    }
+
+    public static int getResolutionIndex () {
+        return resolutionIndex;
+    }
+
+    public static void setResolutionIndex (int _n) {
+        resolutionIndex = _n;
+    }
+
+    /**
+     * Returns a string representation of the resolution.
+     *
+     * @return
+     */
+    public static String getResolution () {
+        return RESOLUTION_LIST[resolutionIndex].getDimensionString();
+    }
+
+    /**
+     * Returns the actual dimension object associated with each ResolutionEnum.
+     *
+     * @return
+     */
+    public static Dimension getDimension () {
+        return RESOLUTION_LIST[resolutionIndex].resolution;
+    }
+
+    /**
+     * Returns the dimension object associated with the object at _index.
+     *
+     * @param _index
+     * @return
+     */
+    private static Dimension getDimension (int _index) {
+        return RESOLUTION_LIST[_index].resolution;
     }
 }
