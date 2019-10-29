@@ -39,10 +39,11 @@ public class LanguageTranslation {
     }
 
     /**
-     * Connects to the weather API to retrieve the JSON-formatted weather
-     * information for the supplied city.
+     * Connects to the yandex API to translate a string of text to a
+     * pre-determined language.
      *
-     * @param city
+     * @param _text to translate
+     * @param _lang to translate _text to.
      * @return
      */
     private static String fetch (String _text, String _lang) {

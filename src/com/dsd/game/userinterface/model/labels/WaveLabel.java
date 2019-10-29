@@ -2,6 +2,7 @@ package com.dsd.game.userinterface.model.labels;
 
 import com.dsd.game.Game;
 import com.dsd.game.controller.LanguageController;
+import com.dsd.game.util.Utilities;
 import com.revivedstandards.main.StandardCamera;
 import com.revivedstandards.util.StdOps;
 import java.awt.Color;
@@ -42,6 +43,6 @@ public class WaveLabel extends StandardLabel {
     }
 
     public void setWaveNumber (int _waveNumber) {
-        this.setText(LanguageController.translate("Wave ") + _waveNumber);
+        this.setText(LanguageController.translate("Wave ") + Utilities.toRoman(_waveNumber));
     }
 }

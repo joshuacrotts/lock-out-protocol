@@ -16,6 +16,7 @@ import java.awt.Graphics2D;
  */
 public class LanguageChangeView extends Screen implements MouseEventInterface {
 
+    //  Miscellaneous menu screen reference;
     private final MenuScreen menuScreen;
 
     public LanguageChangeView (Game _game, MenuScreen _menuScreen) {

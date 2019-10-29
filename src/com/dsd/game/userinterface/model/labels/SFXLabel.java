@@ -5,15 +5,20 @@ import com.dsd.game.userinterface.model.buttons.SoundEffectVolumeControl;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+
 /**
+ * This class denotes the label for showing which of the two volume adjusters
+ * controls the sfx.
  *
  * @author Joshua
  */
 public class SFXLabel extends StandardLabel {
 
-    private MenuScreen menuScreen;
-    private SoundEffectVolumeControl sfxVolumeControl;
+    //  Miscellaneous reference variables.
+    private final MenuScreen menuScreen;
+    private final SoundEffectVolumeControl sfxVolumeControl;
 
+    //  Label positioning offsets.
     private static final int BUTTON_X_OFFSET = 400;
     private static final int BUTTON_Y_OFFSET = 40;
 

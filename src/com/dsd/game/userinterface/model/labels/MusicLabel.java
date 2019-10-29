@@ -6,14 +6,18 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 /**
+ * This class denotes the label for showing which of the two volume adjusters
+ * controls the music.
  *
  * @author Joshua
  */
 public class MusicLabel extends StandardLabel {
 
-    private MenuScreen menuScreen;
-    private MusicVolumeControl musicVolumeControl;
+    //  Miscellaneous reference variables.
+    private final MenuScreen menuScreen;
+    private final MusicVolumeControl musicVolumeControl;
 
+    //  Label positioning offsets.
     private static final int BUTTON_X_OFFSET = 260;
     private static final int BUTTON_Y_OFFSET = 40;
 

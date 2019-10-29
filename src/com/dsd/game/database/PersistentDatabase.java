@@ -56,13 +56,13 @@ public class PersistentDatabase implements RemoteDatabase {
         String levelInfo = this.game.getLevelController().createObject(SerializableType.WAVE_INFO);
         String waveInfo = this.game.getDifficultyController().createObject(SerializableType.LEVEL);
 
-        //  Parse through player info
-        this.uploadPlayerInfo(playerInfo.split(";"));
-        this.uploadInventoryInfo(inventoryInfo.split(";"));
-        this.uploadLevelInfo(levelInfo.split(";"));
-        this.uploadWaveInfo(waveInfo.split(";"));
+        //  If any of these uploads fail, then we automatically reject it.
+        boolean player = this.uploadPlayerInfo(playerInfo.split(";"));
+        boolean inventory = this.uploadInventoryInfo(inventoryInfo.split(";"));
+        boolean level = this.uploadLevelInfo(levelInfo.split(";"));
+        boolean wave = this.uploadWaveInfo(waveInfo.split(";"));
 
-        return true;
+        return player && inventory && level && wave;
     }
 
     /**
@@ -70,20 +70,24 @@ public class PersistentDatabase implements RemoteDatabase {
      *
      * @param _playerData
      */
-    private void uploadPlayerInfo (String[] _playerData) {
+    private boolean uploadPlayerInfo (String[] _playerData) {
         PreparedStatement updatePlayerQuery = null;
 
         try {
             updatePlayerQuery = this.remoteDBConnection.prepareStatement(String.format("UPDATE user_accounts SET PlayerX = ?, PlayerY = ?, Money = ?, Health = ? WHERE UserID = ? ;"));
+            
             for (int i = 0 ; i < _playerData.length ; i++) {
                 updatePlayerQuery.setInt(i + 1, Integer.parseInt(_playerData[i]));
             }
+            
             updatePlayerQuery.setInt(_playerData.length + 1, this.connectedUserID);
             updatePlayerQuery.executeUpdate();
         }
-        catch (SQLException ex) {
-            Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        catch (SQLException | NullPointerException ex) {
+            return false;
         }
+
+        return true;
     }
 
     /**
@@ -91,7 +95,7 @@ public class PersistentDatabase implements RemoteDatabase {
      *
      * @param _inventoryData
      */
-    private void uploadInventoryInfo (String[] _inventoryData) {
+    private boolean uploadInventoryInfo (String[] _inventoryData) {
         PreparedStatement updateInventoryQuery = null;
 
         try {
@@ -104,9 +108,11 @@ public class PersistentDatabase implements RemoteDatabase {
             updateInventoryQuery.setInt(_inventoryData.length + 1, this.connectedUserID);
             updateInventoryQuery.executeUpdate();
         }
-        catch (SQLException ex) {
-            Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        catch (SQLException | NullPointerException ex) {
+            return false;
         }
+
+        return true;
     }
 
     /**
@@ -114,7 +120,7 @@ public class PersistentDatabase implements RemoteDatabase {
      *
      * @param _levelData
      */
-    private void uploadLevelInfo (String[] _levelData) {
+    private boolean uploadLevelInfo (String[] _levelData) {
         PreparedStatement updateLevelQuery = null;
 
         try {
@@ -127,9 +133,11 @@ public class PersistentDatabase implements RemoteDatabase {
             updateLevelQuery.setInt(_levelData.length + 1, this.connectedUserID);
             updateLevelQuery.executeUpdate();
         }
-        catch (SQLException ex) {
-            Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        catch (SQLException | NullPointerException ex) {
+            return false;
         }
+
+        return true;
     }
 
     /**
@@ -137,7 +145,7 @@ public class PersistentDatabase implements RemoteDatabase {
      *
      * @param _levelData
      */
-    private void uploadWaveInfo (String[] _waveInfo) {
+    private boolean uploadWaveInfo (String[] _waveInfo) {
         PreparedStatement updateLevelQuery = null;
 
         try {
@@ -148,9 +156,11 @@ public class PersistentDatabase implements RemoteDatabase {
 
             updateLevelQuery.executeUpdate();
         }
-        catch (SQLException ex) {
-            Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        catch (SQLException | NullPointerException ex) {
+            return false;
         }
+
+        return true;
     }
 
     /**
@@ -178,6 +188,7 @@ public class PersistentDatabase implements RemoteDatabase {
             //  I'm sure there's a MUCH more elegant way to do this, but we'll
             //  optimize the crap out of it later (or at the very LEAST encapsulate
             //  some of this into other methods.
+            //
             //  Firstly, we declare arraylists to hold the values retrieved from
             //  the SQL database. Then, we pass them to their respective objects
             //  and let them deal with it.
@@ -201,7 +212,7 @@ public class PersistentDatabase implements RemoteDatabase {
             this.game.getPlayer().getInventory().readObject(inventoryInfo);
             //  Load in level information from the result set.
             this.game.getLevelController().readObject(playerStatsSet.getInt(21), playerStatsSet.getInt(22));
-            //  Load in wave information from the result set..
+            //  Load in wave information from the result set.
             this.game.getDifficultyController().readObject(playerStatsSet.getInt(23), playerStatsSet.getInt(24));
         }
         catch (SQLException | NullPointerException ex) {

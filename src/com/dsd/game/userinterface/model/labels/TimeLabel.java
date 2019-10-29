@@ -5,6 +5,7 @@ import com.dsd.game.controller.LanguageController;
 import com.dsd.game.controller.TimerController;
 import com.dsd.game.userinterface.Screen;
 import com.dsd.game.userinterface.TimerInterface;
+import com.dsd.game.util.Utilities;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.Timer;
@@ -54,7 +55,8 @@ public class TimeLabel extends StandardLabel implements TimerInterface {
                 TimerController.addTimer(this);
             }
 
-            this.setText(String.format("%02d:%02d:%02d \u007C %s %d", this.hours, this.minutes, this.seconds, this.waveString, this.game.getWaveNumber()));
+            this.setText(String.format("%02d:%02d:%02d \u007C %s %s", this.hours, this.minutes, this.seconds, this.waveString,
+                    Utilities.toRoman(this.game.getWaveNumber())));
         }
     }
 
