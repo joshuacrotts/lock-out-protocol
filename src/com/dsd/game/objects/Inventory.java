@@ -8,6 +8,7 @@ import com.dsd.game.objects.weapons.FastRifle;
 import com.dsd.game.objects.weapons.GrenadeLauncher;
 import com.dsd.game.objects.weapons.Gun;
 import com.dsd.game.objects.weapons.Knife;
+import com.dsd.game.objects.weapons.Minigun;
 import com.dsd.game.objects.weapons.Pistol;
 import com.dsd.game.objects.weapons.Rifle;
 import com.dsd.game.objects.weapons.Shotgun;
@@ -49,6 +50,7 @@ public class Inventory implements SerializableObject {
         //  This will change with time (to a subclass of Weapon).
         this.weapons.add(new Knife(_player));
         this.weapons.add(new Pistol(_game, _player, _sch));
+        this.weapons.add(new Minigun(_game, _player, _sch));
 
         this.view = new InventoryView(this.game, this);
     }
@@ -127,6 +129,9 @@ public class Inventory implements SerializableObject {
                 case GRENADE_LAUNCHER:
                     this.weapons.add(new GrenadeLauncher(this.game, this.player, this.parentHandler));
                     break;
+                case MINIGUN:
+                    this.weapons.add(new Minigun(this.game, this.player, this.parentHandler));
+                    break;
 
             }
         }
@@ -194,7 +199,7 @@ public class Inventory implements SerializableObject {
     public void readObject (ArrayList<Integer> _inventoryInfo) {
         //  Use an array of the types to reduce copying/pasting.
         WeaponType[] types = {WeaponType.PISTOL, WeaponType.RIFLE, WeaponType.FAST_RIFLE,
-            WeaponType.SHOTGUN, WeaponType.GRENADE_LAUNCHER};
+            WeaponType.SHOTGUN, WeaponType.GRENADE_LAUNCHER, WeaponType.MINIGUN};
 
         for (int i = 0, weaponIndex = 0 ; i < types.length ; i++, weaponIndex += 3) {
             this.loadWeaponFromDB(_inventoryInfo.get(weaponIndex), types[i], _inventoryInfo.get(weaponIndex + 1), _inventoryInfo.get(weaponIndex + 2));
@@ -217,13 +222,14 @@ public class Inventory implements SerializableObject {
      * @return
      */
     private Weapon[] hasWeapons () {
-        Weapon[] typesOfWeapons = new Weapon[5];
+        Weapon[] typesOfWeapons = new Weapon[6];
 
         typesOfWeapons[0] = this.hasWeapon(WeaponType.PISTOL);
         typesOfWeapons[1] = this.hasWeapon(WeaponType.RIFLE);
         typesOfWeapons[2] = this.hasWeapon(WeaponType.FAST_RIFLE);
         typesOfWeapons[3] = this.hasWeapon(WeaponType.SHOTGUN);
         typesOfWeapons[4] = this.hasWeapon(WeaponType.GRENADE_LAUNCHER);
+        typesOfWeapons[5] = this.hasWeapon(WeaponType.MINIGUN);
 
         return typesOfWeapons;
     }

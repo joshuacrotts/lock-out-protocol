@@ -74,6 +74,9 @@ public class CollisionHandlerController extends StandardCollisionHandler {
         if (_obj1.getId() == StandardID.Bullet && _obj2 instanceof Enemy) {
             this.handleBulletEnemyCollision((ProjectileGameObject) _obj1, (Enemy) _obj2);
         }
+        else if(_obj1.getId() == StandardID.Bullet && _obj2.getId() == StandardID.Bullet) {
+            return;
+        }
     }
 
     /**

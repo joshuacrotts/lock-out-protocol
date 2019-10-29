@@ -17,7 +17,8 @@ public enum WeaponType {
     GRENADE_LAUNCHER("grenade_launcher"),
     //  PPSH-41 equivalent.
     FAST_RIFLE("fast_rifle"),
-    FLAMETHROWER("flamethrower");
+    FLAMETHROWER("flamethrower"),
+    MINIGUN("minigun");
 
     private final String type;
 
