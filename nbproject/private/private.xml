@@ -22,9 +22,10 @@
             <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/userinterface/view/ShopView.java</file>
             <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/userinterface/model/labels/WaveLabel.java</file>
             <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/userinterface/model/labels/HealthLabel.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/userinterface/model/labels/SFXLabel.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/userinterface/model/buttons/SoundEffectVolumeControl.java</file>
             <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/userinterface/model/buttons/MenuButton.java</file>
             <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/userinterface/model/labels/PauseLabel.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/commands/SprintCommand.java</file>
             <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/LanguageEnum.java</file>
             <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/userinterface/view/PlayerView.java</file>
             <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/userinterface/view/LanguageChangeView.java</file>
@@ -37,6 +38,7 @@
             <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/userinterface/model/labels/ResolutionLabel.java</file>
             <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/LockOutProtocolRunner.java</file>
             <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/userinterface/view/ResolutionView.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/userinterface/model/labels/MusicLabel.java</file>
             <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/userinterface/shop/ShopTitleLabel.java</file>
             <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/userinterface/model/labels/TitleLabel.java</file>
             <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/CSC-340-Game/src/com/dsd/game/commands/IncreaseResolutionCommand.java</file>
