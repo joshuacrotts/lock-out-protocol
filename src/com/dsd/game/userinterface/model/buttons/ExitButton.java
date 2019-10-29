@@ -27,7 +27,7 @@ public class ExitButton extends MenuButton implements MouseEventInterface {
     public ExitButton (Game _game, MenuScreen _menuScreen) {
         super(_game.getGameWidth() - BUTTON_X_OFFSET - BUTTON_WIDTH / 2,
                 _game.getGameHeight(),
-                BUTTON_WIDTH, BUTTON_HEIGHT, LanguageController.translate("EXIT GAME"), _game, _menuScreen);
+                BUTTON_WIDTH, BUTTON_HEIGHT, LanguageController.translate("QUIT GAME"), _game, _menuScreen);
     }
 
     @Override

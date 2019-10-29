@@ -12,17 +12,22 @@ public enum LanguageEnum {
     AR(LanguageController.translate("Arabic", "ar"), "ar"),
     ZH(LanguageController.translate("Chinese", "zh"), "zh"),
     CS(LanguageController.translate("Czech", "cs"), "cs"),
+    DA(LanguageController.translate("Danish", "da"), "da"),
     NL(LanguageController.translate("Dutch", "nl"), "nl"),
     EN(LanguageController.translate("English", "en"), "en"),
+    FI(LanguageController.translate("Finnish", "fi"), "fi"),
     FR(LanguageController.translate("French", "fr"), "fr"),
     DE(LanguageController.translate("German", "de"), "de"),
     EL(LanguageController.translate("Greek", "el"), "el"),
+    GA(LanguageController.translate("Irish", "ga"), "ga"),
     IT(LanguageController.translate("Italian", "it"), "it"),
     JA(LanguageController.translate("Japanese", "ja"), "ja"),
+    PL(LanguageController.translate("Polish", "pl"), "pl"),
     PT(LanguageController.translate("Portuguese", "pt"), "pt"),
     RO(LanguageController.translate("Romanian", "ro"), "ro"),
     RU(LanguageController.translate("Russian", "ru"), "ru"),
     ES(LanguageController.translate("Spanish", "es"), "es"),
+    SV(LanguageController.translate("Swedish", "sv"), "sv"),
     UR(LanguageController.translate("Urdu", "ur"), "ur"),
     VI(LanguageController.translate("Vietnamese", "vi"), "vi");
 
@@ -32,7 +37,7 @@ public enum LanguageEnum {
     private static int languageIndex = 5;
 
     private static final LanguageEnum[] LANGUAGE_LIST = {
-        AR, ZH, CS, NL, EN, FR, DE, EL, IT, JA, PT, RO, RU, ES, UR, VI
+        AR, ZH, CS, DA, NL, EN, FI, FR, DE, EL, GA, IT, JA, PL, PT, RO, RU, ES, SV, UR, VI
     };
 
     /**

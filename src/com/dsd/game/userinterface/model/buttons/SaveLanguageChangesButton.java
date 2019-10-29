@@ -99,7 +99,7 @@ public class SaveLanguageChangesButton extends MenuButton implements MouseEventI
      * appear upon reloading the game.
      */
     private void displaySaveChangesMsg () {
-        JOptionPane.showMessageDialog(null, "Your changes will appear upon reloading the game.");
+        JOptionPane.showMessageDialog(null, LanguageController.translate("Your changes will appear upon reloading the game."));
     }
 
 }
