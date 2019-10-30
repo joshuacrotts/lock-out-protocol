@@ -68,6 +68,7 @@ public class AttackCommand extends Command implements TimerInterface {
                 case SHOTGUN:
                 case GRENADE_LAUNCHER:
                 case MINIGUN:
+                case SUPER_SHOTGUN:
                     this.gunAttack((Gun) weapon);
                     break;
                 case KNIFE:

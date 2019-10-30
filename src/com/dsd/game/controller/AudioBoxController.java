@@ -24,6 +24,7 @@ public abstract class AudioBoxController {
         StandardAudioController.load("src/resources/audio/sfx/shotgun.wav", 4, StandardAudioType.SFX);
         StandardAudioController.load("src/resources/audio/sfx/grenade_launcher.wav", 2, StandardAudioType.SFX);
         StandardAudioController.load("src/resources/audio/sfx/grenade_explosion.wav", 4, StandardAudioType.SFX);
+        StandardAudioController.load("src/resources/audio/sfx/minigun.wav", 64, StandardAudioType.SFX);
         StandardAudioController.load("src/resources/audio/sfx/rifle.wav", 32, StandardAudioType.SFX);
         StandardAudioController.load("src/resources/audio/sfx/fast_rifle.wav", 32, StandardAudioType.SFX);
         StandardAudioController.load("src/resources/audio/sfx/coin.wav", 8, StandardAudioType.SFX);

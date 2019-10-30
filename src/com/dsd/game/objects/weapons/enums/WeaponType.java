@@ -18,7 +18,8 @@ public enum WeaponType {
     //  PPSH-41 equivalent.
     FAST_RIFLE("fast_rifle"),
     FLAMETHROWER("flamethrower"),
-    MINIGUN("minigun");
+    MINIGUN("minigun"),
+    SUPER_SHOTGUN("sshotgun");
 
     private final String type;
 

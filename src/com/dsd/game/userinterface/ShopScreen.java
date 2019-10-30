@@ -6,6 +6,7 @@ import com.dsd.game.userinterface.shop.ShopTitleLabel;
 import com.dsd.game.userinterface.shop.enums.ShopState;
 import com.dsd.game.userinterface.shop.weapons.models.FastRifleButton;
 import com.dsd.game.userinterface.shop.weapons.models.GrenadeLauncherButton;
+import com.dsd.game.userinterface.shop.weapons.models.MinigunButton;
 import com.dsd.game.userinterface.shop.weapons.models.PistolButton;
 import com.dsd.game.userinterface.shop.weapons.models.RifleButton;
 import com.dsd.game.userinterface.shop.weapons.models.ShotgunButton;
@@ -63,6 +64,7 @@ public class ShopScreen extends Screen {
         super.addInteractor(new GrenadeLauncherButton(this.getGame(), this));
         super.addInteractor(new FastRifleButton(this.getGame(), this));
         super.addInteractor(new ShotgunButton(this.getGame(), this));
+        super.addInteractor(new MinigunButton(this.getGame(), this));
     }
 
 //============================ GETTERS ====================================//

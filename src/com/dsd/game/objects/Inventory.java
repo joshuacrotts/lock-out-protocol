@@ -12,6 +12,7 @@ import com.dsd.game.objects.weapons.Minigun;
 import com.dsd.game.objects.weapons.Pistol;
 import com.dsd.game.objects.weapons.Rifle;
 import com.dsd.game.objects.weapons.Shotgun;
+import com.dsd.game.objects.weapons.SuperShotgun;
 import com.dsd.game.objects.weapons.Weapon;
 import com.dsd.game.objects.weapons.enums.WeaponSelection;
 import com.dsd.game.objects.weapons.enums.WeaponType;
@@ -50,7 +51,7 @@ public class Inventory implements SerializableObject {
         //  This will change with time (to a subclass of Weapon).
         this.weapons.add(new Knife(_player));
         this.weapons.add(new Pistol(_game, _player, _sch));
-        this.weapons.add(new Minigun(_game, _player, _sch));
+        this.weapons.add(new SuperShotgun(_game, _player, _sch));
 
         this.view = new InventoryView(this.game, this);
     }
