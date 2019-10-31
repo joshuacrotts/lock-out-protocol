@@ -99,7 +99,7 @@ public class PersistentDatabase implements RemoteDatabase {
         PreparedStatement updateInventoryQuery = null;
 
         try {
-            updateInventoryQuery = this.remoteDBConnection.prepareStatement(String.format("UPDATE user_accounts SET Pistol = ?, PistolAmmo = ?, PistolTotalAmmo = ?, Rifle = ?, RifleAmmo = ?, RifleTotalAmmo = ?, FastRifle = ?, FastRifleAmmo = ?, FastRifleTotalAmmo = ?, Shotgun = ?, ShotgunAmmo = ?, ShotgunTotalAmmo = ?, GrenadeLauncher = ?, GrenadeLauncherAmmo = ?, GrenadeLauncherTotalAmmo = ?, Minigun = ?, MinigunAmmo = ?, MinigunTotalAmmo = ? WHERE UUID = ?;"));
+            updateInventoryQuery = this.remoteDBConnection.prepareStatement(String.format("UPDATE user_accounts SET Pistol = ?, PistolAmmo = ?, PistolTotalAmmo = ?, Rifle = ?, RifleAmmo = ?, RifleTotalAmmo = ?, FastRifle = ?, FastRifleAmmo = ?, FastRifleTotalAmmo = ?, Shotgun = ?, ShotgunAmmo = ?, ShotgunTotalAmmo = ?, GrenadeLauncher = ?, GrenadeLauncherAmmo = ?, GrenadeLauncherTotalAmmo = ?, Minigun = ?, MinigunAmmo = ?, MinigunTotalAmmo = ?, SuperShotgun = ?, SuperShotgunAmmo = ?, SuperShotgunTotalAmmo = ? WHERE UUID = ?;"));
 
             for (int i = 0 ; i < _inventoryData.length ; i++) {
                 updateInventoryQuery.setInt(i + 1, Integer.parseInt(_inventoryData[i]));
@@ -182,7 +182,7 @@ public class PersistentDatabase implements RemoteDatabase {
         try {
             //  Perform the query to retrieve the information about the player
             //  and their inventory from the SQL db.
-            playerStatsQuery = this.remoteDBConnection.prepareStatement(String.format("SELECT Sex, PlayerX, PlayerY, Money, Health, Pistol, PistolAmmo, PistolTotalAmmo, Rifle, RifleAmmo, RifleTotalAmmo, FastRifle, FastRifleAmmo, FastRifleTotalAmmo, Shotgun, ShotgunAmmo, ShotgunTotalAmmo, GrenadeLauncher, GrenadeLauncherAmmo, GrenadeLauncherTotalAmmo, Minigun, MinigunAmmo, MinigunTotalAmmo LevelID, Wave, LevelTransitionTimer, DifficultyFactor FROM user_accounts WHERE UUID = ?;"));
+            playerStatsQuery = this.remoteDBConnection.prepareStatement(String.format("SELECT Sex, PlayerX, PlayerY, Money, Health, Pistol, PistolAmmo, PistolTotalAmmo, Rifle, RifleAmmo, RifleTotalAmmo, FastRifle, FastRifleAmmo, FastRifleTotalAmmo, Shotgun, ShotgunAmmo, ShotgunTotalAmmo, GrenadeLauncher, GrenadeLauncherAmmo, GrenadeLauncherTotalAmmo, Minigun, MinigunAmmo, MinigunTotalAmmo,SuperShotgun, SuperShotgunAmmo, SuperShotgunTotalAmmo, LevelID, Wave, LevelTransitionTimer, DifficultyFactor FROM user_accounts WHERE UUID = ?;"));
             playerStatsQuery.setString(1, this.connectedUserID);
             ResultSet playerStatsSet = playerStatsQuery.executeQuery();
 
@@ -201,7 +201,7 @@ public class PersistentDatabase implements RemoteDatabase {
             ArrayList<Integer> playerInfo = new ArrayList<>();
             ArrayList<Integer> inventoryInfo = new ArrayList<>();
             final int PLAYER_AMT = 5;
-            final int INVENTORY_AMT = 18;
+            final int INVENTORY_AMT = 21;
 
             //  Load in the player data from the Result Set
             for (int i = 1 ; i <= PLAYER_AMT ; i++) {
@@ -217,9 +217,11 @@ public class PersistentDatabase implements RemoteDatabase {
             //  Load the weapon statistics.
             this.game.getPlayer().getInventory().readObject(inventoryInfo);
             //  Load in level information from the result set.
-            this.game.getLevelController().readObject(playerStatsSet.getInt(INVENTORY_AMT + PLAYER_AMT + 1), playerStatsSet.getInt(INVENTORY_AMT + PLAYER_AMT + 2));
+            this.game.getLevelController().readObject(playerStatsSet.getInt(PLAYER_AMT + INVENTORY_AMT + 1),
+                                                      playerStatsSet.getInt(PLAYER_AMT + INVENTORY_AMT + 2));
             //  Load in wave information from the result set.
-            this.game.getDifficultyController().readObject(playerStatsSet.getInt(INVENTORY_AMT + PLAYER_AMT + 3), playerStatsSet.getInt(INVENTORY_AMT + PLAYER_AMT + 4));
+            this.game.getDifficultyController().readObject(playerStatsSet.getInt(PLAYER_AMT + INVENTORY_AMT + 3),
+                                                           playerStatsSet.getInt(PLAYER_AMT + INVENTORY_AMT + 4));
         }
         catch (SQLException | NullPointerException ex) {
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
@@ -337,7 +339,7 @@ public class PersistentDatabase implements RemoteDatabase {
                 String hashed = BCrypt.hashpw(_password, BCrypt.gensalt());
 
                 //  Very, VERY long statement to update the user.
-                insertStatement = this.remoteDBConnection.prepareStatement(String.format("INSERT INTO user_accounts " + "VALUES(UUID(), ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);"));
+                insertStatement = this.remoteDBConnection.prepareStatement(String.format("INSERT INTO user_accounts " + "VALUES(UUID(), ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);"));
                 insertStatement.setString(1, _email);
                 insertStatement.setString(2, hashed);
                 insertStatement.executeUpdate();
