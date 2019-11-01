@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dsd.game.particles;
 
 import com.dsd.game.Game;
@@ -68,7 +63,7 @@ public class BulletCasing extends StandardParticle implements Renderable, Updata
     }
 
     static {
-        casingImgs = Utilities.loadFrames("src/resources/img/objects/casings", 11);
+        casingImgs = Utilities.loadFrames("src/resources/img/objects/casings", 14);
     }
 
 }
