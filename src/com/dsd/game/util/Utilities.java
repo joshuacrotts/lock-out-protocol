@@ -75,6 +75,7 @@ public abstract class Utilities extends StdOps {
      * @return
      */
     public static final String toRoman (int number) {
+        System.out.println(map);
         int l = map.floorKey(number);
         if (number == l) {
             return map.get(number);

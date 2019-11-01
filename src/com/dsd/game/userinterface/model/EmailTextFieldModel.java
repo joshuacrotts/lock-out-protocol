@@ -44,4 +44,7 @@ public class EmailTextFieldModel extends TextFieldModel {
         super.render(_g2);
     }
 
+    public int getEmailLabelLength () {
+        return this.emailLabel.getText().length();
+    }
 }
