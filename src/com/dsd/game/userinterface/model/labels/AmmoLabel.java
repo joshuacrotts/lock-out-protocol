@@ -29,7 +29,7 @@ public class AmmoLabel extends StandardLabel {
     public AmmoLabel (Game _game, Player _player) {
         super((int) (Screen.gameHalfWidth + Screen.gameHalfWidth),
                 (int) (Screen.gameHalfHeight + Screen.gameHalfHeight / 2),
-                LanguageController.translate("AMMO: "), "src/resources/fonts/chargen.ttf", 30f);
+                LanguageController.translate("AMMO: "), "src/resources/fonts/chargen.ttf", 28f);
         this.game = _game;
         this.player = _player;
     }

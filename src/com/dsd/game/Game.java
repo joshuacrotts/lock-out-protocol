@@ -12,6 +12,7 @@ import com.dsd.game.controller.TimerController;
 import com.dsd.game.database.TranslatorDatabase;
 import com.dsd.game.levels.MetalLevel;
 import com.dsd.game.objects.Player;
+import com.dsd.game.particles.BulletCasing;
 import com.dsd.game.userinterface.HUDScreen;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.PauseScreen;
@@ -152,6 +153,8 @@ public class Game extends StandardGame {
             case RUNNING:
                 //  Update the level background first
                 this.levelController.tickLevel();
+                //  Update the handler with the casings
+                StandardHandler.Handler(this.player.getCasingHandler());
                 //  Then the objects within the handler
                 StandardHandler.Handler(this.sch);
                 //  Then the rain if applicable
@@ -178,8 +181,10 @@ public class Game extends StandardGame {
             StandardDraw.Object(this.sc);
             //  Then render the current [active] level
             this.levelController.renderLevel(StandardDraw.Renderer);
-            // Then render the rain if applicable
+            //  Then render the rain if applicable
             this.rainController.render(StandardDraw.Renderer);
+            //  Then render the handler with the casings.
+            StandardDraw.Handler(this.player.getCasingHandler());
             //  Then render the handler objects
             StandardDraw.Handler(this.sch);
             //  Then render the heads up display

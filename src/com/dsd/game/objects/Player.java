@@ -15,7 +15,10 @@ import com.dsd.game.objects.enums.PlayerState;
 import com.dsd.game.userinterface.Screen;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
+import com.revivedstandards.handlers.StandardHandler;
+import com.revivedstandards.handlers.StandardParticleHandler;
 import com.revivedstandards.main.StandardCamera;
+import com.revivedstandards.main.StandardDraw;
 import com.revivedstandards.model.DeathListener;
 import com.revivedstandards.model.StandardID;
 import java.awt.Color;
@@ -40,6 +43,9 @@ public class Player extends Entity implements DeathListener, SerializableObject 
 
     //  Miscellaneous reference variables
     private StandardCamera sc;
+
+    //  Bullet Casing particle handler
+    private StandardParticleHandler casingHandler;
 
     /**
      * Refers to the player's current state (walking, shooting, etc.)
@@ -67,16 +73,24 @@ public class Player extends Entity implements DeathListener, SerializableObject 
 
     public Player (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, 100, StandardID.Player, (Game) _game, _sch);
+
         //  Instantiate the inventory
         this.inventory = new Inventory(this.getGame(), this, _sch);
+
         //  Initializes the miscellaneous variables
         this.sc = this.getGame().getCamera();
+
         //  Sets the default animation
         this.setAnimation(this.inventory.getCurrentWeapon().getWalkFrames());
+
         //  Instantiate commands
         this.initCommands();
+
         //  Initializes the player's default state to standing
         this.playerState = PlayerState.STANDING;
+
+        this.casingHandler = new StandardParticleHandler(1000);
+
         //  Adds the player to the list of collidable objects
         _sch.addCollider(StandardID.Player);
         _sch.flagAlive(StandardID.Player);
@@ -339,6 +353,10 @@ public class Player extends Entity implements DeathListener, SerializableObject 
         return this.maxHealth;
     }
 
+    public StandardParticleHandler getCasingHandler () {
+        return this.casingHandler;
+    }
+
     public int getPlayerDirection () {
         int directionSign = 0;
         switch (this.playerState) {
@@ -359,6 +377,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
 //=============================== SETTERS ================================//
     public void setCamera (StandardCamera _sc) {
         this.sc = _sc;
+        this.casingHandler.setCamera(_sc);
     }
 
     public void setPlayerState (PlayerState _playerState) {

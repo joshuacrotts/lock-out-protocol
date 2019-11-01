@@ -40,7 +40,7 @@ public class Coin extends StandardGameObject {
     private int value = 0;
 
     //  Max number of sound effects for coins.
-    private static final int MAX_COIN_SFX = 3;
+    private static final int MAX_COIN_SFX = 1;
 
     /**
      * The _small, _medium, and _large parameters should be sequential, and go
@@ -88,8 +88,7 @@ public class Coin extends StandardGameObject {
      * Plays a random coin collection sfx.
      */
     public void playCoinSFX () {
-        StandardAudioController.play("src/resources/audio/sfx/coin"
-                + ((int) (Math.random() * Coin.MAX_COIN_SFX)) + ".wav", StandardAudioType.SFX);
+        StandardAudioController.play("src/resources/audio/sfx/coin0.wav", StandardAudioType.SFX);
     }
 
     /**
