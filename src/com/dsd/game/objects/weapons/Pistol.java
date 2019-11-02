@@ -6,10 +6,8 @@ import com.dsd.game.objects.weapons.enums.WeaponType;
 import com.dsd.game.objects.weapons.projectiles.BulletGameObject;
 import com.dsd.game.util.Utilities;
 import com.revivedstandards.controller.StandardAnimatorController;
-import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.model.StandardAnimation;
-import com.revivedstandards.model.StandardAudioType;
 
 /**
  * This class is a subclass of Gun; it acts as a standard pistol.
@@ -27,11 +25,14 @@ public class Pistol extends Gun {
     //  Delay between shots.
     private final int DELAY = 750;
 
+    //  Delay between reloadign and firing the first bullet afterwards.
+    private static final long RELOAD_DELAY = 2000;
+
     //  Damage from the pistol.
     private static final int BULLET_DAMAGE = 40;
 
     public Pistol (Game _game, Player _player, StandardCollisionHandler _sch) {
-        super(WeaponType.PISTOL, 16, _game, _player, _sch, "src/resources/audio/sfx/reload.wav", 3000);
+        super(WeaponType.PISTOL, 16, _game, _player, _sch, "src/resources/audio/sfx/pistol_reload.wav", RELOAD_DELAY);
 
         //  Instantiates the animation controllers
         this.loadAssets(_player);

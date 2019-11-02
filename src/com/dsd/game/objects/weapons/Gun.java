@@ -94,10 +94,10 @@ public abstract class Gun extends Weapon {
     }
 
     /**
-     * Reloads a gun using the specified algorithm.
+     * Reloads a gun using the specified algorithm. This method is called AFTER
+     * the sound effect is played; all it does is change the model.
      */
     public void reload () {
-        StandardAudioController.play(this.reloadSFXPath, StandardAudioType.SFX);
         /**
          * Three cases: 1. The magazine is empty and we have enough to fill it
          * 2. The magazine is not empty and we have enough to fill it

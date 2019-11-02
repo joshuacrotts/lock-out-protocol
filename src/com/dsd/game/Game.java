@@ -12,7 +12,6 @@ import com.dsd.game.controller.TimerController;
 import com.dsd.game.database.TranslatorDatabase;
 import com.dsd.game.levels.MetalLevel;
 import com.dsd.game.objects.Player;
-import com.dsd.game.particles.BulletCasing;
 import com.dsd.game.userinterface.HUDScreen;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.PauseScreen;

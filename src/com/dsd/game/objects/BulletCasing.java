@@ -1,14 +1,12 @@
-package com.dsd.game.particles;
+package com.dsd.game.objects;
 
 import com.dsd.game.Game;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.weapons.Gun;
-import com.dsd.game.util.Utilities;
 import com.revivedstandards.model.StandardParticle;
 import com.revivedstandards.util.StdOps;
 import com.revivedstandards.view.Renderable;
 import com.revivedstandards.view.Updatable;
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 

@@ -3,7 +3,6 @@ package com.dsd.game.userinterface.model.buttons;
 import com.dsd.game.Game;
 import com.dsd.game.GameState;
 import com.dsd.game.controller.DebugController;
-import com.dsd.game.controller.DifficultyController;
 import com.dsd.game.controller.LanguageController;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MouseEventInterface;

@@ -2,7 +2,6 @@ package com.dsd.game.userinterface.model.labels;
 
 import com.dsd.game.controller.LanguageController;
 import com.dsd.game.userinterface.MenuScreen;
-import com.dsd.game.userinterface.model.EmailTextFieldModel;
 import com.dsd.game.userinterface.model.PasswordTextFieldModel;
 import java.awt.Color;
 import java.awt.Graphics2D;

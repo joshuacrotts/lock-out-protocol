@@ -2,13 +2,13 @@ package com.dsd.game.commands;
 
 import com.dsd.game.Game;
 import com.dsd.game.controller.TimerController;
+import com.dsd.game.objects.BulletCasing;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.enums.PlayerState;
 import com.dsd.game.objects.weapons.Gun;
 import com.dsd.game.objects.weapons.Knife;
 import com.dsd.game.objects.weapons.Weapon;
 import com.dsd.game.objects.weapons.enums.WeaponType;
-import com.dsd.game.particles.BulletCasing;
 import com.dsd.game.userinterface.TimerInterface;
 import com.revivedstandards.commands.Command;
 import com.revivedstandards.controller.StandardAnimatorController;

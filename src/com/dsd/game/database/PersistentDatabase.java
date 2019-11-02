@@ -224,7 +224,7 @@ public class PersistentDatabase implements RemoteDatabase {
             //  and let them deal with it.
             ArrayList<Integer> playerInfo = new ArrayList<>();
             ArrayList<Integer> inventoryInfo = new ArrayList<>();
-            final int PLAYER_AMT = 5;
+            final int PLAYER_AMT = 6;
             final int INVENTORY_AMT = 21;
 
             //  Load in the player data from the Result Set

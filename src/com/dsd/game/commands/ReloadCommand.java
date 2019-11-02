@@ -4,6 +4,7 @@ import com.dsd.game.Game;
 import com.dsd.game.controller.TimerController;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.weapons.Gun;
+import com.dsd.game.objects.weapons.enums.WeaponType;
 import com.dsd.game.userinterface.TimerInterface;
 import com.revivedstandards.commands.Command;
 import com.revivedstandards.controller.StandardAudioController;
@@ -58,6 +59,14 @@ public class ReloadCommand extends Command implements TimerInterface {
         }
 
         gun.setReloading(true);
+
+        //  If the gun is a shotgun and we still have shotgun shells, we don't
+        //  reload.
+        if (gun.getWeaponType() == WeaponType.SHOTGUN && !gun.isWeaponEmpty()) {
+            return;
+        }
+
+        //  Play the reload sfx.
         StandardAudioController.play(gun.getReloadSFXPath(), StandardAudioType.SFX);
 
         this.reloadTimer = new Timer(true);
