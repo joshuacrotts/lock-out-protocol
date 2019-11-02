@@ -7,6 +7,7 @@ import com.dsd.game.objects.enums.PlayerState;
 import com.dsd.game.objects.weapons.Gun;
 import com.dsd.game.objects.weapons.Knife;
 import com.dsd.game.objects.weapons.Weapon;
+import com.dsd.game.objects.weapons.enums.WeaponType;
 import com.dsd.game.particles.BulletCasing;
 import com.dsd.game.userinterface.TimerInterface;
 import com.revivedstandards.commands.Command;
@@ -128,8 +129,13 @@ public class AttackCommand extends Command implements TimerInterface {
              */
             this.toggleAttackAnimation();
             _gun.shoot();
-            BulletCasing casing = new BulletCasing(this.game, this.player);
-            StandardAudioController.play(_gun.getSFXPath(), StandardAudioType.SFX);
+            _gun.playGunShotSFX();
+
+            //  If we're on the grenade launcher, we don't need to fire
+            //  a casing.
+            if (_gun.getWeaponType() != WeaponType.GRENADE_LAUNCHER) {
+                BulletCasing casing = new BulletCasing(this.game, this.player, _gun);
+            }
         }
     }
 

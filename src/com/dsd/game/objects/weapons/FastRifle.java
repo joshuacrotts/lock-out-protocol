@@ -29,10 +29,11 @@ public class FastRifle extends Gun {
     private static final int BULLET_DAMAGE = 15;
 
     public FastRifle (Game _game, Player _player, StandardCollisionHandler _sch) {
-        super(WeaponType.FAST_RIFLE, 71, _game, _player, _sch);
+        super(WeaponType.FAST_RIFLE, 71, _game, _player, _sch, "src/resources/audio/sfx/reload.wav", 3000);
         //  Instantiates the animation controllers.
         this.loadAssets(_player);
         super.setDelay(DELAY);
+        super.loadCasingImages(14);
     }
 
     @Override

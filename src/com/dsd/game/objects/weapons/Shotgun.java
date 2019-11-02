@@ -29,10 +29,11 @@ public class Shotgun extends Gun {
     private static final int BULLET_DAMAGE = 100;
 
     public Shotgun (Game _game, Player _player, StandardCollisionHandler _sch) {
-        super(WeaponType.SHOTGUN, 8, _game, _player, _sch);
+        super(WeaponType.SHOTGUN, 8, _game, _player, _sch, "src/resources/audio/sfx/reload.wav", 3000);
         //  Instantiates the animation controllers.
         this.loadAssets(_player);
         super.setDelay(DELAY);
+        super.loadCasingImages(8);
     }
 
     @Override

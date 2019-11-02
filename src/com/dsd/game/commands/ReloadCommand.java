@@ -58,10 +58,10 @@ public class ReloadCommand extends Command implements TimerInterface {
         }
 
         gun.setReloading(true);
-        StandardAudioController.play("src/resources/audio/sfx/reload.wav", StandardAudioType.SFX);
+        StandardAudioController.play(gun.getReloadSFXPath(), StandardAudioType.SFX);
 
         this.reloadTimer = new Timer(true);
-        this.reloadTimer.schedule(new ReloadTimer(gun), this.RELOAD_DELAY);
+        this.reloadTimer.schedule(new ReloadTimer(gun), gun.getReloadDelay());
     }
 
     /**

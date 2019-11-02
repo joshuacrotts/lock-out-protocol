@@ -27,10 +27,11 @@ public class Minigun extends Gun {
     private static final int BULLET_DAMAGE = 15;
 
     public Minigun (Game _game, Player _player, StandardCollisionHandler _sch) {
-        super(WeaponType.MINIGUN, 100, _game, _player, _sch);
+        super(WeaponType.MINIGUN, 100, _game, _player, _sch, "src/resources/audio/sfx/reload.wav", 3000);
         //  Instantiates the animation controllers.
         this.loadAssets(_player);
         super.setDelay(DELAY);
+        super.loadCasingImages(14);
     }
 
     @Override

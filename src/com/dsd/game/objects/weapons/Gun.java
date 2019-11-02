@@ -4,7 +4,11 @@ import com.dsd.game.Game;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.weapons.enums.WeaponState;
 import com.dsd.game.objects.weapons.enums.WeaponType;
+import com.dsd.game.util.Utilities;
+import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
+import com.revivedstandards.model.StandardAudioType;
+import java.awt.image.BufferedImage;
 
 /**
  * This class is a template for a gun. In the future, this will be abstract, so
@@ -22,6 +26,8 @@ public abstract class Gun extends Weapon {
     private final StandardCollisionHandler globalHandler;
     private final Player player;
 
+    private BufferedImage[] casingImages;
+
     /**
      * Variables for how much ammo the gun can carry, how much is in a mag, and
      * how much they currently have.
@@ -32,8 +38,13 @@ public abstract class Gun extends Weapon {
 
     //  Sound effects played when the gun is shot, or empty.
     private final String emptySFXPath;
+    private final String reloadSFXPath;
 
-    public Gun (WeaponType _type, int _totalAmmo, Game _game, Player _player, StandardCollisionHandler _sch) {
+    //  Delay for reload command.
+    private final long reloadDelay;
+
+    public Gun (WeaponType _type, int _totalAmmo, Game _game, Player _player,
+            StandardCollisionHandler _sch, String _reloadSFX, long _reloadDelay) {
         super(_type);
         this.game = _game;
         this.player = _player;
@@ -42,10 +53,14 @@ public abstract class Gun extends Weapon {
         this.magazineAmt = _totalAmmo;
         this.totalAmmo = _totalAmmo << 2;
         this.emptySFXPath = "src/resources/audio/sfx/empty.wav";
+        this.reloadSFXPath = _reloadSFX;
+        this.reloadDelay = _reloadDelay;
         super.setWeaponState(WeaponState.READY);
     }
 
-    public Gun (WeaponType _type, int _currAmmo, int _totalAmmo, int magCapacity, Game _game, Player _player, StandardCollisionHandler _sch) {
+    public Gun (WeaponType _type, int _currAmmo, int _totalAmmo, int magCapacity,
+            Game _game, Player _player, StandardCollisionHandler _sch, String _reloadSFX,
+            long _reloadDelay) {
         super(_type);
         this.game = _game;
         this.player = _player;
@@ -54,6 +69,8 @@ public abstract class Gun extends Weapon {
         this.magazineAmt = magCapacity;
         this.totalAmmo = _totalAmmo << 2;
         this.emptySFXPath = "src/resources/audio/sfx/empty.wav";
+        this.reloadSFXPath = _reloadSFX;
+        this.reloadDelay = _reloadDelay;
         super.setWeaponState(WeaponState.READY);
     }
 
@@ -61,6 +78,13 @@ public abstract class Gun extends Weapon {
      * Defines what happens when the gun is shot.
      */
     public abstract void shoot ();
+
+    /**
+     * Plays the sound effect associated with the gun type.
+     */
+    public void playGunShotSFX () {
+        StandardAudioController.play("src/resources/audio/sfx/" + this.getWeaponType() + ".wav", StandardAudioType.SFX);
+    }
 
     /**
      * Removes one bullet from the gun.
@@ -73,6 +97,7 @@ public abstract class Gun extends Weapon {
      * Reloads a gun using the specified algorithm.
      */
     public void reload () {
+        StandardAudioController.play(this.reloadSFXPath, StandardAudioType.SFX);
         /**
          * Three cases: 1. The magazine is empty and we have enough to fill it
          * 2. The magazine is not empty and we have enough to fill it
@@ -129,6 +154,10 @@ public abstract class Gun extends Weapon {
         return this.emptySFXPath;
     }
 
+    public String getReloadSFXPath () {
+        return this.reloadSFXPath;
+    }
+
     public boolean isReloading () {
         return super.getWeaponState() == WeaponState.RELOAD;
     }
@@ -144,6 +173,14 @@ public abstract class Gun extends Weapon {
     public Game getGame () {
         return this.game;
     }
+
+    public long getReloadDelay () {
+        return this.reloadDelay;
+    }
+
+    public BufferedImage getRandomCasing () {
+        return this.casingImages[(int) (Math.random() * this.casingImages.length)];
+    }
 //============================== SETTERS ===================================//
 
     public void setCurrentAmmo (int _ammo) {
@@ -156,5 +193,9 @@ public abstract class Gun extends Weapon {
 
     public void setReloading (boolean _reloading) {
         this.setWeaponState(_reloading ? WeaponState.RELOAD : WeaponState.READY);
+    }
+
+    public void loadCasingImages (int _casingAmount) {
+        this.casingImages = Utilities.loadFrames("src/resources/img/objects/casings/" + this.getWeaponType() + "_casings/", _casingAmount);
     }
 }
