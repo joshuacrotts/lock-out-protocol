@@ -22,14 +22,14 @@ public class VolumeControlButton extends MenuButton implements MouseEventInterfa
     //  Button position and dimension offsets.
     private static final int BUTTON_X_OFFSET = 141;
     private static final int BUTTON_Y_OFFSET = 450;
-    private static final int TEXT_X_OFFSET = 100;
+    private static final int TEXT_X_OFFSET = 50;
     private static final int TEXT_Y_OFFSET = 45;
     private static final int BUTTON_WIDTH = 300;
     private static final int BUTTON_HEIGHT = 82;
 
     public VolumeControlButton (Game _game, MenuScreen _menuScreen) {
         super(VolumeControlButton.BUTTON_X_OFFSET, _game.getGameHeight() - VolumeControlButton.BUTTON_Y_OFFSET,
-                VolumeControlButton.BUTTON_WIDTH, VolumeControlButton.BUTTON_HEIGHT, LanguageController.translate("VOLUME"),
+                VolumeControlButton.BUTTON_WIDTH, VolumeControlButton.BUTTON_HEIGHT, LanguageController.translate("CHANGE VOLUME"),
                 _game, _menuScreen);
     }
 
