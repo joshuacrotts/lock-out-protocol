@@ -13,13 +13,12 @@ import java.util.logging.Logger;
 /**
  * This API calls the yandex language API for a language translation.
  *
- * @author Joshua
+ * @author Joshua, Rinty, Ronald
  */
 public class LanguageTranslation {
 
     private static BufferedReader reader;
     private static InputStream inputStream;
-
     private static URL url;
     private static String line;
     private static String key;
