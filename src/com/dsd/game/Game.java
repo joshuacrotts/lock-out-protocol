@@ -355,6 +355,10 @@ public class Game extends StandardGame {
     public MenuScreen getMenuScreen () {
         return this.menuScreen;
     }
+    
+    public HUDScreen getHUDScreen() {
+        return this.hudScreen;
+    }
 
     public LevelController getLevelController () {
         return this.levelController;

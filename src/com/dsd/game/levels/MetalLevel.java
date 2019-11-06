@@ -70,8 +70,8 @@ public class MetalLevel extends StandardLevel {
 
     @Override
     public void loadLevelData() {
-        this.addEntity(SpawnerFactory.generateSpawner(EnemyType.FEMALE_BOSS_MONSTER,
-                StdOps.rand(600, 3400), StdOps.rand(600, 3400), 8000, 200, this.game,
+        this.addEntity(SpawnerFactory.generateBossSpawner(EnemyType.FEMALE_BOSS_MONSTER, 
+                StdOps.rand(600, 3400), StdOps.rand(600, 3400), this.game, 
                 (StandardCollisionHandler) this.getHandler()));
 //        this.addEntity(SpawnerFactory.generateSpawner(EnemyType.BASIC_MONSTER,
 //                StdOps.rand(600, 3400), StdOps.rand(600, 3400), 10000, 150,
