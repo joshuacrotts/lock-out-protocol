@@ -4,9 +4,32 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/database/PersistentDatabase.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/LockOutProtocolRunner.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/api/LanguageTranslation.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/controller/LanguageController.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/database/RemoteDatabase.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/api/TranslatorAPI.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/LanguageEnum.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/userinterface/model/labels/ControlsLabel.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/api/adapters/CityLocatorAPIAdapter.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/userinterface/model/buttons/MakeAccountButton.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/userinterface/model/buttons/ExitButton.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/commands/DebugCommand.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/commands/IncreaseResolutionCommand.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/userinterface/view/PlayerView.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/userinterface/model/buttons/MainMenuButton.java</file>
             <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/objects/Player.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/commands/ReloadCommand.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/database/TranslatorDatabase.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/objects/Inventory.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/api/LanguageTranslation.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/userinterface/model/buttons/HelpButton.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/Game.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/controller/CursorController.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/commands/IncreaseLanguageCommand.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/commands/AttackCommand.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/LockOutProtocolRunner.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/userinterface/view/AudioView.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/database/SerializableType.java</file>
+            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/userinterface/model/buttons/SaveButton.java</file>
         </group>
     </open-files>
 </project-private>

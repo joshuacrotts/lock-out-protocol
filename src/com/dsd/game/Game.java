@@ -185,12 +185,12 @@ public class Game extends StandardGame {
             StandardDraw.Object(this.sc);
             //  Then render the current [active] level
             this.levelController.renderLevel(StandardDraw.Renderer);
-            //  Then render the rain if applicable
-            this.rainController.render(StandardDraw.Renderer);
             //  Then render the handler with the casings.
             StandardDraw.Handler(this.player.getCasingHandler());
             //  Then render the handler objects
             StandardDraw.Handler(this.sch);
+            //  Then render the rain if applicable
+            this.rainController.render(StandardDraw.Renderer);
             //  Then render the heads up display
             this.hudScreen.render(StandardDraw.Renderer);
             //  Then render the preamble, pause or shop effect if necessary
