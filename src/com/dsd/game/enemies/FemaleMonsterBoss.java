@@ -43,9 +43,9 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
 
     //  Animation frame per second setting
     private final int walkingFPS;
-    private final int WALKING_FPS_MIN = 13;
-    private final int WALKING_FPS_MAX = 16;
-    private static final int DEATH_FPS = 5;
+    private final int WALKING_FPS_MIN = 8;
+    private final int WALKING_FPS_MAX = 10;
+    private static final int DEATH_FPS = 10;
 
     //  One-time variable for tracking the "alive" to "death state" transition
     private boolean aliveFlag = true;
@@ -69,7 +69,7 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
 
         //  Sets the walking/death frames for this monster.
         super.initWalkingFrames(FemaleMonsterBoss.WALK_FRAMES, this.walkingFPS);
-        super.initDeathFrames(FemaleMonsterBoss.DEATH_FRAMES, FemaleMonsterBoss.DEATH_FPS, 5);
+        super.initDeathFrames(FemaleMonsterBoss.DEATH_FRAMES, FemaleMonsterBoss.DEATH_FPS, 13);
 
         //  Sets the default animation.
         super.setAnimation(super.getWalkingAnimation());
@@ -161,7 +161,7 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
     @Override
     public void uponDeath () {
         this.setAnimation(this.getDeathAnimation());
-        this.explosionHandler = new StandardParticleHandler(50);
+        this.explosionHandler = new StandardParticleHandler(150);
         this.explosionHandler.setCamera(this.getCamera());
 
         for (int i = 0 ; i < this.explosionHandler.getMaxParticles() ; i++) {
@@ -254,14 +254,14 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
         int luck = StdOps.rand(1, 10);
         if (luck == 1) {
             this.getHandler().addEntity(new HealthPowerup((int) (this.getX() + this.getWidth() / 2),
-                    (int) (this.getY() + this.getHealth() / 2),
-                    this.getGame(), this.getHandler()));
+                                                          (int) (this.getY() + this.getHealth() / 2),
+                                                                 this.getGame(), this.getHandler()));
         }
     }
 
     //  Static block for instantiating the images.
     static {
-        WALK_FRAMES = Utilities.loadFrames("src/resources/img/enemies/monster5/walk/", 11);
-        DEATH_FRAMES = Utilities.loadFrames("src/resources/img/enemies/monster5/death/", 6);
+        WALK_FRAMES = Utilities.loadFrames("src/resources/img/enemies/femaleboss/walk/", 10);
+        DEATH_FRAMES = Utilities.loadFrames("src/resources/img/enemies/femaleboss/death/", 14);
     }
 }

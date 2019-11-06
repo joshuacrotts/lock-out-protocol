@@ -3,6 +3,7 @@ package com.dsd.game.controller;
 import com.dsd.game.Game;
 import com.dsd.game.enemies.BasicMonster;
 import com.dsd.game.enemies.DarkFemaleMonster;
+import com.dsd.game.enemies.FemaleMonsterBoss;
 import com.dsd.game.enemies.GreenMonster;
 import com.dsd.game.enemies.RedHeadMonster;
 import com.dsd.game.enemies.TinyMonster;
@@ -36,7 +37,7 @@ public class SpawnerController extends StandardGameObject implements TimerInterf
     private final long delay;
     private final int radius;
 
-    public SpawnerController (int _x, int _y, EnemyType _id, long _delay, int _radius, Game _game, StandardCollisionHandler _sch) {
+    public SpawnerController(int _x, int _y, EnemyType _id, long _delay, int _radius, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, StandardID.Spawner);
         this.game = _game;
         this.spawnerID = _id;
@@ -50,19 +51,19 @@ public class SpawnerController extends StandardGameObject implements TimerInterf
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         //throw new UnsupportedOperationException("Not supported yet.");
         //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void render (Graphics2D gd) {
+    public void render(Graphics2D gd) {
         //throw new UnsupportedOperationException("Not supported yet.");
         //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void cancelTimer () {
+    public void cancelTimer() {
         this.spawnerTimer.cancel();
     }
 
@@ -71,9 +72,9 @@ public class SpawnerController extends StandardGameObject implements TimerInterf
      *
      * @param _n
      */
-    protected void spawn (int _n) {
+    protected void spawn(int _n) {
 
-        for (int i = 0 ; i < _n ; i++) {
+        for (int i = 0; i < _n; i++) {
             int xPos = (int) StdOps.rand(this.getX() - this.radius, this.getX() + this.radius);
             int yPos = (int) StdOps.rand(this.getY() - this.radius, this.getY() + this.radius);
 
@@ -92,6 +93,9 @@ public class SpawnerController extends StandardGameObject implements TimerInterf
                 case RED_HEAD_MONSTER:
                     this.parentContainer.addEntity(new RedHeadMonster(xPos, yPos, this.game, this.parentContainer));
                     break;
+                case FEMALE_BOSS_MONSTER:
+                    this.parentContainer.addEntity(new FemaleMonsterBoss(xPos, yPos, this.game, this.parentContainer));
+                    break;
                 case TINY_MONSTER:
                     this.parentContainer.addEntity(new TinyMonster(xPos, yPos, this.game, this.parentContainer));
                     break;
@@ -109,13 +113,13 @@ public class SpawnerController extends StandardGameObject implements TimerInterf
         private final SpawnerController spawnerController;
         private final Game game;
 
-        public SpawnerDelayTimer (SpawnerController _spawnerController, Game _game) {
+        public SpawnerDelayTimer(SpawnerController _spawnerController, Game _game) {
             this.spawnerController = _spawnerController;
             this.game = _game;
         }
 
         @Override
-        public void run () {
+        public void run() {
             /**
              * If we're not paused AND the game isn't in its preamble state, we
              * can spawn the entities.
@@ -123,7 +127,7 @@ public class SpawnerController extends StandardGameObject implements TimerInterf
             if (this.game.isPaused() || this.game.isPreamble() || this.game.isShop()) {
                 return;
             }
-            this.spawnerController.spawn(StdOps.rand(1, 2));
+            this.spawnerController.spawn(1);
         }
     }
 }

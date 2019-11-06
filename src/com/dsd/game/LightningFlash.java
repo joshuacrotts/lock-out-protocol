@@ -1,7 +1,6 @@
 package com.dsd.game;
 
 import com.dsd.game.userinterface.Screen;
-import com.revivedstandards.util.StdOps;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;

@@ -6,15 +6,12 @@ import com.dsd.game.api.TranslatorAPI;
 import com.dsd.game.handlers.LightningHandler;
 import com.dsd.game.objects.RainDrop;
 import com.dsd.game.userinterface.Screen;
-import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardParticleHandler;
 import com.revivedstandards.main.StandardCamera;
-import com.revivedstandards.model.StandardAudioType;
 import com.revivedstandards.util.StdOps;
 import com.revivedstandards.view.Renderable;
 import com.revivedstandards.view.Updatable;
 import java.awt.Graphics2D;
-import java.util.ArrayList;
 import org.apache.commons.math3.util.FastMath;
 
 /**
