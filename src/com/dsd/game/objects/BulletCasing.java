@@ -1,7 +1,6 @@
 package com.dsd.game.objects;
 
 import com.dsd.game.Game;
-import com.dsd.game.objects.Player;
 import com.dsd.game.objects.weapons.Gun;
 import com.revivedstandards.model.StandardParticle;
 import com.revivedstandards.util.StdOps;

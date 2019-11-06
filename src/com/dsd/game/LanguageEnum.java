@@ -5,7 +5,9 @@ import com.dsd.game.controller.LanguageController;
 /**
  * This enum defines the possible languages the user can switch to in the game.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public enum LanguageEnum {
 

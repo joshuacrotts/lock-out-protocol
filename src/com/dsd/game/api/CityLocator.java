@@ -1,12 +1,11 @@
 package com.dsd.game.api;
 
+import com.dsd.game.api.adapters.CityLocatorAPIAdapter;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,7 +19,7 @@ import org.json.JSONObject;
  *
  * @author Joshua, Ronald, Rinty
  */
-public class CityLocator {
+public class CityLocator implements CityLocatorAPIAdapter {
 
     private static URL url;
     private static InputStream inputStream;
@@ -39,6 +38,10 @@ public class CityLocator {
             Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
         }
         CityLocator.key = CityLocator.line.substring(CityLocator.line.lastIndexOf(":") + 1);
+    }
+
+    public CityLocator () {
+
     }
 
     /**
@@ -65,9 +68,6 @@ public class CityLocator {
             }
             in.close();
         }
-        catch (ProtocolException ex) {
-            Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
-        }
         catch (IOException ex) {
             Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -80,8 +80,9 @@ public class CityLocator {
      *
      * @return
      */
-    protected static String getCity () {
-        return CityLocator.getCityJSON().getString("city");
+    @Override
+    public String getCity () {
+        return this.getCityJSON().getString("city");
     }
 
     /**
@@ -89,7 +90,8 @@ public class CityLocator {
      *
      * @return string representation of IP address
      */
-    protected static String getIPAddress () {
+    @Override
+    public String getIPAddress () {
         String ipAddress = null;
 
         try {
@@ -97,9 +99,6 @@ public class CityLocator {
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     whatismyip.openStream()));
             ipAddress = in.readLine();
-        }
-        catch (MalformedURLException ex) {
-            Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
         }
         catch (IOException ex) {
             Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
@@ -113,7 +112,7 @@ public class CityLocator {
      *
      * @return
      */
-    private static JSONObject getCityJSON () {
-        return new JSONObject(CityLocator.fetch(CityLocator.getIPAddress()));
+    private JSONObject getCityJSON () {
+        return new JSONObject(CityLocator.fetch(this.getIPAddress()));
     }
 }

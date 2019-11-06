@@ -10,7 +10,6 @@ import com.revivedstandards.handlers.StandardCollisionHandler;
 import java.awt.Graphics2D;
 
 /**
- *
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
@@ -30,7 +29,7 @@ public class HUDScreen extends Screen {
 
     @Override
     public void tick () {
-        if (this.getGame().isMenu() || this.getGame().isPaused()) {
+        if (this.getGame().isMenu() || this.getGame().isPaused() || this.getGame().isHelp()) {
             return;
         }
         super.tick();
@@ -39,7 +38,7 @@ public class HUDScreen extends Screen {
 
     @Override
     public void render (Graphics2D _g2) {
-        if (this.getGame().isMenu() || this.getGame().isPaused()) {
+        if (this.getGame().isMenu() || this.getGame().isPaused() || this.getGame().isHelp()) {
             return;
         }
         super.render(_g2);

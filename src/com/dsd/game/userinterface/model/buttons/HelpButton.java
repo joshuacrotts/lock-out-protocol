@@ -14,7 +14,7 @@ import java.awt.Graphics2D;
  *
  * @author rinty
  */
-public class MainMenuButton extends MenuButton implements MouseEventInterface {
+public class HelpButton extends MenuButton implements MouseEventInterface {
 
     //  Miscellaneous reference variables.
     private final Game game;
@@ -22,19 +22,21 @@ public class MainMenuButton extends MenuButton implements MouseEventInterface {
 
     //  Button offsets and dimensions.
     private static final int BUTTON_X_OFFSET = 100;
-    private static final int BUTTON_Y_OFFSET = 200;
-    private static final int TEXT_X_OFFSET = 80;
+    private static final int BUTTON_Y_OFFSET = 100;
+    private static final int TEXT_X_OFFSET = 115;
     private static final int TEXT_Y_OFFSET = 45;
     private static final int BUTTON_WIDTH = 300;
     private static final int BUTTON_HEIGHT = 82;
 
-    public MainMenuButton (Game _game, MenuScreen _menuScreen) {
-        super(BUTTON_X_OFFSET, BUTTON_Y_OFFSET,
-                BUTTON_WIDTH, BUTTON_HEIGHT, LanguageController.translate("MAIN MENU"), _game, _menuScreen);
+    public HelpButton (Game _game, MenuScreen _menuScreen) {
+        super(HelpButton.BUTTON_X_OFFSET, HelpButton.BUTTON_Y_OFFSET,
+                HelpButton.BUTTON_WIDTH, HelpButton.BUTTON_HEIGHT,
+                LanguageController.translate("HELP"), _game, _menuScreen);
+
         this.game = _game;
         this.menuScreen = _menuScreen;
-        this.setX((int) this.game.getCamera().getX() - BUTTON_X_OFFSET);
-        this.setY((int) this.game.getCamera().getY() + BUTTON_Y_OFFSET);
+        this.setX((int) this.game.getCamera().getX() - HelpButton.BUTTON_X_OFFSET);
+        this.setY((int) this.game.getCamera().getY() + HelpButton.BUTTON_Y_OFFSET);
 
         this.setScaled(true);
     }
@@ -45,8 +47,8 @@ public class MainMenuButton extends MenuButton implements MouseEventInterface {
             return;
         }
 
-        this.setX((int) this.game.getCamera().getX() - BUTTON_X_OFFSET);
-        this.setY((int) this.game.getCamera().getY() + BUTTON_Y_OFFSET);
+        this.setX((int) this.game.getCamera().getX() - HelpButton.BUTTON_X_OFFSET);
+        this.setY((int) this.game.getCamera().getY() + HelpButton.BUTTON_Y_OFFSET);
     }
 
     @Override
@@ -58,7 +60,8 @@ public class MainMenuButton extends MenuButton implements MouseEventInterface {
         super.render(_g2);
         _g2.setFont(this.font);
         _g2.setColor(Color.WHITE);
-        _g2.drawString(this.getText(), this.getX() + TEXT_X_OFFSET, this.getY() + TEXT_Y_OFFSET);
+        _g2.drawString(this.getText(), this.getX() + HelpButton.TEXT_X_OFFSET,
+                this.getY() + HelpButton.TEXT_Y_OFFSET);
     }
 
     @Override
@@ -66,8 +69,8 @@ public class MainMenuButton extends MenuButton implements MouseEventInterface {
         if (!this.game.isPaused()) {
             return;
         }
-        this.getGame().setGameState(GameState.MENU);
-        this.getGame().resetGame();
+        //  Once the user presses the save button, it will stop the game (for now).
+        this.getGame().setGameState(GameState.HELP);
     }
 
     @Override

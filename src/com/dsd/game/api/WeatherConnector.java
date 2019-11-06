@@ -1,11 +1,11 @@
 package com.dsd.game.api;
 
+import com.dsd.game.api.adapters.WeatherConnectorAPIAdapter;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,7 +20,7 @@ import org.json.JSONObject;
  *
  * @author Joshua, Ronald, Rinty
  */
-public class WeatherConnector {
+public class WeatherConnector implements WeatherConnectorAPIAdapter {
 
     private static BufferedReader reader;
     private static InputStream inputStream;
@@ -41,6 +41,10 @@ public class WeatherConnector {
         }
         //  Extracts the key from the line read in by the buffered reader
         WeatherConnector.key = WeatherConnector.line.substring(WeatherConnector.line.lastIndexOf(":") + 1);
+    }
+
+    public WeatherConnector () {
+
     }
 
     /**
@@ -68,9 +72,6 @@ public class WeatherConnector {
             }
             in.close();
         }
-        catch (ProtocolException ex) {
-            Logger.getLogger(WeatherConnector.class.getName()).log(Level.SEVERE, null, ex);
-        }
         catch (IOException ex) {
             Logger.getLogger(WeatherConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -84,7 +85,8 @@ public class WeatherConnector {
      * @param city
      * @return
      */
-    protected static String getWeather (String city) {
+    @Override
+    public String getWeather (String city) {
         return getWeatherType(getWeatherArray(city));
     }
 

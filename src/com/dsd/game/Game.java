@@ -13,6 +13,7 @@ import com.dsd.game.database.TranslatorDatabase;
 import com.dsd.game.levels.MetalLevel;
 import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.HUDScreen;
+import com.dsd.game.userinterface.HelpScreen;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.PauseScreen;
 import com.dsd.game.userinterface.PreambleScreen;
@@ -55,6 +56,7 @@ public class Game extends StandardGame {
     private final PreambleScreen preambleScreen;
     private final HUDScreen hudScreen;
     private final ShopScreen shopScreen;
+    private final HelpScreen helpScreen;
 
     /**
      * Rain controller which contacts the API for the logic of determining
@@ -94,7 +96,7 @@ public class Game extends StandardGame {
         this.translatorDatabase.loadFromSettings();
 
         //  Initialize the sound controller
-        AudioBoxController.initialize(32);
+        AudioBoxController.initialize(40);
 
         //  Create a new collision handler
         this.sch = new CollisionHandlerController(this);
@@ -126,6 +128,7 @@ public class Game extends StandardGame {
         this.pauseScreen = new PauseScreen(this);
         this.preambleScreen = new PreambleScreen(this);
         this.shopScreen = new ShopScreen(this);
+        this.helpScreen = new HelpScreen(this);
         this.hudScreen = new HUDScreen(this, this.player, this.sch);
 
         this.getWindow().setWindowVisible(true);
@@ -142,6 +145,9 @@ public class Game extends StandardGame {
                 break;
             case PAUSED:
                 this.pauseScreen.tick();
+                break;
+            case HELP:
+                this.helpScreen.tick();
                 break;
             case SHOP:
                 this.shopScreen.tick();
@@ -164,7 +170,6 @@ public class Game extends StandardGame {
                 StandardHandler.Object(this.sc);
                 break;
         }
-
         this.cursorController.tick();
 
     }
@@ -198,6 +203,9 @@ public class Game extends StandardGame {
                     break;
                 case PAUSED:
                     this.pauseScreen.render(StandardDraw.Renderer);
+                    break;
+                case HELP:
+                    this.helpScreen.render(StandardDraw.Renderer);
                     break;
             }
 
@@ -394,6 +402,10 @@ public class Game extends StandardGame {
 
     public boolean isMenu () {
         return this.gameState == GameState.MENU;
+    }
+
+    public boolean isHelp () {
+        return this.gameState == GameState.HELP;
     }
 
 //========================== SETTERS =============================//
