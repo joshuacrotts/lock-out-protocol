@@ -8,5 +8,6 @@ package com.dsd.game;
  * @author Joshua
  */
 public enum SerializableType {
+    
     PLAYER, LEVEL;
 }

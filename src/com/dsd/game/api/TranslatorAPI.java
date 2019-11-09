@@ -12,8 +12,6 @@ import com.dsd.game.api.adapters.LanguageTranslationAPIAdapter;
  * To change the APIs, simply change the constructors for the three instance
  * variables.
  *
- * [Group Name: Data Structure Deadheads]
- *
  * @author Joshua, Ronald, Rinty
  */
 public final class TranslatorAPI {
@@ -22,13 +20,14 @@ public final class TranslatorAPI {
     private static final CityLocatorAPIAdapter cityLocatorAPI = new CityLocator();
     private static final WeatherConnectorAPIAdapter weatherAPI = new WeatherConnector();
 
-//=================== GETTERS ====================================//
+//=================== GETTERS ====================================
     /**
      * Returns the city retrieved by the CityLocator API.
      *
      * @return
      */
     public static String getCity () {
+
         return cityLocatorAPI.getCity();
     }
 
@@ -38,6 +37,7 @@ public final class TranslatorAPI {
      * @return
      */
     public static String getIPAddress () {
+
         return cityLocatorAPI.getIPAddress();
     }
 
@@ -49,6 +49,7 @@ public final class TranslatorAPI {
      * @return
      */
     public static String getWeather () {
+
         return weatherAPI.getWeather(TranslatorAPI.getCity());
     }
 
@@ -60,6 +61,7 @@ public final class TranslatorAPI {
      * @return
      */
     public static String getWeather (String _city) {
+
         return weatherAPI.getWeather(_city);
     }
 
@@ -72,13 +74,17 @@ public final class TranslatorAPI {
      * @return
      */
     public static String translate (String _text, String _lang) {
+
         if (_lang.equals("en")) {
+
             return _text;
         }
+
         return languageAPI.translateText(_text, _lang);
     }
 
     private TranslatorAPI () {
 
     }
+
 }
