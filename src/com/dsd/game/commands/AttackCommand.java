@@ -6,7 +6,6 @@ import com.dsd.game.objects.BulletCasing;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.enums.PlayerState;
 import com.dsd.game.objects.weapons.Gun;
-import com.dsd.game.objects.weapons.Knife;
 import com.dsd.game.objects.weapons.Weapon;
 import com.dsd.game.objects.weapons.enums.WeaponType;
 import com.dsd.game.userinterface.TimerInterface;
@@ -73,9 +72,6 @@ public class AttackCommand extends Command implements TimerInterface {
                 case SUPER_SHOTGUN:
                     this.gunAttack((Gun) weapon);
                     break;
-                case KNIFE:
-                    this.knifeAttack((Knife) weapon);
-                    break;
             }
 
             /**
@@ -137,16 +133,6 @@ public class AttackCommand extends Command implements TimerInterface {
                 BulletCasing casing = new BulletCasing(this.game, this.player, _gun);
             }
         }
-    }
-
-    /**
-     * Uses the knife attack.
-     *
-     * @param _knife
-     */
-    private void knifeAttack (Weapon _knife) {
-        StandardAudioController.play(_knife.getSFXPath(), StandardAudioType.SFX);
-        this.toggleAttackAnimation();
     }
 
     /**

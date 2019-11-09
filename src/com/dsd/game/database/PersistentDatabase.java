@@ -2,6 +2,7 @@ package com.dsd.game.database;
 
 import com.dsd.game.AccountStatus;
 import com.dsd.game.Game;
+import com.dsd.game.objects.weapons.enums.WeaponType;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -217,7 +218,7 @@ public class PersistentDatabase implements RemoteDatabase {
             ArrayList<Integer> inventoryInfo = new ArrayList<>();
 
             final int PLAYER_AMT = 6;
-            final int INVENTORY_AMT = 21;
+            final int INVENTORY_AMT = WeaponType.values().length;
 
             //  Load in the player data from the Result Set
             for (int i = 2 ; i <= PLAYER_AMT ; i++) {

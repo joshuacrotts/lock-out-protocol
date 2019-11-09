@@ -1,7 +1,6 @@
 package com.dsd.game.objects.weapons.projectiles;
 
 import com.dsd.game.Game;
-import com.dsd.game.objects.Player;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.main.StandardCamera;
@@ -37,8 +36,8 @@ public class ProjectileGameObject extends StandardGameObject {
 
     public ProjectileGameObject (int _x, int _y, double _angle, int _damage,
             int _velFactor, BufferedImage[] _frames, int _projectileFPS, Game _game,
-            StandardCollisionHandler _parentContainer, Player _parent) {
-        super(_x, _y, StandardID.Bullet);
+            StandardCollisionHandler _parentContainer, StandardGameObject _parent, StandardID _id) {
+        super(_x, _y, _id);
         this.game = _game;
         this.sch = _parentContainer;
         this.damage = _damage;

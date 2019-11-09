@@ -3,6 +3,7 @@ package com.dsd.game.objects.weapons.projectiles;
 import com.dsd.game.Game;
 import com.dsd.game.objects.Player;
 import com.revivedstandards.handlers.StandardCollisionHandler;
+import com.revivedstandards.model.StandardID;
 import com.revivedstandards.util.StdOps;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -29,7 +30,7 @@ public class ShotgunBulletObject extends ProjectileGameObject {
     public ShotgunBulletObject (int _x, int _y, double _angle, int _damage, Game _game,
             StandardCollisionHandler _parentContainer, Player _parent) {
         super(_x, _y, _angle, _damage, ShotgunBulletObject.VEL_FACTOR, ShotgunBulletObject.frames,
-                ShotgunBulletObject.BULLET_FPS, _game, _parentContainer, _parent);
+                ShotgunBulletObject.BULLET_FPS, _game, _parentContainer, _parent, StandardID.Bullet2);
     }
 
     @Override

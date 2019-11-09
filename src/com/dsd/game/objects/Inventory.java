@@ -7,7 +7,6 @@ import com.dsd.game.database.SerializableType;
 import com.dsd.game.objects.weapons.FastRifle;
 import com.dsd.game.objects.weapons.GrenadeLauncher;
 import com.dsd.game.objects.weapons.Gun;
-import com.dsd.game.objects.weapons.Knife;
 import com.dsd.game.objects.weapons.Minigun;
 import com.dsd.game.objects.weapons.Pistol;
 import com.dsd.game.objects.weapons.Rifle;
@@ -49,7 +48,6 @@ public class Inventory implements SerializableObject {
         this.parentHandler = _sch;
 
         //  This will change with time (to a subclass of Weapon).
-        this.weapons.add(new Knife(_player));
         this.weapons.add(new Pistol(_game, _player, _sch));
         this.weapons.add(new Rifle(_game, _player, _sch));
         this.weapons.add(new FastRifle(_game, _player, _sch));
@@ -179,7 +177,6 @@ public class Inventory implements SerializableObject {
     public void resetInventory () {
         this.weapons.clear();
 
-        this.weapons.add(new Knife(this.player));
         this.weapons.add(new Pistol(this.game, this.player, this.parentHandler));
         this.currentWeapon = 0;
     }

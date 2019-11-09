@@ -21,6 +21,7 @@ public class FastRifle extends Gun {
     //  FPS variables for how fast the rifle frames animate.
     private static final int WALKING_FPS = 10;
     private static final int SHOOT_GUN_FPS = 20;
+    private static final int CASING_IMAGE_AMT = 14;
 
     //  Delay between shooting one bullet and the next (in ms).
     private final int DELAY = 20;
@@ -33,7 +34,7 @@ public class FastRifle extends Gun {
         //  Instantiates the animation controllers.
         this.loadAssets(_player);
         super.setDelay(DELAY);
-        super.loadCasingImages(14);
+        super.loadCasingImages(CASING_IMAGE_AMT);
     }
 
     @Override
