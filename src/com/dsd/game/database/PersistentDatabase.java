@@ -89,7 +89,11 @@ public class PersistentDatabase implements RemoteDatabase {
         }
 
         catch (SQLException | NullPointerException ex) {
+<<<<<<< HEAD
 
+=======
+            System.out.println(ex);
+>>>>>>> 4e3b04770662a28aec5378a5bf4e6e22962addfa
             return false;
         }
 
@@ -119,6 +123,10 @@ public class PersistentDatabase implements RemoteDatabase {
         }
 
         catch (SQLException | NullPointerException ex) {
+<<<<<<< HEAD
+=======
+            System.out.println(ex);
+>>>>>>> 4e3b04770662a28aec5378a5bf4e6e22962addfa
 
             return false;
         }
@@ -149,6 +157,10 @@ public class PersistentDatabase implements RemoteDatabase {
         }
 
         catch (SQLException | NullPointerException ex) {
+<<<<<<< HEAD
+=======
+            System.out.println(ex);
+>>>>>>> 4e3b04770662a28aec5378a5bf4e6e22962addfa
 
             return false;
         }
@@ -175,6 +187,10 @@ public class PersistentDatabase implements RemoteDatabase {
         }
 
         catch (SQLException | NullPointerException ex) {
+<<<<<<< HEAD
+=======
+            System.out.println(ex);
+>>>>>>> 4e3b04770662a28aec5378a5bf4e6e22962addfa
 
             return false;
         }
@@ -199,6 +215,10 @@ public class PersistentDatabase implements RemoteDatabase {
         }
 
         catch (SQLException | NullPointerException ex) {
+<<<<<<< HEAD
+=======
+            System.out.println(ex);
+>>>>>>> 4e3b04770662a28aec5378a5bf4e6e22962addfa
 
             return false;
         }
@@ -243,7 +263,9 @@ public class PersistentDatabase implements RemoteDatabase {
             ArrayList<Integer> inventoryInfo = new ArrayList<>();
 
             final int PLAYER_AMT = 6;
-            final int INVENTORY_AMT = WeaponType.values().length;
+            //  Gun status (if they have the gun)
+            //  plus the ammo amt and total ammo for every gun
+            final int INVENTORY_AMT = WeaponType.values().length * 3;
 
             //  Load in the player data from the Result Set
             for (int i = 2 ; i <= PLAYER_AMT ; i++) {
