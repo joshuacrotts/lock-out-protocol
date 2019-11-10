@@ -9,8 +9,6 @@ import com.sun.glass.events.KeyEvent;
 /**
  * Command representing when the user increments their weapon counter position.
  *
- * [Group Name: Data Structure Deadheads]
- *
  * @author Joshua, Ronald, Rinty
  */
 public class IncrementWeaponCommand extends Command {
@@ -20,6 +18,7 @@ public class IncrementWeaponCommand extends Command {
     private final Player player;
 
     public IncrementWeaponCommand (Game _game, Player _player) {
+
         this.game = _game;
         this.player = _player;
         this.bind(this.game.getKeyboard(), KeyEvent.VK_C);
@@ -27,9 +26,13 @@ public class IncrementWeaponCommand extends Command {
 
     @Override
     public void pressed (float _dt) {
+
         if (this.player.isAttacking() || this.game.isShop()) {
+
             return;
         }
+
         this.player.getInventory().changeWeapon(WeaponSelection.INCREMENT);
     }
+
 }

@@ -16,7 +16,6 @@ import java.awt.image.BufferedImage;
  *
  * @TODO: Add bullet damage type.
  *
- * [Group Name: Data Structure Deadheads]
  * @author Joshua, Ronald, Rinty
  */
 public abstract class Gun extends Weapon {
@@ -25,11 +24,9 @@ public abstract class Gun extends Weapon {
     private final Game game;
     private final StandardCollisionHandler globalHandler;
     private final Player player;
-
     //  BufferedImage array for the types of casings the gun drops when shooting,
     //  if any at all.
     private BufferedImage[] casingImages;
-
     /**
      * Variables for how much ammo the gun can carry, how much is in a mag, and
      * how much they currently have.
@@ -37,16 +34,15 @@ public abstract class Gun extends Weapon {
     private final int magazineAmt;
     private int totalAmmo;
     private int currentAmmo;
-
     //  Sound effects played when the gun is shot, or empty.
     private final String emptySFXPath;
     private final String reloadSFXPath;
-
     //  Delay for reload command.
     private final long reloadDelay;
 
     public Gun (WeaponType _type, int _totalAmmo, Game _game, Player _player,
             StandardCollisionHandler _sch, String _reloadSFX, long _reloadDelay) {
+        
         super(_type);
         this.game = _game;
         this.player = _player;
@@ -63,6 +59,7 @@ public abstract class Gun extends Weapon {
     public Gun (WeaponType _type, int _currAmmo, int _totalAmmo, int magCapacity,
             Game _game, Player _player, StandardCollisionHandler _sch, String _reloadSFX,
             long _reloadDelay) {
+        
         super(_type);
         this.game = _game;
         this.player = _player;
@@ -85,6 +82,7 @@ public abstract class Gun extends Weapon {
      * Plays the sound effect associated with the gun type.
      */
     public void playGunShotSFX () {
+        
         StandardAudioController.play("src/resources/audio/sfx/" + this.getWeaponType() + ".wav", StandardAudioType.SFX);
     }
 
@@ -92,6 +90,7 @@ public abstract class Gun extends Weapon {
      * Removes one bullet from the gun.
      */
     public void deductAmmo () {
+        
         this.currentAmmo--;
     }
 
@@ -100,15 +99,19 @@ public abstract class Gun extends Weapon {
      * the sound effect is played; all it does is change the model.
      */
     public void reload () {
+        
         /**
          * Three cases: 1. The magazine is empty and we have enough to fill it
          * 2. The magazine is not empty and we have enough to fill it
          */
         if (this.magExceedsTotalAmmo() && !this.magExceedsGunAmmo()) {
+            
             this.currentAmmo += this.totalAmmo;
             this.totalAmmo = 0;
         }
+        
         else {
+            
             /**
              * If we don't have enough to fill the magazine but the current +
              * total > magazine
@@ -117,87 +120,109 @@ public abstract class Gun extends Weapon {
             this.totalAmmo -= difference;
             this.currentAmmo += difference;
         }
+        
     }
 
     private boolean magExceedsTotalAmmo () {
+        
         return this.totalAmmo < this.magazineAmt;
     }
 
     private boolean magExceedsGunAmmo () {
+        
         return this.currentAmmo + this.totalAmmo > this.magazineAmt;
     }
 
-//============================== GETTERS ===================================//
+//============================== GETTERS ===================================
     public int getTotalAmmo () {
+        
         return this.totalAmmo;
     }
 
     public int getCurrentAmmo () {
+        
         return this.currentAmmo;
     }
 
     public int getMagazineCapacity () {
+        
         return this.magazineAmt;
     }
 
     public boolean isWeaponEmpty () {
+        
         return this.currentAmmo == 0;
     }
 
     public boolean hasFullAmmo () {
+        
         return this.currentAmmo == this.magazineAmt;
     }
 
     public boolean hasAmmo () {
+        
         return this.totalAmmo != 0;
     }
 
     public String getEmptySFXPath () {
+        
         return this.emptySFXPath;
     }
 
     public String getReloadSFXPath () {
+        
         return this.reloadSFXPath;
     }
 
     public boolean isReloading () {
+        
         return super.getWeaponState() == WeaponState.RELOAD;
     }
 
     public Player getPlayer () {
+        
         return this.player;
     }
 
     public StandardCollisionHandler getHandler () {
+        
         return this.globalHandler;
     }
 
     public Game getGame () {
+        
         return this.game;
     }
 
     public long getReloadDelay () {
+        
         return this.reloadDelay;
     }
 
     public BufferedImage getRandomCasing () {
+        
         return this.casingImages[(int) (Math.random() * this.casingImages.length)];
     }
-//============================== SETTERS ===================================//
-
+    
+//============================== SETTERS ===================================
     public void setCurrentAmmo (int _ammo) {
+        
         this.currentAmmo = _ammo;
     }
 
     public void setTotalAmmo (int _ammo) {
+        
         this.totalAmmo = _ammo;
     }
 
     public void setReloading (boolean _reloading) {
+        
         this.setWeaponState(_reloading ? WeaponState.RELOAD : WeaponState.READY);
     }
 
     public void loadCasingImages (int _casingAmount) {
+        
         this.casingImages = Utilities.loadFrames("src/resources/img/objects/casings/" + this.getWeaponType() + "_casings/", _casingAmount);
     }
+    
 }

@@ -8,8 +8,6 @@ import com.dsd.game.AccountStatus;
  * MySQL database to something else, it needs to implement this interface and
  * rewrite the methods appropriate to that class (or version of SQL).
  *
- * [Group Name: Data Structure Deadheads]
- *
  * @author Joshua, Ronald, Rinty
  */
 public interface RemoteDatabase extends Database {

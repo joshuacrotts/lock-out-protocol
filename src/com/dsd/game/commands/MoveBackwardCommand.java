@@ -9,8 +9,6 @@ import java.awt.event.KeyEvent;
 /**
  * Command representing when the user back-peddles
  *
- * [Group Name: Data Structure Deadheads]
- *
  * @author Joshua, Ronald, Rinty
  */
 public class MoveBackwardCommand extends Command {
@@ -20,6 +18,7 @@ public class MoveBackwardCommand extends Command {
     private final Player player;
 
     public MoveBackwardCommand (Game _game, Player _obj) {
+
         this.game = _game;
         this.player = _obj;
         this.bind(_game.getKeyboard(), KeyEvent.VK_S);
@@ -27,22 +26,30 @@ public class MoveBackwardCommand extends Command {
 
     @Override
     public void pressed (float _dt) {
+
         if (this.game.isInGameState() && !this.player.isMovingForward()) {
+
             this.player.setPlayerState(PlayerState.WALKING_BACKWARD);
             this.player.updatePosition();
         }
+
     }
 
     @Override
     public void released (float dt) {
+
         this.player.setPlayerState(PlayerState.STANDING);
     }
 
     @Override
     public void down (float _dt) {
+
         if (this.game.isInGameState() && !this.player.isMovingForward()) {
+
             this.player.setPlayerState(PlayerState.WALKING_BACKWARD);
             this.player.updatePosition();
         }
+
     }
+
 }

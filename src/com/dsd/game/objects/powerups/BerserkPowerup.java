@@ -28,7 +28,7 @@ import java.util.TimerTask;
  * Health object for when the player is damaged, they can pick it up and restore
  * some health.
  *
- * @author Joshua
+ * @author Joshua, Ronald, Rinty
  */
 public class BerserkPowerup extends StandardGameObject implements TimerInterface {
 
@@ -38,7 +38,6 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
     private final StandardCamera camera;
     private final StandardCollisionHandler parentContainer;
     private Timer powerupTimer;
-
     //  View
     private final StandardFadeController color;
     private static final BufferedImage[] BERSERK_FRAMES;
@@ -48,12 +47,12 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
     private static final int STROKE_X_OFFSET = (int) (RECT_STROKE * 1.5);
     private static final int STROKE_Y_OFFSET = (int) (RECT_STROKE * 2.4);
     //  Timer for how long the powerup is active (in milliseconds)
-
     private int timer = 10000;
     private boolean isActivated = false;
     private boolean isCollected = false;
 
     public BerserkPowerup (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
+        
         super(_x, _y, StandardID.Item1);
         this.game = _game;
         this.camera = _game.getCamera();
@@ -68,26 +67,36 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
 
     @Override
     public void tick () {
+        
         if (this.isAlive()) {
+            
             this.getAnimationController().tick();
         }
+        
     }
 
     @Override
     public void render (Graphics2D _g2) {
+        
         if (this.isAlive()) {
+            
             this.getAnimationController().renderFrame(_g2);
         }
+        
         else if (this.isActivated) {
+            
             this.drawFlashingBorder(_g2);
         }
+        
     }
 
     /**
      * Turns the timer on and instantiates the associated timer task.
      */
     public void activate () {
+        
         if (this.isActivated) {
+            
             return;
         }
 
@@ -98,13 +107,13 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
         this.powerupTimer = new Timer(true);
         this.powerupTimer.schedule(new BerserkTimer(this), timer);
         TimerController.addTimer(this);
-
         this.isActivated = true;
         this.activateDamageBoost();
     }
 
     @Override
     public void cancelTimer () {
+        
         this.powerupTimer.cancel();
     }
 
@@ -112,6 +121,7 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
      * Adds the 2x damage multiplier to the player's current weapon.
      */
     private void activateDamageBoost () {
+        
         Weapon curr = this.game.getPlayer().getInventory().getCurrentWeapon();
         curr.setDamageFactor(DAMAGE_INCREASE_FACTOR);
     }
@@ -120,6 +130,7 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
      * Removes the 2x damage multiplier from the player's current weapon.
      */
     private void deactivateDamageBoost () {
+        
         Weapon curr = this.game.getPlayer().getInventory().getCurrentWeapon();
         curr.setDamageFactor(DAMAGE_INCREASE_FACTOR >> 1);
     }
@@ -128,7 +139,9 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
      * Plays the sound effect associated with collecting the berserk item.
      */
     public void playBerserkSFX () {
+        
         if (this.isCollected) {
+            
             return;
         }
 
@@ -141,6 +154,7 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
      * @param _g2
      */
     private void drawFlashingBorder (Graphics2D _g2) {
+        
         _g2.setColor(this.getTransparentColor(this.color.combine()));
         Stroke oldStroke = _g2.getStroke();
         _g2.setStroke(new BasicStroke(RECT_STROKE));
@@ -151,20 +165,7 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
         _g2.draw(view);
         _g2.setStroke(oldStroke);
     }
-
-    private Color getTransparentColor (Color _c) {
-        return new Color(_c.getRed(), _c.getGreen(), _c.getBlue(), 127);
-    }
-
-//============================= SETTERS ====================================//
-    public void setCollected () {
-        this.isCollected = true;
-    }
-
-    static {
-        BERSERK_FRAMES = Utilities.loadFrames("src/resources/img/items/drops/berserk/", 6);
-    }
-
+    
     private class BerserkTimer extends TimerTask {
 
         private final BerserkPowerup powerup;
@@ -179,6 +180,21 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
             this.powerup.isActivated = false;
             this.powerup.deactivateDamageBoost();
         }
+    }
+    
+//================================ GETTERS ====================================
+    private Color getTransparentColor (Color _c) {
+        
+        return new Color(_c.getRed(), _c.getGreen(), _c.getBlue(), 127);
+    }
+
+//============================= SETTERS ====================================
+    public void setCollected () {
+        this.isCollected = true;
+    }
+
+    static {
+        BERSERK_FRAMES = Utilities.loadFrames("src/resources/img/items/drops/berserk/", 6);
     }
 
 }

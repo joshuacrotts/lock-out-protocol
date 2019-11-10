@@ -13,8 +13,6 @@ import java.awt.Graphics2D;
  * Subclass of StandardButton - modifies the volume of the sound effects and the
  * music.
  *
- * [Group Name: Data Structure Deadheads]
- *
  * @author Joshua, Ronald, Rinty
  */
 public class VolumeControlButton extends MenuButton implements MouseEventInterface {
@@ -28,6 +26,7 @@ public class VolumeControlButton extends MenuButton implements MouseEventInterfa
     private static final int BUTTON_HEIGHT = 82;
 
     public VolumeControlButton (Game _game, MenuScreen _menuScreen) {
+        
         super(VolumeControlButton.BUTTON_X_OFFSET, _game.getGameHeight() - VolumeControlButton.BUTTON_Y_OFFSET,
                 VolumeControlButton.BUTTON_WIDTH, VolumeControlButton.BUTTON_HEIGHT, LanguageController.translate("CHANGE VOLUME"),
                 _game, _menuScreen);
@@ -35,13 +34,16 @@ public class VolumeControlButton extends MenuButton implements MouseEventInterfa
 
     @Override
     public void tick () {
+        
         this.setX(Screen.gameHalfWidth - VolumeControlButton.BUTTON_X_OFFSET);
         this.setY(Screen.gameHeight - VolumeControlButton.BUTTON_Y_OFFSET);
     }
 
     @Override
     public void render (Graphics2D _g2) {
+        
         if (!this.getMenuScreen().isOnOptions() || !this.getGame().isMenu()) {
+            
             return;
         }
 
@@ -53,7 +55,9 @@ public class VolumeControlButton extends MenuButton implements MouseEventInterfa
 
     @Override
     public void onMouseClick () {
+        
         if (!this.getMenuScreen().isOnOptions() || !this.getGame().isMenu()) {
+            
             return;
         }
 
@@ -64,17 +68,24 @@ public class VolumeControlButton extends MenuButton implements MouseEventInterfa
 
     @Override
     public void onMouseEnterHover () {
+        
         if (!this.getMenuScreen().isOnOptions() || !this.getGame().isMenu()) {
+            
             return;
         }
+        
         this.activeImage = this.onHoverButtonImg;
     }
 
     @Override
     public void onMouseExitHover () {
+        
         if (!this.getMenuScreen().isOnOptions() || !this.getGame().isMenu()) {
+            
             return;
         }
+        
         this.activeImage = this.buttonImg;
     }
+    
 }

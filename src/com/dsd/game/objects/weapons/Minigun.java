@@ -12,8 +12,6 @@ import com.revivedstandards.model.StandardAnimation;
 /**
  * This class is a subclass of Gun; it's an automatic rifle.
  *
- * [Group Name: Data Structure Deadheads]
- *
  * @author Joshua, Ronald, Rinty
  */
 public class Minigun extends Gun {
@@ -27,6 +25,7 @@ public class Minigun extends Gun {
     private static final int BULLET_DAMAGE = 15;
 
     public Minigun (Game _game, Player _player, StandardCollisionHandler _sch) {
+        
         super(WeaponType.MINIGUN, 100, _game, _player, _sch, "src/resources/audio/sfx/reload.wav", 3000);
         //  Instantiates the animation controllers.
         this.loadAssets(_player);
@@ -36,6 +35,7 @@ public class Minigun extends Gun {
 
     @Override
     public void shoot () {
+        
         this.addBullet();
         super.deductAmmo();
     }
@@ -44,6 +44,7 @@ public class Minigun extends Gun {
      * Adds a bullet to the global handler.
      */
     private void addBullet () {
+        
         super.getHandler().addEntity(new BulletGameObject(
                 (int) super.getPlayer().getX() + super.getPlayer().getWidth() / 2,
                 (int) super.getPlayer().getY() + super.getPlayer().getHeight() / 2,
@@ -53,6 +54,7 @@ public class Minigun extends Gun {
 
     @Override
     public void loadAssets (Player _player) {
+        
         //  Instantiates the animation controllers.
         StandardAnimatorController walkingAnimation = new StandardAnimatorController(
                 new StandardAnimation(_player, Utilities.loadFrames("src/resources/img/player/player_" + _player.getPlayerSex() + "/player_walk_minigun/", 6), WALKING_FPS));
@@ -61,4 +63,5 @@ public class Minigun extends Gun {
         super.setWalkFrames(walkingAnimation);
         super.setAttackFrames(shootingAnimation);
     }
+    
 }

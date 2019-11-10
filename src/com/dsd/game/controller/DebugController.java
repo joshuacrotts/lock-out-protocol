@@ -13,8 +13,6 @@ import java.awt.Graphics2D;
  * Debug mode controller; draws information about the game (such as coordinates,
  * handler information, particles, etc.).
  *
- * [Group Name: Data Structure Deadheads]
- *
  * @author Joshua, Ronald, Rinty
  */
 public class DebugController implements Renderable {
@@ -24,31 +22,27 @@ public class DebugController implements Renderable {
     private final Player player;
     private final StandardCamera camera;
     private final StandardCollisionHandler parentContainer;
-
     //  This variable determines if the game is in debug mode or not.
     public static boolean DEBUG_MODE = false;
-
     //  Offset variables for text.
     private final int GLOBAL_X_OFFSET = 300;
     private final int GLOBAL_Y_OFFSET = 150;
-
     //  Player text offsets.
     private final int PLAYER_Y_OFFSET = 20;
     private final int PLAYER_WIDTH_OFFSET = 40;
     private final int PLAYER_HEIGHT_OFFSET = 60;
-
     //  Camera text offsets.
     private final int CAMERA_MIN_X_OFFSET = 20;
     private final int CAMERA_MAX_X_OFFSET = 60;
     private final int CAMERA_MIN_Y_OFFSET = 40;
     private final int CAMERA_MAX_Y_OFFSET = 80;
-
     //  Offsets for drawing the actual information in the top-left.
     private final int DEBUG_MODE_TEXT_Y_OFFSET = 20;
     private final int ENTITY_COUNT_Y_OFFSET = 80;
     private final int CAMERA_COORDINATE_Y_OFFSET = 100;
 
     public DebugController (Game _game, StandardCollisionHandler _sch) {
+
         this.game = _game;
         this.parentContainer = _sch;
         this.camera = this.game.getCamera();
@@ -57,6 +51,7 @@ public class DebugController implements Renderable {
 
     @Override
     public void render (Graphics2D _g2) {
+
         int posX = (int) (this.camera.getX() - Screen.gameFourthWidth) - GLOBAL_X_OFFSET;
         int posY = (int) (this.camera.getY() - Screen.gameFourthHeight) - GLOBAL_Y_OFFSET;
 
@@ -75,6 +70,7 @@ public class DebugController implements Renderable {
      * @param _y
      */
     private void renderPlayerCoordinates (Graphics2D _g2, int _x, int _y) {
+
         _g2.setColor(Color.ORANGE);
         _g2.drawString("Player X: " + this.player.getX(), _x, _y);
         _g2.drawString("Player Y: " + this.player.getY(), _x, _y + PLAYER_Y_OFFSET);
@@ -91,6 +87,7 @@ public class DebugController implements Renderable {
      * @param _y
      */
     private void renderEntityCount (Graphics2D _g2, int _x, int _y) {
+
         _g2.setColor(Color.GREEN);
         _g2.drawString("Entities in handler: " + this.parentContainer.getEntities().size(), _x, _y);
     }
@@ -104,6 +101,7 @@ public class DebugController implements Renderable {
      * @param _y
      */
     private void renderCameraCoordinates (Graphics2D _g2, int _x, int _y) {
+
         _g2.setColor(Color.ORANGE);
         _g2.drawString("Camera coordinates: ", _x, _y);
         _g2.drawString("Camera min x: " + (this.camera.getX() - Screen.gameHalfWidth), _x, _y + CAMERA_MIN_X_OFFSET);
@@ -121,7 +119,9 @@ public class DebugController implements Renderable {
      * @param _y
      */
     private void renderDebugText (Graphics2D _g2, int _x, int _y) {
+
         _g2.setColor(Color.YELLOW);
         _g2.drawString("DEBUG MODE", _x, _y + DEBUG_MODE_TEXT_Y_OFFSET);
     }
+
 }

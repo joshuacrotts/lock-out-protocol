@@ -29,7 +29,7 @@ import java.util.TimerTask;
  * Health object for when the player is damaged, they can pick it up and restore
  * some health.
  *
- * @author Joshua
+ * @author Joshua, Ronald, Rinty
  */
 public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInterface {
 
@@ -39,7 +39,6 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
     private final StandardCamera camera;
     private final StandardCollisionHandler parentContainer;
     private Timer powerupTimer;
-
     //  View
     private final StandardFadeController color;
     private static final BufferedImage[] INFINITE_AMMO_FRAMES;
@@ -47,13 +46,13 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
     private static final int RECT_STROKE = 20;
     private static final int STROKE_X_OFFSET = (int) (RECT_STROKE * 1.5);
     private static final int STROKE_Y_OFFSET = (int) (RECT_STROKE * 2.4);
-
     //  Timer for how long the powerup is active (in milliseconds)
     private int timer = 10000;
     private boolean isActivated = false;
     private boolean isCollected = false;
 
     public InfiniteAmmoPowerup (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
+        
         super(_x, _y, StandardID.Item2);
         this.game = _game;
         this.camera = _game.getCamera();
@@ -68,27 +67,37 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
 
     @Override
     public void tick () {
+        
         if (this.isAlive()) {
+            
             this.getAnimationController().tick();
         }
+        
     }
 
     @Override
     public void render (Graphics2D _g2) {
+        
         if (this.isAlive()) {
+            
             this.getAnimationController().renderFrame(_g2);
         }
+        
         else if (this.isActivated) {
+            
             this.drawFlashingBorder(_g2);
             this.activateInfiniteAmmo();
         }
+        
     }
 
     /**
      * Turns the timer on and instantiates the associated timer task.
      */
     public void activate () {
+        
         if (this.isActivated) {
+            
             return;
         }
 
@@ -99,13 +108,13 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
         this.powerupTimer = new Timer(true);
         this.powerupTimer.schedule(new InfiniteAmmoTimer(this), timer);
         TimerController.addTimer(this);
-
         this.isActivated = true;
         this.playInfAmmoSFX();
     }
 
     @Override
     public void cancelTimer () {
+        
         this.powerupTimer.cancel();
     }
 
@@ -114,21 +123,25 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
      * infinite ammo.
      */
     private void activateInfiniteAmmo () {
+        
         Weapon curr = this.game.getPlayer().getInventory().getCurrentWeapon();
+        
         if (!(curr instanceof Gun)) {
+            
             return;
         }
 
         Gun gun = (Gun) curr;
         gun.setCurrentAmmo(gun.getMagazineCapacity());
-
     }
 
     /**
      * Plays the sound effect associated with collecting the infinite ammo item.
      */
     public void playInfAmmoSFX () {
+        
         if (this.isCollected) {
+            
             return;
         }
 
@@ -141,6 +154,7 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
      * @param _g2
      */
     private void drawFlashingBorder (Graphics2D _g2) {
+        
         _g2.setColor(this.getTransparentColor(this.color.combine()));
         Stroke oldStroke = _g2.getStroke();
         _g2.setStroke(new BasicStroke(RECT_STROKE));
@@ -151,19 +165,7 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
         _g2.draw(view);
         _g2.setStroke(oldStroke);
     }
-
-    private Color getTransparentColor (Color _c) {
-        return new Color(_c.getRed(), _c.getGreen(), _c.getBlue(), 127);
-    }
-
-    public void setCollected () {
-        this.isCollected = true;
-    }
-
-    static {
-        INFINITE_AMMO_FRAMES = Utilities.loadFrames("src/resources/img/items/drops/infammo/", 27);
-    }
-
+    
     /**
      * Private class for the infinite ammo. Once the player picks up the
      * powerup, the timer starts and continues until x milliseconds have passed,
@@ -174,14 +176,33 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
         private final InfiniteAmmoPowerup powerup;
 
         public InfiniteAmmoTimer (InfiniteAmmoPowerup _powerup) {
+            
             this.powerup = _powerup;
         }
 
         @Override
         public void run () {
+            
             this.powerup.setAlive(false);
             this.powerup.isActivated = false;
         }
+        
+    }
+
+//========================== GETTERS ============================================
+    private Color getTransparentColor (Color _c) {
+        
+        return new Color(_c.getRed(), _c.getGreen(), _c.getBlue(), 127);
+    }
+
+//============================= SETTERS =========================================
+    public void setCollected () {
+        
+        this.isCollected = true;
+    }
+
+    static {
+        INFINITE_AMMO_FRAMES = Utilities.loadFrames("src/resources/img/items/drops/infammo/", 27);
     }
 
 }

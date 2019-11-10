@@ -25,8 +25,6 @@ import org.apache.commons.math3.util.FastMath;
 /**
  * Monster entity; follows the player around and (eventually) drains his health.
  *
- * [Group Name: Data Structure Deadheads]
- *
  * @author Joshua, Ronald, Rinty
  */
 public class DarkFemaleMonster extends Enemy implements DeathListener {
@@ -39,20 +37,16 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
      */
     private static final BufferedImage[] WALK_FRAMES;
     private static final BufferedImage[] DEATH_FRAMES;
-
     //  Animation frame per second setting
     private final int walkingFPS;
     private final int WALKING_FPS_MIN = 13;
     private final int WALKING_FPS_MAX = 16;
     private static final int DEATH_FPS = 5;
-
     //  One-time variable for tracking the "alive" to "death state" transition
     private boolean aliveFlag = true;
-
     //  Variables representing the angle and approach velocity
     private final double APPROACH_VEL = -1.2f;
     private final double DAMAGE = 1.0;
-
     //  AlphaComposite factor for when the DarkFemaleMonster dies
     private static final float DEATH_ALPHA_FACTOR = 0.001f;
 
@@ -65,19 +59,16 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
     private static final int BLUE_BOUND = 161;
 
     public DarkFemaleMonster (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
+
         super(_x, _y, DarkFemaleMonster.originalHealth, StandardID.Monster3, _game, _sch);
         this.setTarget(_game.getPlayer());
-
         //  Randomly generates the walking frames per second for variability
         this.walkingFPS = StdOps.rand(this.WALKING_FPS_MIN, this.WALKING_FPS_MAX);
-
         //  Sets the walking/death frames for this monster
         super.initWalkingFrames(DarkFemaleMonster.WALK_FRAMES, this.walkingFPS);
         super.initDeathFrames(DarkFemaleMonster.DEATH_FRAMES, DarkFemaleMonster.DEATH_FPS, 5);
-
         //  Sets the default animation
         super.setAnimation(super.getWalkingAnimation());
-
         //  The width/height of the model is set by the buffered image backing it.
         super.setDimensions();
         super.setDamage(this.DAMAGE);
@@ -91,14 +82,15 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
      */
     @Override
     public void tick () {
-        super.tick();
 
+        super.tick();
         //  If the monster's health is less than 0, we can flag it as dead.
         this.setAlive(this.getHealth() > 0);
         this.getAnimationController().tick();
         this.getAnimationController().getStandardAnimation().setRotation(this.getAngle());
 
         if (this.isAlive()) {
+
             this.updatePosition();
             //  Save the target's position
             double tx = this.getTarget().getX();
@@ -108,24 +100,32 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
             //  Calculates the angle the monster needs to be in to face the player
             this.facePlayer((int) tx, (int) ty);
         }
+
         else {
+
             //  Do this only once.
             if (this.aliveFlag) {
+
                 this.uponDeath();
                 this.aliveFlag = false;
             }
+
             //  Creates the alpha composite object based off the object's current transparency.
             this.updateComposite();
+
             /**
              * If the size of the exphandler (MAX_PARTICLES - dead ones) == 0,
              * we can set this entity to be dead, and remove it from the
              * handler.
              */
             if (this.explosionHandler.size() == 0 || this.getTransparency() <= 0) {
+
                 this.getHandler().removeEntity(this);
             }
+
             StandardHandler.Handler(this.explosionHandler);
         }
+
     }
 
     /**
@@ -136,11 +136,13 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
      */
     @Override
     public void render (Graphics2D _g2) {
+
         /**
          * We need to save the old alpha composition, apply the new one, render,
          * THEN set the old one back.
          */
         if (!this.isAlive() && this.explosionHandler != null) {
+
             StandardDraw.Handler(this.explosionHandler);
             /**
              * We need to save the old alpha composition, apply the new one,
@@ -151,9 +153,12 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
             this.getAnimationController().renderFrame(_g2);
             _g2.setComposite(oldComposite);
         }
+
         else {
+
             this.getAnimationController().renderFrame(_g2);
         }
+
     }
 
     /**
@@ -163,16 +168,19 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
      */
     @Override
     public void uponDeath () {
+
         this.setAnimation(this.getDeathAnimation());
         this.explosionHandler = new StandardParticleHandler(50);
         this.explosionHandler.setCamera(this.getCamera());
 
         for (int i = 0 ; i < this.explosionHandler.getMaxParticles() ; i++) {
+
             this.explosionHandler.addEntity(new StandardBoxParticle(this.getX(), this.getY(),
                     StdOps.rand(1.0, 5.0), StdOps.randBounds(-10.0, -3.0, 3.0, 10.0),
                     StdOps.randBounds(-10.0, -3.0, 3.0, 10.0), this.generateRandomBloodColor(), 3f, this.explosionHandler,
                     this.getAngle(), ShapeType.CIRCLE, true));
         }
+
         this.generateCoins(StdOps.rand(0, 5));
         this.generateDeathSound(StdOps.rand(1, 2));
         this.generatePowerup();
@@ -186,6 +194,7 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
      */
     @Override
     public void generateHurtSound (int _sfx) {
+
         StandardAudioController.play("src/resources/audio/sfx/green_monster/pain" + _sfx + ".wav", StandardAudioType.SFX);
     }
 
@@ -196,6 +205,7 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
      * @return new Color object.
      */
     private Color generateRandomBloodColor () {
+
         return new Color(StdOps.rand(RED_BOUND, BLUE_BOUND), 0, StdOps.rand(BLUE_BOUND, 0xFF));
     }
 
@@ -225,6 +235,7 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
      * @param _posY
      */
     private void facePlayer (int _posX, int _posY) {
+
         /**
          * Calculates the angle using arctangent that the monster needs to face
          * so they are angled towards the player.
@@ -233,10 +244,13 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
         double dx = FastMath.abs(_posX - this.getX());
         double dy = FastMath.abs(_posY - this.getY());
         this.setAngle((double) ((xSign) * (FastMath.atan((dx) / (dy)))));
+
         // If we're in Q1 (+x, -+y) or in Q2 (-x, +y)
         if ((_posX > this.getX() && _posY > this.getY()) || (_posX < this.getX() && _posY > this.getY())) {
+
             this.setAngle((double) ((FastMath.PI / 2) + (FastMath.PI / 2 - this.getAngle())));
         }
+
     }
 
     /**
@@ -245,6 +259,7 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
      * @param sfx either 1 or 2
      */
     private void generateDeathSound (int _sfx) {
+
         StandardAudioController.play("src/resources/audio/sfx/splat" + _sfx + ".wav", StandardAudioType.SFX);
     }
 
@@ -255,26 +270,35 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
      * @param _coinAmt
      */
     private void generateCoins (int _coinAmt) {
+
         for (int i = 0 ; i < _coinAmt ; i++) {
+
             this.getHandler().addEntity(new Coin((int) this.getX(), (int) this.getY(), 0.7, 0.9, 1.0, this.getHandler()));
         }
+
     }
 
     /**
      * Generates a random powerup based on RNG (will definitely change).
      */
     private void generatePowerup () {
+
         int luck = StdOps.rand(1, 10);
+
         if (luck == 1) {
+
             this.getHandler().addEntity(new HealthPowerup((int) (this.getX() + this.getWidth() / 2),
                     (int) (this.getY() + this.getHealth() / 2),
                     this.getGame(), this.getHandler()));
         }
+
     }
 
     //  Static block for instantiating the images.
     static {
+
         WALK_FRAMES = Utilities.loadFrames("src/resources/img/enemies/monster3/walk/", 11);
         DEATH_FRAMES = Utilities.loadFrames("src/resources/img/enemies/monster3/death/", 6);
     }
+
 }

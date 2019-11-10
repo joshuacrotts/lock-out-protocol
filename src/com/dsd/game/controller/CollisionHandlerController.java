@@ -26,8 +26,6 @@ import java.awt.Graphics2D;
  * obj2), and it needs a subclass to override it so the handler knows what to do
  * when two SGO's collide.
  *
- * [Group Name: Data Structure Deadheads]
- *
  * @author Joshua, Ronald, Rinty
  */
 public class CollisionHandlerController extends StandardCollisionHandler {
@@ -39,24 +37,31 @@ public class CollisionHandlerController extends StandardCollisionHandler {
     private static StandardInteractorHandler damageText;
 
     public CollisionHandlerController (Game _game) {
+
         super(_game.getCamera());
         CollisionHandlerController.damageText = new StandardInteractorHandler(_game);
     }
 
     @Override
     public void tick () {
+
         super.tick();
         damageText.tick();
     }
 
     @Override
     public void render (Graphics2D _g2) {
+
         for (int i = 0 ; i < this.getEntities().size() ; i++) {
+
             if (this.getEntities().get(i) == null) {
+
                 continue;
             }
+
             this.getEntities().get(i).render(_g2);
         }
+
         damageText.render(_g2);
     }
 
@@ -70,13 +75,18 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      */
     @Override
     public void handleCollision (StandardGameObject _obj1, StandardGameObject _obj2) {
+
         //Handles bullet to monster collision (kills bullet and takes damage away from monster).
         if (_obj1.getId() == StandardID.Bullet && _obj2 instanceof Enemy) {
+
             this.handleBulletEnemyCollision((ProjectileGameObject) _obj1, (Enemy) _obj2);
         }
-        else if(_obj1.getId() == StandardID.Bullet && _obj2.getId() == StandardID.Bullet) {
+
+        else if (_obj1.getId() == StandardID.Bullet && _obj2.getId() == StandardID.Bullet) {
+
             return;
         }
+
     }
 
     /**
@@ -90,29 +100,43 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      */
     @Override
     public void handleBoundsCollision (StandardGameObject _obj1, StandardGameObject _obj2) {
+
         if (_obj1.getId() == StandardID.Player && _obj2 instanceof Enemy && _obj2.isAlive()) {
+
             this.handlePlayerMonsterCollision((Player) _obj1, (Enemy) _obj2);
         }
+
         else if (_obj1.getId() == StandardID.Bullet && _obj2 instanceof Enemy) {
+
             this.handleBulletEnemyCollision((ProjectileGameObject) _obj1, (Enemy) _obj2);
-        } //
+        }
+
         //  TODO: Refactor this into a PowerUp superclass with some type of activate() method.
-        //
         else if (_obj1.getId() == StandardID.Player && _obj2.getId() == StandardID.Coin && _obj2.isAlive()) {
+
             this.handlePlayerCoinCollision((Player) _obj1, (Coin) _obj2);
         }
+
         else if (_obj1.getId() == StandardID.Player && _obj2 instanceof HealthPowerup) {
+
             this.handlePlayerHealthCollision((Player) _obj1, (HealthPowerup) _obj2);
         }
+
         else if (_obj1.getId() == StandardID.Player && _obj2 instanceof BerserkPowerup) {
+
             this.handlePlayerBerserkCollision((Player) _obj1, (BerserkPowerup) _obj2);
         }
+
         else if (_obj1.getId() == StandardID.Player && _obj2 instanceof InfiniteAmmoPowerup) {
+
             this.handlePlayerAmmoCollision((Player) _obj1, (InfiniteAmmoPowerup) _obj2);
         }
+
         else if (_obj1.getId() == StandardID.Tile1 && _obj2 instanceof Enemy) {
+
             this.handleEnemyExplosionCollision((Explosion) _obj1, (Enemy) _obj2);
         }
+
     }
 
     /**
@@ -124,24 +148,29 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      * @param monster
      */
     private void handleBulletEnemyCollision (ProjectileGameObject _bullet, Enemy _monster) {
+
         // Sets the bullet to dead
         // Casts the obj2 to a Monster so we can deduct health from it
 
         if (_monster.isAlive() && _bullet.isAlive()) {
+
             //  If the object is a grenade bullet, then we'll create an explosion with
             //  a damage radius.
             if (_bullet instanceof GrenadeBulletObject) {
+
                 this.addEntity(new Explosion((int) _monster.getX(), (int) _monster.getY(),
                         _bullet.getDamage(), ExplosionType.GRENADE_EXPLOSION, this));
-            } //  For shotugns, we just add an explosion sprite and make the damage factor 0.
+            }
+
+            //  For shotugns, we just add an explosion sprite and make the damage factor 0.
             else if (_bullet instanceof ShotgunBulletObject) {
+
                 this.addEntity(new Explosion((int) _monster.getX(), (int) _monster.getY(),
                         0, ExplosionType.SHOTGUN_EXPLOSION, this));
-
             }
+
             _bullet.setAlive(false);
             _monster.setHealth(_monster.getHealth() - _bullet.getDamage());
-
             //  Plays random monster hurt sfx
             _monster.generateHurtSound(StdOps.rand(1, 5));
             //  Generates the blood particles for the monster
@@ -151,6 +180,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
             _monster.applyPushForce(_bullet.getVelX(), _bullet.getVelY());
             this.addDamageText(_monster, _bullet.getDamage());
         }
+
     }
 
     /**
@@ -162,14 +192,18 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      * @param _monster
      */
     private void handlePlayerMonsterCollision (Player _player, Enemy _monster) {
+
         _player.setHealth(_player.getHealth() - _monster.getDamage());
+
         if (_player.isAttacking()) {
+
             int dmg = (int) _player.getInventory().getCurrentWeapon().getDamage();
             this.addDamageText(_monster, dmg);
             _monster.setHealth(_monster.getHealth() - dmg);
             _monster.generateHurtSound(StdOps.rand(1, 5));
             _player.setPlayerState(PlayerState.STANDING);
         }
+
     }
 
     /**
@@ -179,6 +213,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      * @param _coin
      */
     private void handlePlayerCoinCollision (Player _player, Coin _coin) {
+
         _coin.setAlive(false);
         _player.setMoney(_player.getMoney() + _coin.getValue());
         _coin.playCoinSFX();
@@ -192,6 +227,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      * @param _health
      */
     private void handlePlayerHealthCollision (Player _player, HealthPowerup _health) {
+
         _health.setAlive(false);
         _health.addHealth();
     }
@@ -204,6 +240,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      * @param _berserk
      */
     private void handlePlayerBerserkCollision (Player _player, BerserkPowerup _berserk) {
+
         _berserk.setAlive(false);
         _berserk.activate();
         _berserk.playBerserkSFX();
@@ -218,6 +255,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      * @param _ammo
      */
     private void handlePlayerAmmoCollision (Player _player, InfiniteAmmoPowerup _ammo) {
+
         _ammo.setAlive(false);
         _ammo.activate();
     }
@@ -231,9 +269,12 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      * @param _enemy
      */
     private void handleEnemyExplosionCollision (Explosion _explosion, Enemy _enemy) {
+
         if (_enemy.isAlive() && _explosion.isAlive()) {
+
             _enemy.setHealth(_enemy.getHealth() - _explosion.getDamage());
         }
+
     }
 
     /**
@@ -243,7 +284,9 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      * @param _damage
      */
     private void addDamageText (Enemy _monster, int _damage) {
+
         damageText.addInteractor(new DamageText((int) _monster.getX() + _monster.getWidth() / 2,
                 (int) _monster.getY(), "-" + _damage, damageText));
     }
+
 }

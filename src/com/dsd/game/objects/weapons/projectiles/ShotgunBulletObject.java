@@ -12,8 +12,6 @@ import org.apache.commons.math3.util.FastMath;
 /**
  * Shotgun bullet game object.
  *
- * [Group Name: Data Structure Deadheads]
- *
  * @author Joshua, Ronald, Rinty
  */
 public class ShotgunBulletObject extends ProjectileGameObject {
@@ -24,22 +22,24 @@ public class ShotgunBulletObject extends ProjectileGameObject {
     private static final BufferedImage[] frames = new BufferedImage[1];
     //  Animation frame per second setting
     private static final int BULLET_FPS = 20;
-
     private static int damage = 100;
 
     public ShotgunBulletObject (int _x, int _y, double _angle, int _damage, Game _game,
             StandardCollisionHandler _parentContainer, Player _parent) {
+        
         super(_x, _y, _angle, _damage, ShotgunBulletObject.VEL_FACTOR, ShotgunBulletObject.frames,
                 ShotgunBulletObject.BULLET_FPS, _game, _parentContainer, _parent, StandardID.Bullet2);
     }
 
     @Override
     public void tick () {
+        
         super.tick();
     }
 
     @Override
     public void render (Graphics2D _g2) {
+        
         super.render(_g2);
     }
 
@@ -49,10 +49,11 @@ public class ShotgunBulletObject extends ProjectileGameObject {
      * @return
      */
     private static void initImages () {
+        
         ShotgunBulletObject.frames[0] = StdOps.loadImage("src/resources/img/bullet/bullet_sprite/new_bullet/shotgun_bullet.png");
     }
 
-//============================ SETTERS ====================================//
+//============================ SETTERS ====================================
     /**
      * Instantiates the velocity of the bullet depending on where the cursor is
      * in relation to the player.
@@ -63,6 +64,7 @@ public class ShotgunBulletObject extends ProjectileGameObject {
      * @param _my
      */
     private void setVelocity (double _x, double _y, int _mx, int _my) {
+        
         double deltaX = (_mx - _x);
         double deltaY = (_my - _y);
         // Use the pythagorean theorem to solve for the hypotenuse distance
@@ -73,10 +75,11 @@ public class ShotgunBulletObject extends ProjectileGameObject {
         this.setVelX(deltaX);
         this.setVelY(deltaY);
     }
-
-//========================== GETTERS =======================================//
+    
     //  Initializes the bullet frames
     static {
+        
         ShotgunBulletObject.initImages();
     }
+    
 }
