@@ -17,13 +17,18 @@ import java.awt.image.BufferedImage;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/9/19
+ *
  */
 public class GrenadeBulletObject extends ProjectileGameObject implements DeathListener {
 
     //  Velocity factor applied to the bullet.
     private static final int VEL_FACTOR = 40;
+
     //  Static reference to the BufferedImages
     private static final BufferedImage[] frames = new BufferedImage[1];
+
     //  Animation frame per second setting
     private static final int BULLET_FPS = 20;
 

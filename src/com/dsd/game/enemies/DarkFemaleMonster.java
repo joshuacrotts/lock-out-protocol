@@ -186,7 +186,7 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
      */
     @Override
     public void generateHurtSound (int _sfx) {
-        StandardAudioController.play("src/resources/audio/sfx/green_monster/pain" + _sfx + ".wav", StandardAudioType.SFX);
+        StandardAudioController.play("src/resources/audio/sfx/zombies/zombie-" + _sfx + ".wav", StandardAudioType.SFX);
     }
 
     /**

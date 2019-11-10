@@ -1,7 +1,9 @@
 package com.dsd.game.controller;
 
 import com.dsd.game.Game;
+import com.dsd.game.enemies.BasicMonster;
 import com.dsd.game.enemies.Enemy;
+import com.dsd.game.enemies.GreenMonster;
 import com.dsd.game.objects.Explosion;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.enums.ExplosionType;
@@ -18,6 +20,7 @@ import com.dsd.game.userinterface.model.DamageText;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.model.StandardGameObject;
 import com.revivedstandards.model.StandardID;
+import static com.revivedstandards.model.StandardID.BasicMonster;
 import com.revivedstandards.util.StdOps;
 import java.awt.Graphics2D;
 
@@ -74,7 +77,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
         if (_obj1.getId() == StandardID.Bullet && _obj2 instanceof Enemy) {
             this.handleBulletEnemyCollision((ProjectileGameObject) _obj1, (Enemy) _obj2);
         }
-        else if(_obj1.getId() == StandardID.Bullet && _obj2.getId() == StandardID.Bullet) {
+        else if (_obj1.getId() == StandardID.Bullet && _obj2.getId() == StandardID.Bullet) {
             return;
         }
     }
@@ -126,24 +129,29 @@ public class CollisionHandlerController extends StandardCollisionHandler {
     private void handleBulletEnemyCollision (ProjectileGameObject _bullet, Enemy _monster) {
         // Sets the bullet to dead
         // Casts the obj2 to a Monster so we can deduct health from it
-
         if (_monster.isAlive() && _bullet.isAlive()) {
             //  If the object is a grenade bullet, then we'll create an explosion with
             //  a damage radius.
             if (_bullet instanceof GrenadeBulletObject) {
                 this.addEntity(new Explosion((int) _monster.getX(), (int) _monster.getY(),
                         _bullet.getDamage(), ExplosionType.GRENADE_EXPLOSION, this));
-            } //  For shotugns, we just add an explosion sprite and make the damage factor 0.
+            }
+            //  For shotguns, we just add an explosion sprite and make the damage factor 0.
             else if (_bullet instanceof ShotgunBulletObject) {
                 this.addEntity(new Explosion((int) _monster.getX(), (int) _monster.getY(),
                         0, ExplosionType.SHOTGUN_EXPLOSION, this));
-
             }
+            
             _bullet.setAlive(false);
             _monster.setHealth(_monster.getHealth() - _bullet.getDamage());
 
             //  Plays random monster hurt sfx
-            _monster.generateHurtSound(StdOps.rand(1, 5));
+            if (!(_monster instanceof BasicMonster || _monster instanceof GreenMonster)) {
+                _monster.generateHurtSound(StdOps.rand(1, 30));
+            }
+            else {
+                _monster.generateHurtSound(StdOps.rand(1, 5));
+            }
             //  Generates the blood particles for the monster
             _monster.generateBloodParticles();
             //  Applys a force to the enemy based on the velocity of the

@@ -89,6 +89,7 @@ public class PersistentDatabase implements RemoteDatabase {
 
         }
         catch (SQLException | NullPointerException ex) {
+            System.out.println(ex);
             return false;
         }
         return true;
@@ -113,6 +114,8 @@ public class PersistentDatabase implements RemoteDatabase {
             updateInventoryQuery.executeUpdate();
         }
         catch (SQLException | NullPointerException ex) {
+            System.out.println(ex);
+
             return false;
         }
         return true;
@@ -137,6 +140,8 @@ public class PersistentDatabase implements RemoteDatabase {
             updateLevelQuery.executeUpdate();
         }
         catch (SQLException | NullPointerException ex) {
+            System.out.println(ex);
+
             return false;
         }
         return true;
@@ -159,6 +164,8 @@ public class PersistentDatabase implements RemoteDatabase {
             updateLevelQuery.executeUpdate();
         }
         catch (SQLException | NullPointerException ex) {
+            System.out.println(ex);
+
             return false;
         }
         return true;
@@ -179,6 +186,8 @@ public class PersistentDatabase implements RemoteDatabase {
             updateLevelQuery.executeUpdate();
         }
         catch (SQLException | NullPointerException ex) {
+            System.out.println(ex);
+
             return false;
         }
         return true;
@@ -218,7 +227,9 @@ public class PersistentDatabase implements RemoteDatabase {
             ArrayList<Integer> inventoryInfo = new ArrayList<>();
 
             final int PLAYER_AMT = 6;
-            final int INVENTORY_AMT = WeaponType.values().length;
+            //  Gun status (if they have the gun)
+            //  plus the ammo amt and total ammo for every gun
+            final int INVENTORY_AMT = WeaponType.values().length * 3;
 
             //  Load in the player data from the Result Set
             for (int i = 2 ; i <= PLAYER_AMT ; i++) {

@@ -153,7 +153,7 @@ public class RedHeadMonster extends Enemy implements DeathListener {
      */
     @Override
     public void generateHurtSound (int _sfx) {
-        StandardAudioController.play("src/resources/audio/sfx/basic_monster/zombie-" + _sfx + ".wav", StandardAudioType.SFX);
+        StandardAudioController.play("src/resources/audio/sfx/zombies/zombie-" + _sfx + ".wav", StandardAudioType.SFX);
     }
 
     /**

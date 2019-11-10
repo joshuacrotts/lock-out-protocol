@@ -208,7 +208,9 @@ public class Inventory implements SerializableObject {
             WeaponType.SHOTGUN, WeaponType.GRENADE_LAUNCHER, WeaponType.MINIGUN, WeaponType.SUPER_SHOTGUN};
 
         for (int i = 0, weaponIndex = 0 ; i < types.length ; i++, weaponIndex += 3) {
-            this.loadWeaponFromDB(_inventoryInfo.get(weaponIndex), types[i], _inventoryInfo.get(weaponIndex + 1), _inventoryInfo.get(weaponIndex + 2));
+            this.loadWeaponFromDB(_inventoryInfo.get(weaponIndex), types[i],
+                    _inventoryInfo.get(weaponIndex + 1),
+                    _inventoryInfo.get(weaponIndex + 2));
         }
     }
 
