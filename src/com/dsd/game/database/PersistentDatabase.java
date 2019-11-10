@@ -89,11 +89,7 @@ public class PersistentDatabase implements RemoteDatabase {
         }
 
         catch (SQLException | NullPointerException ex) {
-<<<<<<< HEAD
-
-=======
-            System.out.println(ex);
->>>>>>> 4e3b04770662a28aec5378a5bf4e6e22962addfa
+            
             return false;
         }
 
@@ -123,10 +119,6 @@ public class PersistentDatabase implements RemoteDatabase {
         }
 
         catch (SQLException | NullPointerException ex) {
-<<<<<<< HEAD
-=======
-            System.out.println(ex);
->>>>>>> 4e3b04770662a28aec5378a5bf4e6e22962addfa
 
             return false;
         }
@@ -157,10 +149,6 @@ public class PersistentDatabase implements RemoteDatabase {
         }
 
         catch (SQLException | NullPointerException ex) {
-<<<<<<< HEAD
-=======
-            System.out.println(ex);
->>>>>>> 4e3b04770662a28aec5378a5bf4e6e22962addfa
 
             return false;
         }
@@ -187,10 +175,6 @@ public class PersistentDatabase implements RemoteDatabase {
         }
 
         catch (SQLException | NullPointerException ex) {
-<<<<<<< HEAD
-=======
-            System.out.println(ex);
->>>>>>> 4e3b04770662a28aec5378a5bf4e6e22962addfa
 
             return false;
         }
@@ -215,10 +199,6 @@ public class PersistentDatabase implements RemoteDatabase {
         }
 
         catch (SQLException | NullPointerException ex) {
-<<<<<<< HEAD
-=======
-            System.out.println(ex);
->>>>>>> 4e3b04770662a28aec5378a5bf4e6e22962addfa
 
             return false;
         }
