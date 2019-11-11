@@ -3,3 +3,4 @@
 /build/*
 /test/*
 /.idea/*
+/nbproject/private/

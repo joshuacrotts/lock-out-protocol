@@ -63,7 +63,6 @@ public class MalePlayerButton extends StandardButton implements MouseEventInterf
         if (!this.menuScreen.isOnPlayerGender()) {
             return;
         }
-
         StandardAudioController.play("src/resources/audio/sfx/menuselect.wav", StandardAudioType.SFX);
         this.game.getPlayer().setPlayerSex("male");
         this.menuScreen.pushMenuStack(MenuState.PLAYER_GENDER);

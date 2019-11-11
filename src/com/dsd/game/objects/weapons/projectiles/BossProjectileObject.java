@@ -5,6 +5,7 @@ import com.dsd.game.enemies.Enemy;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.model.StandardID;
 import com.revivedstandards.util.StdOps;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
@@ -26,14 +27,18 @@ public class BossProjectileObject extends ProjectileGameObject {
     //  Animation frame per second setting
     private static final int BULLET_FPS = 20;
 
-    private static int damage = 25;
+    private int damage = 25;
 
     public BossProjectileObject (int _x, int _y, int _velX, int _velY, int _damage, Game _game,
             StandardCollisionHandler _parentContainer, Enemy _parent) {
         super(_x, _y, 0, _damage, BossProjectileObject.VEL_FACTOR, BossProjectileObject.frames,
                 BossProjectileObject.BULLET_FPS, _game, _parentContainer, _parent, StandardID.Bullet1);
+        
         this.setVelX(_velX);
         this.setVelY(_velY);
+        
+        this.setWidth(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getWidth());
+        this.setHeight(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getHeight());
     }
 
     @Override

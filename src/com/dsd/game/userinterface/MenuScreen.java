@@ -223,6 +223,10 @@ public class MenuScreen extends Screen {
     public boolean isOnLanguages () {
         return this.menuState == MenuState.LANGUAGES;
     }
+    
+    public MenuState getMenuState() {
+        return this.menuState;
+    }
 
 //====================== SETTERS ===============================//
     public void setMenuState (MenuState _menuState) {
