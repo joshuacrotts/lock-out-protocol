@@ -36,30 +36,35 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
 
     //  Handler for particle explosions after the monster dies.
     private StandardParticleHandler explosionHandler;
-    private Timer bossProjectileTimer;
 
     //  Timer for spawning in projectiles.
-    /**
-     * Static bufferedimage array so the images aren't constantly loading in
-     * upon instantiation of a new monster
-     */
+    private final Timer bossProjectileTimer;
+
+    //
+    //  Static bufferedimage array so the images aren't constantly loading in
+    //  upon instantiation of a new monster
+    //
     private static final BufferedImage[] WALK_FRAMES;
     private static final BufferedImage[] DEATH_FRAMES;
 
-    //  Animation frame per second setting
+    //
+    //  Animation frame per second settings.
+    //  WALKING_FPS_MIN/MAX define the possible speeds that the boss can
+    //  animate at. It's randomly selected for variety.
+    //
     private final int walkingFPS;
     private final int WALKING_FPS_MIN = 13;
     private final int WALKING_FPS_MAX = 16;
     private static final int DEATH_FPS = 5;
 
-    //  One-time variable for tracking the "alive" to "death state" transition
+    //  One-time variable for tracking the "alive" to "death state" transition.
     private boolean aliveFlag = true;
 
-    //  Variables representing the angle and approach velocity
+    //  Variables representing the angle and approach velocity.
     private final double APPROACH_VEL = -1.2f;
     private final double DAMAGE = 1.00;
 
-    //  AlphaComposite factor for when the FemaleMonsterBoss dies
+    //  AlphaComposite factor for when the FemaleMonsterBoss dies.
     private static final float DEATH_ALPHA_FACTOR = 0.001f;
 
     //  Health factor for this FemaleMonsterBoss object.

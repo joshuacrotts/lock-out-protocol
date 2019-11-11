@@ -5,7 +5,6 @@ import com.dsd.game.userinterface.model.buttons.SoundEffectVolumeControl;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-
 /**
  * This class denotes the label for showing which of the two volume adjusters
  * controls the sfx.

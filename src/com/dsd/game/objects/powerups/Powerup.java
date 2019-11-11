@@ -6,5 +6,5 @@ package com.dsd.game.objects.powerups;
  */
 public interface Powerup {
 
-    public void activate();
+    public void activate ();
 }

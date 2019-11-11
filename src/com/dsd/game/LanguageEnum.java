@@ -36,7 +36,6 @@ public enum LanguageEnum {
     private static int languageIndex = 5;
 
     private static final LanguageEnum[] LANGUAGE_LIST = {
-
         AR, ZH, CS, DA, NL, EN, FI, FR, DE, EL, GA, IT, JA, PL, PT, RO, RU, ES, SV, UR, VI
     };
 
@@ -50,7 +49,7 @@ public enum LanguageEnum {
             languageIndex++;
         }
 
-        LanguageController.setLanguage (LANGUAGE_LIST[languageIndex].isoCode);
+        LanguageController.setLanguage(LANGUAGE_LIST[languageIndex].isoCode);
     }
 
     /**
@@ -63,7 +62,7 @@ public enum LanguageEnum {
             languageIndex--;
         }
 
-        LanguageController.setLanguage (LANGUAGE_LIST[languageIndex].isoCode);
+        LanguageController.setLanguage(LANGUAGE_LIST[languageIndex].isoCode);
     }
 
     private LanguageEnum (String _language, String _isoCode) {

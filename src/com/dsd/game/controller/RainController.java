@@ -112,6 +112,9 @@ public class RainController implements Renderable, Updatable {
                 (int) (this.sc.getY() + this.sc.getVph() * Y_BOUND_FACTOR));
     }
 
+    /**
+     * Generates a random lightning flash.
+     */
     private void generateLightning () {
         if ((int) (Math.random() * LIGHTNING_INT) < 2) {
             this.lightningHandler.getHandler().add(new LightningFlash(game, this.lightningHandler.getHandler()));

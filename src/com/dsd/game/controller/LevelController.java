@@ -31,14 +31,16 @@ public class LevelController implements TimerInterface, SerializableObject {
     private final List<StandardLevel> levels;
     private Timer levelTimer;
 
+    //  LevelID and wave number; corresponds to the map and the current
+    //  wave number (as the name suggests) respectively.
     private int currentLevelID = 0;
     private int currentWave = 1;
 
     public LevelController (Game _game) {
+        this.game = _game;
         this.levels = new ArrayList<>();
         this.levelTimer = new Timer(true);
         TimerController.addTimer(this);
-        this.game = _game;
     }
 
     /**
@@ -162,7 +164,7 @@ public class LevelController implements TimerInterface, SerializableObject {
     }
 
 //============================= SETTERS ======================================//
-    protected void changeLevelID (int _levelID) {
+    public void setLevelID (int _levelID) {
         this.currentLevelID = _levelID;
     }
 

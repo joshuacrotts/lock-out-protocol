@@ -23,7 +23,7 @@ public class BossSpawnerController extends StandardGameObject {
     private final EnemyType spawnerID;
     private final Game game;
 
-    public BossSpawnerController(int _x, int _y, EnemyType _id, Game _game, StandardCollisionHandler _sch) {
+    public BossSpawnerController (int _x, int _y, EnemyType _id, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, StandardID.Spawner);
         this.game = _game;
         this.spawnerID = _id;
@@ -31,7 +31,7 @@ public class BossSpawnerController extends StandardGameObject {
         this.addBoss();
     }
 
-    private void addBoss() {
+    private void addBoss () {
         int xPos = (int) this.getX();
         int yPos = (int) this.getY();
         Enemy enemy = null;
@@ -48,11 +48,11 @@ public class BossSpawnerController extends StandardGameObject {
     }
 
     @Override
-    public void tick() {
+    public void tick () {
     }
 
     @Override
-    public void render(Graphics2D gd) {
+    public void render (Graphics2D gd) {
     }
 
 }

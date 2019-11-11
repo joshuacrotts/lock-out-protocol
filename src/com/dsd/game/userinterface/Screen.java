@@ -23,7 +23,7 @@ public abstract class Screen implements Renderable, Updatable {
     //  Miscellaneous reference variables
     private static Game game;
     private final StandardInteractorHandler sih;
-    
+
     //  Variables for getting quickly-modified screen dimensions.
     public static int gameFourthWidth;
     public static int gameFourthHeight;

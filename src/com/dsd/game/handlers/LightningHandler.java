@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * This class is very similar to a StandardHandler with the exception that it
  * renders and updates lightning flashes.
- * 
+ *
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty

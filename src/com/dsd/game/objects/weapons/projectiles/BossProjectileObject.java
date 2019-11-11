@@ -33,10 +33,10 @@ public class BossProjectileObject extends ProjectileGameObject {
             StandardCollisionHandler _parentContainer, Enemy _parent) {
         super(_x, _y, 0, _damage, BossProjectileObject.VEL_FACTOR, BossProjectileObject.frames,
                 BossProjectileObject.BULLET_FPS, _game, _parentContainer, _parent, StandardID.Bullet1);
-        
+
         this.setVelX(_velX);
         this.setVelY(_velY);
-        
+
         this.setWidth(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getWidth());
         this.setHeight(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getHeight());
     }

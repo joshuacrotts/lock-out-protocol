@@ -48,9 +48,9 @@ public class HelpScreen extends Screen {
         Color oldColor = _g2.getColor();
         _g2.setColor(this.transparentBlack);
         _g2.fillRect((int) (this.getGame().getCamera().getX() - Screen.gameHalfWidth),
-                     (int) (this.getGame().getCamera().getY() - Screen.gameHalfHeight),
-                     (int) (this.getGame().getCamera().getX() + Screen.gameDoubleWidth),
-                     (int) (this.getGame().getCamera().getY() + Screen.gameDoubleHeight));
+                (int) (this.getGame().getCamera().getY() - Screen.gameHalfHeight),
+                (int) (this.getGame().getCamera().getX() + Screen.gameDoubleWidth),
+                (int) (this.getGame().getCamera().getY() + Screen.gameDoubleHeight));
         _g2.setColor(oldColor);
     }
 

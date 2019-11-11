@@ -6,6 +6,6 @@ package com.dsd.game;
  * @author Joshua, Ronald, Rinty
  */
 public enum GameState {
-    
+
     PAUSED, MENU, SHOP, PREAMBLE, RUNNING, DEBUG, HELP;
 }
