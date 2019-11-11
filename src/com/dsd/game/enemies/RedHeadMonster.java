@@ -227,8 +227,7 @@ public class RedHeadMonster extends Enemy implements DeathListener {
     private void generateCoins (int _coinAmt) {
 
         for (int i = 0 ; i < _coinAmt ; i++) {
-
-            this.getHandler().addEntity(new Coin((int) this.getX(), (int) this.getY(), 0.7, 0.9, 1.0, this.getHandler()));
+            this.getHandler().addEntity(new Coin(this.getGame(), (int) this.getX(), (int) this.getY(), 0.7, 0.9, 1.0, this.getHandler()));
         }
 
     }

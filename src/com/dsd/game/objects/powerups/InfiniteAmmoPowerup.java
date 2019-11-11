@@ -31,7 +31,7 @@ import java.util.TimerTask;
  *
  * @author Joshua, Ronald, Rinty
  */
-public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInterface {
+public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInterface, Powerup {
 
     // Miscellaneous reference variables
     private final Game game;
@@ -51,8 +51,7 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
     private boolean isActivated = false;
     private boolean isCollected = false;
 
-    public InfiniteAmmoPowerup (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
-        
+    public InfiniteAmmoPowerup(int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, StandardID.Item2);
         this.game = _game;
         this.camera = _game.getCamera();
@@ -66,8 +65,7 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
     }
 
     @Override
-    public void tick () {
-        
+    public void tick() {
         if (this.isAlive()) {
             
             this.getAnimationController().tick();
@@ -76,15 +74,11 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
     }
 
     @Override
-    public void render (Graphics2D _g2) {
-        
+    public void render(Graphics2D _g2) {
         if (this.isAlive()) {
             
             this.getAnimationController().renderFrame(_g2);
-        }
-        
-        else if (this.isActivated) {
-            
+        } else if (this.isActivated) {
             this.drawFlashingBorder(_g2);
             this.activateInfiniteAmmo();
         }
@@ -94,8 +88,8 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
     /**
      * Turns the timer on and instantiates the associated timer task.
      */
-    public void activate () {
-        
+    @Override
+    public void activate() {
         if (this.isActivated) {
             
             return;
@@ -113,8 +107,7 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
     }
 
     @Override
-    public void cancelTimer () {
-        
+    public void cancelTimer() {
         this.powerupTimer.cancel();
     }
 
@@ -122,8 +115,7 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
      * Sets the player's ammo to their current magazine ammount, thus simulating
      * infinite ammo.
      */
-    private void activateInfiniteAmmo () {
-        
+    private void activateInfiniteAmmo() {
         Weapon curr = this.game.getPlayer().getInventory().getCurrentWeapon();
         
         if (!(curr instanceof Gun)) {
@@ -138,8 +130,7 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
     /**
      * Plays the sound effect associated with collecting the infinite ammo item.
      */
-    public void playInfAmmoSFX () {
-        
+    public void playInfAmmoSFX() {
         if (this.isCollected) {
             
             return;
@@ -153,8 +144,7 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
      *
      * @param _g2
      */
-    private void drawFlashingBorder (Graphics2D _g2) {
-        
+    private void drawFlashingBorder(Graphics2D _g2) {
         _g2.setColor(this.getTransparentColor(this.color.combine()));
         Stroke oldStroke = _g2.getStroke();
         _g2.setStroke(new BasicStroke(RECT_STROKE));
@@ -165,7 +155,19 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
         _g2.draw(view);
         _g2.setStroke(oldStroke);
     }
-    
+
+    private Color getTransparentColor(Color _c) {
+        return new Color(_c.getRed(), _c.getGreen(), _c.getBlue(), 127);
+    }
+
+    public void setCollected() {
+        this.isCollected = true;
+    }
+
+    static {
+        INFINITE_AMMO_FRAMES = Utilities.loadFrames("src/resources/img/items/drops/infammo/", 27);
+    }
+
     /**
      * Private class for the infinite ammo. Once the player picks up the
      * powerup, the timer starts and continues until x milliseconds have passed,
@@ -175,14 +177,12 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
 
         private final InfiniteAmmoPowerup powerup;
 
-        public InfiniteAmmoTimer (InfiniteAmmoPowerup _powerup) {
-            
+        public InfiniteAmmoTimer(InfiniteAmmoPowerup _powerup) {
             this.powerup = _powerup;
         }
 
         @Override
-        public void run () {
-            
+        public void run() {
             this.powerup.setAlive(false);
             this.powerup.isActivated = false;
         }

@@ -1,5 +1,8 @@
 package com.dsd.game.objects.items;
 
+import com.dsd.game.Game;
+import com.dsd.game.objects.Player;
+import com.dsd.game.objects.powerups.Powerup;
 import com.dsd.game.util.Utilities;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.controller.StandardAudioController;
@@ -18,10 +21,12 @@ import java.awt.image.BufferedImage;
  *
  * @author Joshua, Ronald, Rinty
  */
-public class Coin extends StandardGameObject {
+public class Coin extends StandardGameObject implements Powerup {
 
     //  Handler for the coins
     private final StandardCollisionHandler parentContainer;
+    private final Player player;
+
     //  Frames of animation for the coins
     private static final BufferedImage[] coinOneFrames;
     private static final BufferedImage[] coinTwoFrames;
@@ -49,10 +54,10 @@ public class Coin extends StandardGameObject {
      * @param _large
      * @param _sch
      */
-    public Coin (int _x, int _y, double _small, double _medium, double _large, StandardCollisionHandler _sch) {
-        
+    public Coin(Game _game, int _x, int _y, double _small, double _medium, double _large, StandardCollisionHandler _sch) {
         super(_x, _y, StandardID.Coin);
         this.parentContainer = _sch;
+        this.player = _game.getPlayer();
         this.generateCoinType(_small, _medium, _large);
         this.setVelX(StdOps.randBounds(-Coin.VEL_UPPER_BOUND, -Coin.VEL_LOWER_BOUND,
                 Coin.VEL_LOWER_BOUND, Coin.VEL_UPPER_BOUND));
@@ -61,25 +66,20 @@ public class Coin extends StandardGameObject {
     }
 
     @Override
-    public void tick () {
-        
+    public void tick() {
         if (this.isAlive()) {
             
             this.getAnimationController().tick();
             this.slowVelocities();
             this.updatePosition();
-        }
-        
-        else {
-            
+        } else {
             this.parentContainer.removeEntity(this);
         }
         
     }
 
     @Override
-    public void render (Graphics2D _g2) {
-        
+    public void render(Graphics2D _g2) {
         if (this.isAlive()) {
             
             this.getAnimationController().renderFrame(_g2);
@@ -87,19 +87,23 @@ public class Coin extends StandardGameObject {
         
     }
 
+    @Override
+    public void activate() {
+        this.player.setMoney(this.player.getMoney() + this.getValue());
+        this.playCoinSFX();
+    }
+
     /**
      * Plays a random coin collection sfx.
      */
-    public void playCoinSFX () {
-        
+    private void playCoinSFX() {
         StandardAudioController.play("src/resources/audio/sfx/coin0.wav", StandardAudioType.SFX);
     }
 
     /**
      * Slows the velocity of the coins gradually.
      */
-    private void slowVelocities () {
-        
+    private void slowVelocities() {
         this.setVelX(this.getVelX() * this.SCATTER_RANGE);
         this.setVelY(this.getVelY() * this.SCATTER_RANGE);
     }
@@ -111,27 +115,22 @@ public class Coin extends StandardGameObject {
      * @param _medium
      * @param _large
      */
-    private void generateCoinType (double _small, double _medium, double _large) {
-        
+    private void generateCoinType(double _small, double _medium, double _large) {
         int coin = StdOps.rand(0, 100);
         
         if (coin < _small * 100) {
             
             this.setAnimation(new StandardAnimatorController(this, Coin.coinOneFrames, this.COIN_FPS));
             this.value = 1;
-        }
-        
-        else {
-            
+        } else {
             this.setAnimation(new StandardAnimatorController(this, Coin.coinTwoFrames, this.COIN_FPS));
             this.value = 5;
         }
         
     }
 
-//================================= GETTERS ==================================
-    public int getValue () {
-        
+//================================= GETTERS ==================================//
+    public int getValue() {
         return this.value;
     }
 
