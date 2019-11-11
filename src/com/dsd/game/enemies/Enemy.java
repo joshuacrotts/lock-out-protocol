@@ -59,7 +59,6 @@ public abstract class Enemy extends Entity {
     private int pushFactor = 2;
 
     public Enemy (int _x, int _y, int _health, StandardID _id, Game _game, StandardCollisionHandler _sch) {
-
         super(_x, _y, _health, _id, _game, _sch);
         this.initialHealth = _health;
         this.sc = this.getGame().getCamera();
@@ -69,13 +68,11 @@ public abstract class Enemy extends Entity {
 
     @Override
     public void render (Graphics2D _g2) {
-
         this.bloodHandler.render(_g2);
     }
 
     @Override
     public void tick () {
-
         this.bloodHandler.tick();
     }
 
@@ -93,7 +90,6 @@ public abstract class Enemy extends Entity {
      * dimensions.
      */
     public void setDimensions () {
-
         this.setWidth(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getWidth());
         this.setHeight(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getHeight());
     }
@@ -105,7 +101,6 @@ public abstract class Enemy extends Entity {
      * @param _forceY
      */
     public void applyPushForce (double _forceX, double _forceY) {
-
         this.setX(this.getX() + (_forceX * this.pushFactor));
         this.setY(this.getY() + (_forceY * this.pushFactor));
     }
@@ -115,9 +110,7 @@ public abstract class Enemy extends Entity {
      * later.
      */
     public void generateBloodParticles () {
-
-        for (int i = 0; i < BLOOD_PARTICLES; i++) {
-
+        for (int i = 0 ; i < BLOOD_PARTICLES ; i++) {
             this.bloodHandler.addEntity(new StandardBoxParticle(this.getX(), this.getY(),
                     StdOps.rand(1.0, 5.0), StdOps.randBounds(-10.0, -3.0, 3.0, 10.0),
                     StdOps.randBounds(-10.0, -3.0, 3.0, 10.0), Color.RED, 3f, this.bloodHandler,
@@ -133,7 +126,6 @@ public abstract class Enemy extends Entity {
      * @param _fps
      */
     protected void initWalkingFrames (BufferedImage[] _frames, int _fps) {
-
         this.walkingController = new StandardAnimatorController(this, _frames, _fps);
     }
 
@@ -146,7 +138,6 @@ public abstract class Enemy extends Entity {
      * @param _haltFrame;
      */
     protected void initWalkingFrames (BufferedImage[] _frames, int _fps, int _haltFrame) {
-
         this.walkingController = new StandardAnimatorController(new StandardAnimation(this, _frames, _fps, _haltFrame));
     }
 
@@ -157,7 +148,6 @@ public abstract class Enemy extends Entity {
      * @param _fps
      */
     protected void initAttackingFrames (BufferedImage[] _frames, int _fps) {
-
         this.attackingController = new StandardAnimatorController(this, _frames, _fps);
     }
 
@@ -170,7 +160,6 @@ public abstract class Enemy extends Entity {
      * @param _haltFrame;
      */
     protected void initAttackingFrames (BufferedImage[] _frames, int _fps, int _haltFrame) {
-
         this.attackingController = new StandardAnimatorController(new StandardAnimation(this, _frames, _fps, _haltFrame));
     }
 
@@ -181,7 +170,6 @@ public abstract class Enemy extends Entity {
      * @param _fps
      */
     protected void initDeathFrames (BufferedImage[] _frames, int _fps) {
-
         this.deathController = new StandardAnimatorController(this, _frames, _fps);
     }
 
@@ -194,7 +182,6 @@ public abstract class Enemy extends Entity {
      * @param _haltFrame;
      */
     protected void initDeathFrames (BufferedImage[] _frames, int _fps, int _haltFrame) {
-
         this.deathController = new StandardAnimatorController(new StandardAnimation(this, _frames, _fps, _haltFrame));
     }
 
@@ -203,7 +190,6 @@ public abstract class Enemy extends Entity {
      * swap.
      */
     protected void moveEntityToFront () {
-
         ArrayList<StandardGameObject> entities = this.getHandler().getEntities();
         Collections.swap(entities, 0, entities.indexOf(this));
     }
@@ -212,80 +198,65 @@ public abstract class Enemy extends Entity {
      * Applies the composition factor to the actual transparency.
      */
     protected void updateComposite () {
-
         this.deathTransparentComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, this.deathTransparency);
         this.deathTransparency -= this.deathTransparencyFactor;
     }
 
-//================================ GETTERS ===================================
+//================================ GETTERS ===================================//
     public StandardAnimatorController getWalkingAnimation () {
-
         return this.walkingController;
     }
 
     public StandardAnimatorController getAttackAnimation () {
-
         return this.attackingController;
     }
 
     public StandardAnimatorController getDeathAnimation () {
-
         return this.deathController;
     }
 
     public Entity getTarget () {
-
         return this.target;
     }
 
     public StandardCamera getCamera () {
-
         return this.sc;
     }
 
     public double getDamage () {
-
         return this.damage;
     }
 
     public float getTransparency () {
-
         return this.deathTransparency;
     }
 
     public boolean isAttacking () {
-
         return this.enemyState == EnemyState.ATTACKING;
     }
 
     public boolean isWalking () {
-
         return this.enemyState == EnemyState.WALKING;
     }
 
     public int getInitialHealth () {
-
         return this.initialHealth;
     }
 
-//================================ SETTERS ===================================
+//================================ SETTERS ===================================//
     public void setTarget (Entity _target) {
-
         this.target = _target;
     }
 
     public void setDamage (double _damage) {
-
         this.damage = _damage;
     }
 
     public void setTransparentFactor (float _alphaFactor) {
-
         this.deathTransparencyFactor = _alphaFactor;
     }
 
     public void setEnemyState (EnemyState _state) {
-
         this.enemyState = _state;
     }
 

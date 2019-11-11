@@ -252,8 +252,8 @@ public class MenuScreen extends Screen {
         
         return this.menuState == MenuState.LANGUAGES;
     }
-    
-    public MenuState getMenuState() {
+
+    public MenuState getMenuState () {
         return this.menuState;
     }
 

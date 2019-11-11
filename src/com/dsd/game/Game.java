@@ -79,7 +79,7 @@ public class Game extends StandardGame {
          * Note: Magic numbers for the player and the monster are just for
          * demonstration; they will NOT be in the final game.
          */
-        super (_width, _height, _title);
+        super(_width, _height, _title);
 
         /**
          * Initialize the database translator

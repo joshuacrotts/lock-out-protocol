@@ -54,7 +54,7 @@ public class Coin extends StandardGameObject implements Powerup {
      * @param _large
      * @param _sch
      */
-    public Coin(Game _game, int _x, int _y, double _small, double _medium, double _large, StandardCollisionHandler _sch) {
+    public Coin (Game _game, int _x, int _y, double _small, double _medium, double _large, StandardCollisionHandler _sch) {
         super(_x, _y, StandardID.Coin);
         this.parentContainer = _sch;
         this.player = _game.getPlayer();
@@ -66,20 +66,21 @@ public class Coin extends StandardGameObject implements Powerup {
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         if (this.isAlive()) {
             
             this.getAnimationController().tick();
             this.slowVelocities();
             this.updatePosition();
-        } else {
+        }
+        else {
             this.parentContainer.removeEntity(this);
         }
         
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         if (this.isAlive()) {
             
             this.getAnimationController().renderFrame(_g2);
@@ -88,7 +89,7 @@ public class Coin extends StandardGameObject implements Powerup {
     }
 
     @Override
-    public void activate() {
+    public void activate () {
         this.player.setMoney(this.player.getMoney() + this.getValue());
         this.playCoinSFX();
     }
@@ -96,14 +97,14 @@ public class Coin extends StandardGameObject implements Powerup {
     /**
      * Plays a random coin collection sfx.
      */
-    private void playCoinSFX() {
+    private void playCoinSFX () {
         StandardAudioController.play("src/resources/audio/sfx/coin0.wav", StandardAudioType.SFX);
     }
 
     /**
      * Slows the velocity of the coins gradually.
      */
-    private void slowVelocities() {
+    private void slowVelocities () {
         this.setVelX(this.getVelX() * this.SCATTER_RANGE);
         this.setVelY(this.getVelY() * this.SCATTER_RANGE);
     }
@@ -115,14 +116,15 @@ public class Coin extends StandardGameObject implements Powerup {
      * @param _medium
      * @param _large
      */
-    private void generateCoinType(double _small, double _medium, double _large) {
+    private void generateCoinType (double _small, double _medium, double _large) {
         int coin = StdOps.rand(0, 100);
         
         if (coin < _small * 100) {
             
             this.setAnimation(new StandardAnimatorController(this, Coin.coinOneFrames, this.COIN_FPS));
             this.value = 1;
-        } else {
+        }
+        else {
             this.setAnimation(new StandardAnimatorController(this, Coin.coinTwoFrames, this.COIN_FPS));
             this.value = 5;
         }
@@ -130,7 +132,7 @@ public class Coin extends StandardGameObject implements Powerup {
     }
 
 //================================= GETTERS ==================================//
-    public int getValue() {
+    public int getValue () {
         return this.value;
     }
 

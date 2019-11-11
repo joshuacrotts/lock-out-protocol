@@ -13,11 +13,19 @@ public class TimerController {
 
     private static final ArrayList<TimerInterface> timers = new ArrayList<>();
 
+    /**
+     * Adds a timer to the ArrayList of timers.
+     *
+     * @param _timer
+     */
     public static void addTimer (TimerInterface _timer) {
 
         timers.add(_timer);
     }
 
+    /**
+     * Stops all timers that are in the timer controller.
+     */
     public static void stopTimers () {
 
         for (int i = 0 ; i < TimerController.timers.size() ; i++) {
@@ -32,18 +40,4 @@ public class TimerController {
         }
 
     }
-
-    public static void findTimer (TimerInterface _timer) {
-
-        for (TimerInterface t : timers) {
-
-            if (_timer == t) {
-
-                return;
-            }
-
-        }
-
-    }
-
 }

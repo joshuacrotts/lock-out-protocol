@@ -30,8 +30,10 @@ public class MalePlayerButton extends StandardButton implements MouseEventInterf
     private static final int BUTTON_Y_OFFSET = 550;
 
     public MalePlayerButton (Game _game, MenuScreen _menuScreen) {
-        super(Screen.gameWidth - BUTTON_WIDTH - BUTTON_X_OFFSET, _game.getGameHeight() - MalePlayerButton.BUTTON_Y_OFFSET,
+        super(Screen.gameWidth - BUTTON_WIDTH - BUTTON_X_OFFSET,
+                _game.getGameHeight() - MalePlayerButton.BUTTON_Y_OFFSET,
                 MalePlayerButton.BUTTON_WIDTH, MalePlayerButton.BUTTON_HEIGHT);
+
         this.game = _game;
         this.menuScreen = _menuScreen;
         MalePlayerButton.playerView = new PlayerView(this.game, this.menuScreen, this, "male");
@@ -44,7 +46,7 @@ public class MalePlayerButton extends StandardButton implements MouseEventInterf
         }
 
         this.setX(Screen.gameWidth - BUTTON_WIDTH - BUTTON_X_OFFSET);
-        this.setY(game.getGameHeight() - MalePlayerButton.BUTTON_Y_OFFSET);
+        this.setY(this.game.getGameHeight() - MalePlayerButton.BUTTON_Y_OFFSET);
 
         MalePlayerButton.playerView.tick();
     }

@@ -31,7 +31,7 @@ public class EasyButton extends MenuButton implements MouseEventInterface {
     private static final int BUTTON_WIDTH = 300;
     private static final int BUTTON_HEIGHT = 82;
 
-    public EasyButton(Game _game, MenuScreen _menuScreen) {
+    public EasyButton (Game _game, MenuScreen _menuScreen) {
         super(Screen.gameHalfWidth - BUTTON_X_OFFSET,
                 Screen.gameHalfHeight + BUTTON_Y_OFFSET,
                 BUTTON_WIDTH, BUTTON_HEIGHT,
@@ -40,13 +40,13 @@ public class EasyButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         this.setX(Screen.gameHalfWidth - BUTTON_X_OFFSET);
         this.setY(Screen.gameHalfHeight + BUTTON_Y_OFFSET);
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         if (!this.getMenuScreen().isOnDifficulty()) {
             return;
         }
@@ -58,13 +58,14 @@ public class EasyButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseClick() {
+    public void onMouseClick () {
         if (!this.getMenuScreen().isOnDifficulty() || !this.getGame().isMenu()) {
             return;
         }
         if (!DebugController.DEBUG_MODE) {
             this.getGame().setPreambleState();
-        } else {
+        }
+        else {
             this.getGame().setGameState(GameState.RUNNING);
         }
         DifficultyController.difficultyType = DifficultyType.EASY;
@@ -73,7 +74,7 @@ public class EasyButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseEnterHover() {
+    public void onMouseEnterHover () {
         if (!this.getGame().isMenu() || !this.getMenuScreen().isOnDifficulty()) {
             return;
         }
@@ -82,7 +83,7 @@ public class EasyButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseExitHover() {
+    public void onMouseExitHover () {
         if (!this.getGame().isMenu()) {
             return;
         }

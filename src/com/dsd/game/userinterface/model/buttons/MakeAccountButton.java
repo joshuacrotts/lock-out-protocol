@@ -23,6 +23,9 @@ import java.awt.Graphics2D;
  */
 public class MakeAccountButton extends MenuButton implements MouseEventInterface {
 
+    private final EmailTextFieldModel emailModel;
+    private final PasswordTextFieldModel pswdModel;
+
     //  Button position and dimension offsets.
     private static final int BUTTON_X_OFFSET = 0;
     private static final int BUTTON_Y_OFFSET = 120;
@@ -30,8 +33,6 @@ public class MakeAccountButton extends MenuButton implements MouseEventInterface
     private static final int TEXT_Y_OFFSET = 45;
     private static final int BUTTON_WIDTH = 300;
     private static final int BUTTON_HEIGHT = 82;
-    private final EmailTextFieldModel emailModel;
-    private final PasswordTextFieldModel pswdModel;
 
     public MakeAccountButton (Game _game, MenuScreen _menuScreen, EmailTextFieldModel _email, PasswordTextFieldModel _pswd) {
         super(Screen.gameHalfWidth + BUTTON_X_OFFSET,

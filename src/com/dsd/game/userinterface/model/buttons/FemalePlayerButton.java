@@ -61,7 +61,7 @@ public class FemalePlayerButton extends StandardButton implements MouseEventInte
         if (!this.menuScreen.isOnPlayerGender()) {
             return;
         }
-        
+
         StandardAudioController.play("src/resources/audio/sfx/menuselect.wav", StandardAudioType.SFX);
         this.game.getPlayer().setPlayerSex("female");
         this.menuScreen.pushMenuStack(MenuState.PLAYER_GENDER);
