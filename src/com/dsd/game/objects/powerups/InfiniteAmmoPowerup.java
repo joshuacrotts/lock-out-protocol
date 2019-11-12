@@ -190,20 +190,4 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
         
     }
 
-//========================== GETTERS ============================================
-    private Color getTransparentColor (Color _c) {
-        
-        return new Color(_c.getRed(), _c.getGreen(), _c.getBlue(), 127);
-    }
-
-//============================= SETTERS =========================================
-    public void setCollected () {
-        
-        this.isCollected = true;
-    }
-
-    static {
-        INFINITE_AMMO_FRAMES = Utilities.loadFrames("src/resources/img/items/drops/infammo/", 27);
-    }
-
 }

@@ -186,20 +186,5 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
             this.powerup.deactivateDamageBoost();
         }
     }
-    
-//================================ GETTERS ====================================
-    private Color getTransparentColor (Color _c) {
-        
-        return new Color(_c.getRed(), _c.getGreen(), _c.getBlue(), 127);
-    }
-
-//============================= SETTERS ====================================
-    public void setCollected () {
-        this.isCollected = true;
-    }
-
-    static {
-        BERSERK_FRAMES = Utilities.loadFrames("src/resources/img/items/drops/berserk/", 6);
-    }
 
 }
