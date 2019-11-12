@@ -1,4 +1,4 @@
-package com.dsd.game;
+package com.dsd.game.objects;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;

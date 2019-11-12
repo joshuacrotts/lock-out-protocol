@@ -1,7 +1,7 @@
 package com.dsd.game.database;
 
-import com.dsd.game.AccountStatus;
-import com.dsd.game.Game;
+import com.dsd.game.core.AccountStatus;
+import com.dsd.game.core.Game;
 import com.dsd.game.objects.weapons.enums.WeaponType;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

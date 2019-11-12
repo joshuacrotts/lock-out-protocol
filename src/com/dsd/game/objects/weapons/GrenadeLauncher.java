@@ -1,6 +1,6 @@
 package com.dsd.game.objects.weapons;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.weapons.enums.WeaponType;
 import com.dsd.game.objects.weapons.projectiles.GrenadeBulletObject;
@@ -15,6 +15,8 @@ import com.revivedstandards.model.StandardAnimation;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/12/19
  */
 public class GrenadeLauncher extends Gun {
 

@@ -1,6 +1,6 @@
 package com.dsd.game.levels;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.enemies.enums.EnemyType;
 import com.dsd.game.factories.SpawnerFactory;
 import com.dsd.game.objects.NatureObject;

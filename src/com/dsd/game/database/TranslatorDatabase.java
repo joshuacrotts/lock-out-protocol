@@ -1,7 +1,7 @@
 package com.dsd.game.database;
 
-import com.dsd.game.AccountStatus;
-import com.dsd.game.Game;
+import com.dsd.game.core.AccountStatus;
+import com.dsd.game.core.Game;
 
 /**
  * This class, very similar to the TranslatorAPI class, acts as the intermediary

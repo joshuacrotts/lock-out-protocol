@@ -1,6 +1,6 @@
 package com.dsd.game.objects.powerups;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.objects.Player;
 import com.dsd.game.util.Utilities;
 import com.revivedstandards.controller.StandardAnimatorController;
@@ -21,10 +21,13 @@ import java.awt.image.BufferedImage;
  */
 public class HealthPowerup extends StandardGameObject implements Powerup {
 
+    //  Miscellaneous reference variabeles.
     private final Player player;
     private final StandardCollisionHandler parentContainer;
     private static final BufferedImage[] HEALTH_FRAMES;
 
+    //  Details on how fast the animation for the powerup plays, and how
+    //  much health it restores.
     private static final int HEALTH_FPS = 10;
     private static final int HEALTH_INCREASE = 25;
 
@@ -32,7 +35,9 @@ public class HealthPowerup extends StandardGameObject implements Powerup {
         super(_x, _y, StandardID.Powerup);
         this.player = _game.getPlayer();
         this.parentContainer = _sch;
-        StandardAnimatorController healthAnimation = new StandardAnimatorController(new StandardAnimation(this, HEALTH_FRAMES, HEALTH_FPS, 12));
+        StandardAnimatorController healthAnimation
+                                   = new StandardAnimatorController(new StandardAnimation(this, HEALTH_FRAMES, HEALTH_FPS, 12));
+
         this.setAnimation(healthAnimation);
         this.setWidth(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getWidth());
         this.setHeight(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getHeight());
@@ -56,6 +61,7 @@ public class HealthPowerup extends StandardGameObject implements Powerup {
         }
     }
 
+    @Override
     public void activate () {
         this.addHealth();
     }

@@ -1,13 +1,17 @@
 package com.dsd.game.controller;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.userinterface.model.Crosshair;
 import com.revivedstandards.view.Updatable;
 
 /**
  * This is a very primitive class controlling when the cursor changes images.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/12/19
  */
 public class CursorController implements Updatable {
 

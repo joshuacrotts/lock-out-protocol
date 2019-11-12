@@ -1,4 +1,4 @@
-package com.dsd.game;
+package com.dsd.game.core;
 
 /**
  * This enum defines all possible objects/classes that are, by definition,

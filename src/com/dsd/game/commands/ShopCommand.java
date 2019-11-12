@@ -1,7 +1,7 @@
 package com.dsd.game.commands;
 
-import com.dsd.game.Game;
-import com.dsd.game.GameState;
+import com.dsd.game.core.Game;
+import com.dsd.game.core.GameState;
 import com.revivedstandards.commands.Command;
 import java.awt.event.KeyEvent;
 
@@ -12,6 +12,8 @@ import java.awt.event.KeyEvent;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/12/19
  */
 public class ShopCommand extends Command {
 

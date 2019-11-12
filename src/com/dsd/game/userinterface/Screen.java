@@ -1,6 +1,6 @@
 package com.dsd.game.userinterface;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.userinterface.model.Interactor;
 import com.revivedstandards.handlers.StandardHandler;
 import com.revivedstandards.main.StandardDraw;

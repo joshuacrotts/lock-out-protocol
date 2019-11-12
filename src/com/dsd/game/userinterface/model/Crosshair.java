@@ -1,6 +1,6 @@
 package com.dsd.game.userinterface.model;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.Point;

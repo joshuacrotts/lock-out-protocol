@@ -1,6 +1,6 @@
 package com.dsd.game.commands;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.controller.TimerController;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.weapons.Gun;
@@ -19,6 +19,8 @@ import java.util.TimerTask;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/12/19
  */
 public class ReloadCommand extends Command implements TimerInterface {
 
@@ -27,9 +29,10 @@ public class ReloadCommand extends Command implements TimerInterface {
     private final Player player;
     private Timer reloadTimer;
 
-    //  How long the timer should wait before letting the player fire after
-    //  reloading their gun.
-    private final int RELOAD_DELAY = 3000;
+    //  How long (ms) the timer should wait before letting the player fire after
+    //  reloading their gun (this may change for some reason, so we're not making
+    //  it final.
+    private int reloadDelay = 3000;
 
     //  This may need to change with time.
     public ReloadCommand (Game _game, Player _obj) {
@@ -61,7 +64,8 @@ public class ReloadCommand extends Command implements TimerInterface {
         gun.setReloading(true);
 
         //  If the gun is a shotgun and we still have shotgun shells, we don't
-        //  reload.
+        //  reload (this is pretty much just an edge case to make the sfx
+        //  line up with what the player is "doing").
         if (gun.getWeaponType() == WeaponType.SHOTGUN && !gun.isWeaponEmpty()) {
             return;
         }

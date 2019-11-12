@@ -1,7 +1,7 @@
 package com.dsd.game.controller;
 
-import com.dsd.game.Game;
-import com.dsd.game.LightningFlash;
+import com.dsd.game.core.Game;
+import com.dsd.game.objects.LightningFlash;
 import com.dsd.game.api.TranslatorAPI;
 import com.dsd.game.handlers.LightningHandler;
 import com.dsd.game.objects.RainDrop;
@@ -21,6 +21,8 @@ import org.apache.commons.math3.util.FastMath;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/12/19
  */
 public class RainController implements Renderable, Updatable {
 
@@ -30,7 +32,8 @@ public class RainController implements Renderable, Updatable {
     private final LightningHandler lightningHandler;
     private final StandardCamera sc;
 
-    //  Serves as a debugging feature.
+    //  Serves as a debugging feature (if enabled, it ignores the API call and
+    //  automatically enables rain).
     private static final boolean toggleDownfall = true;
 
     //  If it is raining, this boolean is toggled true.
@@ -49,7 +52,7 @@ public class RainController implements Renderable, Updatable {
     private static final int MAX_RAIN_PARTICLES = 5000;
 
     //  Constant for how "often" lightning should spawn. The higher, the rarer.
-    private static final int LIGHTNING_INT = 2500;
+    private static final int LIGHTNING_INTERVAL = 2500;
 
     public RainController (Game _game) {
         this.game = _game;
@@ -116,7 +119,7 @@ public class RainController implements Renderable, Updatable {
      * Generates a random lightning flash.
      */
     private void generateLightning () {
-        if ((int) (Math.random() * LIGHTNING_INT) < 2) {
+        if ((int) (Math.random() * LIGHTNING_INTERVAL) < 2) {
             this.lightningHandler.getHandler().add(new LightningFlash(game, this.lightningHandler.getHandler()));
             this.lightningHandler.playLightningSFX();
         }

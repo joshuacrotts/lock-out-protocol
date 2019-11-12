@@ -1,7 +1,7 @@
 package com.dsd.game.userinterface;
 
-import com.dsd.game.Game;
-import com.dsd.game.GameState;
+import com.dsd.game.core.Game;
+import com.dsd.game.core.GameState;
 import com.dsd.game.controller.TimerController;
 import com.dsd.game.userinterface.model.LightningModel;
 import com.dsd.game.userinterface.model.labels.WaveLabel;

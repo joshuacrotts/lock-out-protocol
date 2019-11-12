@@ -1,6 +1,6 @@
 package com.dsd.game.objects;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.model.StandardGameObject;
 import com.revivedstandards.model.StandardID;
@@ -19,10 +19,11 @@ public class NatureObject extends StandardGameObject implements Renderable, Upda
     //  Miscellaneous reference variables.
     private final Game game;
     private final StandardCollisionHandler parentContainer;
-    /**
-     * There are two types of nature objects: ones that are collidable by other
-     * entities, and ones that are not (the user just hovers over them).
-     */
+
+    //
+    //  There are two types of nature objects: ones that are collidable by other
+    //  entities, and ones that are not (the user just hovers over them).
+    //
     private boolean collidable = false;
 
     public NatureObject (Game _game, StandardCollisionHandler _parentContainer,
@@ -41,7 +42,6 @@ public class NatureObject extends StandardGameObject implements Renderable, Upda
 
     @Override
     public void tick () {
-
     }
 
     @Override

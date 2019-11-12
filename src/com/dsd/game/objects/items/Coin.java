@@ -1,6 +1,6 @@
 package com.dsd.game.objects.items;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.powerups.Powerup;
 import com.dsd.game.util.Utilities;
@@ -22,6 +22,8 @@ import java.awt.image.BufferedImage;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/12/19
  */
 public class Coin extends StandardGameObject implements Powerup {
 

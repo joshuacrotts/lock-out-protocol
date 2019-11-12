@@ -1,6 +1,6 @@
 package com.dsd.game.userinterface.model.labels;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.controller.LanguageController;
 import com.dsd.game.controller.TimerController;
 import com.dsd.game.userinterface.Screen;

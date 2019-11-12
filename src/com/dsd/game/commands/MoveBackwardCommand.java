@@ -1,17 +1,19 @@
 package com.dsd.game.commands;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.enums.PlayerState;
 import com.revivedstandards.commands.Command;
 import java.awt.event.KeyEvent;
 
 /**
- * Command representing when the user back-peddles
+ * Command representing when the user back-peddles.
  *
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/12/19
  */
 public class MoveBackwardCommand extends Command {
 

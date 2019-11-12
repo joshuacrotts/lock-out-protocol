@@ -1,4 +1,4 @@
-package com.dsd.game;
+package com.dsd.game.core;
 
 /**
  * Enum that lists the possible states for the game to be in.

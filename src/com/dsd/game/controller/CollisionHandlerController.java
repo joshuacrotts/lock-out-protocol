@@ -1,6 +1,6 @@
 package com.dsd.game.controller;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.enemies.BasicMonster;
 import com.dsd.game.enemies.Enemy;
 import com.dsd.game.enemies.GreenMonster;
@@ -8,10 +8,6 @@ import com.dsd.game.objects.Explosion;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.enums.ExplosionType;
 import com.dsd.game.objects.enums.PlayerState;
-import com.dsd.game.objects.items.Coin;
-import com.dsd.game.objects.powerups.BerserkPowerup;
-import com.dsd.game.objects.powerups.HealthPowerup;
-import com.dsd.game.objects.powerups.InfiniteAmmoPowerup;
 import com.dsd.game.objects.powerups.Powerup;
 import com.dsd.game.objects.weapons.projectiles.BossProjectileObject;
 import com.dsd.game.objects.weapons.projectiles.GrenadeBulletObject;
@@ -22,7 +18,6 @@ import com.dsd.game.userinterface.model.DamageText;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.model.StandardGameObject;
 import com.revivedstandards.model.StandardID;
-import static com.revivedstandards.model.StandardID.Powerup;
 import com.revivedstandards.util.StdOps;
 import java.awt.Graphics2D;
 
@@ -82,6 +77,9 @@ public class CollisionHandlerController extends StandardCollisionHandler {
         else if (_obj1.getId() == StandardID.Bullet && _obj2.getId() == StandardID.Bullet) {
             return;
         }
+        //        else if (_obj1.getId() == StandardID.Player && _obj2.getId() == StandardID.Bullet1) {
+        //            this.handlePlayerBossProjectileCollision((Player) _obj1, (BossProjectileObject) _obj2);
+        //        }
     }
 
     /**
@@ -98,16 +96,13 @@ public class CollisionHandlerController extends StandardCollisionHandler {
         if (_obj1.getId() == StandardID.Player && _obj2 instanceof Enemy && _obj2.isAlive()) {
             this.handlePlayerMonsterCollision((Player) _obj1, (Enemy) _obj2);
         }
-        else if (_obj1.getId() == StandardID.Bullet && _obj2 instanceof Enemy) {
+        else if (_obj1.getId() == StandardID.Bullet && _obj2 instanceof Enemy && _obj2.isAlive()) {
             this.handleBulletEnemyCollision((ProjectileGameObject) _obj1, (Enemy) _obj2);
         }
-        else if (_obj1.getId() == StandardID.Tile1 && _obj2 instanceof Enemy) {
+        else if (_obj1.getId() == StandardID.Tile1 && _obj2 instanceof Enemy && _obj2.isAlive()) {
             this.handleEnemyExplosionCollision((Explosion) _obj1, (Enemy) _obj2);
         }
-        //        else if (_obj1.getId() == StandardID.Player && _obj2.getId() == StandardID.Bullet1) {
-        //            this.handlePlayerBossProjectileCollision((Player) _obj1, (BossProjectileObject) _obj2);
-        //        }
-        else if (_obj1.getId() == StandardID.Player && _obj2.isAlive() && _obj2 instanceof Powerup) {
+        else if (_obj1.getId() == StandardID.Player && _obj2 instanceof Powerup && _obj2.isAlive()) {
             _obj2.setAlive(false);
             ((Powerup) _obj2).activate();
         }
@@ -137,6 +132,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
                         _bullet.getDamage(), type, this));
             }
 
+            //  Turn bullet collision off, and deduct health from the monster.
             _bullet.setAlive(false);
             _monster.setHealth(_monster.getHealth() - _bullet.getDamage());
 

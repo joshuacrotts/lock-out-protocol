@@ -1,6 +1,6 @@
 package com.dsd.game.userinterface.shop.weapons.models;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.objects.Inventory;
 import com.dsd.game.userinterface.ShopScreen;
 import com.dsd.game.userinterface.model.Interactor;

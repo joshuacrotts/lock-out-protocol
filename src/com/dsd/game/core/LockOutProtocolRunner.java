@@ -1,4 +1,4 @@
-package com.dsd.game;
+package com.dsd.game.core;
 
 /**
  * This is the main class for actually creating a Game object and running the

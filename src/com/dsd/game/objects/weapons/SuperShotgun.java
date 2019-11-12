@@ -1,6 +1,6 @@
 package com.dsd.game.objects.weapons;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.weapons.enums.WeaponType;
 import com.dsd.game.objects.weapons.projectiles.ShotgunBulletObject;
@@ -28,12 +28,15 @@ public class SuperShotgun extends Gun {
     //  Damage from the rifle.
     private static final int BULLET_DAMAGE = 250;
 
+    //  Amount of casing image frames for this gun.
+    private static final int CASING_IMAGES = 8;
+
     public SuperShotgun (Game _game, Player _player, StandardCollisionHandler _sch) {
         super(WeaponType.SUPER_SHOTGUN, 8, _game, _player, _sch, "src/resources/audio/sfx/reload.wav", 3000);
         //  Instantiates the animation controllers.
         this.loadAssets(_player);
         super.setDelay(DELAY);
-        super.loadCasingImages(8);
+        super.loadCasingImages(SuperShotgun.CASING_IMAGES);
     }
 
     @Override

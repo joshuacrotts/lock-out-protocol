@@ -1,11 +1,10 @@
 package com.dsd.game.objects.weapons.projectiles;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.enemies.Enemy;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.model.StandardID;
 import com.revivedstandards.util.StdOps;
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 

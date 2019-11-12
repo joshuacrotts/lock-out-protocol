@@ -1,6 +1,6 @@
 package com.dsd.game.controller;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.Screen;
 import com.revivedstandards.handlers.StandardCollisionHandler;
@@ -11,11 +11,14 @@ import java.awt.Graphics2D;
 
 /**
  * Debug mode controller; draws information about the game (such as coordinates,
- * handler information, particles, etc.).
+ * handler information, particles, etc.). This mode is only active in the
+ * development stages of the game. This feature is disabled for normal play.
  *
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/12/19
  */
 public class DebugController implements Renderable {
 
@@ -57,12 +60,12 @@ public class DebugController implements Renderable {
 
     @Override
     public void render (Graphics2D _g2) {
-        int posX = (int) (this.camera.getX() - Screen.gameFourthWidth) - GLOBAL_X_OFFSET;
-        int posY = (int) (this.camera.getY() - Screen.gameFourthHeight) - GLOBAL_Y_OFFSET;
+        int posX = (int) (this.camera.getX() - Screen.gameFourthWidth) - this.GLOBAL_X_OFFSET;
+        int posY = (int) (this.camera.getY() - Screen.gameFourthHeight) - this.GLOBAL_Y_OFFSET;
 
         this.renderPlayerCoordinates(_g2, posX, posY);
-        this.renderEntityCount(_g2, posX, posY + ENTITY_COUNT_Y_OFFSET);
-        this.renderCameraCoordinates(_g2, posX, posY + CAMERA_COORDINATE_Y_OFFSET);
+        this.renderEntityCount(_g2, posX, posY + this.ENTITY_COUNT_Y_OFFSET);
+        this.renderCameraCoordinates(_g2, posX, posY + this.CAMERA_COORDINATE_Y_OFFSET);
         this.renderDebugText(_g2, (int) this.camera.getX(), (int) this.camera.getY() - Screen.gameHalfHeight);
     }
 

@@ -1,7 +1,7 @@
 package com.dsd.game.controller;
 
-import com.dsd.game.Game;
-import com.dsd.game.SerializableObject;
+import com.dsd.game.core.Game;
+import com.dsd.game.objects.SerializableObject;
 import com.dsd.game.database.SerializableType;
 import com.dsd.game.userinterface.TimerInterface;
 import com.revivedstandards.model.StandardLevel;
@@ -22,7 +22,11 @@ import java.util.TimerTask;
  * their own respective background. Each level on the other hand will have its
  * own respective wave.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/12/19
  */
 public class LevelController implements TimerInterface, SerializableObject {
 

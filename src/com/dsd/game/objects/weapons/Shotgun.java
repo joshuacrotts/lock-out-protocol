@@ -1,6 +1,6 @@
 package com.dsd.game.objects.weapons;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.weapons.enums.WeaponType;
 import com.dsd.game.objects.weapons.projectiles.ShotgunBulletObject;
@@ -15,6 +15,8 @@ import com.revivedstandards.model.StandardAnimation;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/12/19
  */
 public class Shotgun extends Gun {
 
@@ -31,13 +33,16 @@ public class Shotgun extends Gun {
     //  Damage from the rifle.
     private static final int BULLET_DAMAGE = 100;
 
+    //  Amount of casing image frames for this gun.
+    private static final int CASING_IMAGES = 8;
+
     public Shotgun (Game _game, Player _player, StandardCollisionHandler _sch) {
         super(WeaponType.SHOTGUN, 8, _game, _player, _sch, "src/resources/audio/sfx/shotgun_reload.wav", RELOAD_DELAY);
 
         //  Instantiates the animation controllers.
         this.loadAssets(_player);
         super.setDelay(DELAY);
-        super.loadCasingImages(8);
+        super.loadCasingImages(Shotgun.CASING_IMAGES);
     }
 
     @Override
