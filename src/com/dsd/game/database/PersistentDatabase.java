@@ -2,6 +2,7 @@ package com.dsd.game.database;
 
 import com.dsd.game.AccountStatus;
 import com.dsd.game.Game;
+import com.dsd.game.objects.weapons.enums.WeaponType;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -10,8 +11,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.mindrot.jbcrypt.BCrypt;
@@ -86,7 +89,7 @@ public class PersistentDatabase implements RemoteDatabase {
 
         }
         catch (SQLException | NullPointerException ex) {
-            ex.printStackTrace();
+            System.out.println(ex);
             return false;
         }
         return true;
@@ -111,11 +114,10 @@ public class PersistentDatabase implements RemoteDatabase {
             updateInventoryQuery.executeUpdate();
         }
         catch (SQLException | NullPointerException ex) {
-            ex.printStackTrace();
+            System.out.println(ex);
 
             return false;
         }
-
         return true;
     }
 
@@ -138,11 +140,10 @@ public class PersistentDatabase implements RemoteDatabase {
             updateLevelQuery.executeUpdate();
         }
         catch (SQLException | NullPointerException ex) {
-            ex.printStackTrace();
+            System.out.println(ex);
 
             return false;
         }
-
         return true;
     }
 
@@ -163,11 +164,10 @@ public class PersistentDatabase implements RemoteDatabase {
             updateLevelQuery.executeUpdate();
         }
         catch (SQLException | NullPointerException ex) {
-            ex.printStackTrace();
+            System.out.println(ex);
 
             return false;
         }
-
         return true;
     }
 
@@ -186,7 +186,7 @@ public class PersistentDatabase implements RemoteDatabase {
             updateLevelQuery.executeUpdate();
         }
         catch (SQLException | NullPointerException ex) {
-            ex.printStackTrace();
+            System.out.println(ex);
 
             return false;
         }
@@ -209,9 +209,10 @@ public class PersistentDatabase implements RemoteDatabase {
             playerStatsQuery = this.remoteDBConnection.prepareStatement(String.format("SELECT SavedGame, Sex, PlayerX, PlayerY, Money, Health, Pistol, PistolAmmo, PistolTotalAmmo, Rifle, RifleAmmo, RifleTotalAmmo, FastRifle, FastRifleAmmo, FastRifleTotalAmmo, Shotgun, ShotgunAmmo, ShotgunTotalAmmo, GrenadeLauncher, GrenadeLauncherAmmo, GrenadeLauncherTotalAmmo, Minigun, MinigunAmmo, MinigunTotalAmmo,SuperShotgun, SuperShotgunAmmo, SuperShotgunTotalAmmo, LevelID, Wave, LevelTransitionTimer, DifficultyFactor FROM user_accounts WHERE UUID = ?;"));
             playerStatsQuery.setString(1, this.connectedUserID);
             ResultSet playerStatsSet = playerStatsQuery.executeQuery();
+            ResultSetMetaData playerStatsMetadata = playerStatsSet.getMetaData();
 
             //  If there is no information OR there is no saved game present, return false.
-            if (!playerStatsSet.next() || playerStatsSet.getInt(1) == 0) {
+            if (!playerStatsSet.next() || playerStatsSet.getInt("SavedGame") == 0) {
                 return false;
             }
 
@@ -222,14 +223,17 @@ public class PersistentDatabase implements RemoteDatabase {
             //  Firstly, we declare arraylists to hold the values retrieved from
             //  the SQL database. Then, we pass them to their respective objects
             //  and let them deal with it.
-            ArrayList<Integer> playerInfo = new ArrayList<>();
+            HashMap<String, Double> playerInfo = new HashMap<>();
             ArrayList<Integer> inventoryInfo = new ArrayList<>();
+
             final int PLAYER_AMT = 6;
-            final int INVENTORY_AMT = 21;
+            //  Gun status (if they have the gun)
+            //  plus the ammo amt and total ammo for every gun
+            final int INVENTORY_AMT = WeaponType.values().length * 3;
 
             //  Load in the player data from the Result Set
             for (int i = 2 ; i <= PLAYER_AMT ; i++) {
-                playerInfo.add(playerStatsSet.getInt(i));
+                playerInfo.put(playerStatsMetadata.getColumnName(i), (double) playerStatsSet.getInt(i));
             }
 
             //  Load in the inventory data from the Result set
@@ -251,7 +255,6 @@ public class PersistentDatabase implements RemoteDatabase {
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-
         return true;
     }
 
@@ -267,7 +270,6 @@ public class PersistentDatabase implements RemoteDatabase {
         String instanceID = _dbName;
 
         this.generateClassName();
-
         this.loadDatabaseCreds();
 
         String url = String.format("jdbc:mysql://%s:3306/%s", IP_ADDRESS, instanceID);

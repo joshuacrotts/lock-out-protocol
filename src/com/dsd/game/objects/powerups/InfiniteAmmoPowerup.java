@@ -31,7 +31,7 @@ import java.util.TimerTask;
  *
  * @author Joshua
  */
-public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInterface {
+public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInterface, Powerup {
 
     // Miscellaneous reference variables
     private final Game game;
@@ -87,6 +87,7 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
     /**
      * Turns the timer on and instantiates the associated timer task.
      */
+    @Override
     public void activate () {
         if (this.isActivated) {
             return;

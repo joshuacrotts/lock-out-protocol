@@ -3,6 +3,7 @@ package com.dsd.game.controller;
 import com.dsd.game.Game;
 import com.dsd.game.enemies.BasicMonster;
 import com.dsd.game.enemies.DarkFemaleMonster;
+import com.dsd.game.enemies.FemaleMonsterBoss;
 import com.dsd.game.enemies.GreenMonster;
 import com.dsd.game.enemies.RedHeadMonster;
 import com.dsd.game.enemies.TinyMonster;
@@ -51,14 +52,10 @@ public class SpawnerController extends StandardGameObject implements TimerInterf
 
     @Override
     public void tick () {
-        //throw new UnsupportedOperationException("Not supported yet.");
-        //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void render (Graphics2D gd) {
-        //throw new UnsupportedOperationException("Not supported yet.");
-        //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -92,6 +89,9 @@ public class SpawnerController extends StandardGameObject implements TimerInterf
                 case RED_HEAD_MONSTER:
                     this.parentContainer.addEntity(new RedHeadMonster(xPos, yPos, this.game, this.parentContainer));
                     break;
+                case FEMALE_BOSS_MONSTER:
+                    this.parentContainer.addEntity(new FemaleMonsterBoss(xPos, yPos, this.game, this.parentContainer));
+                    break;
                 case TINY_MONSTER:
                     this.parentContainer.addEntity(new TinyMonster(xPos, yPos, this.game, this.parentContainer));
                     break;
@@ -123,7 +123,7 @@ public class SpawnerController extends StandardGameObject implements TimerInterf
             if (this.game.isPaused() || this.game.isPreamble() || this.game.isShop()) {
                 return;
             }
-            this.spawnerController.spawn(StdOps.rand(1, 2));
+            this.spawnerController.spawn(1);
         }
     }
 }

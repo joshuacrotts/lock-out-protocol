@@ -82,6 +82,10 @@ public abstract class Utilities extends StdOps {
         return map.get(l) + toRoman(number - l);
     }
 
+    public static float normalize (float n, float rMin, float rMax, float scaleMin, float scaleMax) {
+        return (((n - rMin) / (rMax - rMin)) * (scaleMax - scaleMin)) + scaleMin;
+    }
+
     static {
         Utilities.map.put(1000, "M");
         Utilities.map.put(900, "CM");

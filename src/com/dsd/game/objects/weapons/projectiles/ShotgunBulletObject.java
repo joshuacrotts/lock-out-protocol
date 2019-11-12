@@ -3,10 +3,10 @@ package com.dsd.game.objects.weapons.projectiles;
 import com.dsd.game.Game;
 import com.dsd.game.objects.Player;
 import com.revivedstandards.handlers.StandardCollisionHandler;
+import com.revivedstandards.model.StandardID;
 import com.revivedstandards.util.StdOps;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import org.apache.commons.math3.util.FastMath;
 
 /**
  * Shotgun bullet game object.
@@ -14,22 +14,26 @@ import org.apache.commons.math3.util.FastMath;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/9/19
  */
 public class ShotgunBulletObject extends ProjectileGameObject {
 
     //  Velocity factor applied to the bullet.
     private static final int VEL_FACTOR = 40;
+
     //  Static reference to the BufferedImages
     private static final BufferedImage[] frames = new BufferedImage[1];
+
     //  Animation frame per second setting
     private static final int BULLET_FPS = 20;
 
-    private static int damage = 100;
+    private int damage = 100;
 
     public ShotgunBulletObject (int _x, int _y, double _angle, int _damage, Game _game,
             StandardCollisionHandler _parentContainer, Player _parent) {
         super(_x, _y, _angle, _damage, ShotgunBulletObject.VEL_FACTOR, ShotgunBulletObject.frames,
-                ShotgunBulletObject.BULLET_FPS, _game, _parentContainer, _parent);
+                ShotgunBulletObject.BULLET_FPS, _game, _parentContainer, _parent, StandardID.Bullet);
     }
 
     @Override
@@ -49,28 +53,6 @@ public class ShotgunBulletObject extends ProjectileGameObject {
      */
     private static void initImages () {
         ShotgunBulletObject.frames[0] = StdOps.loadImage("src/resources/img/bullet/bullet_sprite/new_bullet/shotgun_bullet.png");
-    }
-
-//============================ SETTERS ====================================//
-    /**
-     * Instantiates the velocity of the bullet depending on where the cursor is
-     * in relation to the player.
-     *
-     * @param _x
-     * @param _y
-     * @param _mx
-     * @param _my
-     */
-    private void setVelocity (double _x, double _y, int _mx, int _my) {
-        double deltaX = (_mx - _x);
-        double deltaY = (_my - _y);
-        // Use the pythagorean theorem to solve for the hypotenuse distance
-        double distance = (double) FastMath.sqrt(((deltaX) * (deltaX))
-                + ((deltaY) * (deltaY)));
-        deltaX = (deltaX / distance) * this.VEL_FACTOR;
-        deltaY = (deltaY / distance) * this.VEL_FACTOR;
-        this.setVelX(deltaX);
-        this.setVelY(deltaY);
     }
 
 //========================== GETTERS =======================================//

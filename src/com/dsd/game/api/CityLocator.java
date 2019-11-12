@@ -1,12 +1,11 @@
 package com.dsd.game.api;
 
+import com.dsd.game.api.adapters.CityLocatorAPIAdapter;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,7 +19,7 @@ import org.json.JSONObject;
  *
  * @author Joshua, Ronald, Rinty
  */
-public class CityLocator {
+public class CityLocator implements CityLocatorAPIAdapter {
 
     private static URL url;
     private static InputStream inputStream;
@@ -29,16 +28,26 @@ public class CityLocator {
     private static String key;
 
     static {
+
         //  Loads in the API key to connect with
         CityLocator.inputStream = CityLocator.class.getClassLoader().getResourceAsStream(".config/.city_config.txt");
         CityLocator.reader = new BufferedReader(new InputStreamReader(CityLocator.inputStream));
+
         try {
+
             CityLocator.line = CityLocator.reader.readLine();
         }
+
         catch (IOException ex) {
+
             Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         CityLocator.key = CityLocator.line.substring(CityLocator.line.lastIndexOf(":") + 1);
+    }
+
+    public CityLocator () {
+
     }
 
     /**
@@ -49,9 +58,11 @@ public class CityLocator {
      * @return
      */
     private static String fetch (String _ipAddress) {
+
         StringBuilder jsonInformation = null;
 
         try {
+
             //  Processes the request to the API, and reads the information
             //  into the StringBuilder object.
             jsonInformation = new StringBuilder();
@@ -60,28 +71,33 @@ public class CityLocator {
             con.setRequestMethod("GET");
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
+
             while ((inputLine = in.readLine()) != null) {
+
                 jsonInformation.append(inputLine);
             }
+
             in.close();
         }
-        catch (ProtocolException ex) {
-            Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
         catch (IOException ex) {
+
             Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return jsonInformation.toString();
     }
 
-    //=============================== GETTERS ======================================//
+    //=============================== GETTERS =====================================
     /**
      * Returns the city that the user is located in.
      *
      * @return
      */
-    protected static String getCity () {
-        return CityLocator.getCityJSON().getString("city");
+    @Override
+    public String getCity () {
+
+        return this.getCityJSON().getString("city");
     }
 
     /**
@@ -89,21 +105,24 @@ public class CityLocator {
      *
      * @return string representation of IP address
      */
-    protected static String getIPAddress () {
+    @Override
+    public String getIPAddress () {
+
         String ipAddress = null;
 
         try {
+
             URL whatismyip = new URL("http://checkip.amazonaws.com");
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     whatismyip.openStream()));
             ipAddress = in.readLine();
         }
-        catch (MalformedURLException ex) {
-            Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
         catch (IOException ex) {
+
             Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return ipAddress;
     }
 
@@ -113,7 +132,9 @@ public class CityLocator {
      *
      * @return
      */
-    private static JSONObject getCityJSON () {
-        return new JSONObject(CityLocator.fetch(CityLocator.getIPAddress()));
+    private JSONObject getCityJSON () {
+
+        return new JSONObject(CityLocator.fetch(this.getIPAddress()));
     }
+
 }

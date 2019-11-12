@@ -59,7 +59,7 @@ public class EasyButton extends MenuButton implements MouseEventInterface {
 
     @Override
     public void onMouseClick () {
-        if (!this.getGame().isMenu() || !this.getMenuScreen().isOnDifficulty()) {
+        if (!this.getMenuScreen().isOnDifficulty() || !this.getGame().isMenu()) {
             return;
         }
         if (!DebugController.DEBUG_MODE) {

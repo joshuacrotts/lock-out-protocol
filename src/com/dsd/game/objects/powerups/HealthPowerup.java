@@ -19,7 +19,7 @@ import java.awt.image.BufferedImage;
  *
  * @author Joshua
  */
-public class HealthPowerup extends StandardGameObject {
+public class HealthPowerup extends StandardGameObject implements Powerup {
 
     private final Player player;
     private final StandardCollisionHandler parentContainer;
@@ -54,6 +54,10 @@ public class HealthPowerup extends StandardGameObject {
         if (this.isAlive()) {
             this.getAnimationController().renderFrame(_g2);
         }
+    }
+
+    public void activate () {
+        this.addHealth();
     }
 
     /**

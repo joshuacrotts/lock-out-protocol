@@ -31,15 +31,6 @@ public class StandardInteractorHandler extends StandardHandler implements MouseL
         this.game = _game;
     }
 
-    public void addInteractor (Interactor _interactor) {
-        this.interactors.add(_interactor);
-    }
-
-    @Override
-    public void addEntity (StandardGameObject _obj) {
-        throw new UnsupportedOperationException("You cannot add an SGO to this particular handler.");
-    }
-
     @Override
     public void tick () {
         for (int i = 0 ; i < this.interactors.size() ; i++) {
@@ -52,6 +43,15 @@ public class StandardInteractorHandler extends StandardHandler implements MouseL
         for (int i = 0 ; i < interactors.size() ; i++) {
             this.interactors.get(i).render(_g2);
         }
+    }
+
+    public void addInteractor (Interactor _interactor) {
+        this.interactors.add(_interactor);
+    }
+
+    @Override
+    public void addEntity (StandardGameObject _obj) {
+        throw new UnsupportedOperationException("You cannot add an SGO to this particular handler.");
     }
 
     /**

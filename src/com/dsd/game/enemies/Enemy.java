@@ -54,6 +54,9 @@ public abstract class Enemy extends Entity {
     //  How much damage the enemy does when running into the player.
     protected double damage;
 
+    //  Initial health factor (mostly for bosses).
+    private int initialHealth;
+
     //  Alpha composition object for when the monster dies.
     protected AlphaComposite deathTransparentComposite;
 
@@ -66,6 +69,7 @@ public abstract class Enemy extends Entity {
 
     public Enemy (int _x, int _y, int _health, StandardID _id, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, _health, _id, _game, _sch);
+        this.initialHealth = _health;
         this.sc = this.getGame().getCamera();
         this.bloodHandler = new StandardParticleHandler(MAX_BLOOD_PARTICLES);
         this.bloodHandler.setCamera(this.sc);
@@ -241,6 +245,10 @@ public abstract class Enemy extends Entity {
 
     public boolean isWalking () {
         return this.enemyState == EnemyState.WALKING;
+    }
+
+    public int getInitialHealth () {
+        return this.initialHealth;
     }
 
 //================================ SETTERS ===================================//

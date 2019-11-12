@@ -30,7 +30,7 @@ public class Rifle extends Gun {
 
     public Rifle (Game _game, Player _player, StandardCollisionHandler _sch) {
         super(WeaponType.RIFLE, 31, _game, _player, _sch, "src/resources/audio/sfx/reload.wav", 3000);
-        
+
         //  Instantiates the animation controllers.
         this.loadAssets(_player);
         super.setDelay(DELAY);

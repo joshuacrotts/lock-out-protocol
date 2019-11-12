@@ -10,6 +10,7 @@ import java.awt.Toolkit;
  * @author Joshua
  */
 public enum ResolutionEnum {
+
     RES_1280_720(new Dimension(1280, 720)),
     RES_1366_768(new Dimension(1366, 768)),
     RES_1440_900(new Dimension(1440, 900)),
@@ -34,19 +35,25 @@ public enum ResolutionEnum {
     /**
      * Increases the index pointer for the RESOLUTION_LIST array.
      */
-    public static void increaseResolution() {
+    public static void increaseResolution () {
+
         if (resolutionIndex < RESOLUTION_LIST.length - 1 && !isAtResolutionLimit()) {
+
             resolutionIndex++;
         }
+
     }
 
     /**
      * Decreases the index pointer for the RESOLUTION_LIST array.
      */
-    public static void decreaseResolution() {
+    public static void decreaseResolution () {
+
         if (resolutionIndex > 0) {
+
             resolutionIndex--;
         }
+
     }
 
     /**
@@ -57,7 +64,8 @@ public enum ResolutionEnum {
      *
      * @return true if not supported, false otherwise.
      */
-    private static boolean isAtResolutionLimit() {
+    private static boolean isAtResolutionLimit () {
+
         Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
 
         /**
@@ -73,23 +81,26 @@ public enum ResolutionEnum {
         return gameResWidth > screenResWidth || gameResHeight > screenResHeight;
     }
 
-    private ResolutionEnum(Dimension _resolution) {
+    private ResolutionEnum (Dimension _resolution) {
+
         resolution = _resolution;
     }
 
-//================================ GETTERS ==================================//
+//================================ GETTERS ==================================
     /**
      * Returns a string representation of the dimension; it takes the width,
      * concatenates an x, then adds the height.
      *
      * @return
      */
-    private String getDimensionString() {
+    private String getDimensionString () {
+
         return (int) resolution.getWidth() + "x"
                 + (int) resolution.getHeight();
     }
 
-    public static int getResolutionIndex() {
+    public static int getResolutionIndex () {
+
         return resolutionIndex;
     }
 
@@ -98,7 +109,8 @@ public enum ResolutionEnum {
      *
      * @return
      */
-    public static String getResolution() {
+    public static String getResolution () {
+
         return RESOLUTION_LIST[resolutionIndex].getDimensionString();
     }
 
@@ -107,7 +119,8 @@ public enum ResolutionEnum {
      *
      * @return
      */
-    public static Dimension getDimension() {
+    public static Dimension getDimension () {
+
         return RESOLUTION_LIST[resolutionIndex].resolution;
     }
 
@@ -117,12 +130,15 @@ public enum ResolutionEnum {
      * @param _index
      * @return
      */
-    private static Dimension getDimension(int _index) {
+    private static Dimension getDimension (int _index) {
+
         return RESOLUTION_LIST[_index].resolution;
     }
 
-//======================== SETTERS ===============================//
-    public static void setResolutionIndex(int _n) {
+//======================== SETTERS ===============================
+    public static void setResolutionIndex (int _n) {
+
         resolutionIndex = _n;
     }
+
 }

@@ -4,6 +4,7 @@ import com.dsd.game.Game;
 import com.dsd.game.objects.Entity;
 import com.dsd.game.objects.items.Coin;
 import com.dsd.game.objects.powerups.HealthPowerup;
+import com.dsd.game.objects.weapons.projectiles.BossProjectileObject;
 import com.dsd.game.util.Utilities;
 import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
@@ -20,6 +21,8 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.Timer;
+import java.util.TimerTask;
 import org.apache.commons.math3.util.FastMath;
 
 /**
@@ -34,27 +37,34 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
     //  Handler for particle explosions after the monster dies.
     private StandardParticleHandler explosionHandler;
 
-    /**
-     * Static bufferedimage array so the images aren't constantly loading in
-     * upon instantiation of a new monster
-     */
+    //  Timer for spawning in projectiles.
+    private final Timer bossProjectileTimer;
+
+    //
+    //  Static bufferedimage array so the images aren't constantly loading in
+    //  upon instantiation of a new monster
+    //
     private static final BufferedImage[] WALK_FRAMES;
     private static final BufferedImage[] DEATH_FRAMES;
 
-    //  Animation frame per second setting
+    //
+    //  Animation frame per second settings.
+    //  WALKING_FPS_MIN/MAX define the possible speeds that the boss can
+    //  animate at. It's randomly selected for variety.
+    //
     private final int walkingFPS;
     private final int WALKING_FPS_MIN = 13;
     private final int WALKING_FPS_MAX = 16;
     private static final int DEATH_FPS = 5;
 
-    //  One-time variable for tracking the "alive" to "death state" transition
+    //  One-time variable for tracking the "alive" to "death state" transition.
     private boolean aliveFlag = true;
 
-    //  Variables representing the angle and approach velocity
+    //  Variables representing the angle and approach velocity.
     private final double APPROACH_VEL = -1.2f;
     private final double DAMAGE = 1.00;
 
-    //  AlphaComposite factor for when the FemaleMonsterBoss dies
+    //  AlphaComposite factor for when the FemaleMonsterBoss dies.
     private static final float DEATH_ALPHA_FACTOR = 0.001f;
 
     //  Health factor for this FemaleMonsterBoss object.
@@ -69,7 +79,7 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
 
         //  Sets the walking/death frames for this monster.
         super.initWalkingFrames(FemaleMonsterBoss.WALK_FRAMES, this.walkingFPS);
-        super.initDeathFrames(FemaleMonsterBoss.DEATH_FRAMES, FemaleMonsterBoss.DEATH_FPS, 5);
+        super.initDeathFrames(FemaleMonsterBoss.DEATH_FRAMES, FemaleMonsterBoss.DEATH_FPS, 13);
 
         //  Sets the default animation.
         super.setAnimation(super.getWalkingAnimation());
@@ -80,6 +90,9 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
         super.getHandler().addCollider(this.getId());
         super.getHandler().flagAlive(this.getId());
         super.setTransparentFactor((float) DEATH_ALPHA_FACTOR);
+
+        this.bossProjectileTimer = new Timer(true);
+        this.bossProjectileTimer.scheduleAtFixedRate(new BossProjectileSpawner(this), 2000, 2000);
     }
 
     /**
@@ -107,6 +120,7 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
             //  Do this only once.
             if (this.aliveFlag) {
                 this.uponDeath();
+                this.bossProjectileTimer.cancel();
                 this.aliveFlag = false;
             }
             //  Creates the alpha composite object based off the object's current transparency.
@@ -183,7 +197,7 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
      */
     @Override
     public void generateHurtSound (int _sfx) {
-        StandardAudioController.play("src/resources/audio/sfx/green_monster/pain" + _sfx + ".wav", StandardAudioType.SFX);
+        StandardAudioController.play("src/resources/audio/sfx/zombies/zombie-" + _sfx + ".wav", StandardAudioType.SFX);
     }
 
     /**
@@ -197,9 +211,11 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
         // Calculate the distance between the enemy and the player
         double diffX = this.getX() - _posX - Entity.APPROACH_FACTOR;
         double diffY = this.getY() - _posY - Entity.APPROACH_FACTOR;
+
         // Use the pythagorean theorem to solve for the hypotenuse distance
         double distance = (double) FastMath.sqrt(((this.getX() - _posX) * (this.getX() - _posX))
                 + ((this.getY() - _posY) * (this.getY() - _posY)));
+
         // Sets the velocity according to how far away the enemy is from the player
         this.setVelX(((this.APPROACH_VEL / distance) * (int) diffX));
         this.setVelY(((this.APPROACH_VEL / distance) * (int) diffY));
@@ -220,6 +236,7 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
         double dx = FastMath.abs(_posX - this.getX());
         double dy = FastMath.abs(_posY - this.getY());
         this.setAngle((double) ((xSign) * (FastMath.atan((dx) / (dy)))));
+
         // If we're in Q1 (+x, -+y) or in Q2 (-x, +y)
         if ((_posX > this.getX() && _posY > this.getY()) || (_posX < this.getX() && _posY > this.getY())) {
             this.setAngle((double) ((FastMath.PI / 2) + (FastMath.PI / 2 - this.getAngle())));
@@ -243,7 +260,7 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
      */
     private void generateCoins (int _coinAmt) {
         for (int i = 0 ; i < _coinAmt ; i++) {
-            this.getHandler().addEntity(new Coin((int) this.getX(), (int) this.getY(), 0.7, 0.9, 1.0, this.getHandler()));
+            this.getHandler().addEntity(new Coin(this.getGame(), (int) this.getX(), (int) this.getY(), 0.7, 0.9, 1.0, this.getHandler()));
         }
     }
 
@@ -259,9 +276,38 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
         }
     }
 
+    /**
+     * Adds several projectiles to the screen from a circular position on the
+     * boss char (this will improve later).
+     */
+    private void addProjectiles () {
+        double angle = this.getAngle();
+        int[] velX = {0, 4, 4, 4, 0, -4, -4, -4};
+        int[] velY = {-4, -4, 0, 4, 4, 4, 0, -4};
+        for (int i = 0 ; i < velX.length ; i++) {
+            this.getHandler().addEntity(new BossProjectileObject((int) this.getX() + this.getWidth() / 2,
+                    (int) this.getY() + this.getHeight() / 2, velX[i], velY[i], (int) this.DAMAGE, this.getGame(),
+                    this.getHandler(), this));
+        }
+    }
+
+    private class BossProjectileSpawner extends TimerTask {
+
+        private FemaleMonsterBoss boss;
+
+        public BossProjectileSpawner (FemaleMonsterBoss _boss) {
+            this.boss = _boss;
+        }
+
+        @Override
+        public void run () {
+            this.boss.addProjectiles();
+        }
+    }
+
     //  Static block for instantiating the images.
     static {
-        WALK_FRAMES = Utilities.loadFrames("src/resources/img/enemies/monster5/walk/", 11);
-        DEATH_FRAMES = Utilities.loadFrames("src/resources/img/enemies/monster5/death/", 6);
+        WALK_FRAMES = Utilities.loadFrames("src/resources/img/enemies/femaleboss/walk/", 10);
+        DEATH_FRAMES = Utilities.loadFrames("src/resources/img/enemies/femaleboss/death/", 14);
     }
 }

@@ -30,7 +30,7 @@ import java.util.TimerTask;
  *
  * @author Joshua
  */
-public class BerserkPowerup extends StandardGameObject implements TimerInterface {
+public class BerserkPowerup extends StandardGameObject implements TimerInterface, Powerup {
 
     //  Miscellaneous reference variables
     private final Game game;
@@ -86,11 +86,13 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
     /**
      * Turns the timer on and instantiates the associated timer task.
      */
+    @Override
     public void activate () {
         if (this.isActivated) {
             return;
         }
-
+        this.playBerserkSFX();
+        this.setCollected();
         /**
          * We need to instantiate a new timer in the event that the previous one
          * was canceled.
@@ -101,6 +103,7 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
 
         this.isActivated = true;
         this.activateDamageBoost();
+
     }
 
     @Override

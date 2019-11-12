@@ -3,6 +3,7 @@ package com.dsd.game.objects.weapons.projectiles;
 import com.dsd.game.Game;
 import com.dsd.game.objects.Player;
 import com.revivedstandards.handlers.StandardCollisionHandler;
+import com.revivedstandards.model.StandardID;
 import com.revivedstandards.util.StdOps;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -20,17 +21,19 @@ public class BulletGameObject extends ProjectileGameObject {
 
     //  Velocity factor applied to the bullet.
     private static final int VEL_FACTOR = 20;
+
     //  Static reference to the BufferedImages
     private static final BufferedImage[] frames = new BufferedImage[1];
+
     //  Animation frame per second setting
     private static final int BULLET_FPS = 20;
 
-    private static int damage = 25;
+    private int damage = 25;
 
     public BulletGameObject (int _x, int _y, double _angle, int _damage, Game _game,
             StandardCollisionHandler _parentContainer, Player _parent) {
         super(_x, _y, _angle, _damage, BulletGameObject.VEL_FACTOR, BulletGameObject.frames,
-                BulletGameObject.BULLET_FPS, _game, _parentContainer, _parent);
+                BulletGameObject.BULLET_FPS, _game, _parentContainer, _parent, StandardID.Bullet);
     }
 
     @Override

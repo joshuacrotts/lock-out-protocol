@@ -1,24 +1,34 @@
 package com.dsd.game.api;
 
+import com.dsd.game.api.adapters.WeatherConnectorAPIAdapter;
+import com.dsd.game.api.adapters.CityLocatorAPIAdapter;
+import com.dsd.game.api.adapters.LanguageTranslationAPIAdapter;
+
 /**
  * This class is a translation class from the game to the city location and
  * weather APIs. Instead of allowing the game to directly talk to the APIs, this
  * translation class will serve as an intermediary step.
  *
- * [Group Name: Data Structure Deadheads]
+ * To change the APIs, simply change the constructors for the three instance
+ * variables.
  *
  * @author Joshua, Ronald, Rinty
  */
 public final class TranslatorAPI {
 
-//=================== GETTERS ====================================//
+    private static final LanguageTranslationAPIAdapter languageAPI = new LanguageTranslation();
+    private static final CityLocatorAPIAdapter cityLocatorAPI = new CityLocator();
+    private static final WeatherConnectorAPIAdapter weatherAPI = new WeatherConnector();
+
+//=================== GETTERS ====================================
     /**
      * Returns the city retrieved by the CityLocator API.
      *
      * @return
      */
     public static String getCity () {
-        return CityLocator.getCity();
+
+        return cityLocatorAPI.getCity();
     }
 
     /**
@@ -27,7 +37,8 @@ public final class TranslatorAPI {
      * @return
      */
     public static String getIPAddress () {
-        return CityLocator.getIPAddress();
+
+        return cityLocatorAPI.getIPAddress();
     }
 
     /**
@@ -38,7 +49,8 @@ public final class TranslatorAPI {
      * @return
      */
     public static String getWeather () {
-        return WeatherConnector.getWeather(TranslatorAPI.getCity());
+
+        return weatherAPI.getWeather(TranslatorAPI.getCity());
     }
 
     /**
@@ -49,17 +61,30 @@ public final class TranslatorAPI {
      * @return
      */
     public static String getWeather (String _city) {
-        return WeatherConnector.getWeather(_city);
+
+        return weatherAPI.getWeather(_city);
     }
 
+    /**
+     * Contacts the translator API to translate a string of text to a specific
+     * language.
+     *
+     * @param _text
+     * @param _lang
+     * @return
+     */
     public static String translate (String _text, String _lang) {
+
         if (_lang.equals("en")) {
+
             return _text;
         }
-        return LanguageTranslation.translateText(_text, _lang);
+
+        return languageAPI.translateText(_text, _lang);
     }
 
     private TranslatorAPI () {
 
     }
+
 }

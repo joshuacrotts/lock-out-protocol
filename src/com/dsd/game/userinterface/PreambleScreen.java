@@ -22,6 +22,7 @@ public class PreambleScreen extends Screen implements TimerInterface {
     // Models for this screen.
     private final LightningModel lightningEffect;
     private final WaveLabel waveModel;
+
     // Transparency effect of all models on the screen.
     private final float ALPHA_TIMER = 0.005f;
     private float alpha = 0f;
@@ -32,6 +33,7 @@ public class PreambleScreen extends Screen implements TimerInterface {
      */
     private Timer preambleTimer;
     private final long PREAMBLE_TIMER_DURATION = 4000;
+
     // State that the menu is currently on (in terms of fading in/out).
     private PreambleScreenState state;
 
@@ -121,7 +123,6 @@ public class PreambleScreen extends Screen implements TimerInterface {
         this.preambleTimer.cancel();
     }
 
-//============================ GETTERS ====================================//
     /**
      * Timer class to keep the alpha transparency the same until we begin to
      * fade back out.

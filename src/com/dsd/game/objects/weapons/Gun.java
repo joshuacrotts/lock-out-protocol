@@ -26,6 +26,8 @@ public abstract class Gun extends Weapon {
     private final StandardCollisionHandler globalHandler;
     private final Player player;
 
+    //  BufferedImage array for the types of casings the gun drops when shooting,
+    //  if any at all.
     private BufferedImage[] casingImages;
 
     /**

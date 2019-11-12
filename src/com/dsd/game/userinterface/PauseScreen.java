@@ -2,6 +2,7 @@ package com.dsd.game.userinterface;
 
 import com.dsd.game.Game;
 import com.dsd.game.commands.PauseCommand;
+import com.dsd.game.userinterface.model.buttons.HelpButton;
 import com.dsd.game.userinterface.model.buttons.MainMenuButton;
 import com.dsd.game.userinterface.model.buttons.SaveButton;
 import com.dsd.game.userinterface.model.labels.PauseLabel;
@@ -33,8 +34,8 @@ public class PauseScreen extends Screen {
         if (this.getGame().isMenu()) {
             return;
         }
-        super.tick();
 
+        super.tick();
     }
 
     @Override
@@ -42,7 +43,9 @@ public class PauseScreen extends Screen {
         if (this.getGame().isMenu()) {
             return;
         }
+
         this.drawTransparentScreen(_g2);
+
         super.render(_g2);
     }
 
@@ -64,6 +67,7 @@ public class PauseScreen extends Screen {
     private void createUIElements () {
         super.addInteractor(new PauseLabel(this.getGame()));
         super.addInteractor(new SaveButton(this.getGame(), null));
+        super.addInteractor(new HelpButton(this.getGame(), null));
         super.addInteractor(new MainMenuButton(this.getGame(), null));
     }
 

@@ -41,6 +41,5 @@ public class Crosshair {
         toolkit = Toolkit.getDefaultToolkit();
         crosshairImage = Crosshair.toolkit.getImage("src/resources/img/ui/crosshair.png");
         crosshairCursor = Crosshair.toolkit.createCustomCursor(Crosshair.crosshairImage, new Point(0, 0), "crosshair");
-
     }
 }

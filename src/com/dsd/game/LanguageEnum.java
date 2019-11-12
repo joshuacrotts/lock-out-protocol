@@ -5,7 +5,7 @@ import com.dsd.game.controller.LanguageController;
 /**
  * This enum defines the possible languages the user can switch to in the game.
  *
- * @author Joshua
+ * @author Joshua, Ronald, Rinty
  */
 public enum LanguageEnum {
 
@@ -33,7 +33,6 @@ public enum LanguageEnum {
 
     private final String language;
     private final String isoCode;
-
     private static int languageIndex = 5;
 
     private static final LanguageEnum[] LANGUAGE_LIST = {
@@ -43,30 +42,38 @@ public enum LanguageEnum {
     /**
      * Increases the index pointer for the LANGUAGE_LIST array.
      */
-    public static void increaseLanguage() {
+    public static void increaseLanguage () {
+
         if (languageIndex < LANGUAGE_LIST.length - 1) {
+
             languageIndex++;
         }
+
         LanguageController.setLanguage(LANGUAGE_LIST[languageIndex].isoCode);
     }
 
     /**
      * Decreases the index pointer for the LANGUAGE_LIST array.
      */
-    public static void decreaseLanguage() {
+    public static void decreaseLanguage () {
+
         if (languageIndex > 0) {
+
             languageIndex--;
         }
+
         LanguageController.setLanguage(LANGUAGE_LIST[languageIndex].isoCode);
     }
 
-    private LanguageEnum(String _language, String _isoCode) {
+    private LanguageEnum (String _language, String _isoCode) {
+
         this.language = _language;
         this.isoCode = _isoCode;
     }
 
-//================================ GETTERS ==================================//
-    public static int getLanguageIndex() {
+//================================ GETTERS ==================================
+    public static int getLanguageIndex () {
+
         return languageIndex;
     }
 
@@ -75,7 +82,8 @@ public enum LanguageEnum {
      *
      * @return
      */
-    public String getLanguageString() {
+    public String getLanguageString () {
+
         return this.language;
     }
 
@@ -84,7 +92,8 @@ public enum LanguageEnum {
      *
      * @return
      */
-    public String getLanguageCode() {
+    public String getLanguageCode () {
+
         return this.isoCode;
     }
 
@@ -93,7 +102,8 @@ public enum LanguageEnum {
      *
      * @return
      */
-    public static String getLanguage() {
+    public static String getLanguage () {
+
         return LANGUAGE_LIST[languageIndex].language;
     }
 
@@ -103,13 +113,16 @@ public enum LanguageEnum {
      *
      * @return
      */
-    public static String getCode() {
+    public static String getCode () {
+
         return LANGUAGE_LIST[languageIndex].isoCode;
     }
 
-// ============================= SETTERS ==================================//
-    public static void setLanguageIndex(int _n) {
+// ============================= SETTERS ==================================
+    public static void setLanguageIndex (int _n) {
+
         languageIndex = _n;
         LanguageController.setLanguage(LANGUAGE_LIST[languageIndex].isoCode);
     }
+
 }

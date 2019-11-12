@@ -13,7 +13,9 @@ import java.awt.Graphics2D;
  * Debug mode controller; draws information about the game (such as coordinates,
  * handler information, particles, etc.).
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
  */
 public class DebugController implements Renderable {
 

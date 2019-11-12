@@ -18,6 +18,11 @@ public class TextFieldController {
     //  The selected text field index in the arraylist.
     private static int selectedTextField = -1;
 
+    /**
+     * Deactivates all text fields except the one that is passed.
+     *
+     * @param _field
+     */
     public static void deactivate (TextFieldModel _field) {
         for (int i = 0 ; i < textFieldController.size() ; i++) {
             TextFieldModel otherModel = textFieldController.get(i);
@@ -27,10 +32,18 @@ public class TextFieldController {
         }
     }
 
+    /**
+     * Adds a text field that is selectable to the controller.
+     *
+     * @param _model
+     */
     public static void addField (TextFieldModel _model) {
         textFieldController.add(_model);
     }
 
+    /**
+     * Increments the pointer that determines which text field is "highlighted".
+     */
     public static void incrementSelectedTextField () {
         if (TextFieldController.selectedTextField + 1 >= TextFieldController.textFieldController.size()) {
             TextFieldController.selectedTextField = 0;

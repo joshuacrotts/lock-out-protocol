@@ -22,7 +22,7 @@ public class MainMenuButton extends MenuButton implements MouseEventInterface {
 
     //  Button offsets and dimensions.
     private static final int BUTTON_X_OFFSET = 100;
-    private static final int BUTTON_Y_OFFSET = 100;
+    private static final int BUTTON_Y_OFFSET = 200;
     private static final int TEXT_X_OFFSET = 80;
     private static final int TEXT_Y_OFFSET = 45;
     private static final int BUTTON_WIDTH = 300;

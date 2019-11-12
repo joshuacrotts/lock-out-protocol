@@ -21,7 +21,7 @@ import com.revivedstandards.model.DeathListener;
 import com.revivedstandards.model.StandardID;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import org.apache.commons.math3.util.FastMath;
 
@@ -177,12 +177,12 @@ public class Player extends Entity implements DeathListener, SerializableObject 
         return playerDetails.toString();
     }
 
-    public void readObject (ArrayList<Integer> _playerInfo) {
-        this.setPlayerSex(_playerInfo.get(0) == 1 ? "male" : "female");
-        this.setX(_playerInfo.get(1));
-        this.setY(_playerInfo.get(2));
-        this.setMoney(_playerInfo.get(3));
-        this.setHealth(_playerInfo.get(4));
+    public void readObject (HashMap<String, Double> _playerInfo) {
+        this.setPlayerSex(_playerInfo.get("Sex") == 1 ? "male" : "female");
+        this.setX(_playerInfo.get("PlayerX"));
+        this.setY(_playerInfo.get("PlayerY"));
+        this.setMoney(_playerInfo.get("Money").intValue());
+        this.setHealth(_playerInfo.get("Health"));
     }
 
     @Override
@@ -302,7 +302,8 @@ public class Player extends Entity implements DeathListener, SerializableObject 
      * command classes themselves).
      */
     private void initCommands () {
-        this.attackCommand = new AttackCommand(this.getGame(), this, this.getHandler(), this.inventory.getCurrentWeapon().getAttackFrames());
+        this.attackCommand = new AttackCommand(this.getGame(), this, this.getHandler(),
+                this.inventory.getCurrentWeapon().getAttackFrames());
         MoveForwardCommand moveForwardCommand = new MoveForwardCommand(this.getGame(), this);
         MoveBackwardCommand moveBackwardCommand = new MoveBackwardCommand(this.getGame(), this);
         ReloadCommand reloadCommand = new ReloadCommand(this.getGame(), this);

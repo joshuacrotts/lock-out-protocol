@@ -13,6 +13,7 @@ import com.dsd.game.database.TranslatorDatabase;
 import com.dsd.game.levels.MetalLevel;
 import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.HUDScreen;
+import com.dsd.game.userinterface.HelpScreen;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.PauseScreen;
 import com.dsd.game.userinterface.PreambleScreen;
@@ -37,7 +38,6 @@ import javax.swing.JOptionPane;
  * of data will ever need to be saved (the Player's position, stats, inventory,
  * and level info).
  *
- * [Group Name: Data Structure Deadheads]
  * @author Joshua, Ronald, Rinty
  */
 public class Game extends StandardGame {
@@ -45,42 +45,36 @@ public class Game extends StandardGame {
     //  Miscellaneous reference variables
     private final StandardCollisionHandler sch;
     private final StandardCamera sc;
-
     //  Database references
     private final TranslatorDatabase translatorDatabase;
-
     //  UI Element views
     private final MenuScreen menuScreen;
     private final PauseScreen pauseScreen;
     private final PreambleScreen preambleScreen;
     private final HUDScreen hudScreen;
     private final ShopScreen shopScreen;
+    private final HelpScreen helpScreen;
 
     /**
      * Rain controller which contacts the API for the logic of determining
      * whether it should rain or not.
      */
     private final RainController rainController;
-
     //  Debug controller
     private final DebugController debugController;
-
     //  Difficulty controller
     private final DifficultyController difficultyController;
-
     //  Level controller
     private final LevelController levelController;
-
     //  Cursor controller
     private final CursorController cursorController;
-
     //  Game state variable (paused, running, menu, etc.)
     private GameState gameState = GameState.MENU;
-
     //  Main player reference so other monsters can track them
     private Player player;
 
     public Game (int _width, int _height, String _title) {
+
         /**
          * Note: Magic numbers for the player and the monster are just for
          * demonstration; they will NOT be in the final game.
@@ -94,21 +88,17 @@ public class Game extends StandardGame {
         this.translatorDatabase.loadFromSettings();
 
         //  Initialize the sound controller
-        AudioBoxController.initialize(32);
+        AudioBoxController.initialize(40);
 
         //  Create a new collision handler
         this.sch = new CollisionHandlerController(this);
-
         //  Instantiates player & adds it to the handler
         this.player = new Player(200, 200, this, this.sch);
-
         //  Instantiate the camera
         this.sc = new StandardCamera(this, player, 1, this.getGameWidth(), this.getGameHeight());
-
         //  Sets the camera for the player and the handler
         this.player.setCamera(this.sc);
         this.sch.setCamera(this.sc);
-
         // Instantiates the rain, debug, and level controllers.
         this.rainController = new RainController(this);
         this.debugController = new DebugController(this, this.sch);
@@ -126,22 +116,26 @@ public class Game extends StandardGame {
         this.pauseScreen = new PauseScreen(this);
         this.preambleScreen = new PreambleScreen(this);
         this.shopScreen = new ShopScreen(this);
+        this.helpScreen = new HelpScreen(this);
         this.hudScreen = new HUDScreen(this, this.player, this.sch);
-
         this.getWindow().setWindowVisible(true);
-
         this.startGame();
     }
 
     @Override
     public void tick () {
+
         //  Depending on the game state, update different things.
         switch (this.gameState) {
+
             case MENU:
                 this.menuScreen.tick();
                 break;
             case PAUSED:
                 this.pauseScreen.tick();
+                break;
+            case HELP:
+                this.helpScreen.tick();
                 break;
             case SHOP:
                 this.shopScreen.tick();
@@ -166,30 +160,33 @@ public class Game extends StandardGame {
         }
 
         this.cursorController.tick();
-
     }
 
     @Override
     public void render () {
+
         //  Depending on the game state, render different things.
         if (this.gameState == GameState.MENU) {
+
             this.menuScreen.render(StandardDraw.Renderer);
         }
         else {
+
             //  First things first: render the camera
             StandardDraw.Object(this.sc);
             //  Then render the current [active] level
             this.levelController.renderLevel(StandardDraw.Renderer);
-            //  Then render the rain if applicable
-            this.rainController.render(StandardDraw.Renderer);
             //  Then render the handler with the casings.
             StandardDraw.Handler(this.player.getCasingHandler());
             //  Then render the handler objects
             StandardDraw.Handler(this.sch);
+            //  Then render the rain if applicable
+            this.rainController.render(StandardDraw.Renderer);
             //  Then render the heads up display
             this.hudScreen.render(StandardDraw.Renderer);
             //  Then render the preamble, pause or shop effect if necessary
             switch (this.gameState) {
+
                 case PREAMBLE:
                     this.preambleScreen.render(StandardDraw.Renderer);
                     break;
@@ -199,13 +196,18 @@ public class Game extends StandardGame {
                 case PAUSED:
                     this.pauseScreen.render(StandardDraw.Renderer);
                     break;
+                case HELP:
+                    this.helpScreen.render(StandardDraw.Renderer);
+                    break;
             }
-
             //  If we are in debug mode, we can draw the text.
             if (DebugController.DEBUG_MODE) {
+
                 this.debugController.render(StandardDraw.Renderer);
             }
+
         }
+
     }
 
     /**
@@ -213,6 +215,7 @@ public class Game extends StandardGame {
      * instantiate the Spawner controllers, level controllers, etc.
      */
     public void uponPlay () {
+
         DifficultyController.setDifficultyFactor();
         DifficultyController.setLevelTransitionTimer();
         this.levelController.getCurrentLevel().loadLevelData();
@@ -224,6 +227,7 @@ public class Game extends StandardGame {
      * Plays the wave change sfx.
      */
     public void playWaveChangeSFX () {
+
         StandardAudioController.play("src/resources/audio/sfx/round_change.wav", StandardAudioType.SFX);
     }
 
@@ -238,6 +242,7 @@ public class Game extends StandardGame {
      * @param _height
      */
     public void changeResolution (int _width, int _height) {
+
         this.setGameWidth(_width);
         this.setGameHeight(_height);
         Screen.setGameDimensions();
@@ -254,6 +259,7 @@ public class Game extends StandardGame {
      * factors from the previous game's progression.
      */
     public void resetGame () {
+
         this.sch.clearEntities();
         this.levelController.clearLevels();
         this.player.resetPlayer();
@@ -270,10 +276,13 @@ public class Game extends StandardGame {
      * @return
      */
     public boolean saveToDatabase () {
+
         if (!this.translatorDatabase.saveToDatabase()) {
+
             JOptionPane.showMessageDialog(null, LanguageController.translate("Unable to save data."));
             return false;
         }
+
         return true;
     }
 
@@ -283,7 +292,9 @@ public class Game extends StandardGame {
      * @return
      */
     public boolean loadFromDatabase () {
+
         if (!this.translatorDatabase.loadFromDatabase()) {
+
             JOptionPane.showMessageDialog(null, LanguageController.translate("Unable to load data, did you log in?."));
             return false;
         }
@@ -296,9 +307,12 @@ public class Game extends StandardGame {
      * preferences to a settings file.
      */
     public void saveToSettings () {
+
         if (!this.translatorDatabase.saveToSettings()) {
+
             JOptionPane.showMessageDialog(null, LanguageController.translate("Unable to save to the settings file."));
         }
+
     }
 
     /**
@@ -306,9 +320,12 @@ public class Game extends StandardGame {
      * preferences from a settings file.
      */
     public void loadFromSettings () {
+
         if (!this.translatorDatabase.saveToSettings()) {
+
             JOptionPane.showMessageDialog(null, LanguageController.translate("Unable to load from the settings file."));
         }
+
     }
 
     /**
@@ -316,6 +333,7 @@ public class Game extends StandardGame {
      * instantiated.
      */
     private void instantiateLevels () {
+
         this.levelController.addLevel(new MetalLevel(this.player, this, this.sch));
     }
 
@@ -323,85 +341,115 @@ public class Game extends StandardGame {
      * Resets the camera's viewport to account for a resized window.
      */
     private void reinstantiateCamera () {
+
         this.sc.setVpw(this.getGameWidth() >> 1);
         this.sc.setVph(this.getGameHeight() >> 1);
     }
 
-//========================== GETTERS =============================//
+//========================== GETTERS =============================
     public Player getPlayer () {
+
         return this.player;
     }
 
     public GameState getGameState () {
+
         return this.gameState;
     }
 
     public StandardCamera getCamera () {
+
         return this.sc;
     }
 
     public StandardCollisionHandler getHandler () {
+
         return this.sch;
     }
 
     public MenuScreen getMenuScreen () {
+
         return this.menuScreen;
     }
 
+    public HUDScreen getHUDScreen () {
+
+        return this.hudScreen;
+    }
+
     public LevelController getLevelController () {
+
         return this.levelController;
     }
 
     public DifficultyController getDifficultyController () {
+
         return this.difficultyController;
     }
 
     public StandardLevel getCurrentLevel () {
+
         return this.levelController.getCurrentLevel();
     }
 
     public int getCurrentLevelID () {
+
         return this.levelController.getCurrentLevelID();
     }
 
     public int getLogicalCurrentLevelID () {
+
         return this.levelController.getLogicalCurrentLevelID();
     }
 
     public int getWaveNumber () {
+
         return this.levelController.getWaveNumber();
     }
 
     public boolean isPaused () {
+
         return this.gameState == GameState.PAUSED;
     }
 
     public boolean isPreamble () {
+
         return this.gameState == GameState.PREAMBLE;
     }
 
     public boolean isRunning () {
+
         return this.gameState == GameState.RUNNING;
     }
 
     public boolean isInGameState () {
+
         return this.isRunning() | this.isPreamble();
     }
 
     public boolean isShop () {
+
         return this.gameState == GameState.SHOP;
     }
 
     public boolean isMenu () {
+
         return this.gameState == GameState.MENU;
     }
 
-//========================== SETTERS =============================//
+    public boolean isHelp () {
+
+        return this.gameState == GameState.HELP;
+    }
+
+//========================== SETTERS =============================
     public void setGameState (GameState _gs) {
+
         this.gameState = _gs;
     }
 
     public void setPlayer (Player _player) {
+
         this.player = _player;
         this.player.setCamera(sc);
         this.player.setHandler(this.sch);
@@ -412,8 +460,10 @@ public class Game extends StandardGame {
      * it.
      */
     public void setPreambleState () {
+
         this.gameState = GameState.PREAMBLE;
         this.playWaveChangeSFX();
         this.preambleScreen.resetPreambleScreen();
     }
+
 }
