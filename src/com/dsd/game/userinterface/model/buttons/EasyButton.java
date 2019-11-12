@@ -1,8 +1,8 @@
 package com.dsd.game.userinterface.model.buttons;
 
-import com.dsd.game.DifficultyType;
-import com.dsd.game.Game;
-import com.dsd.game.GameState;
+import com.dsd.game.core.DifficultyType;
+import com.dsd.game.core.Game;
+import com.dsd.game.core.GameState;
 import com.dsd.game.controller.DebugController;
 import com.dsd.game.controller.DifficultyController;
 import com.dsd.game.controller.LanguageController;

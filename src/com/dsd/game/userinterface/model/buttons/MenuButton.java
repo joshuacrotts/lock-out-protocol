@@ -1,7 +1,7 @@
 package com.dsd.game.userinterface.model.buttons;
 
-import com.dsd.game.AccountStatus;
-import com.dsd.game.Game;
+import com.dsd.game.core.AccountStatus;
+import com.dsd.game.core.Game;
 import com.dsd.game.controller.LanguageController;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.MouseEventInterface;

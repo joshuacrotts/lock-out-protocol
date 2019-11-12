@@ -1,6 +1,6 @@
 package com.dsd.game.userinterface;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.commands.ShopCommand;
 import com.dsd.game.userinterface.shop.ShopTitleLabel;
 import com.dsd.game.userinterface.shop.enums.ShopState;

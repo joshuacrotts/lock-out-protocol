@@ -1,6 +1,6 @@
 package com.dsd.game.commands;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.weapons.enums.WeaponSelection;
 import com.revivedstandards.commands.Command;

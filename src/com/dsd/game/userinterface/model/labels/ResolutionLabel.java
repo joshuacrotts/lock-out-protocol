@@ -1,7 +1,7 @@
 package com.dsd.game.userinterface.model.labels;
 
-import com.dsd.game.Game;
-import com.dsd.game.ResolutionEnum;
+import com.dsd.game.core.Game;
+import com.dsd.game.objects.ResolutionEnum;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.Screen;
 import java.awt.Color;

@@ -1,7 +1,7 @@
 package com.dsd.game.controller;
 
-import com.dsd.game.Game;
-import com.dsd.game.LightningFlash;
+import com.dsd.game.core.Game;
+import com.dsd.game.objects.LightningFlash;
 import com.dsd.game.api.TranslatorAPI;
 import com.dsd.game.handlers.LightningHandler;
 import com.dsd.game.objects.RainDrop;

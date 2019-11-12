@@ -1,6 +1,6 @@
 package com.dsd.game.commands;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.controller.TimerController;
 import com.dsd.game.objects.BulletCasing;
 import com.dsd.game.objects.Player;

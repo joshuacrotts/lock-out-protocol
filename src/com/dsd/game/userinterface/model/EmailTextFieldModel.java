@@ -1,6 +1,6 @@
 package com.dsd.game.userinterface.model;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.userinterface.MenuScreen;
 import com.dsd.game.userinterface.Screen;
 import com.dsd.game.userinterface.model.labels.EmailLabel;

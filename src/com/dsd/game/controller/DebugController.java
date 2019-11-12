@@ -1,6 +1,6 @@
 package com.dsd.game.controller;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.Screen;
 import com.revivedstandards.handlers.StandardCollisionHandler;

@@ -1,6 +1,6 @@
 package com.dsd.game.enemies;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.objects.Entity;
 import com.dsd.game.objects.items.Coin;
 import com.dsd.game.objects.powerups.BerserkPowerup;

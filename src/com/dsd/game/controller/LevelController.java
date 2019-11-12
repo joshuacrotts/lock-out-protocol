@@ -1,7 +1,7 @@
 package com.dsd.game.controller;
 
-import com.dsd.game.Game;
-import com.dsd.game.SerializableObject;
+import com.dsd.game.core.Game;
+import com.dsd.game.objects.SerializableObject;
 import com.dsd.game.database.SerializableType;
 import com.dsd.game.userinterface.TimerInterface;
 import com.revivedstandards.model.StandardLevel;

@@ -1,6 +1,6 @@
 package com.dsd.game.objects.items;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.powerups.Powerup;
 import com.dsd.game.util.Utilities;

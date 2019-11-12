@@ -1,6 +1,6 @@
 package com.dsd.game.objects;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.model.StandardGameObject;
 import com.revivedstandards.model.StandardID;

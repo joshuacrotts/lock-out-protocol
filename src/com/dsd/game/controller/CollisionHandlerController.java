@@ -1,6 +1,6 @@
 package com.dsd.game.controller;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.enemies.BasicMonster;
 import com.dsd.game.enemies.Enemy;
 import com.dsd.game.enemies.GreenMonster;
@@ -82,6 +82,9 @@ public class CollisionHandlerController extends StandardCollisionHandler {
         else if (_obj1.getId() == StandardID.Bullet && _obj2.getId() == StandardID.Bullet) {
             return;
         }
+        //        else if (_obj1.getId() == StandardID.Player && _obj2.getId() == StandardID.Bullet1) {
+        //            this.handlePlayerBossProjectileCollision((Player) _obj1, (BossProjectileObject) _obj2);
+        //        }
     }
 
     /**
@@ -95,19 +98,16 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      */
     @Override
     public void handleBoundsCollision (StandardGameObject _obj1, StandardGameObject _obj2) {
-        if (_obj1.getId() == StandardID.Player && _obj2 instanceof Enemy && _obj2.isAlive()) {
+        if (_obj1.getId() == StandardID.Player && _obj2 instanceof Enemy) {
             this.handlePlayerMonsterCollision((Player) _obj1, (Enemy) _obj2);
         }
-        else if (_obj1.getId() == StandardID.Bullet && _obj2 instanceof Enemy) {
+        else if (_obj1.getId() == StandardID.Bullet && _obj2 instanceof Enemy && _obj2.isAlive()) {
             this.handleBulletEnemyCollision((ProjectileGameObject) _obj1, (Enemy) _obj2);
         }
-        else if (_obj1.getId() == StandardID.Tile1 && _obj2 instanceof Enemy) {
+        else if (_obj1.getId() == StandardID.Tile1 && _obj2 instanceof Enemy && _obj2.isAlive()) {
             this.handleEnemyExplosionCollision((Explosion) _obj1, (Enemy) _obj2);
         }
-        //        else if (_obj1.getId() == StandardID.Player && _obj2.getId() == StandardID.Bullet1) {
-        //            this.handlePlayerBossProjectileCollision((Player) _obj1, (BossProjectileObject) _obj2);
-        //        }
-        else if (_obj1.getId() == StandardID.Player && _obj2.isAlive() && _obj2 instanceof Powerup) {
+        else if (_obj1.getId() == StandardID.Player && _obj2 instanceof Powerup && _obj2.isAlive()) {
             _obj2.setAlive(false);
             ((Powerup) _obj2).activate();
         }

@@ -1,4 +1,4 @@
-package com.dsd.game;
+package com.dsd.game.core;
 
 import com.dsd.game.controller.AudioBoxController;
 import com.dsd.game.controller.CollisionHandlerController;

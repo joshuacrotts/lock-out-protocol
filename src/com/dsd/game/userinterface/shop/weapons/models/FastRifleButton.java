@@ -1,6 +1,6 @@
 package com.dsd.game.userinterface.shop.weapons.models;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.objects.weapons.FastRifle;
 import com.dsd.game.objects.weapons.Gun;
 import com.dsd.game.objects.weapons.enums.WeaponType;
