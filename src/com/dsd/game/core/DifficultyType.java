@@ -25,11 +25,9 @@ public enum DifficultyType {
      * @param _difficultyLevel
      */
     private void setDifficultyString (int _difficultyLevel) {
-
         String text = "";
 
         switch (_difficultyLevel) {
-
             case 1:
                 text = "I\'M TOO YOUNG TO DIE";
                 break;
@@ -40,7 +38,6 @@ public enum DifficultyType {
                 text = "NIGHTMARE";
                 break;
         }
-
         this.difficultyString = text;
     }
 

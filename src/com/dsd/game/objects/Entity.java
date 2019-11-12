@@ -12,6 +12,8 @@ import com.revivedstandards.model.StandardID;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/12/19
  */
 public abstract class Entity extends StandardGameObject {
 
@@ -19,10 +21,10 @@ public abstract class Entity extends StandardGameObject {
     private final Game game;
     private StandardCollisionHandler parentContainer;
 
-    /**
-     * For entities that follow another entity, this is the factor that should
-     * be applied when detecting the angle to turn towards.
-     */
+    //
+    //  For entities that follow another entity, this is the factor that should
+    //  be applied when detecting the angle to turn towards.
+    //
     public static final int APPROACH_FACTOR = 8;
 
     //  Health of entity

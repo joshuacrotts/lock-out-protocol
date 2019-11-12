@@ -15,6 +15,8 @@ import com.revivedstandards.model.StandardAnimation;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/12/19
  */
 public class Pistol extends Gun {
 
@@ -23,7 +25,7 @@ public class Pistol extends Gun {
     private static final int SHOOT_GUN_FPS = 20;
 
     //  Delay between shots.
-    private final int DELAY = 750;
+    private static final int DELAY = 750;
 
     //  Delay between reloadign and firing the first bullet afterwards.
     private static final long RELOAD_DELAY = 2000;
@@ -31,13 +33,16 @@ public class Pistol extends Gun {
     //  Damage from the pistol.
     private static final int BULLET_DAMAGE = 40;
 
+    //  Amount of casing image frames for this gun.
+    private static final int CASING_IMAGES = 14;
+
     public Pistol (Game _game, Player _player, StandardCollisionHandler _sch) {
         super(WeaponType.PISTOL, 16, _game, _player, _sch, "src/resources/audio/sfx/pistol_reload.wav", RELOAD_DELAY);
 
         //  Instantiates the animation controllers
         this.loadAssets(_player);
         super.setDelay(this.DELAY);
-        super.loadCasingImages(14);
+        super.loadCasingImages(Pistol.CASING_IMAGES);
     }
 
     @Override

@@ -6,12 +6,14 @@ import com.revivedstandards.commands.Command;
 import java.awt.event.KeyEvent;
 
 /**
- * Command representing when the user presses the left arrow to increase the
- * game's screen resolution.
+ * Command representing when the user presses the left arrow to change the
+ * language.
  *
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/12/19
  */
 public class DecreaseLanguageCommand extends Command {
 

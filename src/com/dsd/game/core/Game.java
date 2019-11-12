@@ -45,8 +45,10 @@ public class Game extends StandardGame {
     //  Miscellaneous reference variables
     private final StandardCollisionHandler sch;
     private final StandardCamera sc;
+
     //  Database references
     private final TranslatorDatabase translatorDatabase;
+
     //  UI Element views
     private final MenuScreen menuScreen;
     private final PauseScreen pauseScreen;
@@ -60,16 +62,22 @@ public class Game extends StandardGame {
      * whether it should rain or not.
      */
     private final RainController rainController;
+
     //  Debug controller
     private final DebugController debugController;
+
     //  Difficulty controller
     private final DifficultyController difficultyController;
+
     //  Level controller
     private final LevelController levelController;
+
     //  Cursor controller
     private final CursorController cursorController;
+
     //  Game state variable (paused, running, menu, etc.)
     private GameState gameState = GameState.MENU;
+
     //  Main player reference so other monsters can track them
     private Player player;
 
@@ -124,10 +132,8 @@ public class Game extends StandardGame {
 
     @Override
     public void tick () {
-
         //  Depending on the game state, update different things.
         switch (this.gameState) {
-
             case MENU:
                 this.menuScreen.tick();
                 break;
@@ -158,20 +164,17 @@ public class Game extends StandardGame {
                 StandardHandler.Object(this.sc);
                 break;
         }
-
         this.cursorController.tick();
     }
 
     @Override
     public void render () {
-
         //  Depending on the game state, render different things.
         if (this.gameState == GameState.MENU) {
 
             this.menuScreen.render(StandardDraw.Renderer);
         }
         else {
-
             //  First things first: render the camera
             StandardDraw.Object(this.sc);
             //  Then render the current [active] level
@@ -186,7 +189,6 @@ public class Game extends StandardGame {
             this.hudScreen.render(StandardDraw.Renderer);
             //  Then render the preamble, pause or shop effect if necessary
             switch (this.gameState) {
-
                 case PREAMBLE:
                     this.preambleScreen.render(StandardDraw.Renderer);
                     break;
@@ -215,7 +217,6 @@ public class Game extends StandardGame {
      * instantiate the Spawner controllers, level controllers, etc.
      */
     public void uponPlay () {
-
         DifficultyController.setDifficultyFactor();
         DifficultyController.setLevelTransitionTimer();
         this.levelController.getCurrentLevel().loadLevelData();
@@ -227,7 +228,6 @@ public class Game extends StandardGame {
      * Plays the wave change sfx.
      */
     public void playWaveChangeSFX () {
-
         StandardAudioController.play("src/resources/audio/sfx/round_change.wav", StandardAudioType.SFX);
     }
 
@@ -242,7 +242,6 @@ public class Game extends StandardGame {
      * @param _height
      */
     public void changeResolution (int _width, int _height) {
-
         this.setGameWidth(_width);
         this.setGameHeight(_height);
         Screen.setGameDimensions();

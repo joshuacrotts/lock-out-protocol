@@ -22,6 +22,8 @@ import java.awt.image.BufferedImage;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/12/19
  */
 public class Coin extends StandardGameObject implements Powerup {
 

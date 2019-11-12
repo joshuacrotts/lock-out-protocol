@@ -12,6 +12,8 @@ import com.sun.glass.events.KeyEvent;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/12/19
  */
 public class DecrementWeaponCommand extends Command {
 

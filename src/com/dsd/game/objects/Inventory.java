@@ -112,6 +112,9 @@ public class Inventory implements SerializableObject {
     /**
      * Adds the type _type of weapon to the user's inventory.
      *
+     * Is there a better way to do this? I'm sure of it. I just don't have time
+     * to configure it right now.
+     *
      * @param _type
      */
     public void addWeapon (WeaponType _type) {

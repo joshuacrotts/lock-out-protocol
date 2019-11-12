@@ -11,22 +11,26 @@ import java.awt.image.BufferedImage;
 
 /**
  * This class is a template for a weapon. All weapons will extend this class.
- * This class includes melee weapons and guns.
+ * This class includes melee weapons (most likely no longer a thing) and guns.
  *
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/12/19
  */
 public abstract class Weapon implements SerializableObject {
 
     //  Type of weapon, standard animator controllers, the icon (for the inventoryview)
-    private WeaponType weaponType;
+    private final WeaponType weaponType;
     private StandardAnimatorController walkWeaponFrames;
     private StandardAnimatorController attackWeaponFrames;
     private BufferedImage weaponIcon;
+
     //  State of the weapon (when applicable), and the sfx it makes when attacking.
     private WeaponState weaponState;
     private String attackSFXPath;
+
     //  Variables to determine how long to wait in between attacks.
     private long delay = 0;
     private boolean ready = true;
@@ -37,7 +41,7 @@ public abstract class Weapon implements SerializableObject {
      */
     private int damage;
 
-    //  Some powerups will increase the weapon's damage. This variable handles that.
+    //  Some powerups increase the weapon's damage. This variable handles that.
     private int damageFactor = 1;
 
     public Weapon (WeaponType _type) {
@@ -45,7 +49,6 @@ public abstract class Weapon implements SerializableObject {
         this.weaponState = WeaponState.READY;
         this.setSFXPath("src/resources/audio/sfx/" + _type + ".wav");
         this.setIcon(StdOps.loadImage("src/resources/img/items/icons/" + _type.getType() + "_icon.png"));
-
     }
 
     /**
@@ -65,6 +68,8 @@ public abstract class Weapon implements SerializableObject {
         object.append("weapon=").append("\n");
         object.append("type=").append(this.weaponType).append("\n");
         object.append("gun=").append(this instanceof Gun).append("\n");
+
+        //  If the weapon is a gun, we need to append how much ammo it has.
         if (this instanceof Gun) {
             Gun gun = (Gun) this;
             object.append("ammo=").append(gun.getCurrentAmmo()).append("\n");

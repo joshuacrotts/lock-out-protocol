@@ -15,23 +15,30 @@ import com.revivedstandards.model.StandardAnimation;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/12/19
  */
 public class Minigun extends Gun {
 
     //  FPS variables for how fast the rifle frames animate.
     private static final int WALKING_FPS = 10;
     private static final int SHOOT_GUN_FPS = 20;
+
     //  Delay between shooting one bullet and the next (in ms).
-    private final int DELAY = 20;
+    private static final int DELAY = 20;
+
     //  Damage from the rifle.
     private static final int BULLET_DAMAGE = 15;
+
+    //  Amount of casing image frames for this gun.
+    private static final int CASING_IMAGES = 14;
 
     public Minigun (Game _game, Player _player, StandardCollisionHandler _sch) {
         super(WeaponType.MINIGUN, 100, _game, _player, _sch, "src/resources/audio/sfx/reload.wav", 3000);
         //  Instantiates the animation controllers.
         this.loadAssets(_player);
-        super.setDelay(DELAY);
-        super.loadCasingImages(14);
+        super.setDelay(Minigun.DELAY);
+        super.loadCasingImages(Minigun.CASING_IMAGES);
     }
 
     @Override

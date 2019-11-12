@@ -6,12 +6,14 @@ import com.revivedstandards.commands.Command;
 import java.awt.event.KeyEvent;
 
 /**
- * Command representing when the user presses the left arrow to increase the
+ * Command representing when the user presses the right arrow to increase the
  * game's screen resolution.
  *
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/12/19
  */
 public class IncreaseResolutionCommand extends Command {
 

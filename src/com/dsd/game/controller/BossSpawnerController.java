@@ -13,15 +13,21 @@ import java.awt.Graphics2D;
 /**
  * This class is somewhat similar to the SpawnerController, with the exception
  * that it handles boss mobs instead of regular mobs, which run on a timer.
+ *
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/12/19
  */
 public class BossSpawnerController extends StandardGameObject {
 
     //  Miscellaneous reference variables
+    private final Game game;
     private final StandardCollisionHandler parentContainer;
 
     //  Determines which boss to spawn.
     private final EnemyType spawnerID;
-    private final Game game;
 
     public BossSpawnerController (int _x, int _y, EnemyType _id, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, StandardID.Spawner);
@@ -31,6 +37,10 @@ public class BossSpawnerController extends StandardGameObject {
         this.addBoss();
     }
 
+    /**
+     * Adds a boss to the game. This method only runs once per wave instead of a
+     * continuous timer like spawners for regular enemies do.
+     */
     private void addBoss () {
         int xPos = (int) this.getX();
         int yPos = (int) this.getY();

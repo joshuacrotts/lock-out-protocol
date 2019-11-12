@@ -5,13 +5,20 @@ import com.dsd.game.core.Game;
 import com.dsd.game.objects.SerializableObject;
 import com.dsd.game.database.SerializableType;
 import com.dsd.game.enemies.BasicMonster;
+import com.dsd.game.enemies.DarkFemaleMonster;
 import com.dsd.game.enemies.GreenMonster;
+import com.dsd.game.enemies.RedHeadMonster;
+import com.dsd.game.enemies.TinyMonster;
 
 /**
  * Controller to determine how strong the enemies are as a collective group, how
  * fast the rounds go, and how many spawners are placed.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/12/19
  */
 public class DifficultyController implements SerializableObject {
 
@@ -89,11 +96,15 @@ public class DifficultyController implements SerializableObject {
 
     /**
      * Slowly increments the mob health depending on what difficulty the game
-     * is.
+     * is. Is there a better way to do this? Probably. I'll experiment with
+     * reflection later.
      */
     protected static void incrementMobHealth () {
-        BasicMonster.originalHealth *= difficultyFactor;
-        GreenMonster.originalHealth *= difficultyFactor;
+        BasicMonster.originalHealth *= DifficultyController.difficultyFactor;
+        GreenMonster.originalHealth *= DifficultyController.difficultyFactor;
+        RedHeadMonster.originalHealth *= DifficultyController.difficultyFactor;
+        TinyMonster.originalHealth *= DifficultyController.difficultyFactor;
+        DarkFemaleMonster.originalHealth *= DifficultyController.difficultyFactor;
     }
 
     /**
