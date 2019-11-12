@@ -125,13 +125,17 @@ public class CollisionHandlerController extends StandardCollisionHandler {
         // Sets the bullet to dead
         // Casts the obj2 to a Monster so we can deduct health from it
         if (_monster.isAlive() && _bullet.isAlive()) {
-            //  If the object is a grenade bullet, then we'll create an explosion with
+
+            //  If the object is a grenade OR shotgun bullet, then we'll create an explosion with
             //  a damage radius.
             ExplosionType type = _bullet instanceof GrenadeBulletObject ? ExplosionType.GRENADE_EXPLOSION
-                    : ExplosionType.SHOTGUN_EXPLOSION;
+                    : _bullet instanceof ShotgunBulletObject ? ExplosionType.SHOTGUN_EXPLOSION : null;
 
-            this.addEntity(new Explosion((int) _monster.getX(), (int) _monster.getY(),
-                    _bullet.getDamage(), type, this));
+            //  If the bullet is just a regular bullet, then no explosion is created.
+            if (type != null) {
+                this.addEntity(new Explosion((int) _monster.getX(), (int) _monster.getY(),
+                        _bullet.getDamage(), type, this));
+            }
 
             _bullet.setAlive(false);
             _monster.setHealth(_monster.getHealth() - _bullet.getDamage());
