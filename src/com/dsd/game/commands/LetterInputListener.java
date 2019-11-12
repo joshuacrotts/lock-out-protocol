@@ -7,10 +7,14 @@ import java.awt.event.KeyListener;
 
 /**
  * This class will be used for user input when asking for their username and
- * password. We'll write a custom textfield UI element instead of using the
- * lousy Java Swing ones.
+ * password. We wrote a custom text input field instead of using the lousy Java
+ * Swing ones.
  *
- * @author Joshua Crotts
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/12/19
  */
 public class LetterInputListener implements KeyListener {
 

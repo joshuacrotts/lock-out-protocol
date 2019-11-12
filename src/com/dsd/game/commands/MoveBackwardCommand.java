@@ -7,11 +7,13 @@ import com.revivedstandards.commands.Command;
 import java.awt.event.KeyEvent;
 
 /**
- * Command representing when the user back-peddles
+ * Command representing when the user back-peddles.
  *
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/12/19
  */
 public class MoveBackwardCommand extends Command {
 

@@ -24,18 +24,15 @@ public class LanguageTranslation implements LanguageTranslationAPIAdapter {
     private static String key;
 
     static {
-
         //  Loads in the key for the api connection
         LanguageTranslation.inputStream = LanguageTranslation.class.getClassLoader().getResourceAsStream(".config/.language_config.txt");
         LanguageTranslation.reader = new BufferedReader(new InputStreamReader(LanguageTranslation.inputStream));
 
         try {
-
             LanguageTranslation.line = LanguageTranslation.reader.readLine();
         }
 
         catch (IOException ex) {
-
             Logger.getLogger(LanguageTranslation.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -52,11 +49,9 @@ public class LanguageTranslation implements LanguageTranslationAPIAdapter {
      * @return
      */
     private static String fetch (String _text, String _lang) {
-
         StringBuilder jsonInformation = null;
 
         try {
-
             //  Processes the request to the API, and reads the information
             //  into the StringBuilder object.
             jsonInformation = new StringBuilder();
@@ -67,17 +62,14 @@ public class LanguageTranslation implements LanguageTranslationAPIAdapter {
             String inputLine;
 
             while ((inputLine = in.readLine()) != null) {
-
                 jsonInformation.append(inputLine);
             }
-
             in.close();
         }
 
         catch (IOException ex) {
             Logger.getLogger(LanguageTranslation.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return jsonInformation.toString().substring(jsonInformation.toString().indexOf("[") + 2, jsonInformation.toString().lastIndexOf("]") - 1);
     }
 
@@ -91,7 +83,6 @@ public class LanguageTranslation implements LanguageTranslationAPIAdapter {
      */
     @Override
     public String translateText (String _s, String _lang) {
-
         return fixString(_s, _lang);
     }
 
@@ -104,7 +95,6 @@ public class LanguageTranslation implements LanguageTranslationAPIAdapter {
      * @return
      */
     private static String fixString (String _s, String _lang) {
-
         String fixedString = _s.replaceAll("\\s", "%20");
         return fetch(fixedString, _lang);
     }

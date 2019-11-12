@@ -24,6 +24,8 @@ import java.util.TimerTask;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/12/19
  */
 public class AttackCommand extends Command implements TimerInterface {
 
@@ -38,6 +40,7 @@ public class AttackCommand extends Command implements TimerInterface {
     //  The delay for each attack.
     private Timer attackDelayTimer = null;
 
+    //  Boolean to represent if the attack has a timer or not.
     private static boolean hasTimer = false;
 
     public AttackCommand (Game _game, Player _obj, StandardCollisionHandler _gh, StandardAnimatorController animation) {

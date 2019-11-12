@@ -7,7 +7,11 @@ import com.revivedstandards.view.Updatable;
 /**
  * This is a very primitive class controlling when the cursor changes images.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/12/19
  */
 public class CursorController implements Updatable {
 

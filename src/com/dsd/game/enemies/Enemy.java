@@ -5,8 +5,11 @@ import com.dsd.game.enemies.enums.EnemyState;
 import com.dsd.game.objects.Entity;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
+import com.revivedstandards.handlers.StandardHandler;
 import com.revivedstandards.handlers.StandardParticleHandler;
 import com.revivedstandards.main.StandardCamera;
+import com.revivedstandards.main.StandardDraw;
+import com.revivedstandards.model.DeathListener;
 import com.revivedstandards.model.StandardAnimation;
 import com.revivedstandards.model.StandardBoxParticle;
 import com.revivedstandards.model.StandardGameObject;
@@ -19,6 +22,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
+import org.apache.commons.math3.util.FastMath;
 
 /**
  * This class is a template for an enemy. Before, we had everything extending
@@ -29,7 +33,7 @@ import java.util.Collections;
  *
  * @author Joshua
  */
-public abstract class Enemy extends Entity {
+public abstract class Enemy extends Entity implements DeathListener {
 
     //  Miscellaneous reference variables.
     private final StandardCamera sc;
@@ -51,48 +55,106 @@ public abstract class Enemy extends Entity {
     private float deathTransparencyFactor;
     private float deathTransparency = 1.0f;
 
-    //  How much damage the enemy does when running into the player.
-    protected double damage;
+    //  One-time variable for tracking the "alive" to "death state" transition.
+    private boolean aliveFlag = true;
 
-    //  Initial health factor (mostly for bosses).
-    private int initialHealth;
+    //  Vector force factor (we may want to change this, but making it final for now).
+    private final int pushFactor = 2;
 
-    //  Alpha composition object for when the monster dies.
-    protected AlphaComposite deathTransparentComposite;
+    //  Determines how fast the monster approaches the player.
+    private final double APPROACH_VEL;
 
     //  Max amount of particles that can be summoned in the particle handler
     private static final int MAX_BLOOD_PARTICLES = 50;
     private static final int BLOOD_PARTICLES = 10;
 
-    //  Vector force factor
-    private int pushFactor = 2;
+    //  Handler for particle explosions after the monster dies.
+    protected StandardParticleHandler explosionHandler;
 
-    public Enemy (int _x, int _y, int _health, StandardID _id, Game _game, StandardCollisionHandler _sch) {
+    //  How much damage the enemy does when running into the player.
+    protected double damage;
+
+    //  Alpha composition object for when the monster dies.
+    protected AlphaComposite deathTransparentComposite;
+
+    //  Initial health factor (for changing difficulty).
+    public final int initialHealth;
+
+    public Enemy (int _x, int _y, double _approachVel, int _health, StandardID _id, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, _health, _id, _game, _sch);
-        this.initialHealth = _health;
         this.sc = this.getGame().getCamera();
+        this.initialHealth = _health;
+
+        this.APPROACH_VEL = _approachVel;
         this.bloodHandler = new StandardParticleHandler(MAX_BLOOD_PARTICLES);
         this.bloodHandler.setCamera(this.sc);
     }
 
     @Override
-    public void render (Graphics2D _g2) {
-        this.bloodHandler.render(_g2);
+    public void tick () {
+        this.bloodHandler.tick();
+
+        //  If the monster's health is less than 0, we can flag it as dead.
+        this.setAlive(this.getHealth() > 0);
+        this.getAnimationController().tick();
+        this.getAnimationController().getStandardAnimation().setRotation(this.getAngle());
+
+        if (this.isAlive()) {
+            this.updatePosition();
+            //  Save the target's position
+            double tx = this.getTarget().getX();
+            double ty = this.getTarget().getY();
+            //  Causes the monster to follow the target wherever on the screen
+            this.followPlayer((int) tx, (int) ty);
+            //  Calculates the angle the monster needs to be in to face the player
+            this.facePlayer((int) tx, (int) ty);
+        }
+        else {
+            //  Do this only once.
+            if (this.aliveFlag) {
+                this.uponDeath();
+                this.aliveFlag = false;
+            }
+            //  Creates the alpha composite object based off the object's current transparency.
+            this.updateComposite();
+            /**
+             * If the size of the exphandler (MAX_PARTICLES - dead ones) == 0,
+             * we can set this entity to be dead, and remove it from the
+             * handler.
+             */
+            if (this.explosionHandler.size() == 0 || this.getTransparency() <= 0) {
+                this.getHandler().removeEntity(this);
+            }
+            StandardHandler.Handler(this.explosionHandler);
+        }
     }
 
     @Override
-    public void tick () {
-        this.bloodHandler.tick();
-    }
+    public void render (Graphics2D _g2) {
+        this.bloodHandler.render(_g2);
 
-    /**
-     * Generates a random track to play when the monster is hurt. _sfxTrack
-     * should be a number between 1 and the number of sfx are available for that
-     * monster.
-     *
-     * @param _sfxTrack
-     */
-    public abstract void generateHurtSound (int _sfxTrack);
+        /**
+         * We need to save the old alpha composition, apply the new one, render,
+         * THEN set the old one back.
+         */
+        if (!this.isAlive() && this.explosionHandler != null) {
+            StandardDraw.Handler(this.explosionHandler);
+            /**
+             * If there is no death animation for a specific enemy, we just
+             * render the handler and continue until it's removed from the
+             * handler (because the exphandler is out of particles).
+             */
+            if (this.deathController != null) {
+                AlphaComposite oldComposite = (AlphaComposite) _g2.getComposite();
+                _g2.setComposite(this.deathTransparentComposite);
+                this.getAnimationController().renderFrame(_g2);
+                _g2.setComposite(oldComposite);
+            }
+        }
+        else {
+            this.getAnimationController().renderFrame(_g2);
+        }
+    }
 
     /**
      * Sets the dimensions of the enemy to the animation's current frame
@@ -126,6 +188,22 @@ public abstract class Enemy extends Entity {
                     this.getAngle(), ShapeType.CIRCLE, false));
         }
     }
+
+    /**
+     * Generates a random track to play when the monster is hurt. _sfxTrack
+     * should be a number between 1 and the number of sfx are available for that
+     * monster.
+     *
+     * @param _sfxTrack
+     */
+    public abstract void generateHurtSound (int _sfxTrack);
+
+    /**
+     * When the monster's health is below 0, this method is called by the
+     * subclass.
+     */
+    @Override
+    public abstract void uponDeath ();
 
     /**
      * Instantiates the walking animation controller.
@@ -210,6 +288,47 @@ public abstract class Enemy extends Entity {
         this.deathTransparency -= this.deathTransparencyFactor;
     }
 
+    /**
+     * Makes the monster move towards the player.
+     *
+     * @param _posX
+     * @param _posY
+     */
+    private void followPlayer (int _posX, int _posY) {
+
+        // Calculate the distance between the enemy and the player
+        double diffX = this.getX() - _posX - Entity.APPROACH_FACTOR;
+        double diffY = this.getY() - _posY - Entity.APPROACH_FACTOR;
+        // Use the pythagorean theorem to solve for the hypotenuse distance
+        double distance = (double) FastMath.sqrt(((this.getX() - _posX) * (this.getX() - _posX))
+                + ((this.getY() - _posY) * (this.getY() - _posY)));
+        // Sets the velocity according to how far away the enemy is from the player
+        this.setVelX(((this.APPROACH_VEL / distance) * (int) diffX));
+        this.setVelY(((this.APPROACH_VEL / distance) * (int) diffY));
+    }
+
+    /**
+     * Makes the monster face the player.
+     *
+     * @param _posX
+     * @param _posY
+     */
+    private void facePlayer (int _posX, int _posY) {
+        /**
+         * Calculates the angle using arctangent that the monster needs to face
+         * so they are angled towards the player.
+         */
+        float xSign = (float) FastMath.signum(_posX - this.getX());
+        double dx = FastMath.abs(_posX - this.getX());
+        double dy = FastMath.abs(_posY - this.getY());
+        this.setAngle((double) ((xSign) * (FastMath.atan((dx) / (dy)))));
+
+        // If we're in Q1 (+x, -+y) or in Q2 (-x, +y)
+        if ((_posX > this.getX() && _posY > this.getY()) || (_posX < this.getX() && _posY > this.getY())) {
+            this.setAngle((double) ((FastMath.PI / 2) + (FastMath.PI / 2 - this.getAngle())));
+        }
+    }
+
 //================================ GETTERS ===================================//
     public StandardAnimatorController getWalkingAnimation () {
         return this.walkingController;
@@ -249,6 +368,10 @@ public abstract class Enemy extends Entity {
 
     public int getInitialHealth () {
         return this.initialHealth;
+    }
+
+    public StandardParticleHandler getExplosionHandler () {
+        return this.explosionHandler;
     }
 
 //================================ SETTERS ===================================//

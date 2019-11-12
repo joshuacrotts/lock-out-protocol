@@ -9,9 +9,17 @@ import com.revivedstandards.model.StandardAudioType;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/12/19
  */
 public abstract class AudioBoxController {
 
+    /**
+     * Instantiates the amount of buffers that the controller should hold, along
+     * with the tracks that are used in the game.
+     *
+     * @param _buffers
+     */
     public static void initialize (int _buffers) {
         StandardAudioController.init(_buffers);
         StandardAudioController.load("src/resources/audio/music/menu.wav", 1, StandardAudioType.MUSIC);
@@ -40,12 +48,24 @@ public abstract class AudioBoxController {
         AudioBoxController.initGreenMonsterSFX(5);
     }
 
+    /**
+     * Initializes the basic monster sfx (these monsters have their own
+     * dedicated sfx).
+     *
+     * @param _sfxCount
+     */
     private static void initBasicMonsterSFX (int _sfxCount) {
         for (int i = 1 ; i < _sfxCount ; i++) {
             StandardAudioController.load("src/resources/audio/sfx/basic_monster/zombie-" + i + ".wav", 4, StandardAudioType.SFX);
         }
     }
 
+    /**
+     * Initializes the green monster sfx (these monsters have their own
+     * dedicated sfx).
+     *
+     * @param _sfxCount
+     */
     private static void initGreenMonsterSFX (int _sfxCount) {
         for (int i = 1 ; i < _sfxCount ; i++) {
             StandardAudioController.load("src/resources/audio/sfx/green_monster/pain" + i + ".wav", 4, StandardAudioType.SFX);

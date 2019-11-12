@@ -92,6 +92,5 @@ public final class StdConsole {
     }
 
     private StdConsole () {
-
     }
 }
