@@ -18,6 +18,8 @@ import com.dsd.game.Game;
  * player's health, etc. into a new game. The background of the wave/level/stage
  * is also saved.
  *
+ * [Group Name: Data Structure Deadheads]
+ *
  * @author Joshua, Ronald, Rinty
  */
 public class TranslatorDatabase {
@@ -27,7 +29,6 @@ public class TranslatorDatabase {
     private static SettingsDatabase settingsDatabase;
 
     public TranslatorDatabase (Game _game) {
-
         TranslatorDatabase.remoteDatabase = new PersistentDatabase(_game);
         TranslatorDatabase.settingsDatabase = new SettingsDatabase(_game);
     }
@@ -39,7 +40,6 @@ public class TranslatorDatabase {
      * @return true if the save to the database was successful, false otherwise.
      */
     public boolean saveToDatabase () {
-
         return TranslatorDatabase.remoteDatabase.save();
     }
 
@@ -51,7 +51,6 @@ public class TranslatorDatabase {
      * otherwise.
      */
     public boolean loadFromDatabase () {
-
         return TranslatorDatabase.remoteDatabase.load();
     }
 
@@ -62,7 +61,6 @@ public class TranslatorDatabase {
      * @return true if successful save, false otherwise.
      */
     public boolean saveToSettings () {
-
         return settingsDatabase.save();
     }
 
@@ -73,7 +71,6 @@ public class TranslatorDatabase {
      * @return true if successful load, false otherwise.
      */
     public boolean loadFromSettings () {
-
         return settingsDatabase.load();
     }
 
@@ -88,9 +85,7 @@ public class TranslatorDatabase {
      * @return
      */
     public static AccountStatus authenticateUser (String _email, String _password) {
-
         if (remoteDatabase.connect("users")) {
-
             return remoteDatabase.userAuthenticated(_email, _password);
         }
 
@@ -106,13 +101,10 @@ public class TranslatorDatabase {
      * @return
      */
     public static AccountStatus addUser (String _email, String _password) {
-
         if (remoteDatabase.connect("users")) {
-
             return remoteDatabase.addUser(_email, _password);
         }
 
         throw new IllegalStateException("Could not connect to db!");
     }
-
 }

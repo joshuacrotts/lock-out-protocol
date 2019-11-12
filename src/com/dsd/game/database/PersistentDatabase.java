@@ -25,23 +25,27 @@ import org.mindrot.jbcrypt.BCrypt;
  * contents from the game to a file, which will then be uploaded to a SQL
  * database.
  *
+ * [Group Name: Data Structure Deadheads]
+ *
  * @author Joshua, Ronald, Rinty
  */
 public class PersistentDatabase implements RemoteDatabase {
 
     private final Game game;
+
     //  Relative database information (depending on if it's local or not).
     private TranslatorDatabase translatorDatabase;
     private Connection remoteDBConnection;
+
     //  Unique ID for each user in the database.
     private String connectedUserID = "";
+
     //  SQL Database information.
     private static String IP_ADDRESS;
     private static String USERNAME;
     private static String PASSWORD;
 
     public PersistentDatabase (Game _game) {
-
         this.game = _game;
     }
 
@@ -50,7 +54,6 @@ public class PersistentDatabase implements RemoteDatabase {
      */
     @Override
     public boolean save () {
-
         String playerInfo = this.game.getPlayer().createObject(SerializableType.PLAYER);
         String inventoryInfo = this.game.getPlayer().getInventory().createObject(SerializableType.INVENTORY);
         String levelInfo = this.game.getLevelController().createObject(SerializableType.WAVE_INFO);
@@ -72,27 +75,23 @@ public class PersistentDatabase implements RemoteDatabase {
      * @param _playerData
      */
     private boolean uploadPlayerInfo (String[] _playerData) {
-
         PreparedStatement updatePlayerQuery = null;
 
         try {
-
             updatePlayerQuery = this.remoteDBConnection.prepareStatement(String.format("UPDATE user_accounts SET Sex = ?, PlayerX = ?, PlayerY = ?, Money = ?, Health = ? WHERE UUID = ? ;"));
 
             for (int i = 0 ; i < _playerData.length ; i++) {
-
                 updatePlayerQuery.setInt(i + 1, Integer.parseInt(_playerData[i]));
             }
 
             updatePlayerQuery.setString(_playerData.length + 1, this.connectedUserID);
             updatePlayerQuery.executeUpdate();
-        }
 
+        }
         catch (SQLException | NullPointerException ex) {
-            
+            System.out.println(ex);
             return false;
         }
-
         return true;
     }
 
@@ -102,27 +101,23 @@ public class PersistentDatabase implements RemoteDatabase {
      * @param _inventoryData
      */
     private boolean uploadInventoryInfo (String[] _inventoryData) {
-
         PreparedStatement updateInventoryQuery = null;
 
         try {
-
             updateInventoryQuery = this.remoteDBConnection.prepareStatement(String.format("UPDATE user_accounts SET Pistol = ?, PistolAmmo = ?, PistolTotalAmmo = ?, Rifle = ?, RifleAmmo = ?, RifleTotalAmmo = ?, FastRifle = ?, FastRifleAmmo = ?, FastRifleTotalAmmo = ?, Shotgun = ?, ShotgunAmmo = ?, ShotgunTotalAmmo = ?, GrenadeLauncher = ?, GrenadeLauncherAmmo = ?, GrenadeLauncherTotalAmmo = ?, Minigun = ?, MinigunAmmo = ?, MinigunTotalAmmo = ?, SuperShotgun = ?, SuperShotgunAmmo = ?, SuperShotgunTotalAmmo = ? WHERE UUID = ?;"));
 
             for (int i = 0 ; i < _inventoryData.length ; i++) {
-
                 updateInventoryQuery.setInt(i + 1, Integer.parseInt(_inventoryData[i]));
             }
 
             updateInventoryQuery.setString(_inventoryData.length + 1, this.connectedUserID);
             updateInventoryQuery.executeUpdate();
         }
-
         catch (SQLException | NullPointerException ex) {
+            System.out.println(ex);
 
             return false;
         }
-
         return true;
     }
 
@@ -132,27 +127,23 @@ public class PersistentDatabase implements RemoteDatabase {
      * @param _levelData
      */
     private boolean uploadLevelInfo (String[] _levelData) {
-
         PreparedStatement updateLevelQuery = null;
 
         try {
-
             updateLevelQuery = this.remoteDBConnection.prepareStatement(String.format("UPDATE user_accounts SET LevelID = ?, Wave = ? WHERE UUID = ?;"));
 
             for (int i = 0 ; i < _levelData.length ; i++) {
-
                 updateLevelQuery.setInt(i + 1, Integer.parseInt(_levelData[i]));
             }
 
             updateLevelQuery.setString(_levelData.length + 1, this.connectedUserID);
             updateLevelQuery.executeUpdate();
         }
-
         catch (SQLException | NullPointerException ex) {
+            System.out.println(ex);
 
             return false;
         }
-
         return true;
     }
 
@@ -162,23 +153,21 @@ public class PersistentDatabase implements RemoteDatabase {
      * @param _levelData
      */
     private boolean uploadWaveInfo (String[] _waveInfo) {
-
         PreparedStatement updateLevelQuery = null;
 
         try {
-
             updateLevelQuery = this.remoteDBConnection.prepareStatement(String.format("UPDATE user_accounts SET LevelTransitionTimer = ?, DifficultyFactor = ? WHERE UUID = ?;"));
             updateLevelQuery.setInt(1, Integer.parseInt(_waveInfo[0]));
             updateLevelQuery.setDouble(2, Double.parseDouble(_waveInfo[1]));
             updateLevelQuery.setString(_waveInfo.length + 1, this.connectedUserID);
+
             updateLevelQuery.executeUpdate();
         }
-
         catch (SQLException | NullPointerException ex) {
+            System.out.println(ex);
 
             return false;
         }
-
         return true;
     }
 
@@ -187,22 +176,20 @@ public class PersistentDatabase implements RemoteDatabase {
      * file or not).
      */
     private boolean uploadGameInfo () {
-
         PreparedStatement updateLevelQuery = null;
 
         try {
-
             updateLevelQuery = this.remoteDBConnection.prepareStatement(String.format("UPDATE user_accounts SET SavedGame = ? WHERE UUID = ?;"));
             updateLevelQuery.setInt(1, 1);
             updateLevelQuery.setString(2, this.connectedUserID);
+
             updateLevelQuery.executeUpdate();
         }
-
         catch (SQLException | NullPointerException ex) {
+            System.out.println(ex);
 
             return false;
         }
-
         return true;
     }
 
@@ -214,11 +201,9 @@ public class PersistentDatabase implements RemoteDatabase {
      */
     @Override
     public boolean load () {
-
         PreparedStatement playerStatsQuery = null;
 
         try {
-
             //  Perform the query to retrieve the information about the player
             //  and their inventory from the SQL db.
             playerStatsQuery = this.remoteDBConnection.prepareStatement(String.format("SELECT SavedGame, Sex, PlayerX, PlayerY, Money, Health, Pistol, PistolAmmo, PistolTotalAmmo, Rifle, RifleAmmo, RifleTotalAmmo, FastRifle, FastRifleAmmo, FastRifleTotalAmmo, Shotgun, ShotgunAmmo, ShotgunTotalAmmo, GrenadeLauncher, GrenadeLauncherAmmo, GrenadeLauncherTotalAmmo, Minigun, MinigunAmmo, MinigunTotalAmmo,SuperShotgun, SuperShotgunAmmo, SuperShotgunTotalAmmo, LevelID, Wave, LevelTransitionTimer, DifficultyFactor FROM user_accounts WHERE UUID = ?;"));
@@ -228,7 +213,6 @@ public class PersistentDatabase implements RemoteDatabase {
 
             //  If there is no information OR there is no saved game present, return false.
             if (!playerStatsSet.next() || playerStatsSet.getInt("SavedGame") == 0) {
-
                 return false;
             }
 
@@ -249,16 +233,13 @@ public class PersistentDatabase implements RemoteDatabase {
 
             //  Load in the player data from the Result Set
             for (int i = 2 ; i <= PLAYER_AMT ; i++) {
-
                 playerInfo.put(playerStatsMetadata.getColumnName(i), (double) playerStatsSet.getInt(i));
             }
 
             //  Load in the inventory data from the Result set
             for (int j = PLAYER_AMT + 1 ; j <= INVENTORY_AMT + PLAYER_AMT ; j++) {
-
                 inventoryInfo.add(playerStatsSet.getInt(j));
             }
-
             //  Load in the player statistics.
             this.game.getPlayer().readObject(playerInfo);
             //  Load the weapon statistics.
@@ -270,13 +251,10 @@ public class PersistentDatabase implements RemoteDatabase {
             this.game.getDifficultyController().readObject(playerStatsSet.getInt(PLAYER_AMT + INVENTORY_AMT + 3),
                     playerStatsSet.getInt(PLAYER_AMT + INVENTORY_AMT + 4));
         }
-
         catch (SQLException | NullPointerException ex) {
-
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-
         return true;
     }
 
@@ -288,7 +266,6 @@ public class PersistentDatabase implements RemoteDatabase {
      */
     @Override
     public boolean connect (String _dbName) {
-
         //  Database name (db name in remote sql).
         String instanceID = _dbName;
 
@@ -296,18 +273,13 @@ public class PersistentDatabase implements RemoteDatabase {
         this.loadDatabaseCreds();
 
         String url = String.format("jdbc:mysql://%s:3306/%s", IP_ADDRESS, instanceID);
-
         try {
-
             this.remoteDBConnection = DriverManager.getConnection(url, USERNAME, PASSWORD);
         }
-
         catch (SQLException ex) {
-
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-
         return true;
     }
 
@@ -323,25 +295,18 @@ public class PersistentDatabase implements RemoteDatabase {
      */
     @Override
     public AccountStatus userAuthenticated (String _email, String _password) {
-
         try {
-
             //  Verify the email
             if (!this.userEmailInDatabase(_email)) {
-
                 return AccountStatus.DOES_NOT_EXIST;
-            }
-            //  Verify the email AND the password.
+            } //  Verify the email AND the password.
             else if (!this.userInDatabase(_email, _password)) {
-
                 return AccountStatus.INCORRECT_PASS;
             }
 
             this.connectedUserID = null;
         }
-
         catch (SQLException ex) {
-
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -358,34 +323,25 @@ public class PersistentDatabase implements RemoteDatabase {
      * @return
      */
     private String getUserID (String _email) {
-
         try {
-
             PreparedStatement idStatement = null;
             ResultSet idSet = null;
 
             //  Finds the UUID for the respective email.
             try {
-
                 idStatement = this.remoteDBConnection.prepareStatement(String.format("SELECT UUID FROM user_accounts WHERE Email = ?;"));
                 idStatement.setString(1, _email);
                 idSet = idStatement.executeQuery();
             }
-
             catch (SQLException ex) {
-
                 Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             if (idSet.next()) {
-
                 return idSet.getString(1);
             }
-
         }
-
         catch (SQLException ex) {
-
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -401,18 +357,12 @@ public class PersistentDatabase implements RemoteDatabase {
      */
     @Override
     public AccountStatus addUser (String _email, String _password) {
-
         PreparedStatement insertStatement = null;
-
         try {
-
             if (this.userInDatabase(_email, _password)) {
-
                 return AccountStatus.EXISTS;
             }
-
             else {
-
                 String hashed = BCrypt.hashpw(_password, BCrypt.gensalt());
 
                 //  Very, VERY long statement to update the user.
@@ -424,12 +374,9 @@ public class PersistentDatabase implements RemoteDatabase {
             }
 
         }
-
         catch (SQLException ex) {
-
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return null;
     }
 
@@ -444,7 +391,6 @@ public class PersistentDatabase implements RemoteDatabase {
      * @throws SQLException
      */
     private boolean userInDatabase (String _email, String _password) throws SQLException {
-
         return this.isValidPassword(_email, _password);
     }
 
@@ -456,7 +402,6 @@ public class PersistentDatabase implements RemoteDatabase {
      * @throws SQLException
      */
     private boolean userEmailInDatabase (String _email) throws SQLException {
-
         PreparedStatement insertStatement = this.remoteDBConnection.prepareStatement(String.format("SELECT * FROM user_accounts WHERE Email = ?;"));
         insertStatement.setString(1, _email);
         ResultSet resultQuery = insertStatement.executeQuery();
@@ -475,7 +420,6 @@ public class PersistentDatabase implements RemoteDatabase {
      * @throws SQLException
      */
     private boolean isValidPassword (String _email, String _password) throws SQLException {
-
         //  Returns the salted and hashed pswd with the associated email.
         PreparedStatement insertStatement = this.remoteDBConnection.prepareStatement(String.format("SELECT Password FROM user_accounts WHERE Email = ?;"));
         insertStatement.setString(1, _email);
@@ -483,28 +427,21 @@ public class PersistentDatabase implements RemoteDatabase {
 
         //  If we have a result query value, then we check the password against the hashed pswd.
         if (resultQuery.next()) {
-
             return BCrypt.checkpw(_password, resultQuery.getString("Password"));
         }
-
         return false;
     }
 
     /**
-     * Generates the necessary class name to get the MySQL java driver working.
+     * Generates the necessary classname to get the MySQL java driver working.
      */
     private void generateClassName () {
-
         try {
-
             Class.forName("com.mysql.jdbc.Driver");
         }
-
         catch (ClassNotFoundException ex) {
-
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     /**
@@ -512,34 +449,28 @@ public class PersistentDatabase implements RemoteDatabase {
      * password.
      */
     private void loadDatabaseCreds () {
-
         try {
-
             BufferedReader databaseFile = null;
 
             try {
-
                 databaseFile = new BufferedReader(new FileReader("src/.config/.database_info.txt"));
             }
-
             catch (FileNotFoundException ex) {
-
                 Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             String ip = databaseFile.readLine();
             PersistentDatabase.IP_ADDRESS = ip.substring(ip.indexOf("=") + 1);
+
             String user = databaseFile.readLine();
             PersistentDatabase.USERNAME = user.substring(user.indexOf("=") + 1);
+
             String pswd = databaseFile.readLine();
             PersistentDatabase.PASSWORD = pswd.substring(pswd.indexOf("=") + 1);
+
         }
-
         catch (IOException ex) {
-
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
-
 }

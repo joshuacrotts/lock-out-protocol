@@ -14,6 +14,8 @@ import java.awt.Graphics2D;
  *
  * The user can add new elements if desired.
  *
+ * [Group Name: Data Structure Deadheads]
+ *
  * @author Joshua, Ronald, Rinty
  */
 public abstract class Screen implements Renderable, Updatable {
@@ -33,7 +35,6 @@ public abstract class Screen implements Renderable, Updatable {
     public static int gameHeight;
 
     public Screen (Game _game) {
-        
         Screen.game = _game;
         this.sih = new StandardInteractorHandler(Screen.game);
         this.addUIElementsAsListeners();
@@ -42,13 +43,11 @@ public abstract class Screen implements Renderable, Updatable {
 
     @Override
     public void tick () {
-        
         StandardHandler.Handler(this.sih);
     }
 
     @Override
     public void render (Graphics2D _g2) {
-        
         StandardDraw.Handler(this.sih);
     }
 
@@ -58,7 +57,6 @@ public abstract class Screen implements Renderable, Updatable {
      * @param _interactor
      */
     public void addInteractor (Interactor _interactor) {
-        
         this.sih.addInteractor(_interactor);
     }
 
@@ -67,7 +65,6 @@ public abstract class Screen implements Renderable, Updatable {
      * the StandardGame.
      */
     private void addUIElementsAsListeners () {
-        
         Screen.game.addMouseListener(this.sih);
         Screen.game.addMouseMotionListener(this.sih);
     }
@@ -76,7 +73,6 @@ public abstract class Screen implements Renderable, Updatable {
      * Sets the game dimensions
      */
     public static void setGameDimensions () {
-        
         gameWidth = game.getGameWidth();
         gameHeight = game.getGameHeight();
         gameHalfWidth = game.getGameWidth() >> 1;
@@ -87,10 +83,8 @@ public abstract class Screen implements Renderable, Updatable {
         gameFourthHeight = game.getGameHeight() >> 2;
     }
 
-//============================ GETTERS =================================
+//============================ GETTERS =================================//
     public Game getGame () {
-        
         return Screen.game;
     }
-    
 }

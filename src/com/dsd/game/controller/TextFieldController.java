@@ -14,6 +14,7 @@ public class TextFieldController {
 
     //  ArrayList of text fields
     public static ArrayList<TextFieldModel> textFieldController = new ArrayList<>();
+
     //  The selected text field index in the arraylist.
     private static int selectedTextField = -1;
 
@@ -23,18 +24,12 @@ public class TextFieldController {
      * @param _field
      */
     public static void deactivate (TextFieldModel _field) {
-
         for (int i = 0 ; i < textFieldController.size() ; i++) {
-
             TextFieldModel otherModel = textFieldController.get(i);
-
             if (otherModel.isActive() && otherModel != _field) {
-
                 otherModel.setActive(false);
             }
-
         }
-
     }
 
     /**
@@ -43,7 +38,6 @@ public class TextFieldController {
      * @param _model
      */
     public static void addField (TextFieldModel _model) {
-
         textFieldController.add(_model);
     }
 
@@ -51,20 +45,15 @@ public class TextFieldController {
      * Increments the pointer that determines which text field is "highlighted".
      */
     public static void incrementSelectedTextField () {
-
         if (TextFieldController.selectedTextField + 1 >= TextFieldController.textFieldController.size()) {
-
             TextFieldController.selectedTextField = 0;
         }
-
         else {
-
             TextFieldController.selectedTextField++;
         }
-
         TextFieldModel selectedField = TextFieldController.textFieldController.get(selectedTextField);
         selectedField.setActive(true);
         TextFieldController.deactivate(selectedField);
-    }
 
+    }
 }

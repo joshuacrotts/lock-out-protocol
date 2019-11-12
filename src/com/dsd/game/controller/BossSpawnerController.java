@@ -18,6 +18,7 @@ public class BossSpawnerController extends StandardGameObject {
 
     //  Miscellaneous reference variables
     private final StandardCollisionHandler parentContainer;
+
     //  Determines which boss to spawn.
     private final EnemyType spawnerID;
     private final Game game;
@@ -38,13 +39,11 @@ public class BossSpawnerController extends StandardGameObject {
         //  Depending on what type of spawner we have, we spawn that type of monster.
         //  Eventually we will probably want to use reflection classes to make this easier/cleaner.
         switch (this.spawnerID) {
-
             case FEMALE_BOSS_MONSTER:
                 enemy = new FemaleMonsterBoss(xPos, yPos, this.game, this.parentContainer);
                 this.game.getHUDScreen().addInteractor(new BossHealthBar(game, enemy));
                 break;
         }
-
         this.parentContainer.addEntity(enemy);
     }
 

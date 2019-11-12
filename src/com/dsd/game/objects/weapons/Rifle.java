@@ -12,6 +12,8 @@ import com.revivedstandards.model.StandardAnimation;
 /**
  * This class is a subclass of Gun; it's an automatic rifle.
  *
+ * [Group Name: Data Structure Deadheads]
+ *
  * @author Joshua, Ronald, Rinty
  */
 public class Rifle extends Gun {
@@ -19,8 +21,10 @@ public class Rifle extends Gun {
     //  FPS variables for how fast the rifle frames animate.
     private static final int WALKING_FPS = 10;
     private static final int SHOOT_GUN_FPS = 20;
+
     //  Delay between shooting one bullet and the next (in ms).
     private final int DELAY = 100;
+
     //  Damage from the rifle.
     private static final int BULLET_DAMAGE = 25;
 
@@ -31,11 +35,11 @@ public class Rifle extends Gun {
         this.loadAssets(_player);
         super.setDelay(DELAY);
         super.loadCasingImages(14);
+
     }
 
     @Override
     public void shoot () {
-        
         this.addBullet();
         super.deductAmmo();
     }
@@ -44,7 +48,6 @@ public class Rifle extends Gun {
      * Adds a bullet to the global handler.
      */
     private void addBullet () {
-        
         super.getHandler().addEntity(new BulletGameObject(
                 (int) super.getPlayer().getX() + super.getPlayer().getWidth() / 2,
                 (int) super.getPlayer().getY() + super.getPlayer().getHeight() / 2,
@@ -54,7 +57,6 @@ public class Rifle extends Gun {
 
     @Override
     public void loadAssets (Player _player) {
-        
         //  Instantiates the animation controllers.
         StandardAnimatorController walkingAnimation = new StandardAnimatorController(
                 new StandardAnimation(_player, Utilities.loadFrames("src/resources/img/player/player_"
@@ -65,5 +67,4 @@ public class Rifle extends Gun {
         super.setWalkFrames(walkingAnimation);
         super.setAttackFrames(shootingAnimation);
     }
-    
 }

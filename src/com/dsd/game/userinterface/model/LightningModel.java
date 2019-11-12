@@ -15,7 +15,7 @@ import org.apache.commons.math3.util.Pair;
  * This class represents a simple lightning effect; it uses an array of line
  * segments to draw the shape.
  *
- * @author Joshua, Ronald, Rinty
+ * @author Joshua
  */
 public class LightningModel extends Interactor {
 
@@ -27,35 +27,25 @@ public class LightningModel extends Interactor {
     private final int Y_VARIABILITY = 3;
 
     public LightningModel (Game _game) {
-        
         this.game = _game;
         this.camera = this.game.getCamera();
     }
 
     @Override
     public void tick () {
-        
         this.updateLightningPos();
     }
 
     @Override
     public void render (Graphics2D _g2) {
-        
         _g2.setColor(StandardDraw.BLUE_CRAYOLA);
-        
         if (this.lightningLines != null) {
-            
             for (Line2D line : lightningLines) {
-                
                 if (line != null) {
-                    
                     _g2.draw(line);
                 }
-                
             }
-            
         }
-        
     }
 
     @Override
@@ -81,13 +71,11 @@ public class LightningModel extends Interactor {
         this.lightningLines = new Line2D[lightningPoints.size()];
 
         for (int i = 0 ; i < this.lightningLines.length - 1 ; i++) {
-            
             Pair<Integer, Integer> coordOne = lightningPoints.get(i);
             Pair<Integer, Integer> coordTwo = lightningPoints.get(i + 1);
             this.lightningLines[i] = new Line2D.Double(coordOne.getFirst(), coordOne.getSecond(),
                     coordTwo.getFirst(), coordTwo.getSecond());
         }
-        
     }
 
     /**
@@ -96,24 +84,19 @@ public class LightningModel extends Interactor {
      * @return
      */
     private List<Pair<Integer, Integer>> generatePoints () {
-        
         List<Pair<Integer, Integer>> boltPositions = new ArrayList<>();
         int prevXPos = (int) (this.camera.getX() - Screen.gameHalfWidth);
         int prevYPos = (int) StdOps.rand(this.camera.getY() - Y_VARIABILITY, this.camera.getY() + Y_VARIABILITY);
         //  Add initial pair
         boltPositions.add(new Pair(prevXPos, prevYPos));
-        
         //  While the bolt still hasn't reached the edge of the screen
         while (prevXPos < this.camera.getX() + Screen.gameHalfWidth) {
-            
             int deltaX = StdOps.rand(MIN_X_VARIABILITY, MAX_X_VARIABILITY);
             int deltaY = StdOps.rand(-Y_VARIABILITY, Y_VARIABILITY);
             prevXPos += deltaX;
             prevYPos += deltaY;
             boltPositions.add(new Pair(prevXPos, prevYPos));
         }
-        
         return boltPositions;
     }
-    
 }

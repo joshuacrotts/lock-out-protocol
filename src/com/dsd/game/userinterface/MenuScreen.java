@@ -35,19 +35,21 @@ import java.util.Stack;
  * MenuScreen controller. Decides what gets rendered when on the screen for when
  * the game is in the Menu state.
  *
+ * [Group Name: Data Structure Deadheads]
+ *
  * @author Joshua, Ronald, Rinty
  */
 public class MenuScreen extends Screen {
 
     private MenuState menuState;
     private final Stack<MenuState> menuStateStack;
+
     private MenuView menuView;
     private ResolutionView changeResView;
     private LanguageChangeView changeLanguageView;
     private AudioView changeAudioView;
 
     public MenuScreen (Game _game) {
-        
         super(_game);
         this.menuView = new MenuView(_game, this);
         this.menuState = MenuState.MAIN;
@@ -61,67 +63,51 @@ public class MenuScreen extends Screen {
 
     @Override
     public void tick () {
-        
         if (this.getGame().isInGameState()) {
-            
             return;
         }
-        
         this.menuView.tick();
+
         super.tick();
 
         if (this.isOnResolution()) {
-            
             this.changeResView.tick();
         }
-        
         else if (this.isOnLanguages()) {
-            
             this.changeLanguageView.tick();
         }
-        
     }
 
     @Override
     public void render (Graphics2D _g2) {
-        
         if (this.getGame().isInGameState()) {
-            
             return;
         }
-        
         this.menuView.render(_g2);
+
         super.render(_g2);
 
         if (this.isOnResolution()) {
-            
             this.changeResView.render(_g2);
         }
-        
         else if (this.isOnLanguages()) {
-            
             this.changeLanguageView.render(_g2);
         }
-        
     }
 
     public void stopMenuMusic () {
-        
         StandardAudioController.stop("src/resources/audio/music/menu.wav", StandardAudioType.SFX);
     }
 
     public MenuState popMenuStack () {
-        
         return this.menuStateStack.pop();
     }
 
     public void pushMenuStack (MenuState _state) {
-        
         this.menuStateStack.push(_state);
     }
 
     public void loadMenuBackground () {
-        
         this.menuView.loadBackgroundImage();
     }
 
@@ -130,7 +116,6 @@ public class MenuScreen extends Screen {
      * the user is in the menu state.
      */
     private void createUIElements () {
-        
         this.initializeMainMenuButtons();
         this.initializeDifficultyButtons();
         this.initializeAccountButtons();
@@ -141,7 +126,6 @@ public class MenuScreen extends Screen {
      * Instantiates the buttons that are on the MainMenu screen.
      */
     private void initializeMainMenuButtons () {
-        
         //  Instantiates the play button
         super.addInteractor(new PlayButton(this.getGame(), this));
         //  Instantiates the exit button
@@ -164,7 +148,6 @@ public class MenuScreen extends Screen {
      * Initializes the three difficulty buttons.
      */
     private void initializeDifficultyButtons () {
-        
         super.addInteractor(new EasyButton(this.getGame(), this));
         super.addInteractor(new MediumButton(this.getGame(), this));
         super.addInteractor(new HardButton(this.getGame(), this));
@@ -175,7 +158,6 @@ public class MenuScreen extends Screen {
      * Initializes the sub-options menu buttons.
      */
     private void initializeOptionsButtons () {
-        
         super.addInteractor(new ResolutionMenuButton(this.getGame(), this));
         super.addInteractor(new VolumeControlButton(this.getGame(), this));
         super.addInteractor(new AudioMenuButton(this.getGame(), this));
@@ -186,7 +168,6 @@ public class MenuScreen extends Screen {
      * Initializes the buttons located on the Account status submenu.
      */
     private void initializeAccountButtons () {
-        
         EmailTextFieldModel emailModel = new EmailTextFieldModel(Screen.gameHalfWidth, Screen.gameFourthHeight, this.getGame(), this);
         PasswordTextFieldModel pswdModel = new PasswordTextFieldModel(Screen.gameHalfWidth, Screen.gameHalfHeight, this.getGame(), this);
         super.addInteractor(emailModel);
@@ -201,55 +182,45 @@ public class MenuScreen extends Screen {
      * instantiate them.
      */
     private void createUIScreens () {
-        
         this.changeResView = new ResolutionView(this.getGame(), this);
         this.changeLanguageView = new LanguageChangeView(this.getGame(), this);
         this.changeAudioView = new AudioView(this.getGame(), this);
     }
 
-//================================ GETTERS ===============================
+//====================== GETTERS ===============================//
     public boolean isOnMainMenu () {
-        
         return this.menuState == MenuState.MAIN || this.menuStateStack.isEmpty();
     }
 
     public boolean isOnDifficulty () {
-        
         return this.menuState == MenuState.DIFFICULTY;
     }
 
     public boolean isOnAccountScreen () {
-        
         return this.menuState == MenuState.LOGIN;
     }
 
     public boolean isOnOptions () {
-        
         return this.menuState == MenuState.OPTIONS;
     }
 
     public boolean isOnResolution () {
-        
         return this.menuState == MenuState.RESOLUTION;
     }
 
     public boolean isOnVolume () {
-        
         return this.menuState == MenuState.VOLUME;
     }
 
     public boolean isOnPlayerGender () {
-        
         return this.menuState == MenuState.PLAYER_GENDER;
     }
 
     public boolean isOnAudio () {
-        
         return this.menuState == MenuState.AUDIO;
     }
 
     public boolean isOnLanguages () {
-        
         return this.menuState == MenuState.LANGUAGES;
     }
 
@@ -257,10 +228,8 @@ public class MenuScreen extends Screen {
         return this.menuState;
     }
 
-//====================== SETTERS ===============================
+//====================== SETTERS ===============================//
     public void setMenuState (MenuState _menuState) {
-        
         this.menuState = _menuState;
     }
-    
 }

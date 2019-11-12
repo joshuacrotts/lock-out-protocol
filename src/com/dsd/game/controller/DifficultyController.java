@@ -11,15 +11,17 @@ import com.dsd.game.enemies.GreenMonster;
  * Controller to determine how strong the enemies are as a collective group, how
  * fast the rounds go, and how many spawners are placed.
  *
- * @author Joshua, Ronald, Rinty
+ * @author Joshua
  */
 public class DifficultyController implements SerializableObject {
 
     //  Miscellaneous reference variables
     private final Game game;
     public static DifficultyType difficultyType;
+
     //  How many spawners are currently defined.
     private static int spawnerAmount = 0;
+
     //  Difficulty factor, spawn rates of enemies, and other timer vars.
     public static float difficultyFactor;
     public static float basicMonsterSpawnRate = 1.0f;
@@ -28,7 +30,6 @@ public class DifficultyController implements SerializableObject {
     private static final int LEVEL_TRANS_LIMIT = 20000;
 
     public DifficultyController (Game _game) {
-
         this.game = _game;
     }
 
@@ -36,7 +37,6 @@ public class DifficultyController implements SerializableObject {
      * Increases the amount of spawners that are currently in the level.
      */
     public static void incrementSpawnerAmount () {
-
         DifficultyController.spawnerAmount++;
     }
 
@@ -46,14 +46,11 @@ public class DifficultyController implements SerializableObject {
      * transition, and how much health the mobs continue to gain overtime.
      */
     public static void setDifficultyFactor () {
-
         if (DifficultyController.difficultyType == null) {
-
             return;
         }
 
         switch (DifficultyController.difficultyType) {
-
             case EASY:
                 DifficultyController.difficultyFactor = 1f;
                 break;
@@ -64,7 +61,6 @@ public class DifficultyController implements SerializableObject {
                 DifficultyController.difficultyFactor = 1.25f;
                 break;
         }
-
     }
 
     /**
@@ -73,12 +69,9 @@ public class DifficultyController implements SerializableObject {
      * quicker until the plateau is hit (LEVEL_TRANS_LIMIT).
      */
     public static void setLevelTransitionTimer () {
-
         if (levelTransitionTimer <= LEVEL_TRANS_LIMIT) {
-
             return;
         }
-
         levelTransitionTimer *= (2 - difficultyFactor);
     }
 
@@ -87,7 +80,6 @@ public class DifficultyController implements SerializableObject {
      * from within a game (if they quit and start a brand-new game).
      */
     public static void resetDifficultyFactors () {
-
         DifficultyController.levelTransitionTimer = 50000;
         DifficultyController.difficultyFactor = 1.0f;
         DifficultyController.basicMonsterSpawnRate = 1.0f;
@@ -111,17 +103,14 @@ public class DifficultyController implements SerializableObject {
      * @param _difficultyFactor
      */
     protected static void setDifficultyFactors (int _levelTransitionTimer, float _difficultyFactor) {
-
         DifficultyController.levelTransitionTimer = _levelTransitionTimer;
         DifficultyController.difficultyFactor = _difficultyFactor;
     }
 
-//============================= CRUD OPERATIONS ===============================
+//============================= CRUD OPERATIONS ===============================//
     @Override
     public String createObject (SerializableType _id) {
-
         if (_id != SerializableType.LEVEL) {
-
             return null;
         }
 
@@ -132,19 +121,16 @@ public class DifficultyController implements SerializableObject {
     }
 
     public void readObject (int _levelTransitionTimer, double _difficultyType) {
-
         DifficultyController.setDifficultyFactors(_levelTransitionTimer, (float) _difficultyType);
     }
 
     @Override
     public void destroyObject (SerializableType _obj) {
-
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void updateObject (SerializableType _obj) {
-
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

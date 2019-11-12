@@ -20,40 +20,30 @@ public class LightningHandler {
     private final int LIGHTNING_SFX = 3;
 
     public LightningHandler () {
-        
         this.lightningFlashes = new ArrayList<>();
     }
 
     public void tick () {
-        
         for (int i = 0 ; i < this.lightningFlashes.size() ; i++) {
-            
             this.lightningFlashes.get(i).tick();
         }
-        
     }
 
     public void render (Graphics2D _g2) {
-        
         for (int i = 0 ; i < this.lightningFlashes.size() ; i++) {
-            
             this.lightningFlashes.get(i).render(_g2);
         }
-        
     }
 
     /**
      * Plays a random lightning/thunder sfx.
      */
     public void playLightningSFX () {
-        
         StandardAudioController.play("src/resources/audio/sfx/thunder"
                 + (int) (Math.random() * LIGHTNING_SFX) + ".wav", StandardAudioType.SFX);
     }
 
     public ArrayList<LightningFlash> getHandler () {
-        
         return this.lightningFlashes;
     }
-    
 }

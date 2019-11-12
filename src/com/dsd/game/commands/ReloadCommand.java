@@ -16,6 +16,8 @@ import java.util.TimerTask;
 /**
  * Command representing when the user shoots their weapon.
  *
+ * [Group Name: Data Structure Deadheads]
+ *
  * @author Joshua, Ronald, Rinty
  */
 public class ReloadCommand extends Command implements TimerInterface {
@@ -24,13 +26,13 @@ public class ReloadCommand extends Command implements TimerInterface {
     private final Game game;
     private final Player player;
     private Timer reloadTimer;
+
     //  How long the timer should wait before letting the player fire after
     //  reloading their gun.
     private final int RELOAD_DELAY = 3000;
 
     //  This may need to change with time.
     public ReloadCommand (Game _game, Player _obj) {
-
         this.game = _game;
         this.player = _obj;
         this.bind(_game.getKeyboard(), KeyEvent.VK_R);
@@ -40,23 +42,19 @@ public class ReloadCommand extends Command implements TimerInterface {
 
     @Override
     public void cancelTimer () {
-
         this.reloadTimer.cancel();
     }
 
     @Override
     public void pressed (float _dt) {
-
         //  No point in trying to reload if they have a melee weapon.
         if (!this.player.getInventory().hasGun()) {
-
             return;
         }
 
         Gun gun = this.player.getInventory().getGun();
 
         if (!gun.hasAmmo() || gun.hasFullAmmo()) {
-
             return;
         }
 
@@ -84,17 +82,13 @@ public class ReloadCommand extends Command implements TimerInterface {
         private final Gun weapon;
 
         public ReloadTimer (Gun _weapon) {
-
             this.weapon = _weapon;
         }
 
         @Override
         public void run () {
-
             this.weapon.reload();
             this.weapon.setReloading(false);
         }
-
     }
-
 }

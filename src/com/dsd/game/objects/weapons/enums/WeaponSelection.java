@@ -14,14 +14,11 @@ public enum WeaponSelection {
     private final int change;
 
     private WeaponSelection (int change) {
-        
         this.change = change;
     }
 
-//================= GETTERS ============================
+//================= GETTERS ============================//
     public int getChange () {
-        
         return this.change;
     }
-    
 }

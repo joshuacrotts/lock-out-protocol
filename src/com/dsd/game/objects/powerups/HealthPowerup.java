@@ -17,18 +17,18 @@ import java.awt.image.BufferedImage;
  * Health object for when the player is damaged, they can pick it up and restore
  * some health.
  *
- * @author Joshua, Ronald, Rinty
+ * @author Joshua
  */
 public class HealthPowerup extends StandardGameObject implements Powerup {
 
     private final Player player;
     private final StandardCollisionHandler parentContainer;
     private static final BufferedImage[] HEALTH_FRAMES;
+
     private static final int HEALTH_FPS = 10;
     private static final int HEALTH_INCREASE = 25;
 
     public HealthPowerup (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
-        
         super(_x, _y, StandardID.Powerup);
         this.player = _game.getPlayer();
         this.parentContainer = _sch;
@@ -40,28 +40,20 @@ public class HealthPowerup extends StandardGameObject implements Powerup {
 
     @Override
     public void tick () {
-        
         if (this.isAlive()) {
-            
             this.getAnimationController().tick();
         }
-        
         else {
-            
             StandardAudioController.play("src/resources/audio/sfx/restore_health.wav", StandardAudioType.SFX);
             this.parentContainer.removeEntity(this);
         }
-        
     }
 
     @Override
     public void render (Graphics2D _g2) {
-        
         if (this.isAlive()) {
-            
             this.getAnimationController().renderFrame(_g2);
         }
-        
     }
 
     public void activate () {
@@ -73,7 +65,6 @@ public class HealthPowerup extends StandardGameObject implements Powerup {
      * to 200.
      */
     public void addHealth () {
-        
         int pHealth = (int) (this.player.getHealth() + HEALTH_INCREASE);
         pHealth = Utilities.clamp(pHealth, 0, this.player.getMaxHealth());
         this.player.setHealth(pHealth);
@@ -81,8 +72,6 @@ public class HealthPowerup extends StandardGameObject implements Powerup {
 
     //static value
     static {
-        
         HEALTH_FRAMES = Utilities.loadFrames("src/resources/img/items/drops/health/", 22);
     }
-    
 }

@@ -28,6 +28,8 @@ import org.apache.commons.math3.util.FastMath;
 /**
  * Monster entity; follows the player around and (eventually) drains his health.
  *
+ * [Group Name: Data Structure Deadheads]
+ *
  * @author Joshua, Ronald, Rinty
  */
 public class FemaleMonsterBoss extends Enemy implements DeathListener {
@@ -64,26 +66,31 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
 
     //  AlphaComposite factor for when the FemaleMonsterBoss dies.
     private static final float DEATH_ALPHA_FACTOR = 0.001f;
+
     //  Health factor for this FemaleMonsterBoss object.
     public static int originalHealth = 500;
 
-    public FemaleMonsterBoss(int _x, int _y, Game _game, StandardCollisionHandler _sch) {
-
+    public FemaleMonsterBoss (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, FemaleMonsterBoss.originalHealth, StandardID.Monster4, _game, _sch);
         this.setTarget(_game.getPlayer());
+
         //  Randomly generates the walking frames per second for variability
         this.walkingFPS = StdOps.rand(this.WALKING_FPS_MIN, this.WALKING_FPS_MAX);
+
         //  Sets the walking/death frames for this monster.
         super.initWalkingFrames(FemaleMonsterBoss.WALK_FRAMES, this.walkingFPS);
         super.initDeathFrames(FemaleMonsterBoss.DEATH_FRAMES, FemaleMonsterBoss.DEATH_FPS, 13);
+
         //  Sets the default animation.
         super.setAnimation(super.getWalkingAnimation());
+
         //  The width/height of the model is set by the buffered image backing it.
         super.setDimensions();
         super.setDamage(this.DAMAGE);
         super.getHandler().addCollider(this.getId());
         super.getHandler().flagAlive(this.getId());
         super.setTransparentFactor((float) DEATH_ALPHA_FACTOR);
+
         this.bossProjectileTimer = new Timer(true);
         this.bossProjectileTimer.scheduleAtFixedRate(new BossProjectileSpawner(this), 2000, 2000);
     }
@@ -92,8 +99,7 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
      * Updates the animation, health, position and status of the monster.
      */
     @Override
-    public void tick() {
-
+    public void tick () {
         super.tick();
         //  If the monster's health is less than 0, we can flag it as dead.
         this.setAlive(this.getHealth() > 0);
@@ -101,7 +107,6 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
         this.getAnimationController().getStandardAnimation().setRotation(this.getAngle());
 
         if (this.isAlive()) {
-
             this.updatePosition();
             //  Save the target's position
             double tx = this.getTarget().getX();
@@ -110,32 +115,26 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
             this.followPlayer((int) tx, (int) ty);
             //  Calculates the angle the monster needs to be in to face the player
             this.facePlayer((int) tx, (int) ty);
-        } else {
-
+        }
+        else {
             //  Do this only once.
             if (this.aliveFlag) {
-
                 this.uponDeath();
                 this.bossProjectileTimer.cancel();
                 this.aliveFlag = false;
             }
-
             //  Creates the alpha composite object based off the object's current transparency.
             this.updateComposite();
-
             /**
              * If the size of the exphandler (MAX_PARTICLES - dead ones) == 0,
              * we can set this entity to be dead, and remove it from the
              * handler.
              */
             if (this.explosionHandler.size() == 0 || this.getTransparency() <= 0) {
-
                 this.getHandler().removeEntity(this);
             }
-
             StandardHandler.Handler(this.explosionHandler);
         }
-
     }
 
     /**
@@ -145,8 +144,7 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
      * @param _g2
      */
     @Override
-    public void render(Graphics2D _g2) {
-
+    public void render (Graphics2D _g2) {
         super.render(_g2);
 
         /**
@@ -154,7 +152,6 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
          * THEN set the old one back.
          */
         if (!this.isAlive() && this.explosionHandler != null) {
-
             StandardDraw.Handler(this.explosionHandler);
             /**
              * We need to save the old alpha composition, apply the new one,
@@ -164,11 +161,10 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
             _g2.setComposite(this.deathTransparentComposite);
             this.getAnimationController().renderFrame(_g2);
             _g2.setComposite(oldComposite);
-        } else {
-
+        }
+        else {
             this.getAnimationController().renderFrame(_g2);
         }
-
     }
 
     /**
@@ -177,20 +173,17 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
      * @TODO: Re-factor the magic numbers
      */
     @Override
-    public void uponDeath() {
-
+    public void uponDeath () {
         this.setAnimation(this.getDeathAnimation());
         this.explosionHandler = new StandardParticleHandler(50);
         this.explosionHandler.setCamera(this.getCamera());
 
-        for (int i = 0; i < this.explosionHandler.getMaxParticles(); i++) {
-
+        for (int i = 0 ; i < this.explosionHandler.getMaxParticles() ; i++) {
             this.explosionHandler.addEntity(new StandardBoxParticle(this.getX(), this.getY(),
                     StdOps.rand(1.0, 5.0), StdOps.randBounds(-10.0, -3.0, 3.0, 10.0),
                     StdOps.randBounds(-10.0, -3.0, 3.0, 10.0), Color.GREEN, 3f, this.explosionHandler,
                     this.getAngle(), ShapeType.CIRCLE, true));
         }
-
         this.generateCoins(StdOps.rand(0, 5));
         this.generateDeathSound(StdOps.rand(1, 2));
         this.generatePowerup();
@@ -203,9 +196,8 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
      * @param _sfx
      */
     @Override
-    public void generateHurtSound(int _sfx) {
-
-        StandardAudioController.play("src/resources/audio/sfx/green_monster/pain" + _sfx + ".wav", StandardAudioType.SFX);
+    public void generateHurtSound (int _sfx) {
+        StandardAudioController.play("src/resources/audio/sfx/zombies/zombie-" + _sfx + ".wav", StandardAudioType.SFX);
     }
 
     /**
@@ -214,14 +206,16 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
      * @param _posX
      * @param _posY
      */
-    private void followPlayer(int _posX, int _posY) {
+    private void followPlayer (int _posX, int _posY) {
 
         // Calculate the distance between the enemy and the player
         double diffX = this.getX() - _posX - Entity.APPROACH_FACTOR;
         double diffY = this.getY() - _posY - Entity.APPROACH_FACTOR;
+
         // Use the pythagorean theorem to solve for the hypotenuse distance
         double distance = (double) FastMath.sqrt(((this.getX() - _posX) * (this.getX() - _posX))
                 + ((this.getY() - _posY) * (this.getY() - _posY)));
+
         // Sets the velocity according to how far away the enemy is from the player
         this.setVelX(((this.APPROACH_VEL / distance) * (int) diffX));
         this.setVelY(((this.APPROACH_VEL / distance) * (int) diffY));
@@ -233,8 +227,7 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
      * @param _posX
      * @param _posY
      */
-    private void facePlayer(int _posX, int _posY) {
-
+    private void facePlayer (int _posX, int _posY) {
         /**
          * Calculates the angle using arctangent that the monster needs to face
          * so they are angled towards the player.
@@ -246,10 +239,8 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
 
         // If we're in Q1 (+x, -+y) or in Q2 (-x, +y)
         if ((_posX > this.getX() && _posY > this.getY()) || (_posX < this.getX() && _posY > this.getY())) {
-
             this.setAngle((double) ((FastMath.PI / 2) + (FastMath.PI / 2 - this.getAngle())));
         }
-
     }
 
     /**
@@ -257,8 +248,7 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
      *
      * @param sfx either 1 or 2
      */
-    private void generateDeathSound(int _sfx) {
-
+    private void generateDeathSound (int _sfx) {
         StandardAudioController.play("src/resources/audio/sfx/splat" + _sfx + ".wav", StandardAudioType.SFX);
     }
 
@@ -272,66 +262,52 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
         for (int i = 0 ; i < _coinAmt ; i++) {
             this.getHandler().addEntity(new Coin(this.getGame(), (int) this.getX(), (int) this.getY(), 0.7, 0.9, 1.0, this.getHandler()));
         }
-
     }
 
     /**
      * Generates a random powerup based on RNG (will definitely change).
      */
-    private void generatePowerup() {
-
+    private void generatePowerup () {
         int luck = StdOps.rand(1, 10);
-
         if (luck == 1) {
-
             this.getHandler().addEntity(new HealthPowerup((int) (this.getX() + this.getWidth() / 2),
                     (int) (this.getY() + this.getHealth() / 2),
                     this.getGame(), this.getHandler()));
         }
-
     }
 
     /**
      * Adds several projectiles to the screen from a circular position on the
      * boss char (this will improve later).
      */
-    private void addProjectiles() {
-
+    private void addProjectiles () {
         double angle = this.getAngle();
         int[] velX = {0, 4, 4, 4, 0, -4, -4, -4};
         int[] velY = {-4, -4, 0, 4, 4, 4, 0, -4};
-
-        for (int i = 0; i < velX.length; i++) {
-
+        for (int i = 0 ; i < velX.length ; i++) {
             this.getHandler().addEntity(new BossProjectileObject((int) this.getX() + this.getWidth() / 2,
                     (int) this.getY() + this.getHeight() / 2, velX[i], velY[i], (int) this.DAMAGE, this.getGame(),
                     this.getHandler(), this));
         }
-
     }
 
     private class BossProjectileSpawner extends TimerTask {
 
         private FemaleMonsterBoss boss;
 
-        public BossProjectileSpawner(FemaleMonsterBoss _boss) {
-
+        public BossProjectileSpawner (FemaleMonsterBoss _boss) {
             this.boss = _boss;
         }
 
         @Override
-        public void run() {
-
+        public void run () {
             this.boss.addProjectiles();
         }
-
     }
 
     //  Static block for instantiating the images.
     static {
-
         WALK_FRAMES = Utilities.loadFrames("src/resources/img/enemies/femaleboss/walk/", 10);
         DEATH_FRAMES = Utilities.loadFrames("src/resources/img/enemies/femaleboss/death/", 14);
     }
-
 }

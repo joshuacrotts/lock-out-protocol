@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * This class controls all TimerInterface objects in the game. When the game is
  * reset, they need to be halted/canceled.
  *
- * @author Joshua, Ronald, Rinty
+ * @author Joshua
  */
 public class TimerController {
 
@@ -19,7 +19,6 @@ public class TimerController {
      * @param _timer
      */
     public static void addTimer (TimerInterface _timer) {
-
         timers.add(_timer);
     }
 
@@ -27,17 +26,12 @@ public class TimerController {
      * Stops all timers that are in the timer controller.
      */
     public static void stopTimers () {
-
         for (int i = 0 ; i < TimerController.timers.size() ; i++) {
-
             TimerInterface currentTimer = timers.get(i);
 
             if (currentTimer != null) {
-
                 currentTimer.cancelTimer();
             }
-
         }
-
     }
 }

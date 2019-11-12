@@ -17,6 +17,8 @@ import java.util.LinkedList;
  * updates logic for interactors (UI elements). This includes listening for
  * mouse clicks and hovers.
  *
+ * [Group Name: Data Structure Deadheads]
+ *
  * @author Joshua, Ronald, Rinty
  */
 public class StandardInteractorHandler extends StandardHandler implements MouseListener, MouseMotionListener, Renderable {
@@ -25,39 +27,30 @@ public class StandardInteractorHandler extends StandardHandler implements MouseL
     private final Game game;
 
     public StandardInteractorHandler (Game _game) {
-        
         this.interactors = new LinkedList<>();
         this.game = _game;
     }
 
     @Override
     public void tick () {
-        
         for (int i = 0 ; i < this.interactors.size() ; i++) {
-            
             this.interactors.get(i).tick();
         }
-        
     }
 
     @Override
     public void render (Graphics2D _g2) {
-        
         for (int i = 0 ; i < interactors.size() ; i++) {
-            
             this.interactors.get(i).render(_g2);
         }
-        
     }
 
     public void addInteractor (Interactor _interactor) {
-        
         this.interactors.add(_interactor);
     }
 
     @Override
     public void addEntity (StandardGameObject _obj) {
-        
         throw new UnsupportedOperationException("You cannot add an SGO to this particular handler.");
     }
 
@@ -68,9 +61,7 @@ public class StandardInteractorHandler extends StandardHandler implements MouseL
      */
     @Override
     public void mousePressed (MouseEvent e) {
-        
         for (int i = 0 ; i < interactors.size() ; i++) {
-            
             Interactor inter = this.interactors.get(i);
             int scaleXOffset = 0;
             int scaleYOffset = 0;
@@ -81,7 +72,6 @@ public class StandardInteractorHandler extends StandardHandler implements MouseL
              * the mouse-over detection can be called.
              */
             if (inter.isScaled()) {
-                
                 scaleXOffset = (int) this.game.getCamera().getX() - Screen.gameHalfWidth;
                 scaleYOffset = (int) this.game.getCamera().getY() - Screen.gameHalfHeight;
             }
@@ -91,9 +81,7 @@ public class StandardInteractorHandler extends StandardHandler implements MouseL
 
                 inter.onMouseClick();
             }
-            
         }
-        
     }
 
     /**
@@ -104,9 +92,7 @@ public class StandardInteractorHandler extends StandardHandler implements MouseL
      */
     @Override
     public void mouseMoved (MouseEvent e) {
-        
         for (int i = 0 ; i < interactors.size() ; i++) {
-            
             Interactor inter = this.interactors.get(i);
             int scaleXOffset = 0;
             int scaleYOffset = 0;
@@ -117,35 +103,24 @@ public class StandardInteractorHandler extends StandardHandler implements MouseL
              * the mouse-over detection can be called.
              */
             if (inter.isScaled()) {
-                
                 scaleXOffset = (int) this.game.getCamera().getX() - Screen.gameHalfWidth;
                 scaleYOffset = (int) this.game.getCamera().getY() - Screen.gameHalfHeight;
             }
-            
             if (StdOps.mouseOver(this.game.getMouse().getMouseX(), this.game.getMouse().getMouseY(),
                     inter.getX() - scaleXOffset, inter.getY() - scaleYOffset, inter.getWidth(), inter.getHeight())) {
-                
                 inter.onMouseEnterHover();
             }
-            
             else {
-                
                 inter.onMouseExitHover();
             }
-            
         }
-        
     }
 
     @Override
     public void mouseDragged (MouseEvent e) {
-        
         for (int i = 0 ; i < interactors.size() ; i++) {
-            
             Interactor inter = this.interactors.get(i);
-            
             if (!inter.isDraggable()) {
-                
                 continue;
             }
 
@@ -169,10 +144,8 @@ public class StandardInteractorHandler extends StandardHandler implements MouseL
     public void mouseExited (MouseEvent e) {
     }
 
-//====================== GETTERS ===============================
+//====================== GETTERS ===============================//
     public LinkedList<Interactor> getInteractors () {
-        
         return this.interactors;
     }
-    
 }

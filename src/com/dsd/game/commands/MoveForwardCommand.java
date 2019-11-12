@@ -9,6 +9,8 @@ import java.awt.event.KeyEvent;
 /**
  * Command representing when the user shoots their weapon.
  *
+ * [Group Name: Data Structure Deadheads]
+ *
  * @author Joshua, Ronald, Rinty
  */
 public class MoveForwardCommand extends Command {
@@ -18,7 +20,6 @@ public class MoveForwardCommand extends Command {
     private final Player player;
 
     public MoveForwardCommand (Game _game, Player _obj) {
-
         this.game = _game;
         this.player = _obj;
         this.bind(_game.getKeyboard(), KeyEvent.VK_W);
@@ -26,30 +27,22 @@ public class MoveForwardCommand extends Command {
 
     @Override
     public void pressed (float _dt) {
-
         if (this.game.isInGameState() && !this.player.isMovingBackward()) {
-
             this.player.setPlayerState(PlayerState.WALKING_FORWARD);
             this.player.updatePosition();
         }
-
     }
 
     @Override
     public void released (float dt) {
-
         this.player.setPlayerState(PlayerState.STANDING);
     }
 
     @Override
     public void down (float _dt) {
-
         if (this.game.isInGameState() && !this.player.isMovingBackward()) {
-
             this.player.setPlayerState(PlayerState.WALKING_FORWARD);
             this.player.updatePosition();
         }
-
     }
-
 }

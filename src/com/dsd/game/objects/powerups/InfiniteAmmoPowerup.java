@@ -29,7 +29,7 @@ import java.util.TimerTask;
  * Health object for when the player is damaged, they can pick it up and restore
  * some health.
  *
- * @author Joshua, Ronald, Rinty
+ * @author Joshua
  */
 public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInterface, Powerup {
 
@@ -39,6 +39,7 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
     private final StandardCamera camera;
     private final StandardCollisionHandler parentContainer;
     private Timer powerupTimer;
+
     //  View
     private final StandardFadeController color;
     private static final BufferedImage[] INFINITE_AMMO_FRAMES;
@@ -46,6 +47,7 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
     private static final int RECT_STROKE = 20;
     private static final int STROKE_X_OFFSET = (int) (RECT_STROKE * 1.5);
     private static final int STROKE_Y_OFFSET = (int) (RECT_STROKE * 2.4);
+
     //  Timer for how long the powerup is active (in milliseconds)
     private int timer = 10000;
     private boolean isActivated = false;
@@ -67,23 +69,19 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
     @Override
     public void tick () {
         if (this.isAlive()) {
-            
             this.getAnimationController().tick();
         }
-        
     }
 
     @Override
     public void render (Graphics2D _g2) {
         if (this.isAlive()) {
-            
             this.getAnimationController().renderFrame(_g2);
         }
         else if (this.isActivated) {
             this.drawFlashingBorder(_g2);
             this.activateInfiniteAmmo();
         }
-        
     }
 
     /**
@@ -92,7 +90,6 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
     @Override
     public void activate () {
         if (this.isActivated) {
-            
             return;
         }
 
@@ -103,6 +100,7 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
         this.powerupTimer = new Timer(true);
         this.powerupTimer.schedule(new InfiniteAmmoTimer(this), timer);
         TimerController.addTimer(this);
+
         this.isActivated = true;
         this.playInfAmmoSFX();
     }
@@ -118,14 +116,13 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
      */
     private void activateInfiniteAmmo () {
         Weapon curr = this.game.getPlayer().getInventory().getCurrentWeapon();
-        
         if (!(curr instanceof Gun)) {
-            
             return;
         }
 
         Gun gun = (Gun) curr;
         gun.setCurrentAmmo(gun.getMagazineCapacity());
+
     }
 
     /**
@@ -133,7 +130,6 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
      */
     public void playInfAmmoSFX () {
         if (this.isCollected) {
-            
             return;
         }
 
@@ -187,7 +183,6 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
             this.powerup.setAlive(false);
             this.powerup.isActivated = false;
         }
-        
     }
 
 }

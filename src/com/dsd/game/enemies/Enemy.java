@@ -27,34 +27,43 @@ import java.util.Collections;
  * controllers per entity: walking, attacking, and death. Depending on the state
  * of the enemy, one of these will be set.
  *
- * @author Joshua, Ronald, Rinty
+ * @author Joshua
  */
 public abstract class Enemy extends Entity {
 
     //  Miscellaneous reference variables.
     private final StandardCamera sc;
+
     //  Handler for blood particles.
     private final StandardParticleHandler bloodHandler;
+
     //  Information about the enemy's state in the game, and who they're
     //  moving towards.
     private EnemyState enemyState;
     private Entity target;
+
     //  Animation controllers
     private StandardAnimatorController walkingController;
     private StandardAnimatorController attackingController;
     private StandardAnimatorController deathController;
+
     //  Variables for the disappearing effect when the monster dies.
     private float deathTransparencyFactor;
     private float deathTransparency = 1.0f;
+
     //  How much damage the enemy does when running into the player.
     protected double damage;
+
     //  Initial health factor (mostly for bosses).
     private int initialHealth;
+
     //  Alpha composition object for when the monster dies.
     protected AlphaComposite deathTransparentComposite;
+
     //  Max amount of particles that can be summoned in the particle handler
     private static final int MAX_BLOOD_PARTICLES = 50;
     private static final int BLOOD_PARTICLES = 10;
+
     //  Vector force factor
     private int pushFactor = 2;
 
@@ -116,7 +125,6 @@ public abstract class Enemy extends Entity {
                     StdOps.randBounds(-10.0, -3.0, 3.0, 10.0), Color.RED, 3f, this.bloodHandler,
                     this.getAngle(), ShapeType.CIRCLE, false));
         }
-
     }
 
     /**
@@ -259,5 +267,4 @@ public abstract class Enemy extends Entity {
     public void setEnemyState (EnemyState _state) {
         this.enemyState = _state;
     }
-
 }

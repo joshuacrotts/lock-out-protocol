@@ -11,8 +11,8 @@ import com.revivedstandards.handlers.StandardCollisionHandler;
 import java.awt.Graphics2D;
 
 /**
- * This class displays the main game screen to the player.
- * 
+ * [Group Name: Data Structure Deadheads]
+ *
  * @author Joshua, Ronald, Rinty
  */
 public class HUDScreen extends Screen {
@@ -33,7 +33,6 @@ public class HUDScreen extends Screen {
         if (this.getGame().isMenu() || this.getGame().isPaused() || this.getGame().isHelp()) {
             return;
         }
-        
         super.tick();
         this.player.getInventory().getView().tick();
     }
@@ -41,10 +40,8 @@ public class HUDScreen extends Screen {
     @Override
     public void render (Graphics2D _g2) {
         if (this.getGame().isMenu() || this.getGame().isPaused() || this.getGame().isHelp()) {
-            
             return;
         }
-        
         super.render(_g2);
         this.player.getInventory().getView().render(_g2);
     }

@@ -7,24 +7,22 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 /**
- * This method displays what button has which specific function in the game.
- * 
- * @author Joshua, Ronald, Rinty
+ *
+ * @author Joshua
  */
 public class HelpScreen extends Screen {
 
     private final Color transparentBlack;
 
     public HelpScreen (Game _game) {
-
         super(_game);
         this.transparentBlack = new Color(0f, 0f, 0f, 0.5f);
+
         this.createUIElements();
     }
 
     @Override
     public void tick () {
-
         if (!this.getGame().isHelp()) {
             return;
         }
@@ -34,12 +32,9 @@ public class HelpScreen extends Screen {
 
     @Override
     public void render (Graphics2D _g2) {
-
         if (!this.getGame().isHelp()) {
-
             return;
         }
-
         this.drawTransparentScreen(_g2);
         super.render(_g2);
     }
@@ -50,7 +45,6 @@ public class HelpScreen extends Screen {
      * @param _g2
      */
     private void drawTransparentScreen (Graphics2D _g2) {
-
         Color oldColor = _g2.getColor();
         _g2.setColor(this.transparentBlack);
         _g2.fillRect((int) (this.getGame().getCamera().getX() - Screen.gameHalfWidth),
@@ -61,7 +55,6 @@ public class HelpScreen extends Screen {
     }
 
     private void createUIElements () {
-
         super.addInteractor(new ControlsLabel(this.getGame()));
     }
 

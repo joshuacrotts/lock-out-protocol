@@ -10,18 +10,18 @@ import java.awt.event.KeyListener;
  * password. We'll write a custom textfield UI element instead of using the
  * lousy Java Swing ones.
  *
- * @author Joshua
+ * @author Joshua Crotts
  */
 public class LetterInputListener implements KeyListener {
 
     //  Miscellaneous reference variables.
     private final Game game;
     private final TextFieldModel textElement;
+
     //  Last inputted char by the user.
     private char character;
 
     public LetterInputListener (Game _game, TextFieldModel _textElement) {
-
         this.game = _game;
         this.game.addKeyListener(this);
         this.textElement = _textElement;
@@ -29,9 +29,7 @@ public class LetterInputListener implements KeyListener {
 
     @Override
     public void keyTyped (KeyEvent _e) {
-
         if (!this.textElement.isActive() || !this.game.isMenu()) {
-
             return;
         }
 
@@ -43,31 +41,24 @@ public class LetterInputListener implements KeyListener {
             //  If it's the backspace key, delete the last inserted character into
             //  the stringbuilder. Otherwise, just append it.
             switch (this.character) {
-
                 case KeyEvent.VK_BACK_SPACE:
                     if (!this.textElement.isEmpty()) {
-
                         textElement.removeLastChar();
                     }
-
                     break;
                 default:
                     textElement.appendToString(this.character);
                     break;
             }
-
         }
-
     }
 
     @Override
     public void keyPressed (KeyEvent _e) {
-
     }
 
     @Override
     public void keyReleased (KeyEvent _e) {
-
     }
 
     /**
@@ -78,18 +69,15 @@ public class LetterInputListener implements KeyListener {
      * @return
      */
     private boolean isValidTypedChar (char _char) {
-
         return _char != KeyEvent.VK_TAB && _char != KeyEvent.VK_ENTER;
     }
 
-//====================== GETTERS ========================
+//====================== GETTERS ========================//
     public char getLastKeyTyped () {
-
         return this.character;
     }
 
     public String getTextElement () {
-
         return this.textElement.toString();
     }
 

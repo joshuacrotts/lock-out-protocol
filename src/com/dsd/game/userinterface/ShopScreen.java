@@ -17,6 +17,8 @@ import java.awt.Graphics2D;
  * Pause Screen displays a string "Paused" on the screen when the user presses
  * the escape key.
  *
+ * [Group Name: Data Structure Deadheads]
+ *
  * @author Joshua, Ronald, Rinty
  */
 public class ShopScreen extends Screen {
@@ -27,32 +29,27 @@ public class ShopScreen extends Screen {
     private final ShopCommand shopCommand;
 
     public ShopScreen (Game _game) {
-        
         super(_game);
+
         this.shopCommand = new ShopCommand(_game);
         this.shopState = ShopState.WEAPONS;
+
         this.createUIElements();
     }
 
     @Override
     public void tick () {
-        
         if (!this.getGame().isShop()) {
-            
             return;
         }
-        
         super.tick();
     }
 
     @Override
     public void render (Graphics2D _g2) {
-        
         if (!this.getGame().isShop()) {
-            
             return;
         }
-        
         super.render(_g2);
     }
 
@@ -60,7 +57,6 @@ public class ShopScreen extends Screen {
      * Adds the interactors to the screen handler.
      */
     private void createUIElements () {
-        
         super.addInteractor(new ShopView(this.getGame()));
         super.addInteractor(new ShopTitleLabel(this.getGame(), this));
         super.addInteractor(new PistolButton(this.getGame(), this));
@@ -71,14 +67,12 @@ public class ShopScreen extends Screen {
         super.addInteractor(new MinigunButton(this.getGame(), this));
     }
 
-//============================ GETTERS ====================================
+//============================ GETTERS ====================================//
     public boolean isOnWeapons () {
-        
         return this.shopState == ShopState.WEAPONS;
     }
 
     public boolean isOnItems () {
-        
         return this.shopState == ShopState.ITEMS;
     }
 

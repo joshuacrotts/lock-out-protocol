@@ -28,7 +28,7 @@ import java.util.TimerTask;
  * Health object for when the player is damaged, they can pick it up and restore
  * some health.
  *
- * @author Joshua, Ronald, Rinty
+ * @author Joshua
  */
 public class BerserkPowerup extends StandardGameObject implements TimerInterface, Powerup {
 
@@ -38,6 +38,7 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
     private final StandardCamera camera;
     private final StandardCollisionHandler parentContainer;
     private Timer powerupTimer;
+
     //  View
     private final StandardFadeController color;
     private static final BufferedImage[] BERSERK_FRAMES;
@@ -47,6 +48,7 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
     private static final int STROKE_X_OFFSET = (int) (RECT_STROKE * 1.5);
     private static final int STROKE_Y_OFFSET = (int) (RECT_STROKE * 2.4);
     //  Timer for how long the powerup is active (in milliseconds)
+
     private int timer = 10000;
     private boolean isActivated = false;
     private boolean isCollected = false;
@@ -67,22 +69,18 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
     @Override
     public void tick () {
         if (this.isAlive()) {
-            
             this.getAnimationController().tick();
         }
-        
     }
 
     @Override
     public void render (Graphics2D _g2) {
         if (this.isAlive()) {
-            
             this.getAnimationController().renderFrame(_g2);
         }
         else if (this.isActivated) {
             this.drawFlashingBorder(_g2);
         }
-        
     }
 
     /**
@@ -91,7 +89,6 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
     @Override
     public void activate () {
         if (this.isActivated) {
-            
             return;
         }
         this.playBerserkSFX();
@@ -103,6 +100,7 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
         this.powerupTimer = new Timer(true);
         this.powerupTimer.schedule(new BerserkTimer(this), timer);
         TimerController.addTimer(this);
+
         this.isActivated = true;
         this.activateDamageBoost();
 
@@ -134,7 +132,6 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
      */
     public void playBerserkSFX () {
         if (this.isCollected) {
-            
             return;
         }
 

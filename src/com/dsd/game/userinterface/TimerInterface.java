@@ -6,7 +6,7 @@ package com.dsd.game.userinterface;
  * called to do whatever that particular object needs to do when shutting down
  * the timer.
  *
- * @author Joshua, Ronald, Rinty
+ * @author Joshua
  */
 public interface TimerInterface {
 

@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 /**
  * This class is a template for objects in the game that act as foliage.
  *
- * @author Joshua, Ronald, Rinty
+ * @author Joshua
  */
 public class NatureObject extends StandardGameObject implements Renderable, Updatable {
 
@@ -27,20 +27,16 @@ public class NatureObject extends StandardGameObject implements Renderable, Upda
 
     public NatureObject (Game _game, StandardCollisionHandler _parentContainer,
             int _x, int _y, StandardID _id, BufferedImage _sprite, boolean _collidable) {
-        
         super(_x, _y, _sprite, _id);
         this.game = _game;
         this.parentContainer = _parentContainer;
         this.collidable = _collidable;
-        
         if (this.collidable) {
-            
             this.parentContainer.addCollider(this.getId());
             this.parentContainer.flagAlive(this.getId());
             this.setWidth(this.getCurrentSprite().getWidth());
             this.setHeight(this.getCurrentSprite().getHeight());
         }
-        
     }
 
     @Override
@@ -50,8 +46,6 @@ public class NatureObject extends StandardGameObject implements Renderable, Upda
 
     @Override
     public void render (Graphics2D _g2) {
-        
         _g2.drawImage(this.getCurrentSprite(), (int) this.getX(), (int) this.getY(), null);
     }
-    
 }

@@ -9,7 +9,7 @@ import java.awt.Graphics2D;
 /**
  * Text-field for the user to enter their password.
  *
- * @author Joshua, Ronald, Rinty
+ * @author Joshua
  */
 public class PasswordTextFieldModel extends TextFieldModel {
 
@@ -17,7 +17,6 @@ public class PasswordTextFieldModel extends TextFieldModel {
     private final PasswordLabel passwordLabel;
 
     public PasswordTextFieldModel (int _x, int _y, Game _game, MenuScreen _menuScreen) {
-        
         super(_x, _y, _game, _menuScreen);
         this.passwordLabel = new PasswordLabel(this, _menuScreen);
         this.getMenuScreen().addInteractor(this.passwordLabel);
@@ -26,25 +25,20 @@ public class PasswordTextFieldModel extends TextFieldModel {
 
     @Override
     public void tick () {
-        
         if (!this.getMenuScreen().isOnAccountScreen()) {
-            
             return;
         }
-        
         super.tick();
+
         this.setX(Screen.gameHalfWidth - BUTTON_X_OFFSET);
         this.setY(Screen.gameHalfHeight);
     }
 
     @Override
     public void render (Graphics2D _g2) {
-        
         if (!this.getMenuScreen().isOnAccountScreen()) {
-            
             return;
         }
-        
         super.render(_g2);
     }
 

@@ -19,6 +19,8 @@ import java.awt.image.BufferedImage;
  * take; small, medium, and large. The three parameters passed in the
  * constructor (the last three) designate the rarity of these.
  *
+ * [Group Name: Data Structure Deadheads]
+ *
  * @author Joshua, Ronald, Rinty
  */
 public class Coin extends StandardGameObject implements Powerup {
@@ -30,14 +32,17 @@ public class Coin extends StandardGameObject implements Powerup {
     //  Frames of animation for the coins
     private static final BufferedImage[] coinOneFrames;
     private static final BufferedImage[] coinTwoFrames;
+
     //  Randomness for the scatter of the coin
     //  This the value at which the coins can scatter
     private final double SCATTER_RANGE = 0.99;
+
     //  Variables for changing the speed of the coins as they disperse
     private static final double VEL_LOWER_BOUND = 0.5;
     private static final double VEL_UPPER_BOUND = 1.5;
     private final int COIN_FPS = 5;
     private int value = 0;
+
     //  Max number of sound effects for coins.
     private static final int MAX_COIN_SFX = 1;
 
@@ -68,7 +73,6 @@ public class Coin extends StandardGameObject implements Powerup {
     @Override
     public void tick () {
         if (this.isAlive()) {
-            
             this.getAnimationController().tick();
             this.slowVelocities();
             this.updatePosition();
@@ -76,16 +80,13 @@ public class Coin extends StandardGameObject implements Powerup {
         else {
             this.parentContainer.removeEntity(this);
         }
-        
     }
 
     @Override
     public void render (Graphics2D _g2) {
         if (this.isAlive()) {
-            
             this.getAnimationController().renderFrame(_g2);
         }
-        
     }
 
     @Override
@@ -118,9 +119,7 @@ public class Coin extends StandardGameObject implements Powerup {
      */
     private void generateCoinType (double _small, double _medium, double _large) {
         int coin = StdOps.rand(0, 100);
-        
         if (coin < _small * 100) {
-            
             this.setAnimation(new StandardAnimatorController(this, Coin.coinOneFrames, this.COIN_FPS));
             this.value = 1;
         }
@@ -128,7 +127,6 @@ public class Coin extends StandardGameObject implements Powerup {
             this.setAnimation(new StandardAnimatorController(this, Coin.coinTwoFrames, this.COIN_FPS));
             this.value = 5;
         }
-        
     }
 
 //================================= GETTERS ==================================//
@@ -138,9 +136,7 @@ public class Coin extends StandardGameObject implements Powerup {
 
     //static value
     static {
-        
         coinOneFrames = Utilities.loadFrames("src/resources/img/items/coin/small", 4);
         coinTwoFrames = Utilities.loadFrames("src/resources/img/items/coin/medium", 4);
     }
-    
 }

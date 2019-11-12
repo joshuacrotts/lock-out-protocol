@@ -22,7 +22,7 @@ import java.util.TimerTask;
  * their own respective background. Each level on the other hand will have its
  * own respective wave.
  *
- * @author Joshua, Ronald, Rinty
+ * @author Joshua
  */
 public class LevelController implements TimerInterface, SerializableObject {
 
@@ -47,7 +47,6 @@ public class LevelController implements TimerInterface, SerializableObject {
      * Ticks the level pointed at in the List of levels.
      */
     public void tickLevel () {
-
         this.levels.get(this.currentLevelID).tick();
     }
 
@@ -57,7 +56,6 @@ public class LevelController implements TimerInterface, SerializableObject {
      * @param _g2
      */
     public void renderLevel (Graphics2D _g2) {
-
         this.levels.get(this.currentLevelID).render(_g2);
     }
 
@@ -67,7 +65,6 @@ public class LevelController implements TimerInterface, SerializableObject {
      * @param _level object.
      */
     public void addLevel (StandardLevel _level) {
-
         this.levels.add(_level);
     }
 
@@ -75,7 +72,6 @@ public class LevelController implements TimerInterface, SerializableObject {
      * Increments the level pointer.
      */
     public void incrementLevel () {
-
         this.currentLevelID++;
     }
 
@@ -84,7 +80,6 @@ public class LevelController implements TimerInterface, SerializableObject {
      * more frequently than incrementLevel().
      */
     public void incrementWave () {
-
         this.currentWave++;
     }
 
@@ -92,7 +87,6 @@ public class LevelController implements TimerInterface, SerializableObject {
      * Begins the wave timer, depending on what difficulty the game is on.
      */
     public void startWaveTimer () {
-
         this.levelTimer = new Timer(true);
         this.levelTimer.scheduleAtFixedRate(new LevelTimer(this.game, this),
                 (long) DifficultyController.levelTransitionTimer,
@@ -106,7 +100,6 @@ public class LevelController implements TimerInterface, SerializableObject {
      * currentID back to 0.
      */
     public void clearLevels () {
-
         this.levels.clear();
         this.currentLevelID = 0;
         this.currentWave = 1;
@@ -114,16 +107,13 @@ public class LevelController implements TimerInterface, SerializableObject {
 
     @Override
     public void cancelTimer () {
-
         this.levelTimer.cancel();
     }
 
-//=========================== CRUD OPERATIONS ===============================
+//=========================== CRUD OPERATIONS ===============================//
     @Override
     public String createObject (SerializableType _id) {
-
         if (_id != SerializableType.WAVE_INFO) {
-
             return null;
         }
 
@@ -136,36 +126,30 @@ public class LevelController implements TimerInterface, SerializableObject {
     }
 
     public void readObject (int _currentLevelID, int _currentWave) {
-
         this.currentLevelID = _currentLevelID;
         this.currentWave = _currentWave;
     }
 
     @Override
     public void updateObject (SerializableType _obj) {
-
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void destroyObject (SerializableType _obj) {
-
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-//============================= GETTERS ======================================
+//============================= GETTERS ======================================//
     public int getCurrentLevelID () {
-
         return this.currentLevelID;
     }
 
     public StandardLevel getCurrentLevel () {
-
         return this.levels.get(this.currentLevelID);
     }
 
     public int getWaveNumber () {
-
         return this.currentWave;
     }
 
@@ -176,7 +160,6 @@ public class LevelController implements TimerInterface, SerializableObject {
      * @return
      */
     public int getLogicalCurrentLevelID () {
-
         return this.currentLevelID + 1;
     }
 
@@ -186,7 +169,6 @@ public class LevelController implements TimerInterface, SerializableObject {
     }
 
     public void setWaveNumber (int _waveNumber) {
-
         this.currentLevelID = _waveNumber;
     }
 
@@ -198,33 +180,24 @@ public class LevelController implements TimerInterface, SerializableObject {
         private final LevelController levelController;
 
         public LevelTimer (Game _game, LevelController _levelController) {
-
             this.levelController = _levelController;
             this.game = _game;
         }
 
         @Override
         public void run () {
-
             if (!this.game.isRunning()) {
-
                 return;
             }
-
             this.levelController.incrementWave();
             if (this.levelController.getWaveNumber() % 5 == 0) {
-
                 this.updateLevelDifficulty();
             }
-
             this.game.setPreambleState();
         }
 
         private void updateLevelDifficulty () {
-
             DifficultyController.incrementMobHealth();
         }
-
     }
-
 }
