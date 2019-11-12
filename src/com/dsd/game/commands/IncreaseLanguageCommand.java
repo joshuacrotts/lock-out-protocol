@@ -1,7 +1,7 @@
 package com.dsd.game.commands;
 
-import com.dsd.game.Game;
-import com.dsd.game.LanguageEnum;
+import com.dsd.game.core.Game;
+import com.dsd.game.core.LanguageEnum;
 import com.revivedstandards.commands.Command;
 import java.awt.event.KeyEvent;
 

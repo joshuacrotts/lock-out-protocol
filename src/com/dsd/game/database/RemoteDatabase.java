@@ -1,6 +1,6 @@
 package com.dsd.game.database;
 
-import com.dsd.game.AccountStatus;
+import com.dsd.game.core.AccountStatus;
 
 /**
  * This class is a template for all classes that are a remote database to

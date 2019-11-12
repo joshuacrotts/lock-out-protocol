@@ -1,6 +1,6 @@
 package com.dsd.game.userinterface.model.labels;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.Screen;
 import com.revivedstandards.main.StandardDraw;

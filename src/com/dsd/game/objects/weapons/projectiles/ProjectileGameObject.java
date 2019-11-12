@@ -1,6 +1,6 @@
 package com.dsd.game.objects.weapons.projectiles;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.main.StandardCamera;

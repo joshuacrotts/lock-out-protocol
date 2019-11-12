@@ -1,6 +1,6 @@
 package com.dsd.game.userinterface.shop;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.controller.LanguageController;
 import com.dsd.game.userinterface.Screen;
 import com.dsd.game.userinterface.ShopScreen;

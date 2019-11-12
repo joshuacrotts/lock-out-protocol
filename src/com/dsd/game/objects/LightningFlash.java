@@ -1,5 +1,6 @@
-package com.dsd.game;
+package com.dsd.game.objects;
 
+import com.dsd.game.core.Game;
 import com.dsd.game.userinterface.Screen;
 import java.awt.Color;
 import java.awt.Graphics2D;

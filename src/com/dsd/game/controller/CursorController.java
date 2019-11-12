@@ -1,6 +1,6 @@
 package com.dsd.game.controller;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.userinterface.model.Crosshair;
 import com.revivedstandards.view.Updatable;
 

@@ -1,6 +1,6 @@
 package com.dsd.game.controller;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.enemies.BasicMonster;
 import com.dsd.game.enemies.DarkFemaleMonster;
 import com.dsd.game.enemies.FemaleMonsterBoss;

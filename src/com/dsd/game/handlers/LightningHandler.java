@@ -1,6 +1,6 @@
 package com.dsd.game.handlers;
 
-import com.dsd.game.LightningFlash;
+import com.dsd.game.objects.LightningFlash;
 import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.model.StandardAudioType;
 import java.awt.Graphics2D;

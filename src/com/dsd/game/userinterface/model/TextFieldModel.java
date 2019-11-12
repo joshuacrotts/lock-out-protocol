@@ -1,6 +1,6 @@
 package com.dsd.game.userinterface.model;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.commands.LetterInputListener;
 import com.dsd.game.controller.TextFieldController;
 import com.dsd.game.userinterface.MenuScreen;

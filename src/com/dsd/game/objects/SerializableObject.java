@@ -1,4 +1,4 @@
-package com.dsd.game;
+package com.dsd.game.objects;
 
 import com.dsd.game.database.SerializableType;
 

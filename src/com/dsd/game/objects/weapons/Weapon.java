@@ -1,6 +1,6 @@
 package com.dsd.game.objects.weapons;
 
-import com.dsd.game.SerializableObject;
+import com.dsd.game.objects.SerializableObject;
 import com.dsd.game.database.SerializableType;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.weapons.enums.WeaponState;

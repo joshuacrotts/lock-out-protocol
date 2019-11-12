@@ -1,6 +1,6 @@
 package com.dsd.game.commands;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.userinterface.model.TextFieldModel;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

@@ -1,6 +1,6 @@
 package com.dsd.game.factories;
 
-import com.dsd.game.Game;
+import com.dsd.game.core.Game;
 import com.dsd.game.controller.BossSpawnerController;
 import com.dsd.game.controller.SpawnerController;
 import com.dsd.game.enemies.enums.EnemyType;

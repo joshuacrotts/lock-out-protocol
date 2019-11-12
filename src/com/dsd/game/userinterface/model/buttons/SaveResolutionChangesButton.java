@@ -1,7 +1,7 @@
 package com.dsd.game.userinterface.model.buttons;
 
-import com.dsd.game.Game;
-import com.dsd.game.ResolutionEnum;
+import com.dsd.game.core.Game;
+import com.dsd.game.objects.ResolutionEnum;
 import com.dsd.game.commands.DecreaseResolutionCommand;
 import com.dsd.game.commands.IncreaseResolutionCommand;
 import com.dsd.game.controller.LanguageController;

@@ -1,7 +1,6 @@
 package com.dsd.game.objects;
 
-import com.dsd.game.Game;
-import com.dsd.game.SerializableObject;
+import com.dsd.game.core.Game;
 import com.dsd.game.api.WeatherConnector;
 import com.dsd.game.database.SerializableType;
 import com.dsd.game.objects.weapons.FastRifle;
