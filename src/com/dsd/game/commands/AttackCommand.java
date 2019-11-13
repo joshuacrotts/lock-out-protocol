@@ -100,7 +100,7 @@ public class AttackCommand extends Command implements TimerInterface {
     public void down (float _dt) {
         //  down(dt) is essentially just multiple pressed(dt) calls in
         //  succession.
-        this.pressed(dt);
+        this.pressed(_dt);
     }
 
     @Override
