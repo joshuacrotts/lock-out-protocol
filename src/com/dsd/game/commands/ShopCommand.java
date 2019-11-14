@@ -25,7 +25,7 @@ public class ShopCommand extends Command {
     }
 
     @Override
-    public void pressed (float dt) {
+    public void pressed (float _dt) {
         if (this.game.isPreamble() || this.game.isMenu()) {
             return;
         }

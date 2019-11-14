@@ -17,7 +17,8 @@ public class TabTextFieldCommand extends Command {
 
     public Game game;
 
-    public TabTextFieldCommand (Game _game) {
+    public TabTextFieldCommand(Game _game) {
+
         this.game = _game;
 
         //  We need to tell the Canvas within the Game class to stop listening
@@ -28,11 +29,15 @@ public class TabTextFieldCommand extends Command {
     }
 
     @Override
-    public void pressed (float dt) {
+    public void pressed(float _dt) {
+
         //  If we're on the preamble screen OR the menu screen, we need to leave.
         if (!this.game.isMenu()) {
+
             return;
         }
+
         TextFieldController.incrementSelectedTextField();
     }
+
 }
