@@ -16,6 +16,8 @@ import java.awt.Graphics2D;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 11/14/19
  */
 public class LanguageChangeButton extends MenuButton implements MouseEventInterface {
 
@@ -24,12 +26,9 @@ public class LanguageChangeButton extends MenuButton implements MouseEventInterf
     private static final int BUTTON_Y_OFFSET = 180;
     private static final int TEXT_X_OFFSET = 35;
     private static final int TEXT_Y_OFFSET = 45;
-    private static final int BUTTON_WIDTH = 300;
-    private static final int BUTTON_HEIGHT = 82;
 
     public LanguageChangeButton (Game _game, MenuScreen _menuScreen) {
         super(LanguageChangeButton.BUTTON_X_OFFSET, _game.getGameHeight() - LanguageChangeButton.BUTTON_Y_OFFSET,
-                LanguageChangeButton.BUTTON_WIDTH, LanguageChangeButton.BUTTON_HEIGHT,
                 LanguageController.translate("CHANGE LANGUAGE"), _game, _menuScreen);
     }
 

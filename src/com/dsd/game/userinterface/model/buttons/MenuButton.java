@@ -19,20 +19,25 @@ import javax.swing.JOptionPane;
  * button and if the user is hovering over it, etc.
  *
  * @author Joshua
+ * 
+ * @updated 11/14/19
  */
 public abstract class MenuButton extends StandardButton implements MouseEventInterface {
 
     //  Miscellaneous reference variables.
     private final Game game;
     private final MenuScreen menuScreen;
+    
+    protected static final int BUTTON_WIDTH = 300;
+    protected static final int BUTTON_HEIGHT = 82;
+    
     protected final Font font;
-
     protected BufferedImage onHoverButtonImg;
     protected BufferedImage buttonImg;
     protected BufferedImage activeImage;
 
-    public MenuButton (int _x, int _y, int _width, int _height, String _text, Game _game, MenuScreen _menuScreen) {
-        super(_x, _y, _width, _height);
+    public MenuButton (int _x, int _y, String _text, Game _game, MenuScreen _menuScreen) {
+        super(_x, _y, BUTTON_WIDTH, BUTTON_HEIGHT);
         this.game = _game;
         this.menuScreen = _menuScreen;
         if (LanguageController.lang.equals("en-en")) {

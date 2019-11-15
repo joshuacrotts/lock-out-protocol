@@ -11,7 +11,11 @@ import java.awt.Graphics2D;
  * This button is used in the volume controls for the sfx and the music. It
  * decreases the volume of either by a factor of 0.1f.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 11/14/19
  */
 public class DecreaseVolumeButton extends MenuButton implements MouseEventInterface {
 
@@ -24,7 +28,7 @@ public class DecreaseVolumeButton extends MenuButton implements MouseEventInterf
     private final int BUTTON_Y_OFFSET;
 
     public DecreaseVolumeButton (Game _game, MenuScreen _menuScreen, SoundEffectVolumeControl _sfxVolume, int _xOffset, int _yOffset) {
-        super(0, 0, 0, 0, "", _game, _menuScreen);
+        super(0, 0, "", _game, _menuScreen);
 
         this.BUTTON_X_OFFSET = _xOffset;
         this.BUTTON_Y_OFFSET = _yOffset;
@@ -35,12 +39,12 @@ public class DecreaseVolumeButton extends MenuButton implements MouseEventInterf
         this.onHoverButtonImg = StdOps.loadImage("src/resources/img/ui/dec_h.png");
         this.activeImage = this.buttonImg;
 
-        this.setWidth(this.activeImage.getWidth());
-        this.setHeight(this.activeImage.getHeight());
+        super.setWidth(this.activeImage.getWidth());
+        super.setHeight(this.activeImage.getHeight());
     }
 
     public DecreaseVolumeButton (Game _game, MenuScreen _menuScreen, MusicVolumeControl _musicVolume, int _xOffset, int _yOffset) {
-        super(0, 0, 0, 0, "", _game, _menuScreen);
+        super(0, 0, "", _game, _menuScreen);
 
         this.BUTTON_X_OFFSET = _xOffset;
         this.BUTTON_Y_OFFSET = _yOffset;

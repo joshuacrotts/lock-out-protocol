@@ -16,6 +16,8 @@ import java.awt.Graphics2D;
  * verifying changes in the sub-options menu.
  *
  * @author Joshua
+ * 
+ * @updated 11/14/19
  */
 public class SaveResolutionChangesButton extends MenuButton implements MouseEventInterface {
 
@@ -27,12 +29,10 @@ public class SaveResolutionChangesButton extends MenuButton implements MouseEven
     private static final int BUTTON_Y_OFFSET = 120;
     private static final int TEXT_X_OFFSET = 60;
     private static final int TEXT_Y_OFFSET = 45;
-    private static final int BUTTON_WIDTH = 300;
-    private static final int BUTTON_HEIGHT = 82;
 
     public SaveResolutionChangesButton (Game _game, MenuScreen _menuScreen) {
         super(BUTTON_X_OFFSET, _game.getGameHeight() - BUTTON_Y_OFFSET,
-                BUTTON_WIDTH, BUTTON_HEIGHT, LanguageController.translate("SAVE CHANGES"), _game, _menuScreen);
+                LanguageController.translate("SAVE CHANGES"), _game, _menuScreen);
 
         this.menuScreen = _menuScreen;
         this.incResCommand = new IncreaseResolutionCommand(this.getGame());

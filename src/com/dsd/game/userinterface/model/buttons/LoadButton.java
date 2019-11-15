@@ -15,6 +15,8 @@ import java.awt.Graphics2D;
  * file, given that it exists.
  *
  * @author Joshua
+ * 
+ * @updated 11/14/19
  */
 public class LoadButton extends MenuButton implements MouseEventInterface {
 
@@ -27,13 +29,11 @@ public class LoadButton extends MenuButton implements MouseEventInterface {
     private static final int BUTTON_Y_OFFSET = -10;
     private static final int TEXT_X_OFFSET = 80;
     private static final int TEXT_Y_OFFSET = 45;
-    private static final int BUTTON_WIDTH = 300;
-    private static final int BUTTON_HEIGHT = 82;
 
     public LoadButton (Game _game, MenuScreen _menuScreen) {
         super(Screen.gameHalfWidth - BUTTON_X_OFFSET,
                 Screen.gameHalfHeight - BUTTON_Y_OFFSET,
-                BUTTON_WIDTH, BUTTON_HEIGHT, LanguageController.translate("LOAD GAME"), _game, _menuScreen);
+                LanguageController.translate("LOAD GAME"), _game, _menuScreen);
         this.game = _game;
         this.menuScreen = _menuScreen;
     }

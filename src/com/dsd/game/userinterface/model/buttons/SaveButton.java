@@ -13,6 +13,8 @@ import java.awt.Graphics2D;
  * they come back.
  *
  * @author rinty
+ * 
+ * @updated 11/14/19
  */
 public class SaveButton extends MenuButton implements MouseEventInterface {
 
@@ -25,12 +27,9 @@ public class SaveButton extends MenuButton implements MouseEventInterface {
     private static final int BUTTON_Y_OFFSET = 100;
     private static final int TEXT_X_OFFSET = 80;
     private static final int TEXT_Y_OFFSET = 45;
-    private static final int BUTTON_WIDTH = 300;
-    private static final int BUTTON_HEIGHT = 82;
 
     public SaveButton (Game _game, MenuScreen _menuScreen) {
         super(SaveButton.BUTTON_X_OFFSET, SaveButton.BUTTON_Y_OFFSET,
-                SaveButton.BUTTON_WIDTH, SaveButton.BUTTON_HEIGHT,
                 LanguageController.translate("SAVE GAME"), _game, _menuScreen);
 
         this.game = _game;

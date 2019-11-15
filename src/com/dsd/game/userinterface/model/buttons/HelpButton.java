@@ -13,6 +13,8 @@ import java.awt.Graphics2D;
  * they come back.
  *
  * @author rinty
+ * 
+ * @updated 11/14/19
  */
 public class HelpButton extends MenuButton implements MouseEventInterface {
 
@@ -25,20 +27,17 @@ public class HelpButton extends MenuButton implements MouseEventInterface {
     private static final int BUTTON_Y_OFFSET = 100;
     private static final int TEXT_X_OFFSET = 115;
     private static final int TEXT_Y_OFFSET = 45;
-    private static final int BUTTON_WIDTH = 300;
-    private static final int BUTTON_HEIGHT = 82;
 
     public HelpButton (Game _game, MenuScreen _menuScreen) {
         super(HelpButton.BUTTON_X_OFFSET, HelpButton.BUTTON_Y_OFFSET,
-                HelpButton.BUTTON_WIDTH, HelpButton.BUTTON_HEIGHT,
                 LanguageController.translate("HELP"), _game, _menuScreen);
 
         this.game = _game;
         this.menuScreen = _menuScreen;
-        this.setX((int) this.game.getCamera().getX() - HelpButton.BUTTON_X_OFFSET);
-        this.setY((int) this.game.getCamera().getY() + HelpButton.BUTTON_Y_OFFSET);
+        super.setX((int) this.game.getCamera().getX() - HelpButton.BUTTON_X_OFFSET);
+        super.setY((int) this.game.getCamera().getY() + HelpButton.BUTTON_Y_OFFSET);
 
-        this.setScaled(true);
+        super.setScaled(true);
     }
 
     @Override
