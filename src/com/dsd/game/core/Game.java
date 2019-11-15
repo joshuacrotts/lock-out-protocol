@@ -8,6 +8,7 @@ import com.dsd.game.controller.DifficultyController;
 import com.dsd.game.controller.LanguageController;
 import com.dsd.game.controller.LevelController;
 import com.dsd.game.controller.RainController;
+import com.dsd.game.controller.SnowController;
 import com.dsd.game.controller.TimerController;
 import com.dsd.game.database.TranslatorDatabase;
 import com.dsd.game.levels.MetalLevel;
@@ -57,11 +58,17 @@ public class Game extends StandardGame {
     private final ShopScreen shopScreen;
     private final HelpScreen helpScreen;
 
-    /**
-     * Rain controller which contacts the API for the logic of determining
-     * whether it should rain or not.
-     */
+    //
+    //  Rain controller which contacts the API for the logic of determining
+    //  whether it should rain or not.
+    //
     private final RainController rainController;
+
+    //
+    //  Snow controller which contacts the API for the logic of determining
+    //  whether it should snow or not.
+    //
+    private final SnowController snowController;
 
     //  Debug controller
     private final DebugController debugController;
@@ -109,6 +116,7 @@ public class Game extends StandardGame {
         this.sch.setCamera(this.sc);
         // Instantiates the rain, debug, and level controllers.
         this.rainController = new RainController(this);
+        this.snowController = new SnowController(this);
         this.debugController = new DebugController(this, this.sch);
         this.difficultyController = new DifficultyController(this);
         this.levelController = new LevelController(this);
@@ -158,6 +166,8 @@ public class Game extends StandardGame {
                 StandardHandler.Handler(this.sch);
                 //  Then the rain if applicable
                 this.rainController.tick();
+                //  Then the snow if applicable
+                this.snowController.tick();
                 //  Then the heads up display
                 this.hudScreen.tick();
                 //  And lastly the camera
@@ -185,6 +195,8 @@ public class Game extends StandardGame {
             StandardDraw.Handler(this.sch);
             //  Then render the rain if applicable
             this.rainController.render(StandardDraw.Renderer);
+            //  Then render the snow if applicable
+            this.snowController.render(StandardDraw.Renderer);
             //  Then render the heads up display
             this.hudScreen.render(StandardDraw.Renderer);
             //  Then render the preamble, pause or shop effect if necessary
@@ -204,12 +216,9 @@ public class Game extends StandardGame {
             }
             //  If we are in debug mode, we can draw the text.
             if (DebugController.DEBUG_MODE) {
-
                 this.debugController.render(StandardDraw.Renderer);
             }
-
         }
-
     }
 
     /**

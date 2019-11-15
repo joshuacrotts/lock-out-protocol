@@ -34,7 +34,7 @@ public class RainController implements Renderable, Updatable {
 
     //  Serves as a debugging feature (if enabled, it ignores the API call and
     //  automatically enables rain).
-    private static final boolean toggleDownfall = true;
+    private static final boolean toggleDownfall = false;
 
     //  If it is raining, this boolean is toggled true.
     private boolean isRaining;
