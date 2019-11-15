@@ -15,7 +15,7 @@ import java.awt.Graphics2D;
  * This is the view that will be shown when the user wants to change their audio
  * levels.
  *
- * @author Joshua
+ * @author Joshua, Ronald, Rinty
  */
 public class AudioView extends Screen implements MouseEventInterface {
 
@@ -33,7 +33,7 @@ public class AudioView extends Screen implements MouseEventInterface {
 
     @Override
     public void tick () {
-        if (!this.menuScreen.isOnAudio() || !this.getGame().isMenu()) {
+        if (!this.menuScreen.isOnVolume() || !this.getGame().isMenu()) {
             return;
         }
         super.tick();
@@ -41,7 +41,7 @@ public class AudioView extends Screen implements MouseEventInterface {
 
     @Override
     public void render (Graphics2D _g2) {
-        if (!this.menuScreen.isOnAudio() || !this.getGame().isMenu()) {
+        if (!this.menuScreen.isOnVolume() || !this.getGame().isMenu()) {
             return;
         }
         super.render(_g2);
@@ -49,7 +49,7 @@ public class AudioView extends Screen implements MouseEventInterface {
 
     @Override
     public void onMouseClick () {
-        if (!this.menuScreen.isOnAudio() || !this.getGame().isMenu()) {
+        if (!this.menuScreen.isOnVolume() || !this.getGame().isMenu()) {
             return;
         }
     }

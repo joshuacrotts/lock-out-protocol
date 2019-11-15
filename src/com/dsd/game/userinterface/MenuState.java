@@ -7,6 +7,5 @@ package com.dsd.game.userinterface;
  */
 public enum MenuState {
     MAIN, DIFFICULTY, HELP, LOGIN, OPTIONS,
-    RESOLUTION, PLAYER_GENDER, VOLUME, AUDIO,
-    LANGUAGES;
+    RESOLUTION, PLAYER_GENDER, VOLUME, LANGUAGES;
 }

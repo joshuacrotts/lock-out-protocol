@@ -14,7 +14,7 @@ import java.awt.Graphics2D;
  * This class is used for verifying changes in the audio settings (note, this is
  * DIFFERENT from the actual VOLUME of the game).
  *
- * @author Joshua
+ * @author Joshua, Ronald, Rinty
  * 
  * @updated 11/14/19
  */
@@ -45,7 +45,7 @@ public class SaveAudioChangesButton extends MenuButton implements MouseEventInte
 
     @Override
     public void render (Graphics2D _g2) {
-        if (!this.getGame().isMenu() || !this.getMenuScreen().isOnAudio()) {
+        if (!this.getGame().isMenu() || !this.getMenuScreen().isOnVolume()) {
             return;
         }
 
@@ -57,7 +57,7 @@ public class SaveAudioChangesButton extends MenuButton implements MouseEventInte
 
     @Override
     public void onMouseClick () {
-        if (!this.getGame().isMenu() || !this.getMenuScreen().isOnAudio()) {
+        if (!this.getGame().isMenu() || !this.getMenuScreen().isOnVolume()) {
             return;
         }
 
@@ -71,7 +71,7 @@ public class SaveAudioChangesButton extends MenuButton implements MouseEventInte
 
     @Override
     public void onMouseEnterHover () {
-        if (!this.getGame().isMenu() || !this.getMenuScreen().isOnAudio()) {
+        if (!this.getGame().isMenu() || !this.getMenuScreen().isOnVolume()) {
             return;
         }
         this.activeImage = this.onHoverButtonImg;
@@ -79,7 +79,7 @@ public class SaveAudioChangesButton extends MenuButton implements MouseEventInte
 
     @Override
     public void onMouseExitHover () {
-        if (!this.getGame().isMenu() || !this.getMenuScreen().isOnAudio()) {
+        if (!this.getGame().isMenu() || !this.getMenuScreen().isOnVolume()) {
             return;
         }
         this.activeImage = this.buttonImg;

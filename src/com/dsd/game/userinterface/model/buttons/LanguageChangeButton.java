@@ -23,7 +23,7 @@ public class LanguageChangeButton extends MenuButton implements MouseEventInterf
 
     //  Button position and dimension offsets.
     private static final int BUTTON_X_OFFSET = 141;
-    private static final int BUTTON_Y_OFFSET = 180;
+    private static final int BUTTON_Y_OFFSET = 320;
     private static final int TEXT_X_OFFSET = 35;
     private static final int TEXT_Y_OFFSET = 45;
 
