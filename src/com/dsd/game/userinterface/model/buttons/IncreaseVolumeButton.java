@@ -12,6 +12,8 @@ import java.awt.Graphics2D;
  * increases the volume of either by a factor of 0.1f.
  *
  * @author Joshua
+ * 
+ * @updated 11/14/19
  */
 public class IncreaseVolumeButton extends MenuButton implements MouseEventInterface {
 
@@ -26,7 +28,7 @@ public class IncreaseVolumeButton extends MenuButton implements MouseEventInterf
     public static final float MAX_VOLUME = 1f;
 
     public IncreaseVolumeButton (Game _game, MenuScreen _menuScreen, SoundEffectVolumeControl _sfxVolume, int _xOffset, int _yOffset) {
-        super(_xOffset, _yOffset, 0, 0, "", _game, _menuScreen);
+        super(_xOffset, _yOffset, "", _game, _menuScreen);
 
         this.BUTTON_X_OFFSET = _xOffset;
         this.BUTTON_Y_OFFSET = _yOffset;
@@ -37,12 +39,12 @@ public class IncreaseVolumeButton extends MenuButton implements MouseEventInterf
         this.onHoverButtonImg = StdOps.loadImage("src/resources/img/ui/inc_h.png");
         this.activeImage = this.buttonImg;
 
-        this.setWidth(this.activeImage.getWidth());
-        this.setHeight(this.activeImage.getHeight());
+        super.setWidth(this.activeImage.getWidth());
+        super.setHeight(this.activeImage.getHeight());
     }
 
     public IncreaseVolumeButton (Game _game, MenuScreen _menuScreen, MusicVolumeControl _musicVolume, int _xOffset, int _yOffset) {
-        super(0, 0, 0, 0, "", _game, _menuScreen);
+        super(0, 0, "", _game, _menuScreen);
         this.BUTTON_X_OFFSET = _xOffset;
         this.BUTTON_Y_OFFSET = _yOffset;
 
@@ -52,8 +54,8 @@ public class IncreaseVolumeButton extends MenuButton implements MouseEventInterf
         this.onHoverButtonImg = StdOps.loadImage("src/resources/img/ui/inc_h.png");
         this.activeImage = this.buttonImg;
 
-        this.setWidth(this.activeImage.getWidth());
-        this.setHeight(this.activeImage.getHeight());
+        super.setWidth(this.activeImage.getWidth());
+        super.setHeight(this.activeImage.getHeight());
     }
 
     @Override

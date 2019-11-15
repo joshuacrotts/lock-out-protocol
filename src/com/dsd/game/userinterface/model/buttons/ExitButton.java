@@ -14,6 +14,8 @@ import java.awt.Graphics2D;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 11/14/19
  */
 public class ExitButton extends MenuButton implements MouseEventInterface {
 
@@ -21,13 +23,10 @@ public class ExitButton extends MenuButton implements MouseEventInterface {
     private static final int BUTTON_Y_OFFSET = 180;
     private static final int TEXT_X_OFFSET = 84;
     private static final int TEXT_Y_OFFSET = 45;
-    private static final int BUTTON_WIDTH = 300;
-    private static final int BUTTON_HEIGHT = 82;
 
     public ExitButton (Game _game, MenuScreen _menuScreen) {
-        super(_game.getGameWidth() - BUTTON_X_OFFSET - BUTTON_WIDTH / 2,
-                _game.getGameHeight(),
-                BUTTON_WIDTH, BUTTON_HEIGHT, LanguageController.translate("QUIT GAME"), _game, _menuScreen);
+        super(_game.getGameWidth() - BUTTON_X_OFFSET - BUTTON_WIDTH / 2, _game.getGameHeight(),
+                LanguageController.translate("QUIT GAME"), _game, _menuScreen);
     }
 
     @Override
