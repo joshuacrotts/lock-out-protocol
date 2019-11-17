@@ -121,6 +121,7 @@ public class PreambleScreen extends Screen implements TimerInterface {
     @Override
     public void cancelTimer () {
         this.preambleTimer.cancel();
+        this.preambleTimer = new Timer(true);
     }
 
     /**

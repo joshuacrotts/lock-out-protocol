@@ -8,6 +8,7 @@ import com.dsd.game.userinterface.model.buttons.MusicVolumeControl;
 import com.dsd.game.userinterface.model.buttons.SaveAudioChangesButton;
 import com.dsd.game.userinterface.model.buttons.SoundEffectVolumeControl;
 import com.revivedstandards.controller.StandardAudioController;
+import com.revivedstandards.model.StandardAudio;
 import com.revivedstandards.model.StandardAudioType;
 import java.awt.Graphics2D;
 
@@ -27,8 +28,6 @@ public class AudioView extends Screen implements MouseEventInterface {
         this.menuScreen.addInteractor(new SaveAudioChangesButton(super.getGame(), this.menuScreen));
         this.menuScreen.addInteractor(new SoundEffectVolumeControl(super.getGame(), this.menuScreen));
         this.menuScreen.addInteractor(new MusicVolumeControl(super.getGame(), this.menuScreen));
-
-        StandardAudioController.play("src/resources/audio/music/menu.wav", StandardAudioType.MUSIC);
     }
 
     @Override

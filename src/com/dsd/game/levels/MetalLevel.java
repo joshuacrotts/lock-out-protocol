@@ -34,10 +34,11 @@ public class MetalLevel extends StandardLevel {
 
     //  Images loaded in at runtime for random nature objects.
     private static final BufferedImage[] natureImages;
-    /**
-     * Variables used to track where the background image is drawn. The
-     * placement depends on the position and velocity of the player.
-     */
+
+    //
+    //  Variables used to track where the background image is drawn. The
+    //  placement depends on the position and velocity of the player.
+    //
     private int trackX;
     private final double SCROLL_X_FACTOR = 0.25;
 

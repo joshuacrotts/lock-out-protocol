@@ -12,8 +12,8 @@ import java.awt.Graphics2D;
  * This button will allow the user to save their game and resume the game once
  * they come back.
  *
- * @author rinty
- * 
+ * @author Rinty, Ronald, Joshua
+ *
  * @updated 11/14/19
  */
 public class SaveButton extends MenuButton implements MouseEventInterface {

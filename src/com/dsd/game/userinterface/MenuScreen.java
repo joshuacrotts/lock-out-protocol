@@ -26,6 +26,7 @@ import com.dsd.game.userinterface.view.LanguageChangeView;
 import com.dsd.game.userinterface.view.MenuView;
 import com.dsd.game.userinterface.view.ResolutionView;
 import com.revivedstandards.controller.StandardAudioController;
+import com.revivedstandards.model.StandardAudio;
 import com.revivedstandards.model.StandardAudioType;
 import java.awt.Graphics2D;
 import java.util.Stack;
@@ -37,13 +38,21 @@ import java.util.Stack;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/17/19
  */
 public class MenuScreen extends Screen {
 
+    //  Determines the state of the menu, and how many menus deep we're in
+    //  (i.e. if the user wants to press the back button, they'll pop a
+    //  state off the stack and the menu will be set to that.
     private MenuState menuState;
     private final Stack<MenuState> menuStateStack;
 
-    private MenuView menuView;
+    //  Each view listed here is a segment of the MenuScreen as a whole.
+    //  MenuScreen acts as a controller for which view will be rendered
+    //  next.
+    private final MenuView menuView;
     private ResolutionView changeResView;
     private LanguageChangeView changeLanguageView;
     private AudioView changeAudioView;
@@ -58,6 +67,7 @@ public class MenuScreen extends Screen {
         this.createUIScreens();
 
         TabTextFieldCommand tabCommand = new TabTextFieldCommand(this.getGame());
+        this.playMenuMusic();
     }
 
     @Override
@@ -94,18 +104,46 @@ public class MenuScreen extends Screen {
         }
     }
 
-    public void stopMenuMusic () {
-        StandardAudioController.stop("src/resources/audio/music/menu.wav", StandardAudioType.SFX);
+    /**
+     * Plays the music associated with the menu.
+     */
+    public void playMenuMusic () {
+        StandardAudioController.loop("src/resources/audio/music/menu.wav", StandardAudioType.MUSIC,
+                StandardAudio.INFINITELY);
     }
 
+    /**
+     * Stops the music associated with the menu.
+     */
+    public void stopMenuMusic () {
+        StandardAudioController.stop("src/resources/audio/music/menu.wav", StandardAudioType.MUSIC);
+    }
+
+    /**
+     * Returns the top-most state on the stack. This is the [menu] state that is
+     * set when the user presses the back button.
+     *
+     * @return
+     */
     public MenuState popMenuStack () {
         return this.menuStateStack.pop();
     }
 
+    /**
+     * Pushes a state onto the stack. When the user goes deeper into a menu, the
+     * state they were just on is pushed to the stack. In the event they want to
+     * return to it, they press the back button, and it is popped off the top of
+     * the stack.
+     *
+     * @param _state
+     */
     public void pushMenuStack (MenuState _state) {
         this.menuStateStack.push(_state);
     }
 
+    /**
+     * Loads the background image for the menu.
+     */
     public void loadMenuBackground () {
         this.menuView.loadBackgroundImage();
     }
@@ -125,21 +163,21 @@ public class MenuScreen extends Screen {
      * Instantiates the buttons that are on the MainMenu screen.
      */
     private void initializeMainMenuButtons () {
-        //  Instantiates the play button
+        //  Instantiates the play button.
         super.addInteractor(new PlayButton(this.getGame(), this));
-        //  Instantiates the exit button
+        //  Instantiates the exit button.
         super.addInteractor(new ExitButton(this.getGame(), this));
-        //  Instantiates load button
+        //  Instantiates load button.
         super.addInteractor(new LoadButton(this.getGame(), this));
-        //  Instantiates the help/options button
+        //  Instantiates the help/options button.
         super.addInteractor(new HelpOrOptionsButton(this.getGame(), this));
-        //  Instantiates the title label
+        //  Instantiates the title label.
         super.addInteractor(new TitleLabel(this.getGame()));
         //  Instantiates the account label (to access the submenu).
         super.addInteractor(new AccountButton(this.getGame(), this));
-        //  Instantiates the MalePlayer button
+        //  Instantiates the MalePlayer button.
         super.addInteractor(new MalePlayerButton(this.getGame(), this));
-        //  Instantiates the FemalePlayer button
+        //  Instantiates the FemalePlayer button.
         super.addInteractor(new FemalePlayerButton(this.getGame(), this));
     }
 
