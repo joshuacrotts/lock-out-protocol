@@ -20,6 +20,7 @@ public class RainDrop extends StandardGameObject {
      * Gravity pulling the rain drop to the bottom of the screen, as well as its
      * vanish factor (how long it lasts on screen before it dies.
      */
+    private final Color color;
     private final int vanish;
     private final double GRAVITY = 0.25d;
     private final int BLUE_COLOR = 100;
@@ -30,6 +31,7 @@ public class RainDrop extends StandardGameObject {
         //Solve for horizontal leg of right triangle formed by velocity vector
         this.setVelX(_speed * FastMath.sin(_direction));
         this.vanish = _vanish;
+        this.color = new Color(BLUE_COLOR, BLUE_COLOR, StdOps.rand(BLUE_COLOR, 0xFF));
     }
 
     @Override
@@ -43,7 +45,7 @@ public class RainDrop extends StandardGameObject {
 
     @Override
     public void render (Graphics2D _g2) {
-        _g2.setColor(new Color(BLUE_COLOR, BLUE_COLOR, StdOps.rand(BLUE_COLOR, 0xFF)));
+        _g2.setColor(this.color);
         _g2.drawLine((int) this.getX(), (int) this.getY(), (int) (this.getX() - this.getVelX() * VEL_FACTOR),
                 (int) (this.getY() - this.getVelY() * VEL_FACTOR));
     }

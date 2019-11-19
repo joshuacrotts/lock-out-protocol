@@ -45,6 +45,9 @@ public class PersistentDatabase implements RemoteDatabase {
     private static String USERNAME;
     private static String PASSWORD;
 
+    //  Number of salt iterations.
+    private static int SALT_ITERATIONS = 14;
+
     public PersistentDatabase (Game _game) {
         this.game = _game;
     }
@@ -363,7 +366,7 @@ public class PersistentDatabase implements RemoteDatabase {
                 return AccountStatus.EXISTS;
             }
             else {
-                String hashed = BCrypt.hashpw(_password, BCrypt.gensalt());
+                String hashed = BCrypt.hashpw(_password, BCrypt.gensalt(SALT_ITERATIONS));
 
                 //  Very, VERY long statement to update the user.
                 insertStatement = this.remoteDBConnection.prepareStatement(String.format("INSERT INTO user_accounts " + "VALUES(UUID(), ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);"));

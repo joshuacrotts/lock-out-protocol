@@ -14,6 +14,8 @@ import java.awt.Graphics2D;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 11/14/19
  */
 public class BackButton extends MenuButton implements MouseEventInterface {
 
@@ -22,17 +24,15 @@ public class BackButton extends MenuButton implements MouseEventInterface {
     private static final int BUTTON_Y_OFFSET = 120;
     private static final int TEXT_X_OFFSET = 115;
     private static final int TEXT_Y_OFFSET = 45;
-    private static final int BUTTON_WIDTH = 300;
-    private static final int BUTTON_HEIGHT = 82;
 
     public BackButton (Game _game, MenuScreen _menuScreen) {
         super(_game.getGameWidth() - BUTTON_X_OFFSET - BUTTON_WIDTH / 2,
-                _game.getGameHeight() - BUTTON_Y_OFFSET, BUTTON_WIDTH, BUTTON_HEIGHT,
+                _game.getGameHeight() - BUTTON_Y_OFFSET,
                 LanguageController.translate("BACK"), _game, _menuScreen);
     }
 
     public BackButton (int _x, int _y, Game _game, MenuScreen _menuScreen) {
-        super(_x, _y, BUTTON_WIDTH, BUTTON_HEIGHT, LanguageController.translate("BACK"), _game, _menuScreen);
+        super(_x, _y, LanguageController.translate("BACK"), _game, _menuScreen);
     }
 
     @Override

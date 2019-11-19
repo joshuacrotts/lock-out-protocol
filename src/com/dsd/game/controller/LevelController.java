@@ -4,6 +4,9 @@ import com.dsd.game.core.Game;
 import com.dsd.game.objects.SerializableObject;
 import com.dsd.game.database.SerializableType;
 import com.dsd.game.userinterface.TimerInterface;
+import com.revivedstandards.controller.StandardAudioController;
+import com.revivedstandards.model.StandardAudio;
+import com.revivedstandards.model.StandardAudioType;
 import com.revivedstandards.model.StandardLevel;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -26,7 +29,7 @@ import java.util.TimerTask;
  *
  * @author Joshua, Ronald, Rinty
  *
- * @updated 11/12/19
+ * @updated 11/17/19
  */
 public class LevelController implements TimerInterface, SerializableObject {
 
@@ -104,9 +107,26 @@ public class LevelController implements TimerInterface, SerializableObject {
      * currentID back to 0.
      */
     public void clearLevels () {
+        this.stopMusic();
         this.levels.clear();
         this.currentLevelID = 0;
         this.currentWave = 1;
+    }
+
+    /**
+     * Plays the music track associated with the current level ID.
+     */
+    public void playMusic () {
+        StandardAudioController.loop("src/resources/audio/music/level" + this.currentLevelID + ".wav",
+                StandardAudioType.MUSIC, StandardAudio.INFINITELY);
+    }
+
+    /**
+     * Stops the music track associated with the current level ID.
+     */
+    public void stopMusic () {
+        StandardAudioController.stop("src/resources/audio/music/level" + this.currentLevelID + ".wav",
+                StandardAudioType.MUSIC);
     }
 
     @Override

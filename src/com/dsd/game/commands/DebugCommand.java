@@ -26,7 +26,7 @@ public class DebugCommand extends Command {
     }
 
     @Override
-    public void pressed (float dt) {
+    public void pressed (float _dt) {
         DebugController.DEBUG_MODE = !DebugController.DEBUG_MODE;
     }
 }

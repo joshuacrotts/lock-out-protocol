@@ -2,6 +2,7 @@ package com.dsd.game.userinterface;
 
 import com.dsd.game.core.Game;
 import com.dsd.game.userinterface.Screen;
+import com.dsd.game.userinterface.model.buttons.HelpBackButton;
 import com.dsd.game.userinterface.model.labels.ControlsLabel;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -56,6 +57,7 @@ public class HelpScreen extends Screen {
 
     private void createUIElements () {
         super.addInteractor(new ControlsLabel(this.getGame()));
+        super.addInteractor(new HelpBackButton(this.getGame(), null));
     }
 
 }

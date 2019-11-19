@@ -14,7 +14,9 @@ import java.awt.Graphics2D;
  * This class is used for verifying changes in the audio settings (note, this is
  * DIFFERENT from the actual VOLUME of the game).
  *
- * @author Joshua
+ * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 11/14/19
  */
 public class SaveAudioChangesButton extends MenuButton implements MouseEventInterface {
 
@@ -26,13 +28,10 @@ public class SaveAudioChangesButton extends MenuButton implements MouseEventInte
     private static final int BUTTON_Y_OFFSET = 120;
     private static final int TEXT_X_OFFSET = 60;
     private static final int TEXT_Y_OFFSET = 45;
-    private static final int BUTTON_WIDTH = 300;
-    private static final int BUTTON_HEIGHT = 82;
 
     public SaveAudioChangesButton (Game _game, MenuScreen _menuScreen) {
         super(SaveAudioChangesButton.BUTTON_X_OFFSET,
                 _game.getGameHeight() - SaveAudioChangesButton.BUTTON_Y_OFFSET,
-                SaveAudioChangesButton.BUTTON_WIDTH, SaveAudioChangesButton.BUTTON_HEIGHT,
                 LanguageController.translate("SAVE CHANGES"), _game, _menuScreen);
 
         this.menuScreen = _menuScreen;
@@ -46,7 +45,7 @@ public class SaveAudioChangesButton extends MenuButton implements MouseEventInte
 
     @Override
     public void render (Graphics2D _g2) {
-        if (!this.getGame().isMenu() || !this.getMenuScreen().isOnAudio()) {
+        if (!this.getGame().isMenu() || !this.getMenuScreen().isOnVolume()) {
             return;
         }
 
@@ -58,7 +57,7 @@ public class SaveAudioChangesButton extends MenuButton implements MouseEventInte
 
     @Override
     public void onMouseClick () {
-        if (!this.getGame().isMenu() || !this.getMenuScreen().isOnAudio()) {
+        if (!this.getGame().isMenu() || !this.getMenuScreen().isOnVolume()) {
             return;
         }
 
@@ -72,7 +71,7 @@ public class SaveAudioChangesButton extends MenuButton implements MouseEventInte
 
     @Override
     public void onMouseEnterHover () {
-        if (!this.getGame().isMenu() || !this.getMenuScreen().isOnAudio()) {
+        if (!this.getGame().isMenu() || !this.getMenuScreen().isOnVolume()) {
             return;
         }
         this.activeImage = this.onHoverButtonImg;
@@ -80,7 +79,7 @@ public class SaveAudioChangesButton extends MenuButton implements MouseEventInte
 
     @Override
     public void onMouseExitHover () {
-        if (!this.getGame().isMenu() || !this.getMenuScreen().isOnAudio()) {
+        if (!this.getGame().isMenu() || !this.getMenuScreen().isOnVolume()) {
             return;
         }
         this.activeImage = this.buttonImg;

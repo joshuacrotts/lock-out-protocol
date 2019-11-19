@@ -36,7 +36,7 @@ public class MoveBackwardCommand extends Command {
     }
 
     @Override
-    public void released (float dt) {
+    public void released (float _dt) {
         this.player.setPlayerState(PlayerState.STANDING);
     }
 

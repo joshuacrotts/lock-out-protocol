@@ -16,6 +16,8 @@ import java.awt.Graphics2D;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/14/19
  */
 public class VolumeControlButton extends MenuButton implements MouseEventInterface {
 
@@ -24,12 +26,10 @@ public class VolumeControlButton extends MenuButton implements MouseEventInterfa
     private static final int BUTTON_Y_OFFSET = 450;
     private static final int TEXT_X_OFFSET = 50;
     private static final int TEXT_Y_OFFSET = 45;
-    private static final int BUTTON_WIDTH = 300;
-    private static final int BUTTON_HEIGHT = 82;
 
     public VolumeControlButton (Game _game, MenuScreen _menuScreen) {
         super(VolumeControlButton.BUTTON_X_OFFSET, _game.getGameHeight() - VolumeControlButton.BUTTON_Y_OFFSET,
-                VolumeControlButton.BUTTON_WIDTH, VolumeControlButton.BUTTON_HEIGHT, LanguageController.translate("CHANGE VOLUME"),
+                LanguageController.translate("CHANGE VOLUME"),
                 _game, _menuScreen);
     }
 

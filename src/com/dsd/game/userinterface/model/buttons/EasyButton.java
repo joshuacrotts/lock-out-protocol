@@ -20,6 +20,8 @@ import java.awt.Graphics2D;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 11/14/19
  */
 public class EasyButton extends MenuButton implements MouseEventInterface {
 
@@ -28,13 +30,10 @@ public class EasyButton extends MenuButton implements MouseEventInterface {
     private static final int BUTTON_Y_OFFSET = -180;
     private static final int TEXT_X_OFFSET = 21;
     private static final int TEXT_Y_OFFSET = 45;
-    private static final int BUTTON_WIDTH = 300;
-    private static final int BUTTON_HEIGHT = 82;
 
     public EasyButton (Game _game, MenuScreen _menuScreen) {
         super(Screen.gameHalfWidth - BUTTON_X_OFFSET,
                 Screen.gameHalfHeight + BUTTON_Y_OFFSET,
-                BUTTON_WIDTH, BUTTON_HEIGHT,
                 LanguageController.translate(DifficultyType.EASY.getDifficultyLabel()),
                 _game, _menuScreen);
     }

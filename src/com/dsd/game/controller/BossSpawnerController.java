@@ -62,7 +62,7 @@ public class BossSpawnerController extends StandardGameObject {
     }
 
     @Override
-    public void render (Graphics2D gd) {
+    public void render (Graphics2D _gd) {
     }
 
 }

@@ -16,6 +16,8 @@ import java.awt.Graphics2D;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 11/14/19
  */
 public class ResolutionMenuButton extends MenuButton implements MouseEventInterface {
 
@@ -24,12 +26,10 @@ public class ResolutionMenuButton extends MenuButton implements MouseEventInterf
     private static final int BUTTON_Y_OFFSET = 580;
     private static final int TEXT_X_OFFSET = 25;
     private static final int TEXT_Y_OFFSET = 45;
-    private static final int BUTTON_WIDTH = 300;
-    private static final int BUTTON_HEIGHT = 82;
 
     public ResolutionMenuButton (Game _game, MenuScreen _menuScreen) {
         super(ResolutionMenuButton.BUTTON_X_OFFSET, _game.getGameHeight() - ResolutionMenuButton.BUTTON_Y_OFFSET,
-                ResolutionMenuButton.BUTTON_WIDTH, ResolutionMenuButton.BUTTON_HEIGHT, LanguageController.translate("CHANGE RESOLUTION"),
+                LanguageController.translate("CHANGE RESOLUTION"),
                 _game, _menuScreen);
     }
 

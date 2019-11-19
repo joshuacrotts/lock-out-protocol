@@ -8,6 +8,7 @@ import com.dsd.game.controller.DifficultyController;
 import com.dsd.game.controller.LanguageController;
 import com.dsd.game.controller.LevelController;
 import com.dsd.game.controller.RainController;
+import com.dsd.game.controller.SnowController;
 import com.dsd.game.controller.TimerController;
 import com.dsd.game.database.TranslatorDatabase;
 import com.dsd.game.levels.MetalLevel;
@@ -30,15 +31,18 @@ import com.revivedstandards.model.StandardLevel;
 import javax.swing.JOptionPane;
 
 /**
- * This is the main class.
+ * This is the main class. It acts as the "controller", or the center hub for
+ * all other classes, views, models, and other controllers that need to be
+ * instantiated to run the game.
  *
- * @TODO: Lots of refactoring to separate private methods Create level
- * controller class which determines when the user transitions from one level to
- * the next. Serialization is also being accounted for because only a few pieces
- * of data will ever need to be saved (the Player's position, stats, inventory,
- * and level info).
+ * More importantly, the links and associations are also established here. For
+ * instance, most other classes require a reference to either Game, Player, or
+ * StandardCamera. Thus, these relationships are linked here, and don't have to
+ * be touched later on down the road.
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/17/19
  */
 public class Game extends StandardGame {
 
@@ -57,11 +61,17 @@ public class Game extends StandardGame {
     private final ShopScreen shopScreen;
     private final HelpScreen helpScreen;
 
-    /**
-     * Rain controller which contacts the API for the logic of determining
-     * whether it should rain or not.
-     */
+    //
+    //  Rain controller which contacts the API for the logic of determining
+    //  whether it should rain or not.
+    //
     private final RainController rainController;
+
+    //
+    //  Snow controller which contacts the API for the logic of determining
+    //  whether it should snow or not.
+    //
+    private final SnowController snowController;
 
     //  Debug controller
     private final DebugController debugController;
@@ -109,6 +119,7 @@ public class Game extends StandardGame {
         this.sch.setCamera(this.sc);
         // Instantiates the rain, debug, and level controllers.
         this.rainController = new RainController(this);
+        this.snowController = new SnowController(this);
         this.debugController = new DebugController(this, this.sch);
         this.difficultyController = new DifficultyController(this);
         this.levelController = new LevelController(this);
@@ -158,6 +169,8 @@ public class Game extends StandardGame {
                 StandardHandler.Handler(this.sch);
                 //  Then the rain if applicable
                 this.rainController.tick();
+                //  Then the snow if applicable
+                this.snowController.tick();
                 //  Then the heads up display
                 this.hudScreen.tick();
                 //  And lastly the camera
@@ -185,6 +198,8 @@ public class Game extends StandardGame {
             StandardDraw.Handler(this.sch);
             //  Then render the rain if applicable
             this.rainController.render(StandardDraw.Renderer);
+            //  Then render the snow if applicable
+            this.snowController.render(StandardDraw.Renderer);
             //  Then render the heads up display
             this.hudScreen.render(StandardDraw.Renderer);
             //  Then render the preamble, pause or shop effect if necessary
@@ -204,12 +219,9 @@ public class Game extends StandardGame {
             }
             //  If we are in debug mode, we can draw the text.
             if (DebugController.DEBUG_MODE) {
-
                 this.debugController.render(StandardDraw.Renderer);
             }
-
         }
-
     }
 
     /**
@@ -221,6 +233,7 @@ public class Game extends StandardGame {
         DifficultyController.setLevelTransitionTimer();
         this.levelController.getCurrentLevel().loadLevelData();
         this.levelController.startWaveTimer();
+        this.levelController.playMusic();
         this.menuScreen.stopMenuMusic();
     }
 
@@ -258,9 +271,9 @@ public class Game extends StandardGame {
      * factors from the previous game's progression.
      */
     public void resetGame () {
-
         this.sch.clearEntities();
         this.levelController.clearLevels();
+        this.menuScreen.playMenuMusic();
         this.player.resetPlayer();
         this.player.getInventory().resetInventory();
         this.instantiateLevels();
@@ -275,13 +288,10 @@ public class Game extends StandardGame {
      * @return
      */
     public boolean saveToDatabase () {
-
         if (!this.translatorDatabase.saveToDatabase()) {
-
             JOptionPane.showMessageDialog(null, LanguageController.translate("Unable to save data."));
             return false;
         }
-
         return true;
     }
 
@@ -291,9 +301,7 @@ public class Game extends StandardGame {
      * @return
      */
     public boolean loadFromDatabase () {
-
         if (!this.translatorDatabase.loadFromDatabase()) {
-
             JOptionPane.showMessageDialog(null, LanguageController.translate("Unable to load data, did you log in?."));
             return false;
         }
