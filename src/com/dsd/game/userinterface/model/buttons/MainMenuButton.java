@@ -13,7 +13,7 @@ import java.awt.Graphics2D;
  * they come back.
  *
  * @author rinty
- * 
+ *
  * @updated 11/14/19
  */
 public class MainMenuButton extends MenuButton implements MouseEventInterface {
@@ -35,7 +35,6 @@ public class MainMenuButton extends MenuButton implements MouseEventInterface {
         this.menuScreen = _menuScreen;
         this.setX((int) this.game.getCamera().getX() - BUTTON_X_OFFSET);
         this.setY((int) this.game.getCamera().getY() + BUTTON_Y_OFFSET);
-
         this.setScaled(true);
     }
 
@@ -44,7 +43,6 @@ public class MainMenuButton extends MenuButton implements MouseEventInterface {
         if (!this.game.isPaused()) {
             return;
         }
-
         this.setX((int) this.game.getCamera().getX() - BUTTON_X_OFFSET);
         this.setY((int) this.game.getCamera().getY() + BUTTON_Y_OFFSET);
     }
@@ -54,7 +52,6 @@ public class MainMenuButton extends MenuButton implements MouseEventInterface {
         if (!this.game.isPaused()) {
             return;
         }
-
         super.render(_g2);
         _g2.setFont(this.font);
         _g2.setColor(Color.WHITE);

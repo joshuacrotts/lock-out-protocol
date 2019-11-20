@@ -42,7 +42,7 @@ public abstract class Utilities extends StdOps {
      * @return
      */
     public static final float clampFloat (float _num, float _min, float _max) {
-        if(_min > _max) {
+        if (_min > _max) {
             throw new IllegalArgumentException("Your min clamp value cannot be greater than your max.");
         }
         else if (_num < _min) {

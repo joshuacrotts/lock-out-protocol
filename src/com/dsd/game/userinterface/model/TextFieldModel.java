@@ -40,12 +40,10 @@ public class TextFieldModel extends Interactor implements MouseEventInterface {
         this.setWidth(FIELD_WIDTH);
         this.setHeight(FIELD_HEIGHT);
         super.setX(this.getX() - this.getWidth() / 2);
-
         //  Instantiate the variables associated with the view of this model.
         this.view = new TextFieldView(this);
         this.string = new StringBuilder();
         this.inputListener = new LetterInputListener(_game, this);
-
         TextFieldController.addField(this);
     }
 
@@ -108,7 +106,6 @@ public class TextFieldModel extends Interactor implements MouseEventInterface {
                 hiddenStr.append("*");
             }
         }
-
         return hiddenStr.toString();
     }
 

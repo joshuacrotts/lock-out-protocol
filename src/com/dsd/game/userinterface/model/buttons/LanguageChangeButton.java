@@ -16,7 +16,7 @@ import java.awt.Graphics2D;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
- * 
+ *
  * @updated 11/14/19
  */
 public class LanguageChangeButton extends MenuButton implements MouseEventInterface {
@@ -43,7 +43,6 @@ public class LanguageChangeButton extends MenuButton implements MouseEventInterf
         if (!this.getMenuScreen().isOnOptions() || !this.getGame().isMenu()) {
             return;
         }
-
         super.render(_g2);
         _g2.setFont(this.font);
         _g2.setColor(Color.WHITE);
@@ -55,7 +54,6 @@ public class LanguageChangeButton extends MenuButton implements MouseEventInterf
         if (!this.getMenuScreen().isOnOptions() || !this.getGame().isMenu()) {
             return;
         }
-
         super.onMouseClick();
         this.getMenuScreen().pushMenuStack(MenuState.OPTIONS);
         this.getMenuScreen().setMenuState(MenuState.LANGUAGES);

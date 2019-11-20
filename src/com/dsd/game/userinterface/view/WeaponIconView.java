@@ -63,7 +63,6 @@ public class WeaponIconView extends Interactor {
      */
     private void drawIcon (Graphics2D _g2) {
         _g2.drawImage(this.inventory.getCurrentWeapon().getIcon(), this.getX(), this.getY(), null);
-
     }
 
     @Override

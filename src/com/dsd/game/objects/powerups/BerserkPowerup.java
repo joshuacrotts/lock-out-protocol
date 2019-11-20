@@ -100,10 +100,8 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
         this.powerupTimer = new Timer(true);
         this.powerupTimer.schedule(new BerserkTimer(this), timer);
         TimerController.addTimer(this);
-
         this.isActivated = true;
         this.activateDamageBoost();
-
     }
 
     @Override
@@ -134,7 +132,6 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
         if (this.isCollected) {
             return;
         }
-
         StandardAudioController.play("src/resources/audio/sfx/berserk.wav", StandardAudioType.SFX);
     }
 

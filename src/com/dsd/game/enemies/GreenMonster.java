@@ -56,17 +56,13 @@ public class GreenMonster extends Enemy implements DeathListener {
     public GreenMonster (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, GreenMonster.APPROACH_VEL, GreenMonster.originalHealth, StandardID.Monster2, _game, _sch);
         this.setTarget(_game.getPlayer());
-
         //  Randomly generates the walking frames per second for variability
         this.walkingFPS = StdOps.rand(this.WALKING_FPS_MIN, this.WALKING_FPS_MAX);
-
         //  Sets the walking/death frames for this monster
         super.initWalkingFrames(GreenMonster.WALK_FRAMES, this.walkingFPS);
         super.initDeathFrames(GreenMonster.DEATH_FRAMES, GreenMonster.DEATH_FPS, 5);
-
         //  Sets the default animation
         super.setAnimation(super.getWalkingAnimation());
-
         //  The width/height of the model is set by the buffered image backing it.
         super.setDimensions();
         super.setDamage(this.DAMAGE);
@@ -104,7 +100,6 @@ public class GreenMonster extends Enemy implements DeathListener {
         this.setAnimation(this.getDeathAnimation());
         this.explosionHandler = new StandardParticleHandler(50);
         this.explosionHandler.setCamera(this.getCamera());
-
         for (int i = 0 ; i < this.explosionHandler.getMaxParticles() ; i++) {
             this.explosionHandler.addEntity(new StandardBoxParticle(this.getX(), this.getY(),
                     StdOps.rand(1.0, 5.0), StdOps.randBounds(-10.0, -3.0, 3.0, 10.0),

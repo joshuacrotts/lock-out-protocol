@@ -26,7 +26,6 @@ public abstract class UtilitiesTests {
         System.out.println(assertEquals(Utilities.clamp(-50, -40, -30), -40));
         //  Edge case (clamping positive number to negative range
         System.out.println(assertEquals(Utilities.clamp(65, -5, -4), -4));
-
         //  Normal cases.
         System.out.println(assertEquals(Utilities.clamp(5, 3, 7), 5));
         System.out.println(assertEquals(Utilities.clamp(0, 2, 10), 2));

@@ -14,7 +14,7 @@ import java.awt.Graphics2D;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
- * 
+ *
  * @updated 11/14/19
  */
 public class BackButton extends MenuButton implements MouseEventInterface {
@@ -46,7 +46,6 @@ public class BackButton extends MenuButton implements MouseEventInterface {
         if (this.getMenuScreen().isOnMainMenu()) {
             return;
         }
-
         super.render(_g2);
         _g2.setFont(this.font);
         _g2.setColor(Color.WHITE);
@@ -58,9 +57,7 @@ public class BackButton extends MenuButton implements MouseEventInterface {
         if (!this.getGame().isMenu() || this.getMenuScreen().isOnMainMenu()) {
             return;
         }
-
         super.onMouseClick();
-
         this.getMenuScreen().setMenuState(this.getMenuScreen().popMenuStack());
     }
 
@@ -70,7 +67,6 @@ public class BackButton extends MenuButton implements MouseEventInterface {
             return;
         }
         this.activeImage = this.onHoverButtonImg;
-
     }
 
     @Override

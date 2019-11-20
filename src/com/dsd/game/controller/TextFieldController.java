@@ -54,6 +54,5 @@ public class TextFieldController {
         TextFieldModel selectedField = TextFieldController.textFieldController.get(selectedTextField);
         selectedField.setActive(true);
         TextFieldController.deactivate(selectedField);
-
     }
 }

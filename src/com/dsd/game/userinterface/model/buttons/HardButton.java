@@ -20,7 +20,7 @@ import java.awt.Graphics2D;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
- * 
+ *
  * @updated 11/14/19
  */
 public class HardButton extends MenuButton implements MouseEventInterface {
@@ -48,7 +48,6 @@ public class HardButton extends MenuButton implements MouseEventInterface {
         if (!this.getMenuScreen().isOnDifficulty()) {
             return;
         }
-
         super.render(_g2);
         _g2.setFont(this.font);
         _g2.setColor(Color.WHITE);
@@ -70,7 +69,6 @@ public class HardButton extends MenuButton implements MouseEventInterface {
         DifficultyController.difficultyType = DifficultyType.HARD;
         this.getGame().uponPlay();
         this.getMenuScreen().setMenuState(MenuState.MAIN);
-
     }
 
     @Override
@@ -79,7 +77,6 @@ public class HardButton extends MenuButton implements MouseEventInterface {
             return;
         }
         this.activeImage = this.onHoverButtonImg;
-
     }
 
     @Override

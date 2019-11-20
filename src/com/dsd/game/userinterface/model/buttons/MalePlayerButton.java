@@ -14,7 +14,11 @@ import java.awt.Graphics2D;
  * Subclass of StandardButton - switches the game state from the main menu to
  * the player gender sub-menu.
  *
- * @author rinty
+ * @group [Data Structure Deadheads]
+ *
+ * @author Rinty, Ronald, Joshua
+ *
+ * @updated 11/19/19
  */
 public class MalePlayerButton extends StandardButton implements MouseEventInterface {
 
@@ -33,7 +37,6 @@ public class MalePlayerButton extends StandardButton implements MouseEventInterf
         super(Screen.gameWidth - BUTTON_WIDTH - BUTTON_X_OFFSET,
                 _game.getGameHeight() - MalePlayerButton.BUTTON_Y_OFFSET,
                 MalePlayerButton.BUTTON_WIDTH, MalePlayerButton.BUTTON_HEIGHT);
-
         this.game = _game;
         this.menuScreen = _menuScreen;
         MalePlayerButton.playerView = new PlayerView(this.game, this.menuScreen, this, "male");
@@ -44,10 +47,8 @@ public class MalePlayerButton extends StandardButton implements MouseEventInterf
         if (!this.menuScreen.isOnPlayerGender()) {
             return;
         }
-
         this.setX(Screen.gameWidth - BUTTON_WIDTH - BUTTON_X_OFFSET);
         this.setY(this.game.getGameHeight() - MalePlayerButton.BUTTON_Y_OFFSET);
-
         MalePlayerButton.playerView.tick();
     }
 
@@ -56,7 +57,6 @@ public class MalePlayerButton extends StandardButton implements MouseEventInterf
         if (!this.menuScreen.isOnPlayerGender()) {
             return;
         }
-
         MalePlayerButton.playerView.render(_g2);
     }
 

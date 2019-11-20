@@ -41,7 +41,6 @@ public class GrenadeBulletObject extends ProjectileGameObject implements DeathLi
         super(_x, _y, _angle, _damage, VEL_FACTOR, GrenadeBulletObject.frames,
                 GrenadeBulletObject.BULLET_FPS, _game, _parentContainer, _parent,
                 StandardID.Bullet);
-
     }
 
     @Override

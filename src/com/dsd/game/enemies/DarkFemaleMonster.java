@@ -61,19 +61,14 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
     public DarkFemaleMonster (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, DarkFemaleMonster.APPROACH_VEL, DarkFemaleMonster.originalHealth,
                 StandardID.Monster3, _game, _sch);
-
         this.setTarget(_game.getPlayer());
-
         //  Randomly generates the walking frames per second for variability
         this.walkingFPS = StdOps.rand(this.WALKING_FPS_MIN, this.WALKING_FPS_MAX);
-
         //  Sets the walking/death frames for this monster
         super.initWalkingFrames(DarkFemaleMonster.WALK_FRAMES, this.walkingFPS);
         super.initDeathFrames(DarkFemaleMonster.DEATH_FRAMES, DarkFemaleMonster.DEATH_FPS, 5);
-
         //  Sets the default animation
         super.setAnimation(super.getWalkingAnimation());
-
         //  The width/height of the model is set by the buffered image backing it.
         super.setDimensions();
         super.setDamage(this.DAMAGE);
@@ -111,10 +106,10 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
         this.setAnimation(this.getDeathAnimation());
         this.explosionHandler = new StandardParticleHandler(50);
         this.explosionHandler.setCamera(this.getCamera());
-
         for (int i = 0 ; i < this.explosionHandler.getMaxParticles() ; i++) {
             this.explosionHandler.addEntity(new StandardBoxParticle(this.getX(), this.getY(),
-                    StdOps.rand(1.0, 5.0), StdOps.randBounds(-10.0, -3.0, 3.0, 10.0),
+                    StdOps.rand(1.0, 5.0),
+                    StdOps.randBounds(-10.0, -3.0, 3.0, 10.0),
                     StdOps.randBounds(-10.0, -3.0, 3.0, 10.0), this.generateRandomBloodColor(), 3f, this.explosionHandler,
                     this.getAngle(), ShapeType.CIRCLE, true));
         }
@@ -141,47 +136,8 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
      * @return new Color object.
      */
     private Color generateRandomBloodColor () {
-        return new Color(StdOps.rand(RED_BOUND, BLUE_BOUND), 0, StdOps.rand(BLUE_BOUND, 0xFF));
-    }
-
-    /**
-     * Makes the monster move towards the player.
-     *
-     * @param _posX
-     * @param _posY
-     */
-    private void followPlayer (int _posX, int _posY) {
-
-        // Calculate the distance between the enemy and the player
-        double diffX = this.getX() - _posX - Entity.APPROACH_FACTOR;
-        double diffY = this.getY() - _posY - Entity.APPROACH_FACTOR;
-        // Use the pythagorean theorem to solve for the hypotenuse distance
-        double distance = (double) FastMath.sqrt(((this.getX() - _posX) * (this.getX() - _posX))
-                + ((this.getY() - _posY) * (this.getY() - _posY)));
-        // Sets the velocity according to how far away the enemy is from the player
-        this.setVelX(((this.APPROACH_VEL / distance) * (int) diffX));
-        this.setVelY(((this.APPROACH_VEL / distance) * (int) diffY));
-    }
-
-    /**
-     * Makes the monster face the player.
-     *
-     * @param _posX
-     * @param _posY
-     */
-    private void facePlayer (int _posX, int _posY) {
-        /**
-         * Calculates the angle using arctangent that the monster needs to face
-         * so they are angled towards the player.
-         */
-        float xSign = (float) FastMath.signum(_posX - this.getX());
-        double dx = FastMath.abs(_posX - this.getX());
-        double dy = FastMath.abs(_posY - this.getY());
-        this.setAngle((double) ((xSign) * (FastMath.atan((dx) / (dy)))));
-        // If we're in Q1 (+x, -+y) or in Q2 (-x, +y)
-        if ((_posX > this.getX() && _posY > this.getY()) || (_posX < this.getX() && _posY > this.getY())) {
-            this.setAngle((double) ((FastMath.PI / 2) + (FastMath.PI / 2 - this.getAngle())));
-        }
+        return new Color(StdOps.rand(DarkFemaleMonster.RED_BOUND, DarkFemaleMonster.BLUE_BOUND), 0,
+                         StdOps.rand(DarkFemaleMonster.BLUE_BOUND, 0xFF));
     }
 
     /**

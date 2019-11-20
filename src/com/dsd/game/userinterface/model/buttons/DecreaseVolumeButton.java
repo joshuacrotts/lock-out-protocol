@@ -14,7 +14,7 @@ import java.awt.Graphics2D;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
- * 
+ *
  * @updated 11/14/19
  */
 public class DecreaseVolumeButton extends MenuButton implements MouseEventInterface {
@@ -29,32 +29,24 @@ public class DecreaseVolumeButton extends MenuButton implements MouseEventInterf
 
     public DecreaseVolumeButton (Game _game, MenuScreen _menuScreen, SoundEffectVolumeControl _sfxVolume, int _xOffset, int _yOffset) {
         super(0, 0, "", _game, _menuScreen);
-
         this.BUTTON_X_OFFSET = _xOffset;
         this.BUTTON_Y_OFFSET = _yOffset;
-
         this.sfxVolume = _sfxVolume;
-
         this.buttonImg = StdOps.loadImage("src/resources/img/ui/dec.png");
         this.onHoverButtonImg = StdOps.loadImage("src/resources/img/ui/dec_h.png");
         this.activeImage = this.buttonImg;
-
         super.setWidth(this.activeImage.getWidth());
         super.setHeight(this.activeImage.getHeight());
     }
 
     public DecreaseVolumeButton (Game _game, MenuScreen _menuScreen, MusicVolumeControl _musicVolume, int _xOffset, int _yOffset) {
         super(0, 0, "", _game, _menuScreen);
-
         this.BUTTON_X_OFFSET = _xOffset;
         this.BUTTON_Y_OFFSET = _yOffset;
-
         this.musicVolume = _musicVolume;
-
         this.buttonImg = StdOps.loadImage("src/resources/img/ui/dec.png");
         this.onHoverButtonImg = StdOps.loadImage("src/resources/img/ui/dec_h.png");
         this.activeImage = this.buttonImg;
-
         this.setWidth(this.activeImage.getWidth());
         this.setHeight(this.activeImage.getHeight());
     }
@@ -104,6 +96,5 @@ public class DecreaseVolumeButton extends MenuButton implements MouseEventInterf
             return;
         }
         this.activeImage = this.buttonImg;
-
     }
 }

@@ -54,25 +54,19 @@ public class ReloadCommand extends Command implements TimerInterface {
         if (!this.player.getInventory().hasGun()) {
             return;
         }
-
         Gun gun = this.player.getInventory().getGun();
-
         if (!gun.hasAmmo() || gun.hasFullAmmo()) {
             return;
         }
-
         gun.setReloading(true);
-
         //  If the gun is a shotgun and we still have shotgun shells, we don't
         //  reload (this is pretty much just an edge case to make the sfx
         //  line up with what the player is "doing").
         if (gun.getWeaponType() == WeaponType.SHOTGUN && !gun.isWeaponEmpty()) {
             return;
         }
-
         //  Play the reload sfx.
         StandardAudioController.play(gun.getReloadSFXPath(), StandardAudioType.SFX);
-
         this.reloadTimer = new Timer(true);
         this.reloadTimer.schedule(new ReloadTimer(gun), gun.getReloadDelay());
     }

@@ -44,7 +44,6 @@ public class VolumeControlButton extends MenuButton implements MouseEventInterfa
         if (!this.getMenuScreen().isOnOptions() || !this.getGame().isMenu()) {
             return;
         }
-
         super.render(_g2);
         _g2.setFont(this.font);
         _g2.setColor(Color.WHITE);
@@ -56,7 +55,6 @@ public class VolumeControlButton extends MenuButton implements MouseEventInterfa
         if (!this.getMenuScreen().isOnOptions() || !this.getGame().isMenu()) {
             return;
         }
-
         super.onMouseClick();
         this.getMenuScreen().pushMenuStack(MenuState.OPTIONS);
         this.getMenuScreen().setMenuState(MenuState.VOLUME);

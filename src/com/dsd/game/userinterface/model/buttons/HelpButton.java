@@ -13,7 +13,7 @@ import java.awt.Graphics2D;
  * they come back.
  *
  * @author rinty
- * 
+ *
  * @updated 11/14/19
  */
 public class HelpButton extends MenuButton implements MouseEventInterface {
@@ -31,12 +31,10 @@ public class HelpButton extends MenuButton implements MouseEventInterface {
     public HelpButton (Game _game, MenuScreen _menuScreen) {
         super(HelpButton.BUTTON_X_OFFSET, HelpButton.BUTTON_Y_OFFSET,
                 LanguageController.translate("HELP"), _game, _menuScreen);
-
         this.game = _game;
         this.menuScreen = _menuScreen;
         super.setX((int) this.game.getCamera().getX() - HelpButton.BUTTON_X_OFFSET);
         super.setY((int) this.game.getCamera().getY() + HelpButton.BUTTON_Y_OFFSET);
-
         super.setScaled(true);
     }
 
@@ -45,7 +43,6 @@ public class HelpButton extends MenuButton implements MouseEventInterface {
         if (!this.game.isPaused()) {
             return;
         }
-
         this.setX((int) this.game.getCamera().getX() - HelpButton.BUTTON_X_OFFSET);
         this.setY((int) this.game.getCamera().getY() + HelpButton.BUTTON_Y_OFFSET);
     }
@@ -55,7 +52,6 @@ public class HelpButton extends MenuButton implements MouseEventInterface {
         if (!this.game.isPaused()) {
             return;
         }
-
         super.render(_g2);
         _g2.setFont(this.font);
         _g2.setColor(Color.WHITE);

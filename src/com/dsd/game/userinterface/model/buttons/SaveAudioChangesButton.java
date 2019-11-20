@@ -15,7 +15,7 @@ import java.awt.Graphics2D;
  * DIFFERENT from the actual VOLUME of the game).
  *
  * @author Joshua, Ronald, Rinty
- * 
+ *
  * @updated 11/14/19
  */
 public class SaveAudioChangesButton extends MenuButton implements MouseEventInterface {
@@ -33,7 +33,6 @@ public class SaveAudioChangesButton extends MenuButton implements MouseEventInte
         super(SaveAudioChangesButton.BUTTON_X_OFFSET,
                 _game.getGameHeight() - SaveAudioChangesButton.BUTTON_Y_OFFSET,
                 LanguageController.translate("SAVE CHANGES"), _game, _menuScreen);
-
         this.menuScreen = _menuScreen;
     }
 
@@ -48,7 +47,6 @@ public class SaveAudioChangesButton extends MenuButton implements MouseEventInte
         if (!this.getGame().isMenu() || !this.getMenuScreen().isOnVolume()) {
             return;
         }
-
         super.render(_g2);
         _g2.setFont(this.font);
         _g2.setColor(Color.WHITE);
@@ -60,9 +58,7 @@ public class SaveAudioChangesButton extends MenuButton implements MouseEventInte
         if (!this.getGame().isMenu() || !this.getMenuScreen().isOnVolume()) {
             return;
         }
-
         super.onMouseClick();
-
         //  Once the user presses the save changes button, it will update the game's resolution.
         Dimension changedDimension = ResolutionEnum.getDimension();
         this.getGame().changeResolution((int) changedDimension.getWidth(), (int) changedDimension.getHeight());

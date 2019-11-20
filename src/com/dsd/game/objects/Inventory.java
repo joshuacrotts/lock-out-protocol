@@ -45,7 +45,6 @@ public class Inventory implements SerializableObject {
         this.player = _player;
         this.weapons = new ArrayList<>();
         this.parentHandler = _sch;
-
         //  This will change with time (to a subclass of Weapon).
         this.weapons.add(new Pistol(_game, _player, _sch));
         this.weapons.add(new Rifle(_game, _player, _sch));
@@ -54,7 +53,6 @@ public class Inventory implements SerializableObject {
         this.weapons.add(new SuperShotgun(_game, _player, _sch));
         this.weapons.add(new GrenadeLauncher(_game, _player, _sch));
         this.weapons.add(new Minigun(_game, _player, _sch));
-
         this.view = new InventoryView(this.game, this);
     }
 
@@ -94,7 +92,6 @@ public class Inventory implements SerializableObject {
                 return weapon;
             }
         }
-
         return null;
     }
 
@@ -141,7 +138,6 @@ public class Inventory implements SerializableObject {
                 case SUPER_SHOTGUN:
                     this.weapons.add(new SuperShotgun(this.game, this.player, this.parentHandler));
                     break;
-
             }
         }
     }
@@ -169,7 +165,6 @@ public class Inventory implements SerializableObject {
         else if (this.player.isAttacking()) {
             this.player.setAnimation(this.weapons.get(this.currentWeapon).getAttackFrames());
         }
-
         this.player.setAttackAnimator(this.weapons.get(this.currentWeapon).getAttackFrames());
     }
 
@@ -178,7 +173,6 @@ public class Inventory implements SerializableObject {
      */
     public void resetInventory () {
         this.weapons.clear();
-
         this.weapons.add(new Pistol(this.game, this.player, this.parentHandler));
         this.currentWeapon = 0;
     }
@@ -188,7 +182,6 @@ public class Inventory implements SerializableObject {
     public String createObject (SerializableType _id) {
         StringBuilder inventoryDetails = new StringBuilder();
         Weapon[] weaponStatuses = this.hasWeapons();
-
         for (int i = 0 ; i < weaponStatuses.length ; i++) {
             inventoryDetails.append(weaponStatuses[i] != null ? 1 : 0).append(";");
             if (weaponStatuses[i] != null) {
@@ -200,7 +193,6 @@ public class Inventory implements SerializableObject {
                 inventoryDetails.append("0;0;");
             }
         }
-
         return inventoryDetails.toString();
     }
 
@@ -208,7 +200,6 @@ public class Inventory implements SerializableObject {
         //  Use an array of the types to reduce copying/pasting.
         WeaponType[] types = {WeaponType.PISTOL, WeaponType.RIFLE, WeaponType.FAST_RIFLE,
             WeaponType.SHOTGUN, WeaponType.GRENADE_LAUNCHER, WeaponType.MINIGUN, WeaponType.SUPER_SHOTGUN};
-
         for (int i = 0, weaponIndex = 0 ; i < types.length ; i++, weaponIndex += 3) {
             this.loadWeaponFromDB(_inventoryInfo.get(weaponIndex), types[i],
                     _inventoryInfo.get(weaponIndex + 1),
@@ -233,7 +224,6 @@ public class Inventory implements SerializableObject {
      */
     private Weapon[] hasWeapons () {
         Weapon[] typesOfWeapons = new Weapon[7];
-
         typesOfWeapons[0] = this.hasWeapon(WeaponType.PISTOL);
         typesOfWeapons[1] = this.hasWeapon(WeaponType.RIFLE);
         typesOfWeapons[2] = this.hasWeapon(WeaponType.FAST_RIFLE);
@@ -241,7 +231,6 @@ public class Inventory implements SerializableObject {
         typesOfWeapons[4] = this.hasWeapon(WeaponType.GRENADE_LAUNCHER);
         typesOfWeapons[5] = this.hasWeapon(WeaponType.MINIGUN);
         typesOfWeapons[6] = this.hasWeapon(WeaponType.SUPER_SHOTGUN);
-
         return typesOfWeapons;
     }
 
@@ -276,7 +265,6 @@ public class Inventory implements SerializableObject {
 
     public Gun getGun () {
         Gun gun = null;
-
         try {
             gun = (Gun) this.getCurrentWeapon();
         }

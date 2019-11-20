@@ -18,7 +18,6 @@ public class HelpScreen extends Screen {
     public HelpScreen (Game _game) {
         super(_game);
         this.transparentBlack = new Color(0f, 0f, 0f, 0.5f);
-
         this.createUIElements();
     }
 
@@ -27,7 +26,6 @@ public class HelpScreen extends Screen {
         if (!this.getGame().isHelp()) {
             return;
         }
-
         super.tick();
     }
 

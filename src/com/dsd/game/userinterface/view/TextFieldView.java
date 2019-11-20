@@ -78,7 +78,6 @@ public class TextFieldView implements Renderable, Updatable {
         else {
             _g2.setColor(TextFieldView.UNACTIVE_COLOR);
         }
-
         _g2.fill(this.rectangleView);
     }
 
@@ -91,7 +90,6 @@ public class TextFieldView implements Renderable, Updatable {
     private void drawString (Graphics2D _g2) {
         _g2.setColor(TextFieldView.TEXT_COLOR);
         _g2.setFont(TextFieldView.font);
-
         if (!this.model.isHidden()) {
             _g2.drawString(this.model.getString(), this.model.getX() + TEXT_X_OFFSET, this.model.getY() + (int) (FONT_SIZE * FONT_SIZE_FACTOR));
         }

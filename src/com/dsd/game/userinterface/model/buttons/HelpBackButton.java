@@ -8,11 +8,15 @@ import com.dsd.game.userinterface.MouseEventInterface;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-/** The HelpBackButton is a class designed to handle 
- * a return to the Paused Game State, which consequently
- * relates to the PauseScreen of the active game.
+/**
+ * The HelpBackButton is a class designed to handle a return to the Paused Game
+ * State, which consequently relates to the PauseScreen of the active game.
+ *
+ * [Group Name: Data Structure Deadheads]
  *
  * @author Ronald, Josh, Rinty
+ *
+ * @updated 11/19/19
  */
 public class HelpBackButton extends MenuButton implements MouseEventInterface {
 
@@ -28,7 +32,7 @@ public class HelpBackButton extends MenuButton implements MouseEventInterface {
     private static final int TEXT_X_OFFSET = 115;
     private static final int TEXT_Y_OFFSET = 45;
 
-    public HelpBackButton(Game _game, MenuScreen _menuScreen) {
+    public HelpBackButton (Game _game, MenuScreen _menuScreen) {
         super(BUTTON_X_OFFSET, BUTTON_Y_OFFSET,
                 LanguageController.translate("BACK"), _game, _menuScreen);
         this.game = _game;
@@ -39,7 +43,7 @@ public class HelpBackButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void tick() {
+    public void tick () {
         if (!this.game.isHelp()) {
             return;
         }
@@ -48,11 +52,10 @@ public class HelpBackButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void render(Graphics2D _g2) {
+    public void render (Graphics2D _g2) {
         if (!this.game.isHelp()) {
             return;
         }
-
         super.render(_g2);
         _g2.setFont(this.font);
         _g2.setColor(Color.WHITE);
@@ -60,16 +63,16 @@ public class HelpBackButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseClick() {
+    public void onMouseClick () {
         if (!this.game.isHelp()) {
             return;
         }
-
+        super.onMouseClick();
         this.getGame().setGameState(GameState.PAUSED);
     }
 
     @Override
-    public void onMouseEnterHover() {
+    public void onMouseEnterHover () {
         if (!this.game.isHelp()) {
             return;
         }
@@ -77,7 +80,7 @@ public class HelpBackButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseExitHover() {
+    public void onMouseExitHover () {
         if (!this.game.isHelp()) {
             return;
         }

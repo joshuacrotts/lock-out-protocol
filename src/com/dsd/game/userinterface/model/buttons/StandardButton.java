@@ -14,6 +14,8 @@ import java.awt.image.BufferedImage;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/19/19
  */
 public abstract class StandardButton extends Interactor {
 
@@ -27,7 +29,6 @@ public abstract class StandardButton extends Interactor {
     private BufferedImage image;
 
     public StandardButton () {
-
     }
 
     public StandardButton (int _x, int _y) {
@@ -70,7 +71,6 @@ public abstract class StandardButton extends Interactor {
 
     @Override
     public void tick () {
-
     }
 
     @Override

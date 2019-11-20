@@ -44,7 +44,6 @@ public abstract class AudioBoxController {
         StandardAudioController.load("src/resources/audio/sfx/thunder0.wav", 2, StandardAudioType.SFX);
         StandardAudioController.load("src/resources/audio/sfx/thunder1.wav", 2, StandardAudioType.SFX);
         StandardAudioController.load("src/resources/audio/sfx/thunder2.wav", 2, StandardAudioType.SFX);
-
         AudioBoxController.initBasicMonsterSFX(5);
         AudioBoxController.initGreenMonsterSFX(5);
     }

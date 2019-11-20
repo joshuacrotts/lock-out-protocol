@@ -14,7 +14,7 @@ import java.awt.Graphics2D;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
- * 
+ *
  * @updated 11/14/19
  */
 public class ExitButton extends MenuButton implements MouseEventInterface {
@@ -25,14 +25,14 @@ public class ExitButton extends MenuButton implements MouseEventInterface {
     private static final int TEXT_Y_OFFSET = 45;
 
     public ExitButton (Game _game, MenuScreen _menuScreen) {
-        super(_game.getGameWidth() - BUTTON_X_OFFSET - BUTTON_WIDTH / 2, _game.getGameHeight(),
-                LanguageController.translate("QUIT GAME"), _game, _menuScreen);
+        super(_game.getGameWidth() - ExitButton.BUTTON_X_OFFSET - ExitButton.BUTTON_WIDTH / 2,
+                _game.getGameHeight(), LanguageController.translate("QUIT GAME"), _game, _menuScreen);
     }
 
     @Override
     public void tick () {
-        this.setX(Screen.gameHalfWidth - BUTTON_X_OFFSET);
-        this.setY(Screen.gameHalfHeight + BUTTON_Y_OFFSET);
+        this.setX(Screen.gameHalfWidth - ExitButton.BUTTON_X_OFFSET);
+        this.setY(Screen.gameHalfHeight + ExitButton.BUTTON_Y_OFFSET);
     }
 
     @Override
@@ -40,11 +40,11 @@ public class ExitButton extends MenuButton implements MouseEventInterface {
         if (!this.getMenuScreen().isOnMainMenu()) {
             return;
         }
-
         super.render(_g2);
         _g2.setFont(this.font);
         _g2.setColor(Color.WHITE);
-        _g2.drawString(this.getText(), this.getX() + TEXT_X_OFFSET, this.getY() + TEXT_Y_OFFSET);
+        _g2.drawString(this.getText(), this.getX() + ExitButton.TEXT_X_OFFSET,
+                this.getY() + ExitButton.TEXT_Y_OFFSET);
     }
 
     @Override

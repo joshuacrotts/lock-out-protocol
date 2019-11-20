@@ -20,7 +20,7 @@ import java.awt.Graphics2D;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
- * 
+ *
  * @updated 11/14/19
  */
 public class MakeAccountButton extends MenuButton implements MouseEventInterface {
@@ -53,7 +53,6 @@ public class MakeAccountButton extends MenuButton implements MouseEventInterface
         if (!this.getMenuScreen().isOnAccountScreen()) {
             return;
         }
-
         super.render(_g2);
         _g2.setFont(this.font);
         _g2.setColor(Color.WHITE);
@@ -66,7 +65,6 @@ public class MakeAccountButton extends MenuButton implements MouseEventInterface
             return;
         }
         super.onMouseClick();
-
         AccountStatus accountStatus = TranslatorDatabase.addUser(this.emailModel.getString(), this.pswdModel.getString());
         this.displayAccountStatus(accountStatus);
         this.getMenuScreen().setMenuState(MenuState.MAIN);
@@ -79,7 +77,6 @@ public class MakeAccountButton extends MenuButton implements MouseEventInterface
             return;
         }
         this.activeImage = this.onHoverButtonImg;
-
     }
 
     @Override

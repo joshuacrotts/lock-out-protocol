@@ -34,7 +34,6 @@ public class GrenadeLauncherButton extends ShopButton {
                 GrenadeLauncherButton.Y_OFFSET,
                 GRENADE_LAUNCHER_PRICE,
                 GRENADE_LAUNCHER_AMMO_PRICE);
-
         this.grenadeLauncherView = new GrenadeLauncherButtonView(this);
     }
 
@@ -56,20 +55,16 @@ public class GrenadeLauncherButton extends ShopButton {
             return;
         }
         //  If we have enough money...
-
         Gun _weapon = (Gun) this.getInventory().hasWeapon(WeaponType.GRENADE_LAUNCHER);
-
         //  If we don't have the weapon, add it to the user's inventory.
         if (_weapon == null && this.getGame().getPlayer().getMoney() >= this.getPrice()) {
             this.getGame().getPlayer().setMoney(this.getGame().getPlayer().getMoney() - this.getPrice());
-
             this.getInventory().addWeapon(new GrenadeLauncher(this.getGame(),
                     this.getGame().getPlayer(), this.getGame().getPlayer().getHandler()));
         }
         //  Otherwise, add to the ammunition.
         else if (this.getGame().getPlayer().getMoney() >= this.getPricePerMagazine()) {
             this.getGame().getPlayer().setMoney(this.getGame().getPlayer().getMoney() - this.getPricePerMagazine());
-
             _weapon.setTotalAmmo(_weapon.getTotalAmmo() + _weapon.getMagazineCapacity());
         }
     }

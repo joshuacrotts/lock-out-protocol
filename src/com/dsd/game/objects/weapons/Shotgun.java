@@ -38,7 +38,6 @@ public class Shotgun extends Gun {
 
     public Shotgun (Game _game, Player _player, StandardCollisionHandler _sch) {
         super(WeaponType.SHOTGUN, 8, _game, _player, _sch, "src/resources/audio/sfx/shotgun_reload.wav", RELOAD_DELAY);
-
         //  Instantiates the animation controllers.
         this.loadAssets(_player);
         super.setDelay(DELAY);

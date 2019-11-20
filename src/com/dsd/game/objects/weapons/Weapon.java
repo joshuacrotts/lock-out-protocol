@@ -68,7 +68,6 @@ public abstract class Weapon implements SerializableObject {
         object.append("weapon=").append("\n");
         object.append("type=").append(this.weaponType).append("\n");
         object.append("gun=").append(this instanceof Gun).append("\n");
-
         //  If the weapon is a gun, we need to append how much ammo it has.
         if (this instanceof Gun) {
             Gun gun = (Gun) this;

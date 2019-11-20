@@ -46,13 +46,10 @@ public abstract class ShopButton extends Interactor {
         this.shopScreen = _shopScreen;
         this.setWidth(BUTTON_WIDTH);
         this.setHeight(BUTTON_HEIGHT);
-
         this.X_OFFSET = _x;
         this.Y_OFFSET = _y;
-
         this.PRICE = _price;
         this.PRICE_PER_MAGAZINE = 0;
-
         this.initializeButtonImages();
         this.setScaled(true);
     }
@@ -64,13 +61,10 @@ public abstract class ShopButton extends Interactor {
         this.shopScreen = _shopScreen;
         this.setWidth(BUTTON_WIDTH);
         this.setHeight(BUTTON_HEIGHT);
-
         this.X_OFFSET = _x;
         this.Y_OFFSET = _y;
-
         this.PRICE = _price;
         this.PRICE_PER_MAGAZINE = _pricePerMagazine;
-
         this.initializeButtonImages();
         this.setScaled(true);
     }
@@ -101,7 +95,6 @@ public abstract class ShopButton extends Interactor {
             return;
         }
         this.activeImage = this.onHoverButtonImg;
-
     }
 
     @Override

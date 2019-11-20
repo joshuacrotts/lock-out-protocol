@@ -40,7 +40,6 @@ public class StandardLabel extends Interactor implements MouseEventInterface {
         this.originX = _x;
         this.originY = _y;
         this.text = _text;
-
         if (LanguageController.lang.equals("en-en") || _text.equals("Lock Out Protocol")) {
             this.font = StdOps.initFont(_fontPath, _fontSize);
         }

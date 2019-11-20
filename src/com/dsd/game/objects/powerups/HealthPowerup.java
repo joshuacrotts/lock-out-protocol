@@ -37,7 +37,6 @@ public class HealthPowerup extends StandardGameObject implements Powerup {
         this.parentContainer = _sch;
         StandardAnimatorController healthAnimation
                                    = new StandardAnimatorController(new StandardAnimation(this, HEALTH_FRAMES, HEALTH_FPS, 12));
-
         this.setAnimation(healthAnimation);
         this.setWidth(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getWidth());
         this.setHeight(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getHeight());

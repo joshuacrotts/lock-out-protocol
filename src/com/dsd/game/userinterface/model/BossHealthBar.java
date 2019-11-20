@@ -39,7 +39,7 @@ public class BossHealthBar extends Interactor {
     private final Color lightRed = new Color(255, 0, 0, TRANSPARENCY);
 
     //  Positioning offsets.
-    private final int MAX_HEALTH_X = 1035;
+    private final int MAX_HEALTH_X = 1000;
     private final int HEALTH_Y_OFFSET = 25;
     private final int HEALTH_X_OFFSET = 45;
     private final int HEALTH_HEIGHT = 20;
@@ -73,7 +73,6 @@ public class BossHealthBar extends Interactor {
          */
         this.setX((int) (this.game.getCamera().getX() - Screen.gameHalfWidth + HEALTH_X_OFFSET));
         this.setY((int) (this.game.getCamera().getY() - Screen.gameHalfHeight + HEALTH_Y_OFFSET));
-
         this.drawHealthRectangle(_g2);
     }
 
@@ -91,10 +90,10 @@ public class BossHealthBar extends Interactor {
         //Scale max
         int max = MAX_HEALTH_X;
         _g2.setColor(this.healthColor.combine());
-
+        //  Draws the actual health portion of the health.
         float normalizedHealth = Utilities.normalize((float) this.parentBoss.getHealth(), rMin, rMax, min, max);
         _g2.fillRoundRect(this.getX(), this.getY(), (int) normalizedHealth, HEALTH_HEIGHT, ARC_WIDTH, ARC_HEIGHT);
-
+        //  Draws the black border outside the health
         _g2.setColor(Color.BLACK);
         _g2.drawRoundRect(this.getX(), this.getY(), (int) Utilities.normalize((float) this.parentBoss.getInitialHealth(), rMin, rMax, min, max), 20, ARC_WIDTH, ARC_HEIGHT);
     }

@@ -26,13 +26,10 @@ public class ShopView extends Interactor {
     public ShopView (Game _game) {
         this.game = _game;
         this.camera = _game.getCamera();
-
         this.shopRectColor = new Color(0, 0, 0, 0.8f);
         this.shopRectangle = new Rectangle(0, 0, this.game.getGameWidth(), this.game.getGameHeight());
-
         this.setWidth(this.game.getGameWidth());
         this.setHeight(this.game.getGameHeight());
-
         this.setScaled(true);
     }
 
@@ -40,7 +37,6 @@ public class ShopView extends Interactor {
     public void tick () {
         this.setWidth(this.game.getGameWidth());
         this.setHeight(this.game.getGameHeight());
-
         this.shopRectangle = new Rectangle((int) this.camera.getX() - Screen.gameHalfWidth,
                 (int) this.camera.getY() - Screen.gameHalfHeight,
                 this.getWidth(), this.getHeight());

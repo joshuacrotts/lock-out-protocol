@@ -31,12 +31,10 @@ public class SaveButton extends MenuButton implements MouseEventInterface {
     public SaveButton (Game _game, MenuScreen _menuScreen) {
         super(SaveButton.BUTTON_X_OFFSET, SaveButton.BUTTON_Y_OFFSET,
                 LanguageController.translate("SAVE GAME"), _game, _menuScreen);
-
         this.game = _game;
         this.menuScreen = _menuScreen;
         this.setX((int) this.game.getCamera().getX() - SaveButton.BUTTON_X_OFFSET);
         this.setY((int) this.game.getCamera().getY());
-
         this.setScaled(true);
     }
 
@@ -45,7 +43,6 @@ public class SaveButton extends MenuButton implements MouseEventInterface {
         if (!this.game.isPaused()) {
             return;
         }
-
         this.setX((int) this.game.getCamera().getX() - SaveButton.BUTTON_X_OFFSET);
         this.setY((int) this.game.getCamera().getY());
     }
@@ -55,7 +52,6 @@ public class SaveButton extends MenuButton implements MouseEventInterface {
         if (!this.game.isPaused()) {
             return;
         }
-
         super.render(_g2);
         _g2.setFont(this.font);
         _g2.setColor(Color.WHITE);
@@ -68,6 +64,7 @@ public class SaveButton extends MenuButton implements MouseEventInterface {
         if (!this.game.isPaused()) {
             return;
         }
+        super.onMouseClick();
         //  Once the user presses the save button, it will stop the game (for now).
         this.getGame().saveToDatabase();
         this.getGame().setGameState(GameState.MENU);

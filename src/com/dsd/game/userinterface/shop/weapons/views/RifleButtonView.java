@@ -23,7 +23,6 @@ public class RifleButtonView implements Updatable, Renderable {
     public RifleButtonView (RifleButton _rifleButton) {
         this.parentButton = _rifleButton;
         this.text = new ShopTextLabel(_rifleButton.getGame(), this.parentButton.getX(), this.parentButton.getY());
-
     }
 
     @Override
@@ -36,7 +35,6 @@ public class RifleButtonView implements Updatable, Renderable {
             this.text.setText("AK-47 AMMO (31/$" + this.parentButton.getPricePerMagazine() + ")");
         }
         this.text.tick();
-
     }
 
     @Override

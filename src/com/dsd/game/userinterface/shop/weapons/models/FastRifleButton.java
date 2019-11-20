@@ -34,7 +34,6 @@ public class FastRifleButton extends ShopButton {
                 FastRifleButton.Y_OFFSET,
                 FAST_RIFLE_PRICE,
                 FAST_RIFLE_AMMO_PRICE);
-
         this.fastRifleView = new FastRifleButtonView(this);
     }
 
@@ -42,7 +41,6 @@ public class FastRifleButton extends ShopButton {
     public void tick () {
         this.setX((int) this.getGame().getCamera().getX() - FastRifleButton.X_OFFSET);
         this.setY((int) this.getGame().getCamera().getY() - FastRifleButton.Y_OFFSET);
-
         this.fastRifleView.tick();
     }
 
@@ -57,9 +55,7 @@ public class FastRifleButton extends ShopButton {
         if (!this.getGame().isShop()) {
             return;
         }
-
         Gun _weapon = (Gun) this.getInventory().hasWeapon(WeaponType.FAST_RIFLE);
-
         //  If we don't have the weapon, add it to the user's inventory.
         if (_weapon == null && this.getGame().getPlayer().getMoney() >= this.getPrice()) {
             this.getGame().getPlayer().setMoney(this.getGame().getPlayer().getMoney() - this.getPrice());

@@ -16,8 +16,8 @@ import java.awt.Graphics2D;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
- * 
- * @updated 11/14/19
+ *
+ * @updated 11/19/19
  */
 public class HelpOrOptionsButton extends MenuButton implements MouseEventInterface {
 
@@ -42,7 +42,6 @@ public class HelpOrOptionsButton extends MenuButton implements MouseEventInterfa
         if (!this.getMenuScreen().isOnMainMenu()) {
             return;
         }
-
         super.render(_g2);
         _g2.setFont(this.font);
         _g2.setColor(Color.WHITE);
@@ -55,7 +54,6 @@ public class HelpOrOptionsButton extends MenuButton implements MouseEventInterfa
             return;
         }
         super.onMouseClick();
-
         this.getMenuScreen().pushMenuStack(MenuState.MAIN);
         this.getMenuScreen().setMenuState(MenuState.OPTIONS);
     }

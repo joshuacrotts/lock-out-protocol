@@ -11,9 +11,11 @@ import java.awt.Graphics2D;
  * This button is used in the volume controls for the sfx and the music. It
  * increases the volume of either by a factor of 0.1f.
  *
- * @author Joshua
- * 
- * @updated 11/14/19
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/19/19
  */
 public class IncreaseVolumeButton extends MenuButton implements MouseEventInterface {
 
@@ -29,16 +31,12 @@ public class IncreaseVolumeButton extends MenuButton implements MouseEventInterf
 
     public IncreaseVolumeButton (Game _game, MenuScreen _menuScreen, SoundEffectVolumeControl _sfxVolume, int _xOffset, int _yOffset) {
         super(_xOffset, _yOffset, "", _game, _menuScreen);
-
         this.BUTTON_X_OFFSET = _xOffset;
         this.BUTTON_Y_OFFSET = _yOffset;
-
         this.sfxVolume = _sfxVolume;
-
         this.buttonImg = StdOps.loadImage("src/resources/img/ui/inc.png");
         this.onHoverButtonImg = StdOps.loadImage("src/resources/img/ui/inc_h.png");
         this.activeImage = this.buttonImg;
-
         super.setWidth(this.activeImage.getWidth());
         super.setHeight(this.activeImage.getHeight());
     }
@@ -47,13 +45,10 @@ public class IncreaseVolumeButton extends MenuButton implements MouseEventInterf
         super(0, 0, "", _game, _menuScreen);
         this.BUTTON_X_OFFSET = _xOffset;
         this.BUTTON_Y_OFFSET = _yOffset;
-
         this.musicVolume = _musicVolume;
-
         this.buttonImg = StdOps.loadImage("src/resources/img/ui/inc.png");
         this.onHoverButtonImg = StdOps.loadImage("src/resources/img/ui/inc_h.png");
         this.activeImage = this.buttonImg;
-
         super.setWidth(this.activeImage.getWidth());
         super.setHeight(this.activeImage.getHeight());
     }
@@ -64,7 +59,6 @@ public class IncreaseVolumeButton extends MenuButton implements MouseEventInterf
             return;
         }
         super.tick();
-
         this.setX(Screen.gameHalfWidth + this.BUTTON_X_OFFSET);
         this.setY(Screen.gameHalfHeight + this.BUTTON_Y_OFFSET);
     }

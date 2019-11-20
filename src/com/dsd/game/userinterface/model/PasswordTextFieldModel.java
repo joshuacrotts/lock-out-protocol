@@ -29,7 +29,6 @@ public class PasswordTextFieldModel extends TextFieldModel {
             return;
         }
         super.tick();
-
         this.setX(Screen.gameHalfWidth - BUTTON_X_OFFSET);
         this.setY(Screen.gameHalfHeight);
     }
