@@ -92,7 +92,6 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
         if (this.isActivated) {
             return;
         }
-
         /**
          * We need to instantiate a new timer in the event that the previous one
          * was canceled.
@@ -100,7 +99,6 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
         this.powerupTimer = new Timer(true);
         this.powerupTimer.schedule(new InfiniteAmmoTimer(this), timer);
         TimerController.addTimer(this);
-
         this.isActivated = true;
         this.playInfAmmoSFX();
     }
@@ -119,10 +117,8 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
         if (!(curr instanceof Gun)) {
             return;
         }
-
         Gun gun = (Gun) curr;
         gun.setCurrentAmmo(gun.getMagazineCapacity());
-
     }
 
     /**
@@ -132,7 +128,6 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
         if (this.isCollected) {
             return;
         }
-
         StandardAudioController.play("src/resources/audio/sfx/pickup.wav", StandardAudioType.SFX);
     }
 

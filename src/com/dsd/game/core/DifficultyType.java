@@ -13,7 +13,6 @@ public enum DifficultyType {
     private String difficultyString;
 
     private DifficultyType (int _difficultyLevel) {
-
         this.difficultyLevel = _difficultyLevel;
         this.setDifficultyString(this.difficultyLevel);
     }
@@ -26,7 +25,6 @@ public enum DifficultyType {
      */
     private void setDifficultyString (int _difficultyLevel) {
         String text = "";
-
         switch (_difficultyLevel) {
             case 1:
                 text = "I\'M TOO YOUNG TO DIE";
@@ -43,12 +41,10 @@ public enum DifficultyType {
 
 //==================== GETTERS ==========================
     public String getDifficultyLabel () {
-
         return this.difficultyString;
     }
 
     public int getDifficultyNumber () {
-
         return this.difficultyLevel;
     }
 

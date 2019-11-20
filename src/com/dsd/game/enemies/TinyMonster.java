@@ -52,14 +52,11 @@ public class TinyMonster extends Enemy implements DeathListener {
     public TinyMonster (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, TinyMonster.APPROACH_VEL, TinyMonster.originalHealth, StandardID.BasicMonster, _game, _sch);
         this.setTarget(_game.getPlayer());
-
         //  Sets the walking/death frames for this monster
         super.initWalkingFrames(TinyMonster.WALK_FRAMES, TinyMonster.walkingFPS);
         super.initDeathFrames(TinyMonster.DEATH_FRAMES, TinyMonster.DEATH_FPS, 16);
-
         //  Sets the default animation
         super.setAnimation(super.getWalkingAnimation());
-
         //  The width/height of the model is set by the buffered image backing it.
         super.setDimensions();
         super.setDamage(this.DAMAGE);
@@ -88,7 +85,6 @@ public class TinyMonster extends Enemy implements DeathListener {
         this.setAnimation(this.getDeathAnimation());
         this.explosionHandler = new StandardParticleHandler(50);
         this.explosionHandler.setCamera(this.getCamera());
-
         for (int i = 0 ; i < this.explosionHandler.getMaxParticles() ; i++) {
             this.explosionHandler.addEntity(new StandardBoxParticle(this.getX(), this.getY(),
                     StdOps.rand(1.0, 5.0), StdOps.randBounds(-10.0, -3.0, 3.0, 10.0),

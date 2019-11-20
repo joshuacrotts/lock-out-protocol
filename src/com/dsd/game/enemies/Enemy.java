@@ -84,7 +84,6 @@ public abstract class Enemy extends Entity implements DeathListener {
         super(_x, _y, _health, _id, _game, _sch);
         this.sc = this.getGame().getCamera();
         this.initialHealth = _health;
-
         this.APPROACH_VEL = _approachVel;
         this.bloodHandler = new StandardParticleHandler(MAX_BLOOD_PARTICLES);
         this.bloodHandler.setCamera(this.sc);
@@ -93,12 +92,10 @@ public abstract class Enemy extends Entity implements DeathListener {
     @Override
     public void tick () {
         this.bloodHandler.tick();
-
         //  If the monster's health is less than 0, we can flag it as dead.
         this.setAlive(this.getHealth() > 0);
         this.getAnimationController().tick();
         this.getAnimationController().getStandardAnimation().setRotation(this.getAngle());
-
         if (this.isAlive()) {
             this.updatePosition();
             //  Save the target's position
@@ -132,7 +129,6 @@ public abstract class Enemy extends Entity implements DeathListener {
     @Override
     public void render (Graphics2D _g2) {
         this.bloodHandler.render(_g2);
-
         /**
          * We need to save the old alpha composition, apply the new one, render,
          * THEN set the old one back.
@@ -295,7 +291,6 @@ public abstract class Enemy extends Entity implements DeathListener {
      * @param _posY
      */
     private void followPlayer (int _posX, int _posY) {
-
         // Calculate the distance between the enemy and the player
         double diffX = this.getX() - _posX - Entity.APPROACH_FACTOR;
         double diffY = this.getY() - _posY - Entity.APPROACH_FACTOR;
@@ -322,7 +317,6 @@ public abstract class Enemy extends Entity implements DeathListener {
         double dx = FastMath.abs(_posX - this.getX());
         double dy = FastMath.abs(_posY - this.getY());
         this.setAngle((double) ((xSign) * (FastMath.atan((dx) / (dy)))));
-
         // If we're in Q1 (+x, -+y) or in Q2 (-x, +y)
         if ((_posX > this.getX() && _posY > this.getY()) || (_posX < this.getX() && _posY > this.getY())) {
             this.setAngle((double) ((FastMath.PI / 2) + (FastMath.PI / 2 - this.getAngle())));

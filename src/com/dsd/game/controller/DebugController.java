@@ -62,7 +62,6 @@ public class DebugController implements Renderable {
     public void render (Graphics2D _g2) {
         int posX = (int) (this.camera.getX() - Screen.gameFourthWidth) - this.GLOBAL_X_OFFSET;
         int posY = (int) (this.camera.getY() - Screen.gameFourthHeight) - this.GLOBAL_Y_OFFSET;
-
         this.renderPlayerCoordinates(_g2, posX, posY);
         this.renderEntityCount(_g2, posX, posY + this.ENTITY_COUNT_Y_OFFSET);
         this.renderCameraCoordinates(_g2, posX, posY + this.CAMERA_COORDINATE_Y_OFFSET);

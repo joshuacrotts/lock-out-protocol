@@ -20,7 +20,7 @@ import java.awt.Graphics2D;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
- * 
+ *
  * @updated 11/14/19
  */
 public class LoginButton extends MenuButton implements MouseEventInterface {
@@ -35,18 +35,17 @@ public class LoginButton extends MenuButton implements MouseEventInterface {
     private final PasswordTextFieldModel pswdModel;
 
     public LoginButton (Game _game, MenuScreen _menuScreen, EmailTextFieldModel _email, PasswordTextFieldModel _pswd) {
-        super(Screen.gameHalfWidth - BUTTON_X_OFFSET - BUTTON_WIDTH,
-                _game.getGameHeight() - BUTTON_Y_OFFSET,
+        super(Screen.gameHalfWidth - LoginButton.BUTTON_X_OFFSET - LoginButton.BUTTON_WIDTH,
+                _game.getGameHeight() - LoginButton.BUTTON_Y_OFFSET,
                 LanguageController.translate("LOGIN"), _game, _menuScreen);
-
         this.emailModel = _email;
         this.pswdModel = _pswd;
     }
 
     @Override
     public void tick () {
-        this.setX(Screen.gameHalfWidth - BUTTON_X_OFFSET - BUTTON_WIDTH);
-        this.setY(this.getGame().getGameHeight() - BUTTON_Y_OFFSET);
+        this.setX(Screen.gameHalfWidth - LoginButton.BUTTON_X_OFFSET - LoginButton.BUTTON_WIDTH);
+        this.setY(this.getGame().getGameHeight() - LoginButton.BUTTON_Y_OFFSET);
     }
 
     @Override
@@ -54,7 +53,6 @@ public class LoginButton extends MenuButton implements MouseEventInterface {
         if (!this.getMenuScreen().isOnAccountScreen()) {
             return;
         }
-
         super.render(_g2);
         _g2.setFont(this.font);
         _g2.setColor(Color.WHITE);
@@ -67,8 +65,10 @@ public class LoginButton extends MenuButton implements MouseEventInterface {
             return;
         }
         super.onMouseClick();
-
-        AccountStatus accountStatus = TranslatorDatabase.authenticateUser(this.emailModel.getString(), this.pswdModel.getString());
+        //  Once we click on the button, we contact the database to make sure
+        //  this is a valid user.
+        AccountStatus accountStatus = TranslatorDatabase.authenticateUser(this.emailModel.getString(),
+                this.pswdModel.getString());
         this.displayAccountStatus(accountStatus);
         this.getMenuScreen().setMenuState(MenuState.MAIN);
         this.clearTextboxes();
@@ -80,7 +80,6 @@ public class LoginButton extends MenuButton implements MouseEventInterface {
             return;
         }
         this.activeImage = this.onHoverButtonImg;
-
     }
 
     @Override

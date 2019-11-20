@@ -16,7 +16,7 @@ import java.awt.Graphics2D;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
- * 
+ *
  * @updated 11/14/19
  */
 public class PlayButton extends MenuButton implements MouseEventInterface {
@@ -31,7 +31,6 @@ public class PlayButton extends MenuButton implements MouseEventInterface {
         super(Screen.gameHalfWidth - BUTTON_X_OFFSET,
                 Screen.gameHalfHeight - BUTTON_Y_OFFSET,
                 LanguageController.translate("NEW GAME"), _game, _menuScreen);
-
         this.getGame().getHandler().addEntity(_game.getPlayer());
     }
 
@@ -46,7 +45,6 @@ public class PlayButton extends MenuButton implements MouseEventInterface {
         if (!this.getMenuScreen().isOnMainMenu()) {
             return;
         }
-
         super.render(_g2);
         _g2.setFont(this.font);
         _g2.setColor(Color.WHITE);
@@ -59,7 +57,6 @@ public class PlayButton extends MenuButton implements MouseEventInterface {
                 || !this.getMenuScreen().isOnMainMenu()) {
             return;
         }
-
         super.onMouseClick();
         this.getMenuScreen().pushMenuStack(MenuState.MAIN);
         this.getMenuScreen().setMenuState(MenuState.PLAYER_GENDER);
@@ -71,7 +68,6 @@ public class PlayButton extends MenuButton implements MouseEventInterface {
             return;
         }
         activeImage = onHoverButtonImg;
-
     }
 
     @Override

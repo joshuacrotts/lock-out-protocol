@@ -92,22 +92,18 @@ public class Game extends StandardGame {
     private Player player;
 
     public Game (int _width, int _height, String _title) {
-
         /**
          * Note: Magic numbers for the player and the monster are just for
          * demonstration; they will NOT be in the final game.
          */
         super(_width, _height, _title);
-
         /**
          * Initialize the database translator
          */
         this.translatorDatabase = new TranslatorDatabase(this);
         this.translatorDatabase.loadFromSettings();
-
         //  Initialize the sound controller
         AudioBoxController.initialize(40);
-
         //  Create a new collision handler
         this.sch = new CollisionHandlerController(this);
         //  Instantiates player & adds it to the handler
@@ -125,7 +121,6 @@ public class Game extends StandardGame {
         this.levelController = new LevelController(this);
         this.cursorController = new CursorController(this);
         this.instantiateLevels();
-
         /**
          * Instantiates the levels @TODO: (should move this to a method and to
          * some type of controller to determine HOW levels transition) Creates
@@ -184,7 +179,6 @@ public class Game extends StandardGame {
     public void render () {
         //  Depending on the game state, render different things.
         if (this.gameState == GameState.MENU) {
-
             this.menuScreen.render(StandardDraw.Renderer);
         }
         else {
@@ -277,7 +271,6 @@ public class Game extends StandardGame {
         this.player.resetPlayer();
         this.player.getInventory().resetInventory();
         this.instantiateLevels();
-
         TimerController.stopTimers();
         DifficultyController.resetDifficultyFactors();
     }
@@ -305,7 +298,6 @@ public class Game extends StandardGame {
             JOptionPane.showMessageDialog(null, LanguageController.translate("Unable to load data, did you log in?."));
             return false;
         }
-
         return true;
     }
 
@@ -314,12 +306,9 @@ public class Game extends StandardGame {
      * preferences to a settings file.
      */
     public void saveToSettings () {
-
         if (!this.translatorDatabase.saveToSettings()) {
-
             JOptionPane.showMessageDialog(null, LanguageController.translate("Unable to save to the settings file."));
         }
-
     }
 
     /**
@@ -327,12 +316,9 @@ public class Game extends StandardGame {
      * preferences from a settings file.
      */
     public void loadFromSettings () {
-
         if (!this.translatorDatabase.saveToSettings()) {
-
             JOptionPane.showMessageDialog(null, LanguageController.translate("Unable to load from the settings file."));
         }
-
     }
 
     /**
@@ -340,7 +326,6 @@ public class Game extends StandardGame {
      * instantiated.
      */
     private void instantiateLevels () {
-
         this.levelController.addLevel(new MetalLevel(this.player, this, this.sch));
     }
 
@@ -348,115 +333,93 @@ public class Game extends StandardGame {
      * Resets the camera's viewport to account for a resized window.
      */
     private void reinstantiateCamera () {
-
         this.sc.setVpw(this.getGameWidth() >> 1);
         this.sc.setVph(this.getGameHeight() >> 1);
     }
 
 //========================== GETTERS =============================
     public Player getPlayer () {
-
         return this.player;
     }
 
     public GameState getGameState () {
-
         return this.gameState;
     }
 
     public StandardCamera getCamera () {
-
         return this.sc;
     }
 
     public StandardCollisionHandler getHandler () {
-
         return this.sch;
     }
 
     public MenuScreen getMenuScreen () {
-
         return this.menuScreen;
     }
 
     public HUDScreen getHUDScreen () {
-
         return this.hudScreen;
     }
 
     public LevelController getLevelController () {
-
         return this.levelController;
     }
 
     public DifficultyController getDifficultyController () {
-
         return this.difficultyController;
     }
 
     public StandardLevel getCurrentLevel () {
-
         return this.levelController.getCurrentLevel();
     }
 
     public int getCurrentLevelID () {
-
         return this.levelController.getCurrentLevelID();
     }
 
     public int getLogicalCurrentLevelID () {
-
         return this.levelController.getLogicalCurrentLevelID();
     }
 
     public int getWaveNumber () {
-
         return this.levelController.getWaveNumber();
     }
 
     public boolean isPaused () {
-
         return this.gameState == GameState.PAUSED;
     }
 
     public boolean isPreamble () {
-
         return this.gameState == GameState.PREAMBLE;
     }
 
     public boolean isRunning () {
-
         return this.gameState == GameState.RUNNING;
     }
 
     public boolean isInGameState () {
-
         return this.isRunning() | this.isPreamble();
     }
 
     public boolean isShop () {
-
         return this.gameState == GameState.SHOP;
     }
 
     public boolean isMenu () {
-
         return this.gameState == GameState.MENU;
     }
 
     public boolean isHelp () {
-
         return this.gameState == GameState.HELP;
     }
 
 //========================== SETTERS =============================
     public void setGameState (GameState _gs) {
-
         this.gameState = _gs;
     }
 
     public void setPlayer (Player _player) {
-
         this.player = _player;
         this.player.setCamera(sc);
         this.player.setHandler(this.sch);
@@ -467,7 +430,6 @@ public class Game extends StandardGame {
      * it.
      */
     public void setPreambleState () {
-
         this.gameState = GameState.PREAMBLE;
         this.playWaveChangeSFX();
         this.preambleScreen.resetPreambleScreen();

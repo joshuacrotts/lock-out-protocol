@@ -65,7 +65,6 @@ public class MenuScreen extends Screen {
         this.menuStateStack.push(this.menuState);
         this.createUIElements();
         this.createUIScreens();
-
         TabTextFieldCommand tabCommand = new TabTextFieldCommand(this.getGame());
         this.playMenuMusic();
     }
@@ -76,9 +75,7 @@ public class MenuScreen extends Screen {
             return;
         }
         this.menuView.tick();
-
         super.tick();
-
         if (this.isOnResolution()) {
             this.changeResView.tick();
         }
@@ -93,9 +90,7 @@ public class MenuScreen extends Screen {
             return;
         }
         this.menuView.render(_g2);
-
         super.render(_g2);
-
         if (this.isOnResolution()) {
             this.changeResView.render(_g2);
         }

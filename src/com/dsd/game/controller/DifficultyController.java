@@ -56,7 +56,6 @@ public class DifficultyController implements SerializableObject {
         if (DifficultyController.difficultyType == null) {
             return;
         }
-
         switch (DifficultyController.difficultyType) {
             case EASY:
                 DifficultyController.difficultyFactor = 1f;
@@ -124,7 +123,6 @@ public class DifficultyController implements SerializableObject {
         if (_id != SerializableType.LEVEL) {
             return null;
         }
-
         StringBuilder difficultyControllerInfo = new StringBuilder();
         difficultyControllerInfo.append(levelTransitionTimer).append(";");
         difficultyControllerInfo.append(difficultyFactor).append(";");

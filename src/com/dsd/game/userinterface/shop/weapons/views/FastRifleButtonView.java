@@ -26,7 +26,6 @@ public class FastRifleButtonView extends ShopButtonView {
         else {
             this.text.setText("PPSh-41 AMMO (71/$" + this.parentButton.getPricePerMagazine() + ")");
         }
-
         super.tick();
     }
 

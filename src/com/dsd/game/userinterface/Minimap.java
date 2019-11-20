@@ -71,7 +71,6 @@ public class Minimap extends Interactor {
          */
         for (int i = 0 ; i < this.globalHandler.size() ; i++) {
             StandardGameObject obj = this.globalHandler.get(i);
-
             if (obj != null && obj.isAlive()) {
                 switch (obj.getId()) {
                     case Player:

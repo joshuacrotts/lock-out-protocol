@@ -36,12 +36,9 @@ public class LetterInputListener implements KeyListener {
         if (!this.textElement.isActive() || !this.game.isMenu()) {
             return;
         }
-
         //  Retrieve the char last typed
         this.character = _e.getKeyChar();
-
         if (this.isValidTypedChar(this.character)) {
-
             //  If it's the backspace key, delete the last inserted character into
             //  the stringbuilder. Otherwise, just append it.
             switch (this.character) {

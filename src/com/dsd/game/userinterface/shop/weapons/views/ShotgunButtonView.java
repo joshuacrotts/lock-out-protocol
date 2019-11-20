@@ -24,7 +24,6 @@ public class ShotgunButtonView extends ShopButtonView {
         else {
             this.text.setText("SPAS-12 AMMO (12/$" + this.parentButton.getPricePerMagazine() + ")");
         }
-
         super.tick();
     }
 

@@ -47,13 +47,10 @@ public class RedHeadMonster extends Enemy implements DeathListener {
     public RedHeadMonster (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, RedHeadMonster.APPROACH_VEL, RedHeadMonster.originalHealth, StandardID.Monster6, _game, _sch);
         this.setTarget(_game.getPlayer());
-
         //  Sets the walking/death frames for this monster
         super.initWalkingFrames(RedHeadMonster.WALK_FRAMES, this.walkingFPS);
-
         //  Sets the default animation
         super.setAnimation(super.getWalkingAnimation());
-
         //  The width/height of the model is set by the buffered image backing it.
         super.setDimensions();
         super.setDamage(this.DAMAGE);
@@ -80,14 +77,12 @@ public class RedHeadMonster extends Enemy implements DeathListener {
     public void uponDeath () {
         this.explosionHandler = new StandardParticleHandler(50);
         this.explosionHandler.setCamera(this.getCamera());
-
         for (int i = 0 ; i < this.explosionHandler.getMaxParticles() ; i++) {
             this.explosionHandler.addEntity(new StandardBoxParticle(this.getX(), this.getY(),
                     StdOps.rand(1.0, 5.0), StdOps.randBounds(-10.0, -3.0, 3.0, 10.0),
                     StdOps.randBounds(-10.0, -3.0, 3.0, 10.0), Color.RED, 3f, this.explosionHandler,
                     this.getAngle(), ShapeType.CIRCLE, true));
         }
-
         this.generateCoins(StdOps.rand(0, 5));
         this.generateDeathSound(StdOps.rand(1, 2));
         this.generatePowerup();

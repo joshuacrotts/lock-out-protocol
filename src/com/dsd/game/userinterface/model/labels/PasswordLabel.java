@@ -26,7 +26,6 @@ public class PasswordLabel extends StandardLabel {
         super(_passwordModel.getX(), _passwordModel.getY(),
                 LanguageController.translate("PASSWORD:"),
                 "src/resources/fonts/chargen.ttf", 32f);
-
         this.menuScreen = _menuScreen;
         this.passwordModel = _passwordModel;
     }

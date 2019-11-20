@@ -12,6 +12,8 @@ import java.awt.Graphics2D;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/19/19
  */
 public class EmailTextFieldModel extends TextFieldModel {
 
@@ -29,9 +31,7 @@ public class EmailTextFieldModel extends TextFieldModel {
         if (!this.getMenuScreen().isOnAccountScreen()) {
             return;
         }
-
         super.tick();
-
         this.setX(Screen.gameHalfWidth - BUTTON_X_OFFSET);
         this.setY(Screen.gameFourthHeight);
     }

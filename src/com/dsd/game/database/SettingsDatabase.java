@@ -39,7 +39,6 @@ public class SettingsDatabase implements Database {
             Logger.getLogger(SettingsDatabase.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-
         return true;
     }
 
@@ -47,13 +46,11 @@ public class SettingsDatabase implements Database {
     public boolean load () {
         try {
             this.reader = new BufferedReader(new FileReader("settings.cfg"));
-
             //  Parse the resolution line.
             String line = this.reader.readLine();
             ResolutionEnum.setResolutionIndex(Integer.parseInt(line.substring(line.indexOf("=") + 1)));
             this.game.setGameWidth(ResolutionEnum.getDimension().width);
             this.game.setGameHeight(ResolutionEnum.getDimension().height);
-
             //  Parse the language line.
             line = this.reader.readLine();
             LanguageEnum.setLanguageIndex(Integer.parseInt(line.substring(line.indexOf("=") + 1)));
@@ -63,7 +60,6 @@ public class SettingsDatabase implements Database {
             Logger.getLogger(SettingsDatabase.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-
         return true;
     }
 

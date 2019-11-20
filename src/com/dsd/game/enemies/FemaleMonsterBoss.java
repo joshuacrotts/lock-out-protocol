@@ -64,26 +64,20 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
     public FemaleMonsterBoss (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, FemaleMonsterBoss.APPROACH_VEL, FemaleMonsterBoss.originalHealth,
                 StandardID.Monster4, _game, _sch);
-
         this.setTarget(_game.getPlayer());
-
         //  Randomly generates the walking frames per second for variability
         this.walkingFPS = StdOps.rand(this.WALKING_FPS_MIN, this.WALKING_FPS_MAX);
-
         //  Sets the walking/death frames for this monster.
         super.initWalkingFrames(FemaleMonsterBoss.WALK_FRAMES, this.walkingFPS);
         super.initDeathFrames(FemaleMonsterBoss.DEATH_FRAMES, FemaleMonsterBoss.DEATH_FPS, 13);
-
         //  Sets the default animation.
         super.setAnimation(super.getWalkingAnimation());
-
         //  The width/height of the model is set by the buffered image backing it.
         super.setDimensions();
         super.setDamage(this.DAMAGE);
         super.getHandler().addCollider(this.getId());
         super.getHandler().flagAlive(this.getId());
         super.setTransparentFactor((float) DEATH_ALPHA_FACTOR);
-
         this.bossProjectileTimer = new Timer(true);
         this.bossProjectileTimer.scheduleAtFixedRate(new BossProjectileSpawner(this), 2000, 2000);
     }
@@ -117,7 +111,6 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
         this.setAnimation(this.getDeathAnimation());
         this.explosionHandler = new StandardParticleHandler(50);
         this.explosionHandler.setCamera(this.getCamera());
-
         for (int i = 0 ; i < this.explosionHandler.getMaxParticles() ; i++) {
             this.explosionHandler.addEntity(new StandardBoxParticle(this.getX(), this.getY(),
                     StdOps.rand(1.0, 5.0), StdOps.randBounds(-10.0, -3.0, 3.0, 10.0),
@@ -190,7 +183,7 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
 
     private class BossProjectileSpawner extends TimerTask {
 
-        private FemaleMonsterBoss boss;
+        private final FemaleMonsterBoss boss;
 
         public BossProjectileSpawner (FemaleMonsterBoss _boss) {
             this.boss = _boss;
@@ -198,7 +191,9 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
 
         @Override
         public void run () {
-            this.boss.addProjectiles();
+            if (this.boss.isAlive()) {
+                this.boss.addProjectiles();
+            }
         }
     }
 

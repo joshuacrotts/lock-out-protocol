@@ -15,7 +15,11 @@ import java.awt.Rectangle;
  * This class is the sfx volume control for the... as you guessed, sound
  * effects.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/19/19
  */
 public class SoundEffectVolumeControl extends Interactor {
 
@@ -37,16 +41,13 @@ public class SoundEffectVolumeControl extends Interactor {
 
     public SoundEffectVolumeControl (Game _game, MenuScreen _menuScreen) {
         super(0, 0, 0, 0);
-
         this.game = _game;
         this.menuScreen = _menuScreen;
-
         this.incVolumeButton = new IncreaseVolumeButton(_game, _menuScreen, this,
                 SoundEffectVolumeControl.BUTTON_X_OFFSET, SoundEffectVolumeControl.BUTTON_Y_OFFSET);
         this.decVolumeButton = new DecreaseVolumeButton(_game, _menuScreen, this,
                 SoundEffectVolumeControl.BUTTON_X_OFFSET, SoundEffectVolumeControl.BUTTON_Y_OFFSET);
         this.sfxLabel = new SFXLabel(this, _menuScreen);
-
         this.menuScreen.addInteractor(this.incVolumeButton);
         this.menuScreen.addInteractor(this.decVolumeButton);
         this.menuScreen.addInteractor(this.sfxLabel);
@@ -58,7 +59,6 @@ public class SoundEffectVolumeControl extends Interactor {
         if (!this.game.isMenu() || !this.menuScreen.isOnVolume()) {
             return;
         }
-
         this.initializeVolumeBars();
     }
 
@@ -67,7 +67,6 @@ public class SoundEffectVolumeControl extends Interactor {
         if (!this.game.isMenu() || !this.menuScreen.isOnVolume()) {
             return;
         }
-
         this.renderVolumeBars(_g2);
     }
 
@@ -115,11 +114,9 @@ public class SoundEffectVolumeControl extends Interactor {
      */
     private void initializeVolumeBars () {
         this.volumeBars = new Rectangle[10];
-
         for (int i = 0, xOffset = -120 ; i < this.volumeBars.length ; i++, xOffset += 30) {
             this.volumeBars[i] = new Rectangle(Screen.gameHalfWidth + xOffset, Screen.gameHalfHeight, 20, 60);
         }
-
     }
 
     /**
@@ -129,18 +126,17 @@ public class SoundEffectVolumeControl extends Interactor {
      */
     private void renderVolumeBars (Graphics2D _g2) {
         _g2.setColor(Color.BLUE);
-
         for (int i = 0 ; i < this.volumeBars.length ; i++) {
             if ((i + 1) <= Math.round(volume * 10)) {
                 _g2.fill(this.volumeBars[i]);
             }
             else {
                 _g2.draw(this.volumeBars[i]);
-
             }
         }
     }
 
+//============================== GETTERS ====================================//
     public int getLeftButtonX () {
         return this.decVolumeButton.getX();
     }

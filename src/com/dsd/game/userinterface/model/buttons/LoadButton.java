@@ -15,7 +15,7 @@ import java.awt.Graphics2D;
  * file, given that it exists.
  *
  * @author Joshua
- * 
+ *
  * @updated 11/14/19
  */
 public class LoadButton extends MenuButton implements MouseEventInterface {
@@ -54,7 +54,6 @@ public class LoadButton extends MenuButton implements MouseEventInterface {
                 || !this.getMenuScreen().isOnMainMenu()) {
             return;
         }
-
         super.render(_g2);
         _g2.setFont(this.font);
         _g2.setColor(Color.WHITE);
@@ -67,9 +66,7 @@ public class LoadButton extends MenuButton implements MouseEventInterface {
                 || !this.getMenuScreen().isOnMainMenu()) {
             return;
         }
-
         super.onMouseClick();
-
         /**
          * Once the user presses the load button, it will contact the database,
          * and update the game information.
@@ -80,7 +77,6 @@ public class LoadButton extends MenuButton implements MouseEventInterface {
         if (!this.getGame().loadFromDatabase()) {
             return;
         }
-
         //  If the user has debug mode enabled to skip the wave screen, go ahead
         //  and toggle it.
         if (!DebugController.DEBUG_MODE) {
@@ -89,7 +85,6 @@ public class LoadButton extends MenuButton implements MouseEventInterface {
         else {
             this.getGame().setGameState(GameState.RUNNING);
         }
-
         this.getGame().uponPlay();
     }
 

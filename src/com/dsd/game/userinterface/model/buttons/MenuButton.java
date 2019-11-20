@@ -18,19 +18,23 @@ import javax.swing.JOptionPane;
  * or any of its sub-options. It contains the logic for changing between a
  * button and if the user is hovering over it, etc.
  *
- * @author Joshua
- * 
- * @updated 11/14/19
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/19/19
  */
 public abstract class MenuButton extends StandardButton implements MouseEventInterface {
 
     //  Miscellaneous reference variables.
     private final Game game;
     private final MenuScreen menuScreen;
-    
+
     protected static final int BUTTON_WIDTH = 300;
     protected static final int BUTTON_HEIGHT = 82;
-    
+
+    //  Images for when the mouse is over the button, not over, and the current
+    //  image in the current frame.
     protected final Font font;
     protected BufferedImage onHoverButtonImg;
     protected BufferedImage buttonImg;
@@ -62,6 +66,12 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
         StandardAudioController.play("src/resources/audio/sfx/menuselect.wav", StandardAudioType.SFX);
     }
 
+    /**
+     * Displays a JOptionPane dialog box with whatever AccountStatus code was
+     * thrown.
+     *
+     * @param _status
+     */
     public void displayAccountStatus (AccountStatus _status) {
         if (_status == null) {
             return;

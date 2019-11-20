@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  * verifying changes in the sub-options menu.
  *
  * @author Joshua
- * 
+ *
  * @updated 11/14/19
  */
 public class SaveLanguageChangesButton extends MenuButton implements MouseEventInterface {
@@ -37,8 +37,7 @@ public class SaveLanguageChangesButton extends MenuButton implements MouseEventI
 
     public SaveLanguageChangesButton (Game _game, MenuScreen _menuScreen) {
         super(BUTTON_X_OFFSET, _game.getGameHeight() - BUTTON_Y_OFFSET,
-              LanguageController.translate("SAVE CHANGES"), _game, _menuScreen);
-
+                LanguageController.translate("SAVE CHANGES"), _game, _menuScreen);
         this.menuScreen = _menuScreen;
         this.incLangCommand = new IncreaseLanguageCommand(this.getGame());
         this.decLangCommand = new DecreaseLanguageCommand(this.getGame());
@@ -55,7 +54,6 @@ public class SaveLanguageChangesButton extends MenuButton implements MouseEventI
         if (!this.getGame().isMenu() || !this.getMenuScreen().isOnLanguages()) {
             return;
         }
-
         super.render(_g2);
         _g2.setFont(this.font);
         _g2.setColor(Color.WHITE);
@@ -67,14 +65,11 @@ public class SaveLanguageChangesButton extends MenuButton implements MouseEventI
         if (!this.getGame().isMenu() || !this.getMenuScreen().isOnLanguages()) {
             return;
         }
-
         super.onMouseClick();
-
         //  Once the user presses the save changes button, it will update the game's resolution.
         Dimension changedDimension = ResolutionEnum.getDimension();
         this.getGame().changeResolution((int) changedDimension.getWidth(), (int) changedDimension.getHeight());
         this.getGame().saveToSettings();
-
         this.displaySaveChangesMsg();
     }
 

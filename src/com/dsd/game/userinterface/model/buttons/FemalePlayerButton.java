@@ -41,10 +41,8 @@ public class FemalePlayerButton extends StandardButton implements MouseEventInte
         if (!this.menuScreen.isOnPlayerGender()) {
             return;
         }
-
         this.setX(FemalePlayerButton.BUTTON_X_OFFSET);
         this.setY(this.game.getGameHeight() - FemalePlayerButton.BUTTON_Y_OFFSET);
-
         FemalePlayerButton.playerView.tick();
     }
 
@@ -61,7 +59,6 @@ public class FemalePlayerButton extends StandardButton implements MouseEventInte
         if (!this.menuScreen.isOnPlayerGender()) {
             return;
         }
-
         StandardAudioController.play("src/resources/audio/sfx/menuselect.wav", StandardAudioType.SFX);
         this.game.getPlayer().setPlayerSex("female");
         this.menuScreen.pushMenuStack(MenuState.PLAYER_GENDER);

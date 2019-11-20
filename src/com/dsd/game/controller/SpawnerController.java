@@ -46,7 +46,6 @@ public class SpawnerController extends StandardGameObject implements TimerInterf
         this.radius = _radius;
         this.spawnerTimer = new Timer(true);
         this.spawnerTimer.scheduleAtFixedRate(new SpawnerDelayTimer(this, this.game), this.delay, this.delay);
-
         TimerController.addTimer(this);
     }
 
@@ -69,11 +68,12 @@ public class SpawnerController extends StandardGameObject implements TimerInterf
      * @param _n
      */
     protected void spawn (int _n) {
-
+        if (this.game.getLevelController().getWaveNumber() % this.game.getLevelController().getBossSpawnInterval() == 0) {
+            return;
+        }
         for (int i = 0 ; i < _n ; i++) {
             int xPos = (int) StdOps.rand(this.getX() - this.radius, this.getX() + this.radius);
             int yPos = (int) StdOps.rand(this.getY() - this.radius, this.getY() + this.radius);
-
             //  Depending on what type of spawner we have, we spawn that type of monster.
             //  Eventually we will probably want to use reflection classes to make this easier/cleaner.
             switch (this.spawnerID) {

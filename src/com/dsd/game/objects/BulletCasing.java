@@ -36,15 +36,12 @@ public class BulletCasing extends StandardParticle implements Renderable, Updata
         this.game = _game;
         this.player = _player;
         this.gun = _parentGun;
-
         //  Sets the x and y position of the casing to the middle pos of the player.
         this.setX(this.player.getX() + this.player.getWidth() / 2);
         this.setY(this.player.getY() + this.player.getHeight() / 2);
-
         //  Randomizes the velocity ot seem like it is dropping.
         this.setVelX(StdOps.rand(CASING_VEL_X_MIN, CASING_VEL_X_MAX));
         this.setVelY(StdOps.rand(CASING_VEL_Y_MIN, CASING_VEL_Y_MAX));
-
         this.casingImage = this.gun.getRandomCasing();
         _player.getCasingHandler().addEntity(this);
     }

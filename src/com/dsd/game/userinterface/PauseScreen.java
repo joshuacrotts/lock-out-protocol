@@ -34,7 +34,6 @@ public class PauseScreen extends Screen {
         if (this.getGame().isMenu()) {
             return;
         }
-
         super.tick();
     }
 
@@ -43,9 +42,7 @@ public class PauseScreen extends Screen {
         if (this.getGame().isMenu()) {
             return;
         }
-
         this.drawTransparentScreen(_g2);
-
         super.render(_g2);
     }
 

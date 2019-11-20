@@ -50,9 +50,7 @@ public class AttackCommand extends Command implements TimerInterface {
         this.animation = animation;
         this.animation.getStandardAnimation().setReturnAnimation(this.player.getAnimationController());
         this.attackDelayTimer = new Timer(true);
-
         TimerController.addTimer(this);
-
         this.bind(_game.getKeyboard(), KeyEvent.VK_SPACE);
     }
 
@@ -76,7 +74,6 @@ public class AttackCommand extends Command implements TimerInterface {
                     this.gunAttack((Gun) weapon);
                     break;
             }
-
             /**
              * Once the weapon is used, we need to toggle it to false so the
              * timer can resume.
@@ -121,7 +118,6 @@ public class AttackCommand extends Command implements TimerInterface {
                 StandardAudioController.play(_gun.getEmptySFXPath(), StandardAudioType.SFX);
                 return;
             }
-
             /**
              * Play the animation and deduct ammunition from the gun that the
              * player is using.
@@ -129,7 +125,6 @@ public class AttackCommand extends Command implements TimerInterface {
             this.toggleAttackAnimation();
             _gun.shoot();
             _gun.playGunShotSFX();
-
             //  If we're on the grenade launcher, we don't need to fire
             //  a casing.
             if (_gun.getWeaponType() != WeaponType.GRENADE_LAUNCHER) {

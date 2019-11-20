@@ -65,7 +65,6 @@ public class StandardInteractorHandler extends StandardHandler implements MouseL
             Interactor inter = this.interactors.get(i);
             int scaleXOffset = 0;
             int scaleYOffset = 0;
-
             /**
              * If the interactor is on the main game screen (where it will be
              * scaled with the main camera, we apply an offset to its bounds so
@@ -75,10 +74,8 @@ public class StandardInteractorHandler extends StandardHandler implements MouseL
                 scaleXOffset = (int) this.game.getCamera().getX() - Screen.gameHalfWidth;
                 scaleYOffset = (int) this.game.getCamera().getY() - Screen.gameHalfHeight;
             }
-
             if (StdOps.mouseOver(this.game.getMouse().getMouseX(), this.game.getMouse().getMouseY(),
                     inter.getX() - scaleXOffset, inter.getY() - scaleYOffset, inter.getWidth(), inter.getHeight())) {
-
                 inter.onMouseClick();
             }
         }
@@ -96,7 +93,6 @@ public class StandardInteractorHandler extends StandardHandler implements MouseL
             Interactor inter = this.interactors.get(i);
             int scaleXOffset = 0;
             int scaleYOffset = 0;
-
             /**
              * If the interactor is on the main game screen (where it will be
              * scaled with the main camera, we apply an offset to its bounds so
@@ -123,7 +119,6 @@ public class StandardInteractorHandler extends StandardHandler implements MouseL
             if (!inter.isDraggable()) {
                 continue;
             }
-
             inter.onMouseClick();
         }
     }

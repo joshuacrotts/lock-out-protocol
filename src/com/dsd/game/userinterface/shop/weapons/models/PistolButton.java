@@ -32,7 +32,6 @@ public class PistolButton extends ShopButton {
     public PistolButton (Game _game, ShopScreen _shopScreen) {
         super(_game, _shopScreen, PistolButton.X_OFFSET,
                 PistolButton.Y_OFFSET, PISTOL_PRICE, PISTOL_AMMO_PRICE);
-
         this.pistolButtonView = new PistolButtonView(this);
     }
 
@@ -54,11 +53,9 @@ public class PistolButton extends ShopButton {
             return;
         }
         Gun _weapon = (Gun) this.getInventory().hasWeapon(WeaponType.PISTOL);
-
         //  If we don't have the weapon, add it to the user's inventory.
         if (_weapon == null && this.getGame().getPlayer().getMoney() >= this.getPrice()) {
             this.getGame().getPlayer().setMoney(this.getGame().getPlayer().getMoney() - this.getPrice());
-
             this.getInventory().addWeapon(new Pistol(this.getGame(),
                     this.getGame().getPlayer(), this.getGame().getPlayer().getHandler()));
         }

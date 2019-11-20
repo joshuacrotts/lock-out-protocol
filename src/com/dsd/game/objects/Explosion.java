@@ -29,14 +29,11 @@ public class Explosion extends StandardGameObject {
 
     public Explosion (int _x, int _y, int _damage, ExplosionType _type, StandardCollisionHandler _parentContainer) {
         super(_x, _y, StandardID.Tile1);
-
         this.explosionType = _type;
         this.DAMAGE = _damage;
-
         this.parentContainer = _parentContainer;
         this.animation = new StandardAnimatorController(new StandardAnimation(this,
                 _type.getExplosionFrames(), EXPLOSION_FPS, _type.getExplosionFrames().length - 1));
-
         this.parentContainer.addCollider(this.getId());
         this.parentContainer.flagAlive(this.getId());
     }

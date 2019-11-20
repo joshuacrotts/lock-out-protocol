@@ -24,7 +24,6 @@ public class MinigunButtonView extends ShopButtonView {
         else {
             this.text.setText("MINIGUN AMMO (100/$" + this.parentButton.getPricePerMagazine() + ")");
         }
-
         super.tick();
     }
 

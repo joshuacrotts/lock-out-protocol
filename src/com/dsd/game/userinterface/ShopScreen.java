@@ -30,10 +30,8 @@ public class ShopScreen extends Screen {
 
     public ShopScreen (Game _game) {
         super(_game);
-
         this.shopCommand = new ShopCommand(_game);
         this.shopState = ShopState.WEAPONS;
-
         this.createUIElements();
     }
 

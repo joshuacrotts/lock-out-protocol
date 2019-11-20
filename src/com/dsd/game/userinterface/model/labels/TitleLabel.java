@@ -31,7 +31,6 @@ public class TitleLabel extends StandardLabel {
         super(Screen.gameHalfWidth - TitleLabel.TITLE_X_OFFSET,
                 TitleLabel.TITLE_Y_OFFSET, _game.getWindow().getTitle(),
                 "src/resources/fonts/chargen.ttf", 32f);
-
         this.game = _game;
         this.fadeController = new StandardFadeController(Color.white, Color.gray, 0.01f);
     }
@@ -55,7 +54,6 @@ public class TitleLabel extends StandardLabel {
     private void shakeText () {
         this.setX(StdOps.rand(Screen.gameHalfWidth - TitleLabel.TITLE_X_OFFSET - shakeFactor,
                 Screen.gameHalfWidth - TitleLabel.TITLE_X_OFFSET + this.shakeFactor));
-
         this.setY(StdOps.rand(TitleLabel.TITLE_Y_OFFSET - shakeFactor, TitleLabel.TITLE_Y_OFFSET + this.shakeFactor));
     }
 }

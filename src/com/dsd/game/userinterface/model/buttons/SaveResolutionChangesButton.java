@@ -15,16 +15,20 @@ import java.awt.Graphics2D;
  * This class can be used in a multitude of ways; for now, it will be used for
  * verifying changes in the sub-options menu.
  *
- * @author Joshua
- * 
- * @updated 11/14/19
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/19/19
  */
 public class SaveResolutionChangesButton extends MenuButton implements MouseEventInterface {
 
+    //  Miscellaneous reference variables.
     private final MenuScreen menuScreen;
     private final IncreaseResolutionCommand incResCommand;
     private final DecreaseResolutionCommand decResCommand;
 
+    //  Positioning offsets for the button and the text.
     private static final int BUTTON_X_OFFSET = 0;
     private static final int BUTTON_Y_OFFSET = 120;
     private static final int TEXT_X_OFFSET = 60;
@@ -33,7 +37,6 @@ public class SaveResolutionChangesButton extends MenuButton implements MouseEven
     public SaveResolutionChangesButton (Game _game, MenuScreen _menuScreen) {
         super(BUTTON_X_OFFSET, _game.getGameHeight() - BUTTON_Y_OFFSET,
                 LanguageController.translate("SAVE CHANGES"), _game, _menuScreen);
-
         this.menuScreen = _menuScreen;
         this.incResCommand = new IncreaseResolutionCommand(this.getGame());
         this.decResCommand = new DecreaseResolutionCommand(this.getGame());
@@ -50,7 +53,6 @@ public class SaveResolutionChangesButton extends MenuButton implements MouseEven
         if (!this.getGame().isMenu() || !(this.getMenuScreen().isOnResolution())) {
             return;
         }
-
         super.render(_g2);
         _g2.setFont(this.font);
         _g2.setColor(Color.WHITE);
@@ -62,9 +64,7 @@ public class SaveResolutionChangesButton extends MenuButton implements MouseEven
         if (!this.getGame().isMenu() || !(this.getMenuScreen().isOnResolution())) {
             return;
         }
-
         super.onMouseClick();
-
         //  Once the user presses the save changes button, it will update the game's resolution.
         Dimension changedDimension = ResolutionEnum.getDimension();
         this.getGame().changeResolution((int) changedDimension.getWidth(), (int) changedDimension.getHeight());

@@ -65,21 +65,18 @@ public class PlayerView implements Renderable, Updatable {
         if (!this.menuScreen.isOnPlayerGender()) {
             return;
         }
-
         if (this.mouseOver) {
             _g2.setColor(this.fadeController.combine());
         }
         else {
             _g2.setColor(Color.BLACK);
         }
-
         _g2.drawImage(this.icon, this.parentButton.getX(), this.parentButton.getY(), this.imageWidth, this.imageHeight, null);
         this.drawBorder(_g2);
     }
 
     private void drawBorder (Graphics2D _g2) {
         Stroke oldStroke = _g2.getStroke();
-
         _g2.setStroke(new BasicStroke(this.STROKE_WIDTH));
         _g2.draw(this.iconOutline);
         _g2.setStroke(oldStroke);

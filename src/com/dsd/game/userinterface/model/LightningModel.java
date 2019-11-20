@@ -65,11 +65,8 @@ public class LightningModel extends Interactor {
      * the line-segment points
      */
     private void updateLightningPos () {
-
         List<Pair<Integer, Integer>> lightningPoints = this.generatePoints();
-
         this.lightningLines = new Line2D[lightningPoints.size()];
-
         for (int i = 0 ; i < this.lightningLines.length - 1 ; i++) {
             Pair<Integer, Integer> coordOne = lightningPoints.get(i);
             Pair<Integer, Integer> coordTwo = lightningPoints.get(i + 1);

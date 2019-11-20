@@ -42,7 +42,6 @@ public class ControlsLabel extends StandardLabel {
         if (!this.game.isHelp()) {
             return;
         }
-
         this.setX((int) this.game.getCamera().getX() - this.LABEL_X_OFFSET);
         this.setY((int) this.game.getCamera().getY() - this.LABEL_Y_OFFSET);
     }
@@ -54,15 +53,12 @@ public class ControlsLabel extends StandardLabel {
         }
         Color oldColor = _g2.getColor();
         Font oldFont = _g2.getFont();
-
         _g2.setColor(Color.WHITE);
         _g2.setFont(this.getFont());
         super.render(_g2);
         this.drawControlsString(_g2);
-
         _g2.setColor(oldColor);
         _g2.setFont(oldFont);
-
     }
 
     /**
@@ -87,7 +83,6 @@ public class ControlsLabel extends StandardLabel {
         controlsString.append("Change Weapon Backward: X").append(";");
         controlsString.append("Use Weapon: SPACE").append(";");
         controlsString.append("Pause/Main Menu: ESC").append(";");
-
         stringControls = controlsString.toString().split(";");
     }
 }

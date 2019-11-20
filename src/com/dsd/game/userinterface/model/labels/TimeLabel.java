@@ -38,7 +38,6 @@ public class TimeLabel extends StandardLabel implements TimerInterface {
     public TimeLabel (Game _game) {
         super(Screen.gameHalfWidth, TimeLabel.TIME_Y_OFFSET, "00:00:00",
                 "src/resources/fonts/chargen.ttf", 14f);
-
         this.game = _game;
         this.waveString = LanguageController.translate("Wave");
     }
@@ -54,7 +53,6 @@ public class TimeLabel extends StandardLabel implements TimerInterface {
                 this.timer.scheduleAtFixedRate(new TimerControl(this), 0, TIME_INTERVAL);
                 TimerController.addTimer(this);
             }
-
             this.setText(String.format("%02d:%02d:%02d \u007C %s %s", this.hours, this.minutes, this.seconds, this.waveString,
                     Utilities.toRoman(this.game.getWaveNumber())));
         }
@@ -64,7 +62,6 @@ public class TimeLabel extends StandardLabel implements TimerInterface {
     public void render (Graphics2D _g2) {
         this.setX((int) this.game.getCamera().getX());
         this.setY((int) (this.game.getCamera().getY() - Screen.gameHalfHeight + TIME_Y_OFFSET));
-
         _g2.setColor(Color.WHITE);
         super.render(_g2);
     }

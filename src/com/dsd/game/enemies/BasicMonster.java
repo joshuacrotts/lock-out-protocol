@@ -36,18 +36,18 @@ public class BasicMonster extends Enemy implements DeathListener {
     private static final BufferedImage[] DEATH_FRAMES;
     private static final BufferedImage[] ATTACK_FRAMES;
 
-    //  Animation frame per second setting
+    //  Animation frame per second setting.
     private final int walkingFPS;
     private final int WALKING_FPS_MIN = 7;
     private final int WALKING_FPS_MAX = 13;
     private static final int ATTACK_FPS = 9;
     private static final int DEATH_FPS = 5;
 
-    //  Variables representing the angle and approach velocity
+    //  Variables representing the angle and approach velocity.
     private static final double APPROACH_VEL = -1.5f;
     private final double DAMAGE = 0.20;
 
-    //  AlphaComposite factor for when the BasicMonster dies
+    //  AlphaComposite factor for when the BasicMonster dies.
     private static final float DEATH_ALPHA_FACTOR = 0.001f;
 
     //  Health factor for this BasicMonster object.
@@ -56,30 +56,25 @@ public class BasicMonster extends Enemy implements DeathListener {
     public BasicMonster (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, APPROACH_VEL, BasicMonster.originalHealth, StandardID.BasicMonster, _game, _sch);
         this.setTarget(_game.getPlayer());
-
         //  Randomly generates the walking frames per second for variability
         this.walkingFPS = StdOps.rand(this.WALKING_FPS_MIN, this.WALKING_FPS_MAX);
-
         //  Sets the walking/death frames for this monster
         super.initWalkingFrames(BasicMonster.WALK_FRAMES, this.walkingFPS);
         super.initAttackingFrames(BasicMonster.ATTACK_FRAMES, BasicMonster.ATTACK_FPS);
         super.initDeathFrames(BasicMonster.DEATH_FRAMES, BasicMonster.DEATH_FPS, 5);
-
         //  Sets the default animation
         super.setAnimation(super.getWalkingAnimation());
-
         //  The width/height of the model is set by the buffered image backing it.
         super.setDimensions();
         super.setDamage(this.DAMAGE);
         super.getHandler().addCollider(this.getId());
         super.getHandler().flagAlive(this.getId());
-        super.setTransparentFactor((float) DEATH_ALPHA_FACTOR);
+        super.setTransparentFactor((float) BasicMonster.DEATH_ALPHA_FACTOR);
     }
 
     @Override
     public void tick () {
         super.tick();
-
     }
 
     @Override
@@ -97,7 +92,6 @@ public class BasicMonster extends Enemy implements DeathListener {
         this.setAnimation(this.getDeathAnimation());
         this.explosionHandler = new StandardParticleHandler(50);
         this.explosionHandler.setCamera(this.getCamera());
-
         for (int i = 0 ; i < this.explosionHandler.getMaxParticles() ; i++) {
             this.explosionHandler.addEntity(new StandardBoxParticle(this.getX(), this.getY(),
                     StdOps.rand(1.0, 5.0), StdOps.randBounds(-10.0, -3.0, 3.0, 10.0),

@@ -88,7 +88,6 @@ public class TranslatorDatabase {
         if (remoteDatabase.connect("users")) {
             return remoteDatabase.userAuthenticated(_email, _password);
         }
-
         throw new IllegalStateException("Could not connect to db!");
     }
 
@@ -104,7 +103,6 @@ public class TranslatorDatabase {
         if (remoteDatabase.connect("users")) {
             return remoteDatabase.addUser(_email, _password);
         }
-
         throw new IllegalStateException("Could not connect to db!");
     }
 }

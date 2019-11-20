@@ -43,6 +43,9 @@ public class LevelController implements TimerInterface, SerializableObject {
     private int currentLevelID = 0;
     private int currentWave = 1;
 
+    //  Every 5 waves, a boss character will spawn.
+    private int bossSpawnWaveInt = 5;
+
     public LevelController (Game _game) {
         this.game = _game;
         this.levels = new ArrayList<>();
@@ -98,7 +101,6 @@ public class LevelController implements TimerInterface, SerializableObject {
         this.levelTimer.scheduleAtFixedRate(new LevelTimer(this.game, this),
                 (long) DifficultyController.levelTransitionTimer,
                 (long) DifficultyController.levelTransitionTimer);
-
         TimerController.addTimer(this);
     }
 
@@ -140,9 +142,7 @@ public class LevelController implements TimerInterface, SerializableObject {
         if (_id != SerializableType.WAVE_INFO) {
             return null;
         }
-
         StringBuilder levelInformation = new StringBuilder();
-
         //  Appends the level ID and current wave info.
         levelInformation.append(this.currentLevelID).append(";");
         levelInformation.append(this.currentWave).append(";");
@@ -185,6 +185,10 @@ public class LevelController implements TimerInterface, SerializableObject {
      */
     public int getLogicalCurrentLevelID () {
         return this.currentLevelID + 1;
+    }
+
+    public int getBossSpawnInterval () {
+        return this.bossSpawnWaveInt;
     }
 
 //============================= SETTERS ======================================//

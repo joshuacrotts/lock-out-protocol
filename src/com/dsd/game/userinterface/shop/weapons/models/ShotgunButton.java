@@ -34,7 +34,6 @@ public class ShotgunButton extends ShopButton {
                 ShotgunButton.Y_OFFSET,
                 SHOTGUN_PRICE,
                 SHOTGUN_AMMO_PRICE);
-
         this.shotgunButtonView = new ShotgunButtonView(this);
     }
 
@@ -57,18 +56,15 @@ public class ShotgunButton extends ShopButton {
             return;
         }
         Gun _weapon = (Gun) this.getInventory().hasWeapon(WeaponType.SHOTGUN);
-
         //  If we don't have the weapon, add it to the user's inventory.
         if (_weapon == null && this.getGame().getPlayer().getMoney() >= this.getPrice()) {
             this.getGame().getPlayer().setMoney(this.getGame().getPlayer().getMoney() - this.getPrice());
-
             this.getInventory().addWeapon(new Shotgun(this.getGame(),
                     this.getGame().getPlayer(), this.getGame().getPlayer().getHandler()));
         }
         //  Otherwise, add to the ammunition.
         else if (this.getGame().getPlayer().getMoney() >= this.getPricePerMagazine()) {
             this.getGame().getPlayer().setMoney(this.getGame().getPlayer().getMoney() - this.getPricePerMagazine());
-
             _weapon.setTotalAmmo(_weapon.getTotalAmmo() + _weapon.getMagazineCapacity());
         }
     }

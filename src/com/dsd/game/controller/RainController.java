@@ -59,7 +59,6 @@ public class RainController implements Renderable, Updatable {
         this.sc = _game.getCamera();
         this.sph = new StandardParticleHandler(MAX_RAIN_PARTICLES);
         this.lightningHandler = new LightningHandler();
-
         // Be sure to always set the SPH camera or it'll throw a NPE
         this.sph.setCamera(this.sc);
         try {
@@ -81,17 +80,14 @@ public class RainController implements Renderable, Updatable {
 
     @Override
     public void tick () {
-
         if (this.isRaining()) {
             // Generates the min/max points for the rain to spawn
             int xGenMin = (int) (this.sc.getX() - RainController.X_BORDER);
             int xGenMax = (int) (this.sc.getX() + RainController.X_BORDER);
             int yGenMin = (int) (this.sc.getY() - RainController.Y_BORDER);
             int yGenMax = (int) (this.sc.getY() + RainController.Y_BORDER / 4);
-
             this.sph.addEntity(this.generateRainDrop(xGenMin, xGenMax, yGenMin, yGenMax));
             this.sph.tick();
-
             this.generateLightning();
             this.lightningHandler.tick();
         }
@@ -107,10 +103,8 @@ public class RainController implements Renderable, Updatable {
      * @return
      */
     private RainDrop generateRainDrop (int _xGenMin, int _xGenMax, int _yGenMin, int _yGenMax) {
-
         int xPos = StdOps.rand(_xGenMin, _xGenMax);
         int yPos = StdOps.rand(_yGenMin, _yGenMax);
-
         return new RainDrop(xPos, yPos, RAIN_DIRECTION, this.getRandomSpeed(VEL_FACTOR),
                 (int) (this.sc.getY() + this.sc.getVph() * Y_BOUND_FACTOR));
     }

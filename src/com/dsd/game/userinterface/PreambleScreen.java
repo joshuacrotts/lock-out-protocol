@@ -15,7 +15,11 @@ import java.util.TimerTask;
  * This class, conveniently named "PreambleScreen", will draw a lightning effect
  * while showing what level/wave the player is on. Completely cosmetic.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/19/19
  */
 public class PreambleScreen extends Screen implements TimerInterface {
 
@@ -42,8 +46,8 @@ public class PreambleScreen extends Screen implements TimerInterface {
         this.lightningEffect = new LightningModel(_game);
         this.waveModel = new WaveLabel(_game, _game.getLogicalCurrentLevelID());
         this.preambleTimer = new Timer(true);
-        TimerController.addTimer(this);
         this.state = PreambleScreenState.FADE_IN;
+        TimerController.addTimer(this);
     }
 
     @Override
@@ -61,7 +65,6 @@ public class PreambleScreen extends Screen implements TimerInterface {
         if (this.getGame().isMenu()) {
             return;
         }
-
         AlphaComposite oldComposite = (AlphaComposite) _g2.getComposite();
         _g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, this.alpha));
         this.lightningEffect.render(_g2);
@@ -81,7 +84,6 @@ public class PreambleScreen extends Screen implements TimerInterface {
          */
         if (this.state == PreambleScreenState.FADE_IN && this.alpha < 1.0f) {
             this.alpha += ALPHA_TIMER;
-
         }
         /**
          * Once we hit an alpha of 1, we can schedule our timer to wait for x

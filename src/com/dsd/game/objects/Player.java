@@ -70,24 +70,17 @@ public class Player extends Entity implements DeathListener, SerializableObject 
 
     public Player (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, 100, StandardID.Player, (Game) _game, _sch);
-
         //  Instantiate the inventory
         this.inventory = new Inventory(this.getGame(), this, _sch);
-
         //  Initializes the miscellaneous variables
         this.sc = this.getGame().getCamera();
-
         //  Sets the default animation
         this.setAnimation(this.inventory.getCurrentWeapon().getWalkFrames());
-
         //  Instantiate commands
         this.initCommands();
-
         //  Initializes the player's default state to standing
         this.playerState = PlayerState.STANDING;
-
         this.casingHandler = new StandardParticleHandler(1000);
-
         //  Adds the player to the list of collidable objects
         _sch.addCollider(StandardID.Player);
         _sch.flagAlive(StandardID.Player);
@@ -104,16 +97,13 @@ public class Player extends Entity implements DeathListener, SerializableObject 
             }
             this.getAnimationController().getStandardAnimation().setRotation(this.getAngle());
             this.updateDimensions();
-
             // Save the mouse position
             double mx = this.sc.getX() + this.getGame().getMouse().getMouseX() - this.sc.getVpw();
             double my = this.sc.getY() + this.getGame().getMouse().getMouseY() - this.sc.getVph();
-
             //*******************************************************************//
             //      Causes the player to follow the cursor wherever on the screen //
             //*******************************************************************//
             this.followCursor((int) mx, (int) my);
-
             //*****************************************************************//
             //      Calculates the angle the player needs to be in to face the   //
             //      cursor                                                     //
@@ -164,15 +154,12 @@ public class Player extends Entity implements DeathListener, SerializableObject 
         if (_id != SerializableType.PLAYER) {
             return null;
         }
-
         StringBuilder playerDetails = new StringBuilder();
-
         playerDetails.append(this.getPlayerSex().equals("male") ? 1 : 0).append(";");
         playerDetails.append((int) this.getX()).append(";");
         playerDetails.append((int) this.getY()).append(";");
         playerDetails.append((int) this.getMoney()).append(";");
         playerDetails.append((int) this.getHealth()).append(";");
-
         return playerDetails.toString();
     }
 
@@ -211,7 +198,6 @@ public class Player extends Entity implements DeathListener, SerializableObject 
      * @param _cam
      */
     private void checkXBounds (StandardCamera _cam) {
-
         if (this.getX() <= _cam.getMinX() - Screen.gameHalfWidth) {
             this.setX(_cam.getMinX() - Screen.gameHalfWidth);
         }
@@ -273,11 +259,9 @@ public class Player extends Entity implements DeathListener, SerializableObject 
         // Calculate the distance between the sprite and the mouse
         double diffX = this.getX() - _mx - Entity.APPROACH_FACTOR;
         double diffY = this.getY() - _my - Entity.APPROACH_FACTOR;
-
         // Use the pythagorean theorem to solve for the hypotenuse distance
         double distance = (double) FastMath.sqrt(((this.getX() - _mx) * (this.getX() - _mx))
                 + ((this.getY() - _my) * (this.getY() - _my)));
-
         /**
          * Sets the velocity according to how far away the sprite is from the
          * cursor, and according to what direction the player is facing.

@@ -27,16 +27,13 @@ public class WeatherConnector implements WeatherConnectorAPIAdapter {
     private static String key;
 
     static {
-
         //  Loads in the key for the api connection
         WeatherConnector.inputStream = WeatherConnector.class.getClassLoader().getResourceAsStream(".config/.weather_config.txt");
         WeatherConnector.reader = new BufferedReader(new InputStreamReader(WeatherConnector.inputStream));
         try {
-
             WeatherConnector.line = WeatherConnector.reader.readLine();
         }
         catch (IOException ex) {
-
             Logger.getLogger(WeatherConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
         //  Extracts the key from the line read in by the buffered reader
@@ -44,7 +41,6 @@ public class WeatherConnector implements WeatherConnectorAPIAdapter {
     }
 
     public WeatherConnector () {
-
     }
 
     /**
@@ -55,11 +51,8 @@ public class WeatherConnector implements WeatherConnectorAPIAdapter {
      * @return
      */
     private static String fetch (String city) {
-
         StringBuilder jsonInformation = null;
-
         try {
-
             //  Processes the request to the API, and reads the information
             //  into the StringBuilder object.
             jsonInformation = new StringBuilder();
@@ -68,20 +61,14 @@ public class WeatherConnector implements WeatherConnectorAPIAdapter {
             con.setRequestMethod("GET");
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
-
             while ((inputLine = in.readLine()) != null) {
-
                 jsonInformation.append(inputLine);
             }
-
             in.close();
         }
-
         catch (IOException ex) {
-
             Logger.getLogger(WeatherConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return jsonInformation.toString();
     }
 
@@ -94,7 +81,6 @@ public class WeatherConnector implements WeatherConnectorAPIAdapter {
      */
     @Override
     public String getWeather (String city) {
-
         return getWeatherType(getWeatherArray(city));
     }
 
@@ -106,7 +92,6 @@ public class WeatherConnector implements WeatherConnectorAPIAdapter {
      * @return
      */
     private static JSONArray getWeatherArray (String city) {
-
         JSONObject weatherJSON = new JSONObject(WeatherConnector.fetch(city));
         return (JSONArray) weatherJSON.get("weather");
     }
@@ -118,7 +103,6 @@ public class WeatherConnector implements WeatherConnectorAPIAdapter {
      * @return
      */
     private static String getWeatherType (JSONArray weatherArray) {
-
         JSONObject indexOne = (JSONObject) weatherArray.getJSONObject(0);
         return (String) indexOne.get("description");
     }

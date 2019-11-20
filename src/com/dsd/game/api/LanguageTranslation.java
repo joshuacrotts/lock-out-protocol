@@ -27,15 +27,12 @@ public class LanguageTranslation implements LanguageTranslationAPIAdapter {
         //  Loads in the key for the api connection
         LanguageTranslation.inputStream = LanguageTranslation.class.getClassLoader().getResourceAsStream(".config/.language_config.txt");
         LanguageTranslation.reader = new BufferedReader(new InputStreamReader(LanguageTranslation.inputStream));
-
         try {
             LanguageTranslation.line = LanguageTranslation.reader.readLine();
         }
-
         catch (IOException ex) {
             Logger.getLogger(LanguageTranslation.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         //  Extracts the key from the line read in by the buffered reader
         LanguageTranslation.key = LanguageTranslation.line.substring(LanguageTranslation.line.lastIndexOf(":") + 1);
     }
@@ -50,7 +47,6 @@ public class LanguageTranslation implements LanguageTranslationAPIAdapter {
      */
     private static String fetch (String _text, String _lang) {
         StringBuilder jsonInformation = null;
-
         try {
             //  Processes the request to the API, and reads the information
             //  into the StringBuilder object.
@@ -60,13 +56,11 @@ public class LanguageTranslation implements LanguageTranslationAPIAdapter {
             con.setRequestMethod("GET");
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
-
             while ((inputLine = in.readLine()) != null) {
                 jsonInformation.append(inputLine);
             }
             in.close();
         }
-
         catch (IOException ex) {
             Logger.getLogger(LanguageTranslation.class.getName()).log(Level.SEVERE, null, ex);
         }

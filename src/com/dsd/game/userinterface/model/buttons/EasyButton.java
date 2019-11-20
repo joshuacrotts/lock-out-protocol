@@ -20,7 +20,7 @@ import java.awt.Graphics2D;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
- * 
+ *
  * @updated 11/14/19
  */
 public class EasyButton extends MenuButton implements MouseEventInterface {
@@ -49,7 +49,6 @@ public class EasyButton extends MenuButton implements MouseEventInterface {
         if (!this.getMenuScreen().isOnDifficulty()) {
             return;
         }
-
         super.render(_g2);
         _g2.setFont(this.font);
         _g2.setColor(Color.WHITE);
@@ -78,7 +77,6 @@ public class EasyButton extends MenuButton implements MouseEventInterface {
             return;
         }
         this.activeImage = this.onHoverButtonImg;
-
     }
 
     @Override

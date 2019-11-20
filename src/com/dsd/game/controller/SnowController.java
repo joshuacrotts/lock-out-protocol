@@ -57,10 +57,8 @@ public class SnowController implements Renderable, Updatable {
         this.game = _game;
         this.sc = _game.getCamera();
         this.sph = new StandardParticleHandler(MAX_SNOW_PARTICLES);
-        
         // Be sure to always set the SPH camera or it'll throw a NPE
         this.sph.setCamera(this.sc);
-
         try {
             this.isSnowing = TranslatorAPI.getWeather().contains("snow") | SnowController.toggleDownfall;
         }
@@ -80,14 +78,12 @@ public class SnowController implements Renderable, Updatable {
 
     @Override
     public void tick () {
-
         if (this.isSnowing()) {
             // Generates the min/max points for the snow to spawn
             int xGenMin = (int) (this.sc.getX() - SnowController.X_BORDER);
             int xGenMax = (int) (this.sc.getX() + SnowController.X_BORDER);
             int yGenMin = (int) (this.sc.getY() - SnowController.Y_BORDER);
             int yGenMax = (int) (this.sc.getY() - SnowController.Y_BORDER + Y_BOUND_OFFSET);
-
             this.sph.addEntity(this.generateSnowflake(xGenMin, xGenMax, yGenMin, yGenMax));
             this.sph.tick();
         }
@@ -103,10 +99,8 @@ public class SnowController implements Renderable, Updatable {
      * @return
      */
     private Snowflake generateSnowflake (int _xGenMin, int _xGenMax, int _yGenMin, int _yGenMax) {
-
         int xPos = StdOps.rand(_xGenMin, _xGenMax);
         int yPos = StdOps.rand(_yGenMin, _yGenMax);
-
         return new Snowflake(xPos, yPos, SNOW_DIRECTION, this.getRandomSpeed(VEL_FACTOR),
                 (int) (this.sc.getY() + this.sc.getVph() * Y_BOUND_FACTOR));
     }

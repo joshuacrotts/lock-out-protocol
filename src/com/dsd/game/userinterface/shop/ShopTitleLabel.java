@@ -26,7 +26,6 @@ public class ShopTitleLabel extends StandardLabel {
         super(Screen.gameHalfWidth - ShopTitleLabel.TITLE_X_OFFSET,
                 ShopTitleLabel.TITLE_Y_OFFSET, LanguageController.translate("SHOP"),
                 "src/resources/fonts/chargen.ttf", 64f);
-
         this.game = _game;
         this.shopScreen = _shopScreen;
         this.setScaled(true);

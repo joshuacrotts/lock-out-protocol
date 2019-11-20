@@ -26,7 +26,6 @@ public class EmailLabel extends StandardLabel {
         super(_emailModel.getX(), _emailModel.getY(),
                 LanguageController.translate("EMAIL:"),
                 "src/resources/fonts/chargen.ttf", 32f);
-
         this.menuScreen = _menuScreen;
         this.emailModel = _emailModel;
     }
