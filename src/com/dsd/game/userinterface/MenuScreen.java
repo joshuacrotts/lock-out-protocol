@@ -103,8 +103,7 @@ public class MenuScreen extends Screen {
      * Plays the music associated with the menu.
      */
     public void playMenuMusic () {
-        StandardAudioController.loop("src/resources/audio/music/menu.wav", StandardAudioType.MUSIC,
-                StandardAudio.INFINITELY);
+        StandardAudioController.play("src/resources/audio/music/menu.wav", StandardAudioType.MUSIC);
     }
 
     /**

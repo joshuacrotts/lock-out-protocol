@@ -119,8 +119,8 @@ public class LevelController implements TimerInterface, SerializableObject {
      * Plays the music track associated with the current level ID.
      */
     public void playMusic () {
-        StandardAudioController.loop("src/resources/audio/music/level" + this.currentLevelID + ".wav",
-                StandardAudioType.MUSIC, StandardAudio.INFINITELY);
+        //StandardAudioController.play("src/resources/audio/music/level" + this.currentLevelID + ".wav",
+        //        StandardAudioType.MUSIC);
     }
 
     /**

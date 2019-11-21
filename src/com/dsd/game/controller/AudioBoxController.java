@@ -23,7 +23,7 @@ public abstract class AudioBoxController {
     public static void initialize (int _buffers) {
         StandardAudioController.init(_buffers);
         StandardAudioController.load("src/resources/audio/music/menu.wav", 1, StandardAudioType.MUSIC);
-        StandardAudioController.load("src/resources/audio/music/level0.wav", 1, StandardAudioType.MUSIC);
+        //StandardAudioController.load("src/resources/audio/music/level0.wav", 1, StandardAudioType.MUSIC);
         StandardAudioController.load("src/resources/audio/sfx/pistol.wav", 16, StandardAudioType.SFX);
         StandardAudioController.load("src/resources/audio/sfx/splat1.wav", 2, StandardAudioType.SFX);
         StandardAudioController.load("src/resources/audio/sfx/splat2.wav", 2, StandardAudioType.SFX);
