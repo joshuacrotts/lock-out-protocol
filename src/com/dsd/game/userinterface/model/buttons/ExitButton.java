@@ -53,6 +53,7 @@ public class ExitButton extends MenuButton implements MouseEventInterface {
             return;
         }
         this.getGame().stopGame();
+        System.exit(0);
     }
 
     @Override
