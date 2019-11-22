@@ -27,7 +27,7 @@ public class MediumButton extends MenuButton implements MouseEventInterface {
 
     //  Button position and dimension offsets.
     private static final int BUTTON_X_OFFSET = 125;
-    private static final int BUTTON_Y_OFFSET = 30;
+    private static final int BUTTON_Y_OFFSET = -45;
     private static final int TEXT_X_OFFSET = 50;
     private static final int TEXT_Y_OFFSET = 45;
 

@@ -27,7 +27,7 @@ public class HardButton extends MenuButton implements MouseEventInterface {
 
     //  Button position and dimension offsets.
     private static final int BUTTON_X_OFFSET = 125;
-    private static final int BUTTON_Y_OFFSET = 250;
+    private static final int BUTTON_Y_OFFSET = 90;
     private static final int TEXT_X_OFFSET = 85;
     private static final int TEXT_Y_OFFSET = 45;
 
