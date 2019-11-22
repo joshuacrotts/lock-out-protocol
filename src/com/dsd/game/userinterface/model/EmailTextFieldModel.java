@@ -20,14 +20,14 @@ public class EmailTextFieldModel extends TextFieldModel {
     private final int BUTTON_X_OFFSET = 300;
     private final EmailLabel emailLabel;
 
-    public EmailTextFieldModel (int _x, int _y, Game _game, MenuScreen _menuScreen) {
+    public EmailTextFieldModel(int _x, int _y, Game _game, MenuScreen _menuScreen) {
         super(_x, _y, _game, _menuScreen);
         this.emailLabel = new EmailLabel(this, _menuScreen);
         this.getMenuScreen().addInteractor(this.emailLabel);
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (!this.getMenuScreen().isOnAccountScreen()) {
             return;
         }
@@ -37,14 +37,14 @@ public class EmailTextFieldModel extends TextFieldModel {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.getMenuScreen().isOnAccountScreen()) {
             return;
         }
         super.render(_g2);
     }
 
-    public int getEmailLabelLength () {
+    public int getEmailLabelLength() {
         return this.emailLabel.getText().length();
     }
 }

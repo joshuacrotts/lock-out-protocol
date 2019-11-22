@@ -83,14 +83,14 @@ public final class StdConsole {
     public static final String CYAN_BACKGROUND_BRIGHT = "\033[0;106m";  // CYAN
     public static final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";   // WHITE
 
-    public static void println (String _color, String _text) {
+    public static void println(String _color, String _text) {
         System.out.println(_color + _text + StdConsole.RESET);
     }
 
-    public static void println (String _text) {
+    public static void println(String _text) {
         System.out.println(StdConsole.RESET + " " + _text);
     }
 
-    private StdConsole () {
+    private StdConsole() {
     }
 }

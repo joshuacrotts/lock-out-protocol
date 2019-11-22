@@ -68,7 +68,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
     //  Sex of player
     private String sex = "male";
 
-    public Player (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
+    public Player(int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, 100, StandardID.Player, (Game) _game, _sch);
         //  Instantiate the inventory
         this.inventory = new Inventory(this.getGame(), this, _sch);
@@ -88,7 +88,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.setAlive(this.getHealth() > 0);
         if (this.isAlive()) {
             //  If the player is not standing still, update the animation controller.
@@ -110,8 +110,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
             //*****************************************************************//
             this.faceCursor((int) mx, (int) my);
             this.checkCameraBounds();
-        }
-        else {
+        } else {
             this.uponDeath();
         }
     }
@@ -122,7 +121,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
      * @param _g2
      */
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (DebugController.DEBUG_MODE) {
             this.drawBorder(_g2);
         }
@@ -134,7 +133,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
      * out the application (currently WIP).
      */
     @Override
-    public void uponDeath () {
+    public void uponDeath() {
         JOptionPane.showMessageDialog(this.getGame(), "You have died!");
         this.getGame().stopGame();
         System.exit(0);
@@ -143,7 +142,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
     /**
      * Resets all information about the player.
      */
-    public void resetPlayer () {
+    public void resetPlayer() {
         this.money = 0;
         this.setHealth(this.maxHealth);
         this.inventory.resetInventory();
@@ -151,7 +150,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
 
 //=========================== CRUD OPERATIONS ================================//
     @Override
-    public String createObject (SerializableType _id) {
+    public String createObject(SerializableType _id) {
         if (_id != SerializableType.PLAYER) {
             return null;
         }
@@ -164,7 +163,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
         return playerDetails.toString();
     }
 
-    public void readObject (HashMap<String, Double> _playerInfo) {
+    public void readObject(HashMap<String, Double> _playerInfo) {
         this.setPlayerSex(_playerInfo.get("Sex") == 1 ? "male" : "female");
         this.setX(_playerInfo.get("PlayerX"));
         this.setY(_playerInfo.get("PlayerY"));
@@ -173,12 +172,12 @@ public class Player extends Entity implements DeathListener, SerializableObject 
     }
 
     @Override
-    public void updateObject (SerializableType _obj) {
+    public void updateObject(SerializableType _obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void destroyObject (SerializableType _obj) {
+    public void destroyObject(SerializableType _obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -186,7 +185,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
      * Adjusts the player's position so they aren't able to move outside the
      * bounds of the camera.
      */
-    private void checkCameraBounds () {
+    private void checkCameraBounds() {
         StandardCamera cam = this.getGame().getCamera();
         this.checkXBounds(cam);
         this.checkYBounds(cam);
@@ -198,7 +197,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
      *
      * @param _cam
      */
-    private void checkXBounds (StandardCamera _cam) {
+    private void checkXBounds(StandardCamera _cam) {
         if (this.getX() <= _cam.getMinX() - Screen.gameHalfWidth) {
             this.setX(_cam.getMinX() - Screen.gameHalfWidth);
         }
@@ -213,7 +212,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
      *
      * @param _cam
      */
-    private void checkYBounds (StandardCamera _cam) {
+    private void checkYBounds(StandardCamera _cam) {
         if (this.getY() <= _cam.getMinY() - Screen.gameHalfHeight) {
             this.setY(_cam.getMinY() - Screen.gameHalfHeight);
         }
@@ -227,7 +226,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
      *
      * @param _g2
      */
-    private void drawBorder (Graphics2D _g2) {
+    private void drawBorder(Graphics2D _g2) {
         _g2.setColor(Color.RED);
         _g2.draw(this.getBounds());
     }
@@ -239,7 +238,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
      * @param _mx
      * @param _my
      */
-    private void faceCursor (int _mx, int _my) {
+    private void faceCursor(int _mx, int _my) {
         float xSign = (float) FastMath.signum(_mx - this.getX());
         double dx = FastMath.abs(_mx - this.getX());
         double dy = FastMath.abs(_my - this.getY());
@@ -256,7 +255,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
      * @param _mx
      * @param _my
      */
-    private void followCursor (int _mx, int _my) {
+    private void followCursor(int _mx, int _my) {
         // Calculate the distance between the sprite and the mouse
         double diffX = this.getX() - _mx - Entity.APPROACH_FACTOR;
         double diffY = this.getY() - _my - Entity.APPROACH_FACTOR;
@@ -276,7 +275,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
      * Updates the dimensions of the SGO according to the animation's current
      * sprite.
      */
-    private void updateDimensions () {
+    private void updateDimensions() {
         this.setWidth(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getWidth());
         this.setHeight(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getHeight());
     }
@@ -285,7 +284,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
      * Instantiates the commmands and adds them to the listener (within the
      * command classes themselves).
      */
-    private void initCommands () {
+    private void initCommands() {
         this.attackCommand = new AttackCommand(this.getGame(), this, this.getHandler(),
                 this.inventory.getCurrentWeapon().getAttackFrames());
         MoveForwardCommand moveForwardCommand = new MoveForwardCommand(this.getGame(), this);
@@ -297,11 +296,11 @@ public class Player extends Entity implements DeathListener, SerializableObject 
     }
 
 //============================== GETTERS ================================//
-    public Inventory getInventory () {
+    public Inventory getInventory() {
         return this.inventory;
     }
 
-    public int getMoney () {
+    public int getMoney() {
         return this.money;
     }
 
@@ -311,36 +310,36 @@ public class Player extends Entity implements DeathListener, SerializableObject 
      *
      * @return
      */
-    public boolean isWalking () {
+    public boolean isWalking() {
         return this.playerState == PlayerState.WALKING_FORWARD
                 ^ this.playerState == PlayerState.WALKING_BACKWARD;
     }
 
-    public boolean isStanding () {
+    public boolean isStanding() {
         return this.playerState == PlayerState.STANDING;
     }
 
-    public boolean isAttacking () {
+    public boolean isAttacking() {
         return this.playerState == PlayerState.ATTACKING;
     }
 
-    public boolean isMovingForward () {
+    public boolean isMovingForward() {
         return this.playerState == PlayerState.WALKING_FORWARD;
     }
 
-    public boolean isMovingBackward () {
+    public boolean isMovingBackward() {
         return this.playerState == PlayerState.WALKING_BACKWARD;
     }
 
-    public int getMaxHealth () {
+    public int getMaxHealth() {
         return this.maxHealth;
     }
 
-    public StandardParticleHandler getCasingHandler () {
+    public StandardParticleHandler getCasingHandler() {
         return this.casingHandler;
     }
 
-    public int getPlayerDirection () {
+    public int getPlayerDirection() {
         int directionSign = 0;
         switch (this.playerState) {
             case WALKING_FORWARD:
@@ -353,33 +352,33 @@ public class Player extends Entity implements DeathListener, SerializableObject 
         return directionSign;
     }
 
-    public String getPlayerSex () {
+    public String getPlayerSex() {
         return this.sex;
     }
 
 //=============================== SETTERS ================================//
-    public void setCamera (StandardCamera _sc) {
+    public void setCamera(StandardCamera _sc) {
         this.sc = _sc;
         this.casingHandler.setCamera(_sc);
     }
 
-    public void setPlayerState (PlayerState _playerState) {
+    public void setPlayerState(PlayerState _playerState) {
         this.playerState = _playerState;
     }
 
-    public void setAttackAnimator (StandardAnimatorController sac) {
+    public void setAttackAnimator(StandardAnimatorController sac) {
         this.attackCommand.setAnimation(sac);
     }
 
-    public void setMoney (int _money) {
+    public void setMoney(int _money) {
         this.money = _money;
     }
 
-    public void setMaxHealth (int _max) {
+    public void setMaxHealth(int _max) {
         this.maxHealth = _max;
     }
 
-    public void setApproachVelocity (float _vel) {
+    public void setApproachVelocity(float _vel) {
         this.APPROACH_VEL = _vel;
     }
 
@@ -389,7 +388,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
      *
      * @param _sex
      */
-    public void setPlayerSex (String _sex) {
+    public void setPlayerSex(String _sex) {
         this.sex = _sex;
         this.inventory.reloadInventoryAssets();
         this.setAnimation(this.inventory.getCurrentWeapon().getWalkFrames());

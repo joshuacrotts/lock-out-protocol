@@ -39,18 +39,18 @@ public class TextFieldView implements Renderable, Updatable {
     private static final int TEXT_X_OFFSET = 10;
     private static final int HIDDEN_TEXT_Y_OFFSET = 5;
 
-    public TextFieldView (TextFieldModel _model) {
+    public TextFieldView(TextFieldModel _model) {
         this.model = _model;
         this.rectangleView = new Rectangle(this.model.getX(), this.model.getY(), this.model.getWidth(), this.model.getHeight());
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.rectangleView = new Rectangle(this.model.getX(), this.model.getY(), this.model.getWidth(), this.model.getHeight());
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         this.drawTextBox(_g2);
         this.drawBorder(_g2);
         this.drawString(_g2);
@@ -61,7 +61,7 @@ public class TextFieldView implements Renderable, Updatable {
      *
      * @param _g2
      */
-    private void drawBorder (Graphics2D _g2) {
+    private void drawBorder(Graphics2D _g2) {
         _g2.setColor(TextFieldView.BORDER_COLOR);
         _g2.draw(this.rectangleView);
     }
@@ -71,11 +71,10 @@ public class TextFieldView implements Renderable, Updatable {
      *
      * @param _g2
      */
-    private void drawTextBox (Graphics2D _g2) {
+    private void drawTextBox(Graphics2D _g2) {
         if (this.model.isActive()) {
             _g2.setColor(TextFieldView.ACTIVE_COLOR);
-        }
-        else {
+        } else {
             _g2.setColor(TextFieldView.UNACTIVE_COLOR);
         }
         _g2.fill(this.rectangleView);
@@ -87,13 +86,12 @@ public class TextFieldView implements Renderable, Updatable {
      *
      * @param _g2
      */
-    private void drawString (Graphics2D _g2) {
+    private void drawString(Graphics2D _g2) {
         _g2.setColor(TextFieldView.TEXT_COLOR);
         _g2.setFont(TextFieldView.font);
         if (!this.model.isHidden()) {
             _g2.drawString(this.model.getString(), this.model.getX() + TEXT_X_OFFSET, this.model.getY() + (int) (FONT_SIZE * FONT_SIZE_FACTOR));
-        }
-        else {
+        } else {
             _g2.drawString(this.model.getMaskedString(), this.model.getX() + TEXT_X_OFFSET, this.model.getY() + HIDDEN_TEXT_Y_OFFSET + (int) (FONT_SIZE * FONT_SIZE_FACTOR));
         }
     }

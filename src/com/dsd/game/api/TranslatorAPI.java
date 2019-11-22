@@ -26,7 +26,7 @@ public final class TranslatorAPI {
      *
      * @return
      */
-    public static String getCity () {
+    public static String getCity() {
         return cityLocatorAPI.getCity();
     }
 
@@ -35,7 +35,7 @@ public final class TranslatorAPI {
      *
      * @return
      */
-    public static String getIPAddress () {
+    public static String getIPAddress() {
         return cityLocatorAPI.getIPAddress();
     }
 
@@ -46,7 +46,7 @@ public final class TranslatorAPI {
      *
      * @return
      */
-    public static String getWeather () {
+    public static String getWeather() {
         return weatherAPI.getWeather(TranslatorAPI.getCity());
     }
 
@@ -57,7 +57,7 @@ public final class TranslatorAPI {
      * @param _city
      * @return
      */
-    public static String getWeather (String _city) {
+    public static String getWeather(String _city) {
         return weatherAPI.getWeather(_city);
     }
 
@@ -69,14 +69,14 @@ public final class TranslatorAPI {
      * @param _lang
      * @return
      */
-    public static String translate (String _text, String _lang) {
+    public static String translate(String _text, String _lang) {
         if (_lang.equals("en")) {
             return _text;
         }
         return languageAPI.translateText(_text, _lang);
     }
 
-    private TranslatorAPI () {
+    private TranslatorAPI() {
     }
 
 }

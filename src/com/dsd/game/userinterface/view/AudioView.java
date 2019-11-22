@@ -22,7 +22,7 @@ public class AudioView extends Screen implements MouseEventInterface {
 
     private final MenuScreen menuScreen;
 
-    public AudioView (Game _game, MenuScreen _menuScreen) {
+    public AudioView(Game _game, MenuScreen _menuScreen) {
         super(_game);
         this.menuScreen = _menuScreen;
         this.menuScreen.addInteractor(new SaveAudioChangesButton(super.getGame(), this.menuScreen));
@@ -31,7 +31,7 @@ public class AudioView extends Screen implements MouseEventInterface {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (!this.menuScreen.isOnVolume() || !this.getGame().isMenu()) {
             return;
         }
@@ -39,7 +39,7 @@ public class AudioView extends Screen implements MouseEventInterface {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.menuScreen.isOnVolume() || !this.getGame().isMenu()) {
             return;
         }
@@ -47,21 +47,21 @@ public class AudioView extends Screen implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         if (!this.menuScreen.isOnVolume() || !this.getGame().isMenu()) {
             return;
         }
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         if (!this.menuScreen.isOnResolution() || !this.getGame().isMenu()) {
             return;
         }
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         if (!this.menuScreen.isOnResolution() || !this.getGame().isMenu()) {
             return;
         }

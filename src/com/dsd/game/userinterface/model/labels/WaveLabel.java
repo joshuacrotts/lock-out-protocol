@@ -20,14 +20,14 @@ public class WaveLabel extends StandardLabel {
     private final StandardCamera camera;
     private final int VARIABILITY = 1;
 
-    public WaveLabel (Game _game, int _waveNumber) {
+    public WaveLabel(Game _game, int _waveNumber) {
         super((int) _game.getCamera().getX(), (int) _game.getCamera().getY(),
                 LanguageController.translate("Wave ") + _waveNumber, "src/resources/fonts/chargen.ttf", 32f);
         this.camera = _game.getCamera();
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         int xPos = (int) StdOps.rand(this.camera.getX() - this.VARIABILITY, this.camera.getX() + this.VARIABILITY);
         int yPos = (int) StdOps.rand(this.camera.getY() - this.VARIABILITY, this.camera.getY() + this.VARIABILITY);
         this.setX(xPos);
@@ -35,14 +35,14 @@ public class WaveLabel extends StandardLabel {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         Color oldColor = _g2.getColor();
         _g2.setColor(Color.WHITE);
         super.render(_g2);
         _g2.setColor(oldColor);
     }
 
-    public void setWaveNumber (int _waveNumber) {
+    public void setWaveNumber(int _waveNumber) {
         this.setText(LanguageController.translate("Wave ") + Utilities.toRoman(_waveNumber));
     }
 }

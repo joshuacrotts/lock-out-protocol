@@ -16,7 +16,7 @@ public class PasswordTextFieldModel extends TextFieldModel {
     private final int BUTTON_X_OFFSET = 300;
     private final PasswordLabel passwordLabel;
 
-    public PasswordTextFieldModel (int _x, int _y, Game _game, MenuScreen _menuScreen) {
+    public PasswordTextFieldModel(int _x, int _y, Game _game, MenuScreen _menuScreen) {
         super(_x, _y, _game, _menuScreen);
         this.passwordLabel = new PasswordLabel(this, _menuScreen);
         this.getMenuScreen().addInteractor(this.passwordLabel);
@@ -24,7 +24,7 @@ public class PasswordTextFieldModel extends TextFieldModel {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (!this.getMenuScreen().isOnAccountScreen()) {
             return;
         }
@@ -34,7 +34,7 @@ public class PasswordTextFieldModel extends TextFieldModel {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.getMenuScreen().isOnAccountScreen()) {
             return;
         }

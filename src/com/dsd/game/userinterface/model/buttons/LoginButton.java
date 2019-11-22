@@ -34,7 +34,7 @@ public class LoginButton extends MenuButton implements MouseEventInterface {
     private final EmailTextFieldModel emailModel;
     private final PasswordTextFieldModel pswdModel;
 
-    public LoginButton (Game _game, MenuScreen _menuScreen, EmailTextFieldModel _email, PasswordTextFieldModel _pswd) {
+    public LoginButton(Game _game, MenuScreen _menuScreen, EmailTextFieldModel _email, PasswordTextFieldModel _pswd) {
         super(Screen.gameHalfWidth - LoginButton.BUTTON_X_OFFSET - LoginButton.BUTTON_WIDTH,
                 _game.getGameHeight() - LoginButton.BUTTON_Y_OFFSET,
                 LanguageController.translate("LOGIN"), _game, _menuScreen);
@@ -43,13 +43,13 @@ public class LoginButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.setX(Screen.gameHalfWidth - LoginButton.BUTTON_X_OFFSET - LoginButton.BUTTON_WIDTH);
         this.setY(this.getGame().getGameHeight() - LoginButton.BUTTON_Y_OFFSET);
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.getMenuScreen().isOnAccountScreen()) {
             return;
         }
@@ -60,7 +60,7 @@ public class LoginButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         if (!this.getGame().isMenu() || !this.getMenuScreen().isOnAccountScreen()) {
             return;
         }
@@ -75,7 +75,7 @@ public class LoginButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         if (!this.getGame().isMenu() || !this.getMenuScreen().isOnAccountScreen()) {
             return;
         }
@@ -83,14 +83,14 @@ public class LoginButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         if (!this.getGame().isMenu()) {
             return;
         }
         this.activeImage = this.buttonImg;
     }
 
-    private void clearTextboxes () {
+    private void clearTextboxes() {
         this.emailModel.clearString();
         this.pswdModel.clearString();
     }

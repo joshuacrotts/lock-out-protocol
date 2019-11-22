@@ -28,7 +28,7 @@ public class ShopScreen extends Screen {
     private ShopState shopState;
     private final ShopCommand shopCommand;
 
-    public ShopScreen (Game _game) {
+    public ShopScreen(Game _game) {
         super(_game);
         this.shopCommand = new ShopCommand(_game);
         this.shopState = ShopState.WEAPONS;
@@ -36,7 +36,7 @@ public class ShopScreen extends Screen {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (!this.getGame().isShop()) {
             return;
         }
@@ -44,7 +44,7 @@ public class ShopScreen extends Screen {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.getGame().isShop()) {
             return;
         }
@@ -54,7 +54,7 @@ public class ShopScreen extends Screen {
     /**
      * Adds the interactors to the screen handler.
      */
-    private void createUIElements () {
+    private void createUIElements() {
         super.addInteractor(new ShopView(this.getGame()));
         super.addInteractor(new ShopTitleLabel(this.getGame(), this));
         super.addInteractor(new PistolButton(this.getGame(), this));
@@ -66,11 +66,11 @@ public class ShopScreen extends Screen {
     }
 
 //============================ GETTERS ====================================//
-    public boolean isOnWeapons () {
+    public boolean isOnWeapons() {
         return this.shopState == ShopState.WEAPONS;
     }
 
-    public boolean isOnItems () {
+    public boolean isOnItems() {
         return this.shopState == ShopState.ITEMS;
     }
 

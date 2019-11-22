@@ -13,8 +13,8 @@ import java.awt.Graphics2D;
  * they come back.
  *
  * @author Rinty, Joshua, Ronald
- * 
- * @updated 11/14/19
+ *
+ * @updated 11/21/19
  */
 public class HelpButton extends MenuButton implements MouseEventInterface {
 
@@ -28,7 +28,7 @@ public class HelpButton extends MenuButton implements MouseEventInterface {
     private static final int TEXT_X_OFFSET = 115;
     private static final int TEXT_Y_OFFSET = 45;
 
-    public HelpButton (Game _game, MenuScreen _menuScreen) {
+    public HelpButton(Game _game, MenuScreen _menuScreen) {
         super(HelpButton.BUTTON_X_OFFSET, HelpButton.BUTTON_Y_OFFSET,
                 LanguageController.translate("HELP"), _game, _menuScreen);
         this.game = _game;
@@ -39,7 +39,7 @@ public class HelpButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (!this.game.isPaused()) {
             return;
         }
@@ -48,7 +48,7 @@ public class HelpButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.game.isPaused()) {
             return;
         }
@@ -60,16 +60,17 @@ public class HelpButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         if (!this.game.isPaused()) {
             return;
         }
+        super.onMouseClick();
         //  Once the user presses the save button, it will stop the game (for now).
         this.getGame().setGameState(GameState.HELP);
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         if (!this.game.isPaused()) {
             return;
         }
@@ -77,7 +78,7 @@ public class HelpButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         if (!this.game.isPaused()) {
             return;
         }

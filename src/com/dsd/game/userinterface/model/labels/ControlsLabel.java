@@ -29,7 +29,7 @@ public class ControlsLabel extends StandardLabel {
     private static final String[] stringControls;
     private static final int CONTROLS = 6;
 
-    public ControlsLabel (Game _game) {
+    public ControlsLabel(Game _game) {
         super((int) Screen.gameHalfWidth,
                 (int) Screen.gameHalfHeight,
                 LanguageController.translate("CONTROLS"),
@@ -38,7 +38,7 @@ public class ControlsLabel extends StandardLabel {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (!this.game.isHelp()) {
             return;
         }
@@ -47,7 +47,7 @@ public class ControlsLabel extends StandardLabel {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.game.isHelp()) {
             return;
         }
@@ -66,8 +66,8 @@ public class ControlsLabel extends StandardLabel {
      *
      * @param _g2
      */
-    private void drawControlsString (Graphics2D _g2) {
-        for (int i = 1 ; i <= ControlsLabel.CONTROLS ; i++) {
+    private void drawControlsString(Graphics2D _g2) {
+        for (int i = 1; i <= ControlsLabel.CONTROLS; i++) {
             _g2.drawString(ControlsLabel.stringControls[i - 1],
                     (int) this.game.getCamera().getX() - this.CONTROL_X_OFFSET,
                     (int) this.game.getCamera().getY() + (i * this.CONTROL_Y_OFFSET));

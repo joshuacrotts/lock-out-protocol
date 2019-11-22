@@ -17,9 +17,9 @@ import com.dsd.game.database.SerializableType;
  */
 public interface SerializableObject {
 
-    public String createObject (SerializableType _id);
+    public String createObject(SerializableType _id);
 
-    public void updateObject (SerializableType _obj);
+    public void updateObject(SerializableType _obj);
 
-    public void destroyObject (SerializableType _obj);
+    public void destroyObject(SerializableType _obj);
 }

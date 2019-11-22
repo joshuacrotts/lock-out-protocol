@@ -25,14 +25,14 @@ public class Crosshair {
     private static final Image crosshairImage;
     private static final Toolkit toolkit;
 
-    public Crosshair (Game _game) {
+    public Crosshair(Game _game) {
         this.game = _game;
     }
 
     /**
      * Updates the cursor depending on what state the game is in.
      */
-    public void updateCursor () {
+    public void updateCursor() {
         Cursor assignedCursor = this.game.isInGameState() ? Crosshair.crosshairCursor : Cursor.getDefaultCursor();
         this.game.setCursor(assignedCursor);
     }

@@ -25,24 +25,24 @@ public class BackButton extends MenuButton implements MouseEventInterface {
     private static final int TEXT_X_OFFSET = 115;
     private static final int TEXT_Y_OFFSET = 45;
 
-    public BackButton (Game _game, MenuScreen _menuScreen) {
+    public BackButton(Game _game, MenuScreen _menuScreen) {
         super(_game.getGameWidth() - BUTTON_X_OFFSET - BUTTON_WIDTH / 2,
                 _game.getGameHeight() - BUTTON_Y_OFFSET,
                 LanguageController.translate("BACK"), _game, _menuScreen);
     }
 
-    public BackButton (int _x, int _y, Game _game, MenuScreen _menuScreen) {
+    public BackButton(int _x, int _y, Game _game, MenuScreen _menuScreen) {
         super(_x, _y, LanguageController.translate("BACK"), _game, _menuScreen);
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.setX(this.getGame().getGameWidth() - BUTTON_X_OFFSET - BUTTON_WIDTH / 2);
         this.setY(this.getGame().getGameHeight() - BUTTON_Y_OFFSET);
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (this.getMenuScreen().isOnMainMenu()) {
             return;
         }
@@ -53,7 +53,7 @@ public class BackButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         if (!this.getGame().isMenu() || this.getMenuScreen().isOnMainMenu()) {
             return;
         }
@@ -62,7 +62,7 @@ public class BackButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         if (!this.getGame().isMenu()) {
             return;
         }
@@ -70,7 +70,7 @@ public class BackButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         if (!this.getGame().isMenu()) {
             return;
         }

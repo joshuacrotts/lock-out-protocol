@@ -14,7 +14,7 @@ import java.awt.Graphics2D;
  *
  * @author rinty
  *
- * @updated 11/14/19
+ * @updated 11/21/19
  */
 public class MainMenuButton extends MenuButton implements MouseEventInterface {
 
@@ -28,7 +28,7 @@ public class MainMenuButton extends MenuButton implements MouseEventInterface {
     private static final int TEXT_X_OFFSET = 80;
     private static final int TEXT_Y_OFFSET = 45;
 
-    public MainMenuButton (Game _game, MenuScreen _menuScreen) {
+    public MainMenuButton(Game _game, MenuScreen _menuScreen) {
         super(BUTTON_X_OFFSET, BUTTON_Y_OFFSET,
                 LanguageController.translate("MAIN MENU"), _game, _menuScreen);
         this.game = _game;
@@ -39,7 +39,7 @@ public class MainMenuButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (!this.game.isPaused()) {
             return;
         }
@@ -48,7 +48,7 @@ public class MainMenuButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.game.isPaused()) {
             return;
         }
@@ -59,16 +59,17 @@ public class MainMenuButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         if (!this.game.isPaused()) {
             return;
         }
+        super.onMouseClick();
         this.getGame().setGameState(GameState.MENU);
         this.getGame().resetGame();
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         if (!this.game.isPaused()) {
             return;
         }
@@ -76,7 +77,7 @@ public class MainMenuButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         if (!this.game.isPaused()) {
             return;
         }

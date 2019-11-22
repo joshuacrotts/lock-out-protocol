@@ -21,14 +21,14 @@ public class MoveBackwardCommand extends Command {
     private final Game game;
     private final Player player;
 
-    public MoveBackwardCommand (Game _game, Player _obj) {
+    public MoveBackwardCommand(Game _game, Player _obj) {
         this.game = _game;
         this.player = _obj;
         this.bind(_game.getKeyboard(), KeyEvent.VK_S);
     }
 
     @Override
-    public void pressed (float _dt) {
+    public void pressed(float _dt) {
         if (this.game.isInGameState() && !this.player.isMovingForward()) {
             this.player.setPlayerState(PlayerState.WALKING_BACKWARD);
             this.player.updatePosition();
@@ -36,12 +36,12 @@ public class MoveBackwardCommand extends Command {
     }
 
     @Override
-    public void released (float _dt) {
+    public void released(float _dt) {
         this.player.setPlayerState(PlayerState.STANDING);
     }
 
     @Override
-    public void down (float _dt) {
+    public void down(float _dt) {
         if (this.game.isInGameState() && !this.player.isMovingForward()) {
             this.player.setPlayerState(PlayerState.WALKING_BACKWARD);
             this.player.updatePosition();

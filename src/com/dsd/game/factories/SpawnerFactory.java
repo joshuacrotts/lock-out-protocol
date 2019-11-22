@@ -26,7 +26,7 @@ public class SpawnerFactory {
      * @param _sch
      * @return
      */
-    public static SpawnerController generateSpawner (EnemyType _id, int _xRange,
+    public static SpawnerController generateSpawner(EnemyType _id, int _xRange,
             int _yRange, long _delay, int _radius, Game _game, StandardCollisionHandler _sch) {
         return new SpawnerController(_xRange, _yRange, _id, _delay, _radius, _game, _sch);
     }
@@ -41,7 +41,7 @@ public class SpawnerFactory {
      * @param _sch
      * @return
      */
-    public static BossSpawnerController generateBossSpawner (EnemyType _bossID,
+    public static BossSpawnerController generateBossSpawner(EnemyType _bossID,
             int _xRange, int _yRange, Game _game, StandardCollisionHandler _sch) {
         return new BossSpawnerController(_xRange, _yRange, _bossID, _game, _sch);
     }

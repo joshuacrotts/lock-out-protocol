@@ -18,15 +18,15 @@ public class TimerController {
      *
      * @param _timer
      */
-    public static void addTimer (TimerInterface _timer) {
+    public static void addTimer(TimerInterface _timer) {
         timers.add(_timer);
     }
 
     /**
      * Stops all timers that are in the timer controller.
      */
-    public static void stopTimers () {
-        for (int i = 0 ; i < TimerController.timers.size() ; i++) {
+    public static void stopTimers() {
+        for (int i = 0; i < TimerController.timers.size(); i++) {
             TimerInterface currentTimer = timers.get(i);
             if (currentTimer != null) {
                 currentTimer.cancelTimer();

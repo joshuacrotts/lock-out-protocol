@@ -27,20 +27,20 @@ public class ResolutionMenuButton extends MenuButton implements MouseEventInterf
     private static final int TEXT_X_OFFSET = 25;
     private static final int TEXT_Y_OFFSET = 45;
 
-    public ResolutionMenuButton (Game _game, MenuScreen _menuScreen) {
+    public ResolutionMenuButton(Game _game, MenuScreen _menuScreen) {
         super(ResolutionMenuButton.BUTTON_X_OFFSET, _game.getGameHeight() - ResolutionMenuButton.BUTTON_Y_OFFSET,
                 LanguageController.translate("CHANGE RESOLUTION"),
                 _game, _menuScreen);
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.setX(Screen.gameHalfWidth - ResolutionMenuButton.BUTTON_X_OFFSET);
         this.setY(this.getGame().getGameHeight() - ResolutionMenuButton.BUTTON_Y_OFFSET);
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.getMenuScreen().isOnOptions() || !this.getGame().isMenu()) {
             return;
         }
@@ -51,7 +51,7 @@ public class ResolutionMenuButton extends MenuButton implements MouseEventInterf
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         if (!this.getMenuScreen().isOnOptions() || !this.getGame().isMenu()) {
             return;
         }
@@ -61,7 +61,7 @@ public class ResolutionMenuButton extends MenuButton implements MouseEventInterf
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         if (!this.getMenuScreen().isOnOptions() || !this.getGame().isMenu()) {
             return;
         }
@@ -69,7 +69,7 @@ public class ResolutionMenuButton extends MenuButton implements MouseEventInterf
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         if (!this.getMenuScreen().isOnOptions() || !this.getGame().isMenu()) {
             return;
         }

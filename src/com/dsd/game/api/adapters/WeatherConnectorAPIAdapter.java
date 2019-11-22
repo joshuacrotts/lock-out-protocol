@@ -12,5 +12,5 @@ package com.dsd.game.api.adapters;
  */
 public interface WeatherConnectorAPIAdapter {
 
-    public String getWeather (String _city);
+    public String getWeather(String _city);
 }

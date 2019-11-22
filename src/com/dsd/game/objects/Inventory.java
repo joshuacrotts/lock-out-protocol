@@ -40,7 +40,7 @@ public class Inventory implements SerializableObject {
     private int currentWeapon = 0;
     private boolean hasGun;
 
-    public Inventory (Game _game, Player _player, StandardCollisionHandler _sch) {
+    public Inventory(Game _game, Player _player, StandardCollisionHandler _sch) {
         this.game = _game;
         this.player = _player;
         this.weapons = new ArrayList<>();
@@ -62,7 +62,7 @@ public class Inventory implements SerializableObject {
      *
      * @param choice
      */
-    public void changeWeapon (WeaponSelection choice) {
+    public void changeWeapon(WeaponSelection choice) {
         this.currentWeapon += choice.getChange();
         this.clampWeapon();
         this.updateAnimation();
@@ -73,8 +73,8 @@ public class Inventory implements SerializableObject {
      * When the user changes their sex, we need to reload the weapon assets
      * since they're bound to the player's sex.
      */
-    public void reloadInventoryAssets () {
-        for (int i = 0 ; i < this.weapons.size() ; i++) {
+    public void reloadInventoryAssets() {
+        for (int i = 0; i < this.weapons.size(); i++) {
             this.weapons.get(i).loadAssets(this.player);
         }
     }
@@ -85,8 +85,8 @@ public class Inventory implements SerializableObject {
      * @param _type
      * @return
      */
-    public Weapon hasWeapon (WeaponType _type) {
-        for (int i = 0 ; i < this.weapons.size() ; i++) {
+    public Weapon hasWeapon(WeaponType _type) {
+        for (int i = 0; i < this.weapons.size(); i++) {
             Weapon weapon = this.weapons.get(i);
             if (weapon.getWeaponType() == _type) {
                 return weapon;
@@ -100,7 +100,7 @@ public class Inventory implements SerializableObject {
      *
      * @param _weapon
      */
-    public void addWeapon (Weapon _weapon) {
+    public void addWeapon(Weapon _weapon) {
         if (this.hasWeapon(_weapon.getWeaponType()) == null) {
             this.weapons.add(_weapon);
         }
@@ -114,7 +114,7 @@ public class Inventory implements SerializableObject {
      *
      * @param _type
      */
-    public void addWeapon (WeaponType _type) {
+    public void addWeapon(WeaponType _type) {
         if (this.hasWeapon(_type) == null) {
             switch (_type) {
                 case PISTOL:
@@ -145,11 +145,10 @@ public class Inventory implements SerializableObject {
     /**
      * Clamps the pointer for the current weapon to values in the arraylist.
      */
-    private void clampWeapon () {
+    private void clampWeapon() {
         if (this.currentWeapon < 0) {
             this.currentWeapon = this.weapons.size() - 1;
-        }
-        else if (this.currentWeapon >= this.weapons.size()) {
+        } else if (this.currentWeapon >= this.weapons.size()) {
             this.currentWeapon = 0;
         }
     }
@@ -158,11 +157,10 @@ public class Inventory implements SerializableObject {
      * Updates the animation set by the player determined by which weapon they
      * have.
      */
-    private void updateAnimation () {
+    private void updateAnimation() {
         if (this.player.isWalking() || this.player.isStanding()) {
             this.player.setAnimation(this.weapons.get(this.currentWeapon).getWalkFrames());
-        }
-        else if (this.player.isAttacking()) {
+        } else if (this.player.isAttacking()) {
             this.player.setAnimation(this.weapons.get(this.currentWeapon).getAttackFrames());
         }
         this.player.setAttackAnimator(this.weapons.get(this.currentWeapon).getAttackFrames());
@@ -171,7 +169,7 @@ public class Inventory implements SerializableObject {
     /**
      * When the user resets the game, their inventory needs to be reset.
      */
-    public void resetInventory () {
+    public void resetInventory() {
         this.weapons.clear();
         this.weapons.add(new Pistol(this.game, this.player, this.parentHandler));
         this.currentWeapon = 0;
@@ -179,28 +177,27 @@ public class Inventory implements SerializableObject {
 
 //============================== CRUD OPERATIONS =============================//
     @Override
-    public String createObject (SerializableType _id) {
+    public String createObject(SerializableType _id) {
         StringBuilder inventoryDetails = new StringBuilder();
         Weapon[] weaponStatuses = this.hasWeapons();
-        for (int i = 0 ; i < weaponStatuses.length ; i++) {
+        for (int i = 0; i < weaponStatuses.length; i++) {
             inventoryDetails.append(weaponStatuses[i] != null ? 1 : 0).append(";");
             if (weaponStatuses[i] != null) {
                 Gun gun = (Gun) weaponStatuses[i];
                 inventoryDetails.append(gun.getCurrentAmmo()).append(";");
                 inventoryDetails.append(gun.getTotalAmmo()).append(";");
-            }
-            else {
+            } else {
                 inventoryDetails.append("0;0;");
             }
         }
         return inventoryDetails.toString();
     }
 
-    public void readObject (ArrayList<Integer> _inventoryInfo) {
+    public void readObject(ArrayList<Integer> _inventoryInfo) {
         //  Use an array of the types to reduce copying/pasting.
         WeaponType[] types = {WeaponType.PISTOL, WeaponType.RIFLE, WeaponType.FAST_RIFLE,
             WeaponType.SHOTGUN, WeaponType.GRENADE_LAUNCHER, WeaponType.MINIGUN, WeaponType.SUPER_SHOTGUN};
-        for (int i = 0, weaponIndex = 0 ; i < types.length ; i++, weaponIndex += 3) {
+        for (int i = 0, weaponIndex = 0; i < types.length; i++, weaponIndex += 3) {
             this.loadWeaponFromDB(_inventoryInfo.get(weaponIndex), types[i],
                     _inventoryInfo.get(weaponIndex + 1),
                     _inventoryInfo.get(weaponIndex + 2));
@@ -208,12 +205,12 @@ public class Inventory implements SerializableObject {
     }
 
     @Override
-    public void updateObject (SerializableType _obj) {
+    public void updateObject(SerializableType _obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void destroyObject (SerializableType _obj) {
+    public void destroyObject(SerializableType _obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -222,7 +219,7 @@ public class Inventory implements SerializableObject {
      *
      * @return
      */
-    private Weapon[] hasWeapons () {
+    private Weapon[] hasWeapons() {
         Weapon[] typesOfWeapons = new Weapon[7];
         typesOfWeapons[0] = this.hasWeapon(WeaponType.PISTOL);
         typesOfWeapons[1] = this.hasWeapon(WeaponType.RIFLE);
@@ -243,11 +240,10 @@ public class Inventory implements SerializableObject {
      * @param _currAmmo
      * @param _totalAmmo
      */
-    private void loadWeaponFromDB (int _hasWeapon, WeaponType _id, int _currAmmo, int _totalAmmo) {
+    private void loadWeaponFromDB(int _hasWeapon, WeaponType _id, int _currAmmo, int _totalAmmo) {
         if (_hasWeapon == 0) {
             return;
-        }
-        else {
+        } else {
             Gun gun = (Gun) this.hasWeapon(_id);
             if (gun == null) {
                 this.addWeapon(_id);
@@ -259,27 +255,26 @@ public class Inventory implements SerializableObject {
     }
 
 //============================= GETTERS ===================================//
-    public Weapon getCurrentWeapon () {
+    public Weapon getCurrentWeapon() {
         return weapons.get(this.currentWeapon);
     }
 
-    public Gun getGun () {
+    public Gun getGun() {
         Gun gun = null;
         try {
             gun = (Gun) this.getCurrentWeapon();
-        }
-        catch (ClassCastException ex) {
+        } catch (ClassCastException ex) {
             Logger.getLogger(WeatherConnector.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
         return gun;
     }
 
-    public InventoryView getView () {
+    public InventoryView getView() {
         return this.view;
     }
 
-    public boolean hasGun () {
+    public boolean hasGun() {
         return this.hasGun;
     }
 }

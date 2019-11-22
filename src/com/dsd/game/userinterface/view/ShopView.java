@@ -23,7 +23,7 @@ public class ShopView extends Interactor {
     private final Color shopRectColor;
     private Rectangle shopRectangle;
 
-    public ShopView (Game _game) {
+    public ShopView(Game _game) {
         this.game = _game;
         this.camera = _game.getCamera();
         this.shopRectColor = new Color(0, 0, 0, 0.8f);
@@ -34,7 +34,7 @@ public class ShopView extends Interactor {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.setWidth(this.game.getGameWidth());
         this.setHeight(this.game.getGameHeight());
         this.shopRectangle = new Rectangle((int) this.camera.getX() - Screen.gameHalfWidth,
@@ -43,20 +43,20 @@ public class ShopView extends Interactor {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         _g2.setColor(this.shopRectColor);
         _g2.fill(this.shopRectangle);
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
     }
 }

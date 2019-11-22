@@ -38,7 +38,7 @@ public class MenuView implements Renderable, Updatable {
     private final Color[] colors;
     private final float[] shadowDistance;
 
-    public MenuView (Game _game, MenuScreen _menuScreen) {
+    public MenuView(Game _game, MenuScreen _menuScreen) {
         this.game = _game;
         this.menuScreen = _menuScreen;
         this.shadowCenter = new Point2D.Float(shadowXPos, shadowYPos);
@@ -49,7 +49,7 @@ public class MenuView implements Renderable, Updatable {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.shadowCenter = new Point2D.Float(this.shadowXPos, this.shadowYPos);
         this.shadowPaint = new RadialGradientPaint(this.shadowCenter, this.shadowRadius, this.shadowDistance, this.colors);
         this.updateShadowPosition();
@@ -57,14 +57,14 @@ public class MenuView implements Renderable, Updatable {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         _g2.drawImage(background, 0, 0, null);
         _g2.setPaint(this.shadowPaint);
         _g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.95f));
         _g2.fillRect(0, 0, this.game.getGameWidth(), this.game.getGameHeight());
     }
 
-    public void loadBackgroundImage () {
+    public void loadBackgroundImage() {
         String path = "src/resources/img/bg/menu_" + Screen.gameWidth + "x" + Screen.gameHeight + ".png";
         background = StdOps.loadImage(path);
     }
@@ -72,7 +72,7 @@ public class MenuView implements Renderable, Updatable {
     /**
      * Updates the x and y position of the shadow depending on the velocity.
      */
-    private void updateShadowPosition () {
+    private void updateShadowPosition() {
         this.shadowXPos += this.shadowVelX;
         this.shadowYPos += this.shadowVelY;
     }
@@ -81,7 +81,7 @@ public class MenuView implements Renderable, Updatable {
      * Checks the bounds of the shadows; if they go off the screen, the
      * velocities are reversed.
      */
-    private void checkShadowBounds () {
+    private void checkShadowBounds() {
         if (this.shadowXPos <= 0 || this.shadowXPos > this.game.getGameWidth()) {
             this.shadowVelX = -this.shadowVelX;
         }

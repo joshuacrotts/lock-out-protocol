@@ -18,7 +18,7 @@ public class LanguageController {
      *
      * @param _lang
      */
-    public static void setLanguage (String _lang) {
+    public static void setLanguage(String _lang) {
         LanguageController.lang = "en-" + _lang;
     }
 
@@ -29,7 +29,7 @@ public class LanguageController {
      * @param _text
      * @return
      */
-    public static String translate (String _text) {
+    public static String translate(String _text) {
         if (lang.equals("en-en")) {
             return _text;
         }
@@ -44,7 +44,7 @@ public class LanguageController {
      * @param _lang
      * @return
      */
-    public static String translate (String _text, String _lang) {
+    public static String translate(String _text, String _lang) {
         if (_lang.equals("en")) {
             return _text;
         }

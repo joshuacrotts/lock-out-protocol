@@ -57,7 +57,7 @@ public class MetalLevel extends StandardLevel {
      * @param _sg
      * @param _sch
      */
-    public MetalLevel (Player _player, Game _sg, StandardCollisionHandler _sch) {
+    public MetalLevel(Player _player, Game _sg, StandardCollisionHandler _sch) {
         super("src/resources/img/bg/resized_bg/panel1.jpg");
         this.game = _sg;
         this.player = _player;
@@ -69,7 +69,7 @@ public class MetalLevel extends StandardLevel {
     }
 
     @Override
-    public void loadLevelData () {
+    public void loadLevelData() {
         this.addEntity(SpawnerFactory.generateBossSpawner(EnemyType.FEMALE_BOSS_MONSTER,
                 StdOps.rand(400, 3400), StdOps.rand(400, 3600), this.game,
                 (StandardCollisionHandler) this.getHandler()));
@@ -92,25 +92,24 @@ public class MetalLevel extends StandardLevel {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.trackX -= (int) this.player.getVelX() * this.SCROLL_X_FACTOR;
     }
 
     @Override
-    public void render (Graphics2D g2) {
+    public void render(Graphics2D g2) {
         if (this.getBgImage() != null) {
             if (this.trackX <= 0) {
                 g2.drawImage(this.getBgImage(), this.trackX, 0, null);
-            }
-            else {
+            } else {
                 g2.drawImage(this.getBgImage(), 0, 0, null);
             }
         }
         MetalLevel.natureHandler.render(g2);
     }
 
-    private void loadFoliage () {
-        for (int i = 0 ; i < this.FOLIAGE_OBJECT_COUNT ; i++) {
+    private void loadFoliage() {
+        for (int i = 0; i < this.FOLIAGE_OBJECT_COUNT; i++) {
             MetalLevel.natureHandler.addEntity(new NatureObject(this.game,
                     MetalLevel.natureHandler,
                     StdOps.rand(400, 3600), StdOps.rand(400, 3600),
@@ -128,7 +127,7 @@ public class MetalLevel extends StandardLevel {
      * Sets the camera's field of view so as to prevent the camera from
      * scrolling too far to any of the sides
      */
-    private void setCameraBounds (int _maxX, int _maxY) {
+    private void setCameraBounds(int _maxX, int _maxY) {
         this.sc.restrict(_maxX, _maxY, this.MIN_X, this.MIN_Y);
     }
 }

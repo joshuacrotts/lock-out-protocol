@@ -20,25 +20,24 @@ public class RifleButtonView implements Updatable, Renderable {
 
     private static final BufferedImage rifleIconImage;
 
-    public RifleButtonView (RifleButton _rifleButton) {
+    public RifleButtonView(RifleButton _rifleButton) {
         this.parentButton = _rifleButton;
         this.text = new ShopTextLabel(_rifleButton.getGame(), this.parentButton.getX(), this.parentButton.getY());
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         //  Only update the text if the user has the rifle in their inventory.
         if (this.parentButton.getGame().getPlayer().getInventory().hasWeapon(WeaponType.RIFLE) == null) {
             this.text.setText("AK-47 $" + this.parentButton.getPrice());
-        }
-        else {
+        } else {
             this.text.setText("AK-47 AMMO (31/$" + this.parentButton.getPricePerMagazine() + ")");
         }
         this.text.tick();
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         _g2.drawImage(rifleIconImage, this.parentButton.getX(), this.parentButton.getY(), null);
         this.text.render(_g2);
     }

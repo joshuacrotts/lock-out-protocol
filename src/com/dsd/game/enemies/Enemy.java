@@ -80,7 +80,7 @@ public abstract class Enemy extends Entity implements DeathListener {
     //  Initial health factor (for changing difficulty).
     public final int initialHealth;
 
-    public Enemy (int _x, int _y, double _approachVel, int _health, StandardID _id, Game _game, StandardCollisionHandler _sch) {
+    public Enemy(int _x, int _y, double _approachVel, int _health, StandardID _id, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, _health, _id, _game, _sch);
         this.sc = this.getGame().getCamera();
         this.initialHealth = _health;
@@ -90,7 +90,7 @@ public abstract class Enemy extends Entity implements DeathListener {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.bloodHandler.tick();
         //  If the monster's health is less than 0, we can flag it as dead.
         this.setAlive(this.getHealth() > 0);
@@ -105,8 +105,7 @@ public abstract class Enemy extends Entity implements DeathListener {
             this.followPlayer((int) tx, (int) ty);
             //  Calculates the angle the monster needs to be in to face the player
             this.facePlayer((int) tx, (int) ty);
-        }
-        else {
+        } else {
             //  Do this only once.
             if (this.aliveFlag) {
                 this.uponDeath();
@@ -127,7 +126,7 @@ public abstract class Enemy extends Entity implements DeathListener {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         this.bloodHandler.render(_g2);
         /**
          * We need to save the old alpha composition, apply the new one, render,
@@ -146,8 +145,7 @@ public abstract class Enemy extends Entity implements DeathListener {
                 this.getAnimationController().renderFrame(_g2);
                 _g2.setComposite(oldComposite);
             }
-        }
-        else {
+        } else {
             this.getAnimationController().renderFrame(_g2);
         }
     }
@@ -156,7 +154,7 @@ public abstract class Enemy extends Entity implements DeathListener {
      * Sets the dimensions of the enemy to the animation's current frame
      * dimensions.
      */
-    public void setDimensions () {
+    public void setDimensions() {
         this.setWidth(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getWidth());
         this.setHeight(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getHeight());
     }
@@ -167,7 +165,7 @@ public abstract class Enemy extends Entity implements DeathListener {
      * @param _forceX
      * @param _forceY
      */
-    public void applyPushForce (double _forceX, double _forceY) {
+    public void applyPushForce(double _forceX, double _forceY) {
         this.setX(this.getX() + (_forceX * this.pushFactor));
         this.setY(this.getY() + (_forceY * this.pushFactor));
     }
@@ -176,8 +174,8 @@ public abstract class Enemy extends Entity implements DeathListener {
      * Generates ten blood particles. Will probably make this more flexible
      * later.
      */
-    public void generateBloodParticles () {
-        for (int i = 0 ; i < BLOOD_PARTICLES ; i++) {
+    public void generateBloodParticles() {
+        for (int i = 0; i < BLOOD_PARTICLES; i++) {
             this.bloodHandler.addEntity(new StandardBoxParticle(this.getX(), this.getY(),
                     StdOps.rand(1.0, 5.0), StdOps.randBounds(-10.0, -3.0, 3.0, 10.0),
                     StdOps.randBounds(-10.0, -3.0, 3.0, 10.0), Color.RED, 3f, this.bloodHandler,
@@ -192,14 +190,14 @@ public abstract class Enemy extends Entity implements DeathListener {
      *
      * @param _sfxTrack
      */
-    public abstract void generateHurtSound (int _sfxTrack);
+    public abstract void generateHurtSound(int _sfxTrack);
 
     /**
      * When the monster's health is below 0, this method is called by the
      * subclass.
      */
     @Override
-    public abstract void uponDeath ();
+    public abstract void uponDeath();
 
     /**
      * Instantiates the walking animation controller.
@@ -207,7 +205,7 @@ public abstract class Enemy extends Entity implements DeathListener {
      * @param _frames
      * @param _fps
      */
-    protected void initWalkingFrames (BufferedImage[] _frames, int _fps) {
+    protected void initWalkingFrames(BufferedImage[] _frames, int _fps) {
         this.walkingController = new StandardAnimatorController(this, _frames, _fps);
     }
 
@@ -219,7 +217,7 @@ public abstract class Enemy extends Entity implements DeathListener {
      * @param _fps
      * @param _haltFrame;
      */
-    protected void initWalkingFrames (BufferedImage[] _frames, int _fps, int _haltFrame) {
+    protected void initWalkingFrames(BufferedImage[] _frames, int _fps, int _haltFrame) {
         this.walkingController = new StandardAnimatorController(new StandardAnimation(this, _frames, _fps, _haltFrame));
     }
 
@@ -229,7 +227,7 @@ public abstract class Enemy extends Entity implements DeathListener {
      * @param _frames
      * @param _fps
      */
-    protected void initAttackingFrames (BufferedImage[] _frames, int _fps) {
+    protected void initAttackingFrames(BufferedImage[] _frames, int _fps) {
         this.attackingController = new StandardAnimatorController(this, _frames, _fps);
     }
 
@@ -241,7 +239,7 @@ public abstract class Enemy extends Entity implements DeathListener {
      * @param _fps
      * @param _haltFrame;
      */
-    protected void initAttackingFrames (BufferedImage[] _frames, int _fps, int _haltFrame) {
+    protected void initAttackingFrames(BufferedImage[] _frames, int _fps, int _haltFrame) {
         this.attackingController = new StandardAnimatorController(new StandardAnimation(this, _frames, _fps, _haltFrame));
     }
 
@@ -251,7 +249,7 @@ public abstract class Enemy extends Entity implements DeathListener {
      * @param _frames
      * @param _fps
      */
-    protected void initDeathFrames (BufferedImage[] _frames, int _fps) {
+    protected void initDeathFrames(BufferedImage[] _frames, int _fps) {
         this.deathController = new StandardAnimatorController(this, _frames, _fps);
     }
 
@@ -263,7 +261,7 @@ public abstract class Enemy extends Entity implements DeathListener {
      * @param _fps
      * @param _haltFrame;
      */
-    protected void initDeathFrames (BufferedImage[] _frames, int _fps, int _haltFrame) {
+    protected void initDeathFrames(BufferedImage[] _frames, int _fps, int _haltFrame) {
         this.deathController = new StandardAnimatorController(new StandardAnimation(this, _frames, _fps, _haltFrame));
     }
 
@@ -271,7 +269,7 @@ public abstract class Enemy extends Entity implements DeathListener {
      * Moves the current entity to the front of the handler. Actually performs a
      * swap.
      */
-    protected void moveEntityToFront () {
+    protected void moveEntityToFront() {
         ArrayList<StandardGameObject> entities = this.getHandler().getEntities();
         Collections.swap(entities, 0, entities.indexOf(this));
     }
@@ -279,7 +277,7 @@ public abstract class Enemy extends Entity implements DeathListener {
     /**
      * Applies the composition factor to the actual transparency.
      */
-    protected void updateComposite () {
+    protected void updateComposite() {
         this.deathTransparentComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, this.deathTransparency);
         this.deathTransparency -= this.deathTransparencyFactor;
     }
@@ -290,7 +288,7 @@ public abstract class Enemy extends Entity implements DeathListener {
      * @param _posX
      * @param _posY
      */
-    private void followPlayer (int _posX, int _posY) {
+    private void followPlayer(int _posX, int _posY) {
         // Calculate the distance between the enemy and the player
         double diffX = this.getX() - _posX - Entity.APPROACH_FACTOR;
         double diffY = this.getY() - _posY - Entity.APPROACH_FACTOR;
@@ -308,7 +306,7 @@ public abstract class Enemy extends Entity implements DeathListener {
      * @param _posX
      * @param _posY
      */
-    private void facePlayer (int _posX, int _posY) {
+    private void facePlayer(int _posX, int _posY) {
         /**
          * Calculates the angle using arctangent that the monster needs to face
          * so they are angled towards the player.
@@ -324,64 +322,64 @@ public abstract class Enemy extends Entity implements DeathListener {
     }
 
 //================================ GETTERS ===================================//
-    public StandardAnimatorController getWalkingAnimation () {
+    public StandardAnimatorController getWalkingAnimation() {
         return this.walkingController;
     }
 
-    public StandardAnimatorController getAttackAnimation () {
+    public StandardAnimatorController getAttackAnimation() {
         return this.attackingController;
     }
 
-    public StandardAnimatorController getDeathAnimation () {
+    public StandardAnimatorController getDeathAnimation() {
         return this.deathController;
     }
 
-    public Entity getTarget () {
+    public Entity getTarget() {
         return this.target;
     }
 
-    public StandardCamera getCamera () {
+    public StandardCamera getCamera() {
         return this.sc;
     }
 
-    public double getDamage () {
+    public double getDamage() {
         return this.damage;
     }
 
-    public float getTransparency () {
+    public float getTransparency() {
         return this.deathTransparency;
     }
 
-    public boolean isAttacking () {
+    public boolean isAttacking() {
         return this.enemyState == EnemyState.ATTACKING;
     }
 
-    public boolean isWalking () {
+    public boolean isWalking() {
         return this.enemyState == EnemyState.WALKING;
     }
 
-    public int getInitialHealth () {
+    public int getInitialHealth() {
         return this.initialHealth;
     }
 
-    public StandardParticleHandler getExplosionHandler () {
+    public StandardParticleHandler getExplosionHandler() {
         return this.explosionHandler;
     }
 
 //================================ SETTERS ===================================//
-    public void setTarget (Entity _target) {
+    public void setTarget(Entity _target) {
         this.target = _target;
     }
 
-    public void setDamage (double _damage) {
+    public void setDamage(double _damage) {
         this.damage = _damage;
     }
 
-    public void setTransparentFactor (float _alphaFactor) {
+    public void setTransparentFactor(float _alphaFactor) {
         this.deathTransparencyFactor = _alphaFactor;
     }
 
-    public void setEnemyState (EnemyState _state) {
+    public void setEnemyState(EnemyState _state) {
         this.enemyState = _state;
     }
 }

@@ -21,14 +21,14 @@ public class IncrementWeaponCommand extends Command {
     private final Game game;
     private final Player player;
 
-    public IncrementWeaponCommand (Game _game, Player _player) {
+    public IncrementWeaponCommand(Game _game, Player _player) {
         this.game = _game;
         this.player = _player;
         this.bind(this.game.getKeyboard(), KeyEvent.VK_C);
     }
 
     @Override
-    public void pressed (float _dt) {
+    public void pressed(float _dt) {
         if (this.player.isAttacking() || this.game.isShop()) {
             return;
         }

@@ -17,13 +17,13 @@ public class DecreaseResolutionCommand extends Command {
 
     private final Game game;
 
-    public DecreaseResolutionCommand (Game _game) {
+    public DecreaseResolutionCommand(Game _game) {
         this.game = _game;
         this.bind(this.game.getKeyboard(), KeyEvent.VK_LEFT);
     }
 
     @Override
-    public void pressed (float _dt) {
+    public void pressed(float _dt) {
         if (!this.game.isMenu() || !this.game.getMenuScreen().isOnResolution()) {
             return;
         }

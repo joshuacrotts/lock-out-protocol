@@ -44,7 +44,7 @@ public abstract class Weapon implements SerializableObject {
     //  Some powerups increase the weapon's damage. This variable handles that.
     private int damageFactor = 1;
 
-    public Weapon (WeaponType _type) {
+    public Weapon(WeaponType _type) {
         this.weaponType = _type;
         this.weaponState = WeaponState.READY;
         this.setSFXPath("src/resources/audio/sfx/" + _type + ".wav");
@@ -56,14 +56,14 @@ public abstract class Weapon implements SerializableObject {
      *
      * @return
      */
-    public boolean ready () {
+    public boolean ready() {
         return this.ready;
     }
 
-    public abstract void loadAssets (Player _player);
+    public abstract void loadAssets(Player _player);
 
     @Override
-    public String createObject (SerializableType _id) {
+    public String createObject(SerializableType _id) {
         StringBuilder object = new StringBuilder();
         object.append("weapon=").append("\n");
         object.append("type=").append(this.weaponType).append("\n");
@@ -78,99 +78,99 @@ public abstract class Weapon implements SerializableObject {
         return object.toString();
     }
 
-    public void readObject () {
+    public void readObject() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void updateObject (SerializableType _id) {
+    public void updateObject(SerializableType _id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void destroyObject (SerializableType _id) {
+    public void destroyObject(SerializableType _id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 //============================== GETTERS ===================================//
-    public long getDelay () {
+    public long getDelay() {
         return this.delay;
     }
 
-    public WeaponType getWeaponType () {
+    public WeaponType getWeaponType() {
         return this.weaponType;
     }
 
-    public WeaponState getWeaponState () {
+    public WeaponState getWeaponState() {
         return this.weaponState;
     }
 
-    public StandardAnimatorController getWalkFrames () {
+    public StandardAnimatorController getWalkFrames() {
         return this.walkWeaponFrames;
     }
 
-    public StandardAnimatorController getAttackFrames () {
+    public StandardAnimatorController getAttackFrames() {
         return this.attackWeaponFrames;
     }
 
-    public BufferedImage getIcon () {
+    public BufferedImage getIcon() {
         return this.weaponIcon;
     }
 
-    public int getIconWidth () {
+    public int getIconWidth() {
         return this.weaponIcon.getWidth();
     }
 
-    public int getIconHeight () {
+    public int getIconHeight() {
         return this.weaponIcon.getHeight();
     }
 
-    public String getSFXPath () {
+    public String getSFXPath() {
         return this.attackSFXPath;
     }
 
-    public int getDamage () {
+    public int getDamage() {
         return this.damage;
     }
 
-    public int getDamageFactor () {
+    public int getDamageFactor() {
         return this.damageFactor;
     }
 
 //============================== SETTERS ===================================//
-    public void setWeaponState (WeaponState _state) {
+    public void setWeaponState(WeaponState _state) {
         this.weaponState = _state;
     }
 
-    public void setIcon (BufferedImage _image) {
+    public void setIcon(BufferedImage _image) {
         this.weaponIcon = _image;
     }
 
-    public void setSFXPath (String _sfx) {
+    public void setSFXPath(String _sfx) {
         this.attackSFXPath = _sfx;
     }
 
-    protected void setWalkFrames (StandardAnimatorController _walkFrames) {
+    protected void setWalkFrames(StandardAnimatorController _walkFrames) {
         this.walkWeaponFrames = _walkFrames;
     }
 
-    protected void setAttackFrames (StandardAnimatorController _attackFrames) {
+    protected void setAttackFrames(StandardAnimatorController _attackFrames) {
         this.attackWeaponFrames = _attackFrames;
     }
 
-    public void setDamage (int _damage) {
+    public void setDamage(int _damage) {
         this.damage = _damage;
     }
 
-    public void setDelay (long _delay) {
+    public void setDelay(long _delay) {
         this.delay = _delay;
     }
 
-    public void setReady (boolean _ready) {
+    public void setReady(boolean _ready) {
         this.ready = _ready;
     }
 
-    public void setDamageFactor (int _factor) {
+    public void setDamageFactor(int _factor) {
         this.damageFactor = _factor;
     }
 }

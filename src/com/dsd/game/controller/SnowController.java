@@ -53,7 +53,7 @@ public class SnowController implements Renderable, Updatable {
     //  Constants for how many snow particles should spawn.
     private static final int MAX_SNOW_PARTICLES = 5000;
 
-    public SnowController (Game _game) {
+    public SnowController(Game _game) {
         this.game = _game;
         this.sc = _game.getCamera();
         this.sph = new StandardParticleHandler(MAX_SNOW_PARTICLES);
@@ -61,15 +61,14 @@ public class SnowController implements Renderable, Updatable {
         this.sph.setCamera(this.sc);
         try {
             this.isSnowing = TranslatorAPI.getWeather().contains("snow") | SnowController.toggleDownfall;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             System.err.println("Could not connect; continuing without snow.");
             this.isSnowing = false;
         }
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (this.isSnowing()) {
             this.sph.render(_g2);
             this.drawSnowHaze(_g2);
@@ -77,7 +76,7 @@ public class SnowController implements Renderable, Updatable {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (this.isSnowing()) {
             // Generates the min/max points for the snow to spawn
             int xGenMin = (int) (this.sc.getX() - SnowController.X_BORDER);
@@ -98,7 +97,7 @@ public class SnowController implements Renderable, Updatable {
      * @param _yGenMax
      * @return
      */
-    private Snowflake generateSnowflake (int _xGenMin, int _xGenMax, int _yGenMin, int _yGenMax) {
+    private Snowflake generateSnowflake(int _xGenMin, int _xGenMax, int _yGenMin, int _yGenMax) {
         int xPos = StdOps.rand(_xGenMin, _xGenMax);
         int yPos = StdOps.rand(_yGenMin, _yGenMax);
         return new Snowflake(xPos, yPos, SNOW_DIRECTION, this.getRandomSpeed(VEL_FACTOR),
@@ -110,7 +109,7 @@ public class SnowController implements Renderable, Updatable {
      *
      * @param _g2
      */
-    private void drawSnowHaze (Graphics2D _g2) {
+    private void drawSnowHaze(Graphics2D _g2) {
         Color oldColor = _g2.getColor();
         _g2.setColor(this.hazeColor);
         _g2.fillRect((int) (this.game.getCamera().getX() - Screen.gameHalfWidth),
@@ -128,12 +127,12 @@ public class SnowController implements Renderable, Updatable {
      * @param speedFactor
      * @return
      */
-    private double getRandomSpeed (int speedFactor) {
+    private double getRandomSpeed(int speedFactor) {
         return Math.random() * speedFactor;
     }
 
 //========================== SETTERS =======================//
-    public boolean isSnowing () {
+    public boolean isSnowing() {
         return this.isSnowing;
     }
 }

@@ -27,7 +27,7 @@ public class Explosion extends StandardGameObject {
     private static final int EXPLOSION_FPS = 45;
     private final int DAMAGE;
 
-    public Explosion (int _x, int _y, int _damage, ExplosionType _type, StandardCollisionHandler _parentContainer) {
+    public Explosion(int _x, int _y, int _damage, ExplosionType _type, StandardCollisionHandler _parentContainer) {
         super(_x, _y, StandardID.Tile1);
         this.explosionType = _type;
         this.DAMAGE = _damage;
@@ -39,14 +39,14 @@ public class Explosion extends StandardGameObject {
     }
 
     @Override
-    public void render (Graphics2D _gd) {
+    public void render(Graphics2D _gd) {
         if (this.isAlive()) {
             this.animation.renderFrame(_gd);
         }
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (this.isAlive()) {
             this.animation.tick();
         }
@@ -55,7 +55,7 @@ public class Explosion extends StandardGameObject {
         }
     }
 
-    public int getDamage () {
+    public int getDamage() {
         return this.DAMAGE;
     }
 }

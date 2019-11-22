@@ -34,7 +34,7 @@ public class SaveResolutionChangesButton extends MenuButton implements MouseEven
     private static final int TEXT_X_OFFSET = 60;
     private static final int TEXT_Y_OFFSET = 45;
 
-    public SaveResolutionChangesButton (Game _game, MenuScreen _menuScreen) {
+    public SaveResolutionChangesButton(Game _game, MenuScreen _menuScreen) {
         super(BUTTON_X_OFFSET, _game.getGameHeight() - BUTTON_Y_OFFSET,
                 LanguageController.translate("SAVE CHANGES"), _game, _menuScreen);
         this.menuScreen = _menuScreen;
@@ -43,13 +43,13 @@ public class SaveResolutionChangesButton extends MenuButton implements MouseEven
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.setX(BUTTON_X_OFFSET);
         this.setY(this.getGame().getGameHeight() - BUTTON_Y_OFFSET);
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.getGame().isMenu() || !(this.getMenuScreen().isOnResolution())) {
             return;
         }
@@ -60,7 +60,7 @@ public class SaveResolutionChangesButton extends MenuButton implements MouseEven
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         if (!this.getGame().isMenu() || !(this.getMenuScreen().isOnResolution())) {
             return;
         }
@@ -72,7 +72,7 @@ public class SaveResolutionChangesButton extends MenuButton implements MouseEven
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         if (!this.getGame().isMenu() || !(this.getMenuScreen().isOnResolution())) {
             return;
         }
@@ -80,7 +80,7 @@ public class SaveResolutionChangesButton extends MenuButton implements MouseEven
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         if (!this.getGame().isMenu() || !(this.getMenuScreen().isOnResolution())) {
             return;
         }

@@ -34,7 +34,7 @@ public class MakeAccountButton extends MenuButton implements MouseEventInterface
     private static final int TEXT_X_OFFSET = 55;
     private static final int TEXT_Y_OFFSET = 45;
 
-    public MakeAccountButton (Game _game, MenuScreen _menuScreen, EmailTextFieldModel _email, PasswordTextFieldModel _pswd) {
+    public MakeAccountButton(Game _game, MenuScreen _menuScreen, EmailTextFieldModel _email, PasswordTextFieldModel _pswd) {
         super(Screen.gameHalfWidth + BUTTON_X_OFFSET,
                 _game.getGameHeight() - BUTTON_Y_OFFSET,
                 LanguageController.translate("MAKE ACCOUNT"), _game, _menuScreen);
@@ -43,13 +43,13 @@ public class MakeAccountButton extends MenuButton implements MouseEventInterface
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.setX(Screen.gameHalfWidth + BUTTON_X_OFFSET);
         this.setY(this.getGame().getGameHeight() - BUTTON_Y_OFFSET);
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.getMenuScreen().isOnAccountScreen()) {
             return;
         }
@@ -60,7 +60,7 @@ public class MakeAccountButton extends MenuButton implements MouseEventInterface
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         if (!this.getGame().isMenu() || !this.getMenuScreen().isOnAccountScreen()) {
             return;
         }
@@ -72,7 +72,7 @@ public class MakeAccountButton extends MenuButton implements MouseEventInterface
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         if (!this.getGame().isMenu() || !this.getMenuScreen().isOnAccountScreen()) {
             return;
         }
@@ -80,14 +80,14 @@ public class MakeAccountButton extends MenuButton implements MouseEventInterface
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         if (!this.getGame().isMenu()) {
             return;
         }
         this.activeImage = this.buttonImg;
     }
 
-    private void clearTextboxes () {
+    private void clearTextboxes() {
         this.emailModel.clearString();
         this.pswdModel.clearString();
     }

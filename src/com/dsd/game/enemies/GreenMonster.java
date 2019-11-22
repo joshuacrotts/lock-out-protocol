@@ -53,7 +53,7 @@ public class GreenMonster extends Enemy implements DeathListener {
     //  Health factor for this GreenMonster object.
     public static int originalHealth = 200;
 
-    public GreenMonster (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
+    public GreenMonster(int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, GreenMonster.APPROACH_VEL, GreenMonster.originalHealth, StandardID.Monster2, _game, _sch);
         this.setTarget(_game.getPlayer());
         //  Randomly generates the walking frames per second for variability
@@ -75,7 +75,7 @@ public class GreenMonster extends Enemy implements DeathListener {
      * Updates the animation, health, position and status of the monster.
      */
     @Override
-    public void tick () {
+    public void tick() {
         super.tick();
     }
 
@@ -86,7 +86,7 @@ public class GreenMonster extends Enemy implements DeathListener {
      * @param _g2
      */
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         super.render(_g2);
     }
 
@@ -96,11 +96,11 @@ public class GreenMonster extends Enemy implements DeathListener {
      * @TODO: Re-factor the magic numbers
      */
     @Override
-    public void uponDeath () {
+    public void uponDeath() {
         this.setAnimation(this.getDeathAnimation());
         this.explosionHandler = new StandardParticleHandler(50);
         this.explosionHandler.setCamera(this.getCamera());
-        for (int i = 0 ; i < this.explosionHandler.getMaxParticles() ; i++) {
+        for (int i = 0; i < this.explosionHandler.getMaxParticles(); i++) {
             this.explosionHandler.addEntity(new StandardBoxParticle(this.getX(), this.getY(),
                     StdOps.rand(1.0, 5.0), StdOps.randBounds(-10.0, -3.0, 3.0, 10.0),
                     StdOps.randBounds(-10.0, -3.0, 3.0, 10.0), Color.GREEN, 3f, this.explosionHandler,
@@ -118,7 +118,7 @@ public class GreenMonster extends Enemy implements DeathListener {
      * @param _sfx
      */
     @Override
-    public void generateHurtSound (int _sfx) {
+    public void generateHurtSound(int _sfx) {
         StandardAudioController.play("src/resources/audio/sfx/green_monster/pain" + _sfx + ".wav", StandardAudioType.SFX);
     }
 
@@ -127,7 +127,7 @@ public class GreenMonster extends Enemy implements DeathListener {
      *
      * @param sfx either 1 or 2
      */
-    private void generateDeathSound (int _sfx) {
+    private void generateDeathSound(int _sfx) {
         StandardAudioController.play("src/resources/audio/sfx/splat" + _sfx + ".wav", StandardAudioType.SFX);
     }
 
@@ -137,8 +137,8 @@ public class GreenMonster extends Enemy implements DeathListener {
      *
      * @param _coinAmt
      */
-    private void generateCoins (int _coinAmt) {
-        for (int i = 0 ; i < _coinAmt ; i++) {
+    private void generateCoins(int _coinAmt) {
+        for (int i = 0; i < _coinAmt; i++) {
             this.getHandler().addEntity(new Coin(this.getGame(), (int) this.getX(), (int) this.getY(), 0.7, 0.9, 1.0, this.getHandler()));
         }
     }
@@ -146,7 +146,7 @@ public class GreenMonster extends Enemy implements DeathListener {
     /**
      * Generates a random powerup based on RNG (will definitely change).
      */
-    private void generatePowerup () {
+    private void generatePowerup() {
         int luck = StdOps.rand(1, 10);
         switch (luck) {
             case 1:

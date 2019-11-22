@@ -19,13 +19,13 @@ public class CursorController implements Updatable {
     private final Game game;
     private final Crosshair crosshair;
 
-    public CursorController (Game _game) {
+    public CursorController(Game _game) {
         this.game = _game;
         this.crosshair = new Crosshair(_game);
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.crosshair.updateCursor();
     }
 }

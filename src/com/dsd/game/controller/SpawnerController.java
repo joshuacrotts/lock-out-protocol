@@ -37,7 +37,7 @@ public class SpawnerController extends StandardGameObject implements TimerInterf
     private final long delay;
     private final int radius;
 
-    public SpawnerController (int _x, int _y, EnemyType _id, long _delay, int _radius, Game _game, StandardCollisionHandler _sch) {
+    public SpawnerController(int _x, int _y, EnemyType _id, long _delay, int _radius, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, StandardID.Spawner);
         this.game = _game;
         this.spawnerID = _id;
@@ -50,15 +50,15 @@ public class SpawnerController extends StandardGameObject implements TimerInterf
     }
 
     @Override
-    public void tick () {
+    public void tick() {
     }
 
     @Override
-    public void render (Graphics2D gd) {
+    public void render(Graphics2D gd) {
     }
 
     @Override
-    public void cancelTimer () {
+    public void cancelTimer() {
         this.spawnerTimer.cancel();
     }
 
@@ -67,11 +67,11 @@ public class SpawnerController extends StandardGameObject implements TimerInterf
      *
      * @param _n
      */
-    protected void spawn (int _n) {
+    protected void spawn(int _n) {
         if (this.game.getLevelController().getWaveNumber() % this.game.getLevelController().getBossSpawnInterval() == 0) {
             return;
         }
-        for (int i = 0 ; i < _n ; i++) {
+        for (int i = 0; i < _n; i++) {
             int xPos = (int) StdOps.rand(this.getX() - this.radius, this.getX() + this.radius);
             int yPos = (int) StdOps.rand(this.getY() - this.radius, this.getY() + this.radius);
             //  Depending on what type of spawner we have, we spawn that type of monster.
@@ -109,13 +109,13 @@ public class SpawnerController extends StandardGameObject implements TimerInterf
         private final SpawnerController spawnerController;
         private final Game game;
 
-        public SpawnerDelayTimer (SpawnerController _spawnerController, Game _game) {
+        public SpawnerDelayTimer(SpawnerController _spawnerController, Game _game) {
             this.spawnerController = _spawnerController;
             this.game = _game;
         }
 
         @Override
-        public void run () {
+        public void run() {
             /**
              * If we're not paused AND the game isn't in its preamble state, we
              * can spawn the entities.

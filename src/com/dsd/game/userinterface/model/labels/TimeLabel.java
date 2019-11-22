@@ -35,7 +35,7 @@ public class TimeLabel extends StandardLabel implements TimerInterface {
     private static final int TIME_INTERVAL = 1000;
     private final String waveString;
 
-    public TimeLabel (Game _game) {
+    public TimeLabel(Game _game) {
         super(Screen.gameHalfWidth, TimeLabel.TIME_Y_OFFSET, "00:00:00",
                 "src/resources/fonts/chargen.ttf", 14f);
         this.game = _game;
@@ -43,11 +43,10 @@ public class TimeLabel extends StandardLabel implements TimerInterface {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (!this.game.isInGameState()) {
             return;
-        }
-        else {
+        } else {
             if (this.timer == null) {
                 this.timer = new Timer(true);
                 this.timer.scheduleAtFixedRate(new TimerControl(this), 0, TIME_INTERVAL);
@@ -59,7 +58,7 @@ public class TimeLabel extends StandardLabel implements TimerInterface {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         this.setX((int) this.game.getCamera().getX());
         this.setY((int) (this.game.getCamera().getY() - Screen.gameHalfHeight + TIME_Y_OFFSET));
         _g2.setColor(Color.WHITE);
@@ -67,7 +66,7 @@ public class TimeLabel extends StandardLabel implements TimerInterface {
     }
 
     @Override
-    public void cancelTimer () {
+    public void cancelTimer() {
         this.seconds = 0;
         this.minutes = 0;
         this.hours = 0;
@@ -81,7 +80,7 @@ public class TimeLabel extends StandardLabel implements TimerInterface {
      * I'm sure there's a better way to do this with system calls, but this is
      * accurate enough for now.
      */
-    private void calculateTime () {
+    private void calculateTime() {
         this.seconds++;
         if (this.seconds % 60 == 0) {
             this.minutes++;
@@ -97,12 +96,12 @@ public class TimeLabel extends StandardLabel implements TimerInterface {
 
         private final TimeLabel timeLabel;
 
-        public TimerControl (TimeLabel _timeLabel) {
+        public TimerControl(TimeLabel _timeLabel) {
             this.timeLabel = _timeLabel;
         }
 
         @Override
-        public void run () {
+        public void run() {
             this.timeLabel.calculateTime();
         }
     }

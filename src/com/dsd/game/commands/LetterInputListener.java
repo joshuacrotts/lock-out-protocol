@@ -25,14 +25,14 @@ public class LetterInputListener implements KeyListener {
     //  Last inputted char by the user.
     private char character;
 
-    public LetterInputListener (Game _game, TextFieldModel _textElement) {
+    public LetterInputListener(Game _game, TextFieldModel _textElement) {
         this.game = _game;
         this.game.addKeyListener(this);
         this.textElement = _textElement;
     }
 
     @Override
-    public void keyTyped (KeyEvent _e) {
+    public void keyTyped(KeyEvent _e) {
         if (!this.textElement.isActive() || !this.game.isMenu()) {
             return;
         }
@@ -55,11 +55,11 @@ public class LetterInputListener implements KeyListener {
     }
 
     @Override
-    public void keyPressed (KeyEvent _e) {
+    public void keyPressed(KeyEvent _e) {
     }
 
     @Override
-    public void keyReleased (KeyEvent _e) {
+    public void keyReleased(KeyEvent _e) {
     }
 
     /**
@@ -69,16 +69,16 @@ public class LetterInputListener implements KeyListener {
      * @param _char
      * @return
      */
-    private boolean isValidTypedChar (char _char) {
+    private boolean isValidTypedChar(char _char) {
         return _char != KeyEvent.VK_TAB && _char != KeyEvent.VK_ENTER;
     }
 
 //====================== GETTERS ========================//
-    public char getLastKeyTyped () {
+    public char getLastKeyTyped() {
         return this.character;
     }
 
-    public String getTextElement () {
+    public String getTextElement() {
         return this.textElement.toString();
     }
 

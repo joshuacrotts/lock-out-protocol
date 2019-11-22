@@ -26,7 +26,7 @@ public class AmmoLabel extends StandardLabel {
     private final int AMMO_Y_OFFSET = 90;
     private boolean hasGun = false;
 
-    public AmmoLabel (Game _game, Player _player) {
+    public AmmoLabel(Game _game, Player _player) {
         super((int) (Screen.gameHalfWidth + Screen.gameHalfWidth),
                 (int) (Screen.gameHalfHeight + Screen.gameHalfHeight / 2),
                 LanguageController.translate("AMMO: "), "src/resources/fonts/chargen.ttf", 28f);
@@ -35,14 +35,14 @@ public class AmmoLabel extends StandardLabel {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.hasGun = this.player.getInventory().getCurrentWeapon() instanceof Gun;
         this.setX(Screen.gameHalfWidth + Screen.gameHalfWidth);
         this.setY(Screen.gameHalfHeight + Screen.gameHalfHeight / 2);
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (this.hasGun) {
             /**
              * Update positioning here because the timing is crucial to the
@@ -60,22 +60,22 @@ public class AmmoLabel extends StandardLabel {
      *
      * @param _g2
      */
-    private void drawAmmoText (Graphics2D _g2) {
+    private void drawAmmoText(Graphics2D _g2) {
         _g2.setFont(this.getFont());
         _g2.setColor(Color.WHITE);
         _g2.drawString(this.getText() + this.getAmmoAmount(), this.getX(), this.getY());
     }
 
 //=============================  GETTERS  ============================//
-    private String getAmmoAmount () {
+    private String getAmmoAmount() {
         return this.getCurrentAmmo() + "/" + this.getTotalAmmo();
     }
 
-    private int getCurrentAmmo () {
+    private int getCurrentAmmo() {
         return this.player.getInventory().getGun().getCurrentAmmo();
     }
 
-    private int getTotalAmmo () {
+    private int getTotalAmmo() {
         return this.player.getInventory().getGun().getTotalAmmo();
     }
 }

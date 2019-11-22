@@ -11,24 +11,23 @@ import java.awt.Graphics2D;
  */
 public class MinigunButtonView extends ShopButtonView {
 
-    public MinigunButtonView (MinigunButton _minigunButton) {
+    public MinigunButtonView(MinigunButton _minigunButton) {
         super(_minigunButton, StdOps.loadImage("src/resources/img/items/icons/minigun_icon.png"));
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         //  Only update the text if the user has the rifle in their inventory.
         if (this.parentButton.getGame().getPlayer().getInventory().hasWeapon(WeaponType.MINIGUN) == null) {
             this.text.setText("MINIGUN $" + this.parentButton.getPrice());
-        }
-        else {
+        } else {
             this.text.setText("MINIGUN AMMO (100/$" + this.parentButton.getPricePerMagazine() + ")");
         }
         super.tick();
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         super.render(_g2);
     }
 }

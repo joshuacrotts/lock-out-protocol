@@ -28,7 +28,7 @@ public class SaveButton extends MenuButton implements MouseEventInterface {
     private static final int TEXT_X_OFFSET = 80;
     private static final int TEXT_Y_OFFSET = 45;
 
-    public SaveButton (Game _game, MenuScreen _menuScreen) {
+    public SaveButton(Game _game, MenuScreen _menuScreen) {
         super(SaveButton.BUTTON_X_OFFSET, SaveButton.BUTTON_Y_OFFSET,
                 LanguageController.translate("SAVE GAME"), _game, _menuScreen);
         this.game = _game;
@@ -39,7 +39,7 @@ public class SaveButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (!this.game.isPaused()) {
             return;
         }
@@ -48,7 +48,7 @@ public class SaveButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.game.isPaused()) {
             return;
         }
@@ -60,7 +60,7 @@ public class SaveButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         if (!this.game.isPaused()) {
             return;
         }
@@ -72,7 +72,7 @@ public class SaveButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         if (!this.game.isPaused()) {
             return;
         }
@@ -80,7 +80,7 @@ public class SaveButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         if (!this.game.isPaused()) {
             return;
         }

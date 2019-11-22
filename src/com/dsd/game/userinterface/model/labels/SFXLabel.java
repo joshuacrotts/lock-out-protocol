@@ -21,14 +21,14 @@ public class SFXLabel extends StandardLabel {
     private static final int BUTTON_X_OFFSET = 400;
     private static final int BUTTON_Y_OFFSET = 40;
 
-    public SFXLabel (SoundEffectVolumeControl _svc, MenuScreen _menuScreen) {
+    public SFXLabel(SoundEffectVolumeControl _svc, MenuScreen _menuScreen) {
         super(_svc.getLeftButtonX(), _svc.getLeftButtonY(), "SOUND EFFECT VOLUME", "src/resources/fonts/chargen.ttf", 32f);
         this.menuScreen = _menuScreen;
         this.sfxVolumeControl = _svc;
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (this.menuScreen.isOnVolume()) {
             this.setX(sfxVolumeControl.getLeftButtonX() - BUTTON_X_OFFSET);
             this.setY(sfxVolumeControl.getLeftButtonY() + BUTTON_Y_OFFSET);
@@ -36,7 +36,7 @@ public class SFXLabel extends StandardLabel {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (this.menuScreen.isOnVolume()) {
             _g2.setColor(Color.WHITE);
             super.render(_g2);

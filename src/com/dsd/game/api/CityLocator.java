@@ -33,14 +33,13 @@ public class CityLocator implements CityLocatorAPIAdapter {
         CityLocator.reader = new BufferedReader(new InputStreamReader(CityLocator.inputStream));
         try {
             CityLocator.line = CityLocator.reader.readLine();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
         }
         CityLocator.key = CityLocator.line.substring(CityLocator.line.lastIndexOf(":") + 1);
     }
 
-    public CityLocator () {
+    public CityLocator() {
     }
 
     /**
@@ -50,7 +49,7 @@ public class CityLocator implements CityLocatorAPIAdapter {
      * @param city
      * @return
      */
-    private static String fetch (String _ipAddress) {
+    private static String fetch(String _ipAddress) {
         StringBuilder jsonInformation = null;
         try {
             //  Processes the request to the API, and reads the information
@@ -65,8 +64,7 @@ public class CityLocator implements CityLocatorAPIAdapter {
                 jsonInformation.append(inputLine);
             }
             in.close();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
         }
         return jsonInformation.toString();
@@ -79,7 +77,7 @@ public class CityLocator implements CityLocatorAPIAdapter {
      * @return
      */
     @Override
-    public String getCity () {
+    public String getCity() {
         return this.getCityJSON().getString("city");
     }
 
@@ -89,15 +87,14 @@ public class CityLocator implements CityLocatorAPIAdapter {
      * @return string representation of IP address
      */
     @Override
-    public String getIPAddress () {
+    public String getIPAddress() {
         String ipAddress = null;
         try {
             URL whatismyip = new URL("http://checkip.amazonaws.com");
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     whatismyip.openStream()));
             ipAddress = in.readLine();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(CityLocator.class.getName()).log(Level.SEVERE, null, ex);
         }
         return ipAddress;
@@ -109,7 +106,7 @@ public class CityLocator implements CityLocatorAPIAdapter {
      *
      * @return
      */
-    private JSONObject getCityJSON () {
+    private JSONObject getCityJSON() {
         return new JSONObject(CityLocator.fetch(this.getIPAddress()));
     }
 

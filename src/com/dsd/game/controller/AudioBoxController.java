@@ -20,7 +20,7 @@ public abstract class AudioBoxController {
      *
      * @param _buffers
      */
-    public static void initialize (int _buffers) {
+    public static void initialize(int _buffers) {
         StandardAudioController.init(_buffers);
         StandardAudioController.load("src/resources/audio/music/menu.mp3", 1, StandardAudioType.MUSIC);
         StandardAudioController.load("src/resources/audio/music/level0.mp3", 1, StandardAudioType.MUSIC);
@@ -54,8 +54,8 @@ public abstract class AudioBoxController {
      *
      * @param _sfxCount
      */
-    private static void initBasicMonsterSFX (int _sfxCount) {
-        for (int i = 1 ; i < _sfxCount ; i++) {
+    private static void initBasicMonsterSFX(int _sfxCount) {
+        for (int i = 1; i < _sfxCount; i++) {
             StandardAudioController.load("src/resources/audio/sfx/basic_monster/zombie-" + i + ".wav", 4, StandardAudioType.SFX);
         }
     }
@@ -66,8 +66,8 @@ public abstract class AudioBoxController {
      *
      * @param _sfxCount
      */
-    private static void initGreenMonsterSFX (int _sfxCount) {
-        for (int i = 1 ; i < _sfxCount ; i++) {
+    private static void initGreenMonsterSFX(int _sfxCount) {
+        for (int i = 1; i < _sfxCount; i++) {
             StandardAudioController.load("src/resources/audio/sfx/green_monster/pain" + i + ".wav", 4, StandardAudioType.SFX);
         }
     }

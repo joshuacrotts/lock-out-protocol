@@ -41,7 +41,7 @@ public class PreambleScreen extends Screen implements TimerInterface {
     // State that the menu is currently on (in terms of fading in/out).
     private PreambleScreenState state;
 
-    public PreambleScreen (Game _game) {
+    public PreambleScreen(Game _game) {
         super(_game);
         this.lightningEffect = new LightningModel(_game);
         this.waveModel = new WaveLabel(_game, _game.getLogicalCurrentLevelID());
@@ -51,7 +51,7 @@ public class PreambleScreen extends Screen implements TimerInterface {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (this.getGame().isMenu()) {
             return;
         }
@@ -61,7 +61,7 @@ public class PreambleScreen extends Screen implements TimerInterface {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (this.getGame().isMenu()) {
             return;
         }
@@ -77,15 +77,14 @@ public class PreambleScreen extends Screen implements TimerInterface {
      * out. Once we're there, we schedule a new preambletimer to fade the
      * transparency back out after *preambleTimerDuration* time.
      */
-    private void changeAlpha () {
+    private void changeAlpha() {
         /**
          * We can fade in if we are in the fade-in state, and our alpha is lower
          * than 1.
          */
         if (this.state == PreambleScreenState.FADE_IN && this.alpha < 1.0f) {
             this.alpha += ALPHA_TIMER;
-        }
-        /**
+        } /**
          * Once we hit an alpha of 1, we can schedule our timer to wait for x
          * seconds, then decrease the text/bolt effects.
          */
@@ -93,8 +92,7 @@ public class PreambleScreen extends Screen implements TimerInterface {
             this.preambleTimer.schedule(new PreambleTimer(this), PREAMBLE_TIMER_DURATION);
             if (this.state == PreambleScreenState.FADE_OUT && this.alpha > 0.0f) {
                 this.alpha -= ALPHA_TIMER;
-            }
-            /**
+            } /**
              * Finally, once our alpha is below or equal to 0.0, we can flag the
              * game as running.
              */
@@ -113,7 +111,7 @@ public class PreambleScreen extends Screen implements TimerInterface {
     /**
      * Resets the alpha of the transparency, and begins to re-fade in the timer.
      */
-    public void resetPreambleScreen () {
+    public void resetPreambleScreen() {
         this.alpha = 0;
         this.state = PreambleScreenState.FADE_IN;
         this.waveModel.setWaveNumber(this.getGame().getWaveNumber());
@@ -121,7 +119,7 @@ public class PreambleScreen extends Screen implements TimerInterface {
     }
 
     @Override
-    public void cancelTimer () {
+    public void cancelTimer() {
         this.preambleTimer.cancel();
         this.preambleTimer = new Timer(true);
     }
@@ -134,12 +132,12 @@ public class PreambleScreen extends Screen implements TimerInterface {
 
         private final PreambleScreen screen;
 
-        public PreambleTimer (PreambleScreen _screen) {
+        public PreambleTimer(PreambleScreen _screen) {
             this.screen = _screen;
         }
 
         @Override
-        public void run () {
+        public void run() {
             screen.state = PreambleScreenState.FADE_OUT;
         }
     }

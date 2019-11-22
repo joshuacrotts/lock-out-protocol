@@ -26,18 +26,18 @@ public class LightningModel extends Interactor {
     private final int MAX_X_VARIABILITY = 30;
     private final int Y_VARIABILITY = 3;
 
-    public LightningModel (Game _game) {
+    public LightningModel(Game _game) {
         this.game = _game;
         this.camera = this.game.getCamera();
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.updateLightningPos();
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         _g2.setColor(StandardDraw.BLUE_CRAYOLA);
         if (this.lightningLines != null) {
             for (Line2D line : lightningLines) {
@@ -49,25 +49,25 @@ public class LightningModel extends Interactor {
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
     }
 
     /**
      * Updates the lightning array object that holds the coordinates for each of
      * the line-segment points
      */
-    private void updateLightningPos () {
+    private void updateLightningPos() {
         List<Pair<Integer, Integer>> lightningPoints = this.generatePoints();
         this.lightningLines = new Line2D[lightningPoints.size()];
-        for (int i = 0 ; i < this.lightningLines.length - 1 ; i++) {
+        for (int i = 0; i < this.lightningLines.length - 1; i++) {
             Pair<Integer, Integer> coordOne = lightningPoints.get(i);
             Pair<Integer, Integer> coordTwo = lightningPoints.get(i + 1);
             this.lightningLines[i] = new Line2D.Double(coordOne.getFirst(), coordOne.getSecond(),
@@ -80,7 +80,7 @@ public class LightningModel extends Interactor {
      *
      * @return
      */
-    private List<Pair<Integer, Integer>> generatePoints () {
+    private List<Pair<Integer, Integer>> generatePoints() {
         List<Pair<Integer, Integer>> boltPositions = new ArrayList<>();
         int prevXPos = (int) (this.camera.getX() - Screen.gameHalfWidth);
         int prevYPos = (int) StdOps.rand(this.camera.getY() - Y_VARIABILITY, this.camera.getY() + Y_VARIABILITY);

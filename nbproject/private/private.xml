@@ -3,22 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/userinterface/PauseScreen.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/controller/LanguageController.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/userinterface/MenuScreen.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/api/TranslatorAPI.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/userinterface/model/buttons/VolumeControlButton.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/controller/CollisionHandlerController.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/core/Game.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/userinterface/model/buttons/SaveAudioChangesButton.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/userinterface/MenuState.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/controller/CursorController.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/controller/AudioBoxController.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/controller/SpawnerController.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/userinterface/shop/weapons/views/RifleButtonView.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/userinterface/view/AudioView.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/userinterface/shop/weapons/views/ShopButtonView.java</file>
-            <file>file:/C:/Users/Joshua/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/objects/Player.java</file>
+            <file>file:/C:/Users/joshu/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/core/LockOutProtocolRunner.java</file>
+            <file>file:/C:/Users/joshu/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/objects/weapons/projectiles/BossProjectileObject.java</file>
+            <file>file:/C:/Users/joshu/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/enemies/FemaleMonsterBoss.java</file>
+            <file>file:/C:/Users/joshu/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/userinterface/MenuScreen.java</file>
+            <file>file:/C:/Users/joshu/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/userinterface/model/buttons/ExitButton.java</file>
+            <file>file:/C:/Users/joshu/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/controller/LevelController.java</file>
+            <file>file:/C:/Users/joshu/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/levels/MetalLevel.java</file>
+            <file>file:/C:/Users/joshu/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/controller/AudioBoxController.java</file>
+            <file>file:/C:/Users/joshu/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/controller/CollisionHandlerController.java</file>
+            <file>file:/C:/Users/joshu/Desktop/Files/College/CSC-340/Lock-Out-Protocol/src/com/dsd/game/controller/BossSpawnerController.java</file>
         </group>
     </open-files>
 </project-private>

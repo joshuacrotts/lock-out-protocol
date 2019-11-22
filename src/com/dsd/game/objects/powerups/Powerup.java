@@ -16,5 +16,5 @@ public interface Powerup {
      * Each class that implements Powerup will override this method, detailing
      * how the powerup should affect the player/game.
      */
-    public void activate ();
+    public void activate();
 }

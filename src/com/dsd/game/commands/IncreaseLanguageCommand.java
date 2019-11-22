@@ -20,13 +20,13 @@ public class IncreaseLanguageCommand extends Command {
     //  Miscellaneous reference variables.
     private final Game game;
 
-    public IncreaseLanguageCommand (Game _game) {
+    public IncreaseLanguageCommand(Game _game) {
         this.game = _game;
         this.bind(this.game.getKeyboard(), KeyEvent.VK_RIGHT);
     }
 
     @Override
-    public void pressed (float _dt) {
+    public void pressed(float _dt) {
         if (!this.game.isMenu() || !this.game.getMenuScreen().isOnLanguages()) {
             return;
         }

@@ -19,7 +19,7 @@ public class ResolutionView extends Screen implements MouseEventInterface {
     //  Miscellaneous menu reference.
     private final MenuScreen menuScreen;
 
-    public ResolutionView (Game _game, MenuScreen _menuScreen) {
+    public ResolutionView(Game _game, MenuScreen _menuScreen) {
         super(_game);
         this.menuScreen = _menuScreen;
         super.addInteractor(new ResolutionLabel(super.getGame(), this.menuScreen));
@@ -27,7 +27,7 @@ public class ResolutionView extends Screen implements MouseEventInterface {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (!this.menuScreen.isOnResolution() || !this.getGame().isMenu()) {
             return;
         }
@@ -35,7 +35,7 @@ public class ResolutionView extends Screen implements MouseEventInterface {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.menuScreen.isOnResolution() || !this.getGame().isMenu()) {
             return;
         }
@@ -43,21 +43,21 @@ public class ResolutionView extends Screen implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         if (!this.menuScreen.isOnResolution() || !this.getGame().isMenu()) {
             return;
         }
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         if (!this.menuScreen.isOnResolution() || !this.getGame().isMenu()) {
             return;
         }
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         if (!this.menuScreen.isOnResolution() || !this.getGame().isMenu()) {
             return;
         }

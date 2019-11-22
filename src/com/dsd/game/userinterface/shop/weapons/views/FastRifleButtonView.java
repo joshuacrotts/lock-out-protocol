@@ -13,24 +13,23 @@ import java.awt.Graphics2D;
  */
 public class FastRifleButtonView extends ShopButtonView {
 
-    public FastRifleButtonView (FastRifleButton _rifleButton) {
+    public FastRifleButtonView(FastRifleButton _rifleButton) {
         super(_rifleButton, StdOps.loadImage("src/resources/img/items/icons/fast_rifle_icon.png"));
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         //  Only update the text if the user has the rifle in their inventory.
         if (this.parentButton.getGame().getPlayer().getInventory().hasWeapon(WeaponType.FAST_RIFLE) == null) {
             this.text.setText("PPSh-41 $" + this.parentButton.getPrice());
-        }
-        else {
+        } else {
             this.text.setText("PPSh-41 AMMO (71/$" + this.parentButton.getPricePerMagazine() + ")");
         }
         super.tick();
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         super.render(_g2);
     }
 }

@@ -15,7 +15,10 @@ import java.awt.image.BufferedImage;
  * object fired/instantiated from AttackCommand.
  *
  * [Group Name: Data Structure Deadheads]
+ *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/21/19
  */
 public class BossProjectileObject extends ProjectileGameObject {
 
@@ -28,7 +31,7 @@ public class BossProjectileObject extends ProjectileGameObject {
 
     private int damage = 25;
 
-    public BossProjectileObject (int _x, int _y, int _velX, int _velY, int _damage, Game _game,
+    public BossProjectileObject(int _x, int _y, int _velX, int _velY, int _damage, Game _game,
             StandardCollisionHandler _parentContainer, Enemy _parent) {
         super(_x, _y, 0, _damage, BossProjectileObject.VEL_FACTOR, BossProjectileObject.frames,
                 BossProjectileObject.BULLET_FPS, _game, _parentContainer, _parent, StandardID.Bullet1);
@@ -39,12 +42,12 @@ public class BossProjectileObject extends ProjectileGameObject {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         super.tick();
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         super.render(_g2);
     }
 
@@ -53,7 +56,7 @@ public class BossProjectileObject extends ProjectileGameObject {
      *
      * @return
      */
-    private static BufferedImage[] initImages () {
+    private static BufferedImage[] initImages() {
         BossProjectileObject.frames[0] = StdOps.loadImage("src/resources/img/bullet/enemy_projectile/ball.png");
         return BossProjectileObject.frames;
     }

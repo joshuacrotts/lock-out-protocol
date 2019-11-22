@@ -29,7 +29,7 @@ public class GrenadeLauncherButton extends ShopButton {
     //  Price per magazine.
     private static final int GRENADE_LAUNCHER_AMMO_PRICE = 150;
 
-    public GrenadeLauncherButton (Game _game, ShopScreen _shopScreen) {
+    public GrenadeLauncherButton(Game _game, ShopScreen _shopScreen) {
         super(_game, _shopScreen, GrenadeLauncherButton.X_OFFSET,
                 GrenadeLauncherButton.Y_OFFSET,
                 GRENADE_LAUNCHER_PRICE,
@@ -38,19 +38,19 @@ public class GrenadeLauncherButton extends ShopButton {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         super.tick();
         this.grenadeLauncherView.tick();
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         super.render(_g2);
         this.grenadeLauncherView.render(_g2);
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         if (!this.getGame().isShop()) {
             return;
         }
@@ -61,8 +61,7 @@ public class GrenadeLauncherButton extends ShopButton {
             this.getGame().getPlayer().setMoney(this.getGame().getPlayer().getMoney() - this.getPrice());
             this.getInventory().addWeapon(new GrenadeLauncher(this.getGame(),
                     this.getGame().getPlayer(), this.getGame().getPlayer().getHandler()));
-        }
-        //  Otherwise, add to the ammunition.
+        } //  Otherwise, add to the ammunition.
         else if (this.getGame().getPlayer().getMoney() >= this.getPricePerMagazine()) {
             this.getGame().getPlayer().setMoney(this.getGame().getPlayer().getMoney() - this.getPricePerMagazine());
             _weapon.setTotalAmmo(_weapon.getTotalAmmo() + _weapon.getMagazineCapacity());
@@ -70,12 +69,12 @@ public class GrenadeLauncherButton extends ShopButton {
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         super.onMouseEnterHover();
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         super.onMouseExitHover();
     }
 }

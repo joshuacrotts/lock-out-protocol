@@ -12,5 +12,5 @@ package com.dsd.game.api.adapters;
  */
 public interface LanguageTranslationAPIAdapter {
 
-    public String translateText (String _text, String _lang);
+    public String translateText(String _text, String _lang);
 }

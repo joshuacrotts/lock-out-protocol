@@ -27,7 +27,7 @@ public class TitleLabel extends StandardLabel {
     private static final int TITLE_X_OFFSET = 140;
     private static final int TITLE_Y_OFFSET = 40;
 
-    public TitleLabel (Game _game) {
+    public TitleLabel(Game _game) {
         super(Screen.gameHalfWidth - TitleLabel.TITLE_X_OFFSET,
                 TitleLabel.TITLE_Y_OFFSET, _game.getWindow().getTitle(),
                 "src/resources/fonts/chargen.ttf", 32f);
@@ -36,12 +36,12 @@ public class TitleLabel extends StandardLabel {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.shakeText();
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         Color oldColor = _g2.getColor();
         _g2.setColor(fadeController.combine());
         super.render(_g2);
@@ -51,7 +51,7 @@ public class TitleLabel extends StandardLabel {
     /**
      * Causes the label to shake violently.
      */
-    private void shakeText () {
+    private void shakeText() {
         this.setX(StdOps.rand(Screen.gameHalfWidth - TitleLabel.TITLE_X_OFFSET - shakeFactor,
                 Screen.gameHalfWidth - TitleLabel.TITLE_X_OFFSET + this.shakeFactor));
         this.setY(StdOps.rand(TitleLabel.TITLE_Y_OFFSET - shakeFactor, TitleLabel.TITLE_Y_OFFSET + this.shakeFactor));

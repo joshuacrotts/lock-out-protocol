@@ -23,7 +23,7 @@ public class PauseLabel extends StandardLabel {
     private final int LABEL_X_OFFSET = 20;
     private final int LABEL_Y_OFFSET = 100;
 
-    public PauseLabel (Game _game) {
+    public PauseLabel(Game _game) {
         super((int) Screen.gameHalfWidth,
                 (int) Screen.gameHalfHeight,
                 LanguageController.translate("PAUSED"), "src/resources/fonts/chargen.ttf", 32f);
@@ -31,13 +31,13 @@ public class PauseLabel extends StandardLabel {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.setX((int) this.game.getCamera().getX() - this.LABEL_X_OFFSET);
         this.setY((int) this.game.getCamera().getY() - this.LABEL_Y_OFFSET);
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         Color oldColor = _g2.getColor();
         _g2.setColor(Color.WHITE);
         super.render(_g2);

@@ -27,19 +27,19 @@ public class LanguageChangeButton extends MenuButton implements MouseEventInterf
     private static final int TEXT_X_OFFSET = 35;
     private static final int TEXT_Y_OFFSET = 45;
 
-    public LanguageChangeButton (Game _game, MenuScreen _menuScreen) {
+    public LanguageChangeButton(Game _game, MenuScreen _menuScreen) {
         super(LanguageChangeButton.BUTTON_X_OFFSET, _game.getGameHeight() - LanguageChangeButton.BUTTON_Y_OFFSET,
                 LanguageController.translate("CHANGE LANGUAGE"), _game, _menuScreen);
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.setX(Screen.gameHalfWidth - LanguageChangeButton.BUTTON_X_OFFSET);
         this.setY(Screen.gameHeight - LanguageChangeButton.BUTTON_Y_OFFSET);
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.getMenuScreen().isOnOptions() || !this.getGame().isMenu()) {
             return;
         }
@@ -50,7 +50,7 @@ public class LanguageChangeButton extends MenuButton implements MouseEventInterf
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         if (!this.getMenuScreen().isOnOptions() || !this.getGame().isMenu()) {
             return;
         }
@@ -60,7 +60,7 @@ public class LanguageChangeButton extends MenuButton implements MouseEventInterf
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         if (!this.getMenuScreen().isOnOptions() || !this.getGame().isMenu()) {
             return;
         }
@@ -68,7 +68,7 @@ public class LanguageChangeButton extends MenuButton implements MouseEventInterf
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         if (!this.getMenuScreen().isOnOptions() || !this.getGame().isMenu()) {
             return;
         }

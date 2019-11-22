@@ -19,13 +19,13 @@ public class IncreaseResolutionCommand extends Command {
 
     private final Game game;
 
-    public IncreaseResolutionCommand (Game _game) {
+    public IncreaseResolutionCommand(Game _game) {
         this.game = _game;
         this.bind(this.game.getKeyboard(), KeyEvent.VK_RIGHT);
     }
 
     @Override
-    public void pressed (float _dt) {
+    public void pressed(float _dt) {
         if (!this.game.isMenu() || !this.game.getMenuScreen().isOnResolution()) {
             return;
         }

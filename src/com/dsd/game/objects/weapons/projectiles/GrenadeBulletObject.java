@@ -36,7 +36,7 @@ public class GrenadeBulletObject extends ProjectileGameObject implements DeathLi
 
     private boolean uponDeathFlag = false;
 
-    public GrenadeBulletObject (int _x, int _y, double _angle, int _damage, Game _game,
+    public GrenadeBulletObject(int _x, int _y, double _angle, int _damage, Game _game,
             StandardCollisionHandler _parentContainer, Player _parent) {
         super(_x, _y, _angle, _damage, VEL_FACTOR, GrenadeBulletObject.frames,
                 GrenadeBulletObject.BULLET_FPS, _game, _parentContainer, _parent,
@@ -44,23 +44,22 @@ public class GrenadeBulletObject extends ProjectileGameObject implements DeathLi
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (this.isAlive() && !this.uponDeathFlag) {
             super.tick();
-        }
-        else if (!this.uponDeathFlag) {
+        } else if (!this.uponDeathFlag) {
             this.uponDeathFlag = true;
             this.uponDeath();
         }
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         super.render(_g2);
     }
 
     @Override
-    public void uponDeath () {
+    public void uponDeath() {
         StandardAudioController.play("src/resources/audio/sfx/grenade_explosion.wav", StandardAudioType.SFX);
     }
 
@@ -69,7 +68,7 @@ public class GrenadeBulletObject extends ProjectileGameObject implements DeathLi
      *
      * @return
      */
-    private static void initImages () {
+    private static void initImages() {
         GrenadeBulletObject.frames[0] = StdOps.loadImage("src/resources/img/bullet/bullet_sprite/new_bullet/grenade_bullet.png");
     }
 

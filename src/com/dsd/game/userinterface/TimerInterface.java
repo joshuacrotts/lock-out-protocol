@@ -10,5 +10,5 @@ package com.dsd.game.userinterface;
  */
 public interface TimerInterface {
 
-    public void cancelTimer ();
+    public void cancelTimer();
 }

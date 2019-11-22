@@ -45,7 +45,7 @@ public abstract class Gun extends Weapon {
     //  Delay for reload command.
     private final long reloadDelay;
 
-    public Gun (WeaponType _type, int _totalAmmo, Game _game, Player _player,
+    public Gun(WeaponType _type, int _totalAmmo, Game _game, Player _player,
             StandardCollisionHandler _sch, String _reloadSFX, long _reloadDelay) {
         super(_type);
         this.game = _game;
@@ -60,7 +60,7 @@ public abstract class Gun extends Weapon {
         super.setWeaponState(WeaponState.READY);
     }
 
-    public Gun (WeaponType _type, int _currAmmo, int _totalAmmo, int magCapacity,
+    public Gun(WeaponType _type, int _currAmmo, int _totalAmmo, int magCapacity,
             Game _game, Player _player, StandardCollisionHandler _sch, String _reloadSFX,
             long _reloadDelay) {
         super(_type);
@@ -79,19 +79,19 @@ public abstract class Gun extends Weapon {
     /**
      * Defines what happens when the gun is shot.
      */
-    public abstract void shoot ();
+    public abstract void shoot();
 
     /**
      * Plays the sound effect associated with the gun type.
      */
-    public void playGunShotSFX () {
+    public void playGunShotSFX() {
         StandardAudioController.play("src/resources/audio/sfx/" + this.getWeaponType() + ".wav", StandardAudioType.SFX);
     }
 
     /**
      * Removes one bullet from the gun.
      */
-    public void deductAmmo () {
+    public void deductAmmo() {
         this.currentAmmo--;
     }
 
@@ -99,7 +99,7 @@ public abstract class Gun extends Weapon {
      * Reloads a gun using the specified algorithm. This method is called AFTER
      * the sound effect is played; all it does is change the model.
      */
-    public void reload () {
+    public void reload() {
         /**
          * Three cases: 1. The magazine is empty and we have enough to fill it
          * 2. The magazine is not empty and we have enough to fill it
@@ -107,8 +107,7 @@ public abstract class Gun extends Weapon {
         if (this.magExceedsTotalAmmo() && !this.magExceedsGunAmmo()) {
             this.currentAmmo += this.totalAmmo;
             this.totalAmmo = 0;
-        }
-        else {
+        } else {
             /**
              * If we don't have enough to fill the magazine but the current +
              * total > magazine
@@ -119,85 +118,85 @@ public abstract class Gun extends Weapon {
         }
     }
 
-    private boolean magExceedsTotalAmmo () {
+    private boolean magExceedsTotalAmmo() {
         return this.totalAmmo < this.magazineAmt;
     }
 
-    private boolean magExceedsGunAmmo () {
+    private boolean magExceedsGunAmmo() {
         return this.currentAmmo + this.totalAmmo > this.magazineAmt;
     }
 
 //============================== GETTERS ===================================//
-    public int getTotalAmmo () {
+    public int getTotalAmmo() {
         return this.totalAmmo;
     }
 
-    public int getCurrentAmmo () {
+    public int getCurrentAmmo() {
         return this.currentAmmo;
     }
 
-    public int getMagazineCapacity () {
+    public int getMagazineCapacity() {
         return this.magazineAmt;
     }
 
-    public boolean isWeaponEmpty () {
+    public boolean isWeaponEmpty() {
         return this.currentAmmo == 0;
     }
 
-    public boolean hasFullAmmo () {
+    public boolean hasFullAmmo() {
         return this.currentAmmo == this.magazineAmt;
     }
 
-    public boolean hasAmmo () {
+    public boolean hasAmmo() {
         return this.totalAmmo != 0;
     }
 
-    public String getEmptySFXPath () {
+    public String getEmptySFXPath() {
         return this.emptySFXPath;
     }
 
-    public String getReloadSFXPath () {
+    public String getReloadSFXPath() {
         return this.reloadSFXPath;
     }
 
-    public boolean isReloading () {
+    public boolean isReloading() {
         return super.getWeaponState() == WeaponState.RELOAD;
     }
 
-    public Player getPlayer () {
+    public Player getPlayer() {
         return this.player;
     }
 
-    public StandardCollisionHandler getHandler () {
+    public StandardCollisionHandler getHandler() {
         return this.globalHandler;
     }
 
-    public Game getGame () {
+    public Game getGame() {
         return this.game;
     }
 
-    public long getReloadDelay () {
+    public long getReloadDelay() {
         return this.reloadDelay;
     }
 
-    public BufferedImage getRandomCasing () {
+    public BufferedImage getRandomCasing() {
         return this.casingImages[(int) (Math.random() * this.casingImages.length)];
     }
 //============================== SETTERS ===================================//
 
-    public void setCurrentAmmo (int _ammo) {
+    public void setCurrentAmmo(int _ammo) {
         this.currentAmmo = _ammo;
     }
 
-    public void setTotalAmmo (int _ammo) {
+    public void setTotalAmmo(int _ammo) {
         this.totalAmmo = _ammo;
     }
 
-    public void setReloading (boolean _reloading) {
+    public void setReloading(boolean _reloading) {
         this.setWeaponState(_reloading ? WeaponState.RELOAD : WeaponState.READY);
     }
 
-    public void loadCasingImages (int _casingAmount) {
+    public void loadCasingImages(int _casingAmount) {
         this.casingImages = Utilities.loadFrames("src/resources/img/objects/casings/" + this.getWeaponType() + "_casings/", _casingAmount);
     }
 }

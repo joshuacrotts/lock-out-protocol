@@ -43,7 +43,7 @@ public class AttackCommand extends Command implements TimerInterface {
     //  Boolean to represent if the attack has a timer or not.
     private static boolean hasTimer = false;
 
-    public AttackCommand (Game _game, Player _obj, StandardCollisionHandler _gh, StandardAnimatorController animation) {
+    public AttackCommand(Game _game, Player _obj, StandardCollisionHandler _gh, StandardAnimatorController animation) {
         this.game = _game;
         this.player = _obj;
         this.globalHandler = _gh;
@@ -55,7 +55,7 @@ public class AttackCommand extends Command implements TimerInterface {
     }
 
     @Override
-    public void pressed (float _dt) {
+    public void pressed(float _dt) {
         if (!this.game.isInGameState()) {
             return;
         }
@@ -80,8 +80,7 @@ public class AttackCommand extends Command implements TimerInterface {
              */
             weapon.setReady(false);
             AttackCommand.hasTimer = false;
-        }
-        /**
+        } /**
          * If there's not already a delay present and the weapon isn't active,
          * we can create one. We need to instantiate a new timer in the event
          * that the previous one was canceled.
@@ -94,14 +93,14 @@ public class AttackCommand extends Command implements TimerInterface {
     }
 
     @Override
-    public void down (float _dt) {
+    public void down(float _dt) {
         //  down(dt) is essentially just multiple pressed(dt) calls in
         //  succession.
         this.pressed(_dt);
     }
 
     @Override
-    public void cancelTimer () {
+    public void cancelTimer() {
         this.attackDelayTimer.cancel();
     }
 
@@ -112,7 +111,7 @@ public class AttackCommand extends Command implements TimerInterface {
      *
      * @param _gun
      */
-    private void gunAttack (Gun _gun) {
+    private void gunAttack(Gun _gun) {
         if (!_gun.isReloading()) {
             if (_gun.isWeaponEmpty()) {
                 StandardAudioController.play(_gun.getEmptySFXPath(), StandardAudioType.SFX);
@@ -137,14 +136,14 @@ public class AttackCommand extends Command implements TimerInterface {
      * Changes the state of the player to ATTACKING, and sets their animation to
      * be the attacking one relevant to the weapon they're holding.
      */
-    private void toggleAttackAnimation () {
+    private void toggleAttackAnimation() {
         //  Update the animation if the player has chosen a different gender.
         this.player.setAnimation(this.animation);
         this.player.setPlayerState(PlayerState.ATTACKING);
     }
 
 //============================ GETTERS ===================================//
-    public boolean hasTimer () {
+    public boolean hasTimer() {
         return AttackCommand.hasTimer;
     }
 
@@ -154,12 +153,12 @@ public class AttackCommand extends Command implements TimerInterface {
      *
      * @param _sac
      */
-    public void setAnimation (StandardAnimatorController _sac) {
+    public void setAnimation(StandardAnimatorController _sac) {
         this.animation = _sac;
         this.animation.getStandardAnimation().setReturnAnimation(this.player.getAnimationController());
     }
 
-    public void setTimer (boolean _timer) {
+    public void setTimer(boolean _timer) {
         AttackCommand.hasTimer = _timer;
     }
 
@@ -173,13 +172,13 @@ public class AttackCommand extends Command implements TimerInterface {
         private final Weapon weapon;
         private final AttackCommand command;
 
-        public AttackDelayTimer (AttackCommand _command, Weapon _weapon) {
+        public AttackDelayTimer(AttackCommand _command, Weapon _weapon) {
             this.weapon = _weapon;
             this.command = _command;
         }
 
         @Override
-        public void run () {
+        public void run() {
             this.command.setTimer(false);
             this.weapon.setReady(true);
         }

@@ -26,19 +26,19 @@ public class HelpOrOptionsButton extends MenuButton implements MouseEventInterfa
     private static final int TEXT_X_OFFSET = 90;
     private static final int TEXT_Y_OFFSET = 45;
 
-    public HelpOrOptionsButton (Game _game, MenuScreen _menuScreen) {
+    public HelpOrOptionsButton(Game _game, MenuScreen _menuScreen) {
         super(BUTTON_X_OFFSET, _game.getGameHeight() - BUTTON_Y_OFFSET,
                 LanguageController.translate("SETTINGS"), _game, _menuScreen);
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.setX(Screen.gameHalfWidth + BUTTON_X_OFFSET);
         this.setY(Screen.gameHalfHeight - BUTTON_Y_OFFSET);
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.getMenuScreen().isOnMainMenu()) {
             return;
         }
@@ -49,7 +49,7 @@ public class HelpOrOptionsButton extends MenuButton implements MouseEventInterfa
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         if (!this.getGame().isMenu() || !this.getMenuScreen().isOnMainMenu()) {
             return;
         }
@@ -59,7 +59,7 @@ public class HelpOrOptionsButton extends MenuButton implements MouseEventInterfa
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         if (!this.getGame().isMenu() || !this.getMenuScreen().isOnMainMenu()) {
             return;
         }
@@ -67,7 +67,7 @@ public class HelpOrOptionsButton extends MenuButton implements MouseEventInterfa
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         if (!this.getGame().isMenu()) {
             return;
         }

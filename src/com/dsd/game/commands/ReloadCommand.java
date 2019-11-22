@@ -35,7 +35,7 @@ public class ReloadCommand extends Command implements TimerInterface {
     private int reloadDelay = 3000;
 
     //  This may need to change with time.
-    public ReloadCommand (Game _game, Player _obj) {
+    public ReloadCommand(Game _game, Player _obj) {
         this.game = _game;
         this.player = _obj;
         this.bind(_game.getKeyboard(), KeyEvent.VK_R);
@@ -44,12 +44,12 @@ public class ReloadCommand extends Command implements TimerInterface {
     }
 
     @Override
-    public void cancelTimer () {
+    public void cancelTimer() {
         this.reloadTimer.cancel();
     }
 
     @Override
-    public void pressed (float _dt) {
+    public void pressed(float _dt) {
         //  No point in trying to reload if they have a melee weapon.
         if (!this.player.getInventory().hasGun()) {
             return;
@@ -79,12 +79,12 @@ public class ReloadCommand extends Command implements TimerInterface {
 
         private final Gun weapon;
 
-        public ReloadTimer (Gun _weapon) {
+        public ReloadTimer(Gun _weapon) {
             this.weapon = _weapon;
         }
 
         @Override
-        public void run () {
+        public void run() {
             this.weapon.reload();
             this.weapon.setReloading(false);
         }

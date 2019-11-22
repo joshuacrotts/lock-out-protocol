@@ -23,11 +23,11 @@ public abstract class Utilities extends StdOps {
      * @param _frameCount
      * @return
      */
-    public static final BufferedImage[] loadFrames (String _directory, int _frameCount) {
+    public static final BufferedImage[] loadFrames(String _directory, int _frameCount) {
         File folder = new File(_directory);
         File[] listOfFiles = folder.listFiles();
         BufferedImage[] frames = new BufferedImage[_frameCount];
-        for (int i = 0 ; i < frames.length ; i++) {
+        for (int i = 0; i < frames.length; i++) {
             frames[i] = StdOps.loadImage(listOfFiles[i].getPath());
         }
         return frames;
@@ -41,14 +41,12 @@ public abstract class Utilities extends StdOps {
      * @param _max
      * @return
      */
-    public static final float clampFloat (float _num, float _min, float _max) {
+    public static final float clampFloat(float _num, float _min, float _max) {
         if (_min > _max) {
             throw new IllegalArgumentException("Your min clamp value cannot be greater than your max.");
-        }
-        else if (_num < _min) {
+        } else if (_num < _min) {
             return _min;
-        }
-        else if (_num > _max) {
+        } else if (_num > _max) {
             return _max;
         }
         return _num;
@@ -66,7 +64,7 @@ public abstract class Utilities extends StdOps {
      * @param max
      * @return
      */
-    public static final float normalize (float value, float min, float max) {
+    public static final float normalize(float value, float min, float max) {
         return 1 - ((value - min) / (max - min));
     }
 
@@ -77,7 +75,7 @@ public abstract class Utilities extends StdOps {
      * @param number
      * @return
      */
-    public static final String toRoman (int number) {
+    public static final String toRoman(int number) {
         int l = map.floorKey(number);
         if (number == l) {
             return map.get(number);
@@ -85,7 +83,7 @@ public abstract class Utilities extends StdOps {
         return map.get(l) + toRoman(number - l);
     }
 
-    public static float normalize (float n, float rMin, float rMax, float scaleMin, float scaleMax) {
+    public static float normalize(float n, float rMin, float rMax, float scaleMin, float scaleMax) {
         return (((n - rMin) / (rMax - rMin)) * (scaleMax - scaleMin)) + scaleMin;
     }
 

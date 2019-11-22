@@ -42,7 +42,7 @@ public class BossSpawnerController extends StandardGameObject implements TimerIn
     //  we shouldn't add another one.
     protected boolean hasBoss = false;
 
-    public BossSpawnerController (int _x, int _y, EnemyType _id, Game _game, StandardCollisionHandler _sch) {
+    public BossSpawnerController(int _x, int _y, EnemyType _id, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, StandardID.Spawner);
         this.game = _game;
         this.spawnerID = _id;
@@ -57,7 +57,7 @@ public class BossSpawnerController extends StandardGameObject implements TimerIn
      * Adds a boss to the game. This method only runs once per wave instead of a
      * continuous timer like spawners for regular enemies do.
      */
-    public void addBoss () {
+    public void addBoss() {
         int xPos = (int) this.getX();
         int yPos = (int) this.getY();
         Enemy enemy = null;
@@ -73,16 +73,16 @@ public class BossSpawnerController extends StandardGameObject implements TimerIn
     }
 
     @Override
-    public void cancelTimer () {
+    public void cancelTimer() {
         this.bossTimer.cancel();
     }
 
     @Override
-    public void tick () {
+    public void tick() {
     }
 
     @Override
-    public void render (Graphics2D _gd) {
+    public void render(Graphics2D _gd) {
     }
 
     /**
@@ -95,13 +95,13 @@ public class BossSpawnerController extends StandardGameObject implements TimerIn
         private final BossSpawnerController spawnerController;
         private final Game game;
 
-        public BossSpawnerDelayTimer (BossSpawnerController _spawnerController, Game _game) {
+        public BossSpawnerDelayTimer(BossSpawnerController _spawnerController, Game _game) {
             this.spawnerController = _spawnerController;
             this.game = _game;
         }
 
         @Override
-        public void run () {
+        public void run() {
             /**
              * If we're not paused AND the game isn't in its preamble state, AND
              * we don't already HAVE A boss AND we're on the correct wave, spawn
@@ -110,8 +110,7 @@ public class BossSpawnerController extends StandardGameObject implements TimerIn
             if (this.game.isPaused() || this.game.isPreamble()
                     || this.game.isShop() || this.spawnerController.hasBoss) {
                 return;
-            }
-            else if (this.game.getLevelController().getWaveNumber()
+            } else if (this.game.getLevelController().getWaveNumber()
                     % this.game.getLevelController().getBossSpawnInterval() != 0) {
                 return;
             }

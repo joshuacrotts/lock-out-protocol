@@ -22,7 +22,7 @@ public enum ExplosionType {
     private final int frames;
     private final int explosionFPS;
 
-    private ExplosionType (String _path, int _frames, int _fps) {
+    private ExplosionType(String _path, int _frames, int _fps) {
         this.explosionPath = _path;
         this.frames = _frames;
         this.explosionFPS = _fps;
@@ -30,7 +30,7 @@ public enum ExplosionType {
     }
 
 //=============================== GETTERS ===================================//
-    public BufferedImage[] getExplosionFrames () {
+    public BufferedImage[] getExplosionFrames() {
         return this.explosionImages;
     }
 }

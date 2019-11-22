@@ -29,7 +29,7 @@ public class IncreaseVolumeButton extends MenuButton implements MouseEventInterf
 
     public static final float MAX_VOLUME = 1f;
 
-    public IncreaseVolumeButton (Game _game, MenuScreen _menuScreen, SoundEffectVolumeControl _sfxVolume, int _xOffset, int _yOffset) {
+    public IncreaseVolumeButton(Game _game, MenuScreen _menuScreen, SoundEffectVolumeControl _sfxVolume, int _xOffset, int _yOffset) {
         super(_xOffset, _yOffset, "", _game, _menuScreen);
         this.BUTTON_X_OFFSET = _xOffset;
         this.BUTTON_Y_OFFSET = _yOffset;
@@ -41,7 +41,7 @@ public class IncreaseVolumeButton extends MenuButton implements MouseEventInterf
         super.setHeight(this.activeImage.getHeight());
     }
 
-    public IncreaseVolumeButton (Game _game, MenuScreen _menuScreen, MusicVolumeControl _musicVolume, int _xOffset, int _yOffset) {
+    public IncreaseVolumeButton(Game _game, MenuScreen _menuScreen, MusicVolumeControl _musicVolume, int _xOffset, int _yOffset) {
         super(0, 0, "", _game, _menuScreen);
         this.BUTTON_X_OFFSET = _xOffset;
         this.BUTTON_Y_OFFSET = _yOffset;
@@ -54,7 +54,7 @@ public class IncreaseVolumeButton extends MenuButton implements MouseEventInterf
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (!this.getGame().isMenu() || !this.getMenuScreen().isOnVolume()) {
             return;
         }
@@ -64,7 +64,7 @@ public class IncreaseVolumeButton extends MenuButton implements MouseEventInterf
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.getGame().isMenu() || !this.getMenuScreen().isOnVolume()) {
             return;
         }
@@ -72,20 +72,19 @@ public class IncreaseVolumeButton extends MenuButton implements MouseEventInterf
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         if (!this.getGame().isMenu() || !this.getMenuScreen().isOnVolume()) {
             return;
         }
         if (this.sfxVolume != null) {
             this.sfxVolume.incrementVolume();
-        }
-        else {
+        } else {
             this.musicVolume.incrementVolume();
         }
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         if (!this.getGame().isMenu() || !this.getMenuScreen().isOnVolume()) {
             return;
         }
@@ -93,7 +92,7 @@ public class IncreaseVolumeButton extends MenuButton implements MouseEventInterf
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         if (!this.getGame().isMenu() || !this.getMenuScreen().isOnVolume()) {
             return;
         }

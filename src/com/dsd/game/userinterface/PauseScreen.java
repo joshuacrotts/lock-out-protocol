@@ -22,7 +22,7 @@ public class PauseScreen extends Screen {
     private final PauseCommand pauseCommand;
     private final Color transparentBlack;
 
-    public PauseScreen (Game _game) {
+    public PauseScreen(Game _game) {
         super(_game);
         this.pauseCommand = new PauseCommand(_game);
         this.transparentBlack = new Color(0f, 0f, 0f, 0.5f);
@@ -30,7 +30,7 @@ public class PauseScreen extends Screen {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (this.getGame().isMenu()) {
             return;
         }
@@ -38,7 +38,7 @@ public class PauseScreen extends Screen {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (this.getGame().isMenu()) {
             return;
         }
@@ -51,7 +51,7 @@ public class PauseScreen extends Screen {
      *
      * @param _g2
      */
-    private void drawTransparentScreen (Graphics2D _g2) {
+    private void drawTransparentScreen(Graphics2D _g2) {
         Color oldColor = _g2.getColor();
         _g2.setColor(this.transparentBlack);
         _g2.fillRect((int) (this.getGame().getCamera().getX() - Screen.gameHalfWidth),
@@ -61,7 +61,7 @@ public class PauseScreen extends Screen {
         _g2.setColor(oldColor);
     }
 
-    private void createUIElements () {
+    private void createUIElements() {
         super.addInteractor(new PauseLabel(this.getGame()));
         super.addInteractor(new SaveButton(this.getGame(), null));
         super.addInteractor(new HelpButton(this.getGame(), null));

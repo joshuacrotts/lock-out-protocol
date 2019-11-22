@@ -23,8 +23,8 @@ public class TextFieldController {
      *
      * @param _field
      */
-    public static void deactivate (TextFieldModel _field) {
-        for (int i = 0 ; i < textFieldController.size() ; i++) {
+    public static void deactivate(TextFieldModel _field) {
+        for (int i = 0; i < textFieldController.size(); i++) {
             TextFieldModel otherModel = textFieldController.get(i);
             if (otherModel.isActive() && otherModel != _field) {
                 otherModel.setActive(false);
@@ -37,18 +37,17 @@ public class TextFieldController {
      *
      * @param _model
      */
-    public static void addField (TextFieldModel _model) {
+    public static void addField(TextFieldModel _model) {
         textFieldController.add(_model);
     }
 
     /**
      * Increments the pointer that determines which text field is "highlighted".
      */
-    public static void incrementSelectedTextField () {
+    public static void incrementSelectedTextField() {
         if (TextFieldController.selectedTextField + 1 >= TextFieldController.textFieldController.size()) {
             TextFieldController.selectedTextField = 0;
-        }
-        else {
+        } else {
             TextFieldController.selectedTextField++;
         }
         TextFieldModel selectedField = TextFieldController.textFieldController.get(selectedTextField);

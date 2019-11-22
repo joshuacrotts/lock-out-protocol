@@ -22,7 +22,7 @@ public class PasswordLabel extends StandardLabel {
     private static final int BUTTON_X_OFFSET = 200;
     private static final int BUTTON_Y_OFFSET = 40;
 
-    public PasswordLabel (PasswordTextFieldModel _passwordModel, MenuScreen _menuScreen) {
+    public PasswordLabel(PasswordTextFieldModel _passwordModel, MenuScreen _menuScreen) {
         super(_passwordModel.getX(), _passwordModel.getY(),
                 LanguageController.translate("PASSWORD:"),
                 "src/resources/fonts/chargen.ttf", 32f);
@@ -31,7 +31,7 @@ public class PasswordLabel extends StandardLabel {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (this.menuScreen.isOnAccountScreen()) {
             this.setX(passwordModel.getX() - BUTTON_X_OFFSET);
             this.setY(passwordModel.getY() + BUTTON_Y_OFFSET);
@@ -39,7 +39,7 @@ public class PasswordLabel extends StandardLabel {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (this.menuScreen.isOnAccountScreen()) {
             _g2.setColor(Color.WHITE);
             super.render(_g2);

@@ -13,9 +13,9 @@ package com.dsd.game.userinterface;
  */
 public interface MouseEventInterface {
 
-    public void onMouseClick ();
+    public void onMouseClick();
 
-    public void onMouseEnterHover ();
+    public void onMouseEnterHover();
 
-    public void onMouseExitHover ();
+    public void onMouseExitHover();
 }

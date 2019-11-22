@@ -10,7 +10,7 @@ package com.dsd.game.database;
  */
 public interface Database {
 
-    public boolean save ();
+    public boolean save();
 
-    public boolean load ();
+    public boolean load();
 }

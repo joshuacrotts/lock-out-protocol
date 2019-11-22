@@ -22,40 +22,38 @@ public class StandardLabel extends Interactor implements MouseEventInterface {
     private final int shakeFactor = 1;
     private final Font font;
 
-    public StandardLabel (int _x, int _y, String _text, Font _fontPath) {
+    public StandardLabel(int _x, int _y, String _text, Font _fontPath) {
         super(_x, _y);
         this.originX = _x;
         this.originY = _y;
         this.text = _text;
         if (LanguageController.lang.equals("en-en")) {
             this.font = _fontPath;
-        }
-        else {
+        } else {
             this.font = new Font(Font.SANS_SERIF, Font.PLAIN, 16);
         }
     }
 
-    public StandardLabel (int _x, int _y, String _text, String _fontPath, float _fontSize) {
+    public StandardLabel(int _x, int _y, String _text, String _fontPath, float _fontSize) {
         super(_x, _y);
         this.originX = _x;
         this.originY = _y;
         this.text = _text;
         if (LanguageController.lang.equals("en-en") || _text.equals("Lock Out Protocol")) {
             this.font = StdOps.initFont(_fontPath, _fontSize);
-        }
-        else {
+        } else {
             this.font = new Font(Font.SANS_SERIF, Font.PLAIN, (int) 16);
         }
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.setX(StdOps.rand(this.originX - shakeFactor, this.originX + this.shakeFactor));
         this.setY(StdOps.rand(this.originY - shakeFactor, this.originY + this.shakeFactor));
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         Font oldFont = _g2.getFont();
         _g2.setFont(this.font);
         _g2.drawString(this.text, (int) this.getX(), (int) this.getY());
@@ -63,33 +61,33 @@ public class StandardLabel extends Interactor implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         //throw new UnsupportedOperationException("Not supported yet.");
         //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         //throw new UnsupportedOperationException("Not supported yet.");
         //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         //throw new UnsupportedOperationException("Not supported yet.");
         //To change body of generated methods, choose Tools | Templates.
     }
 
 //=============================== GETTERS ====================================//
-    public Font getFont () {
+    public Font getFont() {
         return this.font;
     }
 
-    public String getText () {
+    public String getText() {
         return this.text;
     }
 
-    public void setText (String _text) {
+    public void setText(String _text) {
         this.text = _text;
     }
 }

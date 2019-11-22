@@ -13,24 +13,23 @@ import java.awt.Graphics2D;
  */
 public class PistolButtonView extends ShopButtonView {
 
-    public PistolButtonView (PistolButton _pistolButton) {
+    public PistolButtonView(PistolButton _pistolButton) {
         super(_pistolButton, StdOps.loadImage("src/resources/img/items/icons/pistol_icon.png"));
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         //  Only update the text if the user has the rifle in their inventory.
         if (this.parentButton.getGame().getPlayer().getInventory().hasWeapon(WeaponType.PISTOL) == null) {
             this.text.setText("Glock-17 $" + this.parentButton.getPrice());
-        }
-        else {
+        } else {
             this.text.setText("Glock-17 AMMO (16/$" + this.parentButton.getPricePerMagazine() + ")");
         }
         super.tick();
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         super.render(_g2);
     }
 }

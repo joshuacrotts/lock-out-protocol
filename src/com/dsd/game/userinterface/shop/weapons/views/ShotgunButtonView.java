@@ -11,24 +11,23 @@ import java.awt.Graphics2D;
  */
 public class ShotgunButtonView extends ShopButtonView {
 
-    public ShotgunButtonView (ShotgunButton _shotgunButton) {
+    public ShotgunButtonView(ShotgunButton _shotgunButton) {
         super(_shotgunButton, StdOps.loadImage("src/resources/img/items/icons/shotgun_icon.png"));
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         //  Only update the text if the user has the rifle in their inventory.
         if (this.parentButton.getGame().getPlayer().getInventory().hasWeapon(WeaponType.SHOTGUN) == null) {
             this.text.setText("SPAS-12 $" + this.parentButton.getPrice());
-        }
-        else {
+        } else {
             this.text.setText("SPAS-12 AMMO (12/$" + this.parentButton.getPricePerMagazine() + ")");
         }
         super.tick();
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         super.render(_g2);
     }
 }

@@ -33,7 +33,7 @@ public class MalePlayerButton extends StandardButton implements MouseEventInterf
     private static final int BUTTON_X_OFFSET = 85;
     private static final int BUTTON_Y_OFFSET = 550;
 
-    public MalePlayerButton (Game _game, MenuScreen _menuScreen) {
+    public MalePlayerButton(Game _game, MenuScreen _menuScreen) {
         super(Screen.gameWidth - BUTTON_WIDTH - BUTTON_X_OFFSET,
                 _game.getGameHeight() - MalePlayerButton.BUTTON_Y_OFFSET,
                 MalePlayerButton.BUTTON_WIDTH, MalePlayerButton.BUTTON_HEIGHT);
@@ -43,7 +43,7 @@ public class MalePlayerButton extends StandardButton implements MouseEventInterf
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (!this.menuScreen.isOnPlayerGender()) {
             return;
         }
@@ -53,7 +53,7 @@ public class MalePlayerButton extends StandardButton implements MouseEventInterf
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.menuScreen.isOnPlayerGender()) {
             return;
         }
@@ -61,7 +61,7 @@ public class MalePlayerButton extends StandardButton implements MouseEventInterf
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         if (!this.menuScreen.isOnPlayerGender()) {
             return;
         }
@@ -72,12 +72,12 @@ public class MalePlayerButton extends StandardButton implements MouseEventInterf
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         MalePlayerButton.playerView.setMouseOver(true);
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         MalePlayerButton.playerView.setMouseOver(false);
     }
 }

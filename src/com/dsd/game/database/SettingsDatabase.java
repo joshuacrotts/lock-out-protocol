@@ -23,19 +23,18 @@ public class SettingsDatabase implements Database {
     private BufferedReader reader;
     private BufferedWriter writer;
 
-    public SettingsDatabase (Game _game) {
+    public SettingsDatabase(Game _game) {
         this.game = _game;
     }
 
     @Override
-    public boolean save () {
+    public boolean save() {
         try {
             this.writer = new BufferedWriter(new FileWriter("settings.cfg"));
             this.writer.append("res=" + ResolutionEnum.getResolutionIndex()).append("\n");
             this.writer.append("lang=" + LanguageEnum.getLanguageIndex());
             this.writer.close();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(SettingsDatabase.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
@@ -43,7 +42,7 @@ public class SettingsDatabase implements Database {
     }
 
     @Override
-    public boolean load () {
+    public boolean load() {
         try {
             this.reader = new BufferedReader(new FileReader("settings.cfg"));
             //  Parse the resolution line.
@@ -55,8 +54,7 @@ public class SettingsDatabase implements Database {
             line = this.reader.readLine();
             LanguageEnum.setLanguageIndex(Integer.parseInt(line.substring(line.indexOf("=") + 1)));
             this.reader.close();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(SettingsDatabase.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }

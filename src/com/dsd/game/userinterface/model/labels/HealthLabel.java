@@ -44,7 +44,7 @@ public class HealthLabel extends StandardLabel {
     private final int ARC_WIDTH = 10;
     private final int ARC_HEIGHT = 10;
 
-    public HealthLabel (Game _game, Player _player) {
+    public HealthLabel(Game _game, Player _player) {
         super((int) (Screen.gameHalfWidth - Screen.gameHalfWidth),
                 (int) (Screen.gameHalfHeight + Screen.gameFourthHeight), LanguageController.translate("Health: "), "src/resources/fonts/chargen.ttf", 32f);
         this.darkGreen = new Color(0.0f, 0.5f, 0.0f);
@@ -55,11 +55,11 @@ public class HealthLabel extends StandardLabel {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         /**
          * Update positioning here because the timing is crucial to the
          * rendering; delegating it to tick() will cause flickering problems.
@@ -70,11 +70,11 @@ public class HealthLabel extends StandardLabel {
         this.drawHealthBar(_g2);
     }
 
-    private void drawHealthText (Graphics2D _g2) {
+    private void drawHealthText(Graphics2D _g2) {
         StandardDraw.text(this.getText(), this.getX() + TEXT_X_OFFSET, this.getY(), this.getFont(), this.getFont().getSize(), Color.WHITE);
     }
 
-    private void drawHealthBar (Graphics2D _g2) {
+    private void drawHealthBar(Graphics2D _g2) {
         //  Draw the green portion (health of actual player).
         this.drawGreenBar(_g2);
         //  Draw the black outline.
@@ -87,7 +87,7 @@ public class HealthLabel extends StandardLabel {
      *
      * @param _g2
      */
-    private void drawGreenBar (Graphics2D _g2) {
+    private void drawGreenBar(Graphics2D _g2) {
         _g2.setColor(this.makeColorTransparent(this.healthBarColor.combine()));
         _g2.fillRoundRect(this.getX() + HEALTH_X_OFFSET, this.getY() + HEALTH_BAR_Y_OFFSET - HEALTH_BAR_HEIGHT,
                 (int) this.player.getHealth(), this.HEALTH_BAR_HEIGHT,
@@ -99,13 +99,13 @@ public class HealthLabel extends StandardLabel {
      *
      * @param _g2
      */
-    private void drawBlackBarOutline (Graphics2D _g2) {
+    private void drawBlackBarOutline(Graphics2D _g2) {
         _g2.setColor(Color.BLACK);
         _g2.drawRoundRect(this.getX() + this.HEALTH_X_OFFSET, this.getY() + HEALTH_BAR_Y_OFFSET - this.HEALTH_BAR_HEIGHT,
                 MAX_HEALTH, this.HEALTH_BAR_HEIGHT, this.ARC_WIDTH, this.ARC_HEIGHT);
     }
 
-    private Color makeColorTransparent (Color _c) {
+    private Color makeColorTransparent(Color _c) {
         return new Color(_c.getRed(), _c.getGreen(), _c.getBlue(), this.TRANSPARENCY);
     }
 }

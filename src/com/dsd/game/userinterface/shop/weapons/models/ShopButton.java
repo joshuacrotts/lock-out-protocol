@@ -39,7 +39,7 @@ public abstract class ShopButton extends Interactor {
     //  Price per magazine (if applicable)
     private final int PRICE_PER_MAGAZINE;
 
-    public ShopButton (Game _game, ShopScreen _shopScreen, int _x, int _y, int _price) {
+    public ShopButton(Game _game, ShopScreen _shopScreen, int _x, int _y, int _price) {
         super(_x, _y);
         this.game = _game;
         this.playerInventory = this.game.getPlayer().getInventory();
@@ -54,7 +54,7 @@ public abstract class ShopButton extends Interactor {
         this.setScaled(true);
     }
 
-    public ShopButton (Game _game, ShopScreen _shopScreen, int _x, int _y, int _price, int _pricePerMagazine) {
+    public ShopButton(Game _game, ShopScreen _shopScreen, int _x, int _y, int _price, int _pricePerMagazine) {
         super(_x, _y);
         this.game = _game;
         this.playerInventory = this.game.getPlayer().getInventory();
@@ -70,7 +70,7 @@ public abstract class ShopButton extends Interactor {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (!this.getGame().isShop()) {
             return;
         }
@@ -79,7 +79,7 @@ public abstract class ShopButton extends Interactor {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.getGame().isShop()) {
             return;
         }
@@ -87,10 +87,10 @@ public abstract class ShopButton extends Interactor {
     }
 
     @Override
-    public abstract void onMouseClick ();
+    public abstract void onMouseClick();
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         if (!this.game.isShop()) {
             return;
         }
@@ -98,7 +98,7 @@ public abstract class ShopButton extends Interactor {
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         if (!this.game.isShop()) {
             return;
         }
@@ -109,26 +109,26 @@ public abstract class ShopButton extends Interactor {
      * Instantiates the two button templates for the shop item text and icon, as
      * well as when the user hovers over it.
      */
-    private void initializeButtonImages () {
+    private void initializeButtonImages() {
         this.buttonImg = StdOps.loadImage("src/resources/img/ui/shop_icons/shop_button.png");
         this.onHoverButtonImg = StdOps.loadImage("src/resources/img/ui/shop_icons/shop_buttonh.png");
         this.activeImage = this.buttonImg;
     }
 
 //=============================== GETTERS ====================================//
-    public Game getGame () {
+    public Game getGame() {
         return this.game;
     }
 
-    public int getPrice () {
+    public int getPrice() {
         return this.PRICE;
     }
 
-    public int getPricePerMagazine () {
+    public int getPricePerMagazine() {
         return this.PRICE_PER_MAGAZINE;
     }
 
-    public Inventory getInventory () {
+    public Inventory getInventory() {
         return this.playerInventory;
     }
 }

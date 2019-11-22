@@ -20,13 +20,13 @@ public class DebugCommand extends Command {
     //  Miscellaneous reference variables.
     public Game game;
 
-    public DebugCommand (Game _game) {
+    public DebugCommand(Game _game) {
         this.game = _game;
         this.bind(game.getKeyboard(), KeyEvent.VK_K);
     }
 
     @Override
-    public void pressed (float _dt) {
+    public void pressed(float _dt) {
         DebugController.DEBUG_MODE = !DebugController.DEBUG_MODE;
     }
 }

@@ -20,21 +20,19 @@ public class PauseCommand extends Command {
     //  Miscellaneous reference variables.
     private final Game game;
 
-    public PauseCommand (Game _game) {
+    public PauseCommand(Game _game) {
         this.game = _game;
         this.bind(game.getKeyboard(), KeyEvent.VK_ESCAPE);
     }
 
     @Override
-    public void pressed (float _dt) {
+    public void pressed(float _dt) {
         //  If we're on the preamble screen OR the menu screen, we need to leave.
         if (this.game.isPreamble() || this.game.isMenu()) {
             return;
-        }
-        else if (!this.game.isPaused()) {
+        } else if (!this.game.isPaused()) {
             this.game.setGameState(GameState.PAUSED);
-        }
-        else {
+        } else {
             this.game.setGameState(GameState.RUNNING);
         }
     }

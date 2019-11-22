@@ -25,24 +25,23 @@ public class LightningFlash implements Renderable, Updatable {
     private float flashFadeFloat = 1.0f;
     private static final float FADE_THRESHOLD = 0.01f;
 
-    public LightningFlash (Game _game, ArrayList<LightningFlash> _flashList) {
+    public LightningFlash(Game _game, ArrayList<LightningFlash> _flashList) {
         this.game = _game;
         this.flashList = _flashList;
         this.flashDuration = 0.005f;
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (this.flashFadeFloat <= FADE_THRESHOLD) {
             this.flashList.remove(this);
-        }
-        else {
+        } else {
             this.flashFadeFloat -= this.flashDuration;
         }
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         Color oldColor = _g2.getColor();
         _g2.setColor(new Color(1.0f, 1.0f, 1.0f, this.flashFadeFloat));
         _g2.fillRect((int) (this.game.getCamera().getX() - Screen.gameHalfWidth),

@@ -27,7 +27,7 @@ public class PlayButton extends MenuButton implements MouseEventInterface {
     private static final int TEXT_X_OFFSET = 85;
     private static final int TEXT_Y_OFFSET = 45;
 
-    public PlayButton (Game _game, MenuScreen _menuScreen) {
+    public PlayButton(Game _game, MenuScreen _menuScreen) {
         super(Screen.gameHalfWidth - BUTTON_X_OFFSET,
                 Screen.gameHalfHeight - BUTTON_Y_OFFSET,
                 LanguageController.translate("NEW GAME"), _game, _menuScreen);
@@ -35,13 +35,13 @@ public class PlayButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.setX(Screen.gameHalfWidth - BUTTON_X_OFFSET);
         this.setY(Screen.gameHalfHeight - BUTTON_Y_OFFSET);
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.getMenuScreen().isOnMainMenu()) {
             return;
         }
@@ -52,7 +52,7 @@ public class PlayButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         if (!this.getGame().isMenu()
                 || !this.getMenuScreen().isOnMainMenu()) {
             return;
@@ -63,7 +63,7 @@ public class PlayButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         if (!this.getGame().isMenu() || !this.getMenuScreen().isOnMainMenu()) {
             return;
         }
@@ -71,7 +71,7 @@ public class PlayButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         if (!this.getGame().isMenu()) {
             return;
         }

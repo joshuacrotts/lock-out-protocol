@@ -31,7 +31,7 @@ public class BulletCasing extends StandardParticle implements Renderable, Updata
     private static final double CASING_VEL_Y_MAX = 0.6;
     private static final double VEL_DESCENT = 0.96;
 
-    public BulletCasing (Game _game, Player _player, Gun _parentGun) {
+    public BulletCasing(Game _game, Player _player, Gun _parentGun) {
         super(_player.getX(), _player.getY(), 1f, _player.getCasingHandler());
         this.game = _game;
         this.player = _player;
@@ -47,7 +47,7 @@ public class BulletCasing extends StandardParticle implements Renderable, Updata
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.setX(this.getX() - this.getVelX());
         this.setY(this.getY() - this.getVelY());
         this.setVelX(this.getVelX() * VEL_DESCENT);
@@ -55,7 +55,7 @@ public class BulletCasing extends StandardParticle implements Renderable, Updata
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         _g2.setColor(this.getColor());
         _g2.drawImage(this.casingImage, (int) this.getX(), (int) this.getY(), null);
     }

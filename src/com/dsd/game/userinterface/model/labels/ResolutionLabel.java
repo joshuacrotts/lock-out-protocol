@@ -22,7 +22,7 @@ public class ResolutionLabel extends StandardLabel {
     private final Game game;
     private final MenuScreen menuScreen;
 
-    public ResolutionLabel (Game _game, MenuScreen _menuScreen) {
+    public ResolutionLabel(Game _game, MenuScreen _menuScreen) {
         super(Screen.gameHalfWidth, Screen.gameHalfHeight,
                 "", "src/resources/fonts/chargen.ttf", 32f);
         this.game = _game;
@@ -31,14 +31,14 @@ public class ResolutionLabel extends StandardLabel {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.setX(Screen.gameHalfWidth);
         this.setY(Screen.gameHalfHeight);
         this.setText(ResolutionEnum.getResolution());
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         _g2.setColor(Color.WHITE);
         super.render(_g2);
     }

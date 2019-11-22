@@ -15,28 +15,29 @@ import java.awt.Graphics2D;
  *
  * @author Joshua, Ronald, Rinty
  *
- * @updated 11/14/19
+ * @updated 11/21/19
  */
 public class ExitButton extends MenuButton implements MouseEventInterface {
 
+    //  Button positioning offsets.
     private static final int BUTTON_X_OFFSET = 130;
     private static final int BUTTON_Y_OFFSET = 180;
     private static final int TEXT_X_OFFSET = 84;
     private static final int TEXT_Y_OFFSET = 45;
 
-    public ExitButton (Game _game, MenuScreen _menuScreen) {
+    public ExitButton(Game _game, MenuScreen _menuScreen) {
         super(_game.getGameWidth() - ExitButton.BUTTON_X_OFFSET - ExitButton.BUTTON_WIDTH / 2,
                 _game.getGameHeight(), LanguageController.translate("QUIT GAME"), _game, _menuScreen);
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.setX(Screen.gameHalfWidth - ExitButton.BUTTON_X_OFFSET);
         this.setY(Screen.gameHalfHeight + ExitButton.BUTTON_Y_OFFSET);
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.getMenuScreen().isOnMainMenu()) {
             return;
         }
@@ -48,16 +49,18 @@ public class ExitButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         if (!this.getGame().isMenu() || !this.getMenuScreen().isOnMainMenu()) {
             return;
         }
+
+        super.onMouseClick();
         this.getGame().stopGame();
         System.exit(0);
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         if (!this.getGame().isMenu()
                 || !this.getMenuScreen().isOnMainMenu()) {
             return;
@@ -66,7 +69,7 @@ public class ExitButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         if (!this.getGame().isMenu()) {
             return;
         }

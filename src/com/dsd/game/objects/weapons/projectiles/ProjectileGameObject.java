@@ -34,7 +34,7 @@ public class ProjectileGameObject extends StandardGameObject {
     //  Animation frame per second setting
     private static final int BULLET_FPS = 20;
 
-    public ProjectileGameObject (int _x, int _y, double _angle, int _damage,
+    public ProjectileGameObject(int _x, int _y, double _angle, int _damage,
             int _velFactor, BufferedImage[] _frames, int _projectileFPS, Game _game,
             StandardCollisionHandler _parentContainer, StandardGameObject _parent, StandardID _id) {
         super(_x, _y, _id);
@@ -55,7 +55,7 @@ public class ProjectileGameObject extends StandardGameObject {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (this.camera.SGOInBounds(this)) {
             this.setX(this.getX() + this.getVelX());
             this.setY(this.getY() + this.getVelY());
@@ -63,14 +63,13 @@ public class ProjectileGameObject extends StandardGameObject {
             if (this.isAlive()) {
                 this.getAnimationController().tick();
             }
-        }
-        else {
+        } else {
             this.sch.removeEntity(this);
         }
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         /**
          * If they're alive, draw the frame that the bullet animation is on.
          * Otherwise, render the explosion handler
@@ -91,7 +90,7 @@ public class ProjectileGameObject extends StandardGameObject {
      * @param _mx
      * @param _my
      */
-    private void setVelocity (double _x, double _y, int _mx, int _my) {
+    private void setVelocity(double _x, double _y, int _mx, int _my) {
         double deltaX = (_mx - _x);
         double deltaY = (_my - _y);
         // Use the pythagorean theorem to solve for the hypotenuse distance
@@ -104,7 +103,7 @@ public class ProjectileGameObject extends StandardGameObject {
     }
 
 //========================== GETTERS =======================================//
-    public int getDamage () {
+    public int getDamage() {
         return this.damage;
     }
 }

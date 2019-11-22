@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
  *
  * @author Joshua, Ronald, Rinty
  *
- * @updated 11/19/19
+ * @updated 11/21/19
  */
 public abstract class MenuButton extends StandardButton implements MouseEventInterface {
 
@@ -40,14 +40,13 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
     protected BufferedImage buttonImg;
     protected BufferedImage activeImage;
 
-    public MenuButton (int _x, int _y, String _text, Game _game, MenuScreen _menuScreen) {
+    public MenuButton(int _x, int _y, String _text, Game _game, MenuScreen _menuScreen) {
         super(_x, _y, BUTTON_WIDTH, BUTTON_HEIGHT);
         this.game = _game;
         this.menuScreen = _menuScreen;
         if (LanguageController.lang.equals("en-en")) {
             this.font = StdOps.initFont("src/resources/fonts/chargen.ttf", 24f);
-        }
-        else {
+        } else {
             this.font = new Font("Arial Unicode MS", Font.BOLD, 16);
         }
         this.setText(_text);
@@ -55,14 +54,14 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         _g2.drawImage(activeImage, (int) (this.getX()),
                 (int) (this.getY()),
                 this.getWidth(), this.getHeight(), game);
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         StandardAudioController.play("src/resources/audio/sfx/menuselect.wav", StandardAudioType.SFX);
     }
 
@@ -72,7 +71,7 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
      *
      * @param _status
      */
-    public void displayAccountStatus (AccountStatus _status) {
+    public void displayAccountStatus(AccountStatus _status) {
         if (_status == null) {
             return;
         }
@@ -98,18 +97,18 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
     /**
      * Initializes the static images for button hovers/presses.
      */
-    private void initializeButtonImages () {
+    private void initializeButtonImages() {
         this.buttonImg = StdOps.loadImage("src/resources/img/ui/buttonStock1.png");
         this.onHoverButtonImg = StdOps.loadImage("src/resources/img/ui/buttonStock1h.png");
         this.activeImage = this.buttonImg;
     }
 
 //================================== GETTERS ===================================//
-    public Game getGame () {
+    public Game getGame() {
         return this.game;
     }
 
-    public MenuScreen getMenuScreen () {
+    public MenuScreen getMenuScreen() {
         return this.menuScreen;
     }
 }

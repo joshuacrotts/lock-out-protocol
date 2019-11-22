@@ -29,7 +29,7 @@ public class MinigunButton extends ShopButton {
     //  Price per magazine.
     private static final int MINIGUN_AMMO_PRICE = 200;
 
-    public MinigunButton (Game _game, ShopScreen _shopScreen) {
+    public MinigunButton(Game _game, ShopScreen _shopScreen) {
         super(_game, _shopScreen, MinigunButton.X_OFFSET,
                 MinigunButton.Y_OFFSET,
                 MINIGUN_PRICE,
@@ -38,19 +38,19 @@ public class MinigunButton extends ShopButton {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         super.tick();
         this.minigunButtonView.tick();
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         super.render(_g2);
         this.minigunButtonView.render(_g2);
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         //  If we have enough money...
         if (!this.getGame().isShop()) {
             return;
@@ -61,8 +61,7 @@ public class MinigunButton extends ShopButton {
             this.getGame().getPlayer().setMoney(this.getGame().getPlayer().getMoney() - this.getPrice());
             this.getInventory().addWeapon(new Shotgun(this.getGame(),
                     this.getGame().getPlayer(), this.getGame().getPlayer().getHandler()));
-        }
-        //  Otherwise, add to the ammunition.
+        } //  Otherwise, add to the ammunition.
         else if (this.getGame().getPlayer().getMoney() >= this.getPricePerMagazine()) {
             this.getGame().getPlayer().setMoney(this.getGame().getPlayer().getMoney() - this.getPricePerMagazine());
             _weapon.setTotalAmmo(_weapon.getTotalAmmo() + _weapon.getMagazineCapacity());
@@ -70,12 +69,12 @@ public class MinigunButton extends ShopButton {
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         super.onMouseEnterHover();
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         super.onMouseExitHover();
     }
 }

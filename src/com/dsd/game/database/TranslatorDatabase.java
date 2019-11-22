@@ -28,7 +28,7 @@ public class TranslatorDatabase {
     private static RemoteDatabase remoteDatabase;
     private static SettingsDatabase settingsDatabase;
 
-    public TranslatorDatabase (Game _game) {
+    public TranslatorDatabase(Game _game) {
         TranslatorDatabase.remoteDatabase = new PersistentDatabase(_game);
         TranslatorDatabase.settingsDatabase = new SettingsDatabase(_game);
     }
@@ -39,7 +39,7 @@ public class TranslatorDatabase {
      *
      * @return true if the save to the database was successful, false otherwise.
      */
-    public boolean saveToDatabase () {
+    public boolean saveToDatabase() {
         return TranslatorDatabase.remoteDatabase.save();
     }
 
@@ -50,7 +50,7 @@ public class TranslatorDatabase {
      * @return true if the load from the database was successful, false
      * otherwise.
      */
-    public boolean loadFromDatabase () {
+    public boolean loadFromDatabase() {
         return TranslatorDatabase.remoteDatabase.load();
     }
 
@@ -60,7 +60,7 @@ public class TranslatorDatabase {
      *
      * @return true if successful save, false otherwise.
      */
-    public boolean saveToSettings () {
+    public boolean saveToSettings() {
         return settingsDatabase.save();
     }
 
@@ -70,7 +70,7 @@ public class TranslatorDatabase {
      *
      * @return true if successful load, false otherwise.
      */
-    public boolean loadFromSettings () {
+    public boolean loadFromSettings() {
         return settingsDatabase.load();
     }
 
@@ -84,7 +84,7 @@ public class TranslatorDatabase {
      * @param _password
      * @return
      */
-    public static AccountStatus authenticateUser (String _email, String _password) {
+    public static AccountStatus authenticateUser(String _email, String _password) {
         if (remoteDatabase.connect("users")) {
             return remoteDatabase.userAuthenticated(_email, _password);
         }
@@ -99,7 +99,7 @@ public class TranslatorDatabase {
      * @param _password
      * @return
      */
-    public static AccountStatus addUser (String _email, String _password) {
+    public static AccountStatus addUser(String _email, String _password) {
         if (remoteDatabase.connect("users")) {
             return remoteDatabase.addUser(_email, _password);
         }

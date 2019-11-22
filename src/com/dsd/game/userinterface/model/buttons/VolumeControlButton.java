@@ -27,20 +27,20 @@ public class VolumeControlButton extends MenuButton implements MouseEventInterfa
     private static final int TEXT_X_OFFSET = 50;
     private static final int TEXT_Y_OFFSET = 45;
 
-    public VolumeControlButton (Game _game, MenuScreen _menuScreen) {
+    public VolumeControlButton(Game _game, MenuScreen _menuScreen) {
         super(VolumeControlButton.BUTTON_X_OFFSET, _game.getGameHeight() - VolumeControlButton.BUTTON_Y_OFFSET,
                 LanguageController.translate("CHANGE VOLUME"),
                 _game, _menuScreen);
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.setX(Screen.gameHalfWidth - VolumeControlButton.BUTTON_X_OFFSET);
         this.setY(Screen.gameHeight - VolumeControlButton.BUTTON_Y_OFFSET);
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.getMenuScreen().isOnOptions() || !this.getGame().isMenu()) {
             return;
         }
@@ -51,7 +51,7 @@ public class VolumeControlButton extends MenuButton implements MouseEventInterfa
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         if (!this.getMenuScreen().isOnOptions() || !this.getGame().isMenu()) {
             return;
         }
@@ -61,7 +61,7 @@ public class VolumeControlButton extends MenuButton implements MouseEventInterfa
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         if (!this.getMenuScreen().isOnOptions() || !this.getGame().isMenu()) {
             return;
         }
@@ -69,7 +69,7 @@ public class VolumeControlButton extends MenuButton implements MouseEventInterfa
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         if (!this.getMenuScreen().isOnOptions() || !this.getGame().isMenu()) {
             return;
         }

@@ -32,7 +32,7 @@ public class TextFieldModel extends Interactor implements MouseEventInterface {
     private final LetterInputListener inputListener;
     private final StringBuilder string;
 
-    public TextFieldModel (int _x, int _y, Game _game, MenuScreen _menuScreen) {
+    public TextFieldModel(int _x, int _y, Game _game, MenuScreen _menuScreen) {
         super(_x, _y);
         this.game = _game;
         this.menuScreen = _menuScreen;
@@ -48,30 +48,30 @@ public class TextFieldModel extends Interactor implements MouseEventInterface {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.view.tick();
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         this.view.render(_g2);
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         this.fieldActive = !this.fieldActive;
         TextFieldController.deactivate(this);
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
     }
 
-    public void appendToString (char _c) {
+    public void appendToString(char _c) {
         this.string.append(_c);
     }
 
@@ -79,29 +79,29 @@ public class TextFieldModel extends Interactor implements MouseEventInterface {
      * If the last character inputted by the user was a backspace, we will
      * truncate the last char on the StringBuilder.
      */
-    public void removeLastChar () {
+    public void removeLastChar() {
         this.string.deleteCharAt(this.string.length() - 1);
     }
 
-    public boolean isActive () {
+    public boolean isActive() {
         return this.fieldActive;
     }
 
-    public boolean isEmpty () {
+    public boolean isEmpty() {
         return this.string.length() == 0;
     }
 
-    public void clearString () {
+    public void clearString() {
         this.string.setLength(0);
     }
 
-    public void toggleStringVisible () {
+    public void toggleStringVisible() {
         this.visible = !this.visible;
     }
 
-    public String getMaskedString () {
+    public String getMaskedString() {
         StringBuilder hiddenStr = new StringBuilder();
-        for (int i = 0 ; i < this.string.length() ; i++) {
+        for (int i = 0; i < this.string.length(); i++) {
             if (this.string.charAt(i) != '\0') {
                 hiddenStr.append("*");
             }
@@ -110,23 +110,23 @@ public class TextFieldModel extends Interactor implements MouseEventInterface {
     }
 
 //================================= GETTERS ===================================//
-    public Game getGame () {
+    public Game getGame() {
         return this.game;
     }
 
-    public MenuScreen getMenuScreen () {
+    public MenuScreen getMenuScreen() {
         return this.menuScreen;
     }
 
-    public String getString () {
+    public String getString() {
         return this.string.toString();
     }
 
-    public boolean isHidden () {
+    public boolean isHidden() {
         return !this.visible;
     }
 
-    public void setActive (boolean _active) {
+    public void setActive(boolean _active) {
         this.fieldActive = _active;
     }
 }

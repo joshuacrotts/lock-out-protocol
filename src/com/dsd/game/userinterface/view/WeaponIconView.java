@@ -29,18 +29,18 @@ public class WeaponIconView extends Interactor {
     private final int ICON_X_OFFSET = 310;
     private final int ICON_Y_OFFSET = 130;
 
-    public WeaponIconView (Game _game, Inventory _inventory) {
+    public WeaponIconView(Game _game, Inventory _inventory) {
         this.game = _game;
         this.inventory = _inventory;
         this.weaponBorder = StdOps.loadImage("src/resources/img/items/icons/item_holder.png");
     }
 
     @Override
-    public void tick () {
+    public void tick() {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         this.setX((int) (this.game.getCamera().getX() + Screen.gameHalfWidth - this.ICON_X_OFFSET));
         this.setY((int) ((this.game.getCamera().getY() + Screen.gameHalfHeight) - this.ICON_Y_OFFSET));
         this.drawWeaponBorder(_g2);
@@ -52,7 +52,7 @@ public class WeaponIconView extends Interactor {
      *
      * @param _g2
      */
-    private void drawWeaponBorder (Graphics2D _g2) {
+    private void drawWeaponBorder(Graphics2D _g2) {
         _g2.drawImage(this.weaponBorder, this.getX(), this.getY(), null);
     }
 
@@ -61,19 +61,19 @@ public class WeaponIconView extends Interactor {
      *
      * @param _g2
      */
-    private void drawIcon (Graphics2D _g2) {
+    private void drawIcon(Graphics2D _g2) {
         _g2.drawImage(this.inventory.getCurrentWeapon().getIcon(), this.getX(), this.getY(), null);
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
     }
 }

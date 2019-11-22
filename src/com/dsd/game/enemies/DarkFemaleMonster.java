@@ -58,7 +58,7 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
     private static final int RED_BOUND = 120;
     private static final int BLUE_BOUND = 161;
 
-    public DarkFemaleMonster (int _x, int _y, Game _game, StandardCollisionHandler _sch) {
+    public DarkFemaleMonster(int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, DarkFemaleMonster.APPROACH_VEL, DarkFemaleMonster.originalHealth,
                 StandardID.Monster3, _game, _sch);
         this.setTarget(_game.getPlayer());
@@ -81,7 +81,7 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
      * Updates the animation, health, position and status of the monster.
      */
     @Override
-    public void tick () {
+    public void tick() {
         super.tick();
     }
 
@@ -92,7 +92,7 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
      * @param _g2
      */
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         super.render(_g2);
     }
 
@@ -102,11 +102,11 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
      * @TODO: Re-factor the magic numbers
      */
     @Override
-    public void uponDeath () {
+    public void uponDeath() {
         this.setAnimation(this.getDeathAnimation());
         this.explosionHandler = new StandardParticleHandler(50);
         this.explosionHandler.setCamera(this.getCamera());
-        for (int i = 0 ; i < this.explosionHandler.getMaxParticles() ; i++) {
+        for (int i = 0; i < this.explosionHandler.getMaxParticles(); i++) {
             this.explosionHandler.addEntity(new StandardBoxParticle(this.getX(), this.getY(),
                     StdOps.rand(1.0, 5.0),
                     StdOps.randBounds(-10.0, -3.0, 3.0, 10.0),
@@ -125,7 +125,7 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
      * @param _sfx
      */
     @Override
-    public void generateHurtSound (int _sfx) {
+    public void generateHurtSound(int _sfx) {
         StandardAudioController.play("src/resources/audio/sfx/zombies/zombie-" + _sfx + ".wav", StandardAudioType.SFX);
     }
 
@@ -135,9 +135,9 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
      *
      * @return new Color object.
      */
-    private Color generateRandomBloodColor () {
+    private Color generateRandomBloodColor() {
         return new Color(StdOps.rand(DarkFemaleMonster.RED_BOUND, DarkFemaleMonster.BLUE_BOUND), 0,
-                         StdOps.rand(DarkFemaleMonster.BLUE_BOUND, 0xFF));
+                StdOps.rand(DarkFemaleMonster.BLUE_BOUND, 0xFF));
     }
 
     /**
@@ -145,7 +145,7 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
      *
      * @param sfx either 1 or 2
      */
-    private void generateDeathSound (int _sfx) {
+    private void generateDeathSound(int _sfx) {
         StandardAudioController.play("src/resources/audio/sfx/splat" + _sfx + ".wav", StandardAudioType.SFX);
     }
 
@@ -155,8 +155,8 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
      *
      * @param _coinAmt
      */
-    private void generateCoins (int _coinAmt) {
-        for (int i = 0 ; i < _coinAmt ; i++) {
+    private void generateCoins(int _coinAmt) {
+        for (int i = 0; i < _coinAmt; i++) {
             this.getHandler().addEntity(new Coin(this.getGame(), (int) this.getX(), (int) this.getY(), 0.7, 0.9, 1.0, this.getHandler()));
         }
     }
@@ -164,7 +164,7 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
     /**
      * Generates a random powerup based on RNG (will definitely change).
      */
-    private void generatePowerup () {
+    private void generatePowerup() {
         int luck = StdOps.rand(1, 10);
         if (luck == 1) {
             this.getHandler().addEntity(new HealthPowerup((int) (this.getX() + this.getWidth() / 2),

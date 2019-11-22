@@ -41,7 +41,7 @@ public class PlayerView implements Renderable, Updatable {
     private final int imageHeight;
     private boolean mouseOver;
 
-    public PlayerView (Game _game, MenuScreen _menuScreen, StandardButton _parentButton, String _sex) {
+    public PlayerView(Game _game, MenuScreen _menuScreen, StandardButton _parentButton, String _sex) {
         this.game = _game;
         this.menuScreen = _menuScreen;
         this.parentButton = _parentButton;
@@ -53,7 +53,7 @@ public class PlayerView implements Renderable, Updatable {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (!this.menuScreen.isOnPlayerGender()) {
             return;
         }
@@ -61,21 +61,20 @@ public class PlayerView implements Renderable, Updatable {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.menuScreen.isOnPlayerGender()) {
             return;
         }
         if (this.mouseOver) {
             _g2.setColor(this.fadeController.combine());
-        }
-        else {
+        } else {
             _g2.setColor(Color.BLACK);
         }
         _g2.drawImage(this.icon, this.parentButton.getX(), this.parentButton.getY(), this.imageWidth, this.imageHeight, null);
         this.drawBorder(_g2);
     }
 
-    private void drawBorder (Graphics2D _g2) {
+    private void drawBorder(Graphics2D _g2) {
         Stroke oldStroke = _g2.getStroke();
         _g2.setStroke(new BasicStroke(this.STROKE_WIDTH));
         _g2.draw(this.iconOutline);
@@ -86,7 +85,7 @@ public class PlayerView implements Renderable, Updatable {
      * The outline color around the playerview's icon is determined by which sex
      * the player is currently hovering over.
      */
-    private void setFadeController () {
+    private void setFadeController() {
         switch (this.sex) {
             case "female":
                 this.fadeController = new StandardFadeController(Color.red, Color.orange, 0.05f);
@@ -99,7 +98,7 @@ public class PlayerView implements Renderable, Updatable {
     }
 
 //=============================== SETTERS ==================================//
-    public void setMouseOver (boolean _mouseOn) {
+    public void setMouseOver(boolean _mouseOn) {
         this.mouseOver = _mouseOn;
     }
 }

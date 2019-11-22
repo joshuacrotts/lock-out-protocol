@@ -20,7 +20,7 @@ public class LanguageLabel extends StandardLabel {
     private final Game game;
     private final MenuScreen menuScreen;
 
-    public LanguageLabel (Game _game, MenuScreen _menuScreen) {
+    public LanguageLabel(Game _game, MenuScreen _menuScreen) {
         super(Screen.gameHalfWidth, Screen.gameHalfHeight,
                 "", new Font(Font.SANS_SERIF, Font.PLAIN, 32));
         this.game = _game;
@@ -29,14 +29,14 @@ public class LanguageLabel extends StandardLabel {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.setX(Screen.gameHalfWidth);
         this.setY(Screen.gameHalfHeight);
         this.setText(LanguageEnum.getLanguage());
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         _g2.setColor(Color.WHITE);
         super.render(_g2);
     }

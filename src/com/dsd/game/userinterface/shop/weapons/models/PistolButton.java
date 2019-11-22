@@ -29,26 +29,26 @@ public class PistolButton extends ShopButton {
     //  Price per magazine.
     private static final int PISTOL_AMMO_PRICE = 25;
 
-    public PistolButton (Game _game, ShopScreen _shopScreen) {
+    public PistolButton(Game _game, ShopScreen _shopScreen) {
         super(_game, _shopScreen, PistolButton.X_OFFSET,
                 PistolButton.Y_OFFSET, PISTOL_PRICE, PISTOL_AMMO_PRICE);
         this.pistolButtonView = new PistolButtonView(this);
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         super.tick();
         this.pistolButtonView.tick();
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         super.render(_g2);
         this.pistolButtonView.render(_g2);
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         if (!this.getGame().isShop()) {
             return;
         }
@@ -58,8 +58,7 @@ public class PistolButton extends ShopButton {
             this.getGame().getPlayer().setMoney(this.getGame().getPlayer().getMoney() - this.getPrice());
             this.getInventory().addWeapon(new Pistol(this.getGame(),
                     this.getGame().getPlayer(), this.getGame().getPlayer().getHandler()));
-        }
-        //  Otherwise, add to the ammunition.
+        } //  Otherwise, add to the ammunition.
         else if (this.getGame().getPlayer().getMoney() >= this.getPricePerMagazine()) {
             this.getGame().getPlayer().setMoney(this.getGame().getPlayer().getMoney() - this.getPricePerMagazine());
             _weapon.setTotalAmmo(_weapon.getTotalAmmo() + _weapon.getMagazineCapacity());
@@ -67,12 +66,12 @@ public class PistolButton extends ShopButton {
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         super.onMouseEnterHover();
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         super.onMouseExitHover();
     }
 }

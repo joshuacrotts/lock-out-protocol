@@ -31,20 +31,20 @@ public class MediumButton extends MenuButton implements MouseEventInterface {
     private static final int TEXT_X_OFFSET = 50;
     private static final int TEXT_Y_OFFSET = 45;
 
-    public MediumButton (Game _game, MenuScreen _menuScreen) {
+    public MediumButton(Game _game, MenuScreen _menuScreen) {
         super(Screen.gameHalfWidth - BUTTON_X_OFFSET,
                 Screen.gameHalfHeight + BUTTON_Y_OFFSET,
                 LanguageController.translate(DifficultyType.MEDIUM.getDifficultyLabel()), _game, _menuScreen);
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.setX(Screen.gameHalfWidth - BUTTON_X_OFFSET);
         this.setY(Screen.gameHalfHeight + BUTTON_Y_OFFSET);
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.getMenuScreen().isOnDifficulty()) {
             return;
         }
@@ -55,15 +55,14 @@ public class MediumButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         if (!this.getGame().isMenu() || !this.getMenuScreen().isOnDifficulty()) {
             return;
         }
         super.onMouseClick();
         if (!DebugController.DEBUG_MODE) {
             this.getGame().setPreambleState();
-        }
-        else {
+        } else {
             this.getGame().setGameState(GameState.RUNNING);
         }
         DifficultyController.difficultyType = DifficultyType.MEDIUM;
@@ -72,7 +71,7 @@ public class MediumButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         if (!this.getGame().isMenu() || !this.getMenuScreen().isOnDifficulty()) {
             return;
         }
@@ -80,7 +79,7 @@ public class MediumButton extends MenuButton implements MouseEventInterface {
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         if (!this.getGame().isMenu()) {
             return;
         }

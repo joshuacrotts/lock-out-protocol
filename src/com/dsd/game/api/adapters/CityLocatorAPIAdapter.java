@@ -7,7 +7,7 @@ package com.dsd.game.api.adapters;
  */
 public interface CityLocatorAPIAdapter {
 
-    public String getCity ();
+    public String getCity();
 
-    public String getIPAddress ();
+    public String getIPAddress();
 }

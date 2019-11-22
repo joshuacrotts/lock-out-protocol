@@ -13,7 +13,7 @@ import com.dsd.game.util.Utilities;
  */
 public abstract class UtilitiesTests {
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         //  Edge case (all 0 integers)
         System.out.println(assertEquals(Utilities.clamp(0, 0, 0), 0));
         //  Edge case (all 0 floats)
@@ -41,7 +41,7 @@ public abstract class UtilitiesTests {
      * @param _resultB
      * @return
      */
-    public static boolean assertEquals (int _resultA, int _resultB) {
+    public static boolean assertEquals(int _resultA, int _resultB) {
         return _resultA == _resultB;
     }
 
@@ -60,7 +60,7 @@ public abstract class UtilitiesTests {
      * @param _resultB
      * @return
      */
-    public static boolean assertEquals (float _resultA, float _resultB) {
+    public static boolean assertEquals(float _resultA, float _resultB) {
         //  Using a threshold epsilon value isn't the greatest idea,
         //  but since we aren't using extremely accurate FP numbers,
         //  it'll be okay.

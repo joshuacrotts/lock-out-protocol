@@ -28,7 +28,7 @@ public class FemalePlayerButton extends StandardButton implements MouseEventInte
     private static final int BUTTON_X_OFFSET = 85;
     private static final int BUTTON_Y_OFFSET = 550;
 
-    public FemalePlayerButton (Game _game, MenuScreen _menuScreen) {
+    public FemalePlayerButton(Game _game, MenuScreen _menuScreen) {
         super(FemalePlayerButton.BUTTON_X_OFFSET, _game.getGameHeight() - FemalePlayerButton.BUTTON_Y_OFFSET,
                 FemalePlayerButton.BUTTON_WIDTH, FemalePlayerButton.BUTTON_HEIGHT);
         this.game = _game;
@@ -37,7 +37,7 @@ public class FemalePlayerButton extends StandardButton implements MouseEventInte
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (!this.menuScreen.isOnPlayerGender()) {
             return;
         }
@@ -47,7 +47,7 @@ public class FemalePlayerButton extends StandardButton implements MouseEventInte
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.menuScreen.isOnPlayerGender()) {
             return;
         }
@@ -55,7 +55,7 @@ public class FemalePlayerButton extends StandardButton implements MouseEventInte
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
         if (!this.menuScreen.isOnPlayerGender()) {
             return;
         }
@@ -66,12 +66,12 @@ public class FemalePlayerButton extends StandardButton implements MouseEventInte
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
         FemalePlayerButton.playerView.setMouseOver(true);
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
         FemalePlayerButton.playerView.setMouseOver(false);
     }
 }

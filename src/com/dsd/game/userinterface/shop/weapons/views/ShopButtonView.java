@@ -23,19 +23,19 @@ public abstract class ShopButtonView implements Updatable, Renderable {
     //  Icon image for the corresponding button.
     private final BufferedImage buttonIconImage;
 
-    public ShopButtonView (ShopButton _shopButton, BufferedImage _image) {
+    public ShopButtonView(ShopButton _shopButton, BufferedImage _image) {
         this.parentButton = _shopButton;
         this.text = new ShopTextLabel(_shopButton.getGame(), this.parentButton.getX(), this.parentButton.getY());
         this.buttonIconImage = _image;
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.text.tick();
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         _g2.drawImage(this.buttonIconImage, this.parentButton.getX(), this.parentButton.getY(), null);
         this.text.render(_g2);
     }

@@ -20,17 +20,17 @@ public enum WeaponType {
 
     private final String type;
 
-    private WeaponType (String _type) {
+    private WeaponType(String _type) {
         this.type = _type;
     }
 
     @Override
-    public String toString () {
+    public String toString() {
         return this.type;
     }
 
 //======================= GETTERS =======================//
-    public String getType () {
+    public String getType() {
         return this.type;
     }
 }

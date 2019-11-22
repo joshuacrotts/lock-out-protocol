@@ -24,7 +24,7 @@ public class ShopTextLabel extends StandardLabel {
     private static final int WEAPON_BOX_X_OFFSET = 98;
     private static final int WEAPON_BOX_Y_OFFSET = 41;
 
-    public ShopTextLabel (Game _game, int _xOffset, int _yOffset) {
+    public ShopTextLabel(Game _game, int _xOffset, int _yOffset) {
         super((int) Screen.gameHalfWidth,
                 (int) Screen.gameHalfHeight,
                 "WEAPON", "src/resources/fonts/chargen.ttf", 18f);
@@ -35,13 +35,13 @@ public class ShopTextLabel extends StandardLabel {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.setX((int) this.game.getCamera().getX() - this.LABEL_X_OFFSET);
         this.setY((int) this.game.getCamera().getY() - this.LABEL_Y_OFFSET);
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         Color oldColor = _g2.getColor();
         _g2.setColor(Color.WHITE);
         super.render(_g2);

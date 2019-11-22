@@ -54,7 +54,7 @@ public class RainController implements Renderable, Updatable {
     //  Constant for how "often" lightning should spawn. The higher, the rarer.
     private static final int LIGHTNING_INTERVAL = 2500;
 
-    public RainController (Game _game) {
+    public RainController(Game _game) {
         this.game = _game;
         this.sc = _game.getCamera();
         this.sph = new StandardParticleHandler(MAX_RAIN_PARTICLES);
@@ -63,15 +63,14 @@ public class RainController implements Renderable, Updatable {
         this.sph.setCamera(this.sc);
         try {
             this.isRaining = TranslatorAPI.getWeather().contains("rain") | RainController.toggleDownfall;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             System.err.println("Could not connect; continuing without rain.");
             this.isRaining = false;
         }
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (this.isRaining()) {
             this.sph.render(_g2);
             this.lightningHandler.render(_g2);
@@ -79,7 +78,7 @@ public class RainController implements Renderable, Updatable {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (this.isRaining()) {
             // Generates the min/max points for the rain to spawn
             int xGenMin = (int) (this.sc.getX() - RainController.X_BORDER);
@@ -102,7 +101,7 @@ public class RainController implements Renderable, Updatable {
      * @param _yGenMax
      * @return
      */
-    private RainDrop generateRainDrop (int _xGenMin, int _xGenMax, int _yGenMin, int _yGenMax) {
+    private RainDrop generateRainDrop(int _xGenMin, int _xGenMax, int _yGenMin, int _yGenMax) {
         int xPos = StdOps.rand(_xGenMin, _xGenMax);
         int yPos = StdOps.rand(_yGenMin, _yGenMax);
         return new RainDrop(xPos, yPos, RAIN_DIRECTION, this.getRandomSpeed(VEL_FACTOR),
@@ -112,7 +111,7 @@ public class RainController implements Renderable, Updatable {
     /**
      * Generates a random lightning flash.
      */
-    private void generateLightning () {
+    private void generateLightning() {
         if ((int) (Math.random() * LIGHTNING_INTERVAL) < 2) {
             this.lightningHandler.getHandler().add(new LightningFlash(game, this.lightningHandler.getHandler()));
             this.lightningHandler.playLightningSFX();
@@ -127,12 +126,12 @@ public class RainController implements Renderable, Updatable {
      * @param speedFactor
      * @return
      */
-    private double getRandomSpeed (int speedFactor) {
+    private double getRandomSpeed(int speedFactor) {
         return Math.random() * speedFactor;
     }
 
 //========================== SETTERS =======================//
-    public boolean isRaining () {
+    public boolean isRaining() {
         return this.isRaining;
     }
 }

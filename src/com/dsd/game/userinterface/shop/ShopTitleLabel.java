@@ -22,7 +22,7 @@ public class ShopTitleLabel extends StandardLabel {
     private static final int TITLE_X_OFFSET = 30;
     private static final int TITLE_Y_OFFSET = 280;
 
-    public ShopTitleLabel (Game _game, ShopScreen _shopScreen) {
+    public ShopTitleLabel(Game _game, ShopScreen _shopScreen) {
         super(Screen.gameHalfWidth - ShopTitleLabel.TITLE_X_OFFSET,
                 ShopTitleLabel.TITLE_Y_OFFSET, LanguageController.translate("SHOP"),
                 "src/resources/fonts/chargen.ttf", 64f);
@@ -32,13 +32,13 @@ public class ShopTitleLabel extends StandardLabel {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         this.setX((int) this.game.getCamera().getX() - TITLE_X_OFFSET);
         this.setY((int) this.game.getCamera().getY() - (int) (Screen.gameFourthHeight * 1.575));
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         _g2.setColor(Color.WHITE);
         super.render(_g2);
     }

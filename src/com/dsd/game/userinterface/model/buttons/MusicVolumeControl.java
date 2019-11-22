@@ -40,7 +40,7 @@ public class MusicVolumeControl extends Interactor {
     //  Default volume.
     private static float volume = 1.0f;
 
-    public MusicVolumeControl (Game _game, MenuScreen _menuScreen) {
+    public MusicVolumeControl(Game _game, MenuScreen _menuScreen) {
         super(0, 0, 0, 0);
         this.game = _game;
         this.menuScreen = _menuScreen;
@@ -56,7 +56,7 @@ public class MusicVolumeControl extends Interactor {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (!this.game.isMenu() || !this.menuScreen.isOnVolume()) {
             return;
         }
@@ -64,7 +64,7 @@ public class MusicVolumeControl extends Interactor {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.game.isMenu() || !this.menuScreen.isOnVolume()) {
             return;
         }
@@ -72,22 +72,22 @@ public class MusicVolumeControl extends Interactor {
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
     }
 
     /**
      * Increments the volume of the music by a factor of 10%. If we are already
      * at the max volume, we just quit.
      */
-    public void incrementVolume () {
+    public void incrementVolume() {
         if (MusicVolumeControl.volume == IncreaseVolumeButton.MAX_VOLUME) {
             return;
         }
@@ -99,11 +99,10 @@ public class MusicVolumeControl extends Interactor {
      * Decrements the volume of the music by a factor of 10%. If we are already
      * at the max volume, we just quit.
      */
-    public void decrementVolume () {
+    public void decrementVolume() {
         if (MusicVolumeControl.volume < 0.1) {
             StandardAudioController.setVolumeOfTracks(0, StandardAudioType.MUSIC);
-        }
-        else {
+        } else {
             MusicVolumeControl.volume -= 0.1;
             StandardAudioController.setVolumeOfTracks(MusicVolumeControl.volume, StandardAudioType.MUSIC);
         }
@@ -112,9 +111,9 @@ public class MusicVolumeControl extends Interactor {
     /**
      * Instantiates the ten bars of music volume.
      */
-    private void initializeVolumeBars () {
+    private void initializeVolumeBars() {
         this.volumeBars = new Rectangle[10];
-        for (int i = 0, xOffset = -120 ; i < this.volumeBars.length ; i++, xOffset += 30) {
+        for (int i = 0, xOffset = -120; i < this.volumeBars.length; i++, xOffset += 30) {
             this.volumeBars[i] = new Rectangle(Screen.gameHalfWidth + xOffset, Screen.gameHalfHeight - 200, 20, 60);
         }
     }
@@ -125,24 +124,23 @@ public class MusicVolumeControl extends Interactor {
      *
      * @param _g2
      */
-    private void renderVolumeBars (Graphics2D _g2) {
+    private void renderVolumeBars(Graphics2D _g2) {
         _g2.setColor(Color.RED);
-        for (int i = 0 ; i < this.volumeBars.length ; i++) {
+        for (int i = 0; i < this.volumeBars.length; i++) {
             if (((i + 1)) <= Math.round(volume * 10)) {
                 _g2.fill(this.volumeBars[i]);
-            }
-            else {
+            } else {
                 _g2.draw(this.volumeBars[i]);
             }
         }
     }
 
 //============================== GETTERS =====================================//
-    public int getLeftButtonX () {
+    public int getLeftButtonX() {
         return this.decVolumeButton.getX();
     }
 
-    public int getLeftButtonY () {
+    public int getLeftButtonY() {
         return this.decVolumeButton.getY();
     }
 

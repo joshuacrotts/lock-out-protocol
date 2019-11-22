@@ -19,20 +19,18 @@ public class ShopCommand extends Command {
 
     public Game game;
 
-    public ShopCommand (Game _game) {
+    public ShopCommand(Game _game) {
         this.game = _game;
         this.bind(game.getKeyboard(), KeyEvent.VK_G);
     }
 
     @Override
-    public void pressed (float _dt) {
+    public void pressed(float _dt) {
         if (this.game.isPreamble() || this.game.isMenu()) {
             return;
-        }
-        else if (!this.game.isShop()) {
+        } else if (!this.game.isShop()) {
             this.game.setGameState(GameState.SHOP);
-        }
-        else {
+        } else {
             this.game.setGameState(GameState.RUNNING);
         }
     }

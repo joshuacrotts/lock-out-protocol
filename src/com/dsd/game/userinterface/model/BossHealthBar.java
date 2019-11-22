@@ -46,7 +46,7 @@ public class BossHealthBar extends Interactor {
     private final int ARC_WIDTH = 10;
     private final int ARC_HEIGHT = 10;
 
-    public BossHealthBar (Game _game, Enemy _parentBoss) {
+    public BossHealthBar(Game _game, Enemy _parentBoss) {
         super((int) (Screen.gameHalfWidth - Screen.gameHalfWidth),
                 (int) (Screen.gameHalfHeight - Screen.gameFourthHeight), false);
         this.game = _game;
@@ -55,7 +55,7 @@ public class BossHealthBar extends Interactor {
     }
 
     @Override
-    public void tick () {
+    public void tick() {
         if (!this.parentBoss.isAlive() || this.parentBoss == null) {
             return;
         }
@@ -63,7 +63,7 @@ public class BossHealthBar extends Interactor {
     }
 
     @Override
-    public void render (Graphics2D _g2) {
+    public void render(Graphics2D _g2) {
         if (!this.parentBoss.isAlive() || this.parentBoss == null) {
             return;
         }
@@ -82,7 +82,7 @@ public class BossHealthBar extends Interactor {
      *
      * @param _g2
      */
-    private void drawHealthRectangle (Graphics2D _g2) {
+    private void drawHealthRectangle(Graphics2D _g2) {
         int rMin = 0;
         int rMax = this.parentBoss.getInitialHealth();
         //Scale min
@@ -99,15 +99,15 @@ public class BossHealthBar extends Interactor {
     }
 
     @Override
-    public void onMouseClick () {
+    public void onMouseClick() {
     }
 
     @Override
-    public void onMouseEnterHover () {
+    public void onMouseEnterHover() {
     }
 
     @Override
-    public void onMouseExitHover () {
+    public void onMouseExitHover() {
     }
 
 }

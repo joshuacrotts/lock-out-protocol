@@ -29,8 +29,7 @@ public class LanguageTranslation implements LanguageTranslationAPIAdapter {
         LanguageTranslation.reader = new BufferedReader(new InputStreamReader(LanguageTranslation.inputStream));
         try {
             LanguageTranslation.line = LanguageTranslation.reader.readLine();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(LanguageTranslation.class.getName()).log(Level.SEVERE, null, ex);
         }
         //  Extracts the key from the line read in by the buffered reader
@@ -45,7 +44,7 @@ public class LanguageTranslation implements LanguageTranslationAPIAdapter {
      * @param _lang to translate _text to.
      * @return
      */
-    private static String fetch (String _text, String _lang) {
+    private static String fetch(String _text, String _lang) {
         StringBuilder jsonInformation = null;
         try {
             //  Processes the request to the API, and reads the information
@@ -60,8 +59,7 @@ public class LanguageTranslation implements LanguageTranslationAPIAdapter {
                 jsonInformation.append(inputLine);
             }
             in.close();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(LanguageTranslation.class.getName()).log(Level.SEVERE, null, ex);
         }
         return jsonInformation.toString().substring(jsonInformation.toString().indexOf("[") + 2, jsonInformation.toString().lastIndexOf("]") - 1);
@@ -76,7 +74,7 @@ public class LanguageTranslation implements LanguageTranslationAPIAdapter {
      * @return
      */
     @Override
-    public String translateText (String _s, String _lang) {
+    public String translateText(String _s, String _lang) {
         return fixString(_s, _lang);
     }
 
@@ -88,7 +86,7 @@ public class LanguageTranslation implements LanguageTranslationAPIAdapter {
      * @param _lang
      * @return
      */
-    private static String fixString (String _s, String _lang) {
+    private static String fixString(String _s, String _lang) {
         String fixedString = _s.replaceAll("\\s", "%20");
         return fetch(fixedString, _lang);
     }

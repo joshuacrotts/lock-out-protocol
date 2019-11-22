@@ -20,13 +20,13 @@ public class DecreaseLanguageCommand extends Command {
     //  Miscellaneous reference variables.
     private final Game game;
 
-    public DecreaseLanguageCommand (Game _game) {
+    public DecreaseLanguageCommand(Game _game) {
         this.game = _game;
         this.bind(this.game.getKeyboard(), KeyEvent.VK_LEFT);
     }
 
     @Override
-    public void pressed (float _dt) {
+    public void pressed(float _dt) {
         if (!this.game.isMenu() || !this.game.getMenuScreen().isOnLanguages()) {
             return;
         }
