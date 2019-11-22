@@ -137,6 +137,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
     public void uponDeath () {
         JOptionPane.showMessageDialog(this.getGame(), "You have died!");
         this.getGame().stopGame();
+        System.exit(0);
     }
 
     /**

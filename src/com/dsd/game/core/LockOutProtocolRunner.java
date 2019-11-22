@@ -16,5 +16,4 @@ public class LockOutProtocolRunner {
     public static void main (String[] args) {
         Game game = new Game(1280, 720, "Lock Out Protocol");
     }
-
 }
