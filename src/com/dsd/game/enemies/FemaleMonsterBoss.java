@@ -21,31 +21,27 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Monster entity; follows the player around and (eventually) drains his health.
+ * Boss monster entity; follows the player around and (eventually) drains their health.
  *
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
  *
- * @updated 11/12/19
+ * @updated 11/22/19
  */
 public class FemaleMonsterBoss extends Enemy implements DeathListener {
 
     //  Timer for spawning in projectiles.
     private final Timer bossProjectileTimer;
 
-    //
     //  Static bufferedimage array so the images aren't constantly loading in
     //  upon instantiation of a new monster
-    //
     private static final BufferedImage[] WALK_FRAMES;
     private static final BufferedImage[] DEATH_FRAMES;
 
-    //
     //  Animation frame per second settings.
     //  WALKING_FPS_MIN/MAX define the possible speeds that the boss can
     //  animate at. It's randomly selected for variety.
-    //
     private final int walkingFPS;
     private final int WALKING_FPS_MIN = 13;
     private final int WALKING_FPS_MAX = 16;
@@ -53,7 +49,11 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
 
     //  Variables representing the angle and approach velocity.
     private static final double APPROACH_VEL = -1.2f;
-    private final double DAMAGE = 1.00;
+
+    //  Damage from interacting with the entity, and how much damage
+    //  each bullet will do to the player.
+    private final int entityDamage = 25;
+    private int bulletDamage = 25;
 
     //  AlphaComposite factor for when the FemaleMonsterBoss dies.
     private static final float DEATH_ALPHA_FACTOR = 0.001f;
@@ -64,7 +64,7 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
     public FemaleMonsterBoss(int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, FemaleMonsterBoss.APPROACH_VEL, FemaleMonsterBoss.originalHealth,
                 StandardID.Monster4, _game, _sch);
-        this.setTarget(_game.getPlayer());
+        super.setTarget(_game.getPlayer());
         //  Randomly generates the walking frames per second for variability
         this.walkingFPS = StdOps.rand(this.WALKING_FPS_MIN, this.WALKING_FPS_MAX);
         //  Sets the walking/death frames for this monster.
@@ -74,7 +74,7 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
         super.setAnimation(super.getWalkingAnimation());
         //  The width/height of the model is set by the buffered image backing it.
         super.setDimensions();
-        super.setDamage(this.DAMAGE);
+        super.setDamage(this.entityDamage);
         super.getHandler().addCollider(this.getId());
         super.getHandler().flagAlive(this.getId());
         super.setTransparentFactor((float) DEATH_ALPHA_FACTOR);
@@ -176,7 +176,7 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
         int[] velY = {-4, -4, 0, 4, 4, 4, 0, -4};
         for (int i = 0; i < velX.length; i++) {
             this.getHandler().addEntity(new BossProjectileObject((int) this.getX() + this.getWidth() / 2,
-                    (int) this.getY() + this.getHeight() / 2, velX[i], velY[i], (int) this.DAMAGE, this.getGame(),
+                    (int) this.getY() + this.getHeight() / 2, velX[i], velY[i], this.bulletDamage, this.getGame(),
                     this.getHandler(), this));
         }
     }

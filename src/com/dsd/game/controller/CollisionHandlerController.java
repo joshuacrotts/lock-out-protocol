@@ -97,6 +97,8 @@ public class CollisionHandlerController extends StandardCollisionHandler {
             this.handleBulletEnemyCollision((ProjectileGameObject) _obj1, (Enemy) _obj2);
         } else if (_obj1.getId() == StandardID.Tile1 && _obj2 instanceof Enemy && _obj2.isAlive()) {
             this.handleEnemyExplosionCollision((Explosion) _obj1, (Enemy) _obj2);
+        } else if (_obj1.getId() == StandardID.Player && _obj2.getId() == StandardID.Bullet1 && _obj2.isAlive()) {
+            this.handlePlayerBossProjectileCollision((Player) _obj1, (BossProjectileObject) _obj2);
         } else if (_obj1.getId() == StandardID.Player && _obj2 instanceof Powerup && _obj2.isAlive()) {
             _obj2.setAlive(false);
             ((Powerup) _obj2).activate();
