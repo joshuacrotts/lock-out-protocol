@@ -1,7 +1,7 @@
-/resources/.config/*
 /dist/*
 /build/*
 /test/*
 /.idea/*
-/nbproject/private/
+/nbproject/private/*
 /idea/*
+build

@@ -18,6 +18,8 @@ import java.util.TimerTask;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/26/19
  */
 public class TimeLabel extends StandardLabel implements TimerInterface {
 
@@ -49,7 +51,7 @@ public class TimeLabel extends StandardLabel implements TimerInterface {
         } else {
             if (this.timer == null) {
                 this.timer = new Timer(true);
-                this.timer.scheduleAtFixedRate(new TimerControl(this), 0, TIME_INTERVAL);
+                this.timer.scheduleAtFixedRate(new TimerControl(this.game, this), 0, TIME_INTERVAL);
                 TimerController.addTimer(this);
             }
             this.setText(String.format("%02d:%02d:%02d \u007C %s %s", this.hours, this.minutes, this.seconds, this.waveString,
@@ -94,14 +96,19 @@ public class TimeLabel extends StandardLabel implements TimerInterface {
 
     private class TimerControl extends TimerTask {
 
+        private final Game game;
         private final TimeLabel timeLabel;
 
-        public TimerControl(TimeLabel _timeLabel) {
+        public TimerControl(Game _game, TimeLabel _timeLabel) {
+            this.game = _game;
             this.timeLabel = _timeLabel;
         }
 
         @Override
         public void run() {
+            if (this.game.isPaused() || this.game.isShop()) {
+                return;
+            }
             this.timeLabel.calculateTime();
         }
     }
