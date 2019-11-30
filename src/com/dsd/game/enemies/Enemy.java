@@ -4,6 +4,7 @@ import com.dsd.game.controller.BloodParticleHandler;
 import com.dsd.game.core.Game;
 import com.dsd.game.enemies.enums.EnemyState;
 import com.dsd.game.objects.Entity;
+import com.dsd.game.particles.ShrinkingBoxParticle;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.handlers.StandardHandler;
@@ -66,6 +67,7 @@ public abstract class Enemy extends Entity implements DeathListener {
 
     //  Max amount of particles that can be summoned in the particle handler
     private static final int BLOOD_PARTICLES = 10;
+    private final float PARTICLE_LIFE = 20f;
 
     //  Blood particle colors (on a per-monster basis).
     //  If none is selected, red is the default.
@@ -118,7 +120,7 @@ public abstract class Enemy extends Entity implements DeathListener {
              * we can set this entity to be dead, and remove it from the
              * handler.
              */
-            if (this.explosionHandler.size() == 0 || this.getTransparency() <= 0) {
+            if (this.getTransparency() <= 0) {
                 this.getHandler().removeEntity(this);
             }
             StandardHandler.Handler(this.explosionHandler);
@@ -177,27 +179,32 @@ public abstract class Enemy extends Entity implements DeathListener {
      */
     public void generateBloodParticles() {
         BloodParticleHandler bph = this.getGame().getBloodHandler();
+
+        float particleMinSize = 1.0f;
+        float particleMaxSize = 10.0f;
+        float groundParticleMaxSize = 5.0f;
+
         for (int i = 0; i < BLOOD_PARTICLES; i++) {
-            bph.addEntity(new StandardBoxParticle(this.getX(), this.getY(),
-                    StdOps.rand(1.0, 5.0), StdOps.randBounds(-10.0, -3.0, 3.0, 10.0),
-                    StdOps.randBounds(-10.0, -3.0, 3.0, 10.0), this.bloodColor, 3f, bph,
-                    this.getAngle(), ShapeType.CIRCLE, false));
+            bph.addEntity(new ShrinkingBoxParticle(this.getX(), this.getY(),
+                    StdOps.rand(particleMinSize, particleMaxSize), StdOps.randBounds(-10.0, -1.0, 1.0, 10.0),
+                    StdOps.randBounds(-10.0, -1.0, 1.0, 10.0), this.bloodColor, this.PARTICLE_LIFE, bph,
+                    this.getAngle(), ShapeType.CIRCLE, 0.1d));
 
             //  Generates the still, motionless particles.
             double centerX = this.getX() + this.getWidth() / 2;
             double centerY = this.getY() + this.getHeight() / 2;
 
             bph.addEntity(new StandardBoxParticle(centerX + StdOps.rand(-10.0, 10.0), centerY + StdOps.rand(-10.0, 10.0),
-                    StdOps.rand(1.0, 5.0), 0, 0, this.bloodColor, 3f, bph,
+                    StdOps.rand(particleMinSize, particleMaxSize), 0, 0, this.bloodColor, this.PARTICLE_LIFE, bph,
                     this.getAngle(), ShapeType.CIRCLE, false));
 
             //  Generates the particles that are more scattered.
             double min = 10.0;
             double max = 28.0;
 
-            bph.addEntity(new StandardBoxParticle(centerX + StdOps.randBounds(-max, -min, min, max),
-                    centerY + StdOps.randBounds(-max, -min, min, max),
-                    StdOps.rand(1.0, 5.0), 0, 0, this.bloodColor, 3f, bph,
+            bph.addEntity(new StandardBoxParticle(centerX + StdOps.randBounds(-max - 10, -min, min, max + 10),
+                    centerY + StdOps.randBounds(-max - 10, -min, min, max + 10),
+                    StdOps.rand(particleMinSize, groundParticleMaxSize), 0, 0, this.bloodColor, this.PARTICLE_LIFE, bph,
                     this.getAngle(), ShapeType.CIRCLE, false));
         }
     }

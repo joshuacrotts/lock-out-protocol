@@ -38,7 +38,7 @@ public class SnowController implements Renderable, Updatable {
 
     //  Serves as a debugging feature (if enabled, it ignores the API call and
     //  automatically enables snow).
-    private static final boolean toggleDownfall = true;
+    private static final boolean toggleDownfall = false;
 
     //  Defines the range in which snow can spawn for the user.
     private static final int X_BORDER = Screen.gameDoubleWidth;
