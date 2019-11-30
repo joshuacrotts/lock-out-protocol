@@ -69,6 +69,7 @@ public class GreenMonster extends Enemy implements DeathListener {
         super.getHandler().addCollider(this.getId());
         super.getHandler().flagAlive(this.getId());
         super.setTransparentFactor((float) DEATH_ALPHA_FACTOR);
+        super.bloodColor = Color.GREEN;
     }
 
     /**

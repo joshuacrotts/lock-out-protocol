@@ -1,5 +1,6 @@
 package com.dsd.game.enemies;
 
+import com.dsd.game.controller.BloodParticleHandler;
 import com.dsd.game.core.Game;
 import com.dsd.game.enemies.enums.EnemyState;
 import com.dsd.game.objects.Entity;
@@ -31,15 +32,14 @@ import org.apache.commons.math3.util.FastMath;
  * controllers per entity: walking, attacking, and death. Depending on the state
  * of the enemy, one of these will be set.
  *
- * @author Joshua
+ * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/30/19
  */
 public abstract class Enemy extends Entity implements DeathListener {
 
     //  Miscellaneous reference variables.
     private final StandardCamera sc;
-
-    //  Handler for blood particles.
-    private final StandardParticleHandler bloodHandler;
 
     //  Information about the enemy's state in the game, and who they're
     //  moving towards.
@@ -65,8 +65,11 @@ public abstract class Enemy extends Entity implements DeathListener {
     private final double APPROACH_VEL;
 
     //  Max amount of particles that can be summoned in the particle handler
-    private static final int MAX_BLOOD_PARTICLES = 50;
     private static final int BLOOD_PARTICLES = 10;
+
+    //  Blood particle colors (on a per-monster basis).
+    //  If none is selected, red is the default.
+    protected Color bloodColor = Color.RED;
 
     //  Handler for particle explosions after the monster dies.
     protected StandardParticleHandler explosionHandler;
@@ -85,13 +88,10 @@ public abstract class Enemy extends Entity implements DeathListener {
         this.sc = this.getGame().getCamera();
         this.initialHealth = _health;
         this.APPROACH_VEL = _approachVel;
-        this.bloodHandler = new StandardParticleHandler(MAX_BLOOD_PARTICLES);
-        this.bloodHandler.setCamera(this.sc);
     }
 
     @Override
     public void tick() {
-        this.bloodHandler.tick();
         //  If the monster's health is less than 0, we can flag it as dead.
         this.setAlive(this.getHealth() > 0);
         this.getAnimationController().tick();
@@ -127,7 +127,6 @@ public abstract class Enemy extends Entity implements DeathListener {
 
     @Override
     public void render(Graphics2D _g2) {
-        this.bloodHandler.render(_g2);
         /**
          * We need to save the old alpha composition, apply the new one, render,
          * THEN set the old one back.
@@ -173,12 +172,32 @@ public abstract class Enemy extends Entity implements DeathListener {
     /**
      * Generates ten blood particles. Will probably make this more flexible
      * later.
+     *
+     * This needs to be refactored ASAP!!!!!!!!
      */
     public void generateBloodParticles() {
+        BloodParticleHandler bph = this.getGame().getBloodHandler();
         for (int i = 0; i < BLOOD_PARTICLES; i++) {
-            this.bloodHandler.addEntity(new StandardBoxParticle(this.getX(), this.getY(),
+            bph.addEntity(new StandardBoxParticle(this.getX(), this.getY(),
                     StdOps.rand(1.0, 5.0), StdOps.randBounds(-10.0, -3.0, 3.0, 10.0),
-                    StdOps.randBounds(-10.0, -3.0, 3.0, 10.0), Color.RED, 3f, this.bloodHandler,
+                    StdOps.randBounds(-10.0, -3.0, 3.0, 10.0), this.bloodColor, 3f, bph,
+                    this.getAngle(), ShapeType.CIRCLE, false));
+
+            //  Generates the still, motionless particles.
+            double centerX = this.getX() + this.getWidth() / 2;
+            double centerY = this.getY() + this.getHeight() / 2;
+
+            bph.addEntity(new StandardBoxParticle(centerX + StdOps.rand(-10.0, 10.0), centerY + StdOps.rand(-10.0, 10.0),
+                    StdOps.rand(1.0, 5.0), 0, 0, this.bloodColor, 3f, bph,
+                    this.getAngle(), ShapeType.CIRCLE, false));
+
+            //  Generates the particles that are more scattered.
+            double min = 10.0;
+            double max = 28.0;
+
+            bph.addEntity(new StandardBoxParticle(centerX + StdOps.randBounds(-max, -min, min, max),
+                    centerY + StdOps.randBounds(-max, -min, min, max),
+                    StdOps.rand(1.0, 5.0), 0, 0, this.bloodColor, 3f, bph,
                     this.getAngle(), ShapeType.CIRCLE, false));
         }
     }

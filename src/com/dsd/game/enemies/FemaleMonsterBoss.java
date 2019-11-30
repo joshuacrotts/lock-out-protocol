@@ -21,7 +21,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Boss monster entity; follows the player around and (eventually) drains their health.
+ * Boss monster entity; follows the player around and (eventually) drains their
+ * health.
  *
  * [Group Name: Data Structure Deadheads]
  *

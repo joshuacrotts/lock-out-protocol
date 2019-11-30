@@ -1,6 +1,7 @@
 package com.dsd.game.core;
 
 import com.dsd.game.controller.AudioBoxController;
+import com.dsd.game.controller.BloodParticleHandler;
 import com.dsd.game.controller.CollisionHandlerController;
 import com.dsd.game.controller.CursorController;
 import com.dsd.game.controller.DebugController;
@@ -42,18 +43,18 @@ import javax.swing.JOptionPane;
  *
  * @author Joshua, Ronald, Rinty
  *
- * @updated 11/17/19
+ * @updated 11/30/19
  */
 public class Game extends StandardGame {
 
-    //  Miscellaneous reference variables
+    //  Miscellaneous reference variables.
     private final StandardCollisionHandler sch;
     private final StandardCamera sc;
 
-    //  Database references
+    //  Database references.
     private final TranslatorDatabase translatorDatabase;
 
-    //  UI Element views
+    //  UI Element views.
     private final MenuScreen menuScreen;
     private final PauseScreen pauseScreen;
     private final PreambleScreen preambleScreen;
@@ -61,29 +62,19 @@ public class Game extends StandardGame {
     private final ShopScreen shopScreen;
     private final HelpScreen helpScreen;
 
-    //
     //  Rain controller which contacts the API for the logic of determining
     //  whether it should rain or not.
-    //
     private final RainController rainController;
 
-    //
     //  Snow controller which contacts the API for the logic of determining
     //  whether it should snow or not.
-    //
     private final SnowController snowController;
 
-    //  Debug controller
     private final DebugController debugController;
-
-    //  Difficulty controller
     private final DifficultyController difficultyController;
-
-    //  Level controller
     private final LevelController levelController;
-
-    //  Cursor controller
     private final CursorController cursorController;
+    private final BloodParticleHandler bloodParticleHandler;
 
     //  Game state variable (paused, running, menu, etc.)
     private GameState gameState = GameState.MENU;
@@ -97,35 +88,39 @@ public class Game extends StandardGame {
          * demonstration; they will NOT be in the final game.
          */
         super(_width, _height, _title);
-        /**
-         * Initialize the database translator
-         */
+        //
+        //  Initialize the database translator
+        //
         this.translatorDatabase = new TranslatorDatabase(this);
         this.translatorDatabase.loadFromSettings();
+
         //  Initialize the sound controller
         AudioBoxController.initialize(40);
+
         //  Create a new collision handler
         this.sch = new CollisionHandlerController(this);
+
         //  Instantiates player & adds it to the handler
         this.player = new Player(200, 200, this, this.sch);
+
         //  Instantiate the camera
         this.sc = new StandardCamera(this, player, 1, this.getGameWidth(), this.getGameHeight());
+
         //  Sets the camera for the player and the handler
         this.player.setCamera(this.sc);
         this.sch.setCamera(this.sc);
-        // Instantiates the rain, debug, and level controllers.
+
+        // Instantiates all miscellaneous controllers.
         this.rainController = new RainController(this);
         this.snowController = new SnowController(this);
         this.debugController = new DebugController(this, this.sch);
         this.difficultyController = new DifficultyController(this);
         this.levelController = new LevelController(this);
         this.cursorController = new CursorController(this);
+        this.bloodParticleHandler = new BloodParticleHandler(this);
         this.instantiateLevels();
-        /**
-         * Instantiates the levels @TODO: (should move this to a method and to
-         * some type of controller to determine HOW levels transition) Creates
-         * the UI views
-         */
+
+        //  Instantates all menu screen components.
         this.menuScreen = new MenuScreen(this);
         this.pauseScreen = new PauseScreen(this);
         this.preambleScreen = new PreambleScreen(this);
@@ -160,6 +155,8 @@ public class Game extends StandardGame {
                 this.levelController.tickLevel();
                 //  Update the handler with the casings
                 StandardHandler.Handler(this.player.getCasingHandler());
+                //  Then update the blood handler.
+                StandardHandler.Handler(this.bloodParticleHandler);
                 //  Then the objects within the handler
                 StandardHandler.Handler(this.sch);
                 //  Then the rain if applicable
@@ -187,6 +184,8 @@ public class Game extends StandardGame {
             this.levelController.renderLevel(StandardDraw.Renderer);
             //  Then render the handler with the casings.
             StandardDraw.Handler(this.player.getCasingHandler());
+            //  Then render the handler with the blood.
+            StandardDraw.Handler(this.bloodParticleHandler);
             //  Then render the handler objects
             StandardDraw.Handler(this.sch);
             //  Then render the rain if applicable
@@ -367,6 +366,10 @@ public class Game extends StandardGame {
 
     public DifficultyController getDifficultyController() {
         return this.difficultyController;
+    }
+
+    public BloodParticleHandler getBloodHandler() {
+        return this.bloodParticleHandler;
     }
 
     public StandardLevel getCurrentLevel() {

@@ -7,9 +7,6 @@ import com.dsd.game.userinterface.Screen;
 import com.dsd.game.userinterface.model.buttons.MusicVolumeControl;
 import com.dsd.game.userinterface.model.buttons.SaveAudioChangesButton;
 import com.dsd.game.userinterface.model.buttons.SoundEffectVolumeControl;
-import com.revivedstandards.controller.StandardAudioController;
-import com.revivedstandards.model.StandardAudio;
-import com.revivedstandards.model.StandardAudioType;
 import java.awt.Graphics2D;
 
 /**

@@ -3,7 +3,11 @@ package com.dsd.game.core;
 /**
  * Text/numerical representation of the difficulty.
  *
- * @author Joshua
+ * @group [Data Structure Deadheads]
+ *
+ * @author Joshua, Rinty, Ronald
+ *
+ * @updated 11/30/19
  */
 public enum DifficultyType {
 

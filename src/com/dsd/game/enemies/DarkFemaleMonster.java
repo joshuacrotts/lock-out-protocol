@@ -1,7 +1,6 @@
 package com.dsd.game.enemies;
 
 import com.dsd.game.core.Game;
-import com.dsd.game.objects.Entity;
 import com.dsd.game.objects.items.Coin;
 import com.dsd.game.objects.powerups.HealthPowerup;
 import com.dsd.game.util.Utilities;
@@ -17,7 +16,6 @@ import com.revivedstandards.view.ShapeType;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import org.apache.commons.math3.util.FastMath;
 
 /**
  * Monster entity; follows the player around and (eventually) drains his health.
@@ -75,6 +73,8 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
         super.getHandler().addCollider(this.getId());
         super.getHandler().flagAlive(this.getId());
         super.setTransparentFactor((float) DEATH_ALPHA_FACTOR);
+
+        this.bloodColor = Color.MAGENTA;
     }
 
     /**
