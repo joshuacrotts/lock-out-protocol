@@ -17,4 +17,6 @@ public interface Powerup {
      * how the powerup should affect the player/game.
      */
     public void activate();
+
+    public PowerupType getType();
 }

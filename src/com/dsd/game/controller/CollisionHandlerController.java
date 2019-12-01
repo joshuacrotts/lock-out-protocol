@@ -29,6 +29,8 @@ import java.awt.Graphics2D;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/30/19
  */
 public class CollisionHandlerController extends StandardCollisionHandler {
 
@@ -38,8 +40,11 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      */
     private static StandardInteractorHandler damageText;
 
+    private final Game game;
+
     public CollisionHandlerController(Game _game) {
         super(_game.getCamera());
+        this.game = _game;
         CollisionHandlerController.damageText = new StandardInteractorHandler(_game);
     }
 
@@ -101,6 +106,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
             this.handlePlayerBossProjectileCollision((Player) _obj1, (BossProjectileObject) _obj2);
         } else if (_obj1.getId() == StandardID.Player && _obj2 instanceof Powerup && _obj2.isAlive()) {
             _obj2.setAlive(false);
+            this.game.getHUDScreen().getPowerupTextHandler().addLabel(((Powerup) _obj2).getType().toString());
             ((Powerup) _obj2).activate();
         }
     }
@@ -121,22 +127,27 @@ public class CollisionHandlerController extends StandardCollisionHandler {
             //  a damage radius.
             ExplosionType type = _bullet instanceof GrenadeBulletObject ? ExplosionType.GRENADE_EXPLOSION
                     : _bullet instanceof ShotgunBulletObject ? ExplosionType.SHOTGUN_EXPLOSION : null;
+
             //  If the bullet is just a regular bullet, then no explosion is created.
             if (type != null) {
                 this.addEntity(new Explosion((int) _monster.getX(), (int) _monster.getY(),
                         _bullet.getDamage(), type, this));
             }
+
             //  Turn bullet collision off, and deduct health from the monster.
             _bullet.setAlive(false);
             _monster.setHealth(_monster.getHealth() - _bullet.getDamage());
+
             //  Plays random monster hurt sfx
             if (!(_monster instanceof BasicMonster || _monster instanceof GreenMonster)) {
                 _monster.generateHurtSound(StdOps.rand(1, 30));
             } else {
                 _monster.generateHurtSound(StdOps.rand(1, 5));
             }
+
             //  Generates the blood particles for the monster
             _monster.generateBloodParticles();
+
             //  Applys a force to the enemy based on the velocity of the
             //  projectile.
             _monster.applyPushForce(_bullet.getVelX(), _bullet.getVelY());

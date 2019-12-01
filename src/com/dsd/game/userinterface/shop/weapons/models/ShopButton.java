@@ -2,6 +2,7 @@ package com.dsd.game.userinterface.shop.weapons.models;
 
 import com.dsd.game.core.Game;
 import com.dsd.game.objects.Inventory;
+import com.dsd.game.userinterface.HUDScreen;
 import com.dsd.game.userinterface.ShopScreen;
 import com.dsd.game.userinterface.model.Interactor;
 import com.revivedstandards.util.StdOps;
@@ -11,7 +12,11 @@ import java.awt.image.BufferedImage;
 /**
  * This class is an abstract superclass of all shop buttons.
  *
- * @author Joshua
+ * @group [Data Structure Deadheads]
+ *
+ * @author Joshua, Rinty, Ronald
+ *
+ * @updated 11/30/19
  */
 public abstract class ShopButton extends Interactor {
 
@@ -19,6 +24,7 @@ public abstract class ShopButton extends Interactor {
     private final Game game;
     private final Inventory playerInventory;
     private final ShopScreen shopScreen;
+    private final HUDScreen hudScreen;
 
     //  Button images.
     protected BufferedImage onHoverButtonImg;
@@ -37,7 +43,7 @@ public abstract class ShopButton extends Interactor {
     private final int PRICE;
 
     //  Price per magazine (if applicable)
-    private final int PRICE_PER_MAGAZINE;
+    private int pricePerMagazine;
 
     public ShopButton(Game _game, ShopScreen _shopScreen, int _x, int _y, int _price) {
         super(_x, _y);
@@ -49,24 +55,15 @@ public abstract class ShopButton extends Interactor {
         this.X_OFFSET = _x;
         this.Y_OFFSET = _y;
         this.PRICE = _price;
-        this.PRICE_PER_MAGAZINE = 0;
+        this.pricePerMagazine = 0;
         this.initializeButtonImages();
         this.setScaled(true);
+        this.hudScreen = _game.getHUDScreen();
     }
 
     public ShopButton(Game _game, ShopScreen _shopScreen, int _x, int _y, int _price, int _pricePerMagazine) {
-        super(_x, _y);
-        this.game = _game;
-        this.playerInventory = this.game.getPlayer().getInventory();
-        this.shopScreen = _shopScreen;
-        this.setWidth(BUTTON_WIDTH);
-        this.setHeight(BUTTON_HEIGHT);
-        this.X_OFFSET = _x;
-        this.Y_OFFSET = _y;
-        this.PRICE = _price;
-        this.PRICE_PER_MAGAZINE = _pricePerMagazine;
-        this.initializeButtonImages();
-        this.setScaled(true);
+        this(_game, _shopScreen, _x, _y, _price);
+        this.pricePerMagazine = _pricePerMagazine;
     }
 
     @Override
@@ -87,7 +84,9 @@ public abstract class ShopButton extends Interactor {
     }
 
     @Override
-    public abstract void onMouseClick();
+    public void onMouseClick() {
+        this.hudScreen.getPowerupTextHandler().addLabel("YOU PURCHASED AMMO/GUN!");
+    }
 
     @Override
     public void onMouseEnterHover() {
@@ -125,7 +124,7 @@ public abstract class ShopButton extends Interactor {
     }
 
     public int getPricePerMagazine() {
-        return this.PRICE_PER_MAGAZINE;
+        return this.pricePerMagazine;
     }
 
     public Inventory getInventory() {

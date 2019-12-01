@@ -39,9 +39,9 @@ public class BossHealthBar extends Interactor {
     private final Color lightRed = new Color(255, 0, 0, TRANSPARENCY);
 
     //  Positioning offsets.
-    private final int MAX_HEALTH_X = 960;
+    private final int MAX_HEALTH_X = 600;
     private final int HEALTH_Y_OFFSET = 25;
-    private final int HEALTH_X_OFFSET = 45;
+    private final int HEALTH_X_OFFSET = 300;
     private final int HEALTH_HEIGHT = 20;
     private final int ARC_WIDTH = 10;
     private final int ARC_HEIGHT = 10;

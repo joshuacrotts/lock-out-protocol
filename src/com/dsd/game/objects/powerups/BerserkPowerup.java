@@ -155,6 +155,12 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
         return new Color(_c.getRed(), _c.getGreen(), _c.getBlue(), 127);
     }
 
+//============================= GETTERS ====================================//
+    @Override
+    public PowerupType getType() {
+        return PowerupType.BERSERK;
+    }
+
 //============================= SETTERS ====================================//
     public void setCollected() {
         this.isCollected = true;

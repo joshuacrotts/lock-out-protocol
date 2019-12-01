@@ -267,7 +267,9 @@ public class Game extends StandardGame {
         this.levelController.clearLevels();
         this.menuScreen.playMenuMusic();
         this.player.resetPlayer();
+        this.bloodParticleHandler.clearEntities();
         this.player.getInventory().resetInventory();
+        this.hudScreen.getPowerupTextHandler().clearLabels();
         this.instantiateLevels();
         TimerController.stopTimers();
         DifficultyController.resetDifficultyFactors();

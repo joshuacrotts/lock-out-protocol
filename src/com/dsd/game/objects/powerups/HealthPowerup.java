@@ -74,6 +74,11 @@ public class HealthPowerup extends StandardGameObject implements Powerup {
         this.player.setHealth(pHealth);
     }
 
+    @Override
+    public PowerupType getType() {
+        return PowerupType.HEALTH;
+    }
+
     //static value
     static {
         HEALTH_FRAMES = Utilities.loadFrames("src/resources/img/items/drops/health/", 22);

@@ -145,6 +145,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
     public void resetPlayer() {
         this.money = 0;
         this.setHealth(this.maxHealth);
+        this.casingHandler.clearEntities();
         this.inventory.resetInventory();
     }
 

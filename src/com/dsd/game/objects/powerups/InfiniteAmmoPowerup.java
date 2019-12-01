@@ -33,14 +33,14 @@ import java.util.TimerTask;
  */
 public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInterface, Powerup {
 
-    // Miscellaneous reference variables
+    // Miscellaneous reference variables.
     private final Game game;
     private final Player player;
     private final StandardCamera camera;
     private final StandardCollisionHandler parentContainer;
     private Timer powerupTimer;
 
-    //  View
+    //  View variables and configurations.
     private final StandardFadeController color;
     private static final BufferedImage[] INFINITE_AMMO_FRAMES;
     private static final int INF_AMMO_FPS = 13;
@@ -48,7 +48,7 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
     private static final int STROKE_X_OFFSET = (int) (RECT_STROKE * 1.5);
     private static final int STROKE_Y_OFFSET = (int) (RECT_STROKE * 2.4);
 
-    //  Timer for how long the powerup is active (in milliseconds)
+    //  Timer for how long the powerup is active (in milliseconds).
     private int timer = 10000;
     private boolean isActivated = false;
     private boolean isCollected = false;
@@ -151,6 +151,13 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
         return new Color(_c.getRed(), _c.getGreen(), _c.getBlue(), 127);
     }
 
+    //============================= GETTERS ====================================//
+    @Override
+    public PowerupType getType() {
+        return PowerupType.BERSERK;
+    }
+
+    //============================= SETTERS ====================================//
     public void setCollected() {
         this.isCollected = true;
     }

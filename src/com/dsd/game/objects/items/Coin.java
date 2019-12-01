@@ -3,6 +3,7 @@ package com.dsd.game.objects.items;
 import com.dsd.game.core.Game;
 import com.dsd.game.objects.Player;
 import com.dsd.game.objects.powerups.Powerup;
+import com.dsd.game.objects.powerups.PowerupType;
 import com.dsd.game.util.Utilities;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.controller.StandardAudioController;
@@ -27,19 +28,19 @@ import java.awt.image.BufferedImage;
  */
 public class Coin extends StandardGameObject implements Powerup {
 
-    //  Handler for the coins
+    //  Handler for the coins.
     private final StandardCollisionHandler parentContainer;
     private final Player player;
 
-    //  Frames of animation for the coins
+    //  Frames of animation for the coins.
     private static final BufferedImage[] coinOneFrames;
     private static final BufferedImage[] coinTwoFrames;
 
-    //  Randomness for the scatter of the coin
-    //  This the value at which the coins can scatter
+    //  Randomness for the scatter of the coin.
+    //  This the value at which the coins can scatter.
     private final double SCATTER_RANGE = 0.99;
 
-    //  Variables for changing the speed of the coins as they disperse
+    //  Variables for changing the speed of the coins as they disperse.
     private static final double VEL_LOWER_BOUND = 0.5;
     private static final double VEL_UPPER_BOUND = 1.5;
     private final int COIN_FPS = 5;
@@ -54,6 +55,7 @@ public class Coin extends StandardGameObject implements Powerup {
      * your coin rarity, in that 70% of the time, a small coin will drop. 20% of
      * the time, a medium coin will drop (0.9-0.7). 10% for the large.
      *
+     * @param _game
      * @param _x
      * @param _y
      * @param _small
@@ -134,7 +136,12 @@ public class Coin extends StandardGameObject implements Powerup {
         return this.value;
     }
 
-    //static value
+    @Override
+    public PowerupType getType() {
+        return PowerupType.COIN;
+    }
+
+    //  Static initialization values.
     static {
         coinOneFrames = Utilities.loadFrames("src/resources/img/items/coin/small", 4);
         coinTwoFrames = Utilities.loadFrames("src/resources/img/items/coin/medium", 4);

@@ -1,6 +1,7 @@
 package com.dsd.game.userinterface;
 
 import com.dsd.game.core.Game;
+import com.dsd.game.handlers.PowerupTextHandler;
 import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.model.Interactor;
 import com.dsd.game.userinterface.model.labels.AmmoLabel;
@@ -20,11 +21,13 @@ public class HUDScreen extends Screen {
     //  Miscellaneous reference variables.
     private final Player player;
     private final StandardCollisionHandler globalHandler;
+    private final PowerupTextHandler powerupTextHandler;
 
     public HUDScreen(Game _game, Player _player, StandardCollisionHandler _sch) {
         super(_game);
         this.player = _player;
         this.globalHandler = _sch;
+        this.powerupTextHandler = new PowerupTextHandler(_game, this);
         this.createUIElements();
     }
 
@@ -35,6 +38,7 @@ public class HUDScreen extends Screen {
         }
         super.tick();
         this.player.getInventory().getView().tick();
+        this.powerupTextHandler.tick();
     }
 
     @Override
@@ -44,6 +48,7 @@ public class HUDScreen extends Screen {
         }
         super.render(_g2);
         this.player.getInventory().getView().render(_g2);
+        this.powerupTextHandler.render(_g2);
     }
 
     @Override
@@ -60,6 +65,11 @@ public class HUDScreen extends Screen {
         super.addInteractor(new CoinLabel(super.getGame(), this.player));
         super.addInteractor(new Minimap(super.getGame(), this.globalHandler));
         super.addInteractor(new TimeLabel(super.getGame()));
+    }
+
+//============================= GETTERS =====================================//
+    public PowerupTextHandler getPowerupTextHandler() {
+        return this.powerupTextHandler;
     }
 
 }

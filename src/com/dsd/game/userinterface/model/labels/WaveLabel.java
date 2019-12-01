@@ -14,6 +14,8 @@ import java.awt.Graphics2D;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 11/30/19
  */
 public class WaveLabel extends StandardLabel {
 
@@ -42,6 +44,7 @@ public class WaveLabel extends StandardLabel {
         _g2.setColor(oldColor);
     }
 
+//================================ SETTERS ===================================//
     public void setWaveNumber(int _waveNumber) {
         this.setText(LanguageController.translate("Wave ") + Utilities.toRoman(_waveNumber));
     }
