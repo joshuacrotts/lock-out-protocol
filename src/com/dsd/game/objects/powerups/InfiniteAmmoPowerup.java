@@ -45,10 +45,10 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
     private static final BufferedImage[] INFINITE_AMMO_FRAMES;
     private static final int INF_AMMO_FPS = 13;
     private static final int RECT_STROKE = 20;
-    private static final int STROKE_X_OFFSET = (int) (RECT_STROKE * 1.5);
+    private static final int STROKE_X_OFFSET = (int) (RECT_STROKE * 1.44);
     private static final int STROKE_Y_OFFSET = (int) (RECT_STROKE * 2.4);
 
-    //  Timer for how long the powerup is active (in milliseconds).
+    //  Timer for how long the powerup is active (in milliseconds).``
     private int timer = 10000;
     private boolean isActivated = false;
     private boolean isCollected = false;

@@ -4,7 +4,7 @@ import com.dsd.game.controller.BloodParticleHandler;
 import com.dsd.game.core.Game;
 import com.dsd.game.enemies.enums.EnemyState;
 import com.dsd.game.objects.Entity;
-import com.dsd.game.particles.ShrinkingBoxParticle;
+import com.dsd.game.particles.SlowingBoxParticle;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.handlers.StandardHandler;
@@ -185,14 +185,18 @@ public abstract class Enemy extends Entity implements DeathListener {
         float groundParticleMaxSize = 5.0f;
 
         for (int i = 0; i < BLOOD_PARTICLES; i++) {
-            bph.addEntity(new ShrinkingBoxParticle(this.getX(), this.getY(),
+
+            /*bph.addEntity(new ShrinkingBoxParticle(this.getX(), this.getY(),
                     StdOps.rand(particleMinSize, particleMaxSize), StdOps.randBounds(-10.0, -1.0, 1.0, 10.0),
                     StdOps.randBounds(-10.0, -1.0, 1.0, 10.0), this.bloodColor, this.PARTICLE_LIFE, bph,
                     this.getAngle(), ShapeType.CIRCLE, 0.1d));
-
+             */
             //  Generates the still, motionless particles.
             double centerX = this.getX() + this.getWidth() / 2;
             double centerY = this.getY() + this.getHeight() / 2;
+
+            bph.addEntity(new SlowingBoxParticle(centerX, centerY, StdOps.rand(particleMinSize, particleMaxSize),
+                    this.bloodColor, this.PARTICLE_LIFE, bph, this.getAngle(), ShapeType.CIRCLE));
 
             bph.addEntity(new StandardBoxParticle(centerX + StdOps.rand(-10.0, 10.0), centerY + StdOps.rand(-10.0, 10.0),
                     StdOps.rand(particleMinSize, particleMaxSize), 0, 0, this.bloodColor, this.PARTICLE_LIFE, bph,

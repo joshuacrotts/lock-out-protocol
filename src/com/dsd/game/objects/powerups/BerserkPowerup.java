@@ -45,7 +45,7 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
     private static final int BERSERK_FPS = 10;
     private static final int DAMAGE_INCREASE_FACTOR = 2;
     private static final int RECT_STROKE = 20;
-    private static final int STROKE_X_OFFSET = (int) (RECT_STROKE * 1.5);
+    private static final int STROKE_X_OFFSET = (int) (RECT_STROKE * 1.44);
     private static final int STROKE_Y_OFFSET = (int) (RECT_STROKE * 2.4);
     //  Timer for how long the powerup is active (in milliseconds)
 
