@@ -17,7 +17,11 @@ import java.awt.image.BufferedImage;
  * Health object for when the player is damaged, they can pick it up and restore
  * some health.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
+ *
+ * @updated 12/3/19
  */
 public class HealthPowerup extends StandardGameObject implements Powerup {
 

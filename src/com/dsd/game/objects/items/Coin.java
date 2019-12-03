@@ -24,7 +24,7 @@ import java.awt.image.BufferedImage;
  *
  * @author Joshua, Ronald, Rinty
  *
- * @updated 11/12/19
+ * @updated 12/3/19
  */
 public class Coin extends StandardGameObject implements Powerup {
 
@@ -35,6 +35,7 @@ public class Coin extends StandardGameObject implements Powerup {
     //  Frames of animation for the coins.
     private static final BufferedImage[] coinOneFrames;
     private static final BufferedImage[] coinTwoFrames;
+    private static final BufferedImage[] coinThreeFrames;
 
     //  Randomness for the scatter of the coin.
     //  This the value at which the coins can scatter.
@@ -76,7 +77,7 @@ public class Coin extends StandardGameObject implements Powerup {
 
     @Override
     public void tick() {
-        if (this.isAlive()) {
+        if (this.isAlive() && this.getAnimationController() != null) {
             this.getAnimationController().tick();
             this.slowVelocities();
             this.updatePosition();
@@ -125,9 +126,12 @@ public class Coin extends StandardGameObject implements Powerup {
         if (coin < _small * 100) {
             this.setAnimation(new StandardAnimatorController(this, Coin.coinOneFrames, this.COIN_FPS));
             this.value = 1;
-        } else {
+        } else if (coin < _medium * 100) {
             this.setAnimation(new StandardAnimatorController(this, Coin.coinTwoFrames, this.COIN_FPS));
             this.value = 5;
+        } else if (coin < _large * 100) {
+            this.setAnimation(new StandardAnimatorController(this, Coin.coinThreeFrames, this.COIN_FPS));
+            this.value = 10;
         }
     }
 
@@ -145,5 +149,6 @@ public class Coin extends StandardGameObject implements Powerup {
     static {
         coinOneFrames = Utilities.loadFrames("src/resources/img/items/coin/small", 4);
         coinTwoFrames = Utilities.loadFrames("src/resources/img/items/coin/medium", 4);
+        coinThreeFrames = Utilities.loadFrames("src/resources/img/items/coin/large", 4);
     }
 }

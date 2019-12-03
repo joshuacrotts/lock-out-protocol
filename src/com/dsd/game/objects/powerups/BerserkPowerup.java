@@ -39,7 +39,7 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
     private final StandardCollisionHandler parentContainer;
     private Timer powerupTimer;
 
-    //  View
+    //  View (how the object is displayed).
     private final StandardFadeController color;
     private static final BufferedImage[] BERSERK_FRAMES;
     private static final int BERSERK_FPS = 10;
@@ -47,8 +47,8 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
     private static final int RECT_STROKE = 20;
     private static final int STROKE_X_OFFSET = (int) (RECT_STROKE * 1.44);
     private static final int STROKE_Y_OFFSET = (int) (RECT_STROKE * 2.4);
+    
     //  Timer for how long the powerup is active (in milliseconds)
-
     private int timer = 10000;
     private boolean isActivated = false;
     private boolean isCollected = false;

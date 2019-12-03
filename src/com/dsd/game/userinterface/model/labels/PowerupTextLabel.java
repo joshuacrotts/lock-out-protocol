@@ -1,15 +1,9 @@
 package com.dsd.game.userinterface.model.labels;
 
 import com.dsd.game.core.Game;
-import com.dsd.game.controller.LanguageController;
-import com.dsd.game.controller.TimerController;
 import com.dsd.game.userinterface.Screen;
-import com.dsd.game.userinterface.TimerInterface;
-import com.dsd.game.util.Utilities;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * This class will tell the user how long they've been playing, and what round

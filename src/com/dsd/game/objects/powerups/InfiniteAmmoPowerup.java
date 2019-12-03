@@ -29,7 +29,11 @@ import java.util.TimerTask;
  * Health object for when the player is damaged, they can pick it up and restore
  * some health.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
+ *
+ * @updated 12/3/19
  */
 public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInterface, Powerup {
 
@@ -59,8 +63,8 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
         this.camera = _game.getCamera();
         this.player = _game.getPlayer();
         this.parentContainer = _sch;
-        StandardAnimatorController berserkAnimation = new StandardAnimatorController(this, INFINITE_AMMO_FRAMES, INF_AMMO_FPS);
-        this.setAnimation(berserkAnimation);
+        StandardAnimatorController infiniteAnimation = new StandardAnimatorController(this, INFINITE_AMMO_FRAMES, INF_AMMO_FPS);
+        this.setAnimation(infiniteAnimation);
         this.setWidth(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getWidth());
         this.setHeight(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getHeight());
         this.color = new StandardFadeController(Color.blue, Color.green, 0.05f);
@@ -139,7 +143,8 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
         _g2.setColor(this.getTransparentColor(this.color.combine()));
         Stroke oldStroke = _g2.getStroke();
         _g2.setStroke(new BasicStroke(RECT_STROKE));
-        Rectangle view = new Rectangle((int) this.camera.getX() - Screen.gameHalfWidth + RECT_STROKE / 2,
+        Rectangle view = new Rectangle(
+                (int) this.camera.getX() - Screen.gameHalfWidth + RECT_STROKE / 2,
                 (int) this.camera.getY() - Screen.gameHalfHeight + RECT_STROKE / 2,
                 this.game.getGameWidth() - (int) STROKE_X_OFFSET,
                 this.game.getGameHeight() - (int) STROKE_Y_OFFSET);
@@ -154,7 +159,7 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
     //============================= GETTERS ====================================//
     @Override
     public PowerupType getType() {
-        return PowerupType.BERSERK;
+        return PowerupType.INFINITE_AMMO;
     }
 
     //============================= SETTERS ====================================//

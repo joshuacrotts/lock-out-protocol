@@ -14,7 +14,7 @@ import java.awt.Graphics2D;
  *
  * @author Joshua, Ronald, Rinty
  *
- * @updated 12/1/19
+ * @updated 12/3/19
  */
 public class SlowingBoxParticle extends StandardBoxParticle {
 

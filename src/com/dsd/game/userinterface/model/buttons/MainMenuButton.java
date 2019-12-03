@@ -33,9 +33,9 @@ public class MainMenuButton extends MenuButton implements MouseEventInterface {
                 LanguageController.translate("MAIN MENU"), _game, _menuScreen);
         this.game = _game;
         this.menuScreen = _menuScreen;
-        this.setX((int) this.game.getCamera().getX() - BUTTON_X_OFFSET);
-        this.setY((int) this.game.getCamera().getY() + BUTTON_Y_OFFSET);
-        this.setScaled(true);
+        super.setX((int) this.game.getCamera().getX() - BUTTON_X_OFFSET);
+        super.setY((int) this.game.getCamera().getY() + BUTTON_Y_OFFSET);
+        super.setScaled(true);
     }
 
     @Override

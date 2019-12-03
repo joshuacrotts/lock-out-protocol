@@ -8,7 +8,7 @@ package com.dsd.game.objects.powerups;
  *
  * @author Joshua, Ronald, Rinty
  *
- * @updated 11/12/19
+ * @updated 12/1/19
  */
 public interface Powerup {
 

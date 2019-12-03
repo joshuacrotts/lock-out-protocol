@@ -6,13 +6,10 @@ import com.dsd.game.objects.powerups.HealthPowerup;
 import com.dsd.game.util.Utilities;
 import com.revivedstandards.controller.StandardAudioController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
-import com.revivedstandards.handlers.StandardParticleHandler;
 import com.revivedstandards.model.DeathListener;
 import com.revivedstandards.model.StandardAudioType;
-import com.revivedstandards.model.StandardBoxParticle;
 import com.revivedstandards.model.StandardID;
 import com.revivedstandards.util.StdOps;
-import com.revivedstandards.view.ShapeType;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -24,7 +21,7 @@ import java.awt.image.BufferedImage;
  *
  * @author Joshua, Ronald, Rinty
  *
- * @updated 11/12/19
+ * @updated 12/3/19
  */
 public class DarkFemaleMonster extends Enemy implements DeathListener {
 
@@ -59,14 +56,18 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
     public DarkFemaleMonster(int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, DarkFemaleMonster.APPROACH_VEL, DarkFemaleMonster.originalHealth,
                 StandardID.Monster3, _game, _sch);
-        this.setTarget(_game.getPlayer());
+        super.setTarget(_game.getPlayer());
+
         //  Randomly generates the walking frames per second for variability
         this.walkingFPS = StdOps.rand(this.WALKING_FPS_MIN, this.WALKING_FPS_MAX);
+
         //  Sets the walking/death frames for this monster
         super.initWalkingFrames(DarkFemaleMonster.WALK_FRAMES, this.walkingFPS);
         super.initDeathFrames(DarkFemaleMonster.DEATH_FRAMES, DarkFemaleMonster.DEATH_FPS, 5);
+
         //  Sets the default animation
         super.setAnimation(super.getWalkingAnimation());
+
         //  The width/height of the model is set by the buffered image backing it.
         super.setDimensions();
         super.setDamage(this.DAMAGE);
@@ -74,7 +75,7 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
         super.getHandler().flagAlive(this.getId());
         super.setTransparentFactor((float) DEATH_ALPHA_FACTOR);
 
-        this.bloodColor = Color.MAGENTA;
+        this.bloodColor = this.generateRandomBloodColor();
     }
 
     /**
@@ -103,20 +104,10 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
      */
     @Override
     public void uponDeath() {
-        this.setAnimation(this.getDeathAnimation());
-        this.explosionHandler = new StandardParticleHandler(50);
-        this.explosionHandler.setCamera(this.getCamera());
-        for (int i = 0; i < this.explosionHandler.getMaxParticles(); i++) {
-            this.explosionHandler.addEntity(new StandardBoxParticle(this.getX(), this.getY(),
-                    StdOps.rand(1.0, 5.0),
-                    StdOps.randBounds(-10.0, -3.0, 3.0, 10.0),
-                    StdOps.randBounds(-10.0, -3.0, 3.0, 10.0), this.generateRandomBloodColor(), 3f, this.explosionHandler,
-                    this.getAngle(), ShapeType.CIRCLE, true));
-        }
+        super.uponDeath();
         this.generateCoins(StdOps.rand(0, 5));
         this.generateDeathSound(StdOps.rand(1, 2));
         this.generatePowerup();
-        this.moveEntityToFront();
     }
 
     /**
@@ -157,7 +148,9 @@ public class DarkFemaleMonster extends Enemy implements DeathListener {
      */
     private void generateCoins(int _coinAmt) {
         for (int i = 0; i < _coinAmt; i++) {
-            this.getHandler().addEntity(new Coin(this.getGame(), (int) this.getX(), (int) this.getY(), 0.7, 0.9, 1.0, this.getHandler()));
+            this.getHandler().addEntity(new Coin(this.getGame(), (int) this.getX(),
+                    (int) this.getY(), super.smallCoinDrop, super.medCoinDrop,
+                    super.largeCoinDrop, this.getHandler()));
         }
     }
 

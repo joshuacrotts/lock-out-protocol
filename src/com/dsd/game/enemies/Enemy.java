@@ -47,7 +47,7 @@ public abstract class Enemy extends Entity implements DeathListener {
     private EnemyState enemyState;
     private Entity target;
 
-    //  Animation controllers
+    //  Animation controllers.
     private StandardAnimatorController walkingController;
     private StandardAnimatorController attackingController;
     private StandardAnimatorController deathController;
@@ -69,6 +69,14 @@ public abstract class Enemy extends Entity implements DeathListener {
     private static final int BLOOD_PARTICLES = 10;
     private final float PARTICLE_LIFE = 20f;
 
+    //  Other particle dimension and positioning information.
+    private final float PARTICLE_MIN_SIZE = 1.0f;
+    private final float PARTICLE_MAX_SIZE = 10.0f;
+    private final float GROUND_PARTICLE_MAX_SIZE = 5.0f;
+    private final float PARTICLE_SCATTER_OFFSET = 10.0f;
+    private final float MIN_PARTICLE_OFFSET = 10.0f;
+    private final float MAX_PARTICLE_OFFSET = 28.0f;
+
     //  Blood particle colors (on a per-monster basis).
     //  If none is selected, red is the default.
     protected Color bloodColor = Color.RED;
@@ -82,13 +90,18 @@ public abstract class Enemy extends Entity implements DeathListener {
     //  Alpha composition object for when the monster dies.
     protected AlphaComposite deathTransparentComposite;
 
+    //  Power-up drop odds (should be between 0-1, increasing up to 1).
+    protected double smallCoinDrop = 0.7;
+    protected double medCoinDrop = 0.9;
+    protected double largeCoinDrop = 1.0;
+
     //  Initial health factor (for changing difficulty).
-    public final int initialHealth;
+    public final int INIT_HEALTH;
 
     public Enemy(int _x, int _y, double _approachVel, int _health, StandardID _id, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, _health, _id, _game, _sch);
         this.sc = this.getGame().getCamera();
-        this.initialHealth = _health;
+        this.INIT_HEALTH = _health;
         this.APPROACH_VEL = _approachVel;
     }
 
@@ -98,13 +111,16 @@ public abstract class Enemy extends Entity implements DeathListener {
         this.setAlive(this.getHealth() > 0);
         this.getAnimationController().tick();
         this.getAnimationController().getStandardAnimation().setRotation(this.getAngle());
+        
         if (this.isAlive()) {
             this.updatePosition();
             //  Save the target's position
             double tx = this.getTarget().getX();
             double ty = this.getTarget().getY();
+
             //  Causes the monster to follow the target wherever on the screen
             this.followPlayer((int) tx, (int) ty);
+
             //  Calculates the angle the monster needs to be in to face the player
             this.facePlayer((int) tx, (int) ty);
         } else {
@@ -115,6 +131,10 @@ public abstract class Enemy extends Entity implements DeathListener {
             }
             //  Creates the alpha composite object based off the object's current transparency.
             this.updateComposite();
+            if (this.explosionHandler != null) {
+                StandardHandler.Handler(this.explosionHandler);
+            }
+
             /**
              * If the size of the exphandler (MAX_PARTICLES - dead ones) == 0,
              * we can set this entity to be dead, and remove it from the
@@ -123,7 +143,6 @@ public abstract class Enemy extends Entity implements DeathListener {
             if (this.getTransparency() <= 0) {
                 this.getHandler().removeEntity(this);
             }
-            StandardHandler.Handler(this.explosionHandler);
         }
     }
 
@@ -174,41 +193,34 @@ public abstract class Enemy extends Entity implements DeathListener {
     /**
      * Generates ten blood particles. Will probably make this more flexible
      * later.
-     *
-     * This needs to be refactored ASAP!!!!!!!!
      */
     public void generateBloodParticles() {
         BloodParticleHandler bph = this.getGame().getBloodHandler();
 
-        float particleMinSize = 1.0f;
-        float particleMaxSize = 10.0f;
-        float groundParticleMaxSize = 5.0f;
-
         for (int i = 0; i < BLOOD_PARTICLES; i++) {
-
-            /*bph.addEntity(new ShrinkingBoxParticle(this.getX(), this.getY(),
-                    StdOps.rand(particleMinSize, particleMaxSize), StdOps.randBounds(-10.0, -1.0, 1.0, 10.0),
-                    StdOps.randBounds(-10.0, -1.0, 1.0, 10.0), this.bloodColor, this.PARTICLE_LIFE, bph,
-                    this.getAngle(), ShapeType.CIRCLE, 0.1d));
-             */
             //  Generates the still, motionless particles.
             double centerX = this.getX() + this.getWidth() / 2;
             double centerY = this.getY() + this.getHeight() / 2;
 
-            bph.addEntity(new SlowingBoxParticle(centerX, centerY, StdOps.rand(particleMinSize, particleMaxSize),
+            //  Generates the particle that is on the ground.
+            bph.addEntity(new SlowingBoxParticle(centerX, centerY, StdOps.rand(this.PARTICLE_MIN_SIZE, this.PARTICLE_MAX_SIZE),
                     this.bloodColor, this.PARTICLE_LIFE, bph, this.getAngle(), ShapeType.CIRCLE));
 
-            bph.addEntity(new StandardBoxParticle(centerX + StdOps.rand(-10.0, 10.0), centerY + StdOps.rand(-10.0, 10.0),
-                    StdOps.rand(particleMinSize, particleMaxSize), 0, 0, this.bloodColor, this.PARTICLE_LIFE, bph,
+            //  Generates the particles that are more scattered.
+            bph.addEntity(new StandardBoxParticle(
+                    centerX + StdOps.rand(-this.PARTICLE_SCATTER_OFFSET, this.PARTICLE_SCATTER_OFFSET),
+                    centerY + StdOps.rand(-this.PARTICLE_SCATTER_OFFSET, this.PARTICLE_SCATTER_OFFSET),
+                    StdOps.rand(PARTICLE_MIN_SIZE, PARTICLE_MAX_SIZE), 0, 0, this.bloodColor, this.PARTICLE_LIFE, bph,
                     this.getAngle(), ShapeType.CIRCLE, false));
 
-            //  Generates the particles that are more scattered.
-            double min = 10.0;
-            double max = 28.0;
-
-            bph.addEntity(new StandardBoxParticle(centerX + StdOps.randBounds(-max - 10, -min, min, max + 10),
-                    centerY + StdOps.randBounds(-max - 10, -min, min, max + 10),
-                    StdOps.rand(particleMinSize, groundParticleMaxSize), 0, 0, this.bloodColor, this.PARTICLE_LIFE, bph,
+            bph.addEntity(new StandardBoxParticle(
+                    centerX + StdOps.randBounds(-this.MAX_PARTICLE_OFFSET - this.PARTICLE_SCATTER_OFFSET,
+                            -this.MIN_PARTICLE_OFFSET, this.MIN_PARTICLE_OFFSET,
+                            this.MAX_PARTICLE_OFFSET + this.PARTICLE_SCATTER_OFFSET),
+                    centerY + StdOps.randBounds(-this.MAX_PARTICLE_OFFSET - this.PARTICLE_SCATTER_OFFSET,
+                            -this.MIN_PARTICLE_OFFSET, this.MIN_PARTICLE_OFFSET,
+                            this.MAX_PARTICLE_OFFSET + this.PARTICLE_SCATTER_OFFSET),
+                    StdOps.rand(this.PARTICLE_MIN_SIZE, this.GROUND_PARTICLE_MAX_SIZE), 0, 0, this.bloodColor, this.PARTICLE_LIFE, bph,
                     this.getAngle(), ShapeType.CIRCLE, false));
         }
     }
@@ -227,7 +239,28 @@ public abstract class Enemy extends Entity implements DeathListener {
      * subclass.
      */
     @Override
-    public abstract void uponDeath();
+    public void uponDeath() {
+        if (this.getDeathAnimation() != null) {
+            this.setAnimation(this.getDeathAnimation());
+        }
+
+        this.explosionHandler = new StandardParticleHandler(50);
+        this.explosionHandler.setCamera(this.getCamera());
+        for (int i = 0; i < this.explosionHandler.getMaxParticles(); i++) {
+
+            double centerX = this.getX() + this.getWidth() / 2;
+            double centerY = this.getY() + this.getHeight() / 2;
+
+            this.explosionHandler.addEntity(new StandardBoxParticle(centerX, centerY,
+                    StdOps.rand(1.0, 5.0), StdOps.randBounds(-10.0, -3.0, 3.0, 10.0),
+                    StdOps.randBounds(-10.0, -3.0, 3.0, 10.0), this.bloodColor, 3f, this.explosionHandler,
+                    this.getAngle(), ShapeType.CIRCLE, false));
+        }
+
+        this.moveEntityToFront();
+    }
+
+    ;
 
     /**
      * Instantiates the walking animation controller.
@@ -389,7 +422,7 @@ public abstract class Enemy extends Entity implements DeathListener {
     }
 
     public int getInitialHealth() {
-        return this.initialHealth;
+        return this.INIT_HEALTH;
     }
 
     public StandardParticleHandler getExplosionHandler() {
