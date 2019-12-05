@@ -85,6 +85,12 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
             case ACCOUNT_CREATED:
                 JOptionPane.showMessageDialog(null, LanguageController.translate("Your account has been created. You may log in now."));
                 break;
+            case INVALID_EMAIL:
+                JOptionPane.showMessageDialog(null, LanguageController.translate("Your email does not meet the criteria."));
+                break;
+            case INVALID_PASS:
+                JOptionPane.showMessageDialog(null, LanguageController.translate("Your password does not meet the criteria."));
+                break;
             case INCORRECT_PASS:
                 JOptionPane.showMessageDialog(null, LanguageController.translate("Your password is incorrect."));
                 break;

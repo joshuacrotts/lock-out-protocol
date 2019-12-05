@@ -3,6 +3,8 @@ package com.dsd.game.database;
 import com.dsd.game.core.AccountStatus;
 import com.dsd.game.core.Game;
 import com.dsd.game.objects.weapons.enums.WeaponType;
+import com.dsd.game.userinterface.model.EmailTextFieldModel;
+import com.dsd.game.userinterface.model.PasswordTextFieldModel;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -321,6 +323,10 @@ public class PersistentDatabase implements RemoteDatabase {
         try {
             if (this.userInDatabase(_email, _password)) {
                 return AccountStatus.EXISTS;
+            } else if (_email.length() < EmailTextFieldModel.EMAIL_MIN_LENGTH) {
+                return AccountStatus.INVALID_EMAIL;
+            } else if (_password.length() < PasswordTextFieldModel.PASS_MIN_LENGTH) {
+                return AccountStatus.INVALID_PASS;
             } else {
                 String hashed = BCrypt.hashpw(_password, BCrypt.gensalt(SALT_ITERATIONS));
                 //  Very, VERY long statement to update the user.

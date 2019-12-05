@@ -20,6 +20,8 @@ public class EmailTextFieldModel extends TextFieldModel {
     private final int BUTTON_X_OFFSET = 300;
     private final EmailLabel emailLabel;
 
+    public static final int EMAIL_MIN_LENGTH = 8;
+
     public EmailTextFieldModel(int _x, int _y, Game _game, MenuScreen _menuScreen) {
         super(_x, _y, _game, _menuScreen);
         this.emailLabel = new EmailLabel(this, _menuScreen);
