@@ -1,0 +1,27 @@
+
+# Lock Out Protocol
+
+Lock Out Protocol is a 2D-zombie survival game, played from a top-down perspective. Lock Out Protocol is a joint effort of programming, designing, and planning between [Ronald Abrams](https://github.com/rgabrams), [Rinty Chowdhury](https://github.com/rintychy), and [Joshua Crotts](https://github.com/JoshuaCrotts) for CSC - 340: Software Engineering at the University of North Carolina at Greensboro. The underlying engine stems from one of Joshua's earlier projects (in conjunction with [Andrew Matzureff](https://github.com/AndrewMatzureff)) known as the [Standards](https://github.com/JoshuaCrotts/Standards) library. For this project, Standards is used as an abstract concept and tool, as the predominant goal of this project is to develop an application, not an engine for said application. More specifically, there are a plethra of concepts, optimizations, and miscellaneous ideas that go into crafting a game engine. As such, one semester is not nearly enough time to make a proper game, along with its complex engine.
+
+## Dependencies
+The following .jar files are required for building the project. These should be placed in a folder in the root of your development project called libraries/. 
+	1. [Apache Commons Math 3.6.1](https://mvnrepository.com/artifact/org.apache.commons/commons-math3/3.6.1)
+	2. [JBCrypt-0.4](https://mvnrepository.com/artifact/org.mindrot/jbcrypt/0.4)
+	3. [JSON 2014-01-07](https://mvnrepository.com/artifact/org.json/json/20140107)
+	4. [MySQL Connector Bin](http://www.java2s.com/Code/Jar/m/Downloadmysqlconnectorjava5124binjar.htm)
+	5. [MySQL Socket Factory Connector](https://jar-download.com/artifacts/com.google.cloud.sql/mysql-socket-factory-connector-j-8/1.0.11/source-code)
+	6. [Standards](https://github.com/JoshuaCrotts/Standards/blob/development/dist/Standards.jar)
+
+
+## Rebuilding Lock Out Protocol
+
+To rebuild the code in NetBeans 8.2, Java 8 is required (either Oracle, Amazon Corretto, or OpenJDK). Any arbitrary flavor of Java 8 is most likely acceptable.
+
+Create a new project in any IDE, then clone the repository inside of the src/ folder of the aforesaid project. At this point, all files should be present and available to compile and run. For any of the above dependencies, make a folder called libraries/ in the root of the project.
+
+## Reporting Bugs
+
+See the Issues Tab.
+
+## Version History
+The **master** branch encompasses significant development changes in the project, whereas the three other branches house various experimentation and states of progression. These branch are constantly evolving. Rarely (whenever it is best), the master branch is updated to mimic one of these three branches.

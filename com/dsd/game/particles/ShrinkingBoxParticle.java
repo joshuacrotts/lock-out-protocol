@@ -1,0 +1,56 @@
+package com.dsd.game.particles;
+
+import com.revivedstandards.handlers.StandardParticleHandler;
+import com.revivedstandards.model.StandardBoxParticle;
+import com.revivedstandards.view.ShapeType;
+import java.awt.Color;
+import java.awt.Graphics2D;
+
+/**
+ * This class represents the same as a standard box particle, with the exception
+ * that this class eventually disappears after a certain amount of time.
+ *
+ * @group [Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
+ *
+ * @updated 12/3/19
+ */
+public class ShrinkingBoxParticle extends StandardBoxParticle {
+
+    //  Determines how often the particle will shrink in size.
+    //
+    //
+    //  Admittedly, this would probably (in theory with no limitations) be better synced
+    //  under a clock system, but because EACH particle would then run on its own
+    //  individual clock (Timer), this will work better.
+    private final double SHRINK_INT;
+
+    private double currentShrinkInterval;
+
+    public ShrinkingBoxParticle(double _x, double _y, double _dimension, double _velX, double _velY,
+            Color _color, double _life, StandardParticleHandler _sph, double _angle,
+            ShapeType _type, double _shrinkInt) {
+        super(_x, _y, _dimension, _velX, _velY, _color, _life, _sph, _angle, _type, false);
+        this.SHRINK_INT = _shrinkInt;
+        this.currentShrinkInterval = _dimension;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        this.currentShrinkInterval -= this.SHRINK_INT;
+        this.setWidth((int) this.currentShrinkInterval);
+        this.setHeight((int) this.currentShrinkInterval);
+
+        if (this.currentShrinkInterval <= 0) {
+            this.setAlive(false);
+        }
+    }
+
+    @Override
+    public void render(Graphics2D _g2) {
+        super.render(_g2);
+    }
+}

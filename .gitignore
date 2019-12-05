@@ -1,7 +1,0 @@
-/dist/*
-/build/*
-/test/*
-/.idea/*
-/nbproject/private/*
-/idea/*
-build
