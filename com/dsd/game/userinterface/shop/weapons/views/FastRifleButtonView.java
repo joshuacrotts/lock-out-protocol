@@ -14,7 +14,7 @@ import java.awt.Graphics2D;
 public class FastRifleButtonView extends ShopButtonView {
 
     public FastRifleButtonView(FastRifleButton _rifleButton) {
-        super(_rifleButton, StdOps.loadImage("src/resources/img/items/icons/fast_rifle_icon.png"));
+        super(_rifleButton, StdOps.loadImage("src/resources/img/items/icons/FastRifle_icon.png"));
     }
 
     @Override

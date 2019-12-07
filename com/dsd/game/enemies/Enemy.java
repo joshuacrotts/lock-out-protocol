@@ -1,9 +1,10 @@
 package com.dsd.game.enemies;
 
-import com.dsd.game.controller.BloodParticleHandler;
+import com.dsd.game.handlers.BloodParticleHandler;
 import com.dsd.game.core.Game;
 import com.dsd.game.enemies.enums.EnemyState;
 import com.dsd.game.objects.Entity;
+import com.dsd.game.particles.BloodType;
 import com.dsd.game.particles.SlowingBoxParticle;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
@@ -67,15 +68,6 @@ public abstract class Enemy extends Entity implements DeathListener {
 
     //  Max amount of particles that can be summoned in the particle handler
     private static final int BLOOD_PARTICLES = 10;
-    private final float PARTICLE_LIFE = 20f;
-
-    //  Other particle dimension and positioning information.
-    private final float PARTICLE_MIN_SIZE = 1.0f;
-    private final float PARTICLE_MAX_SIZE = 10.0f;
-    private final float GROUND_PARTICLE_MAX_SIZE = 5.0f;
-    private final float PARTICLE_SCATTER_OFFSET = 10.0f;
-    private final float MIN_PARTICLE_OFFSET = 10.0f;
-    private final float MAX_PARTICLE_OFFSET = 28.0f;
 
     //  Blood particle colors (on a per-monster basis).
     //  If none is selected, red is the default.
@@ -111,7 +103,7 @@ public abstract class Enemy extends Entity implements DeathListener {
         this.setAlive(this.getHealth() > 0);
         this.getAnimationController().tick();
         this.getAnimationController().getStandardAnimation().setRotation(this.getAngle());
-        
+
         if (this.isAlive()) {
             this.updatePosition();
             //  Save the target's position
@@ -191,7 +183,7 @@ public abstract class Enemy extends Entity implements DeathListener {
     }
 
     /**
-     * Generates ten blood particles. Will probably make this more flexible
+     * Generates several blood particles. Will probably make this more flexible
      * later.
      */
     public void generateBloodParticles() {
@@ -203,25 +195,11 @@ public abstract class Enemy extends Entity implements DeathListener {
             double centerY = this.getY() + this.getHeight() / 2;
 
             //  Generates the particle that is on the ground.
-            bph.addEntity(new SlowingBoxParticle(centerX, centerY, StdOps.rand(this.PARTICLE_MIN_SIZE, this.PARTICLE_MAX_SIZE),
-                    this.bloodColor, this.PARTICLE_LIFE, bph, this.getAngle(), ShapeType.CIRCLE));
+            bph.addBloodParticle(BloodType.SLOWING, centerX, centerY, this.getAngle(), this.bloodColor);
 
             //  Generates the particles that are more scattered.
-            bph.addEntity(new StandardBoxParticle(
-                    centerX + StdOps.rand(-this.PARTICLE_SCATTER_OFFSET, this.PARTICLE_SCATTER_OFFSET),
-                    centerY + StdOps.rand(-this.PARTICLE_SCATTER_OFFSET, this.PARTICLE_SCATTER_OFFSET),
-                    StdOps.rand(PARTICLE_MIN_SIZE, PARTICLE_MAX_SIZE), 0, 0, this.bloodColor, this.PARTICLE_LIFE, bph,
-                    this.getAngle(), ShapeType.CIRCLE, false));
-
-            bph.addEntity(new StandardBoxParticle(
-                    centerX + StdOps.randBounds(-this.MAX_PARTICLE_OFFSET - this.PARTICLE_SCATTER_OFFSET,
-                            -this.MIN_PARTICLE_OFFSET, this.MIN_PARTICLE_OFFSET,
-                            this.MAX_PARTICLE_OFFSET + this.PARTICLE_SCATTER_OFFSET),
-                    centerY + StdOps.randBounds(-this.MAX_PARTICLE_OFFSET - this.PARTICLE_SCATTER_OFFSET,
-                            -this.MIN_PARTICLE_OFFSET, this.MIN_PARTICLE_OFFSET,
-                            this.MAX_PARTICLE_OFFSET + this.PARTICLE_SCATTER_OFFSET),
-                    StdOps.rand(this.PARTICLE_MIN_SIZE, this.GROUND_PARTICLE_MAX_SIZE), 0, 0, this.bloodColor, this.PARTICLE_LIFE, bph,
-                    this.getAngle(), ShapeType.CIRCLE, false));
+            bph.addBloodParticle(BloodType.STANDARD, centerX, centerY, this.getAngle(), this.bloodColor);
+            bph.addBloodParticle(BloodType.SCATTERED, centerX, centerY, this.getAngle(), this.bloodColor);
         }
     }
 

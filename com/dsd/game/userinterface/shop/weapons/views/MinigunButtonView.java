@@ -12,7 +12,7 @@ import java.awt.Graphics2D;
 public class MinigunButtonView extends ShopButtonView {
 
     public MinigunButtonView(MinigunButton _minigunButton) {
-        super(_minigunButton, StdOps.loadImage("src/resources/img/items/icons/minigun_icon.png"));
+        super(_minigunButton, StdOps.loadImage("src/resources/img/items/icons/Minigun_icon.png"));
     }
 
     @Override

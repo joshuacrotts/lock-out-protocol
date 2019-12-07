@@ -12,7 +12,7 @@ import java.awt.Graphics2D;
 public class ShotgunButtonView extends ShopButtonView {
 
     public ShotgunButtonView(ShotgunButton _shotgunButton) {
-        super(_shotgunButton, StdOps.loadImage("src/resources/img/items/icons/shotgun_icon.png"));
+        super(_shotgunButton, StdOps.loadImage("src/resources/img/items/icons/Shotgun_icon.png"));
     }
 
     @Override

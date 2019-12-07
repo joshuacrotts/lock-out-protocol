@@ -1,7 +1,6 @@
 package com.dsd.game.core;
 
 import com.dsd.game.controller.AudioBoxController;
-import com.dsd.game.controller.BloodParticleHandler;
 import com.dsd.game.controller.CollisionHandlerController;
 import com.dsd.game.controller.CursorController;
 import com.dsd.game.controller.DebugController;
@@ -12,6 +11,7 @@ import com.dsd.game.controller.RainController;
 import com.dsd.game.controller.SnowController;
 import com.dsd.game.controller.TimerController;
 import com.dsd.game.database.TranslatorDatabase;
+import com.dsd.game.handlers.BloodParticleHandler;
 import com.dsd.game.levels.MetalLevel;
 import com.dsd.game.objects.Player;
 import com.dsd.game.userinterface.HUDScreen;

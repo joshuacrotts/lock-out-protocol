@@ -14,10 +14,11 @@ import java.awt.image.BufferedImage;
  * This class is a template for a gun. In the future, this will be abstract, so
  * other guns can extend it and modify the fields as needed.
  *
- * @TODO: Add bullet damage type.
- *
  * [Group Name: Data Structure Deadheads]
+ *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 12/7/19
  */
 public abstract class Gun extends Weapon {
 

@@ -9,19 +9,37 @@ package com.dsd.game.objects.weapons.enums;
  * @author Joshua, Ronald, Rinty
  */
 public enum WeaponType {
-    RIFLE("rifle"),
-    SHOTGUN("shotgun"),
-    PISTOL("pistol"),
-    GRENADE_LAUNCHER("grenade_launcher"),
-    //  PPSH-41 equivalent.
-    FAST_RIFLE("fast_rifle"),
-    MINIGUN("minigun"),
-    SUPER_SHOTGUN("sshotgun");
+    PISTOL("Pistol"),
+    RIFLE("Rifle"),
+    FAST_RIFLE("FastRifle"),
+    SHOTGUN("Shotgun"),
+    GRENADE_LAUNCHER("GrenadeLauncher"),
+    MINIGUN("Minigun"),
+    SUPER_SHOTGUN("SuperShotgun");
 
     private final String type;
 
     private WeaponType(String _type) {
         this.type = _type;
+    }
+
+    /**
+     * Constructs a StringBuilder object for every weapon, accounting for their
+     * total ammo, current ammo and the weapon type.
+     *
+     * Used in the persistent database.
+     */
+    public static StringBuilder buildInventoryString() {
+        StringBuilder weapons = new StringBuilder();
+
+        for (WeaponType value : WeaponType.values()) {
+            String currType = value.getType();
+            weapons.append(currType).append(", ");
+            weapons.append(currType).append("Ammo").append(", ");
+            weapons.append(currType).append("TotalAmmo").append(", ");
+        }
+
+        return weapons;
     }
 
     @Override

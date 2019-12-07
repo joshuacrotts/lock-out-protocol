@@ -6,6 +6,8 @@ package com.dsd.game.database;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ *
+ * @updated 12/7/19
  */
 public enum SerializableType {
     PLAYER, LEVEL, GAME_INFO, WAVE_INFO, INVENTORY;
