@@ -16,7 +16,7 @@ import com.revivedstandards.model.StandardAnimation;
  *
  * @author Joshua, Ronald, Rinty
  *
- * @updated 11/12/19
+ * @updated 12/7/19
  */
 public class Pistol extends Gun {
 
@@ -24,10 +24,14 @@ public class Pistol extends Gun {
     private static final int WALKING_FPS = 10;
     private static final int SHOOT_GUN_FPS = 20;
 
+    //  How many of each animation we have for this gun.
+    private static final int WALKING_FRAMES = 6;
+    private static final int SHOOTING_FRAMES = 4;
+
     //  Delay between shots.
     private static final int DELAY = 750;
 
-    //  Delay between reloadign and firing the first bullet afterwards.
+    //  Delay between reloading and firing the first bullet afterwards.
     private static final long RELOAD_DELAY = 2000;
 
     //  Damage from the pistol.
@@ -66,10 +70,11 @@ public class Pistol extends Gun {
         //  Instantiates the animation controllers.
         StandardAnimatorController walkingAnimation = new StandardAnimatorController(
                 new StandardAnimation(_player, Utilities.loadFrames("src/resources/img/player/player_"
-                        + _player.getPlayerSex() + "/player_walk_gun/", 6), WALKING_FPS));
+                        + _player.getPlayerSex() + "/player_walk_gun/", WALKING_FRAMES), WALKING_FPS));
+        
         StandardAnimatorController shootingAnimation = new StandardAnimatorController(
                 new StandardAnimation(_player, Utilities.loadFrames("src/resources/img/player/player_"
-                        + _player.getPlayerSex() + "/player_shoot_gun/", 4), SHOOT_GUN_FPS));
+                        + _player.getPlayerSex() + "/player_shoot_gun/", SHOOTING_FRAMES), SHOOT_GUN_FPS));
         super.setWalkFrames(walkingAnimation);
         super.setAttackFrames(shootingAnimation);
     }

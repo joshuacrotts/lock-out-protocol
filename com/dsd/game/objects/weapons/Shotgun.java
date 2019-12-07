@@ -16,13 +16,17 @@ import com.revivedstandards.model.StandardAnimation;
  *
  * @author Joshua, Ronald, Rinty
  *
- * @updated 11/12/19
+ * @updated 12/7/19
  */
 public class Shotgun extends Gun {
 
     //  FPS variables for how fast the rifle frames animate.
     private static final int WALKING_FPS = 10;
     private static final int SHOOT_GUN_FPS = 20;
+
+    //  How many of each animation we have for this gun.
+    private static final int WALKING_FRAMES = 6;
+    private static final int SHOOTING_FRAMES = 4;
 
     //  Delay between shooting one bullet and the next (in ms).
     private final int DELAY = 2500;
@@ -54,9 +58,11 @@ public class Shotgun extends Gun {
     public void loadAssets(Player _player) {
         //  Instantiates the animation controllers.
         StandardAnimatorController walkingAnimation = new StandardAnimatorController(
-                new StandardAnimation(_player, Utilities.loadFrames("src/resources/img/player/player_" + _player.getPlayerSex() + "/player_walk_shotgun/", 6), WALKING_FPS));
+                new StandardAnimation(_player, Utilities.loadFrames("src/resources/img/player/player_" + _player.getPlayerSex() + "/player_walk_shotgun/",
+                        WALKING_FRAMES), WALKING_FPS));
         StandardAnimatorController shootingAnimation = new StandardAnimatorController(
-                new StandardAnimation(_player, Utilities.loadFrames("src/resources/img/player/player_" + _player.getPlayerSex() + "/player_shoot_shotgun/", 4), SHOOT_GUN_FPS));
+                new StandardAnimation(_player, Utilities.loadFrames("src/resources/img/player/player_" + _player.getPlayerSex() + "/player_shoot_shotgun/",
+                        SHOOTING_FRAMES), SHOOT_GUN_FPS));
         super.setWalkFrames(walkingAnimation);
         super.setAttackFrames(shootingAnimation);
     }

@@ -13,7 +13,7 @@ import java.awt.Graphics2D;
 public class GrenadeLauncherButtonView extends ShopButtonView {
 
     public GrenadeLauncherButtonView(GrenadeLauncherButton _grenadeButton) {
-        super(_grenadeButton, StdOps.loadImage("src/resources/img/items/icons/grenade_launcher_icon.png"));
+        super(_grenadeButton, StdOps.loadImage("src/resources/img/items/icons/GrenadeLauncher_icon.png"));
     }
 
     @Override

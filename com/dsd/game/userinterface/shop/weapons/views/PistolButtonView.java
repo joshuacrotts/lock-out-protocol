@@ -14,7 +14,7 @@ import java.awt.Graphics2D;
 public class PistolButtonView extends ShopButtonView {
 
     public PistolButtonView(PistolButton _pistolButton) {
-        super(_pistolButton, StdOps.loadImage("src/resources/img/items/icons/pistol_icon.png"));
+        super(_pistolButton, StdOps.loadImage("src/resources/img/items/icons/Pistol_icon.png"));
     }
 
     @Override
