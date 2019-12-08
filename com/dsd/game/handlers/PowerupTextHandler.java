@@ -21,7 +21,6 @@ public class PowerupTextHandler implements Renderable, Updatable {
 
     //  Miscellaneous references.
     private final Game game;
-    private final HUDScreen hudScreen;
 
     //  ArrayList of Powerup Labels.
     private final ArrayList<PowerupTextLabel> labels;
@@ -30,9 +29,8 @@ public class PowerupTextHandler implements Renderable, Updatable {
     private final int Y_OFFSET_FACTOR = 20;
     private final int MAX_LABELS = 5;
 
-    public PowerupTextHandler(Game _game, HUDScreen _hudScreen) {
+    public PowerupTextHandler(Game _game) {
         this.game = _game;
-        this.hudScreen = _hudScreen;
         this.labels = new ArrayList<>();
     }
 

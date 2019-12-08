@@ -39,6 +39,8 @@ public enum DifficultyType {
             case 3:
                 text = "NIGHTMARE";
                 break;
+            default:
+                throw new IllegalStateException("Invalid difficulty number!");
         }
         this.difficultyString = text;
     }

@@ -65,10 +65,14 @@ public class TextFieldModel extends Interactor implements MouseEventInterface {
 
     @Override
     public void onMouseEnterHover() {
+        //  No mouse logic.
+
     }
 
     @Override
     public void onMouseExitHover() {
+        //  No mouse logic.
+
     }
 
     public void appendToString(char _c) {

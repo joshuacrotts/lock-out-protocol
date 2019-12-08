@@ -62,20 +62,20 @@ public class StandardLabel extends Interactor implements MouseEventInterface {
 
     @Override
     public void onMouseClick() {
-        //throw new UnsupportedOperationException("Not supported yet.");
-        //To change body of generated methods, choose Tools | Templates.
+        //  No mouse logic.
+
     }
 
     @Override
     public void onMouseEnterHover() {
-        //throw new UnsupportedOperationException("Not supported yet.");
-        //To change body of generated methods, choose Tools | Templates.
+        //  No mouse logic.
+
     }
 
     @Override
     public void onMouseExitHover() {
-        //throw new UnsupportedOperationException("Not supported yet.");
-        //To change body of generated methods, choose Tools | Templates.
+        //  No mouse logic.
+
     }
 
 //=============================== GETTERS ====================================//

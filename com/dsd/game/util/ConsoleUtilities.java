@@ -8,7 +8,7 @@ package com.dsd.game.util;
  * @author
  * https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
  */
-public final class StdConsole {
+public final class ConsoleUtilities {
 
     // Reset
     public static final String RESET = "\033[0m";  // Text Reset
@@ -84,13 +84,13 @@ public final class StdConsole {
     public static final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";   // WHITE
 
     public static void println(String _color, String _text) {
-        System.out.println(_color + _text + StdConsole.RESET);
+        System.out.println(_color + _text + ConsoleUtilities.RESET);
     }
 
     public static void println(String _text) {
-        System.out.println(StdConsole.RESET + " " + _text);
+        System.out.println(ConsoleUtilities.RESET + " " + _text);
     }
 
-    private StdConsole() {
+    private ConsoleUtilities() {
     }
 }

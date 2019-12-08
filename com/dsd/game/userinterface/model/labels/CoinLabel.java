@@ -34,6 +34,7 @@ public class CoinLabel extends StandardLabel {
 
     @Override
     public void tick() {
+        //  Nothing to tick since there's no logic for this label.
     }
 
     @Override

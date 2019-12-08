@@ -39,9 +39,6 @@ public class CityLocator implements CityLocatorAPIAdapter {
         CityLocator.key = CityLocator.line.substring(CityLocator.line.lastIndexOf(":") + 1);
     }
 
-    public CityLocator() {
-    }
-
     /**
      * Connects to the IPStack API with the supplied IP, and constructs a
      * JSONObject with the 'city' field. Returns this in a String object.

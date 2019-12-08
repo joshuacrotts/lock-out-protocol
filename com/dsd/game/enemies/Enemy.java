@@ -5,7 +5,6 @@ import com.dsd.game.core.Game;
 import com.dsd.game.enemies.enums.EnemyState;
 import com.dsd.game.objects.Entity;
 import com.dsd.game.particles.BloodType;
-import com.dsd.game.particles.SlowingBoxParticle;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.handlers.StandardHandler;

@@ -38,10 +38,7 @@ public class WeatherConnector implements WeatherConnectorAPIAdapter {
         //  Extracts the key from the line read in by the buffered reader
         WeatherConnector.key = WeatherConnector.line.substring(WeatherConnector.line.lastIndexOf(":") + 1);
     }
-
-    public WeatherConnector() {
-    }
-
+    
     /**
      * Connects to the weather API to retrieve the JSON-formatted weather
      * information for the supplied city.

@@ -68,6 +68,8 @@ public class BossSpawnerController extends StandardGameObject implements TimerIn
                 enemy = new FemaleMonsterBoss(xPos, yPos, this.game, this.parentContainer);
                 this.game.getHUDScreen().addInteractor(new BossHealthBar(this.game, enemy));
                 break;
+            default:
+                throw new IllegalStateException("Invalid boss spawner type!");
         }
         this.parentContainer.addEntity(enemy);
     }

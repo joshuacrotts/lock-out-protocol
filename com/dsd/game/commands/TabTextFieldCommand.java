@@ -15,7 +15,7 @@ import java.awt.event.KeyEvent;
  */
 public class TabTextFieldCommand extends Command {
 
-    public Game game;
+    private final Game game;
 
     public TabTextFieldCommand(Game _game) {
         this.game = _game;

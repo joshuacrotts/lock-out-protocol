@@ -73,6 +73,8 @@ public class AttackCommand extends Command implements TimerInterface {
                 case SUPER_SHOTGUN:
                     this.gunAttack((Gun) weapon);
                     break;
+                default:
+                    throw new IllegalStateException("Invalid weapon type!");
             }
             /**
              * Once the weapon is used, we need to toggle it to false so the
@@ -127,7 +129,7 @@ public class AttackCommand extends Command implements TimerInterface {
             //  If we're on the grenade launcher, we don't need to fire
             //  a casing.
             if (_gun.getWeaponType() != WeaponType.GRENADE_LAUNCHER) {
-                BulletCasing casing = new BulletCasing(this.game, this.player, _gun);
+                BulletCasing casing = new BulletCasing(this.player, _gun);
             }
         }
     }

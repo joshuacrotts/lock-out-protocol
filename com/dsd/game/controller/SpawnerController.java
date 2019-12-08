@@ -95,6 +95,8 @@ public class SpawnerController extends StandardGameObject implements TimerInterf
                 case TINY_MONSTER:
                     this.parentContainer.addEntity(new TinyMonster(xPos, yPos, this.game, this.parentContainer));
                     break;
+                default:
+                    throw new IllegalStateException("Invalid enemy spawner type!");
             }
         }
     }

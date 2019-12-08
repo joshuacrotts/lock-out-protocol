@@ -5,12 +5,12 @@ Lock Out Protocol is a 2D-zombie survival game, played from a top-down perspecti
 ## Dependencies
 The following .jar files are required for building the project. These should be placed in a folder in the root of your development project called libraries/. 
 
-1. [Apache Commons Math 3.6.1](https://mvnrepository.com/artifact/org.apache.commons/commons-math3/3.6.1)
-2. [JBCrypt-0.4](https://mvnrepository.com/artifact/org.mindrot/jbcrypt/0.4)
-3. [JSON 2014-01-07](https://mvnrepository.com/artifact/org.json/json/20140107)
-4. [MySQL Connector Bin](http://www.java2s.com/Code/Jar/m/Downloadmysqlconnectorjava5124binjar.htm)
-5. [MySQL Socket Factory Connector](https://jar-download.com/artifacts/com.google.cloud.sql/mysql-socket-factory-connector-j-8/1.0.11/source-code)
-6. [Standards](https://github.com/JoshuaCrotts/Standards/blob/development/dist/Standards.jar)
+ 1. [Apache Commons Math 3.6.1](https://mvnrepository.com/artifact/org.apache.commons/commons-math3/3.6.1)
+ 2. [JBCrypt-0.4](https://mvnrepository.com/artifact/org.mindrot/jbcrypt/0.4)
+ 3. [JSON 2014-01-07](https://mvnrepository.com/artifact/org.json/json/20140107)
+ 4. [MySQL Connector Bin](http://www.java2s.com/Code/Jar/m/Downloadmysqlconnectorjava5124binjar.htm)
+ 5. [MySQL Socket Factory Connector](https://jar-download.com/artifacts/com.google.cloud.sql/mysql-socket-factory-connector-j-8/1.0.11/source-code)
+ 6. [Standards](https://github.com/JoshuaCrotts/Standards/blob/development/dist/Standards.jar)
 
 
 ## Rebuilding Lock Out Protocol

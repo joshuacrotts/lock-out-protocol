@@ -37,6 +37,7 @@ public class WeaponIconView extends Interactor {
 
     @Override
     public void tick() {
+        //  Nothing to tick since this is just the icon view.
     }
 
     @Override
@@ -67,13 +68,19 @@ public class WeaponIconView extends Interactor {
 
     @Override
     public void onMouseClick() {
+        //  No mouse logic.
+
     }
 
     @Override
     public void onMouseEnterHover() {
+        //  No mouse logic.
+
     }
 
     @Override
     public void onMouseExitHover() {
+        //  No mouse logic.
+
     }
 }
