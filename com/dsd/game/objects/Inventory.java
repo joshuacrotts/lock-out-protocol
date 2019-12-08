@@ -27,10 +27,12 @@ import java.util.logging.Logger;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/7/19
  */
 public class Inventory implements SerializableObject {
 
-    //  Miscellaneous reference variables
+    //  Miscellaneous reference variables.
     private final Game game;
     private final Player player;
     private final StandardCollisionHandler parentHandler;
@@ -45,6 +47,7 @@ public class Inventory implements SerializableObject {
         this.player = _player;
         this.weapons = new ArrayList<>();
         this.parentHandler = _sch;
+        
         //  This will change with time (to a subclass of Weapon).
         this.weapons.add(new Pistol(_game, _player, _sch));
         this.weapons.add(new Rifle(_game, _player, _sch));
@@ -138,6 +141,8 @@ public class Inventory implements SerializableObject {
                 case SUPER_SHOTGUN:
                     this.weapons.add(new SuperShotgun(this.game, this.player, this.parentHandler));
                     break;
+                default:
+                    throw new IllegalArgumentException("Invalid weapon type!");
             }
         }
     }
