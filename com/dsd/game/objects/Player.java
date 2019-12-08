@@ -35,6 +35,8 @@ import org.apache.commons.math3.util.FastMath;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/7/19
  */
 public class Player extends Entity implements DeathListener, SerializableObject {
 
@@ -42,7 +44,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
     private StandardCamera sc;
 
     //  Bullet Casing particle handler
-    private StandardParticleHandler casingHandler;
+    private final StandardParticleHandler casingHandler;
 
     /**
      * Refers to the player's current state (walking, shooting, etc.)
@@ -71,9 +73,9 @@ public class Player extends Entity implements DeathListener, SerializableObject 
     public Player(int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, 100, StandardID.Player, (Game) _game, _sch);
         //  Instantiate the inventory
-        this.inventory = new Inventory(this.getGame(), this, _sch);
+        this.inventory = new Inventory(_game, this, _sch);
         //  Initializes the miscellaneous variables
-        this.sc = this.getGame().getCamera();
+        this.sc = _game.getCamera();
         //  Sets the default animation
         this.setAnimation(this.inventory.getCurrentWeapon().getWalkFrames());
         //  Instantiate commands
@@ -84,26 +86,32 @@ public class Player extends Entity implements DeathListener, SerializableObject 
         //  Adds the player to the list of collidable objects
         _sch.addCollider(StandardID.Player);
         _sch.flagAlive(StandardID.Player);
-        this.setHealth(this.maxHealth);
+        super.setHealth(this.maxHealth);
     }
 
     @Override
     public void tick() {
         this.setAlive(this.getHealth() > 0);
+        
         if (this.isAlive()) {
+
             //  If the player is not standing still, update the animation controller.
             if (!this.isStanding()) {
                 this.getAnimationController().tick();
             }
+
             this.getAnimationController().getStandardAnimation().setRotation(this.getAngle());
             this.updateDimensions();
-            // Save the mouse position
+
+            // Save the mouse position.
             double mx = this.sc.getX() + this.getGame().getMouse().getMouseX() - this.sc.getVpw();
             double my = this.sc.getY() + this.getGame().getMouse().getMouseY() - this.sc.getVph();
+
             //*******************************************************************//
             //      Causes the player to follow the cursor wherever on the screen //
             //*******************************************************************//
             this.followCursor((int) mx, (int) my);
+
             //*****************************************************************//
             //      Calculates the angle the player needs to be in to face the   //
             //      cursor                                                     //
@@ -150,6 +158,14 @@ public class Player extends Entity implements DeathListener, SerializableObject 
     }
 
 //=========================== CRUD OPERATIONS ================================//
+    /**
+     * Creates the data for the Player object. It stores the sex, x, y pos,
+     * money and health information in a String, which is returned to the
+     * database.
+     *
+     * @param _id
+     * @return
+     */
     @Override
     public String createObject(SerializableType _id) {
         if (_id != SerializableType.PLAYER) {
@@ -164,6 +180,12 @@ public class Player extends Entity implements DeathListener, SerializableObject 
         return playerDetails.toString();
     }
 
+    /**
+     * Reads in the player info by a HashMap. Each property is set via the
+     * String key, which holds the double value.
+     *
+     * @param _playerInfo
+     */
     public void readObject(HashMap<String, Double> _playerInfo) {
         this.setPlayerSex(_playerInfo.get("Sex") == 1 ? "male" : "female");
         this.setX(_playerInfo.get("PlayerX"));

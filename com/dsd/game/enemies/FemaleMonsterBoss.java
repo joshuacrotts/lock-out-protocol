@@ -24,7 +24,7 @@ import java.util.TimerTask;
  *
  * @author Joshua, Ronald, Rinty
  *
- * @updated 12/3/19
+ * @updated 12/7/19
  */
 public class FemaleMonsterBoss extends Enemy implements DeathListener {
 
@@ -32,7 +32,7 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
     private final Timer bossProjectileTimer;
 
     //  Static bufferedimage array so the images aren't constantly loading in
-    //  upon instantiation of a new monster
+    //  upon instantiation of a new monster.
     private static final BufferedImage[] WALK_FRAMES;
     private static final BufferedImage[] DEATH_FRAMES;
 
@@ -167,7 +167,6 @@ public class FemaleMonsterBoss extends Enemy implements DeathListener {
      * boss char (this will improve later).
      */
     private void addProjectiles() {
-        double angle = this.getAngle();
         int[] velX = {0, 4, 4, 4, 0, -4, -4, -4};
         int[] velY = {-4, -4, 0, 4, 4, 4, 0, -4};
         for (int i = 0; i < velX.length; i++) {
