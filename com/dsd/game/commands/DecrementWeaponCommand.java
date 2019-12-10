@@ -11,17 +11,15 @@ import com.sun.glass.events.KeyEvent;
  *
  * [Group Name: Data Structure Deadheads]
  *
- * @author Joshua, Ronald, Rinty
- *
- * @updated 11/12/19
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class DecrementWeaponCommand extends Command {
 
-    //  Miscellaneous reference variables.
+    // Miscellaneous reference variables.
     private final Game game;
     private final Player player;
 
-    //  This may need to change with time.
+    // This may need to change with time.
     public DecrementWeaponCommand(Game _game, Player _player) {
         this.game = _game;
         this.player = _player;
@@ -35,4 +33,5 @@ public class DecrementWeaponCommand extends Command {
         }
         this.player.getInventory().changeWeapon(WeaponSelection.DECREMENT);
     }
+    
 }

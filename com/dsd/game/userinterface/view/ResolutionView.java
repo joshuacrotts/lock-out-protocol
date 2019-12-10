@@ -12,7 +12,7 @@ import java.awt.Graphics2D;
  * This is the view that will be shown when the user wants to change their
  * resolution.
  *
- * @author Joshua
+ * @author Joshua, Ronald, Rinty
  */
 public class ResolutionView extends Screen implements MouseEventInterface {
 

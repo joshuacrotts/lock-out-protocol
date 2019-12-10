@@ -16,7 +16,7 @@ import org.json.JSONObject;
  * This class is an example of connecting to and loading data from the weather
  * API.
  *
- * @author Joshua, Ronald, Rinty
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class WeatherConnector implements WeatherConnectorAPIAdapter {
 
@@ -27,15 +27,15 @@ public class WeatherConnector implements WeatherConnectorAPIAdapter {
     private static String key;
 
     static {
-        //  Loads in the key for the api connection
+        //  Loads in the key for the api connection.
         WeatherConnector.inputStream = WeatherConnector.class.getClassLoader().getResourceAsStream(".config/.weather_config.txt");
         WeatherConnector.reader = new BufferedReader(new InputStreamReader(WeatherConnector.inputStream));
         try {
             WeatherConnector.line = WeatherConnector.reader.readLine();
-        } catch (IOException ex) {
-            Logger.getLogger(WeatherConnector.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException _ex) {
+            Logger.getLogger(WeatherConnector.class.getName()).log(Level.SEVERE, null, _ex);
         }
-        //  Extracts the key from the line read in by the buffered reader
+        //  Extracts the key from the line read in by the buffered reader.
         WeatherConnector.key = WeatherConnector.line.substring(WeatherConnector.line.lastIndexOf(":") + 1);
     }
     
@@ -44,15 +44,14 @@ public class WeatherConnector implements WeatherConnectorAPIAdapter {
      * information for the supplied city.
      *
      * @param city
-     * @return
+     * @return this in the string object.
      */
-    private static String fetch(String city) {
+    private static String fetch(String _city) {
         StringBuilder jsonInformation = null;
         try {
-            //  Processes the request to the API, and reads the information
-            //  into the StringBuilder object.
+            //  Processes the request to the API, and reads the information into the StriBuilder object.
             jsonInformation = new StringBuilder();
-            url = new URL(String.format("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s ", city, key));
+            url = new URL(String.format("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s ", _city, key));
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -61,44 +60,28 @@ public class WeatherConnector implements WeatherConnectorAPIAdapter {
                 jsonInformation.append(inputLine);
             }
             in.close();
-        } catch (IOException ex) {
-            Logger.getLogger(WeatherConnector.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException _ex) {
+            Logger.getLogger(WeatherConnector.class.getName()).log(Level.SEVERE, null, _ex);
         }
         return jsonInformation.toString();
     }
 
-    //=================================== GETTERS =====================================
-    /**
-     * Returns the weather type for the parameter city.
-     *
-     * @param city
-     * @return
-     */
+    //=================================== GETTERS ==============================
     @Override
-    public String getWeather(String city) {
-        return getWeatherType(getWeatherArray(city));
+    public String getWeather(String _city) {
+        // Returns the weather type for the parameter city.
+        return getWeatherType(getWeatherArray(_city));
     }
 
-    /**
-     * Returns the array from the collection of JSON objects from the API
-     * connection.
-     *
-     * @param city
-     * @return
-     */
-    private static JSONArray getWeatherArray(String city) {
-        JSONObject weatherJSON = new JSONObject(WeatherConnector.fetch(city));
+    private static JSONArray getWeatherArray(String _city) {
+        JSONObject weatherJSON = new JSONObject(WeatherConnector.fetch(_city));
+        // Returns the array from the collection of JSON onjects from the API connection.
         return (JSONArray) weatherJSON.get("weather");
     }
 
-    /**
-     * Returns the text following the description JSON object
-     *
-     * @param weatherArray
-     * @return
-     */
-    private static String getWeatherType(JSONArray weatherArray) {
-        JSONObject indexOne = (JSONObject) weatherArray.getJSONObject(0);
+    private static String getWeatherType(JSONArray _weatherArray) {
+        JSONObject indexOne = (JSONObject) _weatherArray.getJSONObject(0);
+        // Returns the text following the description JSON object.
         return (String) indexOne.get("description");
     }
 

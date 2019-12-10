@@ -41,49 +41,36 @@ import javax.swing.JOptionPane;
  * StandardCamera. Thus, these relationships are linked here, and don't have to
  * be touched later on down the road.
  *
- * @author Joshua, Ronald, Rinty
+ * [Group Name: Data Structure Deadheads]
  *
- * @updated 11/30/19
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class Game extends StandardGame {
 
-    //  Miscellaneous reference variables.
+    // Miscellaneous reference variables.
     private final StandardCollisionHandler sch;
     private final StandardCamera sc;
-
-    //  Database references.
+    // Database references.
     private final TranslatorDatabase translatorDatabase;
-
-    //  UI Element views.
+    // UI Element views.
     private final MenuScreen menuScreen;
     private final PauseScreen pauseScreen;
     private final PreambleScreen preambleScreen;
     private final HUDScreen hudScreen;
     private final ShopScreen shopScreen;
     private final HelpScreen helpScreen;
-
-    //  Rain controller which contacts the API for the logic of determining
-    //  whether it should rain or not.
+    // Rain controller which contacts the API for the logic of determining whether it should rain or not.
     private final RainController rainController;
-
-    //  Snow controller which contacts the API for the logic of determining
-    //  whether it should snow or not.
+    // Snow controller which contacts the API for the logic of determining whether it should snow or not.
     private final SnowController snowController;
-
     private final DebugController debugController;
     private final DifficultyController difficultyController;
     private final LevelController levelController;
     private final CursorController cursorController;
     private final BloodParticleHandler bloodParticleHandler;
-    
-    private static final int MAX_SOUND_TRACKS = 40;
-    private static final int INITIAL_X_POS = 200;
-    private static final int INITIAL_Y_POS = 200;
-
-    //  Game state variable (paused, running, menu, etc.).
+    // Game state variable (paused, running, menu, etc.)
     private GameState gameState = GameState.MENU;
-
-    //  Main player reference so other monsters can track them.
+    // Main player reference so other monsters can track them
     private Player player;
 
     public Game(int _width, int _height, String _title) {
@@ -92,28 +79,20 @@ public class Game extends StandardGame {
          * demonstration; they will NOT be in the final game.
          */
         super(_width, _height, _title);
-        //
-        //  Initialize the database translator.
-        //
+        // Initialize the database translator.
         this.translatorDatabase = new TranslatorDatabase(this);
         this.translatorDatabase.loadFromSettings();
-
-        //  Initialize the sound controller.
-        AudioBoxController.initialize(Game.MAX_SOUND_TRACKS);
-
-        //  Create a new collision handler.
+        // Initialize the sound controller.
+        AudioBoxController.initialize(40);
+        // Create a new collision handler.
         this.sch = new CollisionHandlerController(this);
-
-        //  Instantiates player & adds it to the handler.
-        this.player = new Player(Game.INITIAL_Y_POS, Game.INITIAL_X_POS, this, this.sch);
-
-        //  Instantiate the camera
+        // Instantiates player & adds it to the handler.
+        this.player = new Player(200, 200, this, this.sch);
+        // Instantiate the camera.
         this.sc = new StandardCamera(this, player, 1, this.getGameWidth(), this.getGameHeight());
-
-        //  Sets the camera for the player and the handler
+        // Sets the camera for the player and the handler.
         this.player.setCamera(this.sc);
         this.sch.setCamera(this.sc);
-
         // Instantiates all miscellaneous controllers.
         this.rainController = new RainController(this);
         this.snowController = new SnowController(this);
@@ -123,8 +102,7 @@ public class Game extends StandardGame {
         this.cursorController = new CursorController(this);
         this.bloodParticleHandler = new BloodParticleHandler(this);
         this.instantiateLevels();
-
-        //  Instantates all menu screen components.
+        // Instantates all menu screen components.
         this.menuScreen = new MenuScreen(this);
         this.pauseScreen = new PauseScreen(this);
         this.preambleScreen = new PreambleScreen(this);
@@ -137,7 +115,7 @@ public class Game extends StandardGame {
 
     @Override
     public void tick() {
-        //  Depending on the game state, update different things.
+        // Depending on the game state, update different things.
         switch (this.gameState) {
             case MENU:
                 this.menuScreen.tick();
@@ -152,24 +130,24 @@ public class Game extends StandardGame {
                 this.shopScreen.tick();
                 break;
             case PREAMBLE:
-                //  Update the preamble text/effect.
+                // Update the preamble text/effect.
                 this.preambleScreen.tick();
             case RUNNING:
-                //  Update the level background first.
+                // Update the level background first.
                 this.levelController.tickLevel();
-                //  Update the handler with the casings.
+                // Update the handler with the casings.
                 StandardHandler.Handler(this.player.getCasingHandler());
-                //  Then update the blood handler.
+                // Then update the blood handler.
                 StandardHandler.Handler(this.bloodParticleHandler);
-                //  Then the objects within the handler
+                // Then the objects within the handler.
                 StandardHandler.Handler(this.sch);
-                //  Then the rain if applicable.
+                // Then the rain if applicable.
                 this.rainController.tick();
-                //  Then the snow if applicable.
+                // Then the snow if applicable.
                 this.snowController.tick();
-                //  Then the heads up display.
+                // Then the heads up display.
                 this.hudScreen.tick();
-                //  And lastly the camera.
+                // And lastly the camera.
                 StandardHandler.Object(this.sc);
                 break;
             default:
@@ -180,27 +158,27 @@ public class Game extends StandardGame {
 
     @Override
     public void render() {
-        //  Depending on the game state, render different things.
+        // Depending on the game state, render different things.
         if (this.gameState == GameState.MENU) {
             this.menuScreen.render(StandardDraw.Renderer);
         } else {
-            //  First things first: render the camera
+            // First things first: render the camera.
             StandardDraw.Object(this.sc);
-            //  Then render the current [active] level
+            // Then render the current [active] level.
             this.levelController.renderLevel(StandardDraw.Renderer);
-            //  Then render the handler with the casings.
+            // Then render the handler with the casings.
             StandardDraw.Handler(this.player.getCasingHandler());
-            //  Then render the handler with the blood.
+            // Then render the handler with the blood.
             StandardDraw.Handler(this.bloodParticleHandler);
-            //  Then render the handler objects
+            // Then render the handler objects.
             StandardDraw.Handler(this.sch);
-            //  Then render the rain if applicable
+            // Then render the rain if applicable.
             this.rainController.render(StandardDraw.Renderer);
-            //  Then render the snow if applicable
+            // Then render the snow if applicable.
             this.snowController.render(StandardDraw.Renderer);
-            //  Then render the heads up display
+            // Then render the heads up display.
             this.hudScreen.render(StandardDraw.Renderer);
-            //  Then render the preamble, pause or shop effect if necessary
+            // Then render the preamble, pause or shop effect if necessary.
             switch (this.gameState) {
                 case PREAMBLE:
                     this.preambleScreen.render(StandardDraw.Renderer);
@@ -217,7 +195,7 @@ public class Game extends StandardGame {
                 default:
                     break;
             }
-            //  If we are in debug mode, we can draw the text.
+            // If we are in debug mode, we can draw the text.
             if (DebugController.DEBUG_MODE) {
                 this.debugController.render(StandardDraw.Renderer);
             }
@@ -286,7 +264,7 @@ public class Game extends StandardGame {
     /**
      * Calls the translator DB class to save the game's current state.
      *
-     * @return
+     * @return true or false
      */
     public boolean saveToDatabase() {
         if (!this.translatorDatabase.saveToDatabase()) {
@@ -299,7 +277,7 @@ public class Game extends StandardGame {
     /**
      * Calls the translator DB class to load a previously-saved file.ß
      *
-     * @return
+     * @return true or false
      */
     public boolean loadFromDatabase() {
         if (!this.translatorDatabase.loadFromDatabase()) {
@@ -346,7 +324,7 @@ public class Game extends StandardGame {
         this.sc.setVph(this.getGameHeight() >> viewPortFactor);
     }
 
-//========================== GETTERS =============================
+//=================================== GETTERS ==================================
     public Player getPlayer() {
         return this.player;
     }
@@ -427,7 +405,7 @@ public class Game extends StandardGame {
         return this.gameState == GameState.HELP;
     }
 
-//========================== SETTERS =============================
+//=============================== SETTERS =====================================
     public void setGameState(GameState _gs) {
         this.gameState = _gs;
     }

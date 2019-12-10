@@ -8,9 +8,7 @@ import com.revivedstandards.model.StandardAudioType;
  *
  * [Group Name: Data Structure Deadheads]
  *
- * @author Joshua, Ronald, Rinty
- *
- * @updated 12/7/19
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public abstract class AudioBoxController {
 
@@ -21,12 +19,11 @@ public abstract class AudioBoxController {
      * @param _buffers
      */
     public static void initialize(int _buffers) {
+        
         StandardAudioController.init(_buffers);
-
         //  Music initialization.
         StandardAudioController.load("src/resources/audio/music/menu.mp3", 1, StandardAudioType.MUSIC);
         StandardAudioController.load("src/resources/audio/music/level0.mp3", 1, StandardAudioType.MUSIC);
-
         //  Gun sound effects.
         StandardAudioController.load("src/resources/audio/sfx/empty.wav", 1, StandardAudioType.SFX);
         StandardAudioController.load("src/resources/audio/sfx/reload.wav", 1, StandardAudioType.SFX);
@@ -37,7 +34,6 @@ public abstract class AudioBoxController {
         StandardAudioController.load("src/resources/audio/sfx/Minigun.wav", 64, StandardAudioType.SFX);
         StandardAudioController.load("src/resources/audio/sfx/Rifle.wav", 32, StandardAudioType.SFX);
         StandardAudioController.load("src/resources/audio/sfx/FastRifle.wav", 32, StandardAudioType.SFX);
-
         //  Other miscellaneous sfx.
         StandardAudioController.load("src/resources/audio/sfx/splat1.wav", 2, StandardAudioType.SFX);
         StandardAudioController.load("src/resources/audio/sfx/splat2.wav", 2, StandardAudioType.SFX);
@@ -76,4 +72,5 @@ public abstract class AudioBoxController {
             StandardAudioController.load("src/resources/audio/sfx/green_monster/pain" + i + ".wav", 4, StandardAudioType.SFX);
         }
     }
+    
 }

@@ -20,11 +20,11 @@ import com.dsd.game.core.Game;
  *
  * [Group Name: Data Structure Deadheads]
  *
- * @author Joshua, Ronald, Rinty
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class TranslatorDatabase {
 
-    //  Miscellaneous reference variables.
+    // Miscellaneous reference variables.
     private static RemoteDatabase remoteDatabase;
     private static SettingsDatabase settingsDatabase;
 
@@ -45,7 +45,7 @@ public class TranslatorDatabase {
 
     /**
      * Load the game state, level state, player health, money and current
-     * inventory
+     * inventory.
      *
      * @return true if the load from the database was successful, false
      * otherwise.
@@ -82,7 +82,7 @@ public class TranslatorDatabase {
      *
      * @param _email
      * @param _password
-     * @return
+     * @return true or false
      */
     public static AccountStatus authenticateUser(String _email, String _password) {
         if (remoteDatabase.connect("users")) {
@@ -97,7 +97,7 @@ public class TranslatorDatabase {
      *
      * @param _email
      * @param _password
-     * @return
+     * @return true or false
      */
     public static AccountStatus addUser(String _email, String _password) {
         if (remoteDatabase.connect("users")) {
@@ -105,4 +105,5 @@ public class TranslatorDatabase {
         }
         throw new IllegalStateException("Could not connect to db!");
     }
+    
 }

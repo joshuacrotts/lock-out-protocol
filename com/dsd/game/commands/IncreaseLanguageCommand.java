@@ -11,13 +11,11 @@ import java.awt.event.KeyEvent;
  *
  * [Group Name: Data Structure Deadheads]
  *
- * @author Joshua, Ronald, Rinty
- *
- * @updated 11/12/19
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class IncreaseLanguageCommand extends Command {
 
-    //  Miscellaneous reference variables.
+    // Miscellaneous reference variables.
     private final Game game;
 
     public IncreaseLanguageCommand(Game _game) {
@@ -32,4 +30,5 @@ public class IncreaseLanguageCommand extends Command {
         }
         LanguageEnum.increaseLanguage();
     }
+    
 }

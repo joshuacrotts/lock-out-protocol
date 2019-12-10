@@ -21,19 +21,19 @@ import java.util.TimerTask;
  * This class is a "mob-spawner". As in, using a pre-specified radius and
  * duration, it will randomly spawn n EnemyType objects within the radius.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class SpawnerController extends StandardGameObject implements TimerInterface {
 
-    //  Miscellaneous reference variables
+    // Miscellaneous reference variables
     private final StandardCollisionHandler parentContainer;
     private final EnemyType spawnerID;
     private final Game game;
-
-    //  Timer object controlling the spawn-rate.
+    // Timer object controlling the spawn-rate.
     private final Timer spawnerTimer;
-
-    //  Delay and radius of the timer.
+    // Delay and radius of the timer.
     private final long delay;
     private final int radius;
 
@@ -54,7 +54,7 @@ public class SpawnerController extends StandardGameObject implements TimerInterf
     }
 
     @Override
-    public void render(Graphics2D gd) {
+    public void render(Graphics2D _gd) {
     }
 
     @Override
@@ -128,4 +128,5 @@ public class SpawnerController extends StandardGameObject implements TimerInterf
             this.spawnerController.spawn(1);
         }
     }
+    
 }

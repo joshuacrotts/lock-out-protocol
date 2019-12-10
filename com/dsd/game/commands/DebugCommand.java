@@ -11,9 +11,7 @@ import java.awt.event.KeyEvent;
  *
  * [Group Name: Data Structure Deadheads]
  *
- * @author Joshua, Ronald, Rinty
- *
- * @updated 11/12/19
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class DebugCommand extends Command {
 
@@ -29,4 +27,5 @@ public class DebugCommand extends Command {
     public void pressed(float _dt) {
         DebugController.DEBUG_MODE = !DebugController.DEBUG_MODE;
     }
+    
 }

@@ -17,7 +17,7 @@ import org.json.JSONObject;
  *
  * [Group Name: Data Structure Deadheads]
  *
- * @author Joshua, Ronald, Rinty
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class CityLocator implements CityLocatorAPIAdapter {
 
@@ -28,7 +28,7 @@ public class CityLocator implements CityLocatorAPIAdapter {
     private static String key;
 
     static {
-        //  Loads in the API key to connect with
+        //  Loads in the API key to connect.
         CityLocator.inputStream = CityLocator.class.getClassLoader().getResourceAsStream(".config/.city_config.txt");
         CityLocator.reader = new BufferedReader(new InputStreamReader(CityLocator.inputStream));
         try {
@@ -44,7 +44,7 @@ public class CityLocator implements CityLocatorAPIAdapter {
      * JSONObject with the 'city' field. Returns this in a String object.
      *
      * @param city
-     * @return
+     * @return this in a String object.
      */
     private static String fetch(String _ipAddress) {
         StringBuilder jsonInformation = null;
@@ -99,7 +99,7 @@ public class CityLocator implements CityLocatorAPIAdapter {
 
     /**
      * Returns the JSON object fetched by the API call with the supplied IP
-     * address
+     * address.
      *
      * @return
      */

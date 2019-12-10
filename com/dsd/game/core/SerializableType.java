@@ -5,9 +5,12 @@ package com.dsd.game.core;
  * serializable. Any serializable type must implement the SerializableObject
  * interface and override its CRUD operations so the database can call them.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public enum SerializableType {
-
+    
     PLAYER, LEVEL;
+    
 }

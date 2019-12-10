@@ -12,17 +12,15 @@ import java.awt.event.KeyListener;
  *
  * [Group Name: Data Structure Deadheads]
  *
- * @author Joshua, Ronald, Rinty
- *
- * @updated 11/12/19
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class LetterInputListener implements KeyListener {
 
-    //  Miscellaneous reference variables.
+    // Miscellaneous reference variables.
     private final Game game;
     private final TextFieldModel textElement;
 
-    //  Last inputted char by the user.
+    // Last inputted char by the user.
     private char character;
 
     public LetterInputListener(Game _game, TextFieldModel _textElement) {
@@ -67,14 +65,15 @@ public class LetterInputListener implements KeyListener {
      * otherwise.
      *
      * @param _char
-     * @return
+     * @return true or false
      */
     private boolean isValidTypedChar(char _char) {
         return _char != KeyEvent.VK_TAB && _char != KeyEvent.VK_ENTER;
     }
 
-//====================== GETTERS ========================//
+//============================== GETTERS =====================================
     public char getLastKeyTyped() {
+        // Returns last characters.
         return this.character;
     }
 

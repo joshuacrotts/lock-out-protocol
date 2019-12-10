@@ -16,20 +16,16 @@ import com.dsd.game.enemies.TinyMonster;
  *
  * [Group Name: Data Structure Deadheads]
  *
- * @author Joshua, Ronald, Rinty
- *
- * @updated 11/12/19
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class DifficultyController implements SerializableObject {
 
-    //  Miscellaneous reference variables
+    // Miscellaneous reference variables.
     private final Game game;
     public static DifficultyType difficultyType;
-
-    //  How many spawners are currently defined.
+    // How many spawners are currently defined.
     private static int spawnerAmount = 0;
-
-    //  Difficulty factor, spawn rates of enemies, and other timer vars.
+    // Difficulty factor, spawn rates of enemies, and other timer vars.
     public static float difficultyFactor;
     public static float basicMonsterSpawnRate = 1.0f;
     public static float greenMonsterSpawnRate = 0.0f;
@@ -119,7 +115,6 @@ public class DifficultyController implements SerializableObject {
         DifficultyController.difficultyFactor = _difficultyFactor;
     }
 
-//============================= CRUD OPERATIONS ===============================//
     @Override
     public String createObject(SerializableType _id) {
         if (_id != SerializableType.LEVEL) {
@@ -137,12 +132,12 @@ public class DifficultyController implements SerializableObject {
 
     @Override
     public void destroyObject(SerializableType _obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void updateObject(SerializableType _obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

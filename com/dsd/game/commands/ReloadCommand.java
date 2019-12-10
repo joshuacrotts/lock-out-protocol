@@ -18,23 +18,22 @@ import java.util.TimerTask;
  *
  * [Group Name: Data Structure Deadheads]
  *
- * @author Joshua, Ronald, Rinty
- *
- * @updated 11/12/19
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class ReloadCommand extends Command implements TimerInterface {
 
-    //  Miscellaneous reference variables
+    // Miscellaneous reference variables
     private final Game game;
     private final Player player;
     private Timer reloadTimer;
-
-    //  How long (ms) the timer should wait before letting the player fire after
-    //  reloading their gun (this may change for some reason, so we're not making
-    //  it final.
+    /**
+     * How long (ms) the timer should wait before letting the player fire after
+     * reloading their gun (this may change for some reason, so we're not making
+     * it final.
+     */
     private int reloadDelay = 3000;
 
-    //  This may need to change with time.
+    // This may need to change with time.
     public ReloadCommand(Game _game, Player _obj) {
         this.game = _game;
         this.player = _obj;
@@ -50,7 +49,7 @@ public class ReloadCommand extends Command implements TimerInterface {
 
     @Override
     public void pressed(float _dt) {
-        //  No point in trying to reload if they have a melee weapon.
+        // No point in trying to reload if they have a melee weapon.
         if (!this.player.getInventory().hasGun()) {
             return;
         }
@@ -59,13 +58,15 @@ public class ReloadCommand extends Command implements TimerInterface {
             return;
         }
         gun.setReloading(true);
-        //  If the gun is a shotgun and we still have shotgun shells, we don't
-        //  reload (this is pretty much just an edge case to make the sfx
-        //  line up with what the player is "doing").
+        /**
+         * If the gun is a shotgun and we still have shotgun shells, we don't
+         * reload (this is pretty much just an edge case to make the sfx line up
+         * with what the player is "doing").
+         */
         if (gun.getWeaponType() == WeaponType.SHOTGUN && !gun.isWeaponEmpty()) {
             return;
         }
-        //  Play the reload sfx.
+        // Play the reload sfx.
         StandardAudioController.play(gun.getReloadSFXPath(), StandardAudioType.SFX);
         this.reloadTimer = new Timer(true);
         this.reloadTimer.schedule(new ReloadTimer(gun), gun.getReloadDelay());
@@ -89,4 +90,5 @@ public class ReloadCommand extends Command implements TimerInterface {
             this.weapon.setReloading(false);
         }
     }
+    
 }

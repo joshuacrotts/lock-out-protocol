@@ -8,14 +8,15 @@ import java.util.ArrayList;
  * active, all others need to be deactivated so text-input is not read into
  * them.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class TextFieldController {
 
-    //  ArrayList of text fields
+    // ArrayList of text fields.
     public static ArrayList<TextFieldModel> textFieldController = new ArrayList<>();
-
-    //  The selected text field index in the arraylist.
+    // The selected text field index in the arraylist.
     private static int selectedTextField = -1;
 
     /**
@@ -54,4 +55,5 @@ public class TextFieldController {
         selectedField.setActive(true);
         TextFieldController.deactivate(selectedField);
     }
+    
 }
