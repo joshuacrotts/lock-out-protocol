@@ -22,6 +22,7 @@ import java.awt.Color;
  */
 public class BloodParticleHandler extends StandardParticleHandler {
 
+    //  Miscellaneous reference variables.
     private final Game game;
     private static final int MAX_BLOOD_PARTICLES = 10000;
 

@@ -11,6 +11,8 @@ import java.awt.image.BufferedImage;
 /**
  * This class represents the casings from a gun.
  *
+ * [Group Name: Data Structure Deadheads]
+ * 
  * @author Joshua
  * 
  * @updated 12/10/2019

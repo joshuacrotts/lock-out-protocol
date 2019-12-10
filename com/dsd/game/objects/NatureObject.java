@@ -12,6 +12,8 @@ import java.awt.image.BufferedImage;
 /**
  * This class is a template for objects in the game that act as foliage.
  *
+ * [Group Name: Data Structure Deadheads]
+ * 
  * @author Joshua
  * 
  * @updated 12/10/2019

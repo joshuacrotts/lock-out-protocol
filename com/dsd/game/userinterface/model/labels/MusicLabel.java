@@ -9,7 +9,11 @@ import java.awt.Graphics2D;
  * This class denotes the label for showing which of the two volume adjusters
  * controls the music.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/10/19
  */
 public class MusicLabel extends StandardLabel {
 

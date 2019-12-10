@@ -8,7 +8,11 @@ import java.util.ArrayList;
  * active, all others need to be deactivated so text-input is not read into
  * them.
  *
+ * [Group Name: Data Structure Deadheads]
+ * 
  * @author Joshua
+ * 
+ * @updated 12/10/19
  */
 public class TextFieldController {
 

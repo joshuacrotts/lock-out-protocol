@@ -6,8 +6,12 @@ import java.util.ArrayList;
 /**
  * This class controls all TimerInterface objects in the game. When the game is
  * reset, they need to be halted/canceled.
- *
+ * 
+ * [Group Name: Data Structure Deadheads]
+ * 
  * @author Joshua
+ * 
+ * @updated 12/10/19
  */
 public class TimerController {
 

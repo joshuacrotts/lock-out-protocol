@@ -14,9 +14,11 @@ import java.awt.Graphics2D;
  * This button will allow the user to load their game from an existing save
  * file, given that it exists.
  *
+ * [Group Name: Data Structure Deadheads]
+ * 
  * @author Joshua
  *
- * @updated 11/14/19
+ * @updated 12/10/19
  */
 public class LoadButton extends MenuButton implements MouseEventInterface {
 

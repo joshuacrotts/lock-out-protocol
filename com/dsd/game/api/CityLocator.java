@@ -18,6 +18,8 @@ import org.json.JSONObject;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/10/19
  */
 public class CityLocator implements CityLocatorAPIAdapter {
 

@@ -12,6 +12,8 @@ import java.awt.event.KeyEvent;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/10/19
  */
 public class DecreaseResolutionCommand extends Command {
 

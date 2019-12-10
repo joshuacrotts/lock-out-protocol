@@ -8,7 +8,11 @@ import java.awt.Graphics2D;
 /**
  * Grenade launcher shop button view.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/10/19
  */
 public class GrenadeLauncherButtonView extends ShopButtonView {
 

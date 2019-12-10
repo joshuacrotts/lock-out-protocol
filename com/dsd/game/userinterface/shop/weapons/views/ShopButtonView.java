@@ -12,7 +12,11 @@ import java.awt.image.BufferedImage;
  * corresponding item paired with it, which is displayed in the gray/black box
  * to the left of the green one.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/10/19
  */
 public abstract class ShopButtonView implements Updatable, Renderable {
 

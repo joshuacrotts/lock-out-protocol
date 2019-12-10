@@ -13,7 +13,11 @@ import java.awt.Graphics2D;
  * This is the view that will be shown when the user wants to change their audio
  * levels.
  *
+ * [Group Name: Data Structure Deadheads]
+ *
  * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/10/19
  */
 public class AudioView extends Screen implements MouseEventInterface {
 

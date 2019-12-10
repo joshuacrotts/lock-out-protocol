@@ -8,6 +8,8 @@ import com.dsd.game.api.TranslatorAPI;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/10/19
  */
 public class LanguageController {
 

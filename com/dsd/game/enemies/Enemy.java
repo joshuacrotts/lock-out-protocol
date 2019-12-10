@@ -33,6 +33,8 @@ import org.apache.commons.math3.util.FastMath;
  * controllers per entity: walking, attacking, and death. Depending on the state
  * of the enemy, one of these will be set.
  *
+ * [Group Name: Data Structure Deadheads]
+ * 
  * @author Joshua, Ronald, Rinty
  *
  * @updated 11/30/19

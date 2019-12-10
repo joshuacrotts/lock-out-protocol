@@ -9,7 +9,11 @@ package com.dsd.game.core;
  * collection Gun sfx: free on website artwork: ronald will link the bgs;
  * sprites were purchased from a website
  *
+ * [Group Name: Data Structure Deadheads]
+ * 
  * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/10/19
  */
 public class LockOutProtocolRunner {
 

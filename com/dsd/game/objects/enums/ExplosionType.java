@@ -8,6 +8,8 @@ import java.awt.image.BufferedImage;
  * different from grenade launcher explosions. We only want to load in the
  * information once, so we can delegate it to an enum and call it a day.
  *
+ * [Group Name: Data Structure Deadheads]
+ * 
  * @author Joshua
  * 
  * @updated 12/10/2019

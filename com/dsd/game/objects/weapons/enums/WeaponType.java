@@ -7,6 +7,8 @@ package com.dsd.game.objects.weapons.enums;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/10/19
  */
 public enum WeaponType {
     PISTOL("Pistol"),

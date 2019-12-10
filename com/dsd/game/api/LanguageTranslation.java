@@ -13,7 +13,11 @@ import java.util.logging.Logger;
 /**
  * This API calls the yandex language API for a language translation.
  *
+ * [Group Name: Data Structure Deadheads]
+ * 
  * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/10/19
  */
 public class LanguageTranslation implements LanguageTranslationAPIAdapter {
 

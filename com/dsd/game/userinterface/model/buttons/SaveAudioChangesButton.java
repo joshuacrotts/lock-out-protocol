@@ -14,6 +14,8 @@ import java.awt.Graphics2D;
  * This class is used for verifying changes in the audio settings (note, this is
  * DIFFERENT from the actual VOLUME of the game).
  *
+ * [Group Name: Data Structure Deadheads]
+ * 
  * @author Joshua, Ronald, Rinty
  *
  * @updated 11/14/19
