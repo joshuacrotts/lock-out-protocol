@@ -43,7 +43,6 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
     private final StandardCamera camera;
     private final StandardCollisionHandler parentContainer;
     private Timer powerupTimer;
-
     //  View variables and configurations.
     private final StandardFadeController color;
     private static final BufferedImage[] INFINITE_AMMO_FRAMES;
@@ -53,7 +52,6 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
     private static final int STROKE_Y_OFFSET = (int) (RECT_STROKE * 2.4);
     private static final float FADE_COLOR_TRANSITION = 0.05f;
     private static final int TRANSPARENCY_VALUE = 127;
-
     //  Timer for how long the powerup is active (in milliseconds).``
     private int timer = 10000;
     private boolean isActivated = false;
@@ -165,17 +163,16 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
         return new Color(_c.getRed(), _c.getGreen(), _c.getBlue(), TRANSPARENCY_VALUE);
     }
 
-    //============================= GETTERS ====================================//
+    //============================= GETTERS ===================================
     @Override
     public PowerupType getType() {
         return PowerupType.INFINITE_AMMO;
     }
 
-    //============================= SETTERS ====================================//
+    //============================= SETTERS ===================================
     public void setCollected() {
         this.isCollected = true;
     }
-
     static {
         INFINITE_AMMO_FRAMES = Utilities.loadFrames("src/resources/img/items/drops/infammo/", 27);
     }

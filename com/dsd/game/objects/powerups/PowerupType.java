@@ -11,6 +11,7 @@ package com.dsd.game.objects.powerups;
  * @updated 12/3/19
  */
 public enum PowerupType {
+    
     HEALTH("HEALTH"),
     INFINITE_AMMO("INFINITE AMMO"),
     BERSERK("BERSERK"),
@@ -26,4 +27,5 @@ public enum PowerupType {
     public String toString() {
         return this.label;
     }
+    
 }

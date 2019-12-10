@@ -35,38 +35,30 @@ import org.apache.commons.math3.util.FastMath;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
- * 
+ *
  * @updated 12/10/2019
  */
 public class Player extends Entity implements DeathListener, SerializableObject {
 
     //  Miscellaneous reference variables.
     private StandardCamera sc;
-
     //  Bullet Casing particle handler.
     private final StandardParticleHandler casingHandler;
-
     /**
      * Refers to the player's current state (walking, shooting, etc.)
      * PlayerState is set by commands.
      */
     private PlayerState playerState;
-
     //  Inventory of the player, tells how much money they have, the current weapon, etc.
     private final Inventory inventory;
-
     //  Global commands
     private AttackCommand attackCommand;
-
     //  Variables representing the angle and approach velocity.
     private float APPROACH_VEL = -3.0f;
-
     //  Money amount.
     private int money = 0;
-
     //  Health vars (this may change with time).
     private int maxHealth = 200;
-
     //  Sex of player.
     private String sex = "male";
 
@@ -92,26 +84,20 @@ public class Player extends Entity implements DeathListener, SerializableObject 
     @Override
     public void tick() {
         this.setAlive(this.getHealth() > 0);
-        
         if (this.isAlive()) {
-
             //  If the player is not standing still, update the animation controller.
             if (!this.isStanding()) {
                 this.getAnimationController().tick();
             }
-
             this.getAnimationController().getStandardAnimation().setRotation(this.getAngle());
             this.updateDimensions();
-
             // Save the mouse position.
             double mx = this.sc.getX() + this.getGame().getMouse().getMouseX() - this.sc.getVpw();
             double my = this.sc.getY() + this.getGame().getMouse().getMouseY() - this.sc.getVph();
-
             //*******************************************************************//
             //      Causes the player to follow the cursor wherever on the screen //
             //*******************************************************************//
             this.followCursor((int) mx, (int) my);
-
             //*****************************************************************//
             //      Calculates the angle the player needs to be in to face the   //
             //      cursor                                                     //
@@ -283,11 +269,9 @@ public class Player extends Entity implements DeathListener, SerializableObject 
         // Calculate the distance between the sprite and the mouse
         double diffX = this.getX() - _mx - Entity.APPROACH_FACTOR;
         double diffY = this.getY() - _my - Entity.APPROACH_FACTOR;
-        
         // Use the pythagorean theorem to solve for the hypotenuse distance
         double distance = (double) FastMath.sqrt(((this.getX() - _mx) * (this.getX() - _mx))
                 + ((this.getY() - _my) * (this.getY() - _my)));
-        
         /**
          * Sets the velocity according to how far away the sprite is from the
          * cursor, and according to what direction the player is facing.
@@ -321,7 +305,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
         DebugCommand debugCommand = new DebugCommand(this.getGame());
     }
 
-//============================== GETTERS ================================//
+//============================== GETTERS ================================
     public Inventory getInventory() {
         return this.inventory;
     }
@@ -382,7 +366,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
         return this.sex;
     }
 
-//=============================== SETTERS ================================//
+//=============================== SETTERS ================================
     public void setCamera(StandardCamera _sc) {
         this.sc = _sc;
         this.casingHandler.setCamera(_sc);
@@ -420,4 +404,5 @@ public class Player extends Entity implements DeathListener, SerializableObject 
         this.setAnimation(this.inventory.getCurrentWeapon().getWalkFrames());
         this.setAttackAnimator(this.inventory.getCurrentWeapon().getAttackFrames());
     }
+    
 }

@@ -30,7 +30,6 @@ public class RainDrop extends StandardGameObject {
 
     public RainDrop(double _x, double _y, double _direction, double _speed, int _vanish) {
         super(_x, _y, StandardID.Particle);
-        
         //  Solve for horizontal leg of right triangle formed by velocity vector.
         this.setVelX(_speed * FastMath.sin(_direction));
         this.vanish = _vanish;
@@ -52,4 +51,5 @@ public class RainDrop extends StandardGameObject {
         _g2.drawLine((int) this.getX(), (int) this.getY(), (int) (this.getX() - this.getVelX() * VEL_FACTOR),
                 (int) (this.getY() - this.getVelY() * VEL_FACTOR));
     }
+    
 }

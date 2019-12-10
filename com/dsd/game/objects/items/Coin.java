@@ -31,29 +31,22 @@ public class Coin extends StandardGameObject implements Powerup {
     //  Handler for the coins.
     private final StandardCollisionHandler parentContainer;
     private final Player player;
-
     //  Frames of animation for the coins.
     private static final BufferedImage[] coinOneFrames;
     private static final BufferedImage[] coinTwoFrames;
     private static final BufferedImage[] coinThreeFrames;
-
-    //  Randomness for the scatter of the coin.
-    //  This the value at which the coins can scatter.
+    //  Randomness for the scatter of the coin. This the value at which the coins can scatter.
     private final double SCATTER_RANGE = 0.99;
-
     //  Variables for changing the speed of the coins as they disperse.
     private static final double VEL_LOWER_BOUND = 0.5;
     private static final double VEL_UPPER_BOUND = 1.5;
     private final int COIN_FPS = 5;
     private int value = 0;
-
     //  Max number of sound effects for coins.
     private static final int MAX_COIN_SFX = 1;
-    
     //  Variables for generating a coin from the monsters.
     private static final int MIN_GEN_VALUE = 0;
     private static final int MAX_GEN_VALUE = 100;
-
     //  Coin values.
     private final int SMALL_COIN_VALUE = 1;
     private final int MED_COIN_VALUE = 5;
@@ -144,7 +137,7 @@ public class Coin extends StandardGameObject implements Powerup {
         }
     }
 
-//================================= GETTERS ==================================//
+//================================= GETTERS ==================================
     public int getValue() {
         return this.value;
     }
@@ -153,11 +146,11 @@ public class Coin extends StandardGameObject implements Powerup {
     public PowerupType getType() {
         return PowerupType.COIN;
     }
-
     //  Static initialization values.
     static {
         coinOneFrames = Utilities.loadFrames("src/resources/img/items/coin/small", 4);
         coinTwoFrames = Utilities.loadFrames("src/resources/img/items/coin/medium", 4);
         coinThreeFrames = Utilities.loadFrames("src/resources/img/items/coin/large", 4);
     }
+    
 }

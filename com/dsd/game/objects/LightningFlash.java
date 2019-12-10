@@ -13,21 +13,19 @@ import java.util.ArrayList;
  * the game.
  *
  * [Group Name: Data Structure Deadheads]
- * 
+ *
  * @author Joshua, Ronald, Rinty
- * 
+ *
  * @updated 12/7/19
  */
 public class LightningFlash implements Renderable, Updatable {
 
     //  Miscellaneous reference variable.
     private final Game game;
-
     //  List for all flash references.
     private final ArrayList<LightningFlash> flashList;
     private float flashFadeFloat = 1.0f;
     private final double flashDuration;
-    
     //  Other variables determining the color and the flash depletion.
     private final float INIT_FLASH_DURATION = 0.005f;
     private final float WHITE_COLOR = 1.0f;

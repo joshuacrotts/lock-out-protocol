@@ -38,7 +38,6 @@ public class Inventory implements SerializableObject {
     private final StandardCollisionHandler parentHandler;
     private final InventoryView view;
     private final List<Weapon> weapons;
-
     private int currentWeapon = 0;
     private boolean hasGun;
 
@@ -47,7 +46,6 @@ public class Inventory implements SerializableObject {
         this.player = _player;
         this.weapons = new ArrayList<>();
         this.parentHandler = _sch;
-
         //  This will change with time (to a subclass of Weapon).
         this.weapons.add(new Pistol(_game, _player, _sch));
         this.weapons.add(new Rifle(_game, _player, _sch));
@@ -86,7 +84,7 @@ public class Inventory implements SerializableObject {
      * Checks the inventory to see if the player has this specific weapon.
      *
      * @param _type
-     * @return
+     * @return weapon
      */
     public Weapon hasWeapon(WeaponType _type) {
         for (int i = 0; i < this.weapons.size(); i++) {
@@ -243,12 +241,10 @@ public class Inventory implements SerializableObject {
     private Weapon[] hasWeapons() {
         Weapon[] typesOfWeapons = new Weapon[WeaponType.values().length];
         WeaponType[] enumTypes = WeaponType.values();
-        
         //  Iterate over all possible weapons to see if the user has it.
         for (int i = 0; i < typesOfWeapons.length; i++) {
             typesOfWeapons[i] = this.hasWeapon(enumTypes[i]);
         }
-
         return typesOfWeapons;
     }
 
@@ -275,7 +271,7 @@ public class Inventory implements SerializableObject {
         }
     }
 
-//============================= GETTERS ===================================//
+//================================== GETTERS ===================================
     public Weapon getCurrentWeapon() {
         return weapons.get(this.currentWeapon);
     }
@@ -298,4 +294,5 @@ public class Inventory implements SerializableObject {
     public boolean hasGun() {
         return this.hasGun;
     }
+    
 }

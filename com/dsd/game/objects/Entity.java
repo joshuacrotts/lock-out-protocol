@@ -20,13 +20,11 @@ public abstract class Entity extends StandardGameObject {
     //  Miscellaneous reference variables.
     private final Game game;
     private StandardCollisionHandler parentContainer;
-
-    //
-    //  For entities that follow another entity, this is the factor that should
-    //  be applied when detecting the angle to turn towards.
-    //
+    /**
+     * For entities that follow another entity, this is the factor that should
+     * be applied when detecting the angle to turn towards.
+     */
     public static final int APPROACH_FACTOR = 8;
-
     //  Health of entity.
     private double health = 0;
 
@@ -37,7 +35,7 @@ public abstract class Entity extends StandardGameObject {
         this.health = _health;
     }
 
-//========================= GETTERS =============================//
+//=================================== GETTERS =================================
     public Game getGame() {
         return this.game;
     }
@@ -54,7 +52,7 @@ public abstract class Entity extends StandardGameObject {
         return this.getVelX() != 0 && this.getVelY() != 0;
     }
 
-//========================= SETTERS =============================//
+//================================ SETTERS =============================
     public void setHealth(double _health) {
         this.health = _health;
     }
@@ -62,4 +60,5 @@ public abstract class Entity extends StandardGameObject {
     public void setHandler(StandardCollisionHandler _sch) {
         this.parentContainer = _sch;
     }
+    
 }

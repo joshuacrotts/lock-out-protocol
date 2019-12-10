@@ -6,10 +6,12 @@ package com.dsd.game.objects.enums;
  *
  * [Group Name: Data Structure Deadheads]
  * 
- * @author Joshua
+ * @author Joshua, Ronald, Rinty
  * 
  * @updated 12/10/2019
  */
 public enum ParticleType {
+    
     StandardBox, StandardDrag;
+    
 }

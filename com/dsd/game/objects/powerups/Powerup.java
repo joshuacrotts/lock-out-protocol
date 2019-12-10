@@ -19,4 +19,5 @@ public interface Powerup {
     public void activate();
 
     public PowerupType getType();
+    
 }

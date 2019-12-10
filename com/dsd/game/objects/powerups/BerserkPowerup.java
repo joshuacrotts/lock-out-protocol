@@ -29,9 +29,9 @@ import java.util.TimerTask;
  * some health.
  *
  * [Group Name: Data Structure Deadheads]
- * 
+ *
  * @author Joshua
- * 
+ *
  * @updated 12/10/19
  */
 public class BerserkPowerup extends StandardGameObject implements TimerInterface, Powerup {
@@ -42,7 +42,6 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
     private final StandardCamera camera;
     private final StandardCollisionHandler parentContainer;
     private Timer powerupTimer;
-
     //  View (how the object is displayed).
     private final StandardFadeController color;
     private static final BufferedImage[] BERSERK_FRAMES;
@@ -53,7 +52,6 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
     private static final int STROKE_Y_OFFSET = (int) (RECT_STROKE * 2.4);
     private static final float FADE_COLOR_TRANSITION = 0.05f;
     private static final int TRANSPARENCY_VALUE = 127;
-
     //  Timer for how long the powerup is active (in milliseconds)
     private int timer = 10000;
     private boolean isActivated = false;
@@ -169,13 +167,13 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
         return new Color(_c.getRed(), _c.getGreen(), _c.getBlue(), BerserkPowerup.TRANSPARENCY_VALUE);
     }
 
-//============================= GETTERS ====================================//
+//============================= GETTERS ====================================
     @Override
     public PowerupType getType() {
         return PowerupType.BERSERK;
     }
 
-//============================= SETTERS ====================================//
+//============================= SETTERS ====================================
     public void setCollected() {
         this.isCollected = true;
     }

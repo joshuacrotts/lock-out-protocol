@@ -96,12 +96,8 @@ public enum ResolutionEnum {
         return RESOLUTION_LIST[resolutionIndex].getDimensionString();
     }
 
-    /**
-     * Returns the actual dimension object associated with each ResolutionEnum.
-     *
-     * @return
-     */
     public static Dimension getDimension() {
+        // Returns the actual dimension object associated with each ResolutionEnum.
         return RESOLUTION_LIST[resolutionIndex].resolution;
     }
 

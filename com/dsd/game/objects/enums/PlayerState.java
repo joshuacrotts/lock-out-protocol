@@ -10,5 +10,7 @@ package com.dsd.game.objects.enums;
  * @updated 12/10/2019
  */
 public enum PlayerState {
+    
     WALKING_FORWARD, WALKING_BACKWARD, STANDING, ATTACKING, DEAD
+    
 }

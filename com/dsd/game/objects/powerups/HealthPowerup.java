@@ -29,9 +29,7 @@ public class HealthPowerup extends StandardGameObject implements Powerup {
     private final Player player;
     private final StandardCollisionHandler parentContainer;
     private static final BufferedImage[] HEALTH_FRAMES;
-
-    //  Details on how fast the animation for the powerup plays, and how
-    //  much health it restores.
+    //  Details on how fast the animation for the powerup plays, and how much health it restores.
     private static final int HEALTH_FPS = 10;
     private static final int HEALTH_INCREASE = 25;
     private static final int FRAMES_PER_SECOND = 12;
@@ -86,9 +84,9 @@ public class HealthPowerup extends StandardGameObject implements Powerup {
     public PowerupType getType() {
         return PowerupType.HEALTH;
     }
-
     //  Load in the images staticly instead of at run-time every time a powerup is spawned.
     static {
         HEALTH_FRAMES = Utilities.loadFrames("src/resources/img/items/drops/health/", HealthPowerup.NUM_OF_FRAMES);
     }
+    
 }

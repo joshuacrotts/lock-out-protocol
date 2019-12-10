@@ -12,9 +12,9 @@ import java.awt.Graphics2D;
  * This class is a simple explosion artifact in the game.
  *
  * [Group Name: Data Structure Deadheads]
- * 
- * @author Joshua
- * 
+ *
+ * @author Joshua, Ronald, Rinty
+ *
  * @updated 12/10/2019
  */
 public class Explosion extends StandardGameObject {
@@ -22,11 +22,8 @@ public class Explosion extends StandardGameObject {
     //  Miscellaneous reference variables.
     private final StandardCollisionHandler parentContainer;
     private final StandardAnimatorController animation;
-
-    //  The gun that the bullet comes from determines what type of explosion
-    //  to use (i.e. which frames, etc).
+    //  The gun that the bullet comes from determines what type of explosion to use (i.e. which frames, etc).
     private ExplosionType explosionType;
-
     //  Information about the FPS of the explosion and its damage (if applicable).
     private static final int EXPLOSION_FPS = 45;
     private final int DAMAGE;
@@ -54,10 +51,10 @@ public class Explosion extends StandardGameObject {
         if (this.isAlive()) {
             this.animation.tick();
         }
-        
-        //  If we're on the last frame of the explosion animation, we can 
-        //  flag the explosion as "dead" meaning it won't affect other
-        //  entities.
+        /**
+         * If we're on the last frame of the explosion animation, we can flag
+         * the explosion as "dead" meaning it won't affect other entities.
+         */
         if (this.animation.getStandardAnimation().getCurrentFrameIndex() == explosionType.getExplosionFrames().length - 1) {
             this.setAlive(false);
         }
@@ -66,4 +63,5 @@ public class Explosion extends StandardGameObject {
     public int getDamage() {
         return this.DAMAGE;
     }
+    
 }

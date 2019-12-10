@@ -13,9 +13,9 @@ import java.awt.image.BufferedImage;
  * This class is a template for objects in the game that act as foliage.
  *
  * [Group Name: Data Structure Deadheads]
- * 
- * @author Joshua
- * 
+ *
+ * @author Joshua, Ronald, Rinty
+ *
  * @updated 12/10/2019
  */
 public class NatureObject extends StandardGameObject implements Renderable, Updatable {
@@ -23,7 +23,6 @@ public class NatureObject extends StandardGameObject implements Renderable, Upda
     //  Miscellaneous reference variables.
     private final Game game;
     private final StandardCollisionHandler parentContainer;
-
     //  There are two types of nature objects: ones that are collidable by other
     //  entities, and ones that are not (the user just hovers over them).
     private boolean collidable = false;
@@ -45,11 +44,11 @@ public class NatureObject extends StandardGameObject implements Renderable, Upda
     @Override
     public void tick() {
         //  Nothing to tick since there's no logic for NatureObjects.
-        //  This may change later.
     }
 
     @Override
     public void render(Graphics2D _g2) {
         _g2.drawImage(this.getCurrentSprite(), (int) this.getX(), (int) this.getY(), null);
     }
+    
 }
