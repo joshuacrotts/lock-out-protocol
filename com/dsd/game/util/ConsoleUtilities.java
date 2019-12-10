@@ -5,15 +5,17 @@ package com.dsd.game.util;
  * the game is in the application-state, but it's good for printing debugging
  * problems.
  *
- * @author
+ * [Group Name: Data Structure Deadheads]
+ * 
+ * @author Joshua Last Updated: 12/10/2019
  * https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
  */
 public final class ConsoleUtilities {
 
-    // Reset.
+    // Resets text string.
     public static final String RESET = "\033[0m";  // Text Reset
 
-    // Regular Colors.
+    // Regular Colors Templates.
     public static final String BLACK = "\033[0;30m";   // BLACK
     public static final String RED = "\033[0;31m";     // RED
     public static final String GREEN = "\033[0;32m";   // GREEN
@@ -23,7 +25,7 @@ public final class ConsoleUtilities {
     public static final String CYAN = "\033[0;36m";    // CYAN
     public static final String WHITE = "\033[0;37m";   // WHITE
 
-    // Bold.
+    // Boldening Effects.
     public static final String BLACK_BOLD = "\033[1;30m";  // BLACK
     public static final String RED_BOLD = "\033[1;31m";    // RED
     public static final String GREEN_BOLD = "\033[1;32m";  // GREEN
@@ -43,7 +45,7 @@ public final class ConsoleUtilities {
     public static final String CYAN_UNDERLINED = "\033[4;36m";   // CYAN
     public static final String WHITE_UNDERLINED = "\033[4;37m";  // WHITE
 
-    // Background.
+    // Background Color.
     public static final String BLACK_BACKGROUND = "\033[40m";  // BLACK
     public static final String RED_BACKGROUND = "\033[41m";    // RED
     public static final String GREEN_BACKGROUND = "\033[42m";  // GREEN

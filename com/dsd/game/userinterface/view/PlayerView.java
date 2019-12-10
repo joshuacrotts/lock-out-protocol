@@ -17,8 +17,10 @@ import java.awt.image.BufferedImage;
 /**
  * This is the view that will be shown when the user wants to change their
  * player gender.
- *
- * @author Rinty
+ * 
+ * [Group Name: Data Structure Deadheads]
+ * 
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class PlayerView implements Renderable, Updatable {
 

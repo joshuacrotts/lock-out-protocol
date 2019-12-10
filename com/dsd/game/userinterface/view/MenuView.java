@@ -15,8 +15,10 @@ import java.awt.image.BufferedImage;
 
 /**
  * This class represents the view displayed by the MenuScreen.
- *
- * @author Joshua
+ * 
+ * [Group Name: Data Structure Deadheads]
+ * 
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class MenuView implements Renderable, Updatable {
 
