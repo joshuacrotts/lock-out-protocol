@@ -48,4 +48,5 @@ public class LightningHandler {
     public ArrayList<LightningFlash> getHandler() {
         return this.lightningFlashes;
     }
+    
 }

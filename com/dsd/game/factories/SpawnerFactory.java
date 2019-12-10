@@ -12,7 +12,7 @@ import com.revivedstandards.handlers.StandardCollisionHandler;
  *
  * [Group Name: Data Structure Deadheads]
  * 
- * @author Joshua
+ * @author Joshua, Ronald, Rinty
  * 
  * @updated 12/10/19
  */
@@ -28,7 +28,7 @@ public class SpawnerFactory {
      * @param _radius
      * @param _game
      * @param _sch
-     * @return
+     * @return new spawner
      */
     public static SpawnerController generateSpawner(EnemyType _id, int _xRange,
             int _yRange, long _delay, int _radius, Game _game, StandardCollisionHandler _sch) {
@@ -43,10 +43,11 @@ public class SpawnerFactory {
      * @param _yRange
      * @param _game
      * @param _sch
-     * @return
+     * @return spawns a boss spawner
      */
     public static BossSpawnerController generateBossSpawner(EnemyType _bossID,
             int _xRange, int _yRange, Game _game, StandardCollisionHandler _sch) {
         return new BossSpawnerController(_xRange, _yRange, _bossID, _game, _sch);
     }
+    
 }

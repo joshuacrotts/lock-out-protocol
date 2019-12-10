@@ -20,10 +20,8 @@ public class PowerupTextHandler implements Renderable, Updatable {
 
     //  Miscellaneous references.
     private final Game game;
-
     //  ArrayList of Powerup Labels.
     private final ArrayList<PowerupTextLabel> labels;
-
     //  Positioning and config offsets/factors.
     private final int Y_OFFSET_FACTOR = 20;
     private final int MAX_LABELS = 5;
@@ -38,7 +36,6 @@ public class PowerupTextHandler implements Renderable, Updatable {
         if (this.labels.size() >= MAX_LABELS) {
             this.labels.remove(0);
         }
-
         for (int i = 0; i < this.labels.size(); i++) {
             this.labels.get(i).tick();
         }
@@ -67,4 +64,5 @@ public class PowerupTextHandler implements Renderable, Updatable {
     public void clearLabels() {
         this.labels.clear();
     }
+    
 }

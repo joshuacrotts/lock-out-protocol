@@ -25,7 +25,6 @@ public class BloodParticleHandler extends StandardParticleHandler {
     //  Miscellaneous reference variables.
     private final Game game;
     private static final int MAX_BLOOD_PARTICLES = 10000;
-
     //  Other particle dimension and positioning information.
     private static final float PARTICLE_MIN_SIZE = 1.0f;
     private static final float PARTICLE_MAX_SIZE = 10.0f;
@@ -37,7 +36,6 @@ public class BloodParticleHandler extends StandardParticleHandler {
 
     public BloodParticleHandler(Game _game) {
         super(MAX_BLOOD_PARTICLES);
-
         this.game = _game;
         this.setCamera(this.game.getCamera());
     }
@@ -62,16 +60,15 @@ public class BloodParticleHandler extends StandardParticleHandler {
                         StdOps.rand(PARTICLE_MIN_SIZE, PARTICLE_MAX_SIZE), 0, 0, _bloodColor, PARTICLE_LIFE, this,
                         _angle, ShapeType.CIRCLE, false));
                 break;
-
-            //  The slowing blood particle's velocity will decrease over time,
-            //  eventually coming to a stop.
+            //  The slowing blood particle's velocity will decrease over time, eventually coming to a stop.
             case SLOWING:
                 this.addEntity(new SlowingBoxParticle(_x, _y, StdOps.rand(PARTICLE_MIN_SIZE, PARTICLE_MAX_SIZE),
                         _bloodColor, PARTICLE_LIFE, this, _angle, ShapeType.CIRCLE));
                 break;
-
-            //  Scattered particles will go in random directions, but stay in
-            //  that specified direction forever, without slowning down.
+            /**
+             * Scattered particles will go in random directions, but stay in
+             * that specified direction forever, without snowing down.
+             */
             case SCATTERED:
                 this.addEntity(new StandardBoxParticle(
                         _x + StdOps.randBounds(-MAX_PARTICLE_OFFSET - PARTICLE_SCATTER_OFFSET,
@@ -86,4 +83,5 @@ public class BloodParticleHandler extends StandardParticleHandler {
                 break;
         }
     }
+    
 }

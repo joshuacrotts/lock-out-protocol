@@ -5,15 +5,17 @@ package com.dsd.game.enemies.enums;
  *
  * [Group Name: Data Structure Deadheads]
  * 
- * @author Joshua
+ * @author Joshua, Ronald, Rinty
  * 
  * @updated 12/10/19
  */
 public enum EnemyType {
+    
     BASIC_MONSTER,
     GREEN_MONSTER,
     FEMALE_BOSS_MONSTER,
     DARK_FEMALE_MONSTER,
     RED_HEAD_MONSTER,
     TINY_MONSTER;
+    
 }

@@ -22,4 +22,5 @@ public interface SerializableObject {
     public void updateObject(SerializableType _obj);
 
     public void destroyObject(SerializableType _obj);
+    
 }

@@ -6,10 +6,12 @@ package com.dsd.game.enemies.enums;
  *
  * [Group Name: Data Structure Deadheads]
  * 
- * @author Joshua
+ * @author Joshua, Ronald, Rinty
  * 
  * @updated 12/10/19
  */
 public enum EnemyState {
+    
     WALKING, ATTACKING, DEAD;
+    
 }

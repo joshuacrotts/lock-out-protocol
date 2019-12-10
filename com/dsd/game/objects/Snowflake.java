@@ -23,7 +23,6 @@ public class Snowflake extends StandardGameObject {
      * vanish factor (how long it lasts on screen before it dies.
      */
     private final double GRAVITY = 0.10d;
-
     //  Positioning and color variables.
     private final Color snowColor;
     private final double WHITE_COLOR = 0.8;
@@ -34,7 +33,6 @@ public class Snowflake extends StandardGameObject {
 
     public Snowflake(double _x, double _y, double _direction, double _speed, int _vanish) {
         super(_x, _y, StandardID.Particle);
-
         //Solve for horizontal leg of right triangle formed by velocity vector
         this.setVelX(_speed * FastMath.sin(_direction));
         this.setWidth(StdOps.rand(this.SNOWFLAKE_WIDTH_MIN, this.SNOWFLAKE_WIDTH_MAX));
@@ -57,4 +55,5 @@ public class Snowflake extends StandardGameObject {
         _g2.setColor(this.snowColor);
         _g2.fillOval((int) this.getX(), (int) this.getY(), this.getWidth(), this.getHeight());
     }
+    
 }

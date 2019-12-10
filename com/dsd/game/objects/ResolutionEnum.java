@@ -9,7 +9,7 @@ import java.awt.Toolkit;
  *
  * [Group Name: Data Structure Deadheads]
  * 
- * @author Joshua
+ * @author Joshua, Ronald, Rinty
  * 
  * @updated 12/10/2019
  */
@@ -80,14 +80,9 @@ public enum ResolutionEnum {
         resolution = _resolution;
     }
 
-//================================ GETTERS ==================================
-    /**
-     * Returns a string representation of the dimension; it takes the width,
-     * concatenates an x, then adds the height.
-     *
-     * @return
-     */
+//================================== GETTERS ===================================
     private String getDimensionString() {
+        // Returns a string representation of the dimension.
         return (int) resolution.getWidth() + "x"
                 + (int) resolution.getHeight();
     }
@@ -96,12 +91,8 @@ public enum ResolutionEnum {
         return resolutionIndex;
     }
 
-    /**
-     * Returns a string representation of the resolution.
-     *
-     * @return
-     */
     public static String getResolution() {
+        // Returns a string representation of the resolution.
         return RESOLUTION_LIST[resolutionIndex].getDimensionString();
     }
 
