@@ -8,6 +8,8 @@ import java.awt.Toolkit;
  * the game.
  *
  * @author Joshua
+ * 
+ * @updated 12/10/2019
  */
 public enum ResolutionEnum {
 

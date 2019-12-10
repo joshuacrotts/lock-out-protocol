@@ -5,6 +5,8 @@ package com.dsd.game.objects.enums;
  * ParticleFactory (when implemented).
  *
  * @author Joshua
+ * 
+ * @updated 12/10/2019
  */
 public enum ParticleType {
     StandardBox, StandardDrag;

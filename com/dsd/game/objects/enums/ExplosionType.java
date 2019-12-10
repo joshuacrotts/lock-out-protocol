@@ -9,6 +9,8 @@ import java.awt.image.BufferedImage;
  * information once, so we can delegate it to an enum and call it a day.
  *
  * @author Joshua
+ * 
+ * @updated 12/10/2019
  */
 public enum ExplosionType {
 

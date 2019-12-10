@@ -75,11 +75,15 @@ public class Game extends StandardGame {
     private final LevelController levelController;
     private final CursorController cursorController;
     private final BloodParticleHandler bloodParticleHandler;
+    
+    private static final int MAX_SOUND_TRACKS = 40;
+    private static final int INITIAL_X_POS = 200;
+    private static final int INITIAL_Y_POS = 200;
 
-    //  Game state variable (paused, running, menu, etc.)
+    //  Game state variable (paused, running, menu, etc.).
     private GameState gameState = GameState.MENU;
 
-    //  Main player reference so other monsters can track them
+    //  Main player reference so other monsters can track them.
     private Player player;
 
     public Game(int _width, int _height, String _title) {
@@ -89,19 +93,19 @@ public class Game extends StandardGame {
          */
         super(_width, _height, _title);
         //
-        //  Initialize the database translator
+        //  Initialize the database translator.
         //
         this.translatorDatabase = new TranslatorDatabase(this);
         this.translatorDatabase.loadFromSettings();
 
-        //  Initialize the sound controller
-        AudioBoxController.initialize(40);
+        //  Initialize the sound controller.
+        AudioBoxController.initialize(Game.MAX_SOUND_TRACKS);
 
-        //  Create a new collision handler
+        //  Create a new collision handler.
         this.sch = new CollisionHandlerController(this);
 
-        //  Instantiates player & adds it to the handler
-        this.player = new Player(200, 200, this, this.sch);
+        //  Instantiates player & adds it to the handler.
+        this.player = new Player(Game.INITIAL_Y_POS, Game.INITIAL_X_POS, this, this.sch);
 
         //  Instantiate the camera
         this.sc = new StandardCamera(this, player, 1, this.getGameWidth(), this.getGameHeight());
@@ -148,24 +152,24 @@ public class Game extends StandardGame {
                 this.shopScreen.tick();
                 break;
             case PREAMBLE:
-                //  Update the preamble text/effect
+                //  Update the preamble text/effect.
                 this.preambleScreen.tick();
             case RUNNING:
-                //  Update the level background first
+                //  Update the level background first.
                 this.levelController.tickLevel();
-                //  Update the handler with the casings
+                //  Update the handler with the casings.
                 StandardHandler.Handler(this.player.getCasingHandler());
                 //  Then update the blood handler.
                 StandardHandler.Handler(this.bloodParticleHandler);
                 //  Then the objects within the handler
                 StandardHandler.Handler(this.sch);
-                //  Then the rain if applicable
+                //  Then the rain if applicable.
                 this.rainController.tick();
-                //  Then the snow if applicable
+                //  Then the snow if applicable.
                 this.snowController.tick();
-                //  Then the heads up display
+                //  Then the heads up display.
                 this.hudScreen.tick();
-                //  And lastly the camera
+                //  And lastly the camera.
                 StandardHandler.Object(this.sc);
                 break;
             default:
@@ -211,7 +215,7 @@ public class Game extends StandardGame {
                     this.helpScreen.render(StandardDraw.Renderer);
                     break;
                 default:
-                    throw new IllegalStateException("Invalid game render state!");
+                    break;
             }
             //  If we are in debug mode, we can draw the text.
             if (DebugController.DEBUG_MODE) {
@@ -337,8 +341,9 @@ public class Game extends StandardGame {
      * Resets the camera's viewport to account for a resized window.
      */
     private void reinstantiateCamera() {
-        this.sc.setVpw(this.getGameWidth() >> 1);
-        this.sc.setVph(this.getGameHeight() >> 1);
+        final int viewPortFactor = 1;
+        this.sc.setVpw(this.getGameWidth() >> viewPortFactor);
+        this.sc.setVph(this.getGameHeight() >> viewPortFactor);
     }
 
 //========================== GETTERS =============================

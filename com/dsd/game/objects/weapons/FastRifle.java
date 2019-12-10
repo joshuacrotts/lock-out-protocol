@@ -37,9 +37,10 @@ public class FastRifle extends Gun {
 
     //  Damage from the rifle.
     private static final int BULLET_DAMAGE = 15;
+    private static final int INITIAL_AMMO = 71;
 
     public FastRifle(Game _game, Player _player, StandardCollisionHandler _sch) {
-        super(WeaponType.FAST_RIFLE, 71, _game, _player, _sch, "src/resources/audio/sfx/reload.wav", RELOAD_DELAY);
+        super(WeaponType.FAST_RIFLE, INITIAL_AMMO, _game, _player, _sch, "src/resources/audio/sfx/reload.wav", RELOAD_DELAY);
         //  Instantiates the animation controllers.
         this.loadAssets(_player);
         super.setDelay(DELAY);

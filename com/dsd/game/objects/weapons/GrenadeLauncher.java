@@ -36,9 +36,10 @@ public class GrenadeLauncher extends Gun {
 
     //  Damage from the rifle.
     private static final int BULLET_DAMAGE = 250;
+    private static final int INITIAL_AMMO = 2;
 
     public GrenadeLauncher(Game _game, Player _player, StandardCollisionHandler _sch) {
-        super(WeaponType.GRENADE_LAUNCHER, 2, _game, _player, _sch, "src/resources/audio/sfx/reload.wav", RELOAD_DELAY);
+        super(WeaponType.GRENADE_LAUNCHER, INITIAL_AMMO, _game, _player, _sch, "src/resources/audio/sfx/reload.wav", RELOAD_DELAY);
         //  Instantiates the animation controllers.
         this.loadAssets(_player);
         super.setDelay(DELAY);

@@ -18,10 +18,10 @@ import java.awt.Graphics2D;
  */
 public class DamageText extends StandardLabel {
 
-    //  Interactor handler that this damage text belongs to
+    //  Interactor handler that this damage text belongs to.
     private final StandardInteractorHandler sih;
 
-    //  Font for the text
+    //  Font for the text.
     private static final Font font = StdOps.initFont("src/resources/fonts/chargen.ttf", 12f);
 
     /**
@@ -33,12 +33,16 @@ public class DamageText extends StandardLabel {
     private static final int ORIGINAL_RED_VALUE = 90;
     private static int redColorValue = ORIGINAL_RED_VALUE;
     private final int FADE_TIMER = 5;
+    private final int MAX_COLOR = 0xff;
+    
+    //  Velocity of the text (as it moves upward).
+    private final int Y_VEL = -1;
 
     public DamageText(int _x, int _y, String _text, StandardInteractorHandler _sih) {
         super(_x, _y, _text, font);
         this.sih = _sih;
-        this.fadeColor = new Color(this.generateRedColor(), 0, 0, 0xff);
-        this.setVelY(-1);
+        this.fadeColor = new Color(this.generateRedColor(), 0, 0, this.MAX_COLOR);
+        this.setVelY(this.Y_VEL);
     }
 
     @Override
@@ -74,6 +78,6 @@ public class DamageText extends StandardLabel {
      */
     private int generateRedColor() {
         DamageText.redColorValue += RED_INC_VALUE;
-        return DamageText.redColorValue > 255 ? (DamageText.redColorValue = ORIGINAL_RED_VALUE) : DamageText.redColorValue;
+        return DamageText.redColorValue > this.MAX_COLOR ? (DamageText.redColorValue = ORIGINAL_RED_VALUE) : DamageText.redColorValue;
     }
 }

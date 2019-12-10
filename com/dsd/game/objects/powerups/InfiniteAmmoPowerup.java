@@ -51,6 +51,8 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
     private static final int RECT_STROKE = 20;
     private static final int STROKE_X_OFFSET = (int) (RECT_STROKE * 1.44);
     private static final int STROKE_Y_OFFSET = (int) (RECT_STROKE * 2.4);
+    private static final float FADE_COLOR_TRANSITION = 0.05f;
+    private static final int TRANSPARENCY_VALUE = 127;
 
     //  Timer for how long the powerup is active (in milliseconds).``
     private int timer = 10000;
@@ -67,7 +69,7 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
         this.setAnimation(infiniteAnimation);
         this.setWidth(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getWidth());
         this.setHeight(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getHeight());
-        this.color = new StandardFadeController(Color.blue, Color.green, 0.05f);
+        this.color = new StandardFadeController(Color.blue, Color.green, FADE_COLOR_TRANSITION);
     }
 
     @Override
@@ -152,8 +154,15 @@ public class InfiniteAmmoPowerup extends StandardGameObject implements TimerInte
         _g2.setStroke(oldStroke);
     }
 
+    /**
+     * Returns a new transparent color for the current frame of the berserk
+     * powerup animation.
+     *
+     * @param _c
+     * @return
+     */
     private Color getTransparentColor(Color _c) {
-        return new Color(_c.getRed(), _c.getGreen(), _c.getBlue(), 127);
+        return new Color(_c.getRed(), _c.getGreen(), _c.getBlue(), TRANSPARENCY_VALUE);
     }
 
     //============================= GETTERS ====================================//

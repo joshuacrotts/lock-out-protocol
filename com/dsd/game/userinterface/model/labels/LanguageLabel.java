@@ -17,12 +17,16 @@ import java.awt.Graphics2D;
  */
 public class LanguageLabel extends StandardLabel {
 
+    //  Miscellaneous game and menu screen references.
     private final Game game;
     private final MenuScreen menuScreen;
 
+    //  View element factors.
+    private static final int FONT_SIZE = 32;
+
     public LanguageLabel(Game _game, MenuScreen _menuScreen) {
         super(Screen.gameHalfWidth, Screen.gameHalfHeight,
-                "", new Font(Font.SANS_SERIF, Font.PLAIN, 32));
+                "", new Font(Font.SANS_SERIF, Font.PLAIN, FONT_SIZE));
         this.game = _game;
         this.menuScreen = _menuScreen;
         this.setText(LanguageEnum.getLanguage());

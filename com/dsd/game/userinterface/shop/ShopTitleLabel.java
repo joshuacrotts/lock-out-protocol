@@ -12,6 +12,8 @@ import java.awt.Graphics2D;
  * Title label for the shop.
  *
  * @author Joshua
+ *
+ * @updated 12/10/19
  */
 public class ShopTitleLabel extends StandardLabel {
 
@@ -19,13 +21,18 @@ public class ShopTitleLabel extends StandardLabel {
     private final Game game;
     private final ShopScreen shopScreen;
 
+    //  Positioning offsets.
     private static final int TITLE_X_OFFSET = 30;
     private static final int TITLE_Y_OFFSET = 280;
+    private final double Y_OFFSET_FACTOR = 1.575;
+    
+    //  View element factors.
+    private static final float FONT_SIZE = 64f;
 
     public ShopTitleLabel(Game _game, ShopScreen _shopScreen) {
         super(Screen.gameHalfWidth - ShopTitleLabel.TITLE_X_OFFSET,
                 ShopTitleLabel.TITLE_Y_OFFSET, LanguageController.translate("SHOP"),
-                "src/resources/fonts/chargen.ttf", 64f);
+                "src/resources/fonts/chargen.ttf", FONT_SIZE);
         this.game = _game;
         this.shopScreen = _shopScreen;
         this.setScaled(true);
@@ -34,7 +41,7 @@ public class ShopTitleLabel extends StandardLabel {
     @Override
     public void tick() {
         this.setX((int) this.game.getCamera().getX() - TITLE_X_OFFSET);
-        this.setY((int) this.game.getCamera().getY() - (int) (Screen.gameFourthHeight * 1.575));
+        this.setY((int) this.game.getCamera().getY() - (int) (Screen.gameFourthHeight * this.Y_OFFSET_FACTOR));
     }
 
     @Override

@@ -20,9 +20,10 @@ public class SFXLabel extends StandardLabel {
     //  Label positioning offsets.
     private static final int BUTTON_X_OFFSET = 400;
     private static final int BUTTON_Y_OFFSET = 40;
+    private static final float FONT_SIZE = 32f;
 
     public SFXLabel(SoundEffectVolumeControl _svc, MenuScreen _menuScreen) {
-        super(_svc.getLeftButtonX(), _svc.getLeftButtonY(), "SOUND EFFECT VOLUME", "src/resources/fonts/chargen.ttf", 32f);
+        super(_svc.getLeftButtonX(), _svc.getLeftButtonY(), "SOUND EFFECT VOLUME", "src/resources/fonts/chargen.ttf", FONT_SIZE);
         this.menuScreen = _menuScreen;
         this.sfxVolumeControl = _svc;
     }

@@ -34,13 +34,17 @@ public class HealthPowerup extends StandardGameObject implements Powerup {
     //  much health it restores.
     private static final int HEALTH_FPS = 10;
     private static final int HEALTH_INCREASE = 25;
+    private static final int FRAMES_PER_SECOND = 12;
+    private static final int NUM_OF_FRAMES = 22;
 
     public HealthPowerup(int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, StandardID.Powerup);
         this.player = _game.getPlayer();
         this.parentContainer = _sch;
         StandardAnimatorController healthAnimation
-                = new StandardAnimatorController(new StandardAnimation(this, HEALTH_FRAMES, HEALTH_FPS, 12));
+                = new StandardAnimatorController(new StandardAnimation(this, HealthPowerup.HEALTH_FRAMES,
+                        HealthPowerup.HEALTH_FPS,
+                        HealthPowerup.FRAMES_PER_SECOND));
         this.setAnimation(healthAnimation);
         this.setWidth(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getWidth());
         this.setHeight(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getHeight());
@@ -83,8 +87,8 @@ public class HealthPowerup extends StandardGameObject implements Powerup {
         return PowerupType.HEALTH;
     }
 
-    //static value
+    //  Load in the images staticly instead of at run-time every time a powerup is spawned.
     static {
-        HEALTH_FRAMES = Utilities.loadFrames("src/resources/img/items/drops/health/", 22);
+        HEALTH_FRAMES = Utilities.loadFrames("src/resources/img/items/drops/health/", HealthPowerup.NUM_OF_FRAMES);
     }
 }

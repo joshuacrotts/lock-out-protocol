@@ -28,8 +28,6 @@ public class ShotgunBulletObject extends ProjectileGameObject {
     //  Animation frame per second setting
     private static final int BULLET_FPS = 20;
 
-    private int damage = 100;
-
     public ShotgunBulletObject(int _x, int _y, double _angle, int _damage, Game _game,
             StandardCollisionHandler _parentContainer, Player _parent) {
         super(_x, _y, _angle, _damage, ShotgunBulletObject.VEL_FACTOR, ShotgunBulletObject.frames,

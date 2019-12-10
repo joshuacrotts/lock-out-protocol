@@ -69,10 +69,23 @@ public abstract class StandardButton extends Interactor {
         this.isImage = true;
     }
 
+    /**
+     * Updates all button logic for any subclass of StandardButton.
+     */
     @Override
     public void tick() {
     }
 
+    /**
+     * If there exists an image associated with this StandardButton, we render
+     * it. Otherwise, we set the color associated, and draw the
+     * backing-rectangle.
+     *
+     * Subclasses should override this method, add their own logic, then call
+     * super.render(_g2);
+     *
+     * @param _g2
+     */
     @Override
     public void render(Graphics2D _g2) {
         if (this.isImage) {

@@ -26,10 +26,11 @@ public class PowerupTextLabel extends StandardLabel {
     //  Time information; its position and how often it should increment.
     private final int HEALTH_X_OFFSET = 25;
     private final int HEALTH_Y_OFFSET = 35;
+    private static final float FONT_SIZE = 14f;
     private int yOffset;
 
     public PowerupTextLabel(Game _game, String _powerupString) {
-        super(0, 0, "", "src/resources/fonts/chargen.ttf", 14f);
+        super(0, 0, "", "src/resources/fonts/chargen.ttf", FONT_SIZE);
         this.game = _game;
         this.powerupString = _powerupString;
     }
@@ -45,8 +46,8 @@ public class PowerupTextLabel extends StandardLabel {
 
     @Override
     public void render(Graphics2D _g2) {
-        this.setX((int) this.game.getCamera().getX() - Screen.gameHalfWidth + HEALTH_X_OFFSET);
-        this.setY((int) (this.game.getCamera().getY() - Screen.gameHalfHeight + HEALTH_Y_OFFSET + this.yOffset));
+        this.setX((int) this.game.getCamera().getX() - Screen.gameHalfWidth + this.HEALTH_X_OFFSET);
+        this.setY((int) (this.game.getCamera().getY() - Screen.gameHalfHeight + this.HEALTH_Y_OFFSET + this.yOffset));
         _g2.setColor(Color.WHITE);
         super.render(_g2);
     }

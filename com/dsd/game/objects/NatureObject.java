@@ -13,6 +13,8 @@ import java.awt.image.BufferedImage;
  * This class is a template for objects in the game that act as foliage.
  *
  * @author Joshua
+ * 
+ * @updated 12/10/2019
  */
 public class NatureObject extends StandardGameObject implements Renderable, Updatable {
 
@@ -20,10 +22,8 @@ public class NatureObject extends StandardGameObject implements Renderable, Upda
     private final Game game;
     private final StandardCollisionHandler parentContainer;
 
-    //
     //  There are two types of nature objects: ones that are collidable by other
     //  entities, and ones that are not (the user just hovers over them).
-    //
     private boolean collidable = false;
 
     public NatureObject(Game _game, StandardCollisionHandler _parentContainer,

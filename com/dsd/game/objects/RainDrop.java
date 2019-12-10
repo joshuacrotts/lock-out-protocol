@@ -13,6 +13,8 @@ import org.apache.commons.math3.util.FastMath;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/10/2019
  */
 public class RainDrop extends StandardGameObject {
 

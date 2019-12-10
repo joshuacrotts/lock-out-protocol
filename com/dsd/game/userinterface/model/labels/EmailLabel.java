@@ -22,10 +22,13 @@ public class EmailLabel extends StandardLabel {
     private static final int BUTTON_X_OFFSET = 200;
     private static final int BUTTON_Y_OFFSET = 40;
 
+    //  View element factors.
+    private static final float FONT_SIZE = 32f;
+
     public EmailLabel(EmailTextFieldModel _emailModel, MenuScreen _menuScreen) {
         super(_emailModel.getX(), _emailModel.getY(),
                 LanguageController.translate("EMAIL:"),
-                "src/resources/fonts/chargen.ttf", 32f);
+                "src/resources/fonts/chargen.ttf", FONT_SIZE);
         this.menuScreen = _menuScreen;
         this.emailModel = _emailModel;
     }

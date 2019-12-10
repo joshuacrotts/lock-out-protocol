@@ -13,6 +13,8 @@ import java.awt.Toolkit;
  * normal cursor.
  *
  * @author Joshua
+ * 
+ * @updated 12/10/19
  */
 public class Crosshair {
 
@@ -37,6 +39,7 @@ public class Crosshair {
         this.game.setCursor(assignedCursor);
     }
 
+    //  Load in the images at compile-time.
     static {
         toolkit = Toolkit.getDefaultToolkit();
         crosshairImage = Crosshair.toolkit.getImage("src/resources/img/ui/crosshair.png");

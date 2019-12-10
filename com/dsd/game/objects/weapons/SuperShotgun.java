@@ -36,12 +36,13 @@ public class SuperShotgun extends Gun {
 
     //  Damage from the rifle.
     private static final int BULLET_DAMAGE = 250;
+    private static final int INITIAL_AMMO = 8;
 
     //  Amount of casing image frames for this gun.
     private static final int CASING_IMAGES = 8;
 
     public SuperShotgun(Game _game, Player _player, StandardCollisionHandler _sch) {
-        super(WeaponType.SUPER_SHOTGUN, 8, _game, _player, _sch, "src/resources/audio/sfx/reload.wav", RELOAD_DELAY);
+        super(WeaponType.SUPER_SHOTGUN, INITIAL_AMMO, _game, _player, _sch, "src/resources/audio/sfx/reload.wav", RELOAD_DELAY);
         //  Instantiates the animation controllers.
         this.loadAssets(_player);
         super.setDelay(DELAY);

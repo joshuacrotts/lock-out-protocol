@@ -19,12 +19,18 @@ import java.awt.Graphics2D;
  */
 public class WaveLabel extends StandardLabel {
 
+    //  Miscellaenous camera reference.
     private final StandardCamera camera;
+    
+    //  Random variability factor for when the wave text shakes.
     private final int VARIABILITY = 1;
+    
+    //  View element factors.
+    private static final float FONT_SIZE = 32f;
 
     public WaveLabel(Game _game, int _waveNumber) {
         super((int) _game.getCamera().getX(), (int) _game.getCamera().getY(),
-                LanguageController.translate("Wave ") + _waveNumber, "src/resources/fonts/chargen.ttf", 32f);
+                LanguageController.translate("Wave ") + _waveNumber, "src/resources/fonts/chargen.ttf", FONT_SIZE);
         this.camera = _game.getCamera();
     }
 

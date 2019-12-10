@@ -25,12 +25,16 @@ public class LightningFlash implements Renderable, Updatable {
     private final ArrayList<LightningFlash> flashList;
     private float flashFadeFloat = 1.0f;
     private final double flashDuration;
+    
+    //  Other variables determining the color and the flash depletion.
+    private final float INIT_FLASH_DURATION = 0.005f;
+    private final float WHITE_COLOR = 1.0f;
     private static final float FADE_THRESHOLD = 0.01f;
 
     public LightningFlash(Game _game, ArrayList<LightningFlash> _flashList) {
         this.game = _game;
         this.flashList = _flashList;
-        this.flashDuration = 0.005f;
+        this.flashDuration = this.INIT_FLASH_DURATION;
     }
 
     @Override
@@ -45,7 +49,7 @@ public class LightningFlash implements Renderable, Updatable {
     @Override
     public void render(Graphics2D _g2) {
         Color oldColor = _g2.getColor();
-        _g2.setColor(new Color(1.0f, 1.0f, 1.0f, this.flashFadeFloat));
+        _g2.setColor(new Color(this.WHITE_COLOR, this.WHITE_COLOR, this.WHITE_COLOR, this.flashFadeFloat));
         _g2.fillRect((int) (this.game.getCamera().getX() - Screen.gameHalfWidth),
                 (int) (this.game.getCamera().getY() - Screen.gameHalfHeight),
                 (int) (this.game.getCamera().getX() + Screen.gameDoubleWidth),

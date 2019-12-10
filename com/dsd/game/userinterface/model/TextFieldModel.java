@@ -17,7 +17,7 @@ import java.awt.Graphics2D;
  */
 public class TextFieldModel extends Interactor implements MouseEventInterface {
 
-    //  Reference variables
+    //  Reference variables.
     private final Game game;
     private final MenuScreen menuScreen;
     private final TextFieldView view;
@@ -40,6 +40,7 @@ public class TextFieldModel extends Interactor implements MouseEventInterface {
         this.setWidth(FIELD_WIDTH);
         this.setHeight(FIELD_HEIGHT);
         super.setX(this.getX() - this.getWidth() / 2);
+        
         //  Instantiate the variables associated with the view of this model.
         this.view = new TextFieldView(this);
         this.string = new StringBuilder();

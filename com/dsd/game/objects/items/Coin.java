@@ -49,7 +49,16 @@ public class Coin extends StandardGameObject implements Powerup {
 
     //  Max number of sound effects for coins.
     private static final int MAX_COIN_SFX = 1;
+    
+    //  Variables for generating a coin from the monsters.
+    private static final int MIN_GEN_VALUE = 0;
+    private static final int MAX_GEN_VALUE = 100;
 
+    //  Coin values.
+    private final int SMALL_COIN_VALUE = 1;
+    private final int MED_COIN_VALUE = 5;
+    private final int LARGE_COIN_VALUE = 10;
+    
     /**
      * The _small, _medium, and _large parameters should be sequential, and go
      * up to 1.0. Essentially, _small = 0.7, _mid = 0.9, _large = 1.0 can be
@@ -122,16 +131,16 @@ public class Coin extends StandardGameObject implements Powerup {
      * @param _large
      */
     private void generateCoinType(double _small, double _medium, double _large) {
-        int coin = StdOps.rand(0, 100);
-        if (coin < _small * 100) {
+        int coin = StdOps.rand(Coin.MIN_GEN_VALUE, Coin.MAX_GEN_VALUE);
+        if (coin < _small * Coin.MAX_GEN_VALUE) {
             this.setAnimation(new StandardAnimatorController(this, Coin.coinOneFrames, this.COIN_FPS));
-            this.value = 1;
-        } else if (coin < _medium * 100) {
+            this.value = this.SMALL_COIN_VALUE;
+        } else if (coin < _medium * Coin.MAX_GEN_VALUE) {
             this.setAnimation(new StandardAnimatorController(this, Coin.coinTwoFrames, this.COIN_FPS));
-            this.value = 5;
-        } else if (coin < _large * 100) {
+            this.value = this.MED_COIN_VALUE;
+        } else if (coin < _large * Coin.MAX_GEN_VALUE) {
             this.setAnimation(new StandardAnimatorController(this, Coin.coinThreeFrames, this.COIN_FPS));
-            this.value = 10;
+            this.value = this.LARGE_COIN_VALUE;
         }
     }
 

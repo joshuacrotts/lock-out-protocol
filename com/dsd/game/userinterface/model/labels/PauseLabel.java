@@ -23,10 +23,13 @@ public class PauseLabel extends StandardLabel {
     private final int LABEL_X_OFFSET = 20;
     private final int LABEL_Y_OFFSET = 100;
 
+    //  View element factors.
+    private static final float FONT_SIZE = 32f;
+
     public PauseLabel(Game _game) {
         super((int) Screen.gameHalfWidth,
                 (int) Screen.gameHalfHeight,
-                LanguageController.translate("PAUSED"), "src/resources/fonts/chargen.ttf", 32f);
+                LanguageController.translate("PAUSED"), "src/resources/fonts/chargen.ttf", FONT_SIZE);
         this.game = _game;
     }
 

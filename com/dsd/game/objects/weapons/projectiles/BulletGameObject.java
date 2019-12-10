@@ -22,13 +22,11 @@ public class BulletGameObject extends ProjectileGameObject {
     //  Velocity factor applied to the bullet.
     private static final int VEL_FACTOR = 20;
 
-    //  Static reference to the BufferedImages
+    //  Static reference to the BufferedImages.
     private static final BufferedImage[] frames = new BufferedImage[1];
 
-    //  Animation frame per second setting
+    //  Animation frame per second setting.
     private static final int BULLET_FPS = 20;
-
-    private int damage = 25;
 
     public BulletGameObject(int _x, int _y, double _angle, int _damage, Game _game,
             StandardCollisionHandler _parentContainer, Player _parent) {
@@ -56,7 +54,7 @@ public class BulletGameObject extends ProjectileGameObject {
         return BulletGameObject.frames;
     }
 
-    //  Initializes the bullet frames
+    //  Initializes the bullet frames.
     static {
         BulletGameObject.initImages();
     }

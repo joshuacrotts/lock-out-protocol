@@ -35,11 +35,16 @@ public class TimeLabel extends StandardLabel implements TimerInterface {
     //  Time information; its position and how often it should increment.
     private static final int TIME_Y_OFFSET = 15;
     private static final int TIME_INTERVAL = 1000;
+    private static final int SECONDS_PER_MINUTE = 60;
     private final String waveString;
+    
+    //  View element factors.
+    private static final float FONT_SIZE = 14f;
+    
 
     public TimeLabel(Game _game) {
         super(Screen.gameHalfWidth, TimeLabel.TIME_Y_OFFSET, "00:00:00",
-                "src/resources/fonts/chargen.ttf", 14f);
+                "src/resources/fonts/chargen.ttf", FONT_SIZE);
         this.game = _game;
         this.waveString = LanguageController.translate("Wave");
     }
@@ -84,11 +89,11 @@ public class TimeLabel extends StandardLabel implements TimerInterface {
      */
     private void calculateTime() {
         this.seconds++;
-        if (this.seconds % 60 == 0) {
+        if (this.seconds % SECONDS_PER_MINUTE == 0) {
             this.minutes++;
             this.seconds = 0;
         }
-        if (this.minutes % 60 == 0 && this.minutes != 0) {
+        if (this.minutes % SECONDS_PER_MINUTE == 0 && this.minutes != 0) {
             this.hours++;
             this.minutes = 0;
         }

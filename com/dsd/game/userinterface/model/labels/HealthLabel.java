@@ -29,10 +29,11 @@ public class HealthLabel extends StandardLabel {
      * health. Also variables about the color and layout of the bar.
      */
     private final StandardFadeController healthBarColor;
-    private final Color darkGreen;
-    private final Color lightGreen;
+    private final Color darkGreen = new Color(0.0f, 0.5f, 0.0f);
+    private final Color lightGreen = new Color(0.0f, 1.0f, 0.0f);
     private final int TRANSPARENCY = 127;
     private final float FADE_INTERVAL = 0.005f;
+    private static final float FONT_SIZE = 32f;
 
     //  Position and sizing of health elements
     private final int MAX_HEALTH = 200;
@@ -46,9 +47,7 @@ public class HealthLabel extends StandardLabel {
 
     public HealthLabel(Game _game, Player _player) {
         super((int) (Screen.gameHalfWidth - Screen.gameHalfWidth),
-                (int) (Screen.gameHalfHeight + Screen.gameFourthHeight), LanguageController.translate("Health: "), "src/resources/fonts/chargen.ttf", 32f);
-        this.darkGreen = new Color(0.0f, 0.5f, 0.0f);
-        this.lightGreen = new Color(0.0f, 1.0f, 0.0f);
+                (int) (Screen.gameHalfHeight + Screen.gameFourthHeight), LanguageController.translate("Health: "), "src/resources/fonts/chargen.ttf", FONT_SIZE);
         this.healthBarColor = new StandardFadeController(this.darkGreen, this.lightGreen, this.FADE_INTERVAL);
         this.game = _game;
         this.player = _player;
@@ -70,10 +69,21 @@ public class HealthLabel extends StandardLabel {
         this.drawHealthBar(_g2);
     }
 
+    /**
+     * Draws the string of text labeled "health".
+     *
+     * @param _g2
+     */
     private void drawHealthText(Graphics2D _g2) {
         StandardDraw.text(this.getText(), this.getX() + TEXT_X_OFFSET, this.getY(), this.getFont(), this.getFont().getSize(), Color.WHITE);
     }
 
+    /**
+     * Draws the green and black border that shows, graphically, how much the
+     * player has
+     *
+     * @param _g2
+     */
     private void drawHealthBar(Graphics2D _g2) {
         //  Draw the green portion (health of actual player).
         this.drawGreenBar(_g2);
@@ -105,6 +115,13 @@ public class HealthLabel extends StandardLabel {
                 MAX_HEALTH, this.HEALTH_BAR_HEIGHT, this.ARC_WIDTH, this.ARC_HEIGHT);
     }
 
+    /**
+     * Creates a new color object for the transparent color effect in the health
+     * bar.
+     *
+     * @param _c
+     * @return
+     */
     private Color makeColorTransparent(Color _c) {
         return new Color(_c.getRed(), _c.getGreen(), _c.getBlue(), this.TRANSPARENCY);
     }
