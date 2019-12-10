@@ -17,7 +17,7 @@ import com.revivedstandards.model.StandardID;
  */
 public abstract class Entity extends StandardGameObject {
 
-    //  Miscellaneous reference variables
+    //  Miscellaneous reference variables.
     private final Game game;
     private StandardCollisionHandler parentContainer;
 
@@ -27,7 +27,7 @@ public abstract class Entity extends StandardGameObject {
     //
     public static final int APPROACH_FACTOR = 8;
 
-    //  Health of entity
+    //  Health of entity.
     private double health = 0;
 
     public Entity(int _x, int _y, int _health, StandardID _id, Game _game, StandardCollisionHandler _parentContainer) {

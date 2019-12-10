@@ -30,7 +30,7 @@ import org.apache.commons.math3.util.FastMath;
  * its list key commands accepted from the keyboard, its speed value, its
  * currency held in the form of an integer, its designated health value from the
  * Entity-Class, and finally, its own collider for collision detection purposes,
- * which is added to the Standard Collision Handler
+ * which is added to the Standard Collision Handler.
  *
  * [Group Name: Data Structure Deadheads]
  *
@@ -40,15 +40,15 @@ import org.apache.commons.math3.util.FastMath;
  */
 public class Player extends Entity implements DeathListener, SerializableObject {
 
-    //  Miscellaneous reference variables
+    //  Miscellaneous reference variables.
     private StandardCamera sc;
 
-    //  Bullet Casing particle handler
+    //  Bullet Casing particle handler.
     private final StandardParticleHandler casingHandler;
 
     /**
      * Refers to the player's current state (walking, shooting, etc.)
-     * PlayerState is set by commands
+     * PlayerState is set by commands.
      */
     private PlayerState playerState;
 
@@ -58,32 +58,32 @@ public class Player extends Entity implements DeathListener, SerializableObject 
     //  Global commands
     private AttackCommand attackCommand;
 
-    //  Variables representing the angle and approach velocity
+    //  Variables representing the angle and approach velocity.
     private float APPROACH_VEL = -3.0f;
 
-    //  Money amount
+    //  Money amount.
     private int money = 0;
 
-    //  Health vars (this may change with time)
+    //  Health vars (this may change with time).
     private int maxHealth = 200;
 
-    //  Sex of player
+    //  Sex of player.
     private String sex = "male";
 
     public Player(int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, 100, StandardID.Player, (Game) _game, _sch);
-        //  Instantiate the inventory
+        //  Instantiate the inventory.
         this.inventory = new Inventory(_game, this, _sch);
-        //  Initializes the miscellaneous variables
+        //  Initializes the miscellaneous variables.
         this.sc = _game.getCamera();
-        //  Sets the default animation
+        //  Sets the default animation.
         this.setAnimation(this.inventory.getCurrentWeapon().getWalkFrames());
-        //  Instantiate commands
+        //  Instantiate commands.
         this.initCommands();
-        //  Initializes the player's default state to standing
+        //  Initializes the player's default state to standing.
         this.playerState = PlayerState.STANDING;
         this.casingHandler = new StandardParticleHandler(1000);
-        //  Adds the player to the list of collidable objects
+        //  Adds the player to the list of collidable objects.
         _sch.addCollider(StandardID.Player);
         _sch.flagAlive(StandardID.Player);
         super.setHealth(this.maxHealth);

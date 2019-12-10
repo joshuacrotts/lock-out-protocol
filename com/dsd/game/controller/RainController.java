@@ -29,20 +29,27 @@ public class RainController implements Renderable, Updatable {
     private final StandardParticleHandler sph;
     private final LightningHandler lightningHandler;
     private final StandardCamera sc;
+    
     // Serves as a debugging feature (if enabled, it ignores the API call and automatically enables rain).
-    private static final boolean toggleDownfall = false;
+    private static final boolean toggleDownfall = true;
+    
     // If it is raining, this boolean is toggled true.
     private boolean isRaining;
+    
     // Defines the range in which rain can spawn for the user.
     private static final int X_BORDER = Screen.gameDoubleWidth;
     private static final int Y_BORDER = Screen.gameDoubleHeight;
+    
     // Velocity constants and factors for the rain drop object.
     private static final double RAIN_DIRECTION = -FastMath.PI * 1.5;
     private static final int VEL_FACTOR = 5;
     private static final int Y_BOUND_FACTOR = 2;
+    
     // Constants for how many rain particles should spawn.
     private static final int MAX_RAIN_PARTICLES = 5000;
+    
     // Constant for how "often" lightning should spawn. The higher, the rarer.
+    
     private static final int LIGHTNING_INTERVAL = 2500;
 
     public RainController(Game _game) {
