@@ -25,8 +25,7 @@ import java.awt.image.BufferedImage;
  */
 public class DarkFemaleMonster extends Enemy implements DeathListener {
 
-    //  Static bufferedimage array so the images aren't constantly loading in
-    //  upon instantiation of a new monster
+    //  Static bufferedimage array so the images aren't constantly loading in upon instantiation of a new monster
     private static final BufferedImage[] WALK_FRAMES;
     private static final BufferedImage[] DEATH_FRAMES;
 

@@ -6,11 +6,12 @@ package com.dsd.game.database;
  *
  * [Group Name: Data Structure Deadheads]
  *
- * @author Joshua, Ronald, Rinty
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public interface Database {
 
     public boolean save();
 
     public boolean load();
+    
 }

@@ -113,7 +113,6 @@ public class PersistentDatabase implements RemoteDatabase {
                 }
             }
             updateInventoryQuery = this.remoteDBConnection.prepareStatement(String.format("UPDATE user_accounts SET " + inventoryString + "WHERE UUID = ?;"));
-
             // Iterate through the updateQuery, and place the data in the PreparedStatement.
             for (int i = 0; i < _inventoryData.length; i++) {
                 updateInventoryQuery.setInt(i + 1, Integer.parseInt(_inventoryData[i]));
@@ -218,14 +217,13 @@ public class PersistentDatabase implements RemoteDatabase {
             HashMap<String, Double> playerInfo = new HashMap<>();
             ArrayList<Integer> inventoryInfo = new ArrayList<>();
             final int PLAYER_AMT = 6;
-            // Gun status (if they have the gun)
-            // plus the ammo amt and total ammo for every gun
+            // Gun status (if they have the gun) plus the ammo amt and total ammo for every gun.
             final int INVENTORY_AMT = WeaponType.values().length * 3;
-            // Load in the player data from the Result Set
+            // Load in the player data from the Result Set..
             for (int i = 2; i <= PLAYER_AMT; i++) {
                 playerInfo.put(playerStatsMetadata.getColumnName(i), (double) playerStatsSet.getInt(i));
             }
-            // Load in the inventory data from the Result set
+            // Load in the inventory data from the Result set.
             for (int j = PLAYER_AMT + 1; j <= INVENTORY_AMT + PLAYER_AMT; j++) {
                 inventoryInfo.add(playerStatsSet.getInt(j));
             }
@@ -276,7 +274,7 @@ public class PersistentDatabase implements RemoteDatabase {
      * @param _email
      * @param _password
      *
-     * @return
+     * @return true or false
      */
     @Override
     public AccountStatus userAuthenticated(String _email, String _password) {
@@ -289,8 +287,8 @@ public class PersistentDatabase implements RemoteDatabase {
                 return AccountStatus.INCORRECT_PASS;
             }
             this.connectedUserID = null;
-        } catch (SQLException ex) {
-            Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException _ex) {
+            Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, _ex);
         }
         this.connectedUserID = this.getUserID(_email);
         return AccountStatus.CORRECT;
@@ -331,7 +329,7 @@ public class PersistentDatabase implements RemoteDatabase {
      *
      * @param _email
      * @param _password
-     * @return 
+     * @return true or false
      */
     @Override
     public AccountStatus addUser(String _email, String _password) {
@@ -346,21 +344,16 @@ public class PersistentDatabase implements RemoteDatabase {
             } else {
                 String hashed = BCrypt.hashpw(_password, BCrypt.gensalt(SALT_ITERATIONS));
 
-                //  First, we want to make sure all weapons are defaulted to having
-                //  no ammo, but are at least exist in the system.
+                // First, we want to make sure all weapons are defaulted to having no ammo, but are at least exist in the system.
                 String defaultWeapons = "";
-
                 for (int i = 0; i < WeaponType.values().length; i++) {
-                    //  Each weapon has three properties, so we initialize these
-                    //  to default here (three times successively).
+                    // Each weapon has three properties, so we initialize these to default here (three times successively).
                     defaultWeapons += "DEFAULT, ";
                     defaultWeapons += "DEFAULT, ";
                     defaultWeapons += "DEFAULT, ";
                 }
                 insertStatement = this.remoteDBConnection.prepareStatement(String.format("INSERT INTO user_accounts " + "VALUES(UUID(), ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, " + defaultWeapons + "DEFAULT, DEFAULT, DEFAULT, DEFAULT);"));
-
-                //  We set the first and second positions in the prepared statement
-                //  to be the username and password.
+                // We set the first and second positions in the prepared statement to be the username and password.
                 insertStatement.setString(1, _email);
                 insertStatement.setString(2, hashed);
                 insertStatement.executeUpdate();
@@ -378,7 +371,7 @@ public class PersistentDatabase implements RemoteDatabase {
      *
      * @param _email
      * @param _password
-     * @return
+     * @return true or false
      *
      * @throws SQLException
      */
@@ -390,7 +383,7 @@ public class PersistentDatabase implements RemoteDatabase {
      * Queries the DB to determine if the email is in the db or not.
      *
      * @param _email
-     * @return
+     * @return true or false
      * @throws SQLException
      */
     private boolean userEmailInDatabase(String _email) throws SQLException {
@@ -407,16 +400,16 @@ public class PersistentDatabase implements RemoteDatabase {
      *
      * @param _email
      * @param _password
-     * @return
+     * @return true or false
      * @throws SQLException
      */
     private boolean isValidPassword(String _email, String _password) throws SQLException {
-        //  Returns the salted and hashed pswd with the associated email.
+        // Returns the salted and hashed pswd with the associated email.
         PreparedStatement insertStatement = this.remoteDBConnection.prepareStatement(String.format("SELECT Password FROM user_accounts WHERE Email = ?;"));
         insertStatement.setString(1, _email);
         ResultSet resultQuery = insertStatement.executeQuery();
 
-        //  If we have a result query value, then we check the password against the hashed pswd.
+        // If we have a result query value, then we check the password against the hashed pswd.
         if (resultQuery.next()) {
             return BCrypt.checkpw(_password, resultQuery.getString("Password"));
         }
@@ -424,7 +417,7 @@ public class PersistentDatabase implements RemoteDatabase {
     }
 
     /**
-     * Generates the necessary classname to get the MySQL java driver working.
+     * Generates the necessary class name to get the MySQL java driver working.
      */
     private void generateClassName() {
         try {
@@ -456,4 +449,5 @@ public class PersistentDatabase implements RemoteDatabase {
             Logger.getLogger(PersistentDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
 }

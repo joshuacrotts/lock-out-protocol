@@ -25,36 +25,28 @@ import java.awt.image.BufferedImage;
  */
 public class RedHeadMonster extends Enemy implements DeathListener {
 
-    //  Static bufferedimage array so the images aren't constantly loading in
-    //  upon instantiation of a new monster
+    // Static bufferedimage array so the images aren't constantly loading in upon instantiation of a new monster
     private static final BufferedImage[] WALK_FRAMES;
-
     //  Animation frame per second setting
     private final int walkingFPS = 16;
-
     //  Variables representing the angle and approach velocity
     private static final double APPROACH_VEL = -2.5f;
     private final double DAMAGE = 0.20;
-
     //  Health factor for this BasicMonster object.
     public static int originalHealth = 100;
 
     public RedHeadMonster(int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, RedHeadMonster.APPROACH_VEL, RedHeadMonster.originalHealth, StandardID.Monster6, _game, _sch);
         super.setTarget(_game.getPlayer());
-
         //  Sets the walking/death frames for this monster
         super.initWalkingFrames(RedHeadMonster.WALK_FRAMES, this.walkingFPS);
-
         //  Sets the default animation
         super.setAnimation(super.getWalkingAnimation());
-
         //  The width/height of the model is set by the buffered image backing it.
         super.setDimensions();
         super.setDamage(this.DAMAGE);
         super.getHandler().addCollider(this.getId());
         super.getHandler().flagAlive(this.getId());
-
         super.bloodColor = Color.RED;
     }
 
@@ -125,9 +117,9 @@ public class RedHeadMonster extends Enemy implements DeathListener {
                     this.getGame(), this.getHandler()));
         }
     }
-
     //  Static block for instantiating the images.
     static {
         WALK_FRAMES = Utilities.loadFrames("src/resources/img/enemies/monster9/walk/", 17);
     }
+    
 }

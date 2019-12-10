@@ -41,51 +41,36 @@ public abstract class Enemy extends Entity implements DeathListener {
 
     //  Miscellaneous reference variables.
     private final StandardCamera sc;
-
-    //  Information about the enemy's state in the game, and who they're
-    //  moving towards.
+    //  Information about the enemy's state in the game, and who they're moving towards.
     private EnemyState enemyState;
     private Entity target;
-
     //  Animation controllers.
     private StandardAnimatorController walkingController;
     private StandardAnimatorController attackingController;
     private StandardAnimatorController deathController;
-
     //  Variables for the disappearing effect when the monster dies.
     private float deathTransparencyFactor;
     private float deathTransparency = 1.0f;
-
     //  One-time variable for tracking the "alive" to "death state" transition.
     private boolean aliveFlag = true;
-
     //  Vector force factor (we may want to change this, but making it final for now).
     private final int pushFactor = 2;
-
     //  Determines how fast the monster approaches the player.
     private final double APPROACH_VEL;
-
     //  Max amount of particles that can be summoned in the particle handler
     private static final int BLOOD_PARTICLES = 10;
-
-    //  Blood particle colors (on a per-monster basis).
-    //  If none is selected, red is the default.
+    //  Blood particle colors (on a per-monster basis). If none is selected, red is the default.
     protected Color bloodColor = Color.RED;
-
     //  Handler for particle explosions after the monster dies.
     protected StandardParticleHandler explosionHandler;
-
     //  How much damage the enemy does when running into the player.
     protected double damage;
-
     //  Alpha composition object for when the monster dies.
     protected AlphaComposite deathTransparentComposite;
-
     //  Power-up drop odds (should be between 0-1, increasing up to 1).
     protected double smallCoinDrop = 0.7;
     protected double medCoinDrop = 0.9;
     protected double largeCoinDrop = 1.0;
-
     //  Initial health factor (for changing difficulty).
     public final int INIT_HEALTH;
     
@@ -108,10 +93,8 @@ public abstract class Enemy extends Entity implements DeathListener {
             //  Save the target's position
             double tx = this.getTarget().getX();
             double ty = this.getTarget().getY();
-
             //  Causes the monster to follow the target wherever on the screen
             this.followPlayer((int) tx, (int) ty);
-
             //  Calculates the angle the monster needs to be in to face the player
             this.facePlayer((int) tx, (int) ty);
         } else {
@@ -187,15 +170,12 @@ public abstract class Enemy extends Entity implements DeathListener {
      */
     public void generateBloodParticles() {
         BloodParticleHandler bph = this.getGame().getBloodHandler();
-
         for (int i = 0; i < BLOOD_PARTICLES; i++) {
             //  Generates the still, motionless particles.
             double centerX = this.getX() + this.getWidth() / 2;
             double centerY = this.getY() + this.getHeight() / 2;
-
             //  Generates the particle that is on the ground.
             bph.addBloodParticle(BloodType.SLOWING, centerX, centerY, this.getAngle(), this.bloodColor);
-
             //  Generates the particles that are more scattered.
             bph.addBloodParticle(BloodType.STANDARD, centerX, centerY, this.getAngle(), this.bloodColor);
             bph.addBloodParticle(BloodType.SCATTERED, centerX, centerY, this.getAngle(), this.bloodColor);
@@ -220,24 +200,18 @@ public abstract class Enemy extends Entity implements DeathListener {
         if (this.getDeathAnimation() != null) {
             this.setAnimation(this.getDeathAnimation());
         }
-
         this.explosionHandler = new StandardParticleHandler(50);
         this.explosionHandler.setCamera(this.getCamera());
         for (int i = 0; i < this.explosionHandler.getMaxParticles(); i++) {
-
             double centerX = this.getX() + this.getWidth() / 2;
             double centerY = this.getY() + this.getHeight() / 2;
-
             this.explosionHandler.addEntity(new StandardBoxParticle(centerX, centerY,
                     StdOps.rand(1.0, 5.0), StdOps.randBounds(-10.0, -3.0, 3.0, 10.0),
                     StdOps.randBounds(-10.0, -3.0, 3.0, 10.0), this.bloodColor, 3f, this.explosionHandler,
                     this.getAngle(), ShapeType.CIRCLE, false));
         }
-
         this.moveEntityToFront();
-    }
-
-    ;
+    };
 
     /**
      * Instantiates the walking animation controller.
@@ -361,7 +335,7 @@ public abstract class Enemy extends Entity implements DeathListener {
         }
     }
 
-//================================ GETTERS ===================================//
+//================================ GETTERS ===================================
     public StandardAnimatorController getWalkingAnimation() {
         return this.walkingController;
     }
@@ -406,7 +380,7 @@ public abstract class Enemy extends Entity implements DeathListener {
         return this.explosionHandler;
     }
 
-//================================ SETTERS ===================================//
+//================================ SETTERS ===================================
     public void setTarget(Entity _target) {
         this.target = _target;
     }
@@ -422,4 +396,5 @@ public abstract class Enemy extends Entity implements DeathListener {
     public void setEnemyState(EnemyState _state) {
         this.enemyState = _state;
     }
+    
 }

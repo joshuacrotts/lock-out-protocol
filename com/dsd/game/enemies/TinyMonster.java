@@ -25,46 +25,35 @@ import java.awt.image.BufferedImage;
  */
 public class TinyMonster extends Enemy implements DeathListener {
 
-    //
-    //  Static bufferedimage array so the images aren't constantly loading in
-    //  upon instantiation of a new monster.
-    //
+    // Static bufferedimage array so the images aren't constantly loading in upon instantiation of a new monster.
     private static final BufferedImage[] WALK_FRAMES;
     private static final BufferedImage[] DEATH_FRAMES;
-
-    //  Animation frame per second setting
+    // Animation frame per second setting
     private static final int walkingFPS = 64;
     private static final int DEATH_FPS = 16;
     private static final int DEATH_ANIMATION_HALT_FRAME = 16;
-
-    //  Variables representing the angle and approach velocity
+    // Variables representing the angle and approach velocity
     private static final double APPROACH_VEL = -4.5f;
     private final double DAMAGE = 0.20;
-
-    //  AlphaComposite factor for when the TinyMonster dies
+    // AlphaComposite factor for when the TinyMonster dies
     private static final float DEATH_ALPHA_FACTOR = 0.001f;
-
-    //  Health factor for this BasicMonster object.
+    // Health factor for this BasicMonster object.
     public static int originalHealth = 100;
 
     public TinyMonster(int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, TinyMonster.APPROACH_VEL, TinyMonster.originalHealth, StandardID.BasicMonster, _game, _sch);
         super.setTarget(_game.getPlayer());
-
-        //  Sets the walking/death frames for this monster
+        // Sets the walking/death frames for this monster
         super.initWalkingFrames(TinyMonster.WALK_FRAMES, TinyMonster.walkingFPS);
         super.initDeathFrames(TinyMonster.DEATH_FRAMES, TinyMonster.DEATH_FPS, DEATH_ANIMATION_HALT_FRAME);
-
-        //  Sets the default animation
+        // Sets the default animation
         super.setAnimation(super.getWalkingAnimation());
-        
-        //  The width/height of the model is set by the buffered image backing it.
+        // The width/height of the model is set by the buffered image backing it.
         super.setDimensions();
         super.setDamage(this.DAMAGE);
         super.getHandler().addCollider(this.getId());
         super.getHandler().flagAlive(this.getId());
         super.setTransparentFactor((float) DEATH_ALPHA_FACTOR);
-
         super.bloodColor = Color.RED;
     }
 
@@ -136,10 +125,11 @@ public class TinyMonster extends Enemy implements DeathListener {
         }
     }
 
-    //  Static block for instantiating the images.
+    // Static block for instantiating the images.
     static {
         WALK_FRAMES = Utilities.loadFrames("src/resources/img/enemies/monster10/walk/", 32);
         int deathFramePicker = (int) (Math.random() * 2);
         DEATH_FRAMES = Utilities.loadFrames("src/resources/img/enemies/monster10/death" + deathFramePicker + "/", 17);
     }
+    
 }
