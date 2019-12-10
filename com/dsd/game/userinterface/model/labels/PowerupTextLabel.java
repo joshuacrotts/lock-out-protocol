@@ -1,5 +1,6 @@
 package com.dsd.game.userinterface.model.labels;
 
+import com.dsd.game.controller.LanguageController;
 import com.dsd.game.core.Game;
 import com.dsd.game.userinterface.Screen;
 import java.awt.Color;
@@ -40,7 +41,10 @@ public class PowerupTextLabel extends StandardLabel {
         if (!this.game.isInGameState()) {
             return;
         } else {
-            this.setText("YOU PICKED UP " + this.powerupString);
+            //  If the language is English, we don't have to translate anything 
+            //  and thus can print the powerup. Otherwise, we have to translate
+            //  every string which causes lag. So, we don't do it for other languages.
+            this.setText(LanguageController.lang.equals("en-en") ? "YOU PICKED UP " + this.powerupString : "");
         }
     }
 
