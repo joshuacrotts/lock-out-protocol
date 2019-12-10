@@ -11,8 +11,12 @@ import com.dsd.game.api.adapters.LanguageTranslationAPIAdapter;
  *
  * To change the APIs, simply change the constructors for the three instance
  * variables.
+ * 
+ * [Group Name: Data Structure Deadheads]
  *
- * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
+ * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/10/19
  */
 public final class TranslatorAPI {
 

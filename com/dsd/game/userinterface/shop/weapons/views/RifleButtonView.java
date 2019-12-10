@@ -8,9 +8,11 @@ import java.awt.Graphics2D;
 /**
  * Standard rifle shop button view.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
  *
- * @updated 12/7/19
+ * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/10/19
  */
 public class RifleButtonView extends ShopButtonView {
 

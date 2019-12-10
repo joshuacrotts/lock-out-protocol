@@ -20,6 +20,8 @@ import java.util.LinkedList;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/10/19
  */
 public class StandardInteractorHandler extends StandardHandler implements MouseListener, MouseMotionListener, Renderable {
 

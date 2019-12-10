@@ -13,7 +13,11 @@ import java.awt.Graphics2D;
  * they click on the field to "activate" it, and then they can start entering
  * text. To disable it, click it once again.
  *
+ * [Group Name: Data Structure Deadheads]
+ * 
  * @author Joshua
+ * 
+ * @updated 12/10/19
  */
 public class TextFieldModel extends Interactor implements MouseEventInterface {
 

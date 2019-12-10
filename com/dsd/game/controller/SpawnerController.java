@@ -22,8 +22,10 @@ import java.util.TimerTask;
  * duration, it will randomly spawn n EnemyType objects within the radius.
  *
  * [Group Name: Data Structure Deadheads]
- *
- * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
+ * 
+ * @author Joshua
+ * 
+ * @updated 12/10/19
  */
 public class SpawnerController extends StandardGameObject implements TimerInterface {
 

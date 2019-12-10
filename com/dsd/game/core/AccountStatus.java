@@ -4,8 +4,10 @@ package com.dsd.game.core;
  * Account status enums.
  *
  * [Group Name: Data Structure Deadheads]
- *
- * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
+ * 
+ * @author Joshua
+ * 
+ * @updated 12/10/19
  */
 public enum AccountStatus {
 

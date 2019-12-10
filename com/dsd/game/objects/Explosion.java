@@ -11,13 +11,15 @@ import java.awt.Graphics2D;
 /**
  * This class is a simple explosion artifact in the game.
  *
+ * [Group Name: Data Structure Deadheads]
+ * 
  * @author Joshua
  * 
  * @updated 12/10/2019
  */
 public class Explosion extends StandardGameObject {
 
-    //  Miscellaneous reference variables
+    //  Miscellaneous reference variables.
     private final StandardCollisionHandler parentContainer;
     private final StandardAnimatorController animation;
 

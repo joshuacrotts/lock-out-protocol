@@ -9,7 +9,11 @@ import java.awt.Graphics2D;
  * This is the view for purchasing the Fast Rifle (PPSh-41), or purchasing its
  * ammunition.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/10/19
  */
 public class FastRifleButtonView extends ShopButtonView {
 

@@ -10,7 +10,11 @@ import com.revivedstandards.handlers.StandardCollisionHandler;
  * This class, when supplied with the information, generates a SpawnerController
  * to add to the game handler.
  *
+ * [Group Name: Data Structure Deadheads]
+ * 
  * @author Joshua
+ * 
+ * @updated 12/10/19
  */
 public class SpawnerFactory {
 

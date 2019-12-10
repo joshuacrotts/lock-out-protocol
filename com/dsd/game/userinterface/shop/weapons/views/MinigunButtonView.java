@@ -6,8 +6,14 @@ import com.revivedstandards.util.StdOps;
 import java.awt.Graphics2D;
 
 /**
+ * This button, like the others, is a shop button displaying the options for
+ * buying the minigun, or ammo for it.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
+ *
+ * @updated 12/10/19
  */
 public class MinigunButtonView extends ShopButtonView {
 

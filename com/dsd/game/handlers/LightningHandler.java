@@ -13,6 +13,8 @@ import java.util.ArrayList;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/10/19
  */
 public class LightningHandler {
 

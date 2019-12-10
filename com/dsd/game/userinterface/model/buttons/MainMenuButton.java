@@ -12,6 +12,8 @@ import java.awt.Graphics2D;
  * This button will allow the user to save their game and resume the game once
  * they come back.
  *
+ * [Group Name: Data Structure Deadheads]
+ * 
  * @author rinty
  *
  * @updated 11/21/19

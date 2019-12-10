@@ -9,6 +9,8 @@ import java.awt.Graphics2D;
 /**
  * Text-field for the user to enter their password.
  *
+ * [Group Name: Data Structure Deadheads]
+ * 
  * @author Joshua
  * 
  * @updated 12/10/19

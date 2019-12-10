@@ -30,7 +30,8 @@ public class RainDrop extends StandardGameObject {
 
     public RainDrop(double _x, double _y, double _direction, double _speed, int _vanish) {
         super(_x, _y, StandardID.Particle);
-        //Solve for horizontal leg of right triangle formed by velocity vector
+        
+        //  Solve for horizontal leg of right triangle formed by velocity vector.
         this.setVelX(_speed * FastMath.sin(_direction));
         this.vanish = _vanish;
         this.color = new Color(BLUE_COLOR, BLUE_COLOR, StdOps.rand(BLUE_COLOR, 0xFF));

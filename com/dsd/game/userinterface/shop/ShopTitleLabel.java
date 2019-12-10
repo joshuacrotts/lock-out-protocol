@@ -11,8 +11,10 @@ import java.awt.Graphics2D;
 /**
  * Title label for the shop.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
  *
+ * @author Joshua, Ronald, Rinty
+ * 
  * @updated 12/10/19
  */
 public class ShopTitleLabel extends StandardLabel {
