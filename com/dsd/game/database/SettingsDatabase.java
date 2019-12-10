@@ -15,7 +15,9 @@ import java.util.logging.Logger;
  * This class is the interactor between the settings file itself, and the
  * translator database java file.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class SettingsDatabase implements Database {
 
@@ -45,12 +47,12 @@ public class SettingsDatabase implements Database {
     public boolean load() {
         try {
             this.reader = new BufferedReader(new FileReader("settings.cfg"));
-            //  Parse the resolution line.
+            // Parse the resolution line.
             String line = this.reader.readLine();
             ResolutionEnum.setResolutionIndex(Integer.parseInt(line.substring(line.indexOf("=") + 1)));
             this.game.setGameWidth(ResolutionEnum.getDimension().width);
             this.game.setGameHeight(ResolutionEnum.getDimension().height);
-            //  Parse the language line.
+            // Parse the language line.
             line = this.reader.readLine();
             LanguageEnum.setLanguageIndex(Integer.parseInt(line.substring(line.indexOf("=") + 1)));
             this.reader.close();

@@ -10,7 +10,7 @@ import com.dsd.game.core.AccountStatus;
  *
  * [Group Name: Data Structure Deadheads]
  *
- * @author Joshua, Ronald, Rinty
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public interface RemoteDatabase extends Database {
 
@@ -51,7 +51,7 @@ public interface RemoteDatabase extends Database {
      * @param _email
      * @param _password
      *
-     * @return
+     * @return true or false
      */
     public AccountStatus userAuthenticated(String _email, String _password);
 
