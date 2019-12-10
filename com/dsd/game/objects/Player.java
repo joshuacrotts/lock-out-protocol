@@ -130,7 +130,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
     public void uponDeath() {
         JOptionPane.showMessageDialog(this.getGame(), "You have died!");
         this.getGame().stopGame();
-        throw new IllegalStateException("You died! Quitting game.");
+        System.exit(0);
     }
 
     /**
