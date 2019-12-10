@@ -7,7 +7,7 @@ import com.dsd.game.api.TranslatorAPI;
  *
  * [Group Name: Data Structure Deadheads]
  *
- * @author Joshua, Ronald, Rinty
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class LanguageController {
 
@@ -27,7 +27,7 @@ public class LanguageController {
      * the language is set to English, we just leave it as is.
      *
      * @param _text
-     * @return
+     * @return String of text with the language.
      */
     public static String translate(String _text) {
         if (lang.equals("en-en")) {
@@ -42,7 +42,7 @@ public class LanguageController {
      *
      * @param _text
      * @param _lang
-     * @return
+     * @return string of text with the language.
      */
     public static String translate(String _text, String _lang) {
         if (_lang.equals("en")) {
@@ -50,4 +50,5 @@ public class LanguageController {
         }
         return TranslatorAPI.translate(_text, _lang);
     }
+    
 }

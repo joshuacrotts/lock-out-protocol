@@ -19,27 +19,21 @@ import java.util.TimerTask;
  *
  * [Group Name: Data Structure Deadheads]
  *
- * @author Joshua, Ronald, Rinty
- *
- * @updated 11/12/19
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class BossSpawnerController extends StandardGameObject implements TimerInterface {
 
-    //  Miscellaneous reference variables.
+    // Miscellaneous reference variables.
     private final Game game;
     private final StandardCollisionHandler parentContainer;
-
-    //  Determines which boss to spawn.
+    // Determines which boss to spawn.
     private final EnemyType spawnerID;
-
-    //  Delay for the spawning of the boss.
+    // Delay for the spawning of the boss.
     private final int bossSpawnDelay = 10000;
-
-    //  Timer that continuously checks if we're ready to spawn a boss.
+    // Timer that continuously checks if we're ready to spawn a boss.
     private final Timer bossTimer;
-
-    //  If we already have a boss currently summoned (and actively battling),
-    //  we shouldn't add another one.
+    // If we already have a boss currently summoned (and actively battling),
+    // we shouldn't add another one.
     protected boolean hasBoss = false;
 
     public BossSpawnerController(int _x, int _y, EnemyType _id, Game _game, StandardCollisionHandler _sch) {
@@ -61,8 +55,8 @@ public class BossSpawnerController extends StandardGameObject implements TimerIn
         int xPos = (int) this.getX();
         int yPos = (int) this.getY();
         Enemy enemy = null;
-        //  Depending on what type of spawner we have, we spawn that type of monster.
-        //  Eventually we will probably want to use reflection classes to make this easier/cleaner.
+        // Depending on what type of spawner we have, we spawn that type of monster.
+        // Eventually we will probably want to use reflection classes to make this easier/cleaner.
         switch (this.spawnerID) {
             case FEMALE_BOSS_MONSTER:
                 enemy = new FemaleMonsterBoss(xPos, yPos, this.game, this.parentContainer);
@@ -118,4 +112,5 @@ public class BossSpawnerController extends StandardGameObject implements TimerIn
             this.spawnerController.hasBoss = true;
         }
     }
+    
 }

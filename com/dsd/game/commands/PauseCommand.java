@@ -11,13 +11,11 @@ import java.awt.event.KeyEvent;
  *
  * [Group Name: Data Structure Deadheads]
  *
- * @author Joshua, Ronald, Rinty
- *
- * @updated 11/12/19
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class PauseCommand extends Command {
 
-    //  Miscellaneous reference variables.
+    // Miscellaneous reference variables.
     private final Game game;
 
     public PauseCommand(Game _game) {
@@ -27,7 +25,7 @@ public class PauseCommand extends Command {
 
     @Override
     public void pressed(float _dt) {
-        //  If we're on the preamble screen OR the menu screen, we need to leave.
+        // If we're on the preamble screen OR the menu screen, we need to leave.
         if (this.game.isPreamble() || this.game.isMenu()) {
             return;
         } else if (!this.game.isPaused()) {
@@ -36,4 +34,5 @@ public class PauseCommand extends Command {
             this.game.setGameState(GameState.RUNNING);
         }
     }
+    
 }

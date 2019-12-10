@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 /**
  * This API calls the yandex language API for a language translation.
  *
- * @author Joshua, Ronald, Rinty
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class LanguageTranslation implements LanguageTranslationAPIAdapter {
 
@@ -24,15 +24,15 @@ public class LanguageTranslation implements LanguageTranslationAPIAdapter {
     private static String key;
 
     static {
-        //  Loads in the key for the api connection
+        //  Loads in the key for the api connection.
         LanguageTranslation.inputStream = LanguageTranslation.class.getClassLoader().getResourceAsStream(".config/.language_config.txt");
         LanguageTranslation.reader = new BufferedReader(new InputStreamReader(LanguageTranslation.inputStream));
         try {
             LanguageTranslation.line = LanguageTranslation.reader.readLine();
-        } catch (IOException ex) {
-            Logger.getLogger(LanguageTranslation.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException _ex) {
+            Logger.getLogger(LanguageTranslation.class.getName()).log(Level.SEVERE, null, _ex);
         }
-        //  Extracts the key from the line read in by the buffered reader
+        //  Extracts the key from the line read in by the buffered reader.
         LanguageTranslation.key = LanguageTranslation.line.substring(LanguageTranslation.line.lastIndexOf(":") + 1);
     }
 
@@ -42,13 +42,12 @@ public class LanguageTranslation implements LanguageTranslationAPIAdapter {
      *
      * @param _text to translate
      * @param _lang to translate _text to.
-     * @return
+     * @return this in a string object.
      */
     private static String fetch(String _text, String _lang) {
         StringBuilder jsonInformation = null;
         try {
-            //  Processes the request to the API, and reads the information
-            //  into the StringBuilder object.
+            //  Processes the request to the API, and reads the information into the StringBuilder object.
             jsonInformation = new StringBuilder();
             url = new URL(String.format("https://translate.yandex.net/api/v1.5/tr.json/translate?key=%s&text=%s&lang=%s", key, _text, _lang));
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -59,8 +58,8 @@ public class LanguageTranslation implements LanguageTranslationAPIAdapter {
                 jsonInformation.append(inputLine);
             }
             in.close();
-        } catch (IOException ex) {
-            Logger.getLogger(LanguageTranslation.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException _ex) {
+            Logger.getLogger(LanguageTranslation.class.getName()).log(Level.SEVERE, null, _ex);
         }
         return jsonInformation.toString().substring(jsonInformation.toString().indexOf("[") + 2, jsonInformation.toString().lastIndexOf("]") - 1);
     }
@@ -71,7 +70,7 @@ public class LanguageTranslation implements LanguageTranslationAPIAdapter {
      *
      * @param _s
      * @param _lang
-     * @return
+     * @return String of text to a certain language.
      */
     @Override
     public String translateText(String _s, String _lang) {
@@ -84,7 +83,7 @@ public class LanguageTranslation implements LanguageTranslationAPIAdapter {
      *
      * @param _s
      * @param _lang
-     * @return
+     * @return %20
      */
     private static String fixString(String _s, String _lang) {
         String fixedString = _s.replaceAll("\\s", "%20");

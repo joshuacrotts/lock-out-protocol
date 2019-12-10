@@ -23,9 +23,7 @@ import java.util.TimerTask;
  *
  * [Group Name: Data Structure Deadheads]
  *
- * @author Joshua, Ronald, Rinty
- *
- * @updated 11/12/19
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class AttackCommand extends Command implements TimerInterface {
 
@@ -33,21 +31,18 @@ public class AttackCommand extends Command implements TimerInterface {
     private final Game game;
     private final Player player;
     private final StandardCollisionHandler globalHandler;
-
     //  The animation controller for the current weapon's animation.
     private StandardAnimatorController animation;
-
     //  The delay for each attack.
     private Timer attackDelayTimer = null;
-
     //  Boolean to represent if the attack has a timer or not.
     private static boolean hasTimer = false;
 
-    public AttackCommand(Game _game, Player _obj, StandardCollisionHandler _gh, StandardAnimatorController animation) {
+    public AttackCommand(Game _game, Player _obj, StandardCollisionHandler _gh, StandardAnimatorController _animation) {
         this.game = _game;
         this.player = _obj;
         this.globalHandler = _gh;
-        this.animation = animation;
+        this.animation = _animation;
         this.animation.getStandardAnimation().setReturnAnimation(this.player.getAnimationController());
         this.attackDelayTimer = new Timer(true);
         TimerController.addTimer(this);
@@ -74,13 +69,11 @@ public class AttackCommand extends Command implements TimerInterface {
                     this.gunAttack((Gun) weapon);
                     break;
             }
-            /**
-             * Once the weapon is used, we need to toggle it to false so the
-             * timer can resume.
-             */
+            // Once the weapon is used, we need to toggle it to false so the timer can resume.
             weapon.setReady(false);
             AttackCommand.hasTimer = false;
-        } /**
+        }
+        /**
          * If there's not already a delay present and the weapon isn't active,
          * we can create one. We need to instantiate a new timer in the event
          * that the previous one was canceled.
@@ -91,11 +84,10 @@ public class AttackCommand extends Command implements TimerInterface {
             this.attackDelayTimer.schedule(new AttackDelayTimer(this, weapon), weapon.getDelay());
         }
     }
-
+    
     @Override
     public void down(float _dt) {
-        //  down(dt) is essentially just multiple pressed(dt) calls in
-        //  succession.
+        // down(dt) is essentially just multiple pressed(dt) calls in succession.
         this.pressed(_dt);
     }
 
@@ -117,15 +109,11 @@ public class AttackCommand extends Command implements TimerInterface {
                 StandardAudioController.play(_gun.getEmptySFXPath(), StandardAudioType.SFX);
                 return;
             }
-            /**
-             * Play the animation and deduct ammunition from the gun that the
-             * player is using.
-             */
+            // Play the animation and deduct ammunition from the gun that the player is using.
             this.toggleAttackAnimation();
             _gun.shoot();
             _gun.playGunShotSFX();
-            //  If we're on the grenade launcher, we don't need to fire
-            //  a casing.
+            // If we're on the grenade launcher, we don't need to fire a casing.
             if (_gun.getWeaponType() != WeaponType.GRENADE_LAUNCHER) {
                 BulletCasing casing = new BulletCasing(this.game, this.player, _gun);
             }
@@ -137,17 +125,17 @@ public class AttackCommand extends Command implements TimerInterface {
      * be the attacking one relevant to the weapon they're holding.
      */
     private void toggleAttackAnimation() {
-        //  Update the animation if the player has chosen a different gender.
+        // Update the animation if the player has chosen a different gender.
         this.player.setAnimation(this.animation);
         this.player.setPlayerState(PlayerState.ATTACKING);
     }
 
-//============================ GETTERS ===================================//
+//=============================== GETTERS =====================================
     public boolean hasTimer() {
         return AttackCommand.hasTimer;
     }
 
-//============================ SETTERS ===================================//
+//================================= SETTERS ===================================
     /**
      * If we switch to a different weapon, we need to update the animation.
      *
@@ -183,4 +171,5 @@ public class AttackCommand extends Command implements TimerInterface {
             this.weapon.setReady(true);
         }
     }
+    
 }

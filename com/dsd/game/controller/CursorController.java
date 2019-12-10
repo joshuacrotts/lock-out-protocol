@@ -9,13 +9,11 @@ import com.revivedstandards.view.Updatable;
  *
  * [Group Name: Data Structure Deadheads]
  *
- * @author Joshua, Ronald, Rinty
- *
- * @updated 11/12/19
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class CursorController implements Updatable {
 
-    //  Miscellaneous reference variables.
+    // Miscellaneous reference variables.
     private final Game game;
     private final Crosshair crosshair;
 
@@ -28,4 +26,5 @@ public class CursorController implements Updatable {
     public void tick() {
         this.crosshair.updateCursor();
     }
+    
 }

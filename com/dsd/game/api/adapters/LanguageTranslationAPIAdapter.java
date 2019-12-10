@@ -6,11 +6,10 @@ package com.dsd.game.api.adapters;
  *
  * [Group Name: Data Structure Deadheads]
  *
- * @author Joshua, Ronald, Rinty
- *
- * @updated 11/12/19
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public interface LanguageTranslationAPIAdapter {
 
     public String translateText(String _text, String _lang);
+    
 }

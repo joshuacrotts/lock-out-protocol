@@ -16,37 +16,30 @@ import java.awt.Graphics2D;
  *
  * [Group Name: Data Structure Deadheads]
  *
- * @author Joshua, Ronald, Rinty
- *
- * @updated 11/12/19
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class DebugController implements Renderable {
 
-    //  Miscellaneous reference variables.
+    // Miscellaneous reference variables.
     private final Game game;
     private final Player player;
     private final StandardCamera camera;
     private final StandardCollisionHandler parentContainer;
-
-    //  This variable determines if the game is in debug mode or not.
+    // This variable determines if the game is in debug mode or not.
     public static boolean DEBUG_MODE = false;
-
-    //  Offset variables for text.
+    // Offset variables for text.
     private final int GLOBAL_X_OFFSET = 300;
     private final int GLOBAL_Y_OFFSET = 150;
-
-    //  Player text offsets.
+    // Player text offsets.
     private final int PLAYER_Y_OFFSET = 20;
     private final int PLAYER_WIDTH_OFFSET = 40;
     private final int PLAYER_HEIGHT_OFFSET = 60;
-
-    //  Camera text offsets.
+    // Camera text offsets.
     private final int CAMERA_MIN_X_OFFSET = 20;
     private final int CAMERA_MAX_X_OFFSET = 60;
     private final int CAMERA_MIN_Y_OFFSET = 40;
     private final int CAMERA_MAX_Y_OFFSET = 80;
-
-    //  Offsets for drawing the actual information in the top-left.
+    // Offsets for drawing the actual information in the top-left.
     private final int DEBUG_MODE_TEXT_Y_OFFSET = 20;
     private final int ENTITY_COUNT_Y_OFFSET = 80;
     private final int CAMERA_COORDINATE_Y_OFFSET = 100;
@@ -126,4 +119,5 @@ public class DebugController implements Renderable {
         _g2.setColor(Color.YELLOW);
         _g2.drawString("DEBUG MODE", _x, _y + DEBUG_MODE_TEXT_Y_OFFSET);
     }
+    
 }

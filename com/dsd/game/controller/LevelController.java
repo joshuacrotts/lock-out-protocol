@@ -26,23 +26,21 @@ import java.util.TimerTask;
  *
  * [Group Name: Data Structure Deadheads]
  *
- * @author Joshua, Ronald, Rinty
- *
- * @updated 11/17/19
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class LevelController implements TimerInterface, SerializableObject {
 
-    //  Miscellaneous reference variables.
+    // Miscellaneous reference variables.
     private final Game game;
     private final List<StandardLevel> levels;
     private Timer levelTimer;
-
-    //  LevelID and wave number; corresponds to the map and the current
-    //  wave number (as the name suggests) respectively.
+    /**
+     * LevelID and wave number; corresponds to the map and the current wave
+     * number (as the name suggests) respectively.
+     */
     private int currentLevelID = 0;
     private int currentWave = 1;
-
-    //  Every 5 waves, a boss character will spawn.
+    // Every 5 waves, a boss character will spawn.
     private int bossSpawnWaveInt = 5;
 
     public LevelController(Game _game) {
@@ -133,14 +131,13 @@ public class LevelController implements TimerInterface, SerializableObject {
         this.levelTimer.cancel();
     }
 
-//=========================== CRUD OPERATIONS ===============================//
     @Override
     public String createObject(SerializableType _id) {
         if (_id != SerializableType.WAVE_INFO) {
             return null;
         }
         StringBuilder levelInformation = new StringBuilder();
-        //  Appends the level ID and current wave info.
+        // Appends the level ID and current wave info.
         levelInformation.append(this.currentLevelID).append(";");
         levelInformation.append(this.currentWave).append(";");
         return levelInformation.toString();
@@ -153,34 +150,32 @@ public class LevelController implements TimerInterface, SerializableObject {
 
     @Override
     public void updateObject(SerializableType _obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void destroyObject(SerializableType _obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
-//============================= GETTERS ======================================//
+//================================== GETTERS ==================================
     public int getCurrentLevelID() {
+        // Returns current ID.
         return this.currentLevelID;
     }
 
     public StandardLevel getCurrentLevel() {
+        // Returns current level ID.
         return this.levels.get(this.currentLevelID);
     }
 
     public int getWaveNumber() {
+        // Returns current wave number.
         return this.currentWave;
     }
 
-    /**
-     * Instead of returning the INDEX in the array of levels, we return the
-     * natural level ID.
-     *
-     * @return
-     */
     public int getLogicalCurrentLevelID() {
+        // Returns natural level ID.
         return this.currentLevelID + 1;
     }
 
@@ -188,7 +183,7 @@ public class LevelController implements TimerInterface, SerializableObject {
         return this.bossSpawnWaveInt;
     }
 
-//============================= SETTERS ======================================//
+//=============================== SETTERS =====================================
     public void setLevelID(int _levelID) {
         this.currentLevelID = _levelID;
     }
@@ -197,10 +192,13 @@ public class LevelController implements TimerInterface, SerializableObject {
         this.currentLevelID = _waveNumber;
     }
 
-    //  This timer, overtime, will continuously increase the difficulty of the game
+    /**
+     * This timer, overtime, will continuously increase the difficulty of the
+     * game.
+     */
     private class LevelTimer extends TimerTask {
 
-        //  Miscellaneous level information.
+        // Miscellaneous level information.
         private final Game game;
         private final LevelController levelController;
 
@@ -225,4 +223,5 @@ public class LevelController implements TimerInterface, SerializableObject {
             DifficultyController.incrementMobHealth();
         }
     }
+    
 }

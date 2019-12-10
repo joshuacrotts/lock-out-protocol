@@ -28,9 +28,7 @@ import java.awt.Graphics2D;
  *
  * [Group Name: Data Structure Deadheads]
  *
- * @author Joshua, Ronald, Rinty
- *
- * @updated 11/30/19
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class CollisionHandlerController extends StandardCollisionHandler {
 
@@ -39,7 +37,6 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      * all damageText objects.
      */
     private static StandardInteractorHandler damageText;
-
     private final Game game;
 
     public CollisionHandlerController(Game _game) {
@@ -75,7 +72,7 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      */
     @Override
     public void handleCollision(StandardGameObject _obj1, StandardGameObject _obj2) {
-        //Handles bullet to monster collision (kills bullet and takes damage away from monster).
+        // Handles bullet to monster collision (kills bullet and takes damage away from monster).
         if (_obj1.getId() == StandardID.Bullet && _obj2 instanceof Enemy) {
             this.handleBulletEnemyCollision((ProjectileGameObject) _obj1, (Enemy) _obj2);
         } else if (_obj1.getId() == StandardID.Bullet && _obj2.getId() == StandardID.Bullet) {
@@ -120,36 +117,28 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      * @param monster
      */
     private void handleBulletEnemyCollision(ProjectileGameObject _bullet, Enemy _monster) {
-        // Sets the bullet to dead
-        // Casts the obj2 to a Monster so we can deduct health from it
+        // Sets the bullet to dead. Casts the obj2 to a Monster so we can deduct health from it.
         if (_monster.isAlive() && _bullet.isAlive()) {
-            //  If the object is a grenade OR shotgun bullet, then we'll create an explosion with
-            //  a damage radius.
+            // If the object is a grenade OR shotgun bullet, then we'll create an explosion with a damage radius.
             ExplosionType type = _bullet instanceof GrenadeBulletObject ? ExplosionType.GRENADE_EXPLOSION
                     : _bullet instanceof ShotgunBulletObject ? ExplosionType.SHOTGUN_EXPLOSION : null;
-
-            //  If the bullet is just a regular bullet, then no explosion is created.
+            // If the bullet is just a regular bullet, then no explosion is created.
             if (type != null) {
                 this.addEntity(new Explosion((int) _monster.getX(), (int) _monster.getY(),
                         _bullet.getDamage(), type, this));
             }
-
-            //  Turn bullet collision off, and deduct health from the monster.
+            // Turn bullet collision off, and deduct health from the monster.
             _bullet.setAlive(false);
             _monster.setHealth(_monster.getHealth() - _bullet.getDamage());
-
-            //  Plays random monster hurt sfx
+            // Plays random monster hurt sfx.
             if (!(_monster instanceof BasicMonster || _monster instanceof GreenMonster)) {
                 _monster.generateHurtSound(StdOps.rand(1, 30));
             } else {
                 _monster.generateHurtSound(StdOps.rand(1, 5));
             }
-
-            //  Generates the blood particles for the monster
+            // Generates the blood particles for the monster.
             _monster.generateBloodParticles();
-
-            //  Applys a force to the enemy based on the velocity of the
-            //  projectile.
+            // Applys a force to the enemy based on the velocity of the projectile.
             _monster.applyPushForce(_bullet.getVelX(), _bullet.getVelY());
             this.addDamageText(_monster, _bullet.getDamage());
         }
@@ -163,20 +152,17 @@ public class CollisionHandlerController extends StandardCollisionHandler {
      * @param monster
      */
     private void handlePlayerBossProjectileCollision(Player _player, BossProjectileObject _bullet) {
-        // Sets the bullet to dead
-        // Casts the obj2 to a Monster so we can deduct health from it
+        // Sets the bullet to dead. Casts the obj2 to a Monster so we can deduct health from it.
         if (_player.isAlive() && _bullet.isAlive()) {
-            //  If the object is a grenade bullet, then we'll create an explosion with
-            //  a damage radius.
+            // If the object is a grenade bullet, then we'll create an explosion with a damage radius.
             _bullet.setAlive(false);
             _player.setHealth(_player.getHealth() - _bullet.getDamage());
         }
     }
 
     /**
-     *
      * If a monster hits the player, the player will take damage according to
-     * the monster's type (for now?).
+     * the monster's type.
      *
      * @param _player
      * @param _monster

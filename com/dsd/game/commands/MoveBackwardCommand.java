@@ -11,9 +11,7 @@ import java.awt.event.KeyEvent;
  *
  * [Group Name: Data Structure Deadheads]
  *
- * @author Joshua, Ronald, Rinty
- *
- * @updated 11/12/19
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class MoveBackwardCommand extends Command {
 
@@ -47,4 +45,5 @@ public class MoveBackwardCommand extends Command {
             this.player.updatePosition();
         }
     }
+    
 }

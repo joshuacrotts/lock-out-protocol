@@ -5,7 +5,9 @@ import com.dsd.game.controller.LanguageController;
 /**
  * This enum defines the possible languages the user can switch to in the game.
  *
- * @author Joshua, Ronald, Rinty
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public enum LanguageEnum {
 
@@ -64,49 +66,32 @@ public enum LanguageEnum {
         this.isoCode = _isoCode;
     }
 
-//================================ GETTERS ==================================
+//================================== GETTERS ==================================
     public static int getLanguageIndex() {
         return languageIndex;
     }
 
-    /**
-     * Returns a string representation of the language.
-     *
-     * @return
-     */
     public String getLanguageString() {
+        // Returns a string representation of the language.
         return this.language;
     }
 
-    /**
-     * Returns a string representation of the iso 2-letter code of the language.
-     *
-     * @return
-     */
     public String getLanguageCode() {
+        // Returns a string representation of the ISO.
         return this.isoCode;
     }
 
-    /**
-     * Returns a string representation of the language in the array.
-     *
-     * @return
-     */
     public static String getLanguage() {
+        // Returns a string representation of the language in the array.
         return LANGUAGE_LIST[languageIndex].language;
     }
 
-    /**
-     * Returns the language code for the language pointed at by languageIndex in
-     * the array.
-     *
-     * @return
-     */
     public static String getCode() {
+        // Returns the language code for the language pointed at by languageIndex in the array.
         return LANGUAGE_LIST[languageIndex].isoCode;
     }
 
-// ============================= SETTERS ==================================
+// =============================== SETTERS ===================================
     public static void setLanguageIndex(int _n) {
         languageIndex = _n;
         LanguageController.setLanguage(LANGUAGE_LIST[languageIndex].isoCode);

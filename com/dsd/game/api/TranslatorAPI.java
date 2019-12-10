@@ -12,7 +12,7 @@ import com.dsd.game.api.adapters.LanguageTranslationAPIAdapter;
  * To change the APIs, simply change the constructors for the three instance
  * variables.
  *
- * @author Joshua, Ronald, Rinty
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public final class TranslatorAPI {
 
@@ -21,58 +21,31 @@ public final class TranslatorAPI {
     private static final WeatherConnectorAPIAdapter weatherAPI = new WeatherConnector();
 
 //=================== GETTERS ====================================
-    /**
-     * Returns the city retrieved by the CityLocator API.
-     *
-     * @return
-     */
     public static String getCity() {
+        // Returns the city retrieved by the CityLocator API.
         return cityLocatorAPI.getCity();
     }
 
-    /**
-     * Returns the IP address of the user retrieved by the CityLocator API.
-     *
-     * @return
-     */
     public static String getIPAddress() {
+        // Returns the IP address of the user retrieved by the CityLocator API.
         return cityLocatorAPI.getIPAddress();
     }
 
-    /**
-     * Returns a string representation of the weather retrieved by the
-     * WeatherConnector API. The string returned is what determines if it is
-     * raining in the game or not.
-     *
-     * @return
-     */
     public static String getWeather() {
+        // Returns a string representation of the weather retrieved by the WeatherConnector API.
         return weatherAPI.getWeather(TranslatorAPI.getCity());
     }
 
-    /**
-     * Returns a string representation of the weather in the city _city from the
-     * WeatherConnector API.
-     *
-     * @param _city
-     * @return
-     */
     public static String getWeather(String _city) {
+        // Returns a string representation of the weather in the city _city from the WeatherConnector API.
         return weatherAPI.getWeather(_city);
     }
 
-    /**
-     * Contacts the translator API to translate a string of text to a specific
-     * language.
-     *
-     * @param _text
-     * @param _lang
-     * @return
-     */
     public static String translate(String _text, String _lang) {
         if (_lang.equals("en")) {
             return _text;
         }
+        // Returns a translated string of text to a specific language.
         return languageAPI.translateText(_text, _lang);
     }
 

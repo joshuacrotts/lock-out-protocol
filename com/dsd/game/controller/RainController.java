@@ -20,38 +20,29 @@ import org.apache.commons.math3.util.FastMath;
  *
  * [Group Name: Data Structure Deadheads]
  *
- * @author Joshua, Ronald, Rinty
- *
- * @updated 11/12/19
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class RainController implements Renderable, Updatable {
 
-    //  Reference variables.
+    // Reference variables.
     private final Game game;
     private final StandardParticleHandler sph;
     private final LightningHandler lightningHandler;
     private final StandardCamera sc;
-
-    //  Serves as a debugging feature (if enabled, it ignores the API call and
-    //  automatically enables rain).
+    // Serves as a debugging feature (if enabled, it ignores the API call and automatically enables rain).
     private static final boolean toggleDownfall = false;
-
-    //  If it is raining, this boolean is toggled true.
+    // If it is raining, this boolean is toggled true.
     private boolean isRaining;
-
-    //  Defines the range in which rain can spawn for the user.
+    // Defines the range in which rain can spawn for the user.
     private static final int X_BORDER = Screen.gameDoubleWidth;
     private static final int Y_BORDER = Screen.gameDoubleHeight;
-
-    //  Velocity constants and factors for the rain drop object.
+    // Velocity constants and factors for the rain drop object.
     private static final double RAIN_DIRECTION = -FastMath.PI * 1.5;
     private static final int VEL_FACTOR = 5;
     private static final int Y_BOUND_FACTOR = 2;
-
-    //  Constants for how many rain particles should spawn.
+    // Constants for how many rain particles should spawn.
     private static final int MAX_RAIN_PARTICLES = 5000;
-
-    //  Constant for how "often" lightning should spawn. The higher, the rarer.
+    // Constant for how "often" lightning should spawn. The higher, the rarer.
     private static final int LIGHTNING_INTERVAL = 2500;
 
     public RainController(Game _game) {
@@ -59,11 +50,11 @@ public class RainController implements Renderable, Updatable {
         this.sc = _game.getCamera();
         this.sph = new StandardParticleHandler(MAX_RAIN_PARTICLES);
         this.lightningHandler = new LightningHandler();
-        // Be sure to always set the SPH camera or it'll throw a NPE
+        // Be sure to always set the SPH camera or it'll throw a NPE.
         this.sph.setCamera(this.sc);
         try {
             this.isRaining = TranslatorAPI.getWeather().contains("rain") | RainController.toggleDownfall;
-        } catch (Exception ex) {
+        } catch (Exception _ex) {
             System.err.println("Could not connect; continuing without rain.");
             this.isRaining = false;
         }
@@ -80,7 +71,7 @@ public class RainController implements Renderable, Updatable {
     @Override
     public void tick() {
         if (this.isRaining()) {
-            // Generates the min/max points for the rain to spawn
+            // Generates the min/max points for the rain to spawn.
             int xGenMin = (int) (this.sc.getX() - RainController.X_BORDER);
             int xGenMax = (int) (this.sc.getX() + RainController.X_BORDER);
             int yGenMin = (int) (this.sc.getY() - RainController.Y_BORDER);
@@ -118,20 +109,15 @@ public class RainController implements Renderable, Updatable {
         }
     }
 
-//========================== GETTERS ==============================//
-    /**
-     * Returns a random speed between [0, speedFactor). Determines how fast each
-     * rain drop will fall.
-     *
-     * @param speedFactor
-     * @return
-     */
-    private double getRandomSpeed(int speedFactor) {
-        return Math.random() * speedFactor;
+//================================ GETTERS ===============================
+    private double getRandomSpeed(int _speedFactor) {
+        // Returns a random speed between [0, speedFactor). Determines how fast each rain drop will fall.
+        return Math.random() * _speedFactor;
     }
 
-//========================== SETTERS =======================//
+//=================================== SETTERS ==============================
     public boolean isRaining() {
         return this.isRaining;
     }
+    
 }

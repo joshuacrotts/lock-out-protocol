@@ -3,11 +3,9 @@ package com.dsd.game.core;
 /**
  * Text/numerical representation of the difficulty.
  *
- * @group [Data Structure Deadheads]
+ * [Group Name: Data Structure Deadheads]
  *
- * @author Joshua, Rinty, Ronald
- *
- * @updated 11/30/19
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public enum DifficultyType {
 
@@ -43,7 +41,7 @@ public enum DifficultyType {
         this.difficultyString = text;
     }
 
-//==================== GETTERS ==========================
+//============================== GETTERS =====================================
     public String getDifficultyLabel() {
         return this.difficultyString;
     }
