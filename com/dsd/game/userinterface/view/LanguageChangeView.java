@@ -12,7 +12,9 @@ import java.awt.Graphics2D;
  * This is the view that will be shown when the user wants to change their
  * language.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ * 
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class LanguageChangeView extends Screen implements MouseEventInterface {
 

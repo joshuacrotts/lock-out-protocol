@@ -11,7 +11,7 @@ import java.awt.Graphics2D;
  *
  * [Group Name: Data Structure Deadheads]
  *
- * @author Joshua, Ronald, Rinty
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class InventoryView extends Screen {
 

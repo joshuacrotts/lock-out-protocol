@@ -13,8 +13,10 @@ import java.awt.Rectangle;
  * This class represents the view of a text-field model. We have a border color,
  * an active color and inactive color. If the user clicks the box, it will
  * become active.
- *
- * @author Joshua
+ * 
+ * [Group Name: Data Structure Deadheads]
+ * 
+ * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
  */
 public class TextFieldView implements Renderable, Updatable {
 

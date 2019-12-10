@@ -9,7 +9,9 @@ import java.util.TreeMap;
  * This class is a utilities class for certain operations that are not specified
  * by the Standards library's StdOps class.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ * 
+ * @author Joshua Last Updated: 12/10/2019
  */
 public abstract class Utilities extends StdOps {
 
@@ -53,38 +55,38 @@ public abstract class Utilities extends StdOps {
     }
 
     /**
-     * Calculates a value between 0 and 1, given the precondition that value is
-     * between min and max. 0 means value = max, and 1 means value = min.
+     * Calculates a _value between 0 and 1, given the precondition that _value is
+ between _min and _max. 0 means _value = _max, and 1 means _value = _min.
+
+ SRC:
+ https://stackoverflow.com/questions/45841201/normalize-a-given-random-_value-to-the-range-of-0-1-in-java
      *
-     * SRC:
-     * https://stackoverflow.com/questions/45841201/normalize-a-given-random-value-to-the-range-of-0-1-in-java
-     *
-     * @param value
-     * @param min
-     * @param max
+     * @param _value
+     * @param _min
+     * @param _max
      * @return
      */
-    public static final float normalize(float value, float min, float max) {
-        return 1.0f - ((value - min) / (max - min));
+    public static final float normalize(float _value, float _min, float _max) {
+        return 1.0f - ((_value - _min) / (_max - _min));
     }
 
     /**
-     * Converts a number from the primitive java int type to its roman numeral
-     * counterpart using a recursive treemap implementation.
+     * Converts a _number from the primitive java int type to its roman numeral
+ counterpart using a recursive treemap implementation.
      *
-     * @param number
+     * @param _number
      * @return
      */
-    public static final String toRoman(int number) {
-        int l = map.floorKey(number);
-        if (number == l) {
-            return map.get(number);
+    public static final String toRoman(int _number) {
+        int l = map.floorKey(_number);
+        if (_number == l) {
+            return map.get(_number);
         }
-        return map.get(l) + toRoman(number - l);
+        return map.get(l) + toRoman(_number - l);
     }
 
-    public static float normalize(float n, float rMin, float rMax, float scaleMin, float scaleMax) {
-        return (((n - rMin) / (rMax - rMin)) * (scaleMax - scaleMin)) + scaleMin;
+    public static float normalize(float _n, float _rMin, float _rMax, float _scaleMin, float _scaleMax) {
+        return (((_n - _rMin) / (_rMax - _rMin)) * (_scaleMax - _scaleMin)) + _scaleMin;
     }
 
     static {
