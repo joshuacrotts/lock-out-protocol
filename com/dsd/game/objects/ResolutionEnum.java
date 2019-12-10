@@ -7,6 +7,8 @@ import java.awt.Toolkit;
  * This enum defines the different resolutions the user can choose when playing
  * the game.
  *
+ * [Group Name: Data Structure Deadheads]
+ * 
  * @author Joshua
  * 
  * @updated 12/10/2019

@@ -162,23 +162,23 @@ public class Game extends StandardGame {
         if (this.gameState == GameState.MENU) {
             this.menuScreen.render(StandardDraw.Renderer);
         } else {
-            // First things first: render the camera.
+            //  First things first: render the camera.
             StandardDraw.Object(this.sc);
-            // Then render the current [active] level.
+            //  Then render the current [active] level.
             this.levelController.renderLevel(StandardDraw.Renderer);
             // Then render the handler with the casings.
             StandardDraw.Handler(this.player.getCasingHandler());
             // Then render the handler with the blood.
             StandardDraw.Handler(this.bloodParticleHandler);
-            // Then render the handler objects.
+            //  Then render the handler objects.
             StandardDraw.Handler(this.sch);
-            // Then render the rain if applicable.
+            //  Then render the rain if applicable.
             this.rainController.render(StandardDraw.Renderer);
-            // Then render the snow if applicable.
+            //  Then render the snow if applicable.
             this.snowController.render(StandardDraw.Renderer);
-            // Then render the heads up display.
+            //  Then render the heads up display.
             this.hudScreen.render(StandardDraw.Renderer);
-            // Then render the preamble, pause or shop effect if necessary.
+            //  Then render the preamble, pause or shop effect if necessary.
             switch (this.gameState) {
                 case PREAMBLE:
                     this.preambleScreen.render(StandardDraw.Renderer);

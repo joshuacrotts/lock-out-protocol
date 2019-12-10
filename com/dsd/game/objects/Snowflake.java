@@ -13,7 +13,7 @@ import org.apache.commons.math3.util.FastMath;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
- * 
+ *
  * @updated 12/10/2019
  */
 public class Snowflake extends StandardGameObject {
@@ -22,17 +22,22 @@ public class Snowflake extends StandardGameObject {
      * Gravity pulling the snow drop to the bottom of the screen, as well as its
      * vanish factor (how long it lasts on screen before it dies.
      */
-    private final Color snowColor;
     private final double GRAVITY = 0.10d;
+
+    //  Positioning and color variables.
+    private final Color snowColor;
     private final double WHITE_COLOR = 0.8;
     private final int vanish;
     private final int VEL_FACTOR = 2;
+    private final int SNOWFLAKE_WIDTH_MIN = 3;
+    private final int SNOWFLAKE_WIDTH_MAX = 8;
 
     public Snowflake(double _x, double _y, double _direction, double _speed, int _vanish) {
         super(_x, _y, StandardID.Particle);
+
         //Solve for horizontal leg of right triangle formed by velocity vector
         this.setVelX(_speed * FastMath.sin(_direction));
-        this.setWidth(StdOps.rand(3, 8));
+        this.setWidth(StdOps.rand(this.SNOWFLAKE_WIDTH_MIN, this.SNOWFLAKE_WIDTH_MAX));
         this.setHeight(this.getWidth());
         this.vanish = _vanish;
         this.snowColor = Color.getHSBColor(1.0f, 0.0f, (float) StdOps.rand(WHITE_COLOR, 1d));

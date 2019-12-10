@@ -12,9 +12,13 @@ import com.revivedstandards.handlers.StandardCollisionHandler;
 import java.awt.Graphics2D;
 
 /**
+ * This class defines the screen for the HUD elements.
+ * 
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/10/19
  */
 public class HUDScreen extends Screen {
 

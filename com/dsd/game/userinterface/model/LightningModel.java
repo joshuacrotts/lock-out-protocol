@@ -15,6 +15,8 @@ import org.apache.commons.math3.util.Pair;
  * This class represents a simple lightning effect; it uses an array of line
  * segments to draw the shape.
  *
+ * [Group Name: Data Structure Deadheads]
+ * 
  * @author Joshua
  *
  * @updated 12/10/19

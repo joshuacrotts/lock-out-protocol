@@ -16,6 +16,8 @@ import javax.swing.JOptionPane;
  * This class can be used in a multitude of ways; for now, it will be used for
  * verifying changes in the sub-options menu.
  *
+ * [Group Name: Data Structure Deadheads]
+ * 
  * @author Joshua
  *
  * @updated 11/14/19

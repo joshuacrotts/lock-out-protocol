@@ -13,10 +13,12 @@ import java.awt.Graphics2D;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/10/19
  */
 public class TitleLabel extends StandardLabel {
 
-    //  Miscellaneous reference variables
+    //  Miscellaneous reference variables.
     private final Game game;
     private final StandardFadeController fadeController;
 

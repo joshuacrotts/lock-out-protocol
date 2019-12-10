@@ -1,23 +1,26 @@
 package com.dsd.game.userinterface;
 
 import com.dsd.game.core.Game;
-import com.dsd.game.userinterface.Screen;
 import com.dsd.game.userinterface.model.buttons.HelpBackButton;
 import com.dsd.game.userinterface.model.labels.ControlsLabel;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
 /**
+ * This class defines the screen for the Help elements.
  *
+ * [Group Name: Data Structure Deadheads]
+ * 
  * @author Joshua
+ * 
+ * @updated 12/10/19
  */
 public class HelpScreen extends Screen {
 
-    private final Color transparentBlack;
+    private final Color transparentBlack = new Color(0f, 0f, 0f, 0.5f);
 
     public HelpScreen(Game _game) {
         super(_game);
-        this.transparentBlack = new Color(0f, 0f, 0f, 0.5f);
         this.createUIElements();
     }
 

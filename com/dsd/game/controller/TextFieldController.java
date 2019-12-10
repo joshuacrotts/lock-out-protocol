@@ -9,8 +9,10 @@ import java.util.ArrayList;
  * them.
  *
  * [Group Name: Data Structure Deadheads]
- *
- * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
+ * 
+ * @author Joshua
+ * 
+ * @updated 12/10/19
  */
 public class TextFieldController {
 

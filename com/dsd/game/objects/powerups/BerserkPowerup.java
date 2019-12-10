@@ -28,7 +28,11 @@ import java.util.TimerTask;
  * Health object for when the player is damaged, they can pick it up and restore
  * some health.
  *
+ * [Group Name: Data Structure Deadheads]
+ * 
  * @author Joshua
+ * 
+ * @updated 12/10/19
  */
 public class BerserkPowerup extends StandardGameObject implements TimerInterface, Powerup {
 

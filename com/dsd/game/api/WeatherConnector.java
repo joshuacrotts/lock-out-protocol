@@ -15,8 +15,12 @@ import org.json.JSONObject;
 /**
  * This class is an example of connecting to and loading data from the weather
  * API.
- *
- * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
+ * 
+ *[Group Name: Data Structure Deadheads]
+ * 
+ * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/10/19
  */
 public class WeatherConnector implements WeatherConnectorAPIAdapter {
 

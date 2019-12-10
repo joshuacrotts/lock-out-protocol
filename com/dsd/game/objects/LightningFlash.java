@@ -12,6 +12,8 @@ import java.util.ArrayList;
  * This class controls the random lighting flash effects when it is raining in
  * the game.
  *
+ * [Group Name: Data Structure Deadheads]
+ * 
  * @author Joshua, Ronald, Rinty
  * 
  * @updated 12/7/19

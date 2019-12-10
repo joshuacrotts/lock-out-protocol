@@ -12,7 +12,11 @@ import java.awt.Graphics2D;
  * This button is for buying either the weapon for a rifle, or buying more rifle
  * ammunition.
  *
- * @author Joshua
+  * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/10/19
  */
 public class GrenadeLauncherButton extends ShopButton {
 

@@ -10,8 +10,10 @@ package com.dsd.game.core;
  * sprites were purchased from a website.
  *
  * [Group Name: Data Structure Deadheads]
- *
- * @author Joshua, Ronald, Rinty Last Updated: 12/10/2019
+ * 
+ * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/10/19
  */
 public class LockOutProtocolRunner {
 

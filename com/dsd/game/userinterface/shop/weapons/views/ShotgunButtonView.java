@@ -6,8 +6,13 @@ import com.revivedstandards.util.StdOps;
 import java.awt.Graphics2D;
 
 /**
+ * Shotgun Button View for the shotgun object.
  *
- * @author Joshua
+ * [Group Name: Data Structure Deadheads]
+ *
+ * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/10/19
  */
 public class ShotgunButtonView extends ShopButtonView {
 
