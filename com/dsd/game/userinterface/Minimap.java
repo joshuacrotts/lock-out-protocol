@@ -91,6 +91,8 @@ public class Minimap extends Interactor {
                     case Monster6:
                         this.drawObject(_g2, obj, StandardDraw.CRIMSON);
                         break;
+                    default:
+                        throw new IllegalStateException("Invalid monster type!");
                 }
             }
         }
@@ -183,17 +185,21 @@ public class Minimap extends Interactor {
 
     @Override
     public void tick() {
+        //  No tick logic for minimap.
     }
 
     @Override
     public void onMouseClick() {
+        //  No mouse logic.
     }
 
     @Override
     public void onMouseEnterHover() {
+        //  No mouse logic.
     }
 
     @Override
     public void onMouseExitHover() {
+        //  No mouse logic.
     }
 }

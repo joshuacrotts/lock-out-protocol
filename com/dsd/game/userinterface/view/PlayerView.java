@@ -93,6 +93,8 @@ public class PlayerView implements Renderable, Updatable {
             case "male":
                 this.fadeController = new StandardFadeController(Color.blue, Color.green, 0.05f);
                 break;
+            default:
+                throw new IllegalStateException("Invalid player sex!");
         }
         this.iconOutline = new Rectangle(this.parentButton.getX(), this.parentButton.getY(), imageWidth, imageHeight);
     }

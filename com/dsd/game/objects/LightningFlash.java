@@ -13,6 +13,8 @@ import java.util.ArrayList;
  * the game.
  *
  * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/7/19
  */
 public class LightningFlash implements Renderable, Updatable {
 
@@ -21,8 +23,8 @@ public class LightningFlash implements Renderable, Updatable {
 
     //  List for all flash references.
     private final ArrayList<LightningFlash> flashList;
-    private final double flashDuration;
     private float flashFadeFloat = 1.0f;
+    private final double flashDuration;
     private static final float FADE_THRESHOLD = 0.01f;
 
     public LightningFlash(Game _game, ArrayList<LightningFlash> _flashList) {

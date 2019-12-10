@@ -1,6 +1,8 @@
 # Lock Out Protocol
 
-Lock Out Protocol is a 2D-zombie survival game, played from a top-down perspective. Lock Out Protocol is a joint effort of programming, designing, and planning between [Ronald Abrams](https://github.com/rgabrams), [Rinty Chowdhury](https://github.com/rintychy), and [Joshua Crotts](https://github.com/JoshuaCrotts) for CSC - 340: Software Engineering at the University of North Carolina at Greensboro. The underlying engine stems from one of Joshua's earlier projects (in conjunction with [Andrew Matzureff](https://github.com/AndrewMatzureff)) known as the [Standards](https://github.com/JoshuaCrotts/Standards) library. For this project, Standards is used as an abstract concept and tool, as the predominant goal of this project is to develop an application, not an engine for said application. More specifically, there are a plethra of concepts, optimizations, and miscellaneous ideas that go into crafting a game engine. As such, one semester is not nearly enough time to make a proper game, along with its complex engine.
+[![CodeFactor](https://www.codefactor.io/repository/github/joshuacrotts/lock-out-protocol/badge)](https://www.codefactor.io/repository/github/joshuacrotts/Lock-out-protocol) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/JoshuaCrotts/Lock-Out-Protocol) ![GitHub repo size](https://img.shields.io/github/repo-size/JoshuaCrotts/Lock-Out-Protocol) ![GitHub contributors](https://img.shields.io/github/contributors/JoshuaCrotts/Lock-Out-Protocol)
+
+Lock Out Protocol is a 2D-zombie survival game, played from a top-down perspective. Lock Out Protocol is a joint effort of programming, designing, and planning between [Ronald Abrams](https://github.com/rgabrams), [Rinty Chowdhury](https://github.com/rintychy), and [Joshua Crotts](https://github.com/JoshuaCrotts) for CSC - 340: Software Engineering at the University of North Carolina at Greensboro. The underlying engine stems from one of Joshua's earlier projects (in conjunction with [Andrew Matzureff](https://github.com/AndrewMatzureff)) known as the [Standards](https://github.com/JoshuaCrotts/Standards) library. For this project, Standards is used as an abstract concept and tool, since the predominant goal of this project is to develop an application, not an engine _for_ said application. More specifically, there are a plethra of concepts, optimizations, and miscellaneous ideas that go into crafting a game engine. As such, one semester is not nearly enough time to make a proper game, along with its complex engine.
 
 ## Dependencies
 The following .jar files are required for building the project. These should be placed in a folder in the root of your development project called libraries/. 
@@ -11,7 +13,6 @@ The following .jar files are required for building the project. These should be 
 4. [MySQL Connector Bin](http://www.java2s.com/Code/Jar/m/Downloadmysqlconnectorjava5124binjar.htm)
 5. [MySQL Socket Factory Connector](https://jar-download.com/artifacts/com.google.cloud.sql/mysql-socket-factory-connector-j-8/1.0.11/source-code)
 6. [Standards](https://github.com/JoshuaCrotts/Standards/blob/development/dist/Standards.jar)
-
 
 ## Rebuilding Lock Out Protocol
 

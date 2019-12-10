@@ -62,6 +62,8 @@ public class DifficultyController implements SerializableObject {
             case HARD:
                 DifficultyController.difficultyFactor = 1.25f;
                 break;
+            default:
+                throw new IllegalStateException("Invalid difficulty type!");
         }
     }
 

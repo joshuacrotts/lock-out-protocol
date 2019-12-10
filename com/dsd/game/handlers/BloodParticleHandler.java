@@ -61,12 +61,14 @@ public class BloodParticleHandler extends StandardParticleHandler {
                         StdOps.rand(PARTICLE_MIN_SIZE, PARTICLE_MAX_SIZE), 0, 0, _bloodColor, PARTICLE_LIFE, this,
                         _angle, ShapeType.CIRCLE, false));
                 break;
+
             //  The slowing blood particle's velocity will decrease over time,
             //  eventually coming to a stop.
             case SLOWING:
                 this.addEntity(new SlowingBoxParticle(_x, _y, StdOps.rand(PARTICLE_MIN_SIZE, PARTICLE_MAX_SIZE),
                         _bloodColor, PARTICLE_LIFE, this, _angle, ShapeType.CIRCLE));
                 break;
+
             //  Scattered particles will go in random directions, but stay in
             //  that specified direction forever, without slowning down.
             case SCATTERED:
@@ -79,7 +81,8 @@ public class BloodParticleHandler extends StandardParticleHandler {
                                 MAX_PARTICLE_OFFSET + PARTICLE_SCATTER_OFFSET),
                         StdOps.rand(PARTICLE_MIN_SIZE, GROUND_PARTICLE_MAX_SIZE), 0, 0, _bloodColor, PARTICLE_LIFE, this,
                         _angle, ShapeType.CIRCLE, false));
-
+            default:
+                throw new IllegalStateException("Invalid blood particle type!");
         }
     }
 }

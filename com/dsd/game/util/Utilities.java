@@ -65,7 +65,7 @@ public abstract class Utilities extends StdOps {
      * @return
      */
     public static final float normalize(float value, float min, float max) {
-        return 1 - ((value - min) / (max - min));
+        return 1.0f - ((value - min) / (max - min));
     }
 
     /**

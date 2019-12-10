@@ -150,6 +150,8 @@ public class Game extends StandardGame {
                 // And lastly the camera.
                 StandardHandler.Object(this.sc);
                 break;
+            default:
+                throw new IllegalStateException("Invalid game tick state!");
         }
         this.cursorController.tick();
     }
@@ -190,6 +192,8 @@ public class Game extends StandardGame {
                 case HELP:
                     this.helpScreen.render(StandardDraw.Renderer);
                     break;
+                default:
+                    throw new IllegalStateException("Invalid game render state!");
             }
             // If we are in debug mode, we can draw the text.
             if (DebugController.DEBUG_MODE) {

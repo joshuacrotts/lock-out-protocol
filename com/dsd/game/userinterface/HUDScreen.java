@@ -27,7 +27,7 @@ public class HUDScreen extends Screen {
         super(_game);
         this.player = _player;
         this.globalHandler = _sch;
-        this.powerupTextHandler = new PowerupTextHandler(_game, this);
+        this.powerupTextHandler = new PowerupTextHandler(_game);
         this.createUIElements();
     }
 

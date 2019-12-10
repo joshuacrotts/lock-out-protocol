@@ -50,13 +50,16 @@ public class ShopView extends Interactor {
 
     @Override
     public void onMouseClick() {
+        //  No mouse logic.
     }
 
     @Override
     public void onMouseEnterHover() {
+        //  No mouse logic.
     }
 
     @Override
     public void onMouseExitHover() {
+        //  No mouse logic.
     }
 }

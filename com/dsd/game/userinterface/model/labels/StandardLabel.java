@@ -13,14 +13,18 @@ import java.awt.Graphics2D;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/7/19
  */
 public class StandardLabel extends Interactor implements MouseEventInterface {
 
     private String text;
+    private final Font font;
+
     private final int originX;
     private final int originY;
     private final int shakeFactor = 1;
-    private final Font font;
+    private final int DEFAULT_FONT_SIZE = 16;
 
     public StandardLabel(int _x, int _y, String _text, Font _fontPath) {
         super(_x, _y);
@@ -30,7 +34,7 @@ public class StandardLabel extends Interactor implements MouseEventInterface {
         if (LanguageController.lang.equals("en-en")) {
             this.font = _fontPath;
         } else {
-            this.font = new Font(Font.SANS_SERIF, Font.PLAIN, 16);
+            this.font = new Font(Font.SANS_SERIF, Font.PLAIN, DEFAULT_FONT_SIZE);
         }
     }
 
@@ -42,7 +46,7 @@ public class StandardLabel extends Interactor implements MouseEventInterface {
         if (LanguageController.lang.equals("en-en") || _text.equals("Lock Out Protocol")) {
             this.font = StdOps.initFont(_fontPath, _fontSize);
         } else {
-            this.font = new Font(Font.SANS_SERIF, Font.PLAIN, (int) 16);
+            this.font = new Font(Font.SANS_SERIF, Font.PLAIN, DEFAULT_FONT_SIZE);
         }
     }
 
@@ -62,20 +66,20 @@ public class StandardLabel extends Interactor implements MouseEventInterface {
 
     @Override
     public void onMouseClick() {
-        //throw new UnsupportedOperationException("Not supported yet.");
-        //To change body of generated methods, choose Tools | Templates.
+        //  No mouse logic.
+
     }
 
     @Override
     public void onMouseEnterHover() {
-        //throw new UnsupportedOperationException("Not supported yet.");
-        //To change body of generated methods, choose Tools | Templates.
+        //  No mouse logic.
+
     }
 
     @Override
     public void onMouseExitHover() {
-        //throw new UnsupportedOperationException("Not supported yet.");
-        //To change body of generated methods, choose Tools | Templates.
+        //  No mouse logic.
+
     }
 
 //=============================== GETTERS ====================================//

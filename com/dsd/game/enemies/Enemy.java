@@ -5,7 +5,6 @@ import com.dsd.game.core.Game;
 import com.dsd.game.enemies.enums.EnemyState;
 import com.dsd.game.objects.Entity;
 import com.dsd.game.particles.BloodType;
-import com.dsd.game.particles.SlowingBoxParticle;
 import com.revivedstandards.controller.StandardAnimatorController;
 import com.revivedstandards.handlers.StandardCollisionHandler;
 import com.revivedstandards.handlers.StandardHandler;
@@ -89,7 +88,7 @@ public abstract class Enemy extends Entity implements DeathListener {
 
     //  Initial health factor (for changing difficulty).
     public final int INIT_HEALTH;
-
+    
     public Enemy(int _x, int _y, double _approachVel, int _health, StandardID _id, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, _health, _id, _game, _sch);
         this.sc = this.getGame().getCamera();

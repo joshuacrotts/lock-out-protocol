@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
  *
  * @author Joshua, Ronald, Rinty
  *
- * @updated 11/21/19
+ * @updated 12/7/19
  */
 public abstract class MenuButton extends StandardButton implements MouseEventInterface {
 
@@ -97,6 +97,8 @@ public abstract class MenuButton extends StandardButton implements MouseEventInt
             case CORRECT:
                 JOptionPane.showMessageDialog(null, LanguageController.translate("Logged in successfully!"));
                 break;
+            default:
+                throw new IllegalArgumentException("Invalid ACCOUNT_STATUS!");
         }
     }
 

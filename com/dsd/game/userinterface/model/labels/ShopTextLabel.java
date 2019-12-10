@@ -12,6 +12,8 @@ import java.awt.Graphics2D;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/7/19
  */
 public class ShopTextLabel extends StandardLabel {
 

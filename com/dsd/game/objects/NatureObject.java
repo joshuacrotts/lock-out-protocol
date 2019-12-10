@@ -42,6 +42,8 @@ public class NatureObject extends StandardGameObject implements Renderable, Upda
 
     @Override
     public void tick() {
+        //  Nothing to tick since there's no logic for NatureObjects.
+        //  This may change later.
     }
 
     @Override
