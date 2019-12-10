@@ -58,12 +58,12 @@ public class Player extends Entity implements DeathListener, SerializableObject 
     //  Money amount.
     private int money = 0;
     //  Health vars (this may change with time).
-    private int maxHealth = 200;
+    private static int maxHealth = 200;
     //  Sex of player.
     private String sex = "male";
 
     public Player(int _x, int _y, Game _game, StandardCollisionHandler _sch) {
-        super(_x, _y, 100, StandardID.Player, (Game) _game, _sch);
+        super(_x, _y, maxHealth, StandardID.Player, (Game) _game, _sch);
         //  Instantiate the inventory.
         this.inventory = new Inventory(_game, this, _sch);
         //  Initializes the miscellaneous variables.
