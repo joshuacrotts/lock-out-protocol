@@ -13,9 +13,23 @@ package com.dsd.game.userinterface;
  */
 public interface MouseEventInterface {
 
+    /**
+     * When the user's mouse is overtop of the bounds set by the interactor, and
+     * the user clicks their mouse, this method is called.
+     *
+     * It uses the Java Swing MouseListener interface to listen for clicks.
+     */
     public void onMouseClick();
 
+    /**
+     * When the user's mouse is overtop of the bounds set by the interactor,
+     * this method is called.
+     */
     public void onMouseEnterHover();
 
+    /**
+     * When the user's mouse leaves the bounds set by the interactor, this
+     * method is called.
+     */
     public void onMouseExitHover();
 }

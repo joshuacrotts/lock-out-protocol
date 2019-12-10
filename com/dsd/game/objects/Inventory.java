@@ -27,8 +27,8 @@ import java.util.logging.Logger;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
- * 
- * @updated 12/7/19
+ *
+ * @updated 12/10/2019
  */
 public class Inventory implements SerializableObject {
 
@@ -47,7 +47,7 @@ public class Inventory implements SerializableObject {
         this.player = _player;
         this.weapons = new ArrayList<>();
         this.parentHandler = _sch;
-        
+
         //  This will change with time (to a subclass of Weapon).
         this.weapons.add(new Pistol(_game, _player, _sch));
         this.weapons.add(new Rifle(_game, _player, _sch));
@@ -181,11 +181,22 @@ public class Inventory implements SerializableObject {
     }
 
 //============================== CRUD OPERATIONS =============================//
+    /**
+     * Creates a serialized version of the inventory. We start by creating a
+     * StringBuilder that holds the status of all guns/weapons the player
+     * currently has. It appends the status of that gun (if they have it or
+     * not), how much ammo it has in the magazine, and how much total ammo they
+     * have. Then, return this as a String.
+     *
+     * @param _id
+     * @return
+     */
     @Override
     public String createObject(SerializableType _id) {
         StringBuilder inventoryDetails = new StringBuilder();
         Weapon[] weaponStatuses = this.hasWeapons();
         for (int i = 0; i < weaponStatuses.length; i++) {
+            //  If the gun is present, we append a 1. Otherwise, it's 0.
             inventoryDetails.append(weaponStatuses[i] != null ? 1 : 0).append(";");
             if (weaponStatuses[i] != null) {
                 Gun gun = (Gun) weaponStatuses[i];
@@ -198,6 +209,11 @@ public class Inventory implements SerializableObject {
         return inventoryDetails.toString();
     }
 
+    /**
+     * We read in the ArrayList of information about the guns from the database.
+     *
+     * @param _inventoryInfo
+     */
     public void readObject(ArrayList<Integer> _inventoryInfo) {
         //  Use an array of the types to reduce copying/pasting.
         WeaponType[] types = {WeaponType.PISTOL, WeaponType.RIFLE, WeaponType.FAST_RIFLE,
@@ -222,17 +238,17 @@ public class Inventory implements SerializableObject {
     /**
      * Determines which of the n weapons the player has.
      *
-     * @return
+     * @return weapon array
      */
     private Weapon[] hasWeapons() {
-        Weapon[] typesOfWeapons = new Weapon[7];
-        typesOfWeapons[0] = this.hasWeapon(WeaponType.PISTOL);
-        typesOfWeapons[1] = this.hasWeapon(WeaponType.RIFLE);
-        typesOfWeapons[2] = this.hasWeapon(WeaponType.FAST_RIFLE);
-        typesOfWeapons[3] = this.hasWeapon(WeaponType.SHOTGUN);
-        typesOfWeapons[4] = this.hasWeapon(WeaponType.GRENADE_LAUNCHER);
-        typesOfWeapons[5] = this.hasWeapon(WeaponType.MINIGUN);
-        typesOfWeapons[6] = this.hasWeapon(WeaponType.SUPER_SHOTGUN);
+        Weapon[] typesOfWeapons = new Weapon[WeaponType.values().length];
+        WeaponType[] enumTypes = WeaponType.values();
+        
+        //  Iterate over all possible weapons to see if the user has it.
+        for (int i = 0; i < typesOfWeapons.length; i++) {
+            typesOfWeapons[i] = this.hasWeapon(enumTypes[i]);
+        }
+
         return typesOfWeapons;
     }
 

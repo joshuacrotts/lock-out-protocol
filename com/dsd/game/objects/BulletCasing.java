@@ -1,6 +1,5 @@
 package com.dsd.game.objects;
 
-import com.dsd.game.core.Game;
 import com.dsd.game.objects.weapons.Gun;
 import com.revivedstandards.model.StandardParticle;
 import com.revivedstandards.util.StdOps;
@@ -13,6 +12,8 @@ import java.awt.image.BufferedImage;
  * This class represents the casings from a gun.
  *
  * @author Joshua
+ * 
+ * @updated 12/10/2019
  */
 public class BulletCasing extends StandardParticle implements Renderable, Updatable {
 

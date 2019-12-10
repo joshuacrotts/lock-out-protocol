@@ -6,6 +6,8 @@ package com.dsd.game.objects.enums;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/10/2019
  */
 public enum PlayerState {
     WALKING_FORWARD, WALKING_BACKWARD, STANDING, ATTACKING, DEAD

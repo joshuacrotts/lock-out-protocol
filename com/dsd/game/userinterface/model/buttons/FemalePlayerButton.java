@@ -14,6 +14,8 @@ import java.awt.Graphics2D;
  * the player gender sub-menu.
  *
  * @author rinty
+ * 
+ * @updated 12/10/19
  */
 public class FemalePlayerButton extends StandardButton implements MouseEventInterface {
 

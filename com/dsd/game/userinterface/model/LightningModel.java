@@ -16,12 +16,20 @@ import org.apache.commons.math3.util.Pair;
  * segments to draw the shape.
  *
  * @author Joshua
+ *
+ * @updated 12/10/19
  */
 public class LightningModel extends Interactor {
 
+    //  Miscellaneous game and camera references.
     private final Game game;
     private final StandardCamera camera;
+    
+    //  Line array of lightning segments, which is populated at run time.
     private Line2D[] lightningLines;
+    
+    //  Values determining the variability and shape of each line connecting
+    //  to the bolt.
     private final int MIN_X_VARIABILITY = 5;
     private final int MAX_X_VARIABILITY = 30;
     private final int Y_VARIABILITY = 3;
@@ -68,11 +76,12 @@ public class LightningModel extends Interactor {
 
     /**
      * Updates the lightning array object that holds the coordinates for each of
-     * the line-segment points
+     * the line-segment points.
      */
     private void updateLightningPos() {
         List<Pair<Integer, Integer>> lightningPoints = this.generatePoints();
         this.lightningLines = new Line2D[lightningPoints.size()];
+        
         for (int i = 0; i < this.lightningLines.length - 1; i++) {
             Pair<Integer, Integer> coordOne = lightningPoints.get(i);
             Pair<Integer, Integer> coordTwo = lightningPoints.get(i + 1);
@@ -89,13 +98,17 @@ public class LightningModel extends Interactor {
     private List<Pair<Integer, Integer>> generatePoints() {
         List<Pair<Integer, Integer>> boltPositions = new ArrayList<>();
         int prevXPos = (int) (this.camera.getX() - Screen.gameHalfWidth);
-        int prevYPos = (int) StdOps.rand(this.camera.getY() - Y_VARIABILITY, this.camera.getY() + Y_VARIABILITY);
-        //  Add initial pair
+        int prevYPos = (int) StdOps.rand(this.camera.getY() - this.Y_VARIABILITY, this.camera.getY() + this.Y_VARIABILITY);
+        
+        //  Add initial pair.
         boltPositions.add(new Pair(prevXPos, prevYPos));
-        //  While the bolt still hasn't reached the edge of the screen
+        
+        //  While the bolt still hasn't reached the edge of the screen.
         while (prevXPos < this.camera.getX() + Screen.gameHalfWidth) {
-            int deltaX = StdOps.rand(MIN_X_VARIABILITY, MAX_X_VARIABILITY);
-            int deltaY = StdOps.rand(-Y_VARIABILITY, Y_VARIABILITY);
+            int deltaX = StdOps.rand(this.MIN_X_VARIABILITY, this.MAX_X_VARIABILITY);
+            int deltaY = StdOps.rand(-this.Y_VARIABILITY, this.Y_VARIABILITY);
+            
+            //  Apply random positioning offsets to the previous x/y pair.
             prevXPos += deltaX;
             prevYPos += deltaY;
             boltPositions.add(new Pair(prevXPos, prevYPos));

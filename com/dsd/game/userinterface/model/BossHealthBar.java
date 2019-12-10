@@ -39,6 +39,7 @@ public class BossHealthBar extends Interactor {
     private final Color lightRed = new Color(255, 0, 0, TRANSPARENCY);
 
     //  Positioning offsets.
+    private final int RECT_HEIGHT = 20;
     private final int MAX_HEALTH_X = 600;
     private final int HEALTH_Y_OFFSET = 25;
     private final int HEALTH_X_OFFSET = 300;
@@ -85,17 +86,22 @@ public class BossHealthBar extends Interactor {
     private void drawHealthRectangle(Graphics2D _g2) {
         int rMin = 0;
         int rMax = this.parentBoss.getInitialHealth();
-        //Scale min
+        //Scale min.
         int min = 0;
-        //Scale max
-        int max = MAX_HEALTH_X;
+        
+        //Scale max.
+        int max = this.MAX_HEALTH_X;
         _g2.setColor(this.healthColor.combine());
+        
         //  Draws the actual health portion of the health.
         float normalizedHealth = Utilities.normalize((float) this.parentBoss.getHealth(), rMin, rMax, min, max);
-        _g2.fillRoundRect(this.getX(), this.getY(), (int) normalizedHealth, HEALTH_HEIGHT, ARC_WIDTH, ARC_HEIGHT);
+        _g2.fillRoundRect(this.getX(), this.getY(), (int) normalizedHealth, this.HEALTH_HEIGHT, this.ARC_WIDTH, this.ARC_HEIGHT);
+        
         //  Draws the black border outside the health
         _g2.setColor(Color.BLACK);
-        _g2.drawRoundRect(this.getX(), this.getY(), (int) Utilities.normalize((float) this.parentBoss.getInitialHealth(), rMin, rMax, min, max), 20, ARC_WIDTH, ARC_HEIGHT);
+        _g2.drawRoundRect(this.getX(), this.getY(),
+                (int) Utilities.normalize((float) this.parentBoss.getInitialHealth(), rMin, rMax, min, max),
+                this.RECT_HEIGHT, this.ARC_WIDTH, this.ARC_HEIGHT);
     }
 
     @Override

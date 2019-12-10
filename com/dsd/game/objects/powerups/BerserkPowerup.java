@@ -47,7 +47,9 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
     private static final int RECT_STROKE = 20;
     private static final int STROKE_X_OFFSET = (int) (RECT_STROKE * 1.44);
     private static final int STROKE_Y_OFFSET = (int) (RECT_STROKE * 2.4);
-    
+    private static final float FADE_COLOR_TRANSITION = 0.05f;
+    private static final int TRANSPARENCY_VALUE = 127;
+
     //  Timer for how long the powerup is active (in milliseconds)
     private int timer = 10000;
     private boolean isActivated = false;
@@ -59,11 +61,11 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
         this.camera = _game.getCamera();
         this.player = _game.getPlayer();
         this.parentContainer = _sch;
-        StandardAnimatorController berserkAnimation = new StandardAnimatorController(this, BERSERK_FRAMES, BERSERK_FPS);
+        StandardAnimatorController berserkAnimation = new StandardAnimatorController(this, BerserkPowerup.BERSERK_FRAMES, BerserkPowerup.BERSERK_FPS);
         this.setAnimation(berserkAnimation);
         this.setWidth(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getWidth());
         this.setHeight(this.getAnimationController().getStandardAnimation().getView().getCurrentFrame().getHeight());
-        this.color = new StandardFadeController(Color.red, Color.yellow, 0.05f);
+        this.color = new StandardFadeController(Color.red, Color.yellow, BerserkPowerup.FADE_COLOR_TRANSITION);
     }
 
     @Override
@@ -143,7 +145,8 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
         _g2.setColor(this.getTransparentColor(this.color.combine()));
         Stroke oldStroke = _g2.getStroke();
         _g2.setStroke(new BasicStroke(RECT_STROKE));
-        Rectangle view = new Rectangle((int) this.camera.getX() - Screen.gameHalfWidth + RECT_STROKE / 2,
+        Rectangle view = new Rectangle(
+                (int) this.camera.getX() - Screen.gameHalfWidth + RECT_STROKE / 2,
                 (int) this.camera.getY() - Screen.gameHalfHeight + RECT_STROKE / 2,
                 this.game.getGameWidth() - (int) STROKE_X_OFFSET,
                 this.game.getGameHeight() - (int) STROKE_Y_OFFSET);
@@ -151,8 +154,15 @@ public class BerserkPowerup extends StandardGameObject implements TimerInterface
         _g2.setStroke(oldStroke);
     }
 
+    /**
+     * Returns a new transparent color for the current frame of the berserk
+     * powerup animation.
+     *
+     * @param _c
+     * @return
+     */
     private Color getTransparentColor(Color _c) {
-        return new Color(_c.getRed(), _c.getGreen(), _c.getBlue(), 127);
+        return new Color(_c.getRed(), _c.getGreen(), _c.getBlue(), BerserkPowerup.TRANSPARENCY_VALUE);
     }
 
 //============================= GETTERS ====================================//

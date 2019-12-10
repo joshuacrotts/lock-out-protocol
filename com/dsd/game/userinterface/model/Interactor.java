@@ -14,6 +14,8 @@ import java.awt.Rectangle;
  * [Group Name: Data Structure Deadheads]
  *
  * @author Joshua, Ronald, Rinty
+ * 
+ * @updated 12/10/19
  */
 public abstract class Interactor implements Renderable, Updatable, MouseEventInterface {
 

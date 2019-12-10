@@ -25,11 +25,14 @@ public class ShopTextLabel extends StandardLabel {
     private final int LABEL_Y_OFFSET;
     private static final int WEAPON_BOX_X_OFFSET = 98;
     private static final int WEAPON_BOX_Y_OFFSET = 41;
+    
+    //  View element factors.
+    private static final float FONT_SIZE = 18f;
 
     public ShopTextLabel(Game _game, int _xOffset, int _yOffset) {
         super((int) Screen.gameHalfWidth,
                 (int) Screen.gameHalfHeight,
-                "WEAPON", "src/resources/fonts/chargen.ttf", 18f);
+                "WEAPON", "src/resources/fonts/chargen.ttf", FONT_SIZE);
         this.game = _game;
         this.LABEL_X_OFFSET = _xOffset - WEAPON_BOX_X_OFFSET;
         this.LABEL_Y_OFFSET = _yOffset - WEAPON_BOX_Y_OFFSET;

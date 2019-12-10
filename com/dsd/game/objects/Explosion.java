@@ -12,6 +12,8 @@ import java.awt.Graphics2D;
  * This class is a simple explosion artifact in the game.
  *
  * @author Joshua
+ * 
+ * @updated 12/10/2019
  */
 public class Explosion extends StandardGameObject {
 
@@ -50,6 +52,10 @@ public class Explosion extends StandardGameObject {
         if (this.isAlive()) {
             this.animation.tick();
         }
+        
+        //  If we're on the last frame of the explosion animation, we can 
+        //  flag the explosion as "dead" meaning it won't affect other
+        //  entities.
         if (this.animation.getStandardAnimation().getCurrentFrameIndex() == explosionType.getExplosionFrames().length - 1) {
             this.setAlive(false);
         }

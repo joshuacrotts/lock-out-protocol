@@ -21,8 +21,11 @@ public class MusicLabel extends StandardLabel {
     private static final int BUTTON_X_OFFSET = 260;
     private static final int BUTTON_Y_OFFSET = 40;
 
+    //  View element factors.
+    private static final float FONT_SIZE = 32f;
+
     public MusicLabel(MusicVolumeControl _mvc, MenuScreen _menuScreen) {
-        super(_mvc.getLeftButtonX(), _mvc.getLeftButtonY(), "MUSIC VOLUME", "src/resources/fonts/chargen.ttf", 32f);
+        super(_mvc.getLeftButtonX(), _mvc.getLeftButtonY(), "MUSIC VOLUME", "src/resources/fonts/chargen.ttf", FONT_SIZE);
         this.menuScreen = _menuScreen;
         this.musicVolumeControl = _mvc;
     }

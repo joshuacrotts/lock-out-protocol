@@ -26,13 +26,17 @@ public class TitleLabel extends StandardLabel {
     //  Title x and y positioning offsets.
     private static final int TITLE_X_OFFSET = 140;
     private static final int TITLE_Y_OFFSET = 40;
+    private static final float FONT_SIZE = 32f;
+    
+    //  View transition timer.
+    private final float TRANSITION_INTERVAL = 0.01f;
 
     public TitleLabel(Game _game) {
         super(Screen.gameHalfWidth - TitleLabel.TITLE_X_OFFSET,
                 TitleLabel.TITLE_Y_OFFSET, _game.getWindow().getTitle(),
-                "src/resources/fonts/chargen.ttf", 32f);
+                "src/resources/fonts/chargen.ttf", FONT_SIZE);
         this.game = _game;
-        this.fadeController = new StandardFadeController(Color.white, Color.gray, 0.01f);
+        this.fadeController = new StandardFadeController(Color.white, Color.gray, this.TRANSITION_INTERVAL);
     }
 
     @Override

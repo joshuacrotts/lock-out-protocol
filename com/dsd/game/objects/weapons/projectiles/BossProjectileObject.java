@@ -24,9 +24,11 @@ public class BossProjectileObject extends ProjectileGameObject {
 
     //  Velocity factor applied to the bullet.
     private static final int VEL_FACTOR = 3;
-    //  Static reference to the BufferedImages
+    
+    //  Static reference to the BufferedImages.
     private static final BufferedImage[] frames = new BufferedImage[1];
-    //  Animation frame per second setting
+    
+    //  Animation frame per second setting.
     private static final int BULLET_FPS = 20;
 
     public BossProjectileObject(int _x, int _y, int _velX, int _velY, int _damage, Game _game,
@@ -61,7 +63,7 @@ public class BossProjectileObject extends ProjectileGameObject {
         return BossProjectileObject.frames;
     }
 
-    //  Initializes the bullet frames
+    //  Initializes the bullet frames.
     static {
         BossProjectileObject.initImages();
     }

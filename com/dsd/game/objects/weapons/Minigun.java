@@ -39,9 +39,10 @@ public class Minigun extends Gun {
 
     //  Amount of casing image frames for this gun.
     private static final int CASING_IMAGES = 14;
+    private static final int INITIAL_AMMO = 100;
 
     public Minigun(Game _game, Player _player, StandardCollisionHandler _sch) {
-        super(WeaponType.MINIGUN, 100, _game, _player, _sch, "src/resources/audio/sfx/reload.wav", RELOAD_DELAY);
+        super(WeaponType.MINIGUN, INITIAL_AMMO, _game, _player, _sch, "src/resources/audio/sfx/reload.wav", RELOAD_DELAY);
         //  Instantiates the animation controllers.
         this.loadAssets(_player);
         super.setDelay(Minigun.DELAY);

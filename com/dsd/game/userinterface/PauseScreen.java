@@ -20,12 +20,11 @@ import java.awt.Graphics2D;
 public class PauseScreen extends Screen {
 
     private final PauseCommand pauseCommand;
-    private final Color transparentBlack;
+    private final Color transparentBlack = new Color(0f, 0f, 0f, 0.5f);
 
     public PauseScreen(Game _game) {
         super(_game);
         this.pauseCommand = new PauseCommand(_game);
-        this.transparentBlack = new Color(0f, 0f, 0f, 0.5f);
         this.createUIElements();
     }
 

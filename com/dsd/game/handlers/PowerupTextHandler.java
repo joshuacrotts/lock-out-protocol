@@ -1,7 +1,6 @@
 package com.dsd.game.handlers;
 
 import com.dsd.game.core.Game;
-import com.dsd.game.userinterface.HUDScreen;
 import com.dsd.game.userinterface.model.labels.PowerupTextLabel;
 import com.revivedstandards.view.Renderable;
 import com.revivedstandards.view.Updatable;

@@ -26,6 +26,10 @@ public class ControlsLabel extends StandardLabel {
     private final int CONTROL_X_OFFSET = 130;
     private final int CONTROL_Y_OFFSET = 32;
 
+    //  View element factors.
+    private static final float FONT_SIZE = 32f;
+    
+    //  Amount of controls for the controls label.
     private static final String[] stringControls;
     private static final int CONTROLS = 6;
 
@@ -33,7 +37,7 @@ public class ControlsLabel extends StandardLabel {
         super((int) Screen.gameHalfWidth,
                 (int) Screen.gameHalfHeight,
                 LanguageController.translate("CONTROLS"),
-                "src/resources/fonts/chargen.ttf", 32f);
+                "src/resources/fonts/chargen.ttf", FONT_SIZE);
         this.game = _game;
     }
 

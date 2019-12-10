@@ -92,7 +92,7 @@ public class Minimap extends Interactor {
                         this.drawObject(_g2, obj, StandardDraw.CRIMSON);
                         break;
                     default:
-                        throw new IllegalStateException("Invalid monster type!");
+                        break;
                 }
             }
         }

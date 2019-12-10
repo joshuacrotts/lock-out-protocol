@@ -21,10 +21,11 @@ public class ResolutionLabel extends StandardLabel {
     //  Miscellaneous reference variables.
     private final Game game;
     private final MenuScreen menuScreen;
+    private static final float FONT_SIZE = 32f;
 
     public ResolutionLabel(Game _game, MenuScreen _menuScreen) {
         super(Screen.gameHalfWidth, Screen.gameHalfHeight,
-                "", "src/resources/fonts/chargen.ttf", 32f);
+                "", "src/resources/fonts/chargen.ttf", FONT_SIZE);
         this.game = _game;
         this.menuScreen = _menuScreen;
         this.setText(this.game.getGameWidth() + " x " + this.game.getGameHeight());

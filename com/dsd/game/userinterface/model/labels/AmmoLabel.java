@@ -26,10 +26,13 @@ public class AmmoLabel extends StandardLabel {
     private final int AMMO_Y_OFFSET = 90;
     private boolean hasGun = false;
 
+    //  View element factors.
+    private static final float FONT_SIZE = 28f;
+
     public AmmoLabel(Game _game, Player _player) {
         super((int) (Screen.gameHalfWidth + Screen.gameHalfWidth),
                 (int) (Screen.gameHalfHeight + Screen.gameHalfHeight / 2),
-                LanguageController.translate("AMMO: "), "src/resources/fonts/chargen.ttf", 28f);
+                LanguageController.translate("AMMO: "), "src/resources/fonts/chargen.ttf", FONT_SIZE);
         this.game = _game;
         this.player = _player;
     }

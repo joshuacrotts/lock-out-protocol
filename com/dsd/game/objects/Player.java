@@ -36,7 +36,7 @@ import org.apache.commons.math3.util.FastMath;
  *
  * @author Joshua, Ronald, Rinty
  * 
- * @updated 12/7/19
+ * @updated 12/10/2019
  */
 public class Player extends Entity implements DeathListener, SerializableObject {
 
@@ -266,6 +266,7 @@ public class Player extends Entity implements DeathListener, SerializableObject 
         double dx = FastMath.abs(_mx - this.getX());
         double dy = FastMath.abs(_my - this.getY());
         this.setAngle((double) ((xSign) * (FastMath.atan((dx) / (dy)))));
+        
         // If we're in Q1 (+x, -+y) or in Q2 (-x, +y)
         if ((_mx > this.getX() && _my > this.getY()) || (_mx < this.getX() && _my > this.getY())) {
             this.setAngle((float) ((FastMath.PI / 2) + (FastMath.PI / 2 - this.getAngle())));
@@ -282,9 +283,11 @@ public class Player extends Entity implements DeathListener, SerializableObject 
         // Calculate the distance between the sprite and the mouse
         double diffX = this.getX() - _mx - Entity.APPROACH_FACTOR;
         double diffY = this.getY() - _my - Entity.APPROACH_FACTOR;
+        
         // Use the pythagorean theorem to solve for the hypotenuse distance
         double distance = (double) FastMath.sqrt(((this.getX() - _mx) * (this.getX() - _mx))
                 + ((this.getY() - _my) * (this.getY() - _my)));
+        
         /**
          * Sets the velocity according to how far away the sprite is from the
          * cursor, and according to what direction the player is facing.

@@ -82,7 +82,7 @@ public class BloodParticleHandler extends StandardParticleHandler {
                         StdOps.rand(PARTICLE_MIN_SIZE, GROUND_PARTICLE_MAX_SIZE), 0, 0, _bloodColor, PARTICLE_LIFE, this,
                         _angle, ShapeType.CIRCLE, false));
             default:
-                throw new IllegalStateException("Invalid blood particle type!");
+                break;
         }
     }
 }
