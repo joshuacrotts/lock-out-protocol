@@ -18,7 +18,7 @@ The following .jar files are required for building the project. These should be 
 
 To rebuild the code in NetBeans 8.2, Java 8 is required (either Oracle, Amazon Corretto, or OpenJDK). Any arbitrary flavor of Java 8 is most likely acceptable.
 
-Create a new project in any IDE, then clone the repository inside of the src/ folder of the aforesaid project. At this point, all files should be present and available to compile and run. For any of the above dependencies, make a folder called libraries/ in the root of the project, download those .jars, and place them in there. You may have to modify your IDE's project to account for compile-time libraries, so be sure to do that, so the IDE knows they exist.
+Create a new project in any IDE, then clone the repository inside of **the src/ folder of the aforesaid project**. This step is absolutely critical. To ensure the project remains IDE-independent, this is the procedure for downloading the code. At this point, all files should be present and available to compile and run. For any of the above dependencies, make a folder called libraries/ in the root of the project, download those .jars, and place them in there. You may have to modify your IDE's project to account for compile-time libraries, so be sure to do that, so the IDE knows they exist.
 
 ## Reporting Bugs
 
