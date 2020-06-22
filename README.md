@@ -1,4 +1,4 @@
-<p align="center"># Lock Out Protocol</p>
+<h1 align="center"># Lock Out Protocol</h1>
 
 <p align="center">
 [![CodeFactor](https://www.codefactor.io/repository/github/joshuacrotts/lock-out-protocol/badge)](https://www.codefactor.io/repository/github/joshuacrotts/Lock-out-protocol) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/JoshuaCrotts/Lock-Out-Protocol) ![GitHub repo size](https://img.shields.io/github/repo-size/JoshuaCrotts/Lock-Out-Protocol) ![GitHub contributors](https://img.shields.io/github/contributors/JoshuaCrotts/Lock-Out-Protocol)
