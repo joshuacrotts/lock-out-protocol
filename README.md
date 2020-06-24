@@ -1,7 +1,7 @@
 <h1 align="center">Lock Out Protocol</h1>
 
 <p align="center">
-  <img width="300" height="488" src="lock_out_protocol.gif">
+  <img width="460" height="300" src="lock_out_protocol.gif">
 </p>
 
 [![CodeFactor](https://www.codefactor.io/repository/github/joshuacrotts/lock-out-protocol/badge)](https://www.codefactor.io/repository/github/joshuacrotts/Lock-out-protocol) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/JoshuaCrotts/Lock-Out-Protocol) ![GitHub repo size](https://img.shields.io/github/repo-size/JoshuaCrotts/Lock-Out-Protocol) ![GitHub contributors](https://img.shields.io/github/contributors/JoshuaCrotts/Lock-Out-Protocol)
