@@ -11,9 +11,6 @@ import java.awt.image.BufferedImage;
 /**
  * Bullet game object.
  *
- * @TODO: Re-factor this to couple it on a per-weapon basis rather than its own
- * object fired/instantiated from AttackCommand.
- *
  * [Group Name: Data Structure Deadheads]
  * 
  * @author Joshua, Ronald, Rinty
