@@ -25,20 +25,24 @@ import java.awt.image.BufferedImage;
  */
 public class RedHeadMonster extends Enemy implements DeathListener {
 
-    // Static bufferedimage array so the images aren't constantly loading in upon instantiation of a new monster
+    // Static bufferedimage array so the images aren't constantly loading in upon instantiation of a new monster.
     private static final BufferedImage[] WALK_FRAMES;
-    //  Animation frame per second setting
+    //  Animation frame per second setting.
     private final int walkingFPS = 16;
-    //  Variables representing the angle and approach velocity
+    //  Variables representing the angle and approach velocity.
     private static final double APPROACH_VEL = -2.5f;
+    //  Variable for the amount of damage the monster does to the player.
     private final double DAMAGE = 0.20;
+    //  Death reward probabilities.
+    private static final int MIN_COINS = 0;
+    private static final int MAX_COINS = 5;
     //  Health factor for this BasicMonster object.
     public static int originalHealth = 100;
 
     public RedHeadMonster(int _x, int _y, Game _game, StandardCollisionHandler _sch) {
         super(_x, _y, RedHeadMonster.APPROACH_VEL, RedHeadMonster.originalHealth, StandardID.Monster6, _game, _sch);
         super.setTarget(_game.getPlayer());
-        //  Sets the walking/death frames for this monster
+        //  Sets the walking/death frames for this monster.
         super.initWalkingFrames(RedHeadMonster.WALK_FRAMES, this.walkingFPS);
         //  Sets the default animation
         super.setAnimation(super.getWalkingAnimation());
@@ -50,11 +54,20 @@ public class RedHeadMonster extends Enemy implements DeathListener {
         super.bloodColor = Color.RED;
     }
 
+    /**
+     * Updates the animation, health, position and status of the monster.
+     */
     @Override
     public void tick() {
         super.tick();
     }
 
+    /**
+     * Draws the current frame of animation for the monster. If they are dead,
+     * it also draws the explosion handler particles.
+     *
+     * @param _g2
+     */
     @Override
     public void render(Graphics2D _g2) {
         super.render(_g2);
@@ -62,13 +75,11 @@ public class RedHeadMonster extends Enemy implements DeathListener {
 
     /**
      * This method is called once the basic monster dies.
-     *
-     * @TODO: Re-factor the magic numbers
      */
     @Override
     public void uponDeath() {
         super.uponDeath();
-        this.generateCoins(StdOps.rand(0, 5));
+        this.generateCoins(StdOps.rand(MIN_COINS, MAX_COINS));
         this.generateDeathSound(StdOps.rand(1, 2));
         this.generatePowerup();
     }

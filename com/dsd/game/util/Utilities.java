@@ -69,6 +69,10 @@ public abstract class Utilities extends StdOps {
     public static final float normalize(float _value, float _min, float _max) {
         return 1.0f - ((_value - _min) / (_max - _min));
     }
+    
+    public static float normalize(float _n, float _rMin, float _rMax, float _scaleMin, float _scaleMax) {
+        return (((_n - _rMin) / (_rMax - _rMin)) * (_scaleMax - _scaleMin)) + _scaleMin;
+    }
 
     /**
      * Converts a _number from the primitive java int type to its roman numeral
@@ -83,10 +87,6 @@ public abstract class Utilities extends StdOps {
             return map.get(_number);
         }
         return map.get(l) + toRoman(_number - l);
-    }
-
-    public static float normalize(float _n, float _rMin, float _rMax, float _scaleMin, float _scaleMax) {
-        return (((_n - _rMin) / (_rMax - _rMin)) * (_scaleMax - _scaleMin)) + _scaleMin;
     }
 
     static {

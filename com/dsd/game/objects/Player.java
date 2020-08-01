@@ -358,6 +358,8 @@ public class Player extends Entity implements DeathListener, SerializableObject 
             case WALKING_BACKWARD:
                 directionSign = -1;
                 break;
+            default:
+                break;
         }
         return directionSign;
     }

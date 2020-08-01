@@ -59,7 +59,7 @@ public class TimeLabel extends StandardLabel implements TimerInterface {
                 this.timer.scheduleAtFixedRate(new TimerControl(this.game, this), 0, TIME_INTERVAL);
                 TimerController.addTimer(this);
             }
-            this.setText(String.format("%02d:%02d:%02d \u007C %s %s", this.hours, this.minutes, this.seconds, this.waveString,
+            this.setText(String.format("%02d:%02d:%02d | %s %s", this.hours, this.minutes, this.seconds, this.waveString,
                     Utilities.toRoman(this.game.getWaveNumber())));
         }
     }

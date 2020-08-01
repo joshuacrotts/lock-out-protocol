@@ -69,8 +69,6 @@ public class TinyMonster extends Enemy implements DeathListener {
 
     /**
      * This method is called once the basic monster dies.
-     *
-     * @TODO: Re-factor the magic numbers
      */
     @Override
     public void uponDeath() {
