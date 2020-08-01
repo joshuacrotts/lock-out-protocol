@@ -108,14 +108,6 @@ public class CollisionHandlerController extends StandardCollisionHandler {
         }
     }
 
-    /**
-     * If a bullet hits a monster (shot by the player), we will destroy the
-     * bullet, deduct the bullet's damage from the monster, and determine if the
-     * monster is alive or not.
-     *
-     * @param bullet
-     * @param monster
-     */
     private void handleBulletEnemyCollision(ProjectileGameObject _bullet, Enemy _monster) {
         // Sets the bullet to dead. Casts the obj2 to a Monster so we can deduct health from it.
         if (_monster.isAlive() && _bullet.isAlive()) {
